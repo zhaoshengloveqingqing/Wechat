@@ -1,0 +1,577 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>在线预订 -{lingzh:$types['type']} </title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="/themes/w/css/hotels.css" rel="stylesheet" type="text/css">
+    <script src="/themes/w/js/jquery.min.js" type="text/javascript"></script>
+    <style>
+    .footFix{width:100%;text-align:center;position:fixed;left:0;bottom:0;z-index:99;}
+    #footReturn a, #footReturn2 a {
+    display: block;
+    line-height: 41px;
+    color: #fff;
+    text-shadow: 1px 1px #282828;
+    font-size: 14px;
+    font-weight: bold;
+    }
+    #footReturn, #footReturn2 {
+    z-index: 89;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    width: 100%;
+    outline: 0 none;
+    overflow: visible;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    height: 41px;
+    opacity: .95;
+    border-top: 1px solid #181818;
+    box-shadow: inset 0 1px 2px #b6b6b6;
+    background-color: #515151;
+    background-image: -ms-linear-gradient(top,#838383,#202020);
+    background-image: -webkit-linear-gradient(top,#838383,#202020);
+    background-image: -moz-linear-gradient(top,#838383,#202020);
+    background-image: -o-linear-gradient(top,#838383,#202020);
+    background-image: -webkit-gradient(linear,0% 0,0% 100%,from(#838383),to(#202020));
+    }
+    div.copyright{font-size:14px;text-align:center;color:#000;margin:8px;}
+    div.tech-support{font-size:12px;text-align:center;color:#000;margin:8px;}
+    div.tech-support a{text-decoration: underline;color:#000}
+    .none {display:none}
+    .vcbutton {
+    display: block;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 5px;
+    background: #4dbfd0;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 1px;
+    font-size: 16px;
+    }
+    
+	.round .text span {
+   		background: none;    
+           font-size: 14px;	
+	}
+    </style>
+  </head>
+  <body id="hotelsorder" >
+    <div class="banner">
+      <div id="wrapper">
+        <div id="scroller">
+          <ul id="thelist">
+            
+            <li><p>{lingzh:$types['type']} - {lingzh:$types['typeinfo']}</p>
+              <if condition="$types['picurl'] neq false">
+              <img src="{lingzh:$types['picurl']}">
+              <else />
+              <img src="/themes/w/images/hotels/default.jpg" width="100%">
+              </if>
+            </li>
+            
+          </ul>
+
+        </div>
+      </div>
+      <div id="nav">
+        <div id="prev" >&larr; prev</div>
+        <ul id="indicator">
+          
+          <li>1</li>
+          
+        </ul>
+        <div id="next">next &rarr;</div>
+      </div>
+      <div class="clr"></div>
+    </div>
+    <div class="cardexplain">
+      <!--商家房价及类型-->
+      <ul class="round">
+        <li class="biaotou bradius pad"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td>类型</td>
+            <td class="yuanjia">原价</td>
+            <td class="youhuijia">优惠价</td>
+          </tr>
+        </table></li>
+        <li><span class="noneorder">
+          <table class="jiagebiao" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td>{lingzh:$types['type']}</td>
+              <td class="yuanjia">￥{lingzh:$types['price']}</td>
+              <td class="youhuijia">￥{lingzh:$types['yhprice']}</td>
+            </tr>
+          </table>
+          </span>
+        </li>
+      </ul>
+
+      <?php if($types['open_inventory'] == 1 ) { ?>
+      <!--库存剩余-->
+      <ul class="round">
+          <li>
+              <h2 style="border: none">库存剩余：{lingzh:$types['inventory']}</h2> 
+              <label style="display: inline-block;font-size: 12px">
+                  (因网络延时等原因，具体库存可联系商家确认！)
+              </label>
+          </li>
+      </ul>
+      <?php } ?>
+      <!--后台可控制是否显示-->
+      <ul class="round">
+        <li>
+          <h2>相关说明</h2>
+          <div class="text">
+            {lingzh:$types['info']}
+          </div>
+        </li>
+        <li class="tel"><a href="tel:{lingzh:$host['tel2']}"><span>{lingzh:$host['tel2']} 电话预订</span></a></li>
+      </ul>
+      <ul class="round roundyellow">
+        <li class="userinfo"><span>请完善个人资料再下订单</span></li>
+      </ul>
+      
+      <ul class="round">
+        <li class="title mb"><span class="none">请认真填写在线订单</span></li>
+        <li class="nob">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+            <tr>
+              <th>预订人</th>
+              <td><input name="truename"  type="text" class="px" id="truename" value="{lingzh:$userinfo['truename']}" placeholder="请输入您的名字"></td>
+            </tr>
+          </table>
+        </li>
+        <li class="nob">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+            <tr>
+              <th>联系电话</th>
+              <td><input name="tel"  type="text"  class="px" id="tel" value="{lingzh:$userinfo['tel']}" placeholder="请输入您的电话"></td>
+            </tr>
+          </table>
+        </li>
+        <eq name="enable_vcode" value="1">
+        <li class="nob">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+            <tr>
+              <td width='50%'><input name="smsvcode"  type="text"  class="px" id='smsvcode' value="" placeholder="短信验证码"></td>
+              <td width='50%'><a id='vcodelink'  href="javascript:void(0);" style='line-height: 35px;' class="vcbutton">获取验证码</a></td>
+            </tr>
+          </table>
+        </li>
+        </eq>
+        <li class="nob <php>if(!empty($default_col_show) && !in_array('book_time', $default_col_show)) {echo ' none';}</php>">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+            <tr>
+              <th>入住日期</th>
+              <td> <select name="dateline" id="dateline"  class="dropdown-select"  onblur="changeleft()">
+                <option   value=2013-08-25  >2013-08-25 </option>
+                <option   value=2013-08-26  >2013-08-26 </option>
+                <option   value=2013-08-27  >2013-08-27 </option>
+                <option   value=2013-08-28  >2013-08-28 </option>
+                <option   value=2013-08-29  >2013-08-29 </option>
+                <option   value=2013-08-30  >2013-08-30 </option>
+                <option   value=2013-08-31  >2013-08-31 </option>
+                <option   value=2013-09-01  >2013-09-01 </option>
+                <option   value=2013-09-02  >2013-09-02 </option>
+                <option   value=2013-09-03  >2013-09-03 </option>
+                <option   value=2013-09-04  >2013-09-04 </option>
+                <option   value=2013-09-05  >2013-09-05 </option>
+                <option   value=2013-09-06  >2013-09-06 </option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </li>
+      <li class="nob <php>if(!empty($default_col_show) && !in_array('book_lefttime', $default_col_show)) {echo ' none';}</php>">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+          <tr>
+            <th>离店日期</th>
+            <td> <select name="leftdateline" id="leftdateline"  class="dropdown-select"  onChange="dothis()">
+              <option   value=2013-08-25  >2013-08-25 </option>
+              <option   value=2013-08-26  >2013-08-26 </option>
+              <option   value=2013-08-27  >2013-08-27 </option>
+              <option   value=2013-08-28  >2013-08-28 </option>
+              <option   value=2013-08-29  >2013-08-29 </option>
+              <option   value=2013-08-30  >2013-08-30 </option>
+              <option   value=2013-08-31  >2013-08-31 </option>
+              <option   value=2013-09-01  >2013-09-01 </option>
+              <option   value=2013-09-02  >2013-09-02 </option>
+              <option   value=2013-09-03  >2013-09-03 </option>
+              <option   value=2013-09-04  >2013-09-04 </option>
+              <option   value=2013-09-05  >2013-09-05 </option>
+              <option   value=2013-09-06  >2013-09-06 </option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </li>
+    <script type="text/javascript" charset="utf-8">
+    function showdate(n)
+    {
+    var uom = new Date(new Date()-0+n*86400000);
+    uom = uom.getFullYear() + "-" + (uom.getMonth()+1) + "-" + uom.getDate();
+    return uom
+    }
+    var options = document.getElementById("dateline").options;
+    var options2 = document.getElementById("leftdateline").options;
+    for(var i = 0; i < options.length; i++) {
+    
+    options[i].value = showdate(i);
+    options[i].text = showdate(i);
+      
+      options2[i].value = showdate(i);
+    options2[i].text = showdate(i);
+    }
+    </script>
+    <li class="nob  <php>if(!empty($default_col_show) && !in_array('book_num', $default_col_show)) {echo ' none';}</php>">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+        <tr>
+          <th>预订房间数量</th>
+          <td>
+            <select name="nums" class="dropdown-select" id="nums" onChange="dothis()">
+                <?php 
+                  $inventory = 20;
+                  $open_inventory = $types['open_inventory'] == 1;
+                  if($open_inventory)
+                  {
+                      $inventory = $types['inventory'] > 0 ? $types['inventory'] : -1;
+                  }
+                  for ($i=1; $i <= $inventory && $inventory > 0; $i++) {  ?>
+                <option value="{lingzh:$i}" >{lingzh:$i}</option>
+                <?php } ?>
+                <?php if($types['inventory'] == -1){ ?>
+                <option>没有库存了</option>
+                <?php } ?>
+          </select>
+        </td>
+        </tr>
+      </table>
+    </li>
+    <volist name='text_cols' id='text_col'>
+    <li class="nob">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+        <tr>
+          <th><php>echo $text_col[0];</php></th>
+          <td><input name="text_cols[]"  type="text"  class="px" id="tel" placeholder="<php>echo $text_col[1];</php>" ></td>
+        </tr>
+      </table>
+    </li>
+    </volist>
+    <volist name='select_cols' id='select_col'>
+    <li class="nob">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+        <tr>
+          <th>{lingzh:$select_col[0]}</th>
+          <td>
+            <select name="select_cols[]" class="dropdown-select">
+              <php>
+              foreach($select_col[1] as $selectItem) {
+              echo '<option value="'.$selectItem.'" >'.$selectItem.'</option>';
+              }
+              </php>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </li>
+    </volist>
+    <li class="nob  <php>if(!empty($default_col_show) && !in_array('price', $default_col_show)) {echo ' none';}</php>">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+        <tr>
+          <th>原价</th>
+          <td class="userinfo" id="price1" >￥ {lingzh:$types['price']}</td>
+        </tr>
+      </table>
+    </li>
+    <li class="nob  <php>if(!empty($default_col_show) && !in_array('yhprice', $default_col_show)) {echo ' none';}</php>">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+        <tr>
+          <th>现价</th>
+          <td class="userinfo price" id="price2" >￥ {lingzh:$types['yhprice']}</td>
+        </tr>
+      </table>
+    </li>
+    <li class="nob   <php>if(!empty($default_col_show) && !in_array('saves', $default_col_show)) {echo ' none';}</php>">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+        <tr>
+          <th>已节省</th>
+          <td class="userinfo price2" id="price3">￥ {lingzh:$saves}</td>
+        </tr>
+      </table>
+    </li>
+     <li class="nob  <php>if(!empty($default_col_show) && !in_array('sale_price', $default_col_show)) {echo ' none';}</php>">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+       <tr>
+          <th>预付款</th>
+          <td class="userinfo" id="price1" >￥ {lingzh:$types['sale_price']}</td>
+        </tr>
+      </table>
+    </li>
+    <li class="nob   <php>if(!empty($default_col_show) && !in_array('payment', $default_col_show)) {echo ' none';}</php>">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+        <tr>
+          <th>支付方式</th>
+          <td class="userinfo price2" >
+          		<select name="payment" style="width:100%">
+                    <volist name="payments" id="pay">
+                        <option value="{lingzh:$pay.pay_code}">{lingzh:$pay.pay_name}</option>
+                    </volist>
+                </select>
+          </td>
+        </tr>
+      </table>
+    </li>
+    <li class="nob">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+        <tr>
+          <th valign="top" class="thtop">备注</th>
+          <td><textarea  name="remarks"  class="pxtextarea" style=" height:99px;overflow-y:visible"  id="remarks"   placeholder="请留言"></textarea></td>
+        </tr>
+      </table>
+    </li>
+  </ul>
+  <div class="footReturn">
+    <a id="showcard"  class="submit" href="javascript:void(0)">提交订单</a>
+    <div class="window" id="windowcenter">
+      <div id="title" class="wtitle"><span id="wtitle">提交成功</span><span class="close" id="alertclose"></span></div>
+      <div class="content">
+        <div id="txt"></div>
+      </div>
+    </div>
+  </div>
+  <div class="plugback">
+    <a href="javascript:history.back(-1)">
+    <div class="plugbg themeStyle">
+      <span class="plugback"></span>
+    </div>
+    </a>
+  </div>
+  <script type="text/javascript">
+  function validateTel(telno) {
+    if (telno.length != 11) {
+      return false;
+    }
+    var reg = new RegExp('^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$');
+    return reg.test(telno);
+  }
+
+        function validateInventory() { 
+                <?php
+                    if (($vo['open_inventory'] == 1 && $types['inventory'] > 0) || $vo['open_inventory'] == 0)
+                    {
+                        echo "return true;";
+                    } 
+                    else 
+                    {
+                        echo "return false;";
+                    } 
+                ?>
+            }
+
+  function getVCode() {
+    var telno = $('#smsvcode').val();
+    if (!validateTel(telno)) {
+      alert('请输入合法的手机号！');
+      return;
+    }
+
+    var postdata = {
+      "telno": telno,
+      "wecha_id": '{lingzh:$_GET["wecha_id"]}',
+      "token": '{lingzh:$_GET["token"]}',
+      "func": "vchotel",
+    };
+
+    var prev_text = $(this).text();
+    $(this).unbind('click', getVCode);
+    $(this).text("正在获取...");
+    var vcodelink = this;
+    $.ajax({
+      url: "{lingzh::U('Smsvcode/getVCode')}",
+      type: "post",
+      data: postdata,
+      dataType: "JSON",
+      success: function(res) {
+        switch (res.errcode) {
+          case 0: //success
+            alert('验证码已发送至您手机，请查收！');
+            var seconds = 60; //seconds
+            var ticker = function() {
+              setTimeout(function() {
+                  seconds--;
+                  if (seconds > 0) {
+                    $(vcodelink).text(seconds + "秒后可重获");
+                    ticker();
+                  } else {
+                    $(vcodelink).bind('click', getVCode);
+                    $(vcodelink).text(prev_text);
+                  }
+                },
+                1000);
+            }
+            ticker();
+            break;
+          case 2: // exceed max limit
+            $(vcodelink).bind('click', getVCode);
+            $(vcodelink).text(prev_text);
+            break;
+          default:
+            alert("获取验证码失败！");
+            $(vcodelink).bind('click', getVCode);
+            $(vcodelink).text(prev_text);
+            break;
+        }
+      }
+    });
+  }
+
+  function changeleft() {
+    $("#leftdateline").val($("#dateline").val());
+  }
+
+  function dateDiff(sDate1, sDate2) { //sDate1和sDate2是2002-12-18格式
+    var aDate = sDate1.split("-");
+    var oDate1 = new Date(parseInt(aDate[0]), parseInt(aDate[1]), parseInt(aDate[2]));
+    aDate = sDate2.split("-");
+    var oDate2 = new Date(parseInt(aDate[0]), parseInt(aDate[1]), parseInt(aDate[2]));
+    return iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24); //把相差的毫秒数转换为天数
+  }
+
+  function dothis() {
+    var nums = parseInt($("#nums").val());
+    var day = dateDiff($("#leftdateline").val(), $("#dateline").val());
+    if (day <= 0) {
+      day = 1;
+    }
+    var str1 = {
+      lingzh: $types['price']
+    } * nums * day;
+    var str2 = {
+      lingzh: $types['yhprice']
+    } * nums * day;
+    var str3 = {
+      lingzh: $saves
+    } * nums * day;
+    $("#price1").text("￥" + str1);
+    $("#price2").text("￥" + str2);
+    $("#price3").text("￥" + str3);
+  }
+
+  function submit_handler() {
+    var text_cols = new Array();
+    $("[name^='text_cols']").each(function(index, element) {
+      text_cols.push($(element).val());
+    });
+
+    var select_cols = new Array();
+    $("[name^='select_cols']").each(function(index, element) {
+      select_cols.push($(element).val());
+    });
+
+    if (!validateInventory()) {
+        alert('库存不足，不能下单！');
+        return;
+    }
+
+    if (!validateTel($("#tel").val())) {
+      alert('请输入合法的11位手机号！');
+      return;
+    }
+    if ($("#truename").val() == '') {
+      alert('名字不能为空', '提交失败');
+      return;
+    }
+    if ($("#dateline").val() == '') {
+      alert('选择入住时间', '提交失败');
+      return;
+    }
+    if ($("#leftdateline").val() == '') {
+      alert('请选择离店时间', '提交失败');
+      return;
+    }
+    if ($("#leftdateline").val() < $("#dateline").val()) {
+      alert('离店时间须在入住之后', '提交失败');
+      return;
+    }
+    var smsvcode = $('#smsvcode').val();
+    if ($('#smsvcode').length > 0 && smsvcode.length != 6) {
+      alert('请输入6位短信验证码');
+      return;
+    }
+
+	var payment = $('select[name="payment"]').val() || '';
+    
+    var submitData = {
+      wecha_id: "{lingzh:$Think.get.wecha_id}",
+      truename: $("#truename").val(),
+      remarks: $("#remarks").val(),
+      tel: $("#tel").val(),
+      smsvcode: smsvcode,
+      payment : payment,
+      nums: $("#nums").val(),
+      dateline: $("#dateline").val(),
+      leftdateline: $("#leftdateline").val(),
+      roomtype: "{lingzh:$types['type']}",
+      id: "{lingzh:$Think.get.id}",
+      room_id:"{lingzh:$types.id}",
+      action: "book",
+      text_cols: text_cols,
+      select_cols: select_cols
+    };
+	console.log(submitData);
+    $("#showcard").unbind('click', submit_handler);
+    $.post('index.php?g=Wap&m=Hotel&a=book&token={lingzh:$Think.get.token}&wecha_id={lingzh:$Think.get.wecha_id}&hid={lingzh:$Think.get.hid}',
+      submitData,
+      function(data) {
+        if (data.success == true) {
+          alert(data.msg);
+          setTimeout("window.location.href='index.php?g=Wap&m=Hotel&a=index&token={lingzh:$Think.get.token}&wecha_id={lingzh:$Think.get.wecha_id}&id={lingzh:$Think.get.id}&hid={lingzh:$Think.get.hid}'", 2000);
+          return
+        } else {
+          alert(data.msg);
+          $("#showcard").bind('click', submit_handler);
+        }
+      },
+      "json");
+  } //submit_handler
+  $(document).ready(function() {
+    $('#vcodelink').bind('click', getVCode);
+    $("#showcard").bind('click', submit_handler);
+  });
+  $("#windowclosebutton").click(function() {
+    $("#windowcenter").slideUp(500);
+  });
+  $("#alertclose").click(function() {
+    $("#windowcenter").slideUp(500);
+  });
+
+  function alerts(content, title) {
+    $("#windowcenter").slideToggle("slow");
+    $("#txt").html(content);
+    $("#wtitle").html(title);
+    setTimeout('$("#windowcenter").slideUp(500)', 4000);
+  }
+  var count = $("#thelist img").size();
+  $("#thelist img").css("width", document.body.clientWidth);
+  $("#scroller").css("width", document.body.clientWidth * count);
+  window.onresize = function() {
+
+    $("#thelist img").css("width", document.body.clientWidth);
+    $("#scroller").css("width", document.body.clientWidth * count);
+  }
+  </script>
+</div>
+<php>
+echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+</body>
+</html>

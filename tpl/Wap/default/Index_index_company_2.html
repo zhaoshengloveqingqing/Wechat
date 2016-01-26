@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lingzh:$tpl['wxname']}</title>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="/themes/w/css/reset.css" rel="stylesheet" type="text/css" />
+<script src="/themes/w/js/swipe.js"></script>
+<style>
+body {background-color: #2b2f58;margin: 0 auto;max-width: 640px;min-width: 320px;overflow-x: hidden;}
+
+.banner {background:url(/themes/w/images/lz/top-bg.jpg) 0 0 repeat-x; margin:10px 0px 10px 20px;}
+.banner a{width:40%;}
+
+
+
+.swipe {  overflow: hidden;    visibility: hidden;	  position: relative;	  }
+.swipe-wrap { overflow: hidden;		  position: relative;  }
+.swipe-wrap > div {float:left;	  width:100%;  position: relative;}
+.swipe-wrap > div img{width:100%;height:94%;}
+
+ul#indicator{text-align: center;list-style: none;padding: 0; }
+ul#indicator li {display: inline-block;width: 10px;height: 10px;border-radius: 10px;background: #7d8083; margin: 0 2px;cursor: pointer;}
+ul#indicator li.on {display: inline-block;width: 10px;height: 10px;border-radius: 10px;background: #fff; margin: 0 2px;cursor: pointer;}
+.navi {opacity:0.5;padding:5px 0;background:#000;height:22px;margin-top:-36px;}
+
+
+.mainmenu li>div{position:relative;margin-left:26px;border-bottom:1px solid #414469;height:77px;line-height:77px;}
+.mainmenu li>div span{width:64px;position:absolute;left:0;top:28px;line-height:0;}
+.mainmenu li>div span i.dott{width:22px;height:22px;border-radius:22px;display:inline-block;}
+.mainmenu li:nth-of-type(6n+1)>div span i.dott{background:#fff;}
+.mainmenu li:nth-of-type(6n+2)>div span i.dott{background:#7bc144;}
+.mainmenu li:nth-of-type(6n+3)>div span i.dott{background:#99022f;}
+.mainmenu li:nth-of-type(6n+4)>div span i.dott{background:#fed53f;}
+.mainmenu li:nth-of-type(6n+5)>div span i.dott{background:#0952a9;}
+.mainmenu li:nth-of-type(6n+6)>div span i.dott{background:#6e492c;}
+.mainmenu li>div a{font-size:23px;color:#fff;display:block;width:80%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-left:65px;box-sizing:border-box}
+.mainmenu li>div i.icon{position:absolute;right:0;font-size:22px;color:#fff;top:33px;right:48px;width:11px;height:18px;background:url(/themes/w/images/icons/gt.png);}
+
+
+
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px 0px;}
+a.copyright{font-size:14px;text-align:center;color:#272828;margin:8px 0px;text-decoration:underline;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px 0px;}
+div.tech-support a{text-decoration: underline;}
+.clr {clear: both;}
+
+.bodybg{background:#2b2f58;}
+
+
+</style>
+</head>
+
+<body class="bodybg">
+
+<div id='slider' class='swipe'>
+  <div class='swipe-wrap'>
+    <volist name="flash" id="so">
+      <div><a href="{lingzh:$so.hyperlink}"><img src="{lingzh:$so.img}" /></a></div>
+	</volist>
+  </div>
+</div>
+<div class="navi">
+	<ul id="indicator">
+		<volist name="flash" id="so">
+		<li   <if condition="$i eq 1">class="on"</if>  ></li>
+		</volist>
+	</ul>
+</div>
+
+<div class="mainmenu">
+<ul>
+	<volist name="info" id="vo"> 
+	<li>
+		<div class="menubtn bg{lingzh:$i%6}">
+			<div class="cont">
+				<span><i class="dott"></i></span>
+				<a href="{lingzh:$vo.hyperlink}">{lingzh:$vo.name}</a>
+				<i class="icon"></i>
+			</div>
+		</div>
+	</li>
+	</volist>
+</ul>
+</div>
+
+<div class="clr"></div>
+<include file="Index:navi"/> 
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+
+<script type="text/javascript">
+var slider = Swipe(document.getElementById('slider'), {
+      auto: 3000,
+      continuous: true,
+      callback: function(pos) {
+          var i = bullets.length;
+	      while (i--) {
+	          bullets[i].className = ' ';
+	       }
+	      bullets[pos].className = 'on';
+      }
+  });
+
+  var bullets = document.getElementById('indicator').getElementsByTagName('li');
+
+
+</script>
+
+</body>
+</html>

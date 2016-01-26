@@ -1,0 +1,79 @@
+<include file="Shop:header"/>
+<style type="text/css">
+.con{
+  display: inline-block;
+  width: 49%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.waterfall{
+  width: 100%;
+  margin-right: auto;margin-left: auto;
+  list-style: none outside none;
+}
+.waterfall .li_ele{
+  margin-top: -38px;
+}
+#ulContainer{
+  margin-top: 38px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 98%;
+}
+.waterfall img{
+  width: 100%;
+}
+.waterfall #title{
+  filter:alpha(opacity=50);
+  -moz-opacity:0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  position: relative;
+  bottom: 43px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+</style>
+<div id="ulContainer">
+  <ul class="waterfall">
+    <?php 
+     $length = count($categories);
+     for ($i=0; $i < $length; ) {  ?>
+      <li class='li_ele'>
+        <div onclick="view(this)" durl="<?php echo $categories[$i]['url']; ?>" class="con">
+          <img src="<?php echo $categories[$i]['logo_url']; ?>">
+          <div id="title"><?php echo $categories[$i]['name']; ?></div>
+        </div>
+        <?php if (isset($categories[$i+1])) {?>
+        <div onclick="view(this)" durl="<?php echo $categories[$i+1]['url']; ?>" class="con">
+          <img src="<?php echo $categories[$i + 1]['logo_url']; ?>">
+          <div id="title"><?php echo $categories[$i + 1]['name']; ?></div>
+        </div>
+        <?php } //~if ?>
+      </li>
+    <?php 
+     $i = $i + 2;
+    } ?>
+  </ul>
+</div>
+<div class="clr"></div>
+<php>
+    echo CopyRightHelper::generateShopCopyRight($_GET["token"]);
+</php>
+<script type="text/javascript">
+function view($this){
+  window.location.href = $($this).attr('durl');
+}
+</script>
+</body>
+</html>

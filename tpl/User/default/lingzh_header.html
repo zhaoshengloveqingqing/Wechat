@@ -1,0 +1,146 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> {lingzh::C('site_title')} {lingzh::C('site_name')}</title>
+<meta name="keywords" content="{lingzh::C('keyword')}" />
+<meta name="description" content="{lingzh::C('content')}" />
+<meta http-equiv="MSThemeCompatible" content="Yes" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<link rel="shortcut icon" href="/favicon.ico" >
+<meta http-equiv="Page-Exit" content="blendTrans(Duration=1.0)">
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/zeroclipboard/zeroclipboard_min.js"></script>
+ 
+<style>
+body, html { font-size: 12px; font-family: "Microsoft YaHei", arial, verdana, sans-serif; }
+body, div, table, dl, dt, dd, ul, ol, li,h1,h2{padding:0; margin:0;}
+ul,li,ol{list-style:none;}
+body {font-size:12px; line-height:18px; color:#333; font-family: Microsoft YaHei, arial, verdana, sans-serif;}
+a { color:#000 ; text-decoration: none;}
+a:hover{ text-decoration:underline;}
+img {border: none;vertical-align: middle;}
+
+.head{ width:100%; height:93px; background-color:#f3f3f3; box-shadow: 0 0 5px black;}
+.head .main{ width:1000px; margin:0px auto;}
+.head .logo{ float:left; width:300px; margin: 10px 0px 0px 0px;}
+
+.head .tel{ float:right;  text-align:right; line-height:30px; padding-right:20px; color:#565656}
+.head .tel span{  width:128px; padding-left:3px; font-size:18px; color:#547907; font-style:italic ; font-weight:bold; }
+.head .login-part .login{ color:#000695; }
+.head .login-part .reg { color:#8a8888; }
+.head .login-part .logout { color:#c11111 }
+
+.head .tel a:hover{ color:#000695; text-decoration:none;}
+.head .tel  .logout:hover{ color:#c11111; text-decoration:none;}
+
+.navi {clear: right;float:left;}
+.anv{  padding-left:5px;}
+.anv li{ width: 100px; float:left; line-height:38px; margin-left:5px; display:inline; font-size:14.5px; text-align:center; font-weight:bold;}
+.anv li a{ color:#3e494e ; display:block;}
+.anv li a:hover{ color:#fff; text-decoration:none; background: #006685;}
+.anv li a.selected{ color:#fff; text-decoration:none; background: #006685;}
+
+.head .main .login-part {float: right;line-height: 30px;}
+.copy{
+position: relative;
+padding: 4px 12px;
+margin: 0;
+color: #333;
+text-shadow: 0 1px 0 #fff;
+white-space: nowrap;
+font-family: Arial,Helvetica,sans-serif;
+font-weight: bold;
+font-size: 13px;
+text-align: center;
+vertical-align: middle;
+background-color: #f3f3f3;
+background-repeat: repeat-x;
+border: 1px solid #dcdcdc;
+border-radius: 2px;
+box-shadow: none;
+background-image: linear-gradient(to bottom,#f5f5f5,#f1f1f1);
+}
+</style>
+<script type="text/javascript" >
+$(document).ready(function() {
+    if (!String.prototype.format) {
+		String.prototype.format = function () {
+			var args = arguments;
+			return this.replace(/{(\d+)}/g, function (match, number) {
+				return typeof args[number] != 'undefined' ? args[number] : match
+			})
+		}
+    };
+    ZeroClipboard.setDefaults({
+        moviePath: "/js/zeroclipboard/zeroclipboard.swf"
+    });
+    $(".copy_text").each(function (i) {
+         var $id = "copy_button{0}".format(i),
+	     _tmp = '  <button class="btn copy" id="{0}" type="button" data-clipboard-target="{2}" data-clipboard-text="{1}"><i class="icon-copy"><\/i>复制<\/button>  <span class="alert copy-success help-inline alert-success"  style="display:none;"  >复制成功,请粘帖到您需要的地方<\/span>',
+	     $this = $(this),
+	     v = $this.text(),
+		 $iid = $this.attr("id");
+        /*if (/^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(v)) {
+            var _atmp = '<a href="{0}" target="_blank" title="点击新窗口打开">{0}<\/a>';
+            $this.html(_atmp.format(v))
+        };*/
+        if ($iid) {
+            $this.after(_tmp.format($id, "", $iid))
+        } else {
+            $this.append(_tmp.format($id, v))
+        };
+		var el = $("#" + $id);
+        var clip = new ZeroClipboard(el);
+		clip.setHandCursor( true ); 
+        var success = function (el) {
+            var span = el.nextAll("span.copy-success");
+            span.show();
+            setTimeout(function () {
+                span.hide()
+            }, 2e3)
+        };
+        clip.on('complete', function (client, args) {
+            success($(client.options.button))
+        })
+	});
+});
+</script>
+<body>
+<div class="head">
+ <div class="main">
+  <div class="logo">
+    <p><a href="http://www.pinet.co" title="微信营销" target="_blank"><img src="{lingzh:$agentInfo.company_logo}" class="pngfix" border="0" width="235" height="44" /></a></p>
+  </div>
+  <div class="login-part">
+		<if condition="!isset($_SESSION['uid'])">&nbsp;
+			<a href="{lingzh::U('Index/login')}" class="login">登录</a>&nbsp;|&nbsp;
+			<a href="{lingzh::U('Index/reg')}" class="reg">注册</a>
+		<else/>
+		    您好,{lingzh:$Think.session.uname}!	
+			<a href="{lingzh::U('User/Index/logout')}" class="logout" >[退出]</a>
+	    </if>	
+  </div>
+  <!--<div class="tel">全国服务热线:<span>{lingzh:$agentInfo.service_tel}</span>
+  </div>
+  --><div class="navi">
+    <ul class="anv">
+    	<if condition="$user_role neq 'oem'">
+      <li>
+	      <a href="http://www.pinet.co" title="首页" target="_blank"> 网站首页</a>
+      </li>
+      </if>
+      <li>
+      <a href="/index.php?g=User&m=Index&a=index" title="平台功能" target="_self" <if condition="MODULE_NAME eq 'Index'">class="selected"</if>>管理中心</a>
+       </li>
+       <li>
+           <a href="/index.php?g=User&m=Help&a=index" title="帮助中心" target="_self" <if condition="MODULE_NAME eq 'Help'">class="selected"</if>>帮助中心</a>
+  
+       </li>
+     </ul>
+  </div>
+ </div>
+</div>
+
+

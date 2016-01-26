@@ -1,0 +1,235 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>个人资料</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<link href="{lingzh::RES}/css/userinfo/fans.css" rel="stylesheet" type="text/css"> 
+
+<script type="text/javascript" src="/js/jquery.min.js"></script> 
+
+<style>
+
+.footFix{width:100%;text-align:center;position:fixed;left:0;bottom:0;z-index:99;}
+#footReturn a, #footReturn2 a {
+display: block;
+line-height: 41px;
+color: #fff;
+text-shadow: 1px 1px #282828;
+font-size: 14px;
+font-weight: bold;
+}
+#footReturn, #footReturn2 {
+z-index: 89;
+display: inline-block;
+text-align: center;
+text-decoration: none;
+vertical-align: middle;
+cursor: pointer;
+width: 100%;
+outline: 0 none;
+overflow: visible;
+box-sizing: border-box;
+padding: 0;
+height: 41px;
+opacity: .95;
+border-top: 1px solid #181818;
+box-shadow: inset 0 1px 2px #b6b6b6;
+background-color: #515151;
+background-image: -webkit-linear-gradient(top,#838383,#202020);
+background-image: -webkit-gradient(linear,0% 0,0% 100%,from(#838383),to(#202020));
+}
+
+ .highlight { border:2px solid red; }
+</style>
+</head>
+<body id="fans" >
+<div class="qiandaobanner"> <img src="{lingzh:$homepic}" > </div>
+<div class="cardexplain">
+<li class="nob">
+<div class="beizhu"><if condition="$cardnum neq false">您可以修改你的会员卡信息。以下信息将作为消费凭证，请认真填写！ <else/>填写以下信息即可领取vip会员卡,红色字必填 </if></div>
+</li>
+<ul class="round">
+<if condition="$cardnum neq false">
+	<li>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+	<tr>
+	<th><font color='red'>会员卡号</font></th>
+	<td><input style="color:red" type="text" class="px" disabled="disabled" readonly value="{lingzh:$cardnum}"></td>
+	</tr>
+	</table>
+	</li>
+</if>
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+<tr>
+<th><font color='red'>微信名称</font></th>
+<td><input name="nickname" onfocus="recover(this.id)"
+onblur="check1(this.id)"  type="text" class="px" id="nickname" value="{lingzh:$info.nickname}" placeholder="请输入您的微信名称"></td>
+</tr>
+</table>
+</li>
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+<tr>
+<th><font color='red'>手机号码</font></th>
+<td><input onfocus="recover(this.id)"
+onblur="check3(this.id)" name="tel"  class="px" id="tel" value="{lingzh:$info.tel}"  type="text" placeholder="请输入您的11位手机电话"></td>
+</tr>
+</table>
+</li>
+
+
+</ul>
+
+<ul class="round">
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+<tr>
+<th>真实姓名</th>
+<td><input name="truename"  type="text" class="px" id="truename" value="{lingzh:$info.truename}" placeholder="请输入您的真实姓名"></td>
+</tr>
+</table>
+</li>
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+<tr>
+<th>性别</th>
+<td><select name="sex" class="dropdown-select" id="sex">
+<option  class="dropdown-option">请选择你的性别</option>
+<option  value="1" <if condition="$info['sex'] eq 1">selected</if>>男</option>
+<option  value="2" <if condition="$info['sex'] eq 2">selected</if>> 女</option>
+<option  value="0" <if condition="$info['sex'] eq 3">selected</if>>其他</option>
+</select></td>
+</tr>
+</table>
+</li>
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+<tr>
+<th>出生日期</th>
+<td><input onfocus="recover(this.id)" onblur="check4(this.id)" name="birthday"  class="px" id="birthday" value="{lingzh:$info.birthday}"  type="date"  placeholder="请输入您的出生日期（如2000-10-11）"></td>
+</tr>
+</table>
+</li>
+</ul>
+
+<div class="footReturn">
+<a id="showcard"  class="submit" ><if condition="$cardnum neq false">保 存<else/>领取会员卡</if></a>
+<div class="window" id="windowcenter" >
+<div id="title" class="wtitle"><span class="close" id="alertclose"></span></div>
+<div class="content">
+<div id="txt"></div>
+</div>
+</div>
+</div>
+<div style="height:60px;" id="msg">&nbsp;</div>
+<div id="footReturn">
+<if condition="$cardnum neq false">
+<a href="javascript:void(0)" onClick="location.href='{lingzh::U('Card/vip',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}';"><span>返回会员卡页</span></a>
+<else/>
+<a href="javascript:void(0)" onClick="location.href='{lingzh::U('Card/get_card',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}';"><span>返回会员卡页</span></a>
+</if>
+</div>
+<script type="text/javascript">
+
+$("#showcard").bind("click",
+function() {
+    var btn = $(this);
+    var nickname = $("#nickname").val();
+	var tel 	  = $("#tel").val();
+	var truename  = $("#truename").val();
+	var sex 	  = $("#sex").val();
+	var birthday  = $("#birthday").val();	
+   if (! check1('nickname')) {
+        //alert("请认真输入微信号");
+        return;
+    }
+
+    if (!check3('tel')) {
+        //alert("请认真输入手机号");
+        return;
+    }
+
+    //if (!check4('birthday')) {
+        //alert("请输入出生日期");
+        //return;
+    //}
+
+    var submitData = {
+        nickname  : nickname,
+        tel 	  : tel,
+        truename  : truename,
+        sex 	  : sex,
+        birthday  : birthday,
+        action: "index"
+    };
+    $.post('index.php?g=Wap&m=Userinfo&a=index&token={lingzh:$Think.get.token}&wecha_id={lingzh:$Think.get.wecha_id}', submitData,
+    function(data) {
+        if(data==1){			 
+			alert('更新成功');
+		}else if(data==2){
+			alert('成功领取了会员卡');
+			location.href = "{lingzh::U('Card/vip',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}";
+		}else if(data==3){
+			alert('该商家会员卡缺货了');
+		}else{  
+			alert('稍后再试.');
+		}
+    },
+    "json")
+});
+
+function check1(objId) {
+
+	if ($('#'+objId).val() == '') {
+		//alert("请输入您的微信名称.");
+		$('#'+objId).addClass('highlight');
+		return;
+	}
+	return true;
+}
+
+function recover(objId){   
+	$('#'+objId).removeClass('highlight');
+}
+
+function check3(objId){
+	var content = $('#'+objId).val();
+	if (content == "") {
+		//alert("请输入您的手机号.");
+		$('#'+objId).addClass('highlight');
+		return false;
+	}
+	reg=/^0{0,1}(13[0-9]|14[0-9]|15[0-9]|18[0-9])[0-9]{8}$/i;
+	if(!reg.test(content)) {   
+			//alert("错误,请输入11位的手机号！");
+			$('#'+objId).addClass('highlight');
+			return false;
+	 }
+	 return true;
+}
+function check4(objId) {	 
+	var content = $('#'+objId).val();
+	if (content == '') {
+		$('#'+objId).addClass('highlight');
+		return false;
+	}
+
+	reg=/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/i;
+	if (!reg.test(content)) {   
+			//alert("日期格式错误，正确格式如2000-10-11");
+			$('#'+objId).addClass('highlight');
+			return false;
+	 }
+	 return true;
+}
+
+
+</script>
+</div>
+
+</body>
+</html>

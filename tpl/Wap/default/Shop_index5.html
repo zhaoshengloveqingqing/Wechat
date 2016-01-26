@@ -1,0 +1,58 @@
+<include file="Shop:header"/>
+
+<style type="text/css">
+.mainmenu { display: block; width: 100%; color: #fff; margin: 0px auto;}
+.mainmenu li { float: left; display: block; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; }
+
+.mainmenu li .menubtn { display: block;  text-decoration: none; color: #000;}
+.mainmenu li.longmenu { height: 160px; width: 100%; background-color: inherit; border: none;margin:5px 5px 0px 5px;padding: 0;}
+.mainmenu li a { display: block; padding: 0px; font-size: 14px; color: #000; text-decoration: none; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; }
+
+.mainmenu li .menubtn .menuimg {
+margin: auto;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+overflow: hidden;
+}
+
+.mainmenu li .menutitle {text-align: center;text-decoration: none;color: #fff;overflow: hidden; font-size:16px;}
+
+.mainmenu li .left-title {float:left; width:39.5%;  height:160px; text-align: center;text-decoration: none;color: #191f1e;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size:16px;line-height: 160px; background-color: #f1604d;}
+
+.mainmenu li .right-icon {float:right; width:60%; overflow: hidden; height:160px }
+
+.mainmenu li .right-title {float:right; width:39.5%; height:160px; text-align: center; text-decoration: none;color: #191f1e;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size:16px; line-height: 160px; background-color: #81d8cf;}
+
+.mainmenu li .left-icon {float:left; width:60%; overflow: hidden;  height:160px }
+
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+
+</style>
+
+<div class="clearfix">
+  <ul class="mainmenu">
+    <volist name="categories" id="vo">   
+	<li class="longmenu">
+	  <div class="menubtn">
+	  <a href="{lingzh:$vo.url}">
+		<div class="menumesg">
+		  <div class="menutitle <if condition='$i%2 eq 0'>left-title</if> <if condition='$i%2 eq 1 '>right-title</if>"><span>{lingzh:$vo.name}</span><br /><span>&gt;</span></div>
+		  <div class="menuimg <if condition='$i%2 eq 0'>right-icon</if> <if condition='$i%2 eq 1 '>left-icon</if>"><img src="{lingzh:$vo.logo_url}" width="100%"  height="100%"/></div>
+		</div>
+	  </a>
+      
+	  </div>
+	</li>
+  </volist>	
+  </ul>
+</div>
+
+<div class="clr"></div>
+<php>
+    echo CopyRightHelper::generateShopCopyRight($_GET["token"]);
+</php>
+</body>
+</html>

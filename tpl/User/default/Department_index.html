@@ -1,0 +1,73 @@
+<include file="Public:head"/>
+<div class="content">
+
+<div class="cLineB">
+	<h4 class="left">部门管理<span class="FAQ">管理发展部门</span></h4>
+	<div class="searchbar right">
+		<form method="post" action="">
+			<input type="text" class="txt left" placeholder="输入关键词搜索"	name="search" value="{lingzh:$search}"> 
+			<input type="submit" value="搜索" href="" class="btnGrayS" title="搜索">
+		</form>
+	</div>
+	<div class="clr"></div>
+</div>
+<div class="cLine" style="line-height: 32px;">
+	<div class="pageNavigator left">
+		<a href="{lingzh::U('Department/add')}" title="新增部门" 	class="btnGrayS vm bigbtn">
+		<img src="/themes/a/images/add.png"	class="vm">新增部门</a>
+		<a onclick="$('#import_deptinfo').toggle();" title='导入部门' class='btnGrayS vm bigbtn'><img src="./tpl/User/default/common/images/pic.png" class="vm" />导入部门</a>
+	</div>
+</div>
+         
+<div id="import_deptinfo" style="display:none;margin-top:5px;">
+    <div class="cLineD" style=" margin: 0px 10px 10px 0px; border: 1px #E0E0E0  solid; padding: 10px; border-radius: 5px;">
+	    <form method="post" action="{lingzh::U('Wsc/import_dept')}" enctype="multipart/form-data">
+	        <div class="cLineB"><h4>导入部门信息</h4></div>
+          <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+	          <tbody>
+  	          <tr>
+  	            <td>
+                  <a href="/tpl/User/default/department-entity-tpl.xls" target="_blank" class="green">下载模板文件department-entity-tpl.xls（支持excel 2003,2007格式）</a>
+                </td>
+  	          </tr>
+  	          <tr>
+  	            <td>
+                  <input  type="file" class="text textMiddle" name="department" />&nbsp;&nbsp;
+                  <button type="submit" name="button" class="btnGreen">提交</button> 
+                  <strong> <font color="red"> 若有重复项，会覆盖原有的记录。</font></strong>
+                </td>
+  	          </tr>
+	          </tbody>
+          </table>
+      </form>
+    </div>
+    <div class="clr"></div>
+</div>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>权限管理</title>
+
+<div class="cr"></div>
+<form action="{lingzh::U('Node/sort')}" method="post">
+<table  border="0" cellspacing="0" cellpadding="5" id="userinfoArea" class="ListProduct">
+  <tr>
+	<thead>
+		<tr>
+			<th align="center" >ID</th>
+			<th align="center">所属部门</th>
+			<th align="center">操作</th>
+		</tr>
+	</thead>
+    
+  </tr>
+	{lingzh:$html_tree}
+   
+</table>
+</form>
+</body>
+</html>
+
+</div>
+<include file="Public:footer" />

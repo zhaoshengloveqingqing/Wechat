@@ -1,0 +1,366 @@
+<include file="Public:head"/>  
+<link rel="stylesheet" href="/themes/a/css/om-apusic.css" type="text/css"/>
+<style type="text/css">
+.tree-menu{
+  float: right;
+}
+.tree-menu span{
+  margin-left: 6px;
+}
+.tree-menu span i{
+  cursor: pointer;
+}
+.icon-plus {
+  background-position: -408px -96px;
+}
+.icon-remove {
+  background-position: -312px 0;
+}
+.icon-edit {
+  background-position: -96px -72px;
+}
+[class^="icon-"], [class*=" icon-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  vertical-align: text-top;
+  background-image: url("/themes/a/images/glyphicons-halflings.png");
+  background-repeat: no-repeat;
+  margin-top: 1px;
+}
+#menu_tree{
+  margin-right: 20px;
+}
+.right iframe{
+  height: 100%;
+  width: 100%;
+  z-index: 20;
+  border: 0;
+  margin: 0 auto;
+  display: block;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+li{
+  line-height: 16px;
+}
+.om-tree-node a{
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  width: 115px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+</style>
+
+<script type="text/javascript" src="/themes/a/js/operamasks-ui-all.min.js"></script> 
+<script type="text/javascript">
+var $tree;
+var LEVEL_1_COUNT = 3;//一级菜单最大数
+var LEVEL_2_COUNT = 5;//二级子菜单最大数
+
+ $(document).ready(function() {
+  
+    var treeData = [{
+    text : "自定义菜单列表",
+    id : 0,
+    rootid : 0
+  }];
+  
+  treeData[0].children = {lingzh:$class};
+  if (treeData[0].children.length == 0) {
+    $("#title").val("");
+    $("#keyword").val("");
+    $("#sort").val(0);
+    $("#type [value=click]").selected = true;
+    $("#treeForm").attr("action", "index.php?g=User&m=Diymen&a=class_add&pid=0");
+  }
+  $("#type").change(function() {
+    var select = $(this).children('option:selected').val();
+     $('.menutype').hide();
+     $('.' + select).show();
+  });
+
+  $tree = $("#menu_tree").omTree({
+    dataSource : treeData,
+    simpleDataModel: true,
+    draggable:true,
+    onDrag:function(nodeData, event){
+      var level = $("#"+nodeData.nid).parents(".om-tree-node").length;
+      if(level == 0){
+        return false;//根节点不可以拖拽
+      }
+    },
+    onDrop:function(nodeData, event) {
+      refreshActions();
+    },
+    onSelect: function() {
+      $('table').slideUp("slow");
+      var selNode = $("#menu_tree").omTree("getSelected"); 
+      var rootid = selNode["rootid"];
+      if(rootid != 0) {
+        $("#title").val(selNode.text);
+        
+        $("#sort").val(selNode.sort);
+        var pid = 0;
+        var pNode = getNode($("#"+selNode.nid).parents(".om-tree-node")[0]);
+        if (pNode != null) {
+            pid = pNode.id;
+        }
+        if (selNode.type == "view") {
+          $("#url").val(selNode.keyword);
+        } else if (selNode.type == "click") {
+          $("#keyword").val(selNode.keyword);
+        } else if (selNode.type == "system") {
+          $("#service option:selected").removeAttr("selected");
+          $("#service [value="+selNode.service+"]").attr("selected", true);
+        }
+        $('.menutype').hide();
+        $('.' + selNode.type).show();
+        $("#type option:selected").removeAttr("selected");
+        $("#type [value=" + selNode.type +"]").attr("selected", true);
+        $("#treeForm").attr("action", "index.php?g=User&m=Diymen&a=class_edit&id=" + selNode.id + "&pid="+pid);
+        $('table').slideDown("slow");
+      }
+    }
+  });
+  $tree.omTree("expandAll");
+  refreshActions();
+  initSelect();//默认选中第一个菜单 
+  
+  $tree.delegate(".tree-menu .add","click",function(){
+    $('table.userinfoArea').slideUp("slow");
+    var node = getNode(this);
+    unselect();
+    $("#title").val("");
+    $("#keyword").val("");
+    $("#url").val("");
+    $("#sort").val(0);
+    $("#type option:selected").removeAttr("selected");
+    $("#type [value=click]").attr("selected", true);
+
+    $('.menutype').hide();
+    $("#service option:selected").removeAttr("selected");
+
+    $('.click').show();
+    $("#treeForm").attr("action", "index.php?g=User&m=Diymen&a=class_add&pid=" + node.id);
+    $('table.userinfoArea').slideDown("slow");
+  });
+  
+  $tree.delegate(".tree-menu .edit","click",function(){
+    $('table.userinfoArea').slideUp("slow");
+    var selectedNode = $tree.omTree("findByNId",$(this).closest(".om-tree-node").attr("id"));
+    $tree.omTree('select',selectedNode);
+    $("#title").val(selectedNode.text);
+    
+    $("#sort").val(selectedNode.sort);
+    $("#type option:selected").removeAttr("selected");
+    $("#type [value=" + selectedNode.type +"]").attr("selected", true);
+    
+    if (selectedNode.type == "view") {
+        $("#url").val(selectedNode.keyword);
+    } else if (selectedNode.type == "click") {
+        $("#keyword").val(selectedNode.keyword);
+    } else if (selectedNode.type == "system") {
+    }
+    $('.menutype').hide();
+    $('.' + selectedNode.type).show();
+
+    var pid = 0;
+    var pNode = getNode($("#"+selectedNode.nid).parents(".om-tree-node")[0]);
+    if (pNode != null) {
+        pid = pNode.id;
+    }
+    $("#treeForm").attr("action", "index.php?g=User&m=Diymen&a=class_edit&id=" + selectedNode.id + "&pid="+pid);
+    $('table.userinfoArea').slideDown("slow");
+    });
+  
+  $tree.delegate(".tree-menu .del","click",function() {
+    $('table.userinfoArea').slideUp("slow");
+      var delNode = getNode(this);
+      var selectedNode = $tree.omTree("getSelected");
+      var children = delNode.children;
+      if (children && children.length>0) {
+        alert("菜单下边有子菜单，请先逐个删除子菜单！");
+        return ;
+      }
+      
+      if(confirm("请慎重该操作，删除后不可恢复，您真的要删除【"+delNode.text+"】吗？")){
+        $tree.omTree("remove" , delNode);
+        refreshActions();
+        if(selectedNode && delNode.hid == selectedNode.hid){
+          $("#treeForm").attr("action", "");
+          $("#title").val("");
+          $("#keyword").val("");      
+        }
+        $.post(
+          "index.php?g=User&m=Diymen&a=class_del&id=" + delNode.id + "&id="+delNode.id,
+          {"id":delNode.id},
+          function(result){
+            if(result.status !== 1){
+              alert("删除菜单出错！");
+              location.reload();
+            }
+          },"json");
+      }
+    });
+
+ });
+ 
+function hasChild(nodeData){
+  return nodeData.children && nodeData.children.length>0;
+}
+function initSelect(){
+  var data = $tree.omTree("getData");
+  var child = data[0].children;
+  if (child && child.length>0) {
+    $tree.omTree("select" , child[0]);
+  }
+}
+function resize(){
+  var w = $(window).width(),
+  h = $(window).height(),
+  th = $("#top").outerHeight(true),
+  mh = $(".main-title h3").outerHeight(true); 
+  $(".right").width(w - $(".left").width() - 40);
+  $(".left").height(h - th - mh- 55);
+  $(".right").height(h - th - mh - 5);
+}
+function unselect(){
+  var selected = $tree.omTree("getSelected");
+  if(selected){
+    $tree.omTree("unselect",selected);
+  }
+}
+
+function getNode(target){
+  return $tree.omTree("findByNId",$(target).closest(".om-tree-node").attr("id"));
+}
+function refreshActions(){
+  $("#menu_tree .om-tree-node span").each(function(index,span){
+    $(span).prev(".tree-menu").remove();//先删除再重新创建
+    var node = getNode(this);
+    var menuHtml = '<div class="tree-menu">';
+    var level = $(this).parents(".om-tree-node").length;
+    var childCount = $tree.omTree("getChildren",node).length;
+    if(level == 1){
+      if(childCount < LEVEL_1_COUNT){
+        $(span).find("a").width(130);
+          menuHtml += '<span><i class="icon-plus add" title="添加一级菜单"></i></span>';
+      }
+    }else if(level == 2){
+      if(childCount < LEVEL_2_COUNT){
+        menuHtml += '<span><i class="icon-plus add" title="添加二级子菜单"></i></span>';
+      }
+      menuHtml += '<span><i class="icon-edit edit" title="编辑菜单"></i></span>';
+      menuHtml += '<span><i class="icon-remove del" title="删除菜单(其下没有子菜单才可以删除)"></i></span>';
+    }else{
+      menuHtml += '<span><i class="icon-edit edit" title="编辑菜单"></i></span>';
+      menuHtml += '<span><i class="icon-remove del" title="删除菜单"></i></span>';
+    }
+    menuHtml += '</div>';
+    $(span).before($(menuHtml));
+  });
+}
+
+
+ </script>
+
+<div class="content">
+  <div class="cLineB">
+    <h4><span class="left">自定义菜单</span></h4>
+  </div>
+
+ 
+  <div class="msgWrap bgfc" style="height:900px;">
+    <div class="cLineD" style=" margin: 0px 10px 10px 0px; border: 1px #E0E0E0  solid; padding: 10px; border-radius: 5px;font-size:13px; line-height:28px; padding-left:15px; background-color:#dde8fa; padding-bottom:15px;color: #d45b5b; font-weight:bold;" >
+    <if condition="$diymen neq 1">
+    <h5>
+      <span style="color: #d45b5b; font-weight:bold;">★ AppId和AppSecret参数尚未设置项 ★</span><a style="text-decoration:underline;cursor:pointer;" href="{lingzh::U('Account/edit',array('id'=>$userid))}">点击设置</a>
+    </h5>
+    </if>   
+      操作步骤：<br>
+      第一步:在左侧菜单树上选择添加,点击“+”；<br>
+      第二步:编辑菜单内容并保存；<br>
+      第三步:<strong>点击“生成自定义按钮”,</strong> 修改后需要隔一段时间才能看到效果，或选择重新关注。<br>
+      注意：目前自定义菜单最多包括3个一级菜单，每个一级菜单最多包含5个二级菜单。一级菜单最多4个汉字，二级菜单最多7个汉字。<br>
+      若公众号不是已认证的服务号，菜单的系统业务模块将以图文消息的方式返回。
+    </div>   
+
+    <form id="treeForm" class="form" method="post" action="" target="_top" enctype="multipart/form-data">
+    <div style="padding:0px; ">
+      <div class="left" style=" border: 1px #E0E0E0  solid; padding: 10px; margin-right: 10px; border-radius: 5px; text-align:center;"> 
+          <ul id="menu_tree" ></ul>
+          <div><a class="btnGreen " style="margin-top:20px;" onclick="drop_confirm('自定义菜单最多定义3个，每个菜单的子菜单最多5个，请确认!', '{lingzh::U('Diymen/class_send')}');" title="">生成自定义菜单</a></div>
+          <div><a class="btnGreen " style="margin-top:20px;" onclick="drop_confirm('请确认删除公众号当前使用的自定义菜单，此操作不影响本平台上配置的菜单', '{lingzh::U('Diymen/class_remove')}');" title="">删除自定义菜单</a></div>
+      </div>
+    </div>    
+    <table class="userinfoArea" style="display:none;  margin:0px; border: 1px #E0E0E0  solid; padding: 10px; border-radius: 5px;" border="0" cellspacing="0" cellpadding="0" width="70%">
+    <tbody>
+    <tr>
+      <th width="120"><span class="red">*</span>菜单名：</th>
+      <td><input type="text" id="title" name="title" class="px" style="width:400px;"></td>
+    </tr>
+    <tr>
+      <th width="120">&nbsp;&nbsp;排序：</th>
+      <td><input type="text" id="sort" name="sort" class="px" style="width:400px;"></td>
+    </tr>
+    <tr>
+      <th width="120"><span class="red">*</span>类型：</th>
+      <td>
+        <select id="type" name="type" class="px" style="width:412px;">
+          <option value="click" selected>关键词</option>
+          <option value="view" >外链</option>
+          <option value="system" >系统业务</option>
+  			  <option value="navig" >一键导航</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="menutype system">
+      <th width="120"><span class="red">*</span><span>系统业务</span>：</th>
+      <td>
+              <select id="service" name='service' class="px" style="width:200px;">
+              <volist name="services" id="service">
+                <optgroup label="{lingzh:$service.name}">
+                  <volist name="service.functions" id="fun">
+                    <option value="{lingzh:$fun.tag}">{lingzh:$fun.name}</option>
+                  </volist>
+                </optgroup>
+              </volist>
+              </select>
+              <span style="color:#a5a5a6;">提示：请先配置相应业务功能，否则无法生成自定义菜单</span>
+      </td>
+    </tr>
+    <tr class="menutype click">
+      <th width="120"><span class="red">*</span><span>关键词</span>：</th>
+      <td><input type="text" id="keyword" name="keyword" class="px" style="width:400px;"></td>
+    </tr>
+  	<tr class="menutype navig">
+      <th width="120"><span class="red">*</span><span>地址</span>：</th>
+      <td>
+  		  <input type="text" id="address" disabled="disabled" name="address" value="{lingzh:$address}" class="px" style="width:400px;">
+  		  <if condition="empty($address)"><br/><span class="red">请先在基础设置中设置公司地址信息</span></if>
+  		  </td>
+    </tr>
+    <tr class="menutype view">
+      <th width="120"><span class="red">*</span><span>外链网址</span>：</th>
+      <td><input type="text" id="url" name="url" class="px" style="width:400px;"></td>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+      <td>
+        <button type="submit" name="button" class="btnGreen">保存</button>
+        <a href="javascript:history.go(-1);" class="btnGray vm">取消</a>
+      </td>
+    </tr>
+    </tbody>
+    </table>
+    </form>
+  </div> 
+</div>
+<include file="Public:footer"/>  
+ 

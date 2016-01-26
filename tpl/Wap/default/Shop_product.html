@@ -1,0 +1,514 @@
+<include file="Shop:header"/>
+<script src="/js/hashmap.js" type="text/javascript"></script>
+<style type="text/css">
+  div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px;}
+  div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+  div.tech-support a{text-decoration: underline;}
+  #specs_div , #amount_div, #add_div, #must_div, #discount_div{
+    margin: 10px;
+  }
+  #add_div{
+    height: 35px;
+    margin-top: 20px;
+  }
+  .add_to_cart_btn{
+    border: 1px;
+    border-radius: 4px;
+    background-color: #222;
+    padding: 9px;
+    color: white;
+    font-size: 12px;
+    margin-top: 15px;
+    margin-left: 40px;
+  }
+  .spec{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .spec .ele_dd,.spec dt{
+    display: inline-block;
+  }
+  .current{
+    background-color: #F90;
+    color: #FFF;
+    border: 1px solid #F90;
+    text-shadow: none;
+  }
+
+  .unchoose{
+    background-color: white;
+    color:black;
+  }
+
+  .spec .ele_span{
+    padding: 10px;
+    min-width: 30px;  
+    text-align: center;
+  }
+
+  .spec dd{ 
+    padding: 5px;
+    min-width: 30px;  
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+</style>
+<!--数目-->
+<style type="text/css">
+  .quantity{
+    border: 1px solid #EAEAEA;
+    vertical-align: middle;
+    height: 40px;
+    display: inline-block;
+    background-color: #FFF;
+  }
+  .quantity .minus {
+      position: relative;
+      text-align: center;
+      display: inline-block;
+      width: 44px;
+      height: 40px;
+      border-right: 1px solid #EAEAEA;
+  }
+  .quantity .minus:after {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 14px;
+      border-top: 2px solid #333;
+      width: 15px;
+  }
+  .quantity input {
+      width: 44px;
+      height: 38px;
+      text-align: center;
+      background: none repeat scroll 0% 0% transparent;
+      border: 0px none;
+      vertical-align: top;
+      font-size: 16px;
+  }
+  .quantity .plus:before {
+      content: "";
+      position: absolute;
+      height: 16px;
+      border-left: 2px solid #333;
+      top: 12px;
+      left: 21px;
+  }
+  .quantity .plus:after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      border-top: 2px solid #333;
+      top: 19px;
+      left: 14px;
+  }
+  .quantity .plus {
+      position: relative;
+      text-align: center;
+      display: inline-block;
+      width: 44px;
+      height: 40px;
+      border-left: 1px solid #EAEAEA;
+  }
+  .qb_icon {
+      display: inline-block;
+      background-repeat: no-repeat;
+  }
+</style>
+
+<div class="main">
+  <div class="banner" id="banner" style="height: auto">
+    <img src="{lingzh:$product.logo_url}" alt="{lingzh:$product.name}" style="height: auto"/>  
+  </div>
+  <div class="p_title">{lingzh:$product.name}</div> 
+  <div class="f_list_car clearfix">
+    <div class="f_list_car_l" style="width:100%;">
+      <span class="all_price" style="width:100%;">
+      	本店售价：<font>￥{lingzh:$product.price}</font> 
+      	<span style="text-decoration:line-through">
+      		<?php if(in_array($product['category_id'], array('1134', '1124')) ){ ?>
+      			
+      		<?php }else { ?>
+				原价：{lingzh:$product.market_price}元
+			<?php } ?>
+      	</span>
+      </span>
+    </div>
+  </div>
+
+  <div id="specs_div">
+    
+      <?php if($size_set){ ?>
+        <dl class="spec">
+            <dt>{lingzh:$product.size_alias}：</dt>
+            <?php  foreach ($size_set as $key => $val) { ?>
+              <dd class="ele_dd"><span data-name="{lingzh:$val.name}" data-id="{lingzh:$val.id}" class="ele_span unchoose" onClick="choose(this,0)">{lingzh:$val.name}</span></dd>
+            <?php } ?>
+        </dl>
+        <?php } ?>
+      <?php if($color_set){ ?>
+        <dl class="spec">
+            <dt>{lingzh:$product.color_alias}：</dt>
+            <?php if($color_set) foreach ($color_set as $key => $val) { ?>
+              <dd class="ele_dd"><span data-name="{lingzh:$val.name}" data-id="{lingzh:$val.id}" class="ele_span unchoose" onClick="choose(this,1)">{lingzh:$val.name}</span></dd>
+            <?php } ?>
+        </dl>
+        <?php } ?>
+      <script type="text/javascript">
+        var good = {"id":<?php echo $_GET['id']  ?>,"color_id":0,"color_name":"","size_id":0,"size_name":"","amount":1};
+        $(document).ready(function(){
+        	$('#amount').val(1);
+       	});
+        function choose($this,type){
+          var node = $($this);
+          var current_node = node.parent().parent().find('.current');
+          current_node.removeClass('current');
+          current_node.addClass('unchoose');
+          node.removeClass('unchoose');
+          node.addClass('current');
+          var id_field = type == 0 ? 'size_id' : 'color_id';
+          var name_field = type == 0 ? 'size_name' : 'color_name';
+          good[id_field] = node.attr("data-id");
+          good[name_field] = node.attr("data-name");
+          good.amount = 1;
+          notifyInventory();
+          $('#amount').val(1);
+        }
+        function notifyInventory()
+        {
+          var specs = getSpecsInventory();
+          var amount = specs.containsK(good.size_id + '_' + good.color_id);
+          if(amount !== false && amount > 0)
+          {
+            $("#inventory_label").text(amount); 
+
+            $('#amount_div').show();
+            $('#add_div').show();
+          }
+          else
+          {
+            $("#inventory_label").text(0); 
+            $('#amount_div').hide();
+            $('#add_div').hide();
+          }
+          
+        }
+      </script>
+  </div>
+  <div id="amount_div">
+    <span>数量：</span>
+    <span class="quantity">
+        <?php if(!in_array($product['category_id'], $category_ids)){ ?>
+      <span class="minus" tag="sub" onClick="deleteOne()">
+        <i class="qb_icon icon_minus"></i>
+      </span>
+        <?php } ?>
+      <input readonly="readonly" id="amount" name="amount" value="1" type="tel">
+        <?php if(!in_array($product['category_id'], $category_ids)){ ?>
+      <span tag="add" class="plus" onClick="addOne()">
+        <i class="qb_icon icon_plus"></i>
+      </span>
+        <?php } ?>
+    </span>
+    <?php if(!(!$size_set && !$color_set && $product['inventory'] == 0)){ ?>
+    <span id="inventory" style="margin-left: 5px; font-size: 10px;">剩余<label id="inventory_label">{lingzh:$product.inventory}</label>件</span>
+    <?php } ?>
+  </div>
+  <!-- Hi电手机分类 start  -->
+  <?php if($product['category_id']==1129){ ?>
+  <div id="must_div">
+      <span>必选：</span>
+      <span class="minus"><input type="checkbox" checked onclick="return false;">{lingzh:$phone_pay.name}</span>&nbsp;&nbsp;{lingzh:$phone_pay.intro}
+      </div>
+  <?php } ?>
+  <?php if($product['category_id']==1129  && in_array($product['product_id'], array('9069', '9070', '9081')) ){ ?>
+  <div id="discount_div">
+      <span>可选：</span>
+      <span class="minus"><input id="discount_activity" type="checkbox" onclick="changeGoPayUrl();">{lingzh:$internet_pay.name}</span>&nbsp;&nbsp;{lingzh:$internet_pay.intro}
+  </div>
+  <?php } ?> 
+  <!-- Hi电手机分类 end  -->
+  
+  <!-- Hi电宽带分类 start  -->
+  <?php if($product['category_id']==1134){ ?>
+  	<?php if(preg_match('/一年付$/', $product['name'])){ ?>
+	  <div id="must_div">
+	      <span>必选：</span>
+	      <span class="minus"><input type="checkbox" checked onclick="return false;">{lingzh:$phone_pay.name}</span>&nbsp;&nbsp;{lingzh:$phone_pay.intro}
+	  </div>
+	  <div id="discount_div">
+	      <span>必选：</span>
+	      <span class="minus"><input id="discount_activity" type="checkbox" checked onclick="return false;">{lingzh:$internet_pay.name}</span>&nbsp;&nbsp;{lingzh:$internet_pay.intro}
+	  </div>
+  	<?php }elseif(preg_match('/两年付$/', $product['name'])){ ?>
+  	  <div id="must_div">
+	      <span>必选：</span>
+	      <span class="minus"><input type="checkbox" checked onclick="return false;">{lingzh:$phone_pay.name}</span>&nbsp;&nbsp;{lingzh:$phone_pay.intro}
+	  </div>
+	<?php } ?>
+  <?php } ?>
+  <!-- Hi电宽带分类 end  -->
+  
+  <!-- Hi电iphone6分类 start  -->
+  <?php if(in_array($product['category_id'], array(1124, 1174))){ ?>
+  	<div id="must_div">
+      <span>必选：</span>
+      <span class="minus"><input type="checkbox" checked onclick="return false;">{lingzh:$phone_pay.name}</span>&nbsp;&nbsp;{lingzh:$phone_pay.intro}
+    </div>
+  <?php } ?>
+  <!-- Hi电iphone6分类 end  -->
+  <script type="text/javascript">
+    function deleteOne(){
+      if(good.amount > 1)
+      {
+        good.amount = good.amount - 1;
+        $('#amount').val(good.amount);
+      } 
+    }
+
+    function addOne(){
+      var specs = getSpecsInventory();
+      if(specs === false)
+      {
+        good.amount = good.amount + 1;
+        $('#amount').val(good.amount);
+        return;
+      }
+      var amount = specs.containsK(good.size_id + '_' + good.color_id);
+      if(amount === false || good.amount < amount || $('#inventory').length == 0)
+      {
+        good.amount = good.amount + 1;
+        $('#amount').val(good.amount);
+      }
+      else if(amount !== false && good.amount == amount)
+      {
+        alert("抱歉，此类型商品，库存仅剩" + good.amount + "件，欲购从速！");
+      }
+      else
+      {
+    	  var msg = "请选择商品尺寸和颜色！";
+	   	  var strMsg = "<?php
+	   			$msg = '';
+	   			if($size_set){
+	   				$msg .=  $product['size_alias'];
+	   			}
+	   			if($color_set){
+	   				$msg .=  (!empty($msg) ? '和' : '').$product['color_alias'];
+	   			}
+	   			echo $msg;
+	   		?>";
+	   		if(strMsg){
+	   			msg = '请选择'+strMsg;
+	   		}
+	        alert(msg);
+            return;
+      }
+    }
+
+    function getSpecsInventory()
+    {
+      <?php if($specs)
+      {
+        echo 'return ' . json_encode($specs) . ';';
+      } else {
+        echo 'return false;';
+      }?>
+    }
+    Array.prototype.containsK = function(k)
+    {
+      for (var i = this.length - 1; i >= 0; i--) {
+        if( this[i].k == k )
+        {
+          return this[i].inventory;
+        }
+      };
+      return false;
+    };
+  </script>
+  <div id="add_div">
+    <!--加入购物车-->
+    <?php if(!in_array($product['category_id'], $category_ids)){ ?>
+	    <span onclick="add_cart()" class="add_to_cart_btn">
+	      <?php if($_GET['token'] == '53cb3b7ez79'){echo '加入洗衣车';} else {echo '加入购物车';} ?>
+	    </span>
+    <?php }else{ 
+      	if(!in_array($product['product_id'], $special_ids)){
+      ?>
+      	<span onclick="goPay()" class="add_to_cart_btn">
+	      <?php echo '去结算'; ?>
+	    </span>
+      <?php }} ?>
+  </div>
+  <script type="text/javascript">
+      var temp_gopay_url = '{lingzh:$goPay_url}';
+      var gopay_url = '{lingzh:$noNet_goPay_url}';
+      var nonet_gopay_url = '{lingzh:$noNet_goPay_url}';
+      function changeGoPayUrl(){
+          discount_checked = $('#discount_activity')[0].checked;
+          if(discount_checked){
+              gopay_url = temp_gopay_url;
+          }else{
+              gopay_url = nonet_gopay_url;
+          }
+      }
+      function goPay()
+      {
+          var specs = getSpecsInventory();
+          if(good.color_id == 0 && good.size_id == 0 && specs.length > 0)
+          {
+        	  var msg = "请选择商品尺寸和颜色！";
+    	   	  var strMsg = "<?php
+    	   			$msg = '';
+    	   			if($size_set){
+    	   				$msg .=  $product['size_alias'];
+    	   			}
+    	   			if($color_set){
+    	   				$msg .=  (!empty($msg) ? '和' : '').$product['color_alias'];
+    	   			}
+    	   			echo $msg;
+    	   		?>";
+    	   		if(strMsg){
+    	   			msg = '请选择'+strMsg;
+    	   		}
+    	        alert(msg);
+                return;
+          }
+          if(specs.length > 0 && specs.containsK(good.size_id + '_' + good.color_id) === false)
+          {
+        	  var msg = "请选择商品尺寸和颜色！";
+    	   	  var strMsg = "<?php
+    	   			$msg = '';
+    	   			if($size_set){
+    	   				$msg .=  $product['size_alias'];
+    	   			}
+    	   			if($color_set){
+    	   				$msg .=  (!empty($msg) ? '和' : '').$product['color_alias'];
+    	   			}
+    	   			echo $msg;
+    	   		?>";
+    	   		if(strMsg){
+    	   			msg = '请选择'+strMsg;
+    	   		}
+    	        alert(msg);
+                return;
+          }
+          if(specs.containsK(good.size_id + '_' + good.color_id) === 0 || $('#inventory').length == 0)
+          {
+        	  alert("抱歉，此类型商品，库存剩0件！");
+        	  return;
+          }
+          
+		  var strParams = '';
+		  for(param in good){
+			  if(param != 'id'){
+				  strParams += '&' + param + '=' +  good[param];
+			  }
+		  }
+          location.href = gopay_url + strParams;
+      }
+    //点击加入购物车
+    function add_cart() {
+      var specs = getSpecsInventory();
+      if(good.color_id == 0 && good.size_id == 0 && specs.length > 0)
+      {
+    	  var msg = "请选择商品尺寸和颜色！";
+	   	  var strMsg = "<?php
+	   			$msg = '';
+	   			if($size_set){
+	   				$msg .=  $product['size_alias'];
+	   			}
+	   			if($color_set){
+	   				$msg .=  (!empty($msg) ? '和' : '').$product['color_alias'];
+	   			}
+	   			echo $msg;
+	   		?>";
+	   		if(strMsg){
+	   			msg = '请选择'+strMsg;
+	   		}
+	        alert(msg);
+            return;
+      }
+      if(specs.length > 0 && specs.containsK(good.size_id + '_' + good.color_id) === false)
+      {
+    	  var msg = "请选择商品尺寸和颜色！";
+	   	  var strMsg = "<?php
+	   			$msg = '';
+	   			if($size_set){
+	   				$msg .=  $product['size_alias'];
+	   			}
+	   			if($color_set){
+	   				$msg .=  (!empty($msg) ? '和' : '').$product['color_alias'];
+	   			}
+	   			echo $msg;
+	   		?>";
+	   		if(strMsg){
+	   			msg = '请选择'+strMsg;
+	   		}
+	        alert(msg);
+            return;
+      }
+      $.ajax({
+        type:'POST',
+        url: "{lingzh::$add_to_cart_url}",
+        data:good,
+        success: function( data ) {
+          if(data){
+            var cur_count = $('#cart_item_count').html();
+            if (cur_count) {
+              cur_count = parseInt(cur_count);
+            } else {
+              cur_count = 0;
+            }
+            $('#cart_item_count').html(cur_count + parseInt(data));
+            $('#cart_top').show();
+          }
+        }
+      });
+    }
+  </script>
+
+  <div class="p_mod p_short_desc">
+    <h2 class="p_mod_title">商品介绍</h2>
+    <div class="p_con">
+      <p>{lingzh:$intro}</p>
+    </div>
+  </div>
+    
+
+  <!--套餐-->
+  <section class="f_list f_mod" >
+    <h2 class="p_mod_title">其他热门商品</h2>
+    <ul class="clearfix" id="f_list">
+      <volist name="hot_products" id="h_product"> 
+      <li>
+        <div class="f_list_l">
+          <a href="{lingzh:$h_product.url}">
+            <img src="{lingzh:$h_product.logo_url}" style="height: auto;margin-bottom: 5px;"/>
+            <h3>{lingzh:$h_product.name}</h3>
+            <p class="tui_price ts2" style="font-weight:normal;font-size:14px;color:#3c3c3c;text-decoration:line-through">原价：{lingzh:$h_product.market_price}&nbsp;元</p>
+            <div class="hot"><strong style="display:none">热卖</strong></div>
+          </a>
+        </div>
+        <div class="f_list_r">
+          <p class="tui_price ts2">
+            <strong>￥{lingzh:$h_product.price}</strong>
+          </p>
+          <a href="{lingzh:$h_product.url}" class="u_order_return ts1" id="in_car">去浏览</a>
+        </div>
+      </li>
+      </volist>
+    </ul>
+   </section>
+      
+<div class="clr"></div>
+<notempty name="shop['name']">
+  <div class="copyright">
+    ©<php> echo date('Y').'  '.$shop['name'];</php> 
+  </div>
+</notempty>
+
+</body>
+</html>

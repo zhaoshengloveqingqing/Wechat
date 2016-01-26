@@ -1,0 +1,1647 @@
+<include file="lingzh:header"/>
+<style  type="text/css">
+body {
+	color:black;
+	font-family:微软雅黑, 黑体
+}
+.none {
+	display:none
+}
+.help_main_panel {
+	width:1000px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #D3D3D3;
+	min-height: 500px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.help_section {
+	margin: 10px;
+	border: 1px solid #d2d2d2;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.help_section .section_head {
+	background: #838383; /* Old browsers */
+	background: -moz-linear-gradient(top, #d9d9d9, #cccccc); /* FF3.6+ */
+	background: -webkit-gradient(linear, top, bottom, from(#d9d9d9), to(#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #d9d9d9, #cccccc); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #d9d9d9, #cccccc); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, #d9d9d9, #cccccc); /* IE10+ */
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#d9d9d9', GradientType=1 ); /* IE6-9 */
+	background: linear-gradient(top, #d9d9d9, #cccccc); /* W3C */
+	margin: 1px;
+	height: 40px;
+	clear:both;
+	cursor:  pointer;
+	padding-top:10px;
+}
+.section_head .section_title {
+	margin-left:10px;
+	height: 50px;
+	;
+	font-size: 20px;
+	font-weight:  bold;
+	vertical-align: middle;
+	color:#3e3e3e;
+	font-family:微软雅黑;
+	line-height:32px;
+}
+<!--
+.section_head .menu_icon {
+	float:right;
+	padding:13px 13px;
+	background-image: url(/themes/a/images/icon.png);
+	overflow: hidden;
+	background-repeat: no-repeat;
+}
+-->
+.section_head .menu_icon_dropdown {
+	background-position: 0px -311px;
+	float: right;
+}
+.section_head .menu_icon_collapse {
+	background-position: 0px -279px;
+	float: right;
+}
+.section_detail {
+	margin: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.section_detail ul li {
+	margin-bottom: 10px;
+}
+.section_item_title {
+	margin-left: 0px;
+	font-size: 16px;
+	color: #056683;
+	font-weight:bolder;
+	text-decoration:none;
+	line-height:30px;
+}
+.section_item_content {
+	font-size: 14px;
+	margin-left:20px;
+	margin-right:20px;
+	line-height: 32px;
+	font-family:微软雅黑;
+	text-indent:2em
+}
+a {
+	color:#0782a7;
+}
+a:hover {
+	color: #b2120a;
+}
+table {
+	margin-left:100px;
+	border: 1px solid #D5D5D5;
+}
+.table_title {
+	font-size:16px;
+	font-weight:bolder;
+	color:#000;
+}
+.title {
+	font-size:16px;
+	color: #000;
+	text-decoration:none;
+}
+.red {
+	color: #FF62B0;
+}
+.ftitle {
+	font-size:16px;
+	color:#575757;
+	text-decoration:none;
+	padding-left:100px;
+	padding-top:5px;
+	margin-bottom:-20px;
+}
+xmp {
+	padding-left:5px;
+	display:block;
+}
+.action {
+	font-size:14px;
+	color:#CA0000;
+	line-height:24px;
+	padding-left:100px;
+	padding-bottom:10px;
+	padding-top:10px;
+}
+.p {
+style=" margin-top:10px;
+	margin-bottom:10px;
+}
+.img {
+	text-align:center;
+	margin:auto;
+}
+.redred {
+	color:#ff0000;
+}
+.black {
+	color:#030303;
+	font-weight:bolder;
+}
+.headtitle {
+	font-size:16px;
+	color:#030303;
+}
+</style>
+<script type="text/javascript">
+    $(function(){
+        $('.section_head').click(function(){
+            $(this).next('.section_detail:first').toggleClass('none');
+            if( $(this).children('.menu_icon').hasClass('menu_icon_dropdown')) {
+                $(this).children('.menu_icon').removeClass('menu_icon_dropdown');
+                $(this).children('.menu_icon').addClass('menu_icon_collapse')
+            }else{
+                $(this).children('.menu_icon').removeClass('menu_icon_collapse')
+                $(this).children('.menu_icon').addClass('menu_icon_dropdown')
+            }
+        });
+        
+        $('.section_item_title').click(function() {
+            $(this).next('.section_item_content:first').toggleClass('none');
+        });
+        
+        
+        $('.section_head .menu_icon').addClass('menu_icon_collapse');
+        $('.menu_icon_collapse:first').addClass('menu_icon_dropdown').removeClass('menu_icon_collapse');
+       
+        $('.section_detail:first').removeClass('none');
+       
+        
+    });
+</script>
+
+<br/>
+<div class="help_main_panel"> 
+  
+  <!-- 01.基础建设-->
+  
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>01. 基础建设</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+       <li> <a class="section_item_title" href="javascript:void(0)"> 0)入门新手看这里！！！ </a>
+          <div class='section_item_content none'>
+           <p class="redred">*这里介绍的是最基础的流程，相对应的具体操作请到对应栏目去寻找答案。</p>
+            <p>很多亲们注册了派尔网络平台之后就不知道如何开始下手建一个属于自己的站，下面就为大家简单介绍下步骤流程。</p>
+            <p><a class="redred">第一步：</a>在注册派尔网络平台之前，必须要有个微信公众号（没有的请转移到这个链接申请 <a href="http://mp.weixin.qq.com">http://mp.weixin.qq.com</a>）下一步就开始自动或者手动绑定公众号咯。</p>
+            <p><a class="redred">第二步：</a>绑定成功之后，就可以进入管理功能啦。进入之后勾选相应的功能开启服务（新注册的用户有十天的免费试用）开始体验咯。</p>
+            <p><a class="redred">第三步：</a>选择好功能之后，可以为自己建立一个小站啦。先填写好“基础设置”—“公司信息”(如需在各微应用底部显示公司版权信息，请购买相应充值码)</p>
+            <p><a class="redred">第四步：</a>接下来到“微信客服”栏目设置好内容(不懂设置的亲们，请转移到下面栏目寻找答案)，“微信客服”栏目先设置好是为了用户关注你的公众号能得到对应提示回复。</p>
+            <p><a class="redred">第五步：</a>到了这一步亲们就可以根据自己的需求选择完善栏目了，微网站、会员卡、行业方案等等都可以。</p>
+             <p>步骤都很简单，赶紧动手试试！！！</p>
+          </div>
+        </li>
+        
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 如何注册微信公众号</a>
+          <div class='section_item_content none'>
+            <p> 登录<a href="http://mp.weixin.qq.com" target="_blank">http://mp.weixin.qq.com</a>, 点击注册填写相关信息即可申请微信公众号，微信公众号只能在PC端登录，不能用手机端，公众号分服务号和订阅号，企业可申请服务号，个人、自媒体申请订阅号，服务号每个月限制群发一条，而订阅号每天可发送一次，但消息会折叠起来放在一个订阅号的消息盒子里，服务号仍然是放在聊天列表。 </p>
+            <div class="img"><img src="/themes/a/images/user/1.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">2) 如何注册{lingzh:$agentInfo['company_short_name']}微信平台</a>
+          <div class='section_item_content none'>
+            <p> 进入{lingzh:$agentInfo['company_short_name']}官方网站，点击注册填写用户名、密码、联系人、手机号码、公司名称即可进行在线注册，最后一步扫描关注{lingzh:$agentInfo['company_short_name']}公众号，并回复"审核+注册用户名"即可。 </p>
+            <div class="img"><img src="/themes/a/images/user/1.1.jpg"/></div>
+            </p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">3) 如何绑定公众号</a>
+          <div class='section_item_content none'>
+            <p >微信公众号的绑定指的是把微信公众号的信息注册到{lingzh:$agentInfo['company_short_name']}的一个过程，完成注册后，微信公众号便拥有了平台的各种扩展功能。</p>
+            <p>{lingzh:$agentInfo['company_short_name']}一共提供了两种微信公众号的绑定方式，分别为一键智能绑定和手动绑定。以下分别作说明。</p>
+            <p>(一) 一键智能绑定</p>
+            <p>一键智能绑定非常的简单，当用户第一次登录平台，会进入到绑定的一个页面，如下图。</p>
+            <div class="img"><img src="/themes/a/images/user/1.2.jpg"/></div>
+            <p>这时候只需要输入您想要绑定的微信公众平台的账号和密码 ( 此账号和密码必须可以在<a href="mp.weixin.qq.com" target="_blank">mp.weixin.qq.com</a>中顺利登录 ),然后点击"一键绑定公众号"，系统便会智能完成绑定所需要的一切，等待几十秒后，就会进入如下页面。</p>
+            <div class="img"><img src="/themes/a/images/user/1.3.jpg"/></div>
+            <p> 大功告成！绑定成功啦！直接点击开启营销体验。有时候，用户在绑定的过程中会出现一些问题，这里给大家总结一下：</p>
+            <p class="redred">★ 1. 输入公众平台账号和密码后一直不对。</p>
+            <p class="redred">请注意，这里输入的账号和密码必须是微信公众平台的账号和密码，而不是{lingzh:$agentInfo['company_short_name']}平台的账号。</p>
+            <p class="redred">★ 2. 如果绑定过程出现其它错误。</p>
+            <p class="redred">请确保您的微信公众账号至少已经在mp.weixin.qq.com中已经注册超过7天了，然后已经拥有高级功能和开发者模式。</p>
+            <p>(二) 手动绑定</p>
+            <p>如下图所示，点击进入"手动绑定"模式</p>
+            <div class="img"><img src="/themes/a/images/user/1.4.jpg"/></div>
+            <p>登录微信公众号平台( <a href="http://mp.weixin.qq.com" target="_blank">http://mp.weixin.qq.com</a> )，根据你的微信公众号信息在{lingzh:$agentInfo['company_short_name']}平台上填写，如下图详解。注意了！千万不要填错哦！</p>
+            <div class="img"><img src="/themes/a/images/user/1.5.jpg"/></div>
+            <div class="img"><img src="/themes/a/images/user/1.6.jpg"/></div>
+            <p>完成以上信息填写后，点击保存，这时候，平台会自动生成一个url和Token，如下图所示:</p>
+            <div class="img"><img src="/themes/a/images/user/1.7.jpg"/></div>
+            <p>下一步，打开微信公众平台，接着，点击"高级功能"，然后进入"开发模式"，</p>
+            <div class="img"><img src="/themes/a/images/user/1.8.jpg"/></div>
+            <p>一定要开启"开发者模式"，然后点击"修改"，</p>
+            <div class="img"><img src="/themes/a/images/user/1.9.jpg"/></div>
+            <p>把前面平台生成的url和Token回填到微信公众平台，提交便可以完成绑定了。</p>
+            <div class="img"><img src="/themes/a/images/user/1.91.jpg"/></div>
+            <p>在公众平台提交完url和Token后，在平台页面一直往下一步走，便可以结束整个绑定流程了。 其实，简单的说，手动绑定就是把平台生成的url和Token填写到微信公众平台，然后打开微信公众平台的"开发者模式"便可以了。</p>
+            <p class="redred">★ 在此对手动绑定做一个总结：</p>
+            <p class="redred">1. 在微信公众平台开启"开发者模式"</p>
+            <p class="redred">2. 复制平台生成的url和Token到公众平台上进行绑定。</p>
+          </div>
+        </li>
+        <!-- <li>
+                    <a class="section_item_title" href="javascript:void(0)">4) 如何绑定URL和TOKEN</a>
+                    <div class='section_item_content none'>
+                        <p>
+                            添加完公众号点击保存，页面会跳转到这个页面。</p><img src="/themes/a/images/user/pic6.jpg"/><p>绑定URL和TOKEN (URL和TOKEN这两处地方必须一致)
+1. 登录微信公众平台http://mp.weixin.qq.com/（注意需提前注册好公众号
+2 点击高级功能，进入开发模式。（注：如果没有高级功能说明你注册的公众号还在审核中，审核通过后会有高级功能）
+3. 开启开发模式（注：开启开发模式编辑模式则不能用，两者只能选其一）<img src="/themes/a/images/user/pic7.jpg"/></p><p>信息都填写成功后， 找客服要充值码充值即可进入功能管理体验了。<img src="/themes/a/images/user/pic8.jpg"/><img src="/themes/a/images/user/pic9.jpg"/>
+
+                        </p>
+                    </div>
+                </li>-->
+        <li> <a class="section_item_title" href="javascript:void(0)">4) 为什么配置好了收不到消息</a>
+          <div class='section_item_content none'>
+            <p style="color:#d12727; font-size:16px;"> 检查微信的公众号平台</p>
+            <p>1、是否开通开发者模式</p>
+            <p>2、url和token是否和{lingzh:$agentInfo['company_short_name']}上的一致</p>
+            <p>3、{lingzh:$agentInfo['company_short_name']}上的公众号的原始id是否一致</p>
+            <p>4、微信是否开通了“接收讯息”功能，如下图</p>
+            <div class="img"><img src="/themes/a/images/user/1.0099.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 5) 公司信息</a>
+          <div class='section_item_content none'>
+            <p>公司信息用于定位功能，还有添加分店信息，在两处会显示此信息，请看图详解。</p>
+            <p># 第一处 #在{lingzh:$agentInfo['company_short_name']}平台添加公司详细信息</p>
+            <div class="img"><img src="/themes/a/images/user/1.93.jpg"/></div>
+            <p>接下来添加分店信息</p>
+            <div class="img"><img src="/themes/a/images/user/1.94.jpg"/></div>
+            <p>拿起手机，打开你微信公众号，点击手机底部“+”符号，查看位置</p>
+            <div class="img"><img src="/themes/a/images/user/1.95.jpg"/></div>
+            <p>这时手机会显示你编辑的分店信息</p>
+            <div class="img"><img src="/themes/a/images/user/1.96.jpg"/></div>
+            <p># 第二处 #</p>
+            <p>打开你的微网站，底部有个快捷导航（前提是要在后台微网站中把这个选项显示出来，要不不会在首页显示的哦）请看图解。</p>
+            <div class="img"><img src="/themes/a/images/user/1.97.jpg"/></div>
+            <p>想要有快捷导航按钮，记得在这点击显示哦。</p>
+            <div class="img"><img src="/themes/a/images/user/1.98.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 6) 短信通知设置</a>
+          <div class='section_item_content none'>
+            <p>短信通知是指：购买了短信通知套餐，你的手机会收到微商城新订单、微预订新订单、微餐饮新订单等通知提醒。如何操作，请看图</p>
+            <div class="img"><img src="/themes/a/images/user/1.99.jpg"/></div>
+            <p>如何购买呢？请往下看图</p>
+            <div class="img"><img src="/themes/a/images/user/1.991.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 7) 操作员管理</a>
+          <div class='section_item_content none'>
+            <p>操作员管理是指：用户添加完操作员之后，进入商户管理平台可以查看商家用户信息以及订单管理                                                    等功能，如何操作呢，请往下看（最多只可以添加3位操作员哦）</p>
+            <div class="img"><img src="/themes/a/images/user/1.992.jpg"/></div>
+            <p>添加操作员图解</p>
+            <div class="img"><img src="/themes/a/images/user/1.993.jpg"/></div>
+            <p>进入商户平台图解</p>
+            <div class="img"><img src="/themes/a/images/user/1.994.jpg"/></div>
+            <p>餐饮行业有自动打印小票功能啦！！！如何使用呢，看图吧。</p>
+            <div class="img"><img src="/themes/a/images/user/1.0994.jpg"/></div><br />
+            <div class="img"><img src="/themes/a/images/user/1.0995.jpg"/></div>
+             <p class="redred">注意啦！！</p>
+              <p class="redred">★ 1. 自动打印小票目前只支持IE浏览器（且是IE8以上）。</p>
+               <p class="redred">★2.“开始自动查询”按钮指的是：每隔40秒去查询是否有新订单。“立即查询”按钮指的是：立即查询是否有新订单。</p>
+                <p class="redred">★3.用IE浏览器时，底部会有提醒安装驱动的提示，点击安装就ok了。
+</p>
+                 <p class="redred">★4.小票打印机记得要装驱动哦！</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 8) 自定义菜单</a>
+          <div class='section_item_content none'>
+            <p>自定义菜单是企业微信公众号消息框底部的导航菜单，可以很方便用户进行交互，相当于一个轻量级的APP。</p>
+            <p>目前自定义菜单只对服务号开放，服务号认证需要企业认证，所以如果是订阅号这个功能是用不了的（订阅号升级为服务号后，通过认证也可开通自定义菜单功能），如果服务号还没有申请自定义菜单，可以点击-高级功能-开发模式，会有一栏会话界面自定义菜单，点击申请就可以了，申请成功后的界面如下：</p>
+            <div class="img"><img src="/themes/a/images/user/1.995.jpg"/></div>
+            <div class="img"><img src="/themes/a/images/user/1.996.jpg"/></div>
+            <p>将AppId 和AppSecret填写在{lingzh:$agentInfo['company_short_name']}平台管理中心-我的公众号 设置微信公众号信息里</p>
+            <div class="img"><img src="/themes/a/images/user/1.997.jpg"/></div>
+            <p><span class="black">菜单设置: </span>自定义菜单目前限制只能3个一级菜单，5个二级菜单，{lingzh:$agentInfo['company_short_name']}后台也对添加菜单作了相应的限制，只允许同时启用三个一级菜单，五个二级菜单。 并且只有保存主菜单后才能添加子菜单。（填写前请花30秒看下操作事项）</p>
+            <div class="img"><img src="/themes/a/images/user/1.998.jpg"/></div>
+            <p><span class="black">主菜单名称</span>就是显示在消息框的一级菜单，触发关键词表示点击这个菜单后触发的关键词，这个关键词需提前在回复设置里定义好，可以是文字回复、也可以是图文回复、还可以是活动关键词等。</p>
+            <p><span class="black">添加二级菜单</span>，直接点击一级菜单后面的+即可以创建二级菜单，二级菜单只能同时启用5个。</p>
+            <p><span class="black">显示顺序</span>，表示菜单的显示的先后顺序，数字越小越排在前面。点击保存，保存自定义菜单设置，注意这时候并未生成自定义菜单，需要点生成自定义菜单。</p>
+            <p class="redred">★ 生成自定义菜单后会在24小时内生效，如果想立即生效，取消关注后重新关注就可以看到了。</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 9) 如何购买套餐</a>
+          <div class='section_item_content none'>
+            <p>进入"管理中心" — 选择"账户充值" — 点击"我要购买套餐"</p>
+            <div class="img"><img src="/themes/a/images/user/0123.jpg"/></div>
+            <p>选择你要购买的套餐，付款即可。</p>
+            <div class="img"><img src="/themes/a/images/user/0124.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 02.基础客服-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>02. 微信客服</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 关注时回复</a>
+          <div class='section_item_content none'>
+            <div class="img"><img src="/themes/a/images/user/1.999.jpg"/></div>
+            <p>关注时回复：指粉丝关注微信公众号后推送的第一条信息，可以是文本，也可以是图文，如果需要图文回复，请到图文回复栏目编辑。</p>
+            <p class="redred">★ 如果想关注时默认进到微网站，可以不添加图文回复，只要你在微信官网-微网站图文消息，已经编辑好内容关键词，那么在关注时回复图文填上想对应关键词就ok啦！</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">2) 文本回复</a>
+          <div class='section_item_content none'>
+            <p>文本回复指添加关键后回复的内容是文本。点击添加按钮</p>
+            <div class="img"><img src="/themes/a/images/user/1.01.jpg"/></div>
+            <p>如上示例：定义了关键词“微信”，当用户在公众号发送“微信”的时候，将会回复“我们是全国最早一批从事微信公众号研发的公司之一。”</p>
+            <p>如果想定义多个关键词用空格隔开，如：微信 营销</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">3) 图文回复</a>
+          <div class='section_item_content none'>
+            <p>图文回复分单图文回复和多图文回复</p>
+            <p>首先我们先看单图文，点击新增单图文回复按钮进入图文编辑页面</p>
+            <div class="img"><img src="/themes/a/images/user/1.02.jpg"/></div>
+            <p>填写触发关键词，图文标题、图文简介，上传图文封面。</p>
+            <p><span class="black">图文外链地址</span>是指当用户点击图文消息框的时候，不进入对应的图文详情页，而是直接进行已有的网站链接，这个功能可以很好的整合自身的一些资源。如果企业本身有移动3G站，可以直接链到3G站。</p>
+            <p>添加完之后点击保存，即完成单图文回复创建。</p>
+            <p>下面是回复效果展示，我们在高端私密会所公众号输入关键词"互动营销""技术团队" 测试一下效果。</p>
+            <div class="img"><img src="/themes/a/images/user/1.03.jpg"/></div>
+            <p>接着我们来看多图文回复，点击新增多图文回复按钮进入多图文编辑页面</p>
+            <p>同样的还是填写触发关键词，图文标题、图文简介，上传图文封面。点击右边"增加图文"按钮可以添加多图文</p>
+            <div class="img"><img src="/themes/a/images/user/1.06.jpg"/></div>
+            <p>添加完之后点击保存，即完成多图文回复创建。</p>
+            <p>下面是回复效果展示，我们在高端私密会所公众号输入关键词"成功案例" 测试一下效果。</p>
+            <div class="img"><img src="/themes/a/images/user/1.07.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">4) 语音回复</a>
+          <div class='section_item_content none'>
+            <p>点击新增语音回复按钮进入语音编辑页</p>
+            <p>填写触发关键词，音乐标题、音乐链接，高品质音乐链接，点击保存。</p>
+            <div class="img"><img src="/themes/a/images/user/1.04.jpg"/></div>
+            <p>下面是回复效果展示，我们在高端私密会所公众号输入关键词"语音" 测试一下效果。</p>
+            <div class="img"><img src="/themes/a/images/user/1.05.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">5) 默认回复</a>
+          <div class='section_item_content none'>
+            <p><span class="black">默认回复：</span>是指当用户关注公众号后发送信息，且匹配不上任何关键词时的回复</p>
+            <div class="img"><img src="/themes/a/images/user/1.08.jpg"/></div>
+            <p>相对应的关键词请到回复中设置</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 03.微信官网-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>03. 微信官网</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 微网站图文消息</a>
+          <div class='section_item_content none'>
+            <p>使用微官网前首先进行微网站图文消息设置，设置触发关键词、微官网标题、图文消息封面，设置完后点击保存。<span class="black">首页地址</span>是指微官网首页地址，如果需要链接微官网首页地址时，可以点击复制按钮，每个商户的微官网地址是唯一的。</p>
+            <div class="img"><img src="/themes/a/images/user/1.09.jpg"/></div>
+            <p>设置后的效果在右边有显示预览图哦</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 2) 网站模板选择</a>
+          <div class='section_item_content none'>
+            <p>微官网目前支持首页模板、列表页模板、详情页模板。多达几十种模板可以随意任意组合，快速打造超强超炫的微官网。直接选择喜欢的模板风格，勾选就可以了，然后打开手机端即可预览效果。</p>
+            <p>首先选择模板，选择后点击下一步</p>
+            <div class="img"><img src="/themes/a/images/user/1.10.jpg"/><img src="/themes/a/images/user/1.11.jpg"/><img src="/themes/a/images/user/1.12.jpg"/><img src="/themes/a/images/user/1.13.jpg"/></div>
+            <p>下一步之后就到了自定义设置（当选择的模板中有自定义功能，可以根据需求设置模板颜色及字体颜色等信息，当选择的模板没有自定义功能，请点击提交即可）</p>
+            <div class="img"><img src="/themes/a/images/user/1.14.jpg"/></div>
+            <p>看图解释吧</p>
+            <div class="img"><img src="/themes/a/images/user/1.15.jpg"/></div>
+            <p>编辑好样式后，我们看看效果图吧</p>
+            <div class="img"><img src="/themes/a/images/user/1.16.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 3) 主页幻灯片设置</a>
+          <div class='section_item_content none'>
+            <p>为了加大微官网的视觉效果，微官网支持首页幻灯片，点击主页幻灯片设置-添加幻灯片，上传幻灯片图片、幻灯片类型、幻灯片显示顺序，选择链接类型，点击保存即完成幻灯片添加工作。</p>
+            <div class="img"><img src="/themes/a/images/user/1.17.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 4) 栏目管理</a>
+          <div class='section_item_content none'>
+            <p>栏目管理是用于显示在首页的菜单栏，点击添加栏目。</p>
+            <div class="img"><img src="/themes/a/images/user/1.18.jpg"/><img src="/themes/a/images/user/1.19.jpg"/><img src="/themes/a/images/user/1.20.jpg"/><img src="/themes/a/images/user/1.21.jpg"/></div>
+            <p><span class="black">栏目名称：</span>用于显示在首页的菜单名称。</p>
+            <p><span class="black">栏目图标：</span>图标是在图标模板或菜单导航时显示的，目前{lingzh:$agentInfo['company_short_name']}内置100多套图标库，后期还会再增加。</p>
+            <div class="img"><img src="/themes/a/images/user/1.22.jpg"/></div>
+            <p><span class="black">顶部图片：</span>菜单显示的先后顺序。</p>
+            <p><span class="black">栏目描述：</span>菜单的一句话描述，有些模板会用到，另外列表页简介也会用到。</p>
+            <p><span class="black">栏目位置：</span>菜单显示的先后顺序。（序号越大越靠前）</p>
+             <div class="img"><img src="/themes/a/images/10.022.jpg"/></div>
+            <p><span class="black">上级分类：</span>上级分类指的是本栏目的上级栏目，例如：本栏目是“技术团队”，上级分类选择的是“成功案例”，那么“成功案例”就是“技术团队”的上级栏目，当用户点击进入的栏目即是“成功案例”这个栏目，这个逻辑一定要清楚哦！</p>
+            <p><span class="black">是否显示：</span>是否显示在首页菜单，勾选就会显示</p>
+            <p><span class="black">链接类型：</span>{lingzh:$agentInfo['company_short_name']}微官网强大的内链系统，支持回复的类型有文章列表、功能模块、互动营销、外链地址、微汽车模块。</p>
+            <div class="img"><img src="/themes/a/images/user/1.23.jpg"/></div>
+            <p><span class="black">次级分类列表：</span>次级分类列表道理跟“上级分类”同个道理，也是子栏目的意思。</p>
+            <p>选择好对应的业务类型，点击保存即完成成分类的添加。</p>
+            <p>重复上述动作，完成其它分类的添加。</p>
+            <p><span class="black">栏目显示模板：</span>根据你的需求选择相应模板。</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 5) 新闻/产品/文章</a>
+          <div class='section_item_content none'>
+            <p>为栏目添加文章</p>
+            <div class="img"><img src="/themes/a/images/user/1.24.jpg"/><img src="/themes/a/images/user/1.25.jpg"/><img src="/themes/a/images/user/1.26.jpg"/></div>
+            <p>选择好对应的业务类型，点击保存即完成成分类的添加。</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 04.微信会员卡-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>04. 微信会员卡</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 会员卡设置</a>
+          <div class='section_item_content none'>
+            <p class="headtitle">1.1 会员卡图文消息</p>
+            <p>对应填写各项，生成完整的图文消息，用户通过关键词即可看到图文回复</p>
+            <div class="img"><img src="/themes/a/images/user/1.27.jpg"/></div>
+            <p class="headtitle">1.2 商家信息设置</p>
+            <div class="img"><img src="/themes/a/images/user/1.28.jpg"/></div>
+            <p class="headtitle">1.3 卡片设计</p>
+            <p>卡片设置包含卡片名称、logo、背景、卡号、提示文字、是否在会员卡显示余额、是否在会员卡页显示可用积分等，设置后可生成完整的微信电子会员卡；</p>
+            <div class="img"><img src="/themes/a/images/user/1.29.jpg"/></div>
+            <p class="headtitle">1.4 会员资料设置</p>
+            <p>系统定义5个默认项，分别为：姓名、手机号、微信名称、出生日期、性别、地址，可根据不同需求添加其他填写项，在用户领卡或完善资料时供用户填写。</p>
+            <div class="img"><img src="/themes/a/images/user/1.30.jpg"/></div>
+            <p>如下图</p>
+            <div class="img"><img src="/themes/a/images/user/1.31.jpg"/></div>
+            <p class="headtitle">1.5 自定义会员等级</p>
+            <p>对于会员卡当前所拥有的权限等级，可创建多条。</p>
+            <div class="img"><img src="/themes/a/images/user/1.32.jpg"/></div>
+            <p>效果如图</p>
+            <div class="img"><img src="/themes/a/images/user/1.34.jpg"/></div>
+            <p class="headtitle">1.6 积分规则设置</p>
+            <p class="headtitle">商家自定义积分规则</p>
+            <div class="img"><img src="/themes/a/images/user/1.33.jpg"/></div>
+          </div> 
+          </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 2) 微信会员会员管理</a>
+          <div class='section_item_content none'>
+            <p>用户信息：可直接为某个会员充值、编辑信息、调整等级，并可查看各会员的消费统计表。</p>
+            <div class="img"><img src="/themes/a/images/user/1.35.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 3) 实体店会员管理</a>
+          <div class='section_item_content none'>
+            <p>Step1：通过【导入会员】下载模板文件；</p>
+            <p>Step2：对应文件内的各项栏目填写会员信息，不可自定义添加栏目，以免导入有误；</p>
+            <p>Step3：填写成功，通过【导入会员】-【选择文件】-【提交】；</p>
+            <p>Step4：线上线下结合：导入的会员关注您的微信公众号后，进入会员卡，无需进行繁琐的领卡步骤，只需填写手机号+验证码即可成为您的微信会员。</p>
+            <p class="redred">注：导入的会员以手机号作为唯一身份，不可重复，重复手机号的会员则无法导入。</p>
+            <div class="img"><img src="/themes/a/images/user/1.36.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 4) 会员特权管理</a>
+          <div class='section_item_content none'>
+            <p>填写一些长期不变的会员卡特权信息</p>
+            <div class="img"><img src="/themes/a/images/user/1.37.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 5) 会员营销管理</a>
+          <div class='section_item_content none'>
+            <p class="headtitle">5.1 优惠券</p>
+            <p >券有2种类型——打折优惠券、现金抵用券</p>
+            <p>编辑优惠券名称、选择人群、有效期、券类型、使用说明、数量等信息，生成完整的优惠券。</p>
+            <div class="img"><img src="/themes/a/images/user/1.38.jpg"/></div>
+            <p class="headtitle">5.2 礼品券</p>
+            <p>编辑礼品名称、兑换礼品所需积分、有效期、使用说明等信息，生成完整的礼品券。</p>
+            <div class="img"><img src="/themes/a/images/user/1.39.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 6) 会员充值管理</a>
+          <div class='section_item_content none'>
+            <p>填写会员卡号、充值金额、操作员等信息可为用户充值。</p>
+            <div class="img"><img src="/themes/a/images/user/1.40.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 7) 会员消费管理</a>
+          <div class='section_item_content none'>
+            <p>填写会员卡号、消费金额、支付方式等信息可为用户添加消费记录。</p>
+            <div class="img"><img src="/themes/a/images/user/1.41.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 8) 积分兑换管理</a>
+          <div class='section_item_content none'>
+            <p>填写会员卡号、兑换积分、兑换日期等信息可为用户添加积分兑换记录。</p>
+            <div class="img"><img src="/themes/a/images/user/1.42.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 05.微信相册-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>05. 微信相册</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 微相册图文消息</a>
+          <div class='section_item_content none'>
+            <p>设置触发关键词、标题、封面图片地址、内容摘要，点击保存</p>
+            <div class="img"><img src="/themes/a/images/user/1.43.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">2) 微相册管理</a>
+          <div class='section_item_content none'>
+            <p> 点击"创建相册"，进入"添加相册"界面，设置相册名称、相册封面图、相册介绍、是否显示，点击保存； </p>
+            <div class="img"><img src="/themes/a/images/user/1.45.jpg"/></div>
+            <p> 点击“上传图片”，可为此相册添加图片；点击“编辑”，可修改此相册信息。 </p>
+            <div class="img"><img src="/themes/a/images/user/1.44.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 06.3D全景相册-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>06. 3D全景相册</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 全景相册图文消息</a>
+          <div class='section_item_content none'>
+            <p>填写触发关键词、标题、封面图片地址、内容摘要完成册图文消息设置 </p>
+            <div class="img"><img src="/themes/a/images/user/1.46.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">2) 全景相册管理</a>
+          <div class='section_item_content none'>
+            <p>点击"创建全景相册"，进入"添加全景相册"界面，设置相册名称、相册封面图、相册介绍、是否显示，点击保存； </p>
+            <div class="img"><img src="/themes/a/images/user/1.47.jpg"/></div>
+            <p> 点击"上传全景图片"，可为此相册添加图片；点击"编辑"，可修改此相册信息。 </p>
+            <div class="img"><img src="/themes/a/images/user/1.48.jpg"/></div>
+            <p> 如何添加全景图呢？往下看 </p>
+            <p> 需要上传前剖面、右剖面、后剖面、左剖面、顶部剖面、底部剖面六个切面，点击保存，系统自动生成3D全景图。 </p>
+            <div class="img"><img src="/themes/a/images/user/1.49.jpg"/></div>
+            <p> 怎么制作一个360度全景图呢？请往下看图或打开此链接<a href="http://115.29.193.180/index.php?g=User&m=Help&a=360help1" target="_blank">http://115.29.193.180/index.php?g=User&m=Help&a=360help1 </a></p>
+            <div class="img"><img src="/themes/a/images/user/1.50.jpg"/></div>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 07.互动营销工具-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>07. 互动营销工具</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 微投票</a>
+          <div class='section_item_content none'>
+            <p>商家采用投票的活动来吸引用户，与用户之间产生互动，从而促进企业营销的一种手段。</p>
+            <p>使用方法：</p>
+            <p>1、商家发布一个活动名称，例如："爸爸去哪儿，你最喜欢谁？"商家还可以为本次活动上传封面，吸引更多的用户来参加；</p>
+            <p>2、商家可以设置吴个选项：林志颖儿子Kimi、田亮女儿Cindy、李湘女儿Angela、郭涛儿子石头、张亮儿子天天，每个用户只能选择一个选项；</p>
+            <p>3、设置活动的回复关键词为"我要投票"；</p>
+            <p>4、编辑活动说明，例如："湖南卫视2013年第四季度全新推出大型明星亲子旅行生存真人秀，中国首档大型明星亲子生存体验真人秀。"；</p>
+            <p>5、单选/多选，商家可以把此活动选项设置为单选或者单选给大众选择；</p>
+            <p>6、设置活动的起开始时间和活动的结束时间。</p>
+            <div class="img"><img src="/themes/a/images/user/1.51.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">2) 幸运大转盘</a>
+          <div class='section_item_content none'>
+            <p>该模块可为商家提供转盘抽奖服务，商家通过设置活动时间，预计参加抽奖人数，相应奖项和触发关键词，由网友在线参与抽奖。</p>
+            <p>1、设置抽奖前需要先编辑一条图文消息，提前一天或者当天推送给所有粉丝，告知在某个时间段发某个关键词可以参与抽奖；</p>
+            <p>2、进入抽奖设置，设定活动的类别，设定活动的预热时间，已经活动的开始和结束时间，设置活动回复关键词"大转盘"，确定设置后系统会根据设定的中奖几率产生相应的SN码；</p>
+            <p>3、活动设定后，在规定时间到时，网友发送关键词如"大转盘"，就可以参与三次转盘，中奖后会得到一个SN码，网友到店时向商家出示SN码，商家根据系统产生的SN码进行比对，确认无误后即可兑换奖品。</p>
+            <div class="img"><img src="/themes/a/images/user/1.52.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">3) 优惠劵</a>
+          <div class='section_item_content none'>
+            <p>优惠券是用于微信上与顾客互动的一种营销方式，不仅可以展现自己的产品，更能让顾客在使用此项功能时感受到更多的乐趣。</p>
+            <p>0、新建优惠券活动；</p>
+            <p>1、新建优惠券活动；</p>
+            <p>2、填写触发关键词；</p>
+            <p>3、填写活动结束的内容；</p>
+            <p>4、设置奖项，设定活动时间、中奖几率、触发关键词和相应的奖品，确定设置后系统会根据设定的中奖几率产生相应的SN码，保存活动；</p>
+            <p>5、设置活动开始；（点击开始活动后，就不能再修改活动奖项，但可以修改其他活动内容,活动开启会自动生成SN码，也就是兑奖码）</p>
+            <p>6、设置活动结束；（你设置的活动结束时间到了会自动结束活动，你也可以时间没有到直接结束活动）</p>
+            <p>7、兑奖，查看活动粉丝中奖详情；（点击SN码管理查看详情）通过设置SN码状态，可以将一等奖先不放出！要内部人员中奖，只要对着公众号，输入：刮奖 SN码 即可！</p>
+            <p>8、删除活动（最好是在最后兑奖时间过了，再删除活动）</p>
+            <div class="img"><img src="/themes/a/images/user/1.53.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">4) 刮刮卡</a>
+          <div class='section_item_content none'>
+            <p>该模块可为商家提供刮刮卡抽奖服务，全网第一个可以通过微信玩刮刮卡，用户通过手机屏幕进行刮奖的游戏！</p>
+            <p>1、设置抽奖前需要先编辑一条图文消息，提前一天或者当天推送给所有粉丝，告知在某个时间段发某个关键词可以参与刮奖；</p>
+            <p>2、进入抽奖设置，设定活动时间、中奖几率、触发关键词和相应的奖品，确定设置后系统会根据设定的中奖几率产生相应的SN码；</p>
+            <p>3、活动设定后，在规定时间到时，网友发送关键词如"我要抽奖"，就会发送给他一张刮刮卡，粉丝通过屏幕进行刮奖，中奖后会得到一个SN码，网友到店时向商家出示SN码，商家根据系统产生的SN码进行比对，确认无误后即可兑换奖品。</p>
+            <div class="img"><img src="/themes/a/images/user/1.54.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">5) 砸金蛋</a>
+          <div class='section_item_content none'>
+            <p>该模块可为商家提供砸金蛋抽奖服务，商家通过设置活动时间，预计参加抽奖人数，相应奖项和触发关键词，由网友在线参与抽奖。</p>
+            <p>1、设置抽奖前需要先编辑一条图文消息，提前一天或者当天推送给所有粉丝，告知在某个时间段发某个关键词可以参与抽奖；</p>
+            <p>2、进入抽奖设置，设定活动的类别，设定活动的预热时间，以及活动的开始和结束时间，设置活动回复关键词"砸金蛋"，确定设置后系统会根据设定的中奖几率产生相应的SN码；</p>
+            <p>3、活动设定后，在规定时间到时，网友发送关键词如"砸金蛋"，就可以参与三次砸金蛋活动，中奖后会得到一个SN码，网友到店时向商家出示SN码，商家根据系统产生的SN码进行比对，确认无误后即可兑换奖品。</p>
+            <div class="img"><img src="/themes/a/images/user/1.55.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 08.微订单预定-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>08. 微订单预定</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 预约/报名/预定</a>
+          <div class='section_item_content none'>
+            <p> 1、点击"预约/报名/预定"—"新增订单商家"，填写触发关键词，上传图文封面、填写商家名称、手机号、商家地址、设置地图标识；</p>
+            <div class="img"><img src="/themes/a/images/user/1.56.jpg"/></div>
+            <p> 2、上传商家介绍图片、填写商家介绍、编辑订单说明、订单接收设置；</p>
+            <div class="img"><img src="/themes/a/images/user/1.57.jpg"/></div>
+            <p>3、订单内容设置：填写你要收集的内容！订单默认项不允许修改！如果有其他的需求，可以点击"添加"，编辑内容，点击"保存"即可；</p>
+            <div class="img"><img src="/themes/a/images/user/1.58.jpg"/></div>
+            <p>4、回到"微订单"界面，点击"订单设置-添加预定商品"；</p>
+            <p>预定内容设置 [ 都是必填项 ] OK，添加完成了，用户就可以预定你的产品啦！</p>
+            <div class="img"><img src="/themes/a/images/user/1.59.jpg"/></div>
+            <p>5、进入"微订单信息"界面，点击"订单管理"，可以查看到用户的订单详细信息，还可以修改订单状态，修改后点击保存修改；</p>
+            <div class="img"><img src="/themes/a/images/user/1.60.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 09.微现场-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>09. 微现场</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 微现场</a>
+          <div class='section_item_content none'>
+            <p>微信墙，又叫微信大屏幕，可以现场大屏幕上刷屏留言、互动。本模块还提供了照片墙、抽奖、投票等更多丰富好玩的互动环节，适用场景广泛。</p>
+            <p class="redred">微现场管理（仅服务号支持头像和昵称上墙）</p>
+            <div class="img"><img src="/themes/a/images/user/1.61.jpg"/></div>
+            <p>步骤1：填写各项基本信息以生成微信墙</p>
+            <p>1、上传主办方的logo（如上图位置1）；</p>
+            <p>2、左侧大字为"活动主题"，右侧为"主办方"（如上图位置2）；</p>
+            <p>3、可以设置绑定上墙的微信公众号二维码，以便用户微信上墙（如上图位置3）；</p>
+            <p>4、可以填写活动说明（如上图位置4）；</p>
+            <p>5、可自定义活动时间、活动背景及背景音乐；活动结束，用户则不可再进入上墙刷屏模式；</p>
+            <p class="black">★用户如何发布微现场消息呢?</p>
+            <p>1、微现场设置好的触发关键词+内容，例如：“微现场+功能实在太好用啦”</p>
+            <div class="img"><img src="/themes/a/images/user/1.75.jpg"/></div>
+            <p>2、这时手机会收到一条回复“您的回复已经提交，等待审核，感谢你参与现场活动”</p>
+            <p>3、说明你发布的消息已经提交，等待管理员审核是否将消息上墙。</p>
+            <p class="redred">发送的消息必须包含触发关键词加内容，但显示现场消息时，触发关键词会被去掉。</p>
+            <p>回到"微现场管理"—点击"消息管理"</p>
+            <div class="img"><img src="/themes/a/images/user/1.62.jpg"/></div>
+            <p class="redred">备注：鼠标放置墙上，即展现上一条、下一条按钮（上图位置6），点击即可翻阅；</p>
+            <p>步骤3：互动版块（上图位置7功能条）</p>
+            <p class="black">互动1：抽奖</p>
+            <p>活动规则：该活动为多人中奖活动，一个奖品可以设置多个人中奖；已经中奖人员，不可再参与抽奖；奖品抽完，也不可再抽，系统自动提醒抽奖活动结束；</p>
+            <p>点击"微现场管理"进入编辑模式，设置奖品类型、中奖个数即可生成抽奖活动；</p>
+            <div class="img"><img src="/themes/a/images/user/1.63.jpg"/></div>
+            <div class="img"><img src="/themes/a/images/user/1.64.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 10.微评论-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>10. 微评论</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 微评论</a>
+          <div class='section_item_content none'>
+            <p>点击"微评论"进入留言板。</p>
+            <p>填写触发关键词、主题、图文消息图片、评论页面图片、审核设置、评论管理员即可完成微评论。</p>
+            <div class="img"><img src="/themes/a/images/user/1.65.jpg"/></div>
+            <p>评论管理页面，可以对用户发布的留言做相对应的屏蔽跟审核操作。</p>
+            <div class="img"><img src="/themes/a/images/user/1.66.jpg"/></div>
+            <p>看看效果图</p>
+            <div class="img"><img src="/themes/a/images/user/1.67.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)">2) 微印象</a>
+          <div class='section_item_content none'>
+            <p>填写触发关键词、主题、图文消息图片、印象设置即可完成微印象。</p>
+            <div class="img"><img src="/themes/a/images/user/1.68.jpg"/></div>
+            <p>看看预览图吧</p>
+            <div class="img"><img src="/themes/a/images/user/1.69.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 11.WIFI接入-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>11. WIFI接入</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) Wifi设置</a>
+          <div class='section_item_content none'>
+            <p>WIFI接入是指要购买指定的路由器，才能实现wifi接入功能。</p>
+            <p>如果已经有了路由器，第一步 添加商家wifi热点信息</p>
+            <div class="img"><img src="/themes/a/images/user/1.70.jpg"/></div>
+            <p>第二步 编辑微信回复内容</p>
+            <div class="img"><img src="/themes/a/images/user/1.71.jpg"/></div>
+            <p>保存成功后，往你的公众号发送关键词“wifi”看看手机预览图吧</p>
+            <div class="img"><img src="/themes/a/images/user/1.72.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 12.第三方接入-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>12. 第三方接入</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <!-- <li>
+                    <a class="section_item_title" href="javascript:void(0)"> 1) 第三方接入设置</a>
+                    <div class='section_item_content none'>
+                        <p>
+                          填写关键词、合作方、第三方接口url、第三方接口token，保存即可。<br /><img src="/themes/a/images/user/pic27.jpg"/>
+                    </div>
+                </li>-->
+        
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 第三方接入设置</a>
+          <div class='section_item_content none'> <span class="red">说明：为了减少第三方接入的难度，网站接入，消息的发送和接受格式均与微信开放平台保持一致，只有在发送消息的ToUserName有细微不同，在处理时候需要注意，ToUserName是{lingzh:$agentInfo['company_short_name']}开放接口的一个id，在申请后分配，每个第三方接入唯一表示。</span>
+            <div class="title">接入参数</div>
+            <p> 其中url和token可以和微信公共平台的保持一致，只需要在接受时候能够识别出是来自{lingzh:$agentInfo['company_short_name']}服务器的消息即可，主要区别在消息的ToUserName字段。</p>
+            <table width="600" border="1" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td height="50" align="center" valign="middle" class="table_title">参数</td>
+                <td align="center" valign="middle" class="table_title">描述</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; url</td>
+                <td>&nbsp;  &nbsp; 接受来自{lingzh:$agentInfo['company_short_name']}服务器的url</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; Token</td>
+                <td>&nbsp;  &nbsp; 用于跟{lingzh:$agentInfo['company_short_name']}服务器加密通信的token</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; 关键词</td>
+                <td>&nbsp;  &nbsp; 响应用户请求的关键词</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp;  匹配类型</td>
+                <td>&nbsp;  &nbsp; 1或者2 (1完全匹配，2部分匹配)</td>
+              </tr>
+            </table>
+            <div class="title">网址接入</div>
+            <p>平台用户提交信息后，服务器将发送GET请求到填写的URL上，并且带上四个参数：</p>
+            <table width="600" border="1" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td height="50" align="center" valign="middle" class="table_title">参数</td>
+                <td align="center" valign="middle" class="table_title">描述</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp;signature</td>
+                <td>&nbsp;  &nbsp; 加密签名</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; timestamp</td>
+                <td>&nbsp;  &nbsp; 时间戳</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; nonce</td>
+                <td>&nbsp;  &nbsp;  &nbsp;随机数</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp;  echostr</td>
+                <td>&nbsp;  &nbsp;   &nbsp;随机字符串</td>
+              </tr>
+            </table>
+            <p>开发者通过检验signature对请求进行校验（下面有校验方式）。若确认此次GET请求来自，请原样返回echostr参数内容，则接入生效，否则接入失败。<br />
+              signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。</p>
+            <table width="600" border="1" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td>&nbsp;  &nbsp; 加密/校验流程：<br />
+                  &nbsp;  &nbsp; 1. 将token、timestamp、nonce三个参数进行字典序排序<br />
+                  &nbsp;  &nbsp; 2. 将三个参数字符串拼接成一个字符串进行sha1加密<br />
+                  &nbsp;  &nbsp; 3. 开发者获得加密后的字符串可与signature对比，标识该请求来源于{lingzh:$agentInfo['company_short_name']} </td>
+              </tr>
+            </table>
+            &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; <span class="red">字典排序，php的sort方法</span>，请加入SORT_STRING参数，默认使用字符串方式排序：sort($arr, SORT_STRING) <br />
+            <span class="title">二、消息推送</span><br />
+            <p>当普通微信用户向公众账号发消息时，{lingzh:$agentInfo['company_short_name']}服务器接收该消息后，将POST该消息到填写的URL上。结构如下
+            
+            <div class="ftitle">文本消息</div>
+            <br />
+            <table width="600" border="1" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td><xmp>
+                    <xml>
+                      <ToUserName>
+                        <![CDATA[toUser]]>
+                      </ToUserName>
+                      <FromUserName>
+                        <![CDATA[fromUser]]>
+                      </FromUserName>
+                      <CreateTime>1348831860</CreateTime>
+                      <MsgType>
+                        <![CDATA[text]]>
+                      </MsgType>
+                      <Content>
+                        <![CDATA[this is a test]]>
+                      </Content>
+                      <MsgId>1234567890123456</MsgId>
+                    </xml>
+                  </xmp></td>
+              </tr>
+            </table>
+            <table width="600" border="1" align="center" cellpadding="0" cellspacing="0" style="padding-top:10px;">
+              <tr>
+                <td height="50" align="center" valign="middle" class="table_title">参数</td>
+                <td align="center" valign="middle" class="table_title">描述</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; ToUserName</td>
+                <td>&nbsp;  &nbsp; {lingzh:$agentInfo['company_short_name']}帐号id（pinetteach_id）</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; FromUserName</td>
+                <td>&nbsp;  &nbsp; 发送方帐号（一个OpenID）</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; CreateTime</td>
+                <td>&nbsp;  &nbsp; 消息创建时间 （整型）</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp;  MsgType</td>
+                <td>&nbsp;  &nbsp; text</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp;  Content</td>
+                <td>&nbsp;  &nbsp; 文本消息内容</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; MsgId</td>
+                <td>&nbsp;  &nbsp; 消息id，64位整型</td>
+              </tr>
+            </table>
+            <div class="ftitle">图片消息</div>
+            <br />
+            <table width="600" border="1" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td><xmp>
+                    <xml>
+                      <ToUserName>
+                        <![CDATA[toUser]]>
+                      </ToUserName>
+                      <FromUserName>
+                        <![CDATA[fromUser]]>
+                      </FromUserName>
+                      <CreateTime>1348831860</CreateTime>
+                      <MsgType>
+                        <![CDATA[image]]>
+                      </MsgType>
+                      <PicUrl>
+                        <![CDATA[this is a url]]>
+                      </PicUrl>
+                      <MsgId>1234567890123456</MsgId>
+                    </xml>
+                  </xmp></td>
+              </tr>
+            </table>
+            <table width="600" border="1" align="center" cellpadding="0" cellspacing="0" style="padding-top:10px;">
+              <tr>
+                <td height="50" align="center" valign="middle" class="table_title">参数</td>
+                <td align="center" valign="middle" class="table_title">描述</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; ToUserName</td>
+                <td>&nbsp;  &nbsp; {lingzh:$agentInfo['company_short_name']}帐号id（pinetteach_id）</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; FromUserName</td>
+                <td>&nbsp;  &nbsp; 发送方帐号（一个OpenID）</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; CreateTime</td>
+                <td>&nbsp;  &nbsp; 消息创建时间 （整型）</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp;  MsgType</td>
+                <td>&nbsp;  &nbsp; image</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp;  PicUrl</td>
+                <td>&nbsp;  &nbsp; 图片链接</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; MsgId</td>
+                <td>&nbsp;  &nbsp; 消息id，64位整型</td>
+              </tr>
+            </table>
+            <span class="title">三、消息回复</span><br />
+            <p>对于每一个POST请求，第三方应用在响应包中返回特定xml结构，对该消息进行响应（现支持回复文本、图文）。<br />
+              {lingzh:$agentInfo['company_short_name']}服务器在五秒内收不到响应会断掉连接。回复xml结构如下：
+            
+            <div class="ftitle">回复文本消息</div>
+            <br />
+            <table width="600" border="1" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td><xmp>
+                    <xml>
+                      <ToUserName>
+                        <![CDATA[toUser]]>
+                      </ToUserName>
+                      <FromUserName>
+                        <![CDATA[fromUser]]>
+                      </FromUserName>
+                      <CreateTime>12345678</CreateTime>
+                      <MsgType>
+                        <![CDATA[text]]>
+                      </MsgType>
+                      <Content>
+                        <![CDATA[content]]>
+                      </Content>
+                    </xml>
+                  </xmp></td>
+              </tr>
+            </table>
+            <table width="600" border="1" align="center" cellpadding="0" cellspacing="0" style="padding-top:10px;">
+              <tr>
+                <td height="50" align="center" valign="middle" class="table_title">参数</td>
+                <td align="center" valign="middle" class="table_title">描述</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; ToUserName</td>
+                <td>&nbsp;  &nbsp; 接收方帐号（收到的OpenID）</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; FromUserName</td>
+                <td>&nbsp;  &nbsp; {lingzh:$agentInfo['company_short_name']}帐号id（pinetteach_id）</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; CreateTime</td>
+                <td>&nbsp;  &nbsp; 消息创建时间</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; MsgType</td>
+                <td>&nbsp;  &nbsp; text</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp;  Content</td>
+                <td>&nbsp;  &nbsp; 回复的消息内容,长度不超过2048字节</td>
+              </tr>
+            </table>
+            <div class="ftitle">回复图文消息</div>
+            <br />
+            <table width="600" border="1" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td><xmp>
+                    <xml>
+                      <ToUserName>
+                        <![CDATA[toUser]]>
+                      </ToUserName>
+                      <FromUserName>
+                        <![CDATA[fromUser]]>
+                      </FromUserName>
+                      <CreateTime>12345678</CreateTime>
+                      <MsgType>
+                        <![CDATA[news]]>
+                      </MsgType>
+                      <ArticleCount>2</ArticleCount>
+                      <Articles> <item>
+                        <Title>
+                        <![CDATA[title1]]>
+                        </Title>
+                        <Description>
+                          <![CDATA[description1]]>
+                        </Description>
+                        <PicUrl>
+                          <![CDATA[picurl]]>
+                        </PicUrl>
+                        <Url>
+                          <![CDATA[url]]>
+                        </Url>
+                        </item> <item>
+                        <Title>
+                        <![CDATA[title]]>
+                        </Title>
+                        <Description>
+                          <![CDATA[description]]>
+                        </Description>
+                        <PicUrl>
+                          <![CDATA[picurl]]>
+                        </PicUrl>
+                        <Url>
+                          <![CDATA[url]]>
+                        </Url>
+                        </item> </Articles>
+                    </xml>
+                  </xmp></td>
+              </tr>
+            </table>
+            <table width="600" border="1" align="center" cellpadding="0" cellspacing="0" style="padding-top:10px;">
+              <tr>
+                <td height="50" align="center" valign="middle" class="table_title">参数</td>
+                <td align="center" valign="middle" class="table_title">描述</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; ToUserName</td>
+                <td>&nbsp;  &nbsp; 接收方帐号（收到的OpenID）</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; FromUserName</td>
+                <td>&nbsp;  &nbsp; 发送者账号（用户的OpenID）</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; CreateTime</td>
+                <td>&nbsp;  &nbsp; 消息创建时间</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp;  MsgType</td>
+                <td>&nbsp;  &nbsp; news</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp;  ArticleCount</td>
+                <td>&nbsp;  &nbsp; 图文消息个数，限制为10条以内</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; Articles</td>
+                <td>&nbsp;  &nbsp; 多条图文消息信息，默认第一个item为大图</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; Title</td>
+                <td>&nbsp;  &nbsp; 图文消息标题</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; Description</td>
+                <td>&nbsp;  &nbsp; 图文消息描述</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; PicUrl</td>
+                <td>&nbsp;  &nbsp; 图片链接，支持JPG、PNG格式，较好的效果为大图640*320，小图80*80</td>
+              </tr>
+              <tr>
+                <td height="50">&nbsp;  &nbsp; Url</td>
+                <td>&nbsp;  &nbsp; 点击图文消息跳转链接</td>
+              </tr>
+            </table>
+            <div class="action">注意事项<br />
+              1.用户OpenID对一个公众号是固定唯一的串<br />
+              2.请使用80端口</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 13.行业解决方案--> 
+  <!--<div class="help_section">
+        <div class="section_head ">
+            <span class='section_title'>13. 行业解决方案</span>
+            <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span>
+        </div>
+        <div class='section_detail'>
+            <ul>
+                <li>
+                    <a class="section_item_title" href="javascript:void(0)"> 1) 电子商务行业</a>
+                    <div class='section_item_content none'>
+                        <p>
+                           1.进入功能管理勾选开启"电商行业方案"即可。<br /> 2.拿起你的手机往你的公众号回复关键词"微商城" 即可看到你自己的微商城了！（商城内容是{lingzh:$agentInfo['company_short_name']}后台自动导入的数据，商家可以根据自己的需求调整内容及图片。）<img src="/themes/a/images/user/pic11.jpg"/> 
+                        <img src="/themes/a/images/user/pic12.jpg"/><br />3.选择商城模板时，请注意看对应的商城描述，如选择的模板未提示上传商城首页背景，可直接添加商品分类、添加商品。（*注意* 当栏目下还有商品时，商品分类 不可删除，必须把栏目下的商品都删除，分类才可删掉）<br /><img src="/themes/a/images/user/pic13.jpg"/>                        </p>
+                    </div>
+                </li>
+                 <li>
+                    <a class="section_item_title" href="javascript:void(0)">2) 餐饮服务行业</a>
+                    <div class='section_item_content none'>
+                        <p>
+                            1.操作步骤跟"餐饮行业方案"一样，勾选后即可开启。往你的公众号回复关键词"点餐" 即可看到订餐系统！<br /><img src="/themes/a/images/user/pic14.jpg"/>
+                        </p>
+                    </div>
+                </li>
+                 <li>
+                    <a class="section_item_title" href="javascript:void(0)">3) 酒店宾馆行业</a>
+                    <div class='section_item_content none'>
+                        <p>
+                            1.操作步骤跟"餐饮行业方案"一样，勾选后即可开启。往你的公众号回复关键词"点餐" 即可看到订餐系统！<br /><img src="/themes/a/images/user/pic14.jpg"/>
+                        </p>
+                    </div>
+                </li>
+                 <li>
+                    <a class="section_item_title" href="javascript:void(0)">4) 婚庆服务行业</a>
+                    <div class='section_item_content none'>
+                        <p>
+                            1.操作步骤跟"餐饮行业方案"一样，勾选后即可开启。往你的公众号回复关键词"点餐" 即可看到订餐系统！<br /><img src="/themes/a/images/user/pic14.jpg"/>
+                        </p>
+                    </div>
+                </li>
+                 <li>
+                    <a class="section_item_title" href="javascript:void(0)">5) 汽车汽服行业</a>
+                    <div class='section_item_content none'>
+                        <p>
+                            1.操作步骤跟"餐饮行业方案"一样，勾选后即可开启。往你的公众号回复关键词"点餐" 即可看到订餐系统！<br /><img src="/themes/a/images/user/pic14.jpg"/>
+                        </p>
+                    </div>
+                </li>
+                 <li>
+                    <a class="section_item_title" href="javascript:void(0)">6) 美容美发行业</a>
+                    <div class='section_item_content none'>
+                        <p>
+                            1.操作步骤跟"餐饮行业方案"一样，勾选后即可开启。往你的公众号回复关键词"点餐" 即可看到订餐系统！<br /><img src="/themes/a/images/user/pic14.jpg"/>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <a class="section_item_title" href="javascript:void(0)">6) 房地产行业</a>
+                    <div class='section_item_content none'>
+                        <p>
+                            1.操作步骤跟"餐饮行业方案"一样，勾选后即可开启。往你的公众号回复关键词"点餐" 即可看到订餐系统！<br /><img src="/themes/a/images/user/pic14.jpg"/>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <a class="section_item_title" href="javascript:void(0)">7) 如何开通支付功能</a>
+                    <div class='section_item_content none'>
+                        <p style=" color:#1d1e1f; font-size:16px; line-height:20px;">
+                            一、支付宝支付的申请（目前仅限于公司）
+                        </p>
+                        <p>
+                        1、支付宝接口申请：认证的企业支付宝账户+{lingzh:$agentInfo['company_short_name']}网站备案授权书=支付宝接口；<br />2、企业支付宝申请材料：<br />（1）营业执照；<br />
+（2）申请人的有效身份证信息；<br />
+（3）提交申请人如非法定代表人需提供企业委托授权书；<br />
+（4）银行对公账户。<Br />3、企业向{lingzh:$agentInfo['company_short_name']}索取网站备案授权书(另外上传)</p><p style="color:#e51b1b; line-height:14px;">填写接入的网址地址为：<a href="http://www.lingzhtech.com/" target="_blank">http://www.lingzhtech.com/</a></p><p>(1)授权书模板；<br />
+(2)授权人({lingzh:$agentInfo['company_short_name']})将盖章的授权书传给被授权人(微商城用户)；<br />
+(3)经被授权人(微商城用户)确认，盖章、扫描上传给支付宝；<br />4、有关支付宝问题可以进入<a href="http://help.alipay.com/support/index_sh.htm" target="_blank"> http://help.alipay.com/support/index_sh.htm</a>这个网址进去了解。<img src="/themes/a/images/user/pic0.jpg"/><br /></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>--> 
+  
+  <!-- 14.统计数据-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>13. 统计数据</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 消息分析</a>
+          <div class='section_item_content none'>
+            <p>消息分析指的是可以查看近12个月以来的关注数、文本请求数、点击数</p>
+            <div class="img"><img src="/themes/a/images/user/1.73.jpg"/></div>
+            <div class="img"><img src="/themes/a/images/user/1.74.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 15.实用生活工具-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>14. 实用生活工具</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 天气查询</a>
+          <div class='section_item_content none'>
+            <p>天气查询是运用于微信公众平台上让用户随时随地查询天气情况的一种功能，更能方便用户的出行。</p>
+            <p class="black">使用方法：</p>
+            <p>1、开通天气查询服务，在状态栏打"√"即可；</p>
+            <p>2、用户只需输入"所在的城市+天气"，就能查询到所在城市的天气情况。</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 2) 翻译</a>
+          <div class='section_item_content none'>
+            <p>百度百科利用微信为用户提供一个创造性的移动互联网平台，充分调动互联网所有用户的力量，汇聚上亿用户的头脑智慧，积极进行交流和分享，同时实现与搜索引擎的完美结合，从不同的层次上满足用户对信息的需求。</p>
+            <p class="black">使用方法：</p>
+            <p>1、开通翻译服务，在状态栏打"√"即可；</p>
+            <p>2、用户只需要输入"翻译查询内容（中文或英文）"，即可以查询到所要翻译的内容。</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 3) 快递查询</a>
+          <div class='section_item_content none'>
+            <p>快递用户通过进入到快递查询公众账号，持快递公司邮单号，对包裹快递过程进行跟踪查询。</p>
+            <p class="black">使用方法：</p>
+            <p>1、开通快递查询服务，在状态栏打"√"即可；</p>
+            <p>2、用户只需输入" 快递单号"，如"申通快递222222"，就可以查询到快递的最新动态。</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 4) 彩票</a>
+          <div class='section_item_content none'>
+            <p>彩票查询让用户对中奖信息随手掌握实时查询</p>
+            <p class="black">使用方法：</p>
+            <p>1、开通彩票服务，在状态栏打"√"即可；</p>
+            <p>2、用户只需输入"彩票+彩票名"，就能查询到最新的彩票开奖信息</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 15.电子商务行业-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>15. 电子商务行业</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 商城信息配置</a>
+          <div class='section_item_content none'>
+            <p>填写触发关键词、图文消息封面图片、商城图文消息摘要、商城名称等商城信息。</p>
+            <div class="img"><img src="/themes/a/images/user/1.76.jpg"/></div>
+            <p>手机显示预览图如下</p>
+            <div class="img"><img src="/themes/a/images/user/1.761.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 2) 商城模板配置</a>
+          <div class='section_item_content none'>
+            <p>可选择商城的展现模板，商城的首次形象就在这里。</p>
+            <div class="img"><img src="/themes/a/images/user/1.77.jpg"/></div>
+            <p>手机显示预览图如下</p>
+            <div class="img"><img src="/themes/a/images/user/1.771.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 3) 商品分类管理</a>
+          <div class='section_item_content none'>
+            <p>通过添加分类，可把各商品进行分类展示，如下图</p>
+            <div class="img"><img src="/themes/a/images/user/1.78.jpg"/></div>
+            <div class="img"><img src="/themes/a/images/user/1.79.jpg"/></div>
+            <p>手机显示预览图如下</p>
+            <div class="img"><img src="/themes/a/images/user/1.791.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 4) 商品管理</a>
+          <div class='section_item_content none'>
+            <p>所有商品的列表，有筛选、搜索等功能方便管理；可添加商品，进行商品基本信息、商品描述等设置，设置后商品的名称、图片、价格、描述等均可展现在用户面前；商品图片支持大图浏览，建议上传高清图片；</p>
+            <div class="img"><img src="/themes/a/images/user/1.80.jpg"/></div>
+            <p>手机显示预览图如下</p>
+            <div class="img"><img src="/themes/a/images/user/1.801.jpg"/></div>
+            <br />
+            <div class="img"><img src="/themes/a/images/user/1.802.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 5) 订单管理</a>
+          <div class='section_item_content none'>
+            <p>订单管理是商城产生的所有订单都会陈列在这里，可通过搜索查询任一个订购人姓名，每一个订单可查看订单情况，可编辑或处理发货。</p>
+            <div class="img"><img src="/themes/a/images/user/1.81.jpg"/></div>
+            <p>手机显示预览图如下</p>
+            <div class="img"><img src="/themes/a/images/user/1.811.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 6) 支付方式配置</a>
+          <div class='section_item_content none'>
+            <p>支付方式：支持财付通、支付宝支付及货到付款</p>
+            <div class="img"><img src="/themes/a/images/user/1.82.jpg"/></div>
+            <p>手机显示预览图如下</p>
+            <div class="img"><img src="/themes/a/images/user/1.821.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 7) 商城内容配置完成点击图文消息后进去一片空白？</a>
+          <div class='section_item_content none'>
+            <p>如果你的微信公众账号是服务号，且是认证的服务号（是否认证可在微信平台查询）如下图</p>
+            <div class="img"><img src="/themes/a/images/user/1.0082.jpg"/></div>
+            <p>接下来登陆你的微信公众平台，在服务—我的服务—高级接口，点击修改红框的地方。如下图</p>
+            <div class="img"><img src="/themes/a/images/user/1.00821.jpg"/></div>
+             <p>点击修改，弹出一个对话框，把里面的授权回调页面域名填写为：www.pinet.co 如下图</p>
+            <div class="img"><img src="/themes/a/images/user/1.00822.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 16.餐饮服务行业-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>16. 餐饮服务行业</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 饭店消息配置</a>
+          <div class='section_item_content none'>
+            <p>微餐饮是专为餐饮行业打造的的解决方案，借助微餐饮方案实现品牌传播、菜品宣传、在线订餐、智能点餐、预定坐席、粉丝到店、口碑营销以及与粉丝互动等全自主的营销手段，帮助餐饮企业让粉丝转为门店客人，并进一步让门店客人转为长期客户！</p>
+            <p>在此配置微餐饮的触发图文的设置，比如触发关键词等</p>
+            <div class="img"><img src="/themes/a/images/user/1.83.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 2) 分店管理</a>
+          <div class='section_item_content none'>
+            <p>分店管理——新增分店：编辑门店的基本信息，包括名称、电话、logo图片、实景、门店所在的地区，并在地图上标识，点击保存；</p>
+            <div class="img"><img src="/themes/a/images/user/1.84.jpg"/></div>
+            <div class="img"><img src="/themes/a/images/user/1.85.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 3) 菜品分类管理</a>
+          <div class='section_item_content none'>
+            <p>进入菜单管理界面，点击"菜品分类管理"-----"新增分类"，编辑分类名称，显示顺序，保存；</p>
+            <div class="img"><img src="/themes/a/images/user/1.86.jpg"/></div>
+            <div class="img"><img src="/themes/a/images/user/1.87.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 4) 菜单管理</a>
+          <div class='section_item_content none'>
+            <p>在"菜品管理"界面里面点击"菜品管理"——"添加菜品"，编辑菜品的名称、选择菜品分类、价格标签、设置显示顺序、上传菜品图片、编辑菜品简介，点击保存；这样客户就能在前台实现在线订餐的功能了；</p>
+            <div class="img"><img src="/themes/a/images/user/1.88.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 5) 包厢管理</a>
+          <div class='section_item_content none'>
+            <p>点击"包厢管理"——"新增包厢"，设置包厢名称、容纳人数，点击保存，这样就可以在订单管理修改用户包厢号啦。</p>
+            <div class="img"><img src="/themes/a/images/user/1.89.jpg"/></div>
+            <p>回到订单管理界面，还可以点击以下红色区域，修改包厢号。</p>
+            <div class="img"><img src="/themes/a/images/user/1.90.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 6) 订单管理</a>
+          <div class='section_item_content none'>
+            <p>可以对用户下的订单进行修改包厢号、取消订单、查看详情等操作。</p>
+            <div class="img"><img src="/themes/a/images/user/1.910.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 7) 自动打印小票功能</a>
+          <div class='section_item_content none'>
+           <p>餐饮行业有自动打印小票功能啦！！！如何使用呢，看图吧。</p>
+            <div class="img"><img src="/themes/a/images/user/1.0994.jpg"/></div><br />
+            <div class="img"><img src="/themes/a/images/user/1.0995.jpg"/></div>
+             <p class="redred">注意啦！！</p>
+              <p class="redred">★ 1. 自动打印小票目前只支持IE浏览器（且是IE8以上）。</p>
+               <p class="redred">★2."开始自动查询"按钮指的是：每隔40秒去查询是否有新订单。"立即查询"按钮指的是：立即查询是否有新订单。</p>
+                <p class="redred">★3.用IE浏览器时，底部会有提醒安装驱动的提示，点击安装就ok了。
+</p>
+                 <p class="redred">★4.小票打印机记得要装驱动哦！</p>
+          </div>
+        </li>
+         <li> <a class="section_item_title" href="javascript:void(0)"> 8) 餐饮内容配置完成点击图文消息后进去一片空白？</a>
+          <div class='section_item_content none'>
+            <p>如果你的微信公众账号是服务号，且是认证的服务号（是否认证可在微信平台查询）如下图</p>
+            <div class="img"><img src="/themes/a/images/user/1.0082.jpg"/></div>
+            <p>接下来登陆你的微信公众平台，在服务—我的服务—高级接口，点击修改红框的地方。如下图</p>
+            <div class="img"><img src="/themes/a/images/user/1.00821.jpg"/></div>
+             <p>点击修改，弹出一个对话框，把里面的授权回调页面域名填写为：www.pinet.co 如下图</p>
+            <div class="img"><img src="/themes/a/images/user/1.00822.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 17.酒店宾馆行业-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>17. 酒店宾馆行业</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 宾馆设置</a>
+          <div class='section_item_content none'>
+            <p>使用微酒店可进行酒店管理功能，设置酒店添加、房间信息，并支持在线预约房间，创造销售机会，也方便商户管理。</p>
+            <p>1. 新增宾馆分店，进入编辑酒店信息页面，设置触发关键词、上传图文封面、酒店名称、手机号、填写酒店地址、宾馆介绍图片、设置地图标识，地图标识可直接输入地址，进行搜索定位，以实现一键导航功能；</p>
+            <div class="img"><img src="/themes/a/images/user/1.911.jpg"/></div>
+            <p>2. 添加宾馆介绍图片、编辑宾馆介绍、订单说明</p>
+            <div class="img"><img src="/themes/a/images/user/1.912.jpg"/></div>
+            <p>3. 订单内容设置：例如：联系人、联系电话、预约日期、选择数量，商家可以根据自己的需求，可对酒店各房间的类型、价格、图片、配套设施进行填写，以供用户针对性的选择房型预订，点击保存</p>
+            <div class="img"><img src="/themes/a/images/user/1.913.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 2) 客房管理</a>
+          <div class='section_item_content none'>
+            <p>点击宾馆客房设置，进入房间设置页面，新增房间类型、简要说明、原价、优惠价、上传图片、编辑配套设施；</p>
+            <div class="img"><img src="/themes/a/images/user/1.915.jpg"/></div>
+            <div class="img"><img src="/themes/a/images/user/1.916.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 3)订单管理</a>
+          <div class='section_item_content none'>
+            <p>点击订单管理，进入订单管理页面，会出现客户预订的信息</p>
+            <div class="img"><img src="/themes/a/images/user/1.914.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 18.婚庆服务行业-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>18. 婚庆服务行业</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 喜帖管理</a>
+          <div class='section_item_content none'>
+            <p>1、首先，添加喜帖，设置触发 关键词，以及喜帖的标题，上传喜帖的图文封面和开场动画的封面、喜帖主页的小图标，填写新郎新娘的名字，联系电话、婚庆日期、婚庆地点；</p>
+            <div class="img"><img src="/themes/a/images/user/1.9150.jpg"/></div>
+            <p>2. 上传背景音乐、婚纱照等；</p>
+            <div class="img"><img src="/themes/a/images/user/1.9160.jpg"/></div>
+            <p>3. 填写联系电话、婚礼时间、二维码、地址，点击保存即可。</p>
+            <div class="img"><img src="/themes/a/images/user/1.917.jpg"/></div>
+            <p>看手机预览图吧</p>
+            <div class="img"><img src="/themes/a/images/user/1.918.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 2) 好友祝福</a>
+          <div class='section_item_content none'>
+            <p>可对用户发送的祝福进行屏蔽功能</p>
+            <div class="img"><img src="/themes/a/images/user/1.919.jpg"/></div>
+            <p>手机上发送祝福</p>
+            <div class="img"><img src="/themes/a/images/user/1.9910.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 3) 婚庆墙</a>
+          <div class='section_item_content none'>
+            <p>看看大家发送的祝福吧。</p>
+            <div class="img"><img src="/themes/a/images/user/1.9911.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 19.房地产行业-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>19. 房地产行业</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 楼盘简介</a>
+          <div class='section_item_content none'>
+            <p>微房产是利用{lingzh:$agentInfo['company_short_name']}平台打造的一款全新超炫酷房产官方网站，其功能非常强大，包含了楼盘介绍、子楼盘管理、楼盘相册、房友印象以及专家点评等功能，更有360度全景看房超强大功能震撼登场！现在就花几分钟时间来看一下如何打造您的微房产官网吧。</p>
+            <p>1、就像使用我们其他功能模块一样，设置一个打开微房产首页的触发关键字，以及图文回复的消息标题，选择完全匹配模式，上传图文消息封面和楼盘顶部图片，添加相册；</p>
+            <div class="img"><img src="/themes/a/images/user/0101.jpg"/></div>
+            <p>2、上传户型头部图片、填写楼盘简介、配套信息；</p>
+            <div class="img"><img src="/themes/a/images/user/0102.jpg"/></div>
+            <p>3、填写联系电话，在地图上设置标识，点击保存即可。</p>
+            <div class="img"><img src="/themes/a/images/user/0103.jpg"/></div>
+            <p class="redred">★ 注意：楼盘相册：必须先到相册功能模块添加，在此才可以选择。</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 2) 楼盘管理</a>
+          <div class='section_item_content none'>
+            <p>"子楼盘"：如果您的楼盘是由多种楼盘类型组成的，比如既有别墅群，又有公寓、商品房等，那我们建议您在子楼盘内进行分类添加相应的子楼盘。</p>
+            <p>1、点击"添加子楼盘"，设置子楼盘名称，显示顺序、子楼盘介绍，点击保存；</p>
+            <div class="img"><img src="/themes/a/images/user/0104.jpg"/></div>
+            <p>2、点击"操作"板块的两个按钮，分别可以进行编辑和删除操作。</p>
+            <div class="img"><img src="/themes/a/images/user/0105.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 3) 户型管理</a>
+          <div class='section_item_content none'>
+            <p>1、点击"添加户型"，设置户型名称、选择子楼盘、楼层设置、建筑面积、房屋户型、显示顺序；</p>
+            <div class="img"><img src="/themes/a/images/user/0106.jpg"/></div>
+            <p>2、选择3D相册、上传户型图片、户型介绍，点击保存。</p>
+            <div class="img"><img src="/themes/a/images/user/0107.jpg"/></div>
+            <p class="redred">★ 注意：3D全景相册：必须先到3D相册功能模块添加，在此才可以选择。</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 4) 专家点评</a>
+          <div class='section_item_content none'>
+            <p>1、进入"专家点评"管理界面，点击"添加点评"，添加标题、设置显示顺序、专家姓名、专家职位、上传专家照片、编辑专家介绍和专家点评，点击保存；</p>
+            <div class="img"><img src="/themes/a/images/user/0108.jpg"/></div>
+            <p>1、进入"专家点评管理"界面，点击以下两个按钮，可以进行编辑和删除操作。</p>
+            <div class="img"><img src="/themes/a/images/user/0109.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 20.汽车汽服行业-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>20. 汽车汽服行业</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 品牌管理</a>
+          <div class='section_item_content none'>
+            <p>使用方法：点击品牌管理进入品牌设置界面，填写触发关键词、编辑标题、上传图文封面、填写品牌名称、官方网站；</p>
+            <div class="img"><img src="/themes/a/images/user/0110.jpg"/></div>
+            <p>上传logo标识、显示顺序、编辑品牌简介，点击保存；</p>
+            <div class="img"><img src="/themes/a/images/user/0111.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 2) 车系管理</a>
+          <div class='section_item_content none'>
+            <p>使用方法：点击"添加车系"，进入车系管理页面，添加车系：选择品牌、编辑车系名称、车系简称、上传车系图片、设置显示顺序、编辑车系简介，点击保存；</p>
+            <p class="redred">★ 注意：注意填写车系的简称，因为在手机端的前台页面上我们显示的是简称。</p>
+            <div class="img"><img src="/themes/a/images/user/0112.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 3) 车型管理</a>
+          <div class='section_item_content none'>
+            <p>使用方法：进入车型管理界面，添加车型：编辑车型名称、选择品牌和车系、年款、设置显示顺序、设定指导价、经销商报价、上传图片（50张以内）、设置排量、档位个数、选择变速箱，点击保存；</p>
+            <p class="redred">★ 注意：为之前添加的每一款车系添加相应的车型，请认真填写每一项内容并为该款车型添加清晰的图片。</p>
+            <div class="img"><img src="/themes/a/images/user/0113.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 4) 销售管理</a>
+          <div class='section_item_content none'>
+            <p>使用方法：添加销售顾问，输入姓名、上传头像、填写电话号码、设置显示顺序、选择类型（售前/售后）、编辑简介，点击保存；</p>
+            <p class="redred">★ 注意：添加为您服务的销售人员联系方式，您的顾客将可以通过手机端直接拨打电话。</p>
+            <div class="img"><img src="/themes/a/images/user/0114.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 5) 预约试驾</a>
+          <div class='section_item_content none'>
+            <p>使用方法：点击添加试驾项目，设置触发关键词、图文消息标题、上传图文封面、填写预约地址、设置地图标识、填写预约电话、上传订单页头部图片、编辑订单详情、设置重命名订单、重命名订单说明、重命名订单电话、订单接收设置、填写订单的起始和结束时间，设置订单内容，点击保存；</p>
+            <div class="img"><img src="/themes/a/images/user/0115.jpg"/></div>
+            <div class="img"><img src="/themes/a/images/user/0116.jpg"/></div>
+            <div class="img"><img src="/themes/a/images/user/0117.jpg"/></div>
+            <p>回到预约试驾界面还可以点击查看客户预约订单</p>
+            <div class="img"><img src="/themes/a/images/user/0118.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 6) 预约保养</a>
+          <div class='section_item_content none'>
+            <p>使用方法：点击添加预约保养，设置触发关键词、图文消息标题、上传图文封面、填写预约地址、设置地图标识、填写预约电话、上传订单页头部图片、编辑订单详情、设置重命名订单、重命名订单说明、重命名订单电话、订单接收设置、填写订单的起始和结束时间，设置订单内容，点击保存；</p>
+            <div class="img"><img src="/themes/a/images/user/0119.jpg"/></div>
+            <p>基本流程与预约保养一样，用户只需按照流程步骤来操作即可完成预约试驾功能，点击保存；</p>
+            <p>回到预约保养界面还可以点击查看客户预约订单</p>
+            <div class="img"><img src="/themes/a/images/user/0120.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 7) 实用工具</a>
+          <div class='section_item_content none'>
+            <p>使用方法：保险计算、车贷计算、全款计算、车型比较，商家可以根据需求，设置打开功能。</p>
+            <p class="redred">备注：我们暂时给您提供了5款实用小工具，以后会逐步增加更多。</p>
+            <div class="img"><img src="/themes/a/images/user/0121.jpg"/></div>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 8) 车主关怀</a>
+          <div class='section_item_content none'>
+            <p>使用方法：点击车主关怀，设置触发关键词、图文消息标题、上传图文封面、关怀页面顶部图、填写图文消息简介，点击保存；</p>
+            <div class="img"><img src="/themes/a/images/user/0122.jpg"/></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- 21.微支付-->
+  <div class="help_section">
+    <div class="section_head "> <span class='section_title'>21. 微支付</span> <span class='menu_icon'><img src="/themes/a/images/icon.png"  style=" margin-top:-10px;"/></span> </div>
+    <div class='section_detail'>
+      <ul>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 1) 申请条件</a>
+          <div class='section_item_content none'>
+            <p>1、目前微支付仅支持认证的服务号。</p>
+            <p>2、目前微信支付确定面向综合商城、服饰鞋包、运动户外、美妆用品、家装家纺、汽车及配件、数码家电、母婴、图书等约10个大型类目开放微信支付申请。（详情请参考：https://mp.weixin.qq.com/cgi-bin/readtemplate?t=business/faq_tmpl 目录中1.2 首期开放微信支付的经营类目及相应资质要求）</p>
+            <p>3、因个人和个体工商户无法申请服务号，因此也不能申请微支付。</p>
+            <p>4、在支付费率方面，目前微信支付对所有类目商户的费率均为0.6%，低于支付宝。</p>
+            <p>5、微信支付需要向所有类目商家收取2万元保证金。</p>
+            <p>6、请申请认证的商户主体与后续申请微信支付权限的商户主体保持一致。</p>
+            <p>7、在申请微支付中，有任何疑问请联系{lingzh:$agentInfo['company_short_name']}技术支持400-080-6930，或加{lingzh:$agentInfo['company_short_name']}客服QQ：2324727187</p>
+          </div>
+        </li>
+        <li> <a class="section_item_title" href="javascript:void(0)"> 2) 申请流程</a>
+          <div class='section_item_content none'>
+          <p>第一阶段的申请主要分为几个部分：申请成为微信服务号、申请服务号认证、商户基本资料填写、业务审核资料填写、财务审核资料填写。</p>
+           <p>一、进入申请界面</p>
+           <div class="img"><img src="/themes/a/images/user/0125.jpg"/></div>
+           <p>第一步：商户基本资料填写</p>
+           <div class="img"><img src="/themes/a/images/user/0126.jpg"/></div>
+           <div class="img"><img src="/themes/a/images/user/0127.jpg"/></div>
+           <p>第二步：业务审核资料填写</p>
+            <div class="img"><img src="/themes/a/images/user/0128.jpg"/></div>
+             <div class="img"><img src="/themes/a/images/user/0129.jpg"/></div>
+             <p>第三步：财务审核资料</p>
+              <div class="img"><img src="/themes/a/images/user/0130.jpg"/></div>
+              <p>二、微支付申请通过在{lingzh:$agentInfo['company_short_name']}后台添加支付方式</p>
+               <div class="img"><img src="/themes/a/images/user/0131.jpg"/></div>
+                <p>三、微支付白名单测试完成后，全网微商城购物。</p>
+                 <p>（1）添加白名单，支付测试</p>
+                 <div class="img"><img src="/themes/a/images/user/0132.jpg"/></div>
+                 <p>（2）支付测试完成，发布产品。</p>
+                 <div class="img"><img src="/themes/a/images/user/0133.jpg"/></div>
+                 <div class="img"><img src="/themes/a/images/user/0134.jpg"/></div>
+          </div>
+        </li>
+        
+        <li> <a class="section_item_title" href="javascript:void(0)"> 3) 常见问题</a>
+          <div class='section_item_content none'>
+          <p>1、我公司售卖商品/服务在经营类目中找不到对应的，怎么办?</p>
+           <p>答：基于平台风险管理，首期仅开放部分类目，后续将逐渐增加更多可接入类目，欢迎更多商户接入微信支付功能，敬请期待。</p>
+            <p>2、我提交完申请资料之后一直没有通过审核，为什么?</p>
+           <p>答：在收到你提交的申请资料之后，微信审核团队会在7个工作日以内给你审核结果。若审核被驳回，你可登录公众平台查看驳回原因，请你尽快根据驳回原因调整填写内容，并再次提交，微信审核团队将继续为你审核。</p>
+            <p>3、交纳的微信风险保证金、支付手续费，会否开具发票或收据吗?</p>
+           <p>答：会开具支付手续费发票，不会开具微信风险保证金发票，因微信风险保证金是存放于商户自己的财付通账户中的，处于冻结状态，腾讯没有收到此款项，所以不会提供保证金发票或收据。</p>
+            <!--<p>4、没有公众号，如何申请APP支付权限?</p>
+           <p>答：微信将在近期开放微信App支付功能申请。届时，没有开通公众号的APP开发者可在微信开放平台申请。</p>
+          -->
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  
+</div>
+<include file="Public:footer"/> 

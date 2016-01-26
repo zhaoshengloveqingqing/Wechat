@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <meta name="Keywords" content="{lingzh::C('keyword')}" />
+        <meta name="Description" content="{lingzh::C('content')}" />
+        <!-- Mobile Devices Support @begin -->
+        <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+        <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta content="0" http-equiv="expires">
+        <meta content="telephone=no, address=no" name="format-detection">
+        <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <!-- Mobile Devices Support @end -->
+        <link href="/themes/w/css/car/reset.css" rel="stylesheet" type="text/css" />
+        <link href="/themes/w/css/car/common.css" rel="stylesheet" type="text/css" />
+        <script src="/themes/w/js/swipe.js"></script>
+        
+        <title>品牌列表</title>
+        <style type='text/css'>
+            img{max-width:100%!important;}
+            div.copyright{font-size:14px;text-align:center;color:#000;margin:8px;}
+            div.tech-support{font-size:12px;text-align:center;color:#000;margin:8px;}
+            div.tech-support a{text-decoration: underline;color:#000}
+        </style>
+    </head>
+<body class="portrait">
+    <div class="main" style="padding-top: 10px;">
+        <ul class="list_ul_common">
+            <volist name='brands' id='brand'>
+                <li>
+                    <a href="{lingzh::U('Wap/Car/brand', array('token'=>$_GET['token'], 'wecha_id'=>$_GET['wecha_id'], 'id'=>$brand['id']))}">
+                        <div>
+                             <p>{lingzh:$brand.name}</p>
+                        </div>
+                    </a>
+                </li>
+            </volist>
+        </ul>
+    </div>
+    <div class="footer">
+          <php>
+            echo CopyRightHelper::generateCopyRight($_GET["token"]);
+          </php>
+    </div>
+    <footer class="nav_footer">
+            <ul class="box">
+                    <li><a href="javascript:history.go(-1);" >返回</a></li>
+                    <li><a href="javascript:history.go(1);" >前进</a></li>
+                    <li><a href="{lingzh::U('Wap/Index/index', array('token'=>$_GET['token'], 'wecha_id'=>$_GET['wecha_id'],'wxref'=>'mp.weixin.qq.com'))}" >首页</a></li>
+                    <li><a href="javascript:location.reload();" >刷新</a></li>
+            </ul>
+    </footer>
+</body>        	
+
+<script type='text/javascript'>
+function shareFriend() {
+    WeixinJSBridge.invoke('sendAppMessage',{
+                            "appid":window.shareData.appid,
+                            "img_url":window.shareData.imgUrl,
+                            "img_width":"640",
+                            "img_height":"640",
+                            "link":window.shareData.sendFriendLink,
+                            "desc":window.shareData.tContent,
+                            "title":window.shareData.tTitle
+                            }, function(res) {
+                            _report('send_msg', res.err_msg);
+                            })
+}
+function shareTimeline() {
+    WeixinJSBridge.invoke('shareTimeline',{
+                            "img_url":window.shareData.imgUrl,
+                            "img_width":"640",
+                            "img_height":"640",
+                            "link":window.shareData.timeLineLink,
+                            "desc": window.shareData.tContent,
+                            "title": window.shareData.tTitle
+                            }, function(res) {
+                            _report('timeline', res.err_msg);
+                            });
+}
+function shareWeibo() {
+    WeixinJSBridge.invoke('shareWeibo',{
+                            "content":window.shareData.wContent,
+                            "url":'http://meishi.qq.com/weixin',
+                            }, function(res) {
+                            _report('weibo', res.err_msg);
+                            });
+}
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv){
+            shareFriend();
+            });
+
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function(argv){
+            shareTimeline();
+            });
+
+        // 分享到微博
+        WeixinJSBridge.on('menu:share:weibo', function(argv){
+            shareWeibo();
+            });
+        }, false)
+</script>
+</html>

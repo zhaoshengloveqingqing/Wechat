@@ -1,0 +1,147 @@
+<include file="Public:head"/>
+<style type="text/css">
+
+.form-wizard .wizard-steps {list-style-type: none;margin: 0 0 30px 0;padding: 0;background: #eee;}
+.form-wizard .wizard-steps li {width: 50%;}
+.form-wizard .wizard-steps li.active {background: #fff;}
+.form-wizard .wizard-steps li {float: left;text-align: center;}
+.form-wizard .wizard-steps li .single-step {padding: 15px 0;}
+.form-wizard .wizard-steps li.active .single-step .title {background: #368ee0;color: #fff;}
+.form-wizard .wizard-steps li .single-step .title {text-align: center;font-size: 16px;background: #ddd;padding: 4px 10px;color: #888;}
+.form-wizard .wizard-steps li.active .single-step .description {color: #333;}
+.form-wizard .wizard-steps li .single-step .description {margin-left: 5px;color: #aaa;}
+
+.step .brand{ height: 211px;width: 211px;border-radius: 211px;text-align: center;line-height: 321px; float: left;margin: 50px 60px; background: url(/themes/a/images/wifi/wifi_deactive.png) no-repeat no-repeat 36px 37px #e4f0fa;}
+
+.step .brand:hover{background-color: #368ee0; color: #fefefe ; background: url(/themes/a/images/wifi/wifi_active.png) no-repeat no-repeat 36px 37px #368ee0;}
+
+.step .active-brand{  background-color: #368ee0; color: #fefefe ; background: url(/themes/a/images/wifi/wifi_active.png) no-repeat no-repeat 36px 37px #368ee0;}
+.step .deactive-brand{  background-color: #e4f0fa;; color: #9fcbf3 ; background: url(/themes/a/images/wifi/wifi_deactive.png) no-repeat no-repeat 36px 37px #e4f0fa;}
+
+.step .brand-detail{margin: 50px 10px;font-size: 20px;}
+
+.brand-config{display:none;}
+
+
+</style>
+
+<div class="content">
+  <div class="cLineB"><h4>路由器设置</h4><a href="javascript:history.go(-1);"  class="right btnGrayS vm" style="margin-top:-27px" >返回</a></div> 
+  <div class="msgWrap">
+    <form id="Form" class="form form-wizard" method="post"   action="{lingzh::U('Wifi/setApInfo')}"  target="_top" enctype="multipart/form-data" >
+    <input type="hidden" name="brand" value="witown" id="brand" />
+    <ul class="wizard-steps steps">
+      <li class='active' id="nav-step1">
+        <div class="single-step">
+          <span class="title">1</span>
+          <span class="circle"><span class="active"></span></span>
+          <span class="description">选择路由器品牌</span>
+        </div>
+      </li>
+      <li id="nav-step2">
+        <div class="single-step">
+          <span class="title">2</span>
+          <span class="circle"><span></span></span>
+          <span class="description">路由器设置</span>
+        </div>
+      </li>                              
+    </ul>
+
+    <div class="step" id="step1">
+      <div class="brand <if condition='isset($ap) and $ap.type eq 1'> active-brand<else/>deactive-brand</if>" data-brand="witown" >
+        <span class="brand-detail deactive-icon">树熊路由器</span>
+      </div>
+      <div class="brand <if condition='isset($ap) and $ap.type eq 2'> active-brand<else/>deactive-brand</if>" data-brand="secnet">
+        <span class="brand-detail active-icon">安网路由器</span>
+      </div>
+      
+    </div>
+
+    <div class="step" id="step2">
+      <if condition='isset($ap)'><input type="hidden" name="agent_id" value="0" /></if>
+      <TABLE class="userinfoArea" style=" margin:50px;" border="0" cellSpacing="0" cellPadding="0" width="90%">
+        <TBODY>
+        <TR class="brand-config witown-config">
+          <TH valign="top"><label for="ap_name">商家名称：</label></TH>
+          <TD><input type="input" class="px"  value="<if condition='isset($ap)'> {lingzh:$ap.merchant_name}</if>" name="merchant_name" style="width:500px" ></TD>
+        </TR>
+        <TR class="brand-config witown-config">
+          <TH valign="top"><label for="ap_name">商家wifi ID：</label></TH>
+          <TD><input type="input" class="px"  value="<if condition='isset($ap)'> {lingzh:$ap.merchant_id}</if>" name="merchant_id" style="width:500px" ><br />请联系witown代理商获取该ID </TD>
+        </TR>
+
+        <TR class="brand-config secnet-config">
+          <TD width="50%" align="center">请将该地址填入路由器web认证地址中:</TD>
+          <TD width="50%" align="center"><if condition="!empty($token)"><span class="copy_text">http://{lingzh::C('wx_handler_server')}/wifi/{lingzh:$token}</span><else/>出错了，请联系客服</if> </TD>
+        </TR>
+        <TR class="brand-config secnet-config">
+          <TD width="50%" align="center">请将该地址填入路由器web跳转地址中，用户认证后将跳转到微网站首页:</TD>
+          <TD width="50%" align="center"><if condition="!empty($token)"><span class="copy_text">http://{lingzh::C('wx_handler_server')}/vweb/{lingzh:$token}</span><else/>出错了，请联系客服</if> </TD>
+        </TR>
+        <TR>
+          <th></th>
+          <TD align="center"><button type="submit"  name="button"  class="btnGreen left" >保存</button>　</td>
+        </TR>
+        </TBODY>
+      </TABLE>
+    </div>
+
+    </form>
+  </div>
+</div>
+<include file="Public:footer"/>
+
+
+<script type="text/javascript">
+  var brand = '';
+  $(function(){
+    $("#Form").formwizard({ 
+      formPluginEnabled: true,
+      validationEnabled: true,
+      focusFirstInput : true,
+      formOptions: {
+          success: function (data) { 
+            var json = JSON.parse(data);
+            if (json.status == 1) {
+              window.location.reload();
+            } else {
+              alert(json.data);
+            }
+          },
+          resetForm: false
+      }
+     }
+    );
+
+    // bind a callback to the before_step_shown event
+    $("#Form").bind("before_step_shown", function(event, data) {
+      $("ul.steps li.active").removeClass("active");
+      $("ul.steps li#nav-"+data.currentStep).addClass("active");
+      if (data.currentStep == 'step2') {
+        $('#step2 .brand-config').hide();
+        $('#step2 .' + brand +'-config').show();
+        $("#brand").attr("value",brand);
+      }
+    });
+
+    $("ul.steps li").click(function(){
+      var val = $(this).attr('id');
+      var words = val.split("-")
+      $("#Form").formwizard("show",words[1]);
+    })
+
+
+    $(".brand").click(function(){
+      $(this).parent().find('.brand').removeClass('active-brand');
+      $(this).removeClass('deactive-brand').addClass('active-brand');
+      brand = $(this).attr('data-brand');
+      $("#Form").formwizard("show",'step2');
+    });
+
+  });
+
+
+  
+
+
+</script>

@@ -1,0 +1,42 @@
+#mcover {
+	background: rgba(0, 0, 0, 0.7); left: 0px; top: 0px; width: 100%; height: 100%; display: none; position: fixed; z-index: 20000;
+}
+#mcover img {
+	top: 5px; width: 260px !important; height: 180px !important; right: 18px; position: fixed; z-index: 20001;
+}
+.text {
+	margin: 15px 0px; color: rgb(114, 114, 114); font-size: 14px; -ms-word-wrap: break-word;
+}
+#mess_share {
+	margin: 15px 0px; display: block;
+}
+#share_1 {
+	width: 49%; float: left; display: block;
+}
+#share_2 {
+	width: 49%; float: right; display: block;
+}
+.clr {
+	height: 0px; overflow: hidden; clear: both; display: block;
+}
+.button2 {
+	padding: 8px 0px; border-radius: 3px; border: 1px solid rgb(173, 173, 171); border-image: none; width: 100%; text-align: center; color: rgb(0, 0, 0); font-size: 16px; box-shadow: 0px 1px 1px rgba(0,0,0,0.45), inset 0px 1px 1px #efefef; text-shadow: 0.5px 0.5px 1px #fff; background-image: linear-gradient(to top, rgb(219, 219, 219), rgb(244, 244, 244)); background-color: rgb(232, 232, 232);
+}
+#mess_share img {
+	border: 0px currentColor; border-image: none; width: 22px !important; height: 22px !important; vertical-align: top;
+}
+.btn_music {
+	background: url("../../img/play.png") no-repeat center / 100% auto; left: 15px; top: 20px; width: 35px; height: 35px; display: inline-block; position: absolute; z-index: 100;
+}
+.on.btn_music {
+	background-image: url("../../img/stop.png");
+}
+#iframe_screen {
+	background: rgb(255, 255, 255); left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; position: absolute; z-index: 300000;
+}
+a[data-type='2'].btn_music {
+	background: url("../../img/template/lib/v72_2.png") no-repeat right / auto 100%; margin: 5px 10px; width: 25px; height: 25px; display: inline-block; min-width: 25px;
+}
+a[data-type='2'].on.btn_music {
+	background-position: 0px !important;
+}

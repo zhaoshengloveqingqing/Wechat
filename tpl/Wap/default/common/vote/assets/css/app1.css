@@ -1,0 +1,18 @@
+/* Write your styles */
+body {
+	background-color: #f6f2e9;
+}
+.header{
+	padding: 0;
+}
+.content .info p{
+	 color: #7a287d;
+}
+.content .info p span{
+	  background-color: #7a287d;
+	  width: 6px;
+	  height: 6px;
+	  display: inline-block;
+	  color: #7a287d;
+	  border-radius: 50%;
+}

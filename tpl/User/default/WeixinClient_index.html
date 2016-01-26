@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="Keywords" content="微信无线网站开发,手机无线网站建设" />
+        <meta name="Description" content="领众微信营销系统从事网站建设达八年之久,专业为企业和商家提供:微信无线网站开发,微信系统接口开发,手机无线网站建设,微信商城网站开发等相关服务.咨询热线:0755-36989386" />
+        <title>微信模拟客户端</title>
+        <style type="text/css">
+            .realTimeShow{
+                float: right;
+                margin-top: 3px;
+                margin-right: 2px;
+                background-color: #ccc;
+                width: 450px;
+                height: 210px;
+            }
+            .formContainer{
+                width:800px;
+                margin:0 auto;
+                border:1px solid #999;
+                background-color: #cde;
+            }
+            .formContainer span {
+                vertical-align: top;
+            }
+            .formContainer select, .formContainer input[type="text"], .formContainer input[type="file"] {
+                width: 200px;
+                margin-top: 15px;
+            }
+            .name {
+                display: inline-block;
+                width: 125px;
+                margin-top: 15px;
+                margin-left: 5px;
+            }
+            #sendMsgBtn{
+                margin-left: 200px;
+                margin-top: 15px;
+            }
+            #urlRealTimeShow{
+                display: inline-block;
+                font-size: 12px;
+                margin-top: 15px;
+                margin-left: 10px;
+            }
+            .tips{
+                display: inline-block;
+                margin-left: 136px;
+                font-size: 12px;
+            }
+            #responseText{
+                width: 795px;
+                height: 200px;
+                font-size: 15px;
+            }
+            #messageView{
+            	width: 300px;
+            	height: 300px;
+            	float: right;
+            	background-color: #eee;
+            }
+        </style>
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(function(){
+                var basic=consturctHtml(basicMsg);
+                $('#basicMsgEle').html(basic);
+                var tempOp=msgContentOp[$('#MsgType').val()];
+                //alert(objdump(basicMsg));
+                var cont=consturctHtml(tempOp);
+                $('#msgContent').html(cont);
+                $('#MsgType').change(msgTypeChanged);
+                $('#FromUserName').val("123");
+                setCreateTime();
+                freshMsgId();
+            });
+
+            function freshMsgId(){
+                today=new Date();
+                var id= Math.floor(Math.random(today.getTime())*10000000000000000);
+                $('#MsgId').val(id+10000000000);
+            }
+
+            function setCreateTime(){
+                today=new Date();
+                $('#CreateTime').val(today.getTime());
+            }
+
+            function msgTypeChanged()
+            {
+                var msgType=$('#MsgType').val();
+                var tempOp=msgContentOp[msgType];
+                //alert(objdump(basicMsg));
+                var cont=consturctHtml(tempOp);
+                $('#msgContent').html(cont);
+                if(msgType=='event')
+                {
+                    var eventTypechange=function(){
+                            var eventMsg=consturctHtml(eventContentOp[$('#Event').val()]);
+                            $('#eventMsgContent').html(eventMsg);
+                    };
+                    eventTypechange();
+                    $('#Event').change(eventTypechange);
+                }
+
+            }
+
+            String.format = function(src){
+                if (arguments.length == 0) return null;
+                var args = Array.prototype.slice.call(arguments, 1);
+                return src.replace(/\{(\d+)\}/g, function(m, i){
+                    return args[i];
+            });};
+
+            var basicMsg={ 
+                'ToUserName': {'tips':'公众号','hidden':true,'type':'text' , 'defaultValue' : ''},
+                'FromUserName':{'tips':'发送者ID','hidden':false,'type':'text' , 'defaultValue' : ''},
+                'CreateTime':{'tips':'消息创建时间','hidden':false,'type':'text' , 'defaultValue' : ''},
+                'MsgId':{'tips' : '消息ID,64位整型','hidden':false,'type':'text' , 'defaultValue' : ''},
+                'MsgType':{ 'tips':'消息类型',
+                            'hidden':false,
+                            'type' : 'select',
+                            'options' : 
+                            [
+                                {'val' : 'text','text' : '文本消息','type':'option',},
+                                {'val' : 'image','text' : '图片消息','type':'option',},
+                                {'val' : 'voice','text' : '语音消息','type':'option',},
+                                {'val' : 'video','text' : '视频消息','type':'option',},
+                                {'val' : 'location','text' : '位置消息','type':'option',},
+                                {'val' : 'link','text' : '链接消息','type':'option',},
+                                {'val' : 'event','text' : '事件消息','type':'option',},
+                            ]},
+            };
+            
+            var msgContentOp={
+                        'text' :{'Content' : {'tips' : '消息内容','hidden':false,'type':'text' , 'defaultValue' : ''},  },
+                        'image':{
+                                    'PicUrl' : {'tips' : '图片链接地址','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                    'MediaId' : {'tips' : '语音消息媒体id,可以调用相应接口拉取数据。','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                },
+                        'voice':{
+                                    'MediaId' : {'tips' : '语音消息媒体id,可以调用相应接口拉取数据。','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                    'Format' : {'tips' : '语音格式','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                },
+                        'video':{
+                                            'MediaId' : {'tips' : '语音消息媒体id,可以调用相应接口拉取数据。','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                            'ThumbMediaId' : {'tips' : '缩略图','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                        },
+                        'location':{
+                                        'Location_X' : {'tips' : '纬度','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                        'Location_Y' : {'tips' : '经度','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                        'Scale' : {'tips' : '缩放比例','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                        'Label' : {'tips' : '地理位置信息','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                    },
+                        'link':{
+                                    'Title' : {'tips' : '标题','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                    'Description' : {'tips' : '描述','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                    'Url' : {'tips' : '链接','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                },
+                        'event':{
+                                'Event' : 
+                                    {
+                                        'tips' : '事件类型', 
+                                        'type' : 'select',
+                                        'options' : 
+                                        [
+                                            {'val' : 'subscribe', 'text': '非二维码关注事件','type':'option',},
+                                            {'val' : 'unsubscribe', 'text': '取消关注事件','type':'option',},
+                                            //{'val' : 'subscribe', 'text' : '二维码关注事件','type':'option',},
+                                            {'val' : 'SCAN', 'text' : '关注后扫描二维码事件','type':'option',},
+                                            {'val' : 'LOCATION', 'text' : '上报地理位置事件','type':'option',},
+                                            {'val' : 'CLICK', 'text' : '点击菜单拉取消息时的事件','type':'option',},
+                                            {'val' : 'VIEW', 'text' : '点击菜单跳转链接时的事件','type':'option',},
+                                        ],
+                                    }
+                                }
+                    };
+
+            var eventContentOp={'subscribe':'',
+                                'unsubscribe':'',
+                                //'subscribe': {
+                                  //              'EventKey' : {'defaultValue' : 'qrscene_' , 'tips' : '事件KEY值，qrscene_为前缀，后面为二维码的参数值','hidden':false,'type':'text' ,},
+                                    //            'Ticket' : {'tips' : '二维码的ticket，可用来换取二维码图片','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                      //      },
+                                'SCAN': {
+                                                'EventKey' : {'tips' : '事件KEY值，是一个32位无符号整数，即创建二维码时的二维码scene_id','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                                'Ticket' : {'tips' : '二维码的ticket，可用来换取二维码图片','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                            },
+                                'LOCATION': {
+                                                'Latitude' : {'tips' : '地理位置纬度','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                                'Longitude' : {'tips' : '地理位置经度','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                                'Precision' : {'tips' : '地理位置精度','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                            },
+                                'CLICK' : {
+                                                'EventKey' : {'tips' : '事件KEY值，与自定义菜单接口中KEY值对应','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                            },
+                                'VIEW' : {
+                                                'EventKey' : {'tips' : '事件KEY值，设置的跳转URL','hidden':false,'type':'text' , 'defaultValue' : ''},
+                                            },
+                        };
+
+            function consturctHtml(myobject)
+            {
+                var s='';
+                for (var property in myobject) {
+                    if (typeof(property)!='function'){
+                        if(!myobject[property].hidden)
+                        {
+                            s = s + constructFormItem(property+'Span',{'nodetype':'span','class':'name' , 'value':property});
+                        }
+                        switch(property)
+                        {
+                            case 'EventKey':
+                            case 'Ticket':
+                            case 'Latitude':
+                            case 'Longitude':
+                            case 'Precision':
+                            case 'Content':
+                            case 'PicUrl':
+                            case 'MediaId':
+                            case 'Format':
+                            case 'ThumbMediaId':
+                            case 'Location_X':
+                            case 'Location_Y':
+                            case 'Scale':
+                            case 'Label':
+                            case 'Title':
+                            case 'Description':
+                            case 'Url':
+                            case 'ToUserName':
+                            case 'FromUserName':
+                            case 'CreateTime':
+                            case 'MsgId':
+                                s = s + constructFormItem(property,{'nodetype':'input','obj':myobject[property]});
+                                break;
+                            case 'Event':
+                            case 'MsgType':
+                                s = s + constructFormItem(property,{'nodetype':'select','obj':myobject[property]});
+                                break;
+                        }
+                        if(!myobject[property].hidden){
+                            s = s + '<br>';
+                            s = s + constructFormItem(property + 'tips',{'nodetype':'span','class':'tips','value':myobject[property].tips});
+                            s = s + '<br/>';
+                        }
+                    }
+                }
+                return s;
+            }
+
+            function constructFormItem(name,obj){
+                switch(obj.nodetype)
+                {
+                    case 'span':
+                        return String.format('<span id="{0}" class="{1}" > {2} </span>', name, obj.class,obj.value);
+                    case 'input':
+                        return String.format('<input id="{0}"  name="{0}" type="{1}" value={3}></input>', name , obj.obj.hidden?'hidden':obj.obj.type, obj.obj.defaultValue);  
+                    case 'select':
+                        var s='';
+                        var ops=obj.obj.options;
+                        for (var i = 0; i < ops.length; i++) {
+                            s = s+ String.format('<option value="{0}">{1}</option>',ops[i].val,ops[i].text);
+                        };
+                        return String.format('<select id="{0}" name="{0}"> {1} </select>' , name ,s);
+                }
+
+            }
+
+            function objdump(myObject)
+            {
+                var s = "";  
+                for (var property in myObject) {  
+                 s = s + "\n "+property +": " + myObject[property] ;  
+                }  
+                return s;  
+            }
+
+            function sendMsg(){
+                var token=$('#token').val();
+                $.getJSON('/index.php?g=User&m=WeixinClient&a=GetPubIdAndSinid',
+                    'token='+token,
+                    function(data, textStatus, jqXHR){
+                    // alert(data);
+                    postMsg(data);
+                });
+            }
+
+            function postMsg(arr){
+                var posturl=$("#url").val()+'?signature='+arr['signature']+'&timestamp='+arr['timestamp']+'&nonce='+arr['nonce'];
+                $('#ToUserName').val(arr['wxid']);
+                $.ajax({
+                             url:posturl,
+                             type:"POST",
+                             data:constructMsg(),
+                             dataType:"xml",
+                             success:function(res)
+                             {
+                                 $('#responseText').val(res.documentElement.innerHTML);
+                             },
+                             error:function(err)
+                             {
+                                 var response=err['responseText'];
+                                 if(response==''){$('#responseText').val(objdump(err)); return;}
+                                 $('#responseText').val(response);
+                             }
+                        }) ;
+            }
+
+            function constructMsg()
+            {
+                var data=$("form").serializeArray();
+                /*var root=Q('xml');
+
+                for (var i = 0; i < data.length-1; i++) {
+                    root.appendChild(Q(data[i].name,CDATA(data[i].value)));
+                };
+                var res=root.outerHTML;
+                $('#messageView').text(res);*/
+                var rootS="<xml>",rootE="</xml>";
+                var res="";
+                for (var i = 0; i < data.length-1; i++) {
+                    var key = data[i].name;
+                    var v=CDATA(data[i].value);
+                    res = res + String.format('<{0}>{1}</{0}>',key,v);
+                };
+                $('#messageView').text(res);
+                return String.format('{0}{1}{2}',rootS,res,rootE);
+            }
+            function CDATA(str)
+            {
+                return String.format('<![CDATA[{0}]]>',str);
+            }
+        </script>
+    </head>
+    <body>
+            <div class="formContainer">
+            	<div id="messageView"></div>
+                <div id="host">
+                        <span class="name">URL:</span>
+                        <input id="url" type="text" value="http://localhost:80/index.php/api/majianghaikou"/><span id='urlRealTimeShow'></span><br/>
+                        <span class='tips'>对于URL，例:http://localhost:80/index.php/api/majianghaikou</span><br/>
+                        <span class="name">Token:</span>
+                        <input id="token" type="text" value="majianghaikou"/><br/>
+                </div>
+                <form>
+                        <div id="basicMsgEle"></div>
+                        <div id="msgContent"></div>
+                        <div id="eventMsgContent"></div>
+                        <div id="Btn">
+                                <input type="button" value="刷新自动生成的参数" id="freshMsgBtn" onclick="freshMsgId(),setCreateTime()"/>
+                                <input type="button" value="发送消息" id="sendMsgBtn" onclick="sendMsg()"/>
+                        </div>
+                </form>
+
+            </div>
+            <div class="formContainer">
+                <textarea id="responseText" style=""></textarea>
+            </div>
+    </body>
+</html>

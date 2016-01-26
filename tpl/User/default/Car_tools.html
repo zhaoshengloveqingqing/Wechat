@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<include file="Public:head"/> 
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+<link rel="stylesheet" href="/themes/a/css/bootstrapSwitch.css">
+<script src="/themes/a/js/bootstrapSwitch.js"></script>
+
+<div class="content">
+  <div class="cLineB">
+    <h4 class="left"></h4>
+    
+    <div class="clr"></div>
+  </div>
+  <!--tab start-->
+  <div class="tab">
+    <ul>
+    <li class="tabli" id="tab0"><a href="{lingzh::U('Car/index')}">品牌管理</a></li>
+    <li class="tabli" id="tab1"><a href="{lingzh::U('Car/series')}">车系管理</a></li>
+    <li class="tabli" id="tab2"><a href="{lingzh::U('Car/model')}">车型管理</a></li>
+    <li class="tabli" id="tab3"><a href="{lingzh::U('Car/sales')}">销售管理</a></li>
+    <li class="tabli" id="tab4"><a href="{lingzh::U('Car/rdrive')}">预约试驾</a></li>
+    <li class="tabli" id="tab5"><a href="{lingzh::U('Car/rmaintain')}">预约保养</a></li>
+    <li class="current tabli" id="tab6"><a href="#">实用工具</a></li>
+    <li class="tabli" id="tab7"><a href="{lingzh::U('Car/care')}">车主关怀</a></li>
+    </ul>
+  </div>
+  <!--tab end-->
+  <div class="cLine">
+    <div class="clr"></div>
+    <div class="clr"></div>
+  </div>
+
+  <div class="msgWrap">
+    <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+        <thead>
+            <tr>
+                <th>工具名称</th>
+                <!--<th>回复关键词</th> -->
+                <th>状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <volist name="tools" id="tool">
+               <tr>
+                <td>
+                    {lingzh:$tool.name}
+                </td>
+                <td>
+                    <div class="switch switch_anchor"  data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+                        <input type="checkbox" <if condition="$tool.status eq 1" >checked</if>  value="{lingzh:$tool.id}"/>
+                    </div>
+                </td>
+               </tr>
+            </volist>
+           
+        </tbody>
+    </table>
+  </div>
+<script>
+    $('.switch_anchor').on('switch-change', function (e, data) {
+        var $el = $(data.el) , status = data.value;
+        var appId = $el.attr('value');
+         $.post("{lingzh::U('User/Car/tool_change')}", {'appid': appId, 'status': status }, function (data) {
+            console.log(data);
+        });
+    });
+
+</script>
+</div>
+<include file="Public:footer"/>

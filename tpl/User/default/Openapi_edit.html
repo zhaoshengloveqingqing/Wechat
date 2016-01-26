@@ -1,0 +1,86 @@
+<include file="Public:head"/>
+<script src="{lingzh::RES}/js/date/WdatePicker.js"></script>
+<script>
+$(function(){
+        $('#voteForm').ajaxForm({
+            beforeSubmit:  checkForm,  // pre-submit callback
+            success:       complete,  // post-submit callback
+			error: showError,
+            dataType: 'json'
+        });
+        function checkForm(arr){
+            if( '' == $.trim($('#user').val())){
+                alert("第三方合作伙伴名不能为空");
+                return false;
+            }
+			if( '' == $.trim($('#keyword').val())){
+                alert("关键词不能为空");
+                return false;
+            }
+			if( '' == $.trim($('#ourl').val())){
+                alert("第三方接口url不能为空");
+                return false;
+            }
+			if( '' == $.trim($('#otoken').val())){
+                alert("第三方接口token不能为空");
+                return false;
+            }
+        }
+        function complete(data){
+            if (data.status == 0) {
+			    alert(data.info);
+			} else {
+			    alert("修改成功");
+			    window.location.href = data.url;
+			}
+        }
+
+		function showError(data){
+            alert(data);
+        }
+    });
+</script>
+<div class="content">
+
+<div class="cLineB">
+  <h4>新增第三方接口 </h4><a href="{lingzh::U('Openapi/index')}" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+         
+         <div class="msgWrap bgfc">
+  <form id="voteForm" class="form" method="post" action="" target="_top" enctype="multipart/form-data">	 
+<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+<tbody>
+
+<tr>
+<th width="210">接口号：</th>
+<td width="1001"><input type="text" id="openid" name="openid" disabled="disabled" value="lingzhtech_{lingzh:$info.id}" class="px" style="width:550px;"><br><span class="red">自动分配，用于标识第三方接口</span></td>
+</tr>
+
+<tr>
+<th width="210">关键词：</th>
+<td><input type="text" id="keyword" name="keyword" value="{lingzh:$info.keyword}" class="px" style="width:550px;"><br><span class="red">关键词完全匹配</span></td>
+</tr>
+
+<tr>
+<th width="210">合作方：</th>
+<td><input type="text" id="user" name="user" value="{lingzh:$info.user}" class="px" style="width:550px;"><br><span>第三方接口提供商名称</span></td>
+</tr>
+<tr>
+<th>第三方接口url：</th>
+<td><input type="text" name="ourl" value="{lingzh:$info.ourl}" id="ourl" class="px" style="width:550px;"> 
+<a href="/index.php?g=User&m=Help&a=index" target="_blank"><img src="./tpl/User/default/common/images/help.png" class="vm helpimg" title="帮助"></a>
+</tr>
+<tr>
+<th>第三方接口token：</th>
+<td><input type="text" name="otoken" value="{lingzh:$info.otoken}" id="otoken" class="px" style="width:550px;"> 
+</tr>
+<th>&nbsp;</th>
+<td><button type="submit" name="button" class="btnGreen">修改</button>
+<a href="{lingzh::U('Openapi/index')}" class="btnGray vm">取消</a></td>
+</tr>
+</tbody>
+</table>
+</form>
+  </div> 
+</div>
+<include file="Public:footer"/>

@@ -1,0 +1,138 @@
+<include file="Public:head"/>  
+<link href="/themes/a/css/car.css" rel="stylesheet" type="text/css">
+
+<script src="/themes/a/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<link href="/themes/a/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+<div class="content">
+    <div class="cLineB">
+        <h4 class="left"> 预约保养订单管理</h4>
+        <div class="clr"></div> 
+    </div>
+    <div class="cLineB">
+      预约总数：<span class="redamount">{lingzh:$overview.total_count}</span>个　　预订成功：
+      <span id='overview_2' class="redamount">{lingzh:$overview.approved}</span>个　未处理订单：
+      <span id='overview_1' class="redamount">{lingzh:$overview.unprocessed}</span>个 　商家已拒绝：
+      <span id='overview_3' class="redamount">{lingzh:$overview.failed}</span>个 　用户已取消：
+      <span id='overview_4' class="redamount">{lingzh:$overview.cancelByUser}</span>个
+      <a href="{lingzh::U('Car/rmaintain')}" class="right btnGreen vm">返回</a>
+    </div>
+    <div class="msgWrap">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+                    <th width="8%">联系人</th>
+                    <th width="10%">电话</th>
+                    <th width="10%">预约日期</th>
+                    <th width="8%">预约时间</th>
+                    <th width="8%">车牌</th>
+                    <th width="8%">公里数</th>
+                    <th width="8%">提交时间</th>
+                    <volist name="text_cols" id="text_col">
+                        <th width="5%">{lingzh:$text_col}</th>
+                    </volist>
+                    <volist name="select_cols" id="select_col">
+                        <th width="5%">{lingzh:$select_col}</th>
+                    </volist>
+                    
+                    <th width="10%">备注</th>
+                    <th width="8%">状态</th>
+                    <th width="10%" class="norightborder">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="reserves" id="reserve">
+                <tr>
+                    <td>{lingzh:$reserve.name}</td>
+                    <td>{lingzh:$reserve.tel}</td>
+                    <td>{lingzh:$reserve.reserve_date|date="Y-m-d",###}</td>
+                    <td><php>echo $reserve['reserve_time'].':00-'.($reserve['reserve_time']+1).':00';</php></td>
+                    <td>{lingzh:$reserve.number}</td>
+                    <td>{lingzh:$reserve.miles}</td>
+                    <td>{lingzh:$reserve.submit_time|date="Y-m-d H:i",###}</td>
+                    <php>
+
+                        $textColVals = unserialize($reserve['text_cols']);
+                        if(count($textColVals) !== count($text_cols)) {
+                            for($ij=0; $ij<count($text_cols); $ij++) {
+                                echo "<td></td>";
+                            }
+                        }else {
+                            foreach($textColVals as $textColVal) {
+                                echo "<td>".$textColVal."</td>";
+                            }
+                        }
+                    </php>
+                    <php>
+                        $selectColVals = unserialize($reserve['select_cols']);
+                        if(count($selectColVals) !== count($select_cols)) {
+                            for($ik=0; $ik<count($select_cols); $ik++) {
+                                echo "<td></td>";
+                            }
+                        }else{
+                            foreach($selectColVals as $selectColVal) {
+                                echo "<td>".$selectColVal."</td>";
+                            }
+                        }    
+                    </php>
+
+                      <td>{lingzh:$reserve.remarks}</td>
+                      <td >
+                            <if condition="$reserve.status eq 2"> 已确认 
+                            <elseif condition="$reserve.status eq 3"/> 用户取消 
+                            <elseif condition="$reserve.status eq 4"/> 商家取消 
+                            <else />未确认
+                            </if>  
+                      </td>
+                      <td class="norightborder">  
+                            <if condition="$reserve.status eq 1">
+                                <a class='normal_btn operationxxx' href="{lingzh::U('Car/rmaintain_reserves', array('mode'=>'edit', 'reserve_id'=>$reserve['id'], 'id'=>$reserve['rdrive_id'],'status'=>2))}">确认
+                                </a>
+                                <a class='normal_btn operationxxx' href="{lingzh::U('Car/rmaintain_reserves', array('mode'=>'edit', 'reserve_id'=>$reserve['id'], 'id'=>$reserve['rdrive_id'],'status'=>4))}">拒绝
+                                </a>
+                            <else />
+                            </if>
+                      </td>
+                </tr>
+                </volist>
+            </tbody>
+            </table>
+          <div class="cLine">
+    <div class="pageNavigator right">
+        <div class="pages">{lingzh:$page}</div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+<script type='text/javascript'>
+    $(function(){
+        $('.ListProduct').dataTable({
+            "oLanguage": {
+                "sLengthMenu": "每页显示 _MENU_ 记录",
+                "sZeroRecords": "抱歉，您还没有预约订单",
+                "sInfo": "第 _START_ 条到 _END_ 条，总共 _TOTAL_ 条记录",
+                "sInfoEmpty": "显示 0 条记录",
+                "sInfoFiltered": "(从 总共_MAX_条记录)",
+                "sSearch": "查找",
+                "bJQueryUI": true,
+                "sPaginationType": "full_numbers",
+                "oPaginate": {
+                    "sPrevious" : "前一页",
+                    "sNext": "下一页"
+                },
+            },
+            "aaSorting": [],
+            "bPaginate": false,
+            "bFilter": false,
+        });
+        
+        $('a.operationxxx').click(function(event) {
+            if(!window.confirm('您确定要执行当前操作吗？')) {
+                event.preventDefault();
+                exit;
+            }
+        }); 
+        
+     }); 
+</script>
+<include file="Public:footer"/>

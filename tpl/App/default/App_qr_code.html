@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="./tpl/App/default/common/css/App/main.css"/>
+<link rel="stylesheet" type="text/css" href="./tpl/App/default/common/css/App/shengcheng.css"/>
+<title>Iphone6预约二维码申请</title>
+</head>
+<script src="./tpl/Fxs/default/common/js/jquery-1.8.3.min.js"></script>
+<script src="./tpl/Fxs/default/common/js/mobile_tip.min.js"></script>
+<body>
+<div class="main">
+  <div class="header">
+    <div style="width:1020px;margin:0 auto;"> <img src="/tpl/App/default/common/images/App/top.png" /> </div>
+  </div>
+  
+  <form method="post" autocomplete="on" action="{lingzh::U('App/qr',array('ver'=>'store'))}" onsubmit="return check_d();">
+	  <div class="content">
+		<div class="cont">
+		  <ul>
+			<li> <span>协同发展人
+			  ：</span>
+			   <input type="text" name="develop_name" id="develop_name" class="input"/>
+			</li>
+		  
+			<li>
+			  <input type="submit" class="submit l" value="提 交"/>
+			</li>
+			<li style="color:blue">
+				 <a href="{lingzh::U('App/qr_list')}">查看协同发展人</a>
+			</li>
+		  </ul>
+		</div>
+	  </div>
+  </form>
+  <div class="footer">
+    <p>Copyright(C)2006-2014 All Rights Reserved </p>
+  </div>
+</div>
+</body>
+</html>
+<script>
+$(document).ready(function() {
+	if(""!=""){
+		toAlert="";
+		addToAlert();
+	}
+});
+
+
+
+function check_d(){
+
+    
+	var userAddress=$("#develop_name").val();
+	
+		
+	  if(userAddress =="" || userAddress==null){
+	    toAlert="请您填写协同发展人";
+		addToAlert();
+		return false;
+		}
+    
+    
+	
+	return true;
+	
+}
+
+    /*** 报名成功提示！ ***/
+    function addToCart(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert("注册成功！");
+    }
+        /*** 报名失败提示！ ***/
+    function addToAlert(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert(toAlert);
+    }
+        /*** 注册提示！ ***/
+    function SignAlert(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert(toAlert);
+    }
+
+</script>

@@ -1,0 +1,125 @@
+<include file="Public:head"/> 
+<script src="/js/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="/js/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="/js/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<div class="content">
+<style type="text/css">
+  #formul li{
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  #formul input,span{
+    display: inline-block;
+  }
+  #formul input,select {
+    width: 200px;
+    height: 30px;
+    border: 1px solid #bbb;
+  }
+  #formul span{
+    width: 80px;
+  }
+  #checkUl li,span , input{
+    display: inline;
+  }
+  #checkUl span{
+    width: 150px;
+    margin-left: 20px;
+  }
+  #checkUl input{
+    width: 20px;
+    height: 18px;
+  }
+</style>
+  <ul id='nav_bar'> 
+    <li><a href="<?php echo U('LzhNews/admin'); ?>" class="btnGreen vm">返回</a></li>
+  </ul>
+
+  <form action="" method="POST">
+    <ul id="formul">
+      <li>
+        <span>分类：</span>
+        <select name="category_id" id = "category" onchange="changeCategory()">
+          <?php foreach ($categories as $k => $val) { ?>
+            <option value="{lingzh:$val['id']}">{lingzh:$val['name']}</option>
+          <?php } ?>
+        </select>
+        <script type="text/javascript">
+          function changeCategory(){
+            if($('#category').val()==3){
+              $('#has_link').attr('checked',false);
+            }
+          }
+        </script>
+      </li>
+      <li>
+        <span>标题：</span><input name="title" value="{lingzh:$news['title']}" type="text">
+      </li>
+      <li>
+        <span>排序：</span><input name="sorts" value="<?php echo $news['sorts'] ? $news['sorts'] : 1 ; ?>" type="number">
+      </li>
+      <li>
+        <ul id="checkUl">
+          <li>
+            <span>在首页滚动条上显示：</span><input name="slide_show" value="1" type="checkbox" 
+            <?php if($news){ echo $news['slide_show'] ? 'checked="checked"' : ""; } else{ echo 'checked="checked"' ;} ?> >
+          </li>
+          <li>
+            <span>有链接：</span></span><input id="has_link" name="has_link" value="1" type="checkbox" 
+            <?php if($news){ echo $news['has_link'] ? 'checked="checked"' : ""; } else{ echo 'checked="checked"' ;} ?> >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <span>来源：</span><input name="source" value="<?php echo $news['source'] ? $news['source'] : '领众科技' ?>" type="text">
+      </li>
+    </ul>
+        <span>内容：</span>
+        <textarea id="content" name="content" >
+          <?php if($news){ echo $news['content'];  }?>
+        </textarea>
+    <input type="submit" value="提交" class="btnGreen vm">
+  </form>
+</div>
+<include file="Public:footer"/>
+<script type="text/javascript">
+$(function(){
+  $('form').submit(function(){
+    var ret = true;
+    var str='';
+    $('input[type="text"]').each(function(){
+      str = $(this).val();
+      ret = noError && (ret !== null || str !== undefined || str !== '');
+      //!ret && alert($(this));
+    });
+   !ret && alert('请教数据填充完整！');
+   return ret;
+  });
+});
+</script>
+<script>
+var editor;
+KindEditor.ready(function(K) {
+  editor = K.create('#content', {
+  resizeType : 1,
+  allowPreviewEmoticons : false,
+  allowImageUpload : true,
+  uploadJson :'/index.php/upload/image',
+  items : [
+  'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+  'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+  'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut', 'image'],
+
+  });
+
+});
+
+<?php if($news){ ?>
+$(function(){
+  var cid = '<?php echo $news['category_id']; ?>';
+  $('#category').val(cid);
+});
+<?php } ?>
+
+</script>

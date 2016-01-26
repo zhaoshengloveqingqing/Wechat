@@ -1,0 +1,252 @@
+<include file="Public:head"/>
+
+<link href="/themes/a/css/kefu.css" rel="stylesheet" type="text/css" />
+<div class="content">
+
+  <div >
+    <h4>粉丝关注的时候系统自动回复的内容</h4>
+  </div>
+
+  <form method="post"  action="{lingzh::U('Areply/addOrUpdate')}">
+ 
+<div class="biaoqing">
+<ul id="faces" style="display:none">
+<li><img src="{lingzh::RES}/images/face/0.gif" alt="微笑" onclick="jsbq('微笑')"></li>
+<li><img src="{lingzh::RES}/images/face/1.gif" alt="撇嘴" onclick="jsbq('撇嘴')"></li>
+<li><img src="{lingzh::RES}/images/face/2.gif" alt="色" onclick="jsbq('色')"></li>
+<li><img src="{lingzh::RES}/images/face/3.gif" alt="发呆" onclick="jsbq('发呆')"></li>
+<li><img src="{lingzh::RES}/images/face/4.gif" alt="得意" onclick="jsbq('得意')"></li>
+<li><img src="{lingzh::RES}/images/face/5.gif" alt="流泪" onclick="jsbq('流泪')"></li>
+<li><img src="{lingzh::RES}/images/face/6.gif" alt="害羞" onclick="jsbq('害羞')"></li>
+<li><img src="{lingzh::RES}/images/face/7.gif" alt="闭嘴" onclick="jsbq('闭嘴')"></li>
+<li><img src="{lingzh::RES}/images/face/8.gif" alt="睡" onclick="jsbq('睡')"></li>
+<li><img src="{lingzh::RES}/images/face/9.gif" alt="大哭" onclick="jsbq('大哭')"></li>
+<li><img src="{lingzh::RES}/images/face/10.gif" alt="尴尬" onclick="jsbq('尴尬')"></li>
+<li><img src="{lingzh::RES}/images/face/11.gif" alt="发怒" onclick="jsbq('发怒')"></li>
+<li><img src="{lingzh::RES}/images/face/12.gif" alt="调皮" onclick="jsbq('调皮')"></li>
+<li><img src="{lingzh::RES}/images/face/13.gif" alt="呲牙" onclick="jsbq('呲牙')"></li>
+<li><img src="{lingzh::RES}/images/face/14.gif" alt="惊讶" onclick="jsbq('惊讶')"></li>
+<li><img src="{lingzh::RES}/images/face/15.gif" alt="难过" onclick="jsbq('难过')"></li>
+<li><img src="{lingzh::RES}/images/face/16.gif" alt="酷" onclick="jsbq('酷')"></li>
+<li><img src="{lingzh::RES}/images/face/17.gif" alt="冷汗" onclick="jsbq('冷汗')"></li>
+<li><img src="{lingzh::RES}/images/face/18.gif" alt="抓狂" onclick="jsbq('抓狂')"></li>
+<li><img src="{lingzh::RES}/images/face/19.gif" alt="吐" onclick="jsbq('吐')"></li>
+<li><img src="{lingzh::RES}/images/face/20.gif" alt="偷笑" onclick="jsbq('偷笑')"></li>
+<li><img src="{lingzh::RES}/images/face/21.gif" alt="可爱" onclick="jsbq('可爱')"></li>
+<li><img src="{lingzh::RES}/images/face/22.gif" alt="白眼" onclick="jsbq('白眼')"></li>
+<li><img src="{lingzh::RES}/images/face/23.gif" alt="傲慢" onclick="jsbq('傲慢')"></li>
+<li><img src="{lingzh::RES}/images/face/24.gif" alt="饥饿" onclick="jsbq('饥饿')"></li>
+<li><img src="{lingzh::RES}/images/face/25.gif" alt="困" onclick="jsbq('困')"></li>
+<li><img src="{lingzh::RES}/images/face/26.gif" alt="惊恐" onclick="jsbq('惊恐')"></li>
+<li><img src="{lingzh::RES}/images/face/27.gif" alt="流汗" onclick="jsbq('流汗')"></li>
+<li><img src="{lingzh::RES}/images/face/28.gif" alt="憨笑" onclick="jsbq('憨笑')"></li>
+<li><img src="{lingzh::RES}/images/face/29.gif" alt="大兵" onclick="jsbq('大兵')"></li>
+<li><img src="{lingzh::RES}/images/face/30.gif" alt="奋斗" onclick="jsbq('奋斗')"></li>
+<li><img src="{lingzh::RES}/images/face/31.gif" alt="咒骂" onclick="jsbq('咒骂')"></li>
+<li><img src="{lingzh::RES}/images/face/32.gif" alt="疑问" onclick="jsbq('疑问')"></li>
+<li><img src="{lingzh::RES}/images/face/33.gif" alt="嘘" onclick="jsbq('嘘')"></li>
+<li><img src="{lingzh::RES}/images/face/34.gif" alt="晕" onclick="jsbq('晕')"></li>
+<li><img src="{lingzh::RES}/images/face/35.gif" alt="折磨" onclick="jsbq('折磨')"></li>
+<li><img src="{lingzh::RES}/images/face/36.gif" alt="衰" onclick="jsbq('衰')"></li>
+<li><img src="{lingzh::RES}/images/face/37.gif" alt="骷髅" onclick="jsbq('骷髅')"></li>
+<li><img src="{lingzh::RES}/images/face/38.gif" alt="敲打" onclick="jsbq('敲打')"></li>
+<li><img src="{lingzh::RES}/images/face/39.gif" alt="再见" onclick="jsbq('再见')"></li>
+<li><img src="{lingzh::RES}/images/face/40.gif" alt="擦汗" onclick="jsbq('擦汗')"></li>
+<li><img src="{lingzh::RES}/images/face/41.gif" alt="抠鼻" onclick="jsbq('抠鼻')"></li>
+<li><img src="{lingzh::RES}/images/face/42.gif" alt="鼓掌" onclick="jsbq('鼓掌')"></li>
+<li><img src="{lingzh::RES}/images/face/43.gif" alt="糗大了" onclick="jsbq('糗大了')"></li>
+<li><img src="{lingzh::RES}/images/face/44.gif" alt="坏笑" onclick="jsbq('坏笑')"></li>
+<li><img src="{lingzh::RES}/images/face/45.gif" alt="左哼哼" onclick="jsbq('左哼哼')"></li>
+<li><img src="{lingzh::RES}/images/face/46.gif" alt="右哼哼" onclick="jsbq('右哼哼')"></li>
+<li><img src="{lingzh::RES}/images/face/47.gif" alt="哈欠" onclick="jsbq('哈欠')"></li>
+<li><img src="{lingzh::RES}/images/face/48.gif" alt="鄙视" onclick="jsbq('鄙视')"></li>
+<li><img src="{lingzh::RES}/images/face/49.gif" alt="委屈" onclick="jsbq('委屈')"></li>
+<li><img src="{lingzh::RES}/images/face/50.gif" alt="快哭了" onclick="jsbq('快哭了')"></li>
+<li><img src="{lingzh::RES}/images/face/51.gif" alt="阴险" onclick="jsbq('阴险')"></li>
+<li><img src="{lingzh::RES}/images/face/52.gif" alt="亲亲" onclick="jsbq('亲亲')"></li>
+<li><img src="{lingzh::RES}/images/face/53.gif" alt="吓" onclick="jsbq('吓')"></li>
+<li><img src="{lingzh::RES}/images/face/54.gif" alt="可怜" onclick="jsbq('可怜')"></li>
+<li><img src="{lingzh::RES}/images/face/55.gif" alt="菜刀" onclick="jsbq('菜刀')"></li>
+<li><img src="{lingzh::RES}/images/face/56.gif" alt="西瓜" onclick="jsbq('西瓜')"></li>
+<li><img src="{lingzh::RES}/images/face/57.gif" alt="啤酒" onclick="jsbq('啤酒')"></li>
+<li><img src="{lingzh::RES}/images/face/58.gif" alt="篮球" onclick="jsbq('篮球')"></li>
+<li><img src="{lingzh::RES}/images/face/59.gif" alt="乒乓" onclick="jsbq('乒乓')"></li>
+<li><img src="{lingzh::RES}/images/face/60.gif" alt="咖啡" onclick="jsbq('咖啡')"></li>
+<li><img src="{lingzh::RES}/images/face/61.gif" alt="饭" onclick="jsbq('饭')"></li>
+<li><img src="{lingzh::RES}/images/face/62.gif" alt="猪头" onclick="jsbq('猪头')"></li>
+<li><img src="{lingzh::RES}/images/face/63.gif" alt="玫瑰" onclick="jsbq('玫瑰')"></li>
+<li><img src="{lingzh::RES}/images/face/64.gif" alt="凋谢" onclick="jsbq('凋谢')"></li>
+<li><img src="{lingzh::RES}/images/face/65.gif" alt="示爱" onclick="jsbq('示爱')"></li>
+<li><img src="{lingzh::RES}/images/face/66.gif" alt="爱心" onclick="jsbq('爱心')"></li>
+<li><img src="{lingzh::RES}/images/face/67.gif" alt="心碎" onclick="jsbq('心碎')"></li>
+<li><img src="{lingzh::RES}/images/face/68.gif" alt="蛋糕" onclick="jsbq('蛋糕')"></li>
+<li><img src="{lingzh::RES}/images/face/69.gif" alt="闪电" onclick="jsbq('闪电')"></li>
+<li><img src="{lingzh::RES}/images/face/70.gif" alt="炸弹" onclick="jsbq('炸弹')"></li>
+<li><img src="{lingzh::RES}/images/face/71.gif" alt="刀" onclick="jsbq('刀')"></li>
+<li><img src="{lingzh::RES}/images/face/72.gif" alt="足球" onclick="jsbq('足球')"></li>
+<li><img src="{lingzh::RES}/images/face/73.gif" alt="瓢虫" onclick="jsbq('瓢虫')"></li>
+<li><img src="{lingzh::RES}/images/face/74.gif" alt="便便" onclick="jsbq('便便')"></li>
+<li><img src="{lingzh::RES}/images/face/75.gif" alt="月亮" onclick="jsbq('月亮')"></li>
+<li><img src="{lingzh::RES}/images/face/76.gif" alt="太阳" onclick="jsbq('太阳')"></li>
+<li><img src="{lingzh::RES}/images/face/77.gif" alt="礼物" onclick="jsbq('礼物')"></li>
+<li><img src="{lingzh::RES}/images/face/78.gif" alt="拥抱" onclick="jsbq('拥抱')"></li>
+<li><img src="{lingzh::RES}/images/face/79.gif" alt="强" onclick="jsbq('强')"></li>
+<li><img src="{lingzh::RES}/images/face/80.gif" alt="弱" onclick="jsbq('弱')"></li>
+<li><img src="{lingzh::RES}/images/face/81.gif" alt="握手" onclick="jsbq('握手')"></li>
+<li><img src="{lingzh::RES}/images/face/82.gif" alt="胜利" onclick="jsbq('胜利')"></li>
+<li><img src="{lingzh::RES}/images/face/83.gif" alt="抱拳" onclick="jsbq('抱拳')"></li>
+<li><img src="{lingzh::RES}/images/face/84.gif" alt="勾引" onclick="jsbq('勾引')"></li>
+<li><img src="{lingzh::RES}/images/face/85.gif" alt="拳头" onclick="jsbq('拳头')"></li>
+<li><img src="{lingzh::RES}/images/face/86.gif" alt="差劲" onclick="jsbq('差劲')"></li>
+<li><img src="{lingzh::RES}/images/face/87.gif" alt="爱你" onclick="jsbq('爱你')"></li>
+<li><img src="{lingzh::RES}/images/face/88.gif" alt="NO" onclick="jsbq('NO')"></li>
+<li><img src="{lingzh::RES}/images/face/89.gif" alt="OK" onclick="jsbq('OK')"></li>
+<li><img src="{lingzh::RES}/images/face/90.gif" alt="爱情" onclick="jsbq('爱情')"></li>
+<li><img src="{lingzh::RES}/images/face/91.gif" alt="飞吻" onclick="jsbq('飞吻')"></li>
+<li><img src="{lingzh::RES}/images/face/92.gif" alt="跳跳" onclick="jsbq('跳跳')"></li>
+<li><img src="{lingzh::RES}/images/face/93.gif" alt="发抖" onclick="jsbq('发抖')"></li>
+<li><img src="{lingzh::RES}/images/face/94.gif" alt="怄火" onclick="jsbq('怄火')"></li>
+<li><img src="{lingzh::RES}/images/face/95.gif" alt="转圈" onclick="jsbq('转圈')"></li>
+<li><img src="{lingzh::RES}/images/face/96.gif" alt="磕头" onclick="jsbq('磕头')"></li>
+<li><img src="{lingzh::RES}/images/face/97.gif" alt="回头" onclick="jsbq('回头')"></li>
+<li><img src="{lingzh::RES}/images/face/98.gif" alt="跳绳" onclick="jsbq('跳绳')"></li>
+<li><img src="{lingzh::RES}/images/face/99.gif" alt="挥手" onclick="jsbq('挥手')"></li>
+<li><img src="{lingzh::RES}/images/face/100.gif" alt="激动" onclick="jsbq('激动')"></li>
+<li><img src="{lingzh::RES}/images/face/101.gif" alt="街舞" onclick="jsbq('街舞')"></li>
+<li><img src="{lingzh::RES}/images/face/102.gif" alt="献吻" onclick="jsbq('献吻')"></li>
+<li><img src="{lingzh::RES}/images/face/103.gif" alt="左太极" onclick="jsbq('左太极')"></li>
+</ul>
+</div>
+
+
+
+  <div id="ivrSettingArea" class="settingArea">
+    <input type="hidden" name='respType' value="<php> echo $areply['ctype'] == 'img'? 2 : 1;</php>"></input>
+    <div class="c-gA cLine">               
+      <div class="msgSenderPlugin">       
+        <ul class="tab group tab4">                                         
+          <li class="<if condition="$areply['ctype'] != 'img'">selected</if> chooseMedia chooseMedia1" data-type="1">
+            <span class="tab_inner"><strong>文字</strong></span>
+          </li>                         
+          <!--<li class="chooseMedia vioce chooseMedia3" data-type="3">
+            <span class="tab_inner"><i class="icon28_msgsender vioces"></i><strong>语音</strong></span>
+          </li>                         
+          <li class="chooseMedia chooseMedia2" data-type="2">
+            <span class="tab_inner"><i class="icon28_msgsender img"></i><strong>图片</strong></span>
+          </li>                       
+          <li class="chooseMedia chooseMedia4" data-type="4">
+            <span class="tab_inner no_extra"><i class="icon28_msgsender video"></i><strong>视频</strong></span>
+          </li>                        -->          
+          <li class="<if condition="$areply['ctype'] eq 'img'">selected</if> chooseMedia chooseMedia10" data-type="2" >
+            <span class="tab_inner no_extra"><strong>图文消息</strong></span>
+          </li>                                                       
+        </ul>       
+        <div class="panel" style="display:inline-block; overflow:auto;width:100%;">         
+          <div class="txtArea <if condition="$areply['ctype'] eq 'img'">none</if>">           
+            <div class="editArea">             
+              <textarea name="content"><php>if (isset($text)) echo $text['text'];</php></textarea>
+            </div>           
+            <div class="functionBar">             
+              <div class="opt">               
+              <a class="iconEmotion block" href="javascript:;"><img src="/themes/a/images/biaoqing.png"></a>
+              </div>             
+              <div class="input-tips">请不要超过200字</div>  
+              <div class="emotions">              
+                  <table cellspacing="0" cellpadding="0">  </table>               
+                  <div class="emotionsGif"></div>             
+              </div>                  
+            </div>         
+          </div> 
+
+          <div class="mediaArea <php> if(empty($areply['ctype']) || $areply['ctype'] == 'text'){ echo 'none';}</php>" style="widthfloat:left;">
+          <div class="keyword-input">
+            <span>关键词：</span><input type="input"  class="px" id="keyword" value="{lingzh:$areply.keyword}" name="keyword" style="width:100px" ><span class="verify ">&nbsp;</span>例：如果输入关键词“帮助”，将回复关键词“帮助”对应的所有图文消息(最多十条)。<br />   
+          </div>
+          <p>现有关键词(可点击添加):</p>
+          <div class="keywords-area">
+            <volist name="keywords" id="vo" offset="0" length='20'>
+                <span class="keyword">{lingzh:$vo}</span>
+            </volist>
+            </div>
+          </div>          
+          <div class="btnArea">
+            <button class="btnGreen">保存</button>
+          </div>       
+        </div>     
+      </div>         
+    </div>            
+    <div class="mask"></div>     
+  </div>
+
+  </form> 
+</div>
+
+
+<script>
+    var keywords = <php>echo json_encode($keywords);</php>;
+$(document).ready( function(){ 
+  $('.msgSenderPlugin li').each(function(index){
+    $(this).click(function(){
+      var index = $(this).attr('data-type');
+    var curType = $("input[name=respType]").val();
+    $('.msgSenderPlugin li[data-type=' + curType + ']').removeClass('selected');
+    $('.msgSenderPlugin li[data-type=' + index + ']').addClass('selected');
+      $("input[name=respType]").val(index);
+    if (index == 1) {
+        $('.msgSenderPlugin .txtArea').removeClass('none');
+        $('.msgSenderPlugin .mediaArea').addClass('none');
+    } else {
+        $('.msgSenderPlugin .mediaArea').removeClass('none');
+        $('.msgSenderPlugin .txtArea').addClass('none');
+    }
+    });
+  });
+  $('.msgSenderPlugin .keywords-area span').each(function(index){
+    $(this).click(function(){
+      $('.mediaArea .keyword-input input').val($(this).text());
+    })
+  })
+  $(".mediaArea input").bind('input  propertychange',function(e){
+      var input = $(this).val();
+    if (input == "") {
+        $('.mediaArea .verify').removeClass("nomatch");
+        $('.mediaArea .verify').removeClass("matched");
+      return;
+    }
+    for (var i = 0;i < keywords.length; i++) {
+          if(input == keywords[i]) {
+          $('.mediaArea .verify').addClass("matched");
+          $('.mediaArea .verify').removeClass("nomatch");
+        return;
+      } else {
+             $('.mediaArea .verify').removeClass("matched");
+             $('.mediaArea .verify').addClass("nomatch");
+      }
+
+
+    }
+      //e.stopPropagation;
+  }) 
+
+  $(".functionBar a").hover(
+      function(){
+        $("#faces").css("position","absolute");
+        $("#faces").css("z-index","999");
+        $("#faces").css("top",$(this).position().top + 60 ) ;
+        $("#faces").css("left",$(this).position().left +  220);
+          $("#faces").show();
+      },
+    function(){
+      }
+    );
+   $("#faces").mouseleave(function(){
+       $(this).hide();
+   })
+});
+function jsbq(srt){
+//    $(".editArea textArea").val($(".editArea textArea").val()+srt);
+    $(".editArea textarea").html($(".editArea textarea").html()+'/'+srt);
+  $("#faces").hide();
+}
+</script>
+<include file="Public:footer"/>  

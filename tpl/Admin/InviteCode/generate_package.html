@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>邀请码管理</title>
+    <include file="common:public" />
+    <include file="Public:head"/>
+    
+<link rel="stylesheet" type="text/css" href="/themes/a/css/purchase.css" /> 
+<style type="text/css"> 
+    
+.topbar .balance {
+float: left;
+font-size: 20px;
+font-weight: bold;
+margin-right: 10px;
+color: #cc0707;
+margin-top: 5px;
+}
+</style>
+</head>
+<body>
+<div id="artlist" style="margin-left:50px; margin-top:30px;">
+    <div class="topbar">
+        <div class="balance">
+                账户余额：{lingzh:$beUser['balance']}元
+        </div> 
+        <div style="clear: both;"></div>
+    </div>
+    <div class="packages">
+        <form action="" method='post'>
+            <label class='package_guide'>请选择套餐项目：</label>
+            <select id="packageId" name="packageId" class='normal_select'>
+                <volist name='agentPackages' id='package'>
+                    <option package-type="{lingzh:$package.type}" value="{lingzh:$package.id}">{lingzh:$package.name}
+                    </option>
+                </volist>
+            </select>
+            <div class='display_none'>
+                <volist name='agentPackages' id='package'>
+                    <input type='hidden' id='price_{lingzh:$package.id}' value='{lingzh:$package.price_month}' />
+                </volist>
+            </div>
+            
+            <label class='package_guide'>请选择套餐量：</label>
+            <select  id="packageDuration" name="packageDuration" class='normal_select'>
+             
+            </select>
+            <label class="package_guide">价格：</label>
+            <label id='currcharge' class="package_price">0</label>
+            <span class="package_guide">元</span>
+            <input type="submit" class="normal_btn" value="确认购买" /> 
+        </form>
+
+    </div>
+    <div class="package_details">
+    <div><label class="package_guidetitle">方案详细说明如下图：<br /></label></div>
+    <volist name='agentPackages' id='package'>
+        <img id='detail_img_{lingzh:$package.id}' class='detail_img display_none' src="{lingzh:$package.detail_img}"  style="margin-top:10px;"/>
+    </volist>
+    </div>
+</div>
+    
+    <script type='text/javascript'>
+        function package_volume_change() {
+            var packageDuration = $("#packageDuration").val();
+            var packageId = $("#packageId").val();
+            var price_unit = $("#price_" + packageId).val();
+            var totalCharge = price_unit * packageDuration;
+            //alert(packageId + ' ' + packageDuration + ' ' + price_unit + ' ' + totalCharge);
+            $('#currcharge').text(totalCharge);
+            $('.detail_img:visible').addClass('display_none');
+            $('#detail_img_'+packageId).removeClass('display_none');
+        }
+        function package_change() {
+            var package_type = $("#packageId option:selected").attr('package-type');
+            switch(package_type) {
+                case '2':
+                    // 短信包
+                    $("#packageDuration").html("<option value='500'>500条</option><option value='1000'>1000条</option>");
+                    break;
+                case '1':
+                    // 功能套餐
+                    $("#packageDuration").html("<option value='12'>一年</option><option value='1'>1个月</option><option value='2'>2个月</option><option value='3'>3个月</option><option value='4'>4个月</option><option value='5'>5个月</option><option value='6'>半年</option><option value='7'>7个月</option><option value='8'>8个月</option><option value='9'>9个月</option><option value='10'>10个月</option><option value='11'>11个月</option>");
+                    break;
+                default:
+                    break;
+            }
+            package_volume_change();
+        }
+        $(function(){
+            $("#packageId").change(package_change);
+            $("#packageDuration").change(package_volume_change);
+            $("#packageId").change();
+        });
+    </script>
+</body>
+</html>

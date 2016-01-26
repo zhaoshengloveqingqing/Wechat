@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/wedding.css" media="all" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script> 
+	<script type="text/javascript" src="/js/jquery_easing.js"></script> 
+	<script type="text/javascript" src="/js/weixin.js"></script>
+    <script type="text/javascript" src="/themes/w/js/wedding.js"></script>
+    <title>{lingzh:$wedding.title}</title>
+
+</head>
+<body>
+<html lang="zh-CN">
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+		<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+		<meta content="no-cache" http-equiv="pragma">
+		<meta content="0" http-equiv="expires">
+		<meta content="telephone=no, address=no" name="format-detection">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+		
+
+<script>
+var dataForWeixin={
+   appId:"",
+   Img:"{lingzh:$wedding.msg_pic_url}",
+   path:"http://" + window.location.host + "/index.php?g=Wap&m=Wedding&a=index&id={lingzh:$wedding.id}&token={lingzh:$wedding.token}",
+   title:"{lingzh:$wedding.title}",
+   desc:"{lingzh:$wedding.description}",
+   fakeid:"",
+   callback:function(){}
+};
+</script>
+		<script>
+	        $().ready(function(){
+	        	playbox.init("playbox");
+
+	        	$("#overlay_ul").bind("click", function(evt){
+	        		if("UL" == evt.target.nodeName){
+	        		this.className = 'overlay_ul';
+	        		$(this).find('li').removeClass('on');
+	        		}
+	        		
+	        	});
+	        });
+
+	        function show(i){
+	        	//$("#overlay_ul>li").removeClass("on")[i].className = "on";
+				//$("#overlay_ul>li").removeClass("on");
+				$("#overlay_ul>li:eq(" + i + ")").addClass("on");
+	        	$("#overlay_ul").addClass("on");
+	        }
+
+	        function submit1(){
+	        	var form1 = document.getElementById("form1");
+	        	var userName = form1.userName.value;
+	        	var telephone = form1.telephone.value;
+	        	var count = form1.count.value;
+	        	if(userName.length<1){
+	        		alert("请输入姓名！");
+	        		return;
+	        	}
+	        	if(telephone.length<6){
+	        		alert("请输入电话号码！");
+	        		return;
+	        	}
+	        	if(count.length<1){
+	        		alert("请输入人数！");
+	        		return;
+	        	}
+	        	var obj = {
+					id:	487,		
+					bid: 10963,
+	        		userName: userName,
+	        		telephone: telephone,
+	        		count: count
+	        	}
+	        	$.post("/Webwedding/index", obj,function(result){
+				   	alert(result);
+				   	form1.reset();
+					$("#overlay_ul").removeClass("on");
+				});
+				
+	        }
+	        //
+	       function submit2(){
+	        	var form2 = document.getElementById("form2");
+	        	var userName = form2.userName.value;
+	        	var telephone = form2.telephone.value;
+	        	var content = form2.content.value;
+	        	if(userName.length<1){
+	        		alert("请输入姓名！");
+	        		return;
+	        	}
+	        	if(telephone.length<6){
+	        		alert("请输入电话号码！");
+	        		return;
+	        	}
+	        	if(content.length>50){
+	        		alert("内容不能大于50个字！");
+	        		return;
+	        	}
+	        	if(content.length<1){
+	        		alert("请输入祝福内容！");
+	        		return;
+	        	}
+	        	var obj = {	
+	        		name: userName,
+	        		tel: telephone,
+	        		text: content
+	        	}
+	        	$.post("/index.php?g=Wap&m=Wedding&a=reply&id={lingzh:$wedding.id}&token={lingzh:$wedding.token}", obj,function(result){
+				   	alert(result);
+				   	form2.reset();
+					$("#overlay_ul").removeClass("on");
+				});
+	        }
+		</script>
+		 <style type="text/css">
+
+        .loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    line-height: 100%;
+    border: none;
+    z-index: 9999;
+}
+
+.loading-part {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #FFFFFF;
+    z-index: 1;
+}
+
+.loading-part.top {
+    top: 0;
+}
+
+.loading-part.bottom {
+    bottom: 0;
+}
+
+.loading-panel {
+    position: absolute;
+    width: 200px;
+    height: 82px;
+    top: 50%;
+    left: 50%;
+    margin-top: -41px;
+    margin-left: -100px;
+    z-index: 2;
+}
+
+.loading-icon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: url('http://stc.weimob.com/img/wedding/love.gif') center center no-repeat;
+    margin: auto;
+}
+
+.loading-text {
+    position: relative;
+    width: 200px;
+    height: 32px;
+    color: #fc8e65;
+    text-align: center;
+    line-height: 32px;
+    margin: auto;
+}.cover {
+    display: none;
+    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #A00908;
+    box-shadow: 5px 5px 5px 10px rgba(0,0,0,.6);
+    z-index: 999;
+}
+
+/*封面模版:t1*/
+.cover.t1 {
+    min-height: 330px;
+    background-color: #A00908;
+}
+
+.cover.t1 .slogan {
+    position: absolute;
+    width: 266px;
+    height: 290px;
+    left: 50%;
+    margin-left: -133px;
+    top: 50%;
+    margin-top: -145px;
+}
+
+.cover.t1 .mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('http://stc.weimob.com/img/wedding/icons.png') 0 0 no-repeat;
+    top: 0;
+    left: 0; 
+}
+
+.cover.t1 .head {
+    position: absolute;
+    width: 158px;
+    height: 153px;
+    top: 68px;
+    left: 48px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+div.copyright{font-size:14px;text-align:center;color:#000;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#000;margin:8px;}
+div.tech-support a{text-decoration: underline;color:#000}
+ 
+    </style>
+    <script type="text/javascript">
+    $(function () {
+             var $loading = $('.loading'),
+                $parts = $('.loading-part', $loading),
+                height = $parts.height();
+            var $loadingpanel = $('.loading-panel', $loading);
+            var $cover = $('.cover'); 
+            function closeLoading(callback) {
+                $loadingpanel.fadeOut(function () {
+                    $loading.remove();
+                });
+                if (typeof callback === 'function') {
+                    callback.call(this);
+                }
+            }
+            function closeCover() { 
+                $cover.animate({
+                    'top': -$cover.height()
+                }, 'linear', function () {
+                    $cover.remove();
+                });
+            }
+            var handler_touch = function (e) {
+                closeCover();
+                e.preventDefault();
+                return false;
+            };
+            //处理封面
+            function initCover() {
+                $cover.one('touchstart MSPointerDown', handler_touch); 
+                if (window.navigator.msPointerEnabled !== undefined) {
+                    window.setTimeout(function () {
+                        closeCover();
+                    }, 2000);
+                }
+            }
+            closeLoading(function () {
+                initCover();
+                $cover.fadeIn(1500, function () {
+                    $cover.animate({
+                        top: '-120px'
+                    }, 'easeOutBack', function () {
+                        $cover.animate({
+                            top: 0
+                        }, 500, 'easeOutElastic', function () { });
+                    });
+                });
+            });
+        });
+    </script>
+	</head>
+	<body onselectstart="return true;" ondragstart="return false;">
+		<div class="loading">
+        <div class="loading-part top"></div>
+        <div class="loading-part bottom"></div>
+        <div class="loading-panel">
+            <div class="loading-icon"></div>
+            <div class="loading-text">幸福加载中...</div>
+        </div>
+    </div>
+    <div class="cover t1">
+    <div class="slogan">
+        <div class="head" style="background-image:url('{lingzh:$wedding.head_pic_url}')"></div>
+        <div class="mask"></div>
+    </div>
+</div>
+		<div class="container">
+			<header>
+				<div>
+					<ul class="box">
+						<li class="relative"><span class="pic"><img src="{lingzh:$wedding.head_pic_url}" /></span></li>
+						<li>
+							<div class="label">
+								<label>{lingzh:$wedding.man}</label>
+								<img src="/themes/w/images/wedding_04.png" style="width:30px;" />
+								<label>{lingzh:$wedding.woman}</label>
+							<div>
+						</li>
+						<li>
+							<span id="playbox" class="btn_music" onclick="playbox.init(this).play();"><audio id="audio" loop src="{lingzh:$wedding.wedding_music_url}"></audio></span>
+						</li>
+					</ul>
+				</div>
+			</header>
+			<section class="body">
+								<div>
+					<ul>
+					<volist name="wedding_pic_urls" id="picurl">
+						<li class="pb_10"><img src="{lingzh:$picurl}" style="width:100%;" /></li>
+					</volist>
+					</ul>
+											
+				</div>
+				<div class="des">
+					<h3  class="align_center">新人寄语</h3>
+					<p>{lingzh:$wedding.description}</p>
+				</div>
+				<div>
+					<ul class="list_font">
+						<li>
+							<a href="javascript:;" class="tbox">
+								<div>{lingzh:$wedding.wedding_time}</div>
+								<div>
+									<figure>
+										<p><span><img src="/themes/w/images/wedding_08.png" /></span></p>
+										<figcaption>婚礼时间</figcaption>
+									</figure>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="{lingzh:$navigationLink}" class="tbox">
+								<div>{lingzh:$wedding.wedding_address}</div>
+								<div>
+									<figure>
+										<p><span><img src="/themes/w/images/wedding_06.png" /></span></p>
+										<figcaption>点此导航</figcaption>
+									</figure>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="tel:{lingzh:$wedding.tel}" class="tbox">
+								<div>{lingzh:$wedding.tel}</div>
+								<div>
+									<figure>
+										<p><span><img src="/themes/w/images/wedding_07.png" /></span></p>
+										<figcaption>联系电话</figcaption>
+									</figure>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<ul class="btns_1 box">
+						<li><a href="javascript:show(0);" >送上祝福</a></li>
+					</ul>
+					<ul id="overlay_ul" class="overlay_ul">
+						<li>
+							<form id="form2" action="javascript:;" method="post">
+								<input type="hidden" name="id" value="{lingzh:$wedding.id}" />
+								<table>
+									<tr><td colspan="2"><label>送上祝福</label></td></tr>
+									<tr><td style="width:45px;">姓名</td><td><input type="text" name="userName" /></td></tr>
+									<tr><td>手机</td><td><input type="tel" name="telephone" /></td></tr>
+									<tr><td colspan="2"><textarea placeholder="这里写一些祝福语给{lingzh:$wedding.man}和{lingzh:$wedding.woman}" style="width:100%;height:50px;" maxlength="100" name="content"></textarea></td></tr>
+									<tr><td colspan="2" style="text-align:center;" class="btns_1"><a href="javascript:submit2();" >提交</a></td></tr>
+								</table>
+							</form>
+						</li>
+						<li></li>
+					</ul>
+				</div>
+			</section>
+        </div>
+		<php>
+            echo CopyRightHelper::generateCopyRight($_GET["token"]);
+        </php>
+		<div style="height:8px;"></div>
+	</body>
+</html>
+</body>
+</html>

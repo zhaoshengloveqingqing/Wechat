@@ -1,0 +1,185 @@
+<include file="Public:head"/> 
+<script src="./tpl/User/default/common/js/date/WdatePicker.js"></script>
+<link href="/themes/w/css/reservation_setting.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/themes/w/js/userinfo/aSelect.js"></script>
+<script type="text/javascript" src="/themes/w/js/userinfo/aLocation.js"></script>
+<style type="text/css">
+    .title-con {
+        display: inline-block;
+        padding-left: 25px;
+        width: 125px;
+        font-size: 15px;
+        margin-top: 15px;
+        margin-left: 5px;
+    } 
+    .input-text{
+        width: 210px;
+        height: 30px;
+        display: inline-block;
+        padding-left: 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-right: 1px solid #D9D9D9;
+        border-color: #C0C0C0 #D9D9D9 #D9D9D9;
+    }
+    .select-con{
+        width: 216px;
+        height: 35px;
+        display: inline-block;
+        border-color: #C0C0C0 #D9D9D9 #D9D9D9;padding:5px;
+        background:transparent; 
+        -webkit-appearance: none; /*for Webkit browsers*/
+    }
+    .addresBox{
+        width: 100%;
+        display: -moz-box;
+        -moz-box-orient: horizontal;
+        -moz-box-sizing: border-box;
+    }
+    .divBox{
+        display: inline-block;
+        margin-top: 15px;
+        margin-left: 5px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        var sel = aSelect({data: aLocation});
+        sel.bind('#selectProvince',"{lingzh:$addressData['addr_prov']}" );
+        sel.bind('#selectCity', "{lingzh:$addressData['addr_city']}");
+        sel.bind('#selectArea', "{lingzh:$addressData['addr_area']}");
+    })
+    $(function(){
+        $('#sex-select option[value={lingzh:$data["sex"]}]').attr('selected',true);
+        $('#memberclass-select option[value={lingzh:$data["groupid"]}]').attr('selected',true);
+        $('#defaultinfodiv input,#defaultinfodiv select').each(function(){
+            $(this).change(function(){
+                $('#defaultinfochanged').val(1);
+            });
+        });
+        $('#extinfodiv input,#extinfodiv select').each(function(){
+            $(this).change(function(){
+                $('#extinfochanged').val(1);
+            });
+        });
+    });
+</script>
+<div class="content">
+    <div class="cLineB">
+        <h4><span class="left">编辑会员信息</span></h4>
+        <a href="javascript:history.go(-1);" class="right btnGrayS vm">返回</a>
+    </div>
+    <div id="formContainer" class="msgWrap bgfc" style="height:900px;">
+        <form action="" method="post" id="memberForm">
+            <div id="groupdiv">
+                <input name="id" value="{lingzh:$data['id']}" type="hidden" >
+                <input name='defaultinfochanged' id='defaultinfochanged' type='hidden' value='0'>
+                <input name='extinfochanged' id='extinfochanged' type='hidden' value='0'>
+                <input name='Member_card_create_id' value='{lingzh:$data["Member_card_create_id"]}' type="hidden">
+                <span class="title-con">会员卡号:</span>
+                <input value="{lingzh:$data['number']}" type="text" disabled="disable" readonly="readonly" class="input-text"><br/>
+                <span class="title-con">会员等级:</span>
+                <input name='oldgroupid' value='{lingzh:$data["groupid"]}' type="hidden">
+                <select class='select-con' id='memberclass-select' name='groupid'>
+                    <?php foreach ($class_info as $k => $val) { ?>
+                    <option value='<?php echo $val['groupid']; ?>'><?php echo $val['title']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div id="defaultinfodiv"> 
+                <php>
+                    if(empty($default_show_cols)||in_array('nickname',$default_show_cols)){
+                </php> 
+                <span class="title-con">微信名称:</span>
+                <input value='{lingzh:$data["nickname"]}' type="text" disabled="disable" readonly="readonly" name="nickname" class="input-text"><br/>
+                <php>}</php>
+                <span class="title-con">姓名:</span>
+                <input value='{lingzh:$data["truename"]}' id='name' type="text" name="truename" class="input-text"><br/>
+                <span class="title-con">电话:</span>
+                <input value='{lingzh:$data["tel"]}' type="text" maxlength='11' name="tel" id='tel' onblur="checkTel(this.id)" class="input-text"><br/>
+                <!--
+                <span class="title-con">微信号:</span>
+                <input value='{lingzh:$data["wecha_id"]}' type="text"  disabled="disable" readonly="readonly" name="wecha_id" class="input-text"><br/>-->
+   
+                <php>
+                    if(empty($default_show_cols)||in_array('sex',$default_show_cols)){
+                </php>
+                <span class="title-con">性别:</span>
+                <select name="sex" id='sex-select' class="select-con">
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                    <option value="0">其他</option>
+                </select><br/>
+                <?php 
+                }
+                    if(empty($default_show_cols)||in_array('birthday', $default_show_cols)){
+                  ?>
+                <span class="title-con">出生日期:</span>
+                <input type='hidden' value='{lingzh:$data["birthday"]}' name='oldbirthday'>
+                <input value='{lingzh:$data["birthday"]}' type="text" name="birthday" class="input-text" onclick="WdatePicker()"><br/>
+                <?php  
+                }
+                    if(in_array('address',$default_show_cols)){
+                ?> 
+                <span class="title-con">地址:</span> 
+                <select style="width: 80px;" selectedindex="0" name="addr_prov" class="select-con" id="selectProvince"></select>
+                <select style="width: 80px;" selectedindex="0" name="addr_city" class="select-con" id="selectCity"></select>
+                <select style="width: 80px;" selectedindex="0" name="addr_area" class="select-con" id="selectArea"></select>
+                <br/>
+                <span class="title-con"></span>
+                <input name="addr_detail" id="addr_detail" value='{lingzh:$addressData["addr_detail"]}' placeholder="请输入详细地址" maxlength="100" class="input-text" style="margin-top: 5px" type="text">
+                <br/>
+                <?php 
+                }
+                ?>
+            </div>
+            <div id="extinfodiv">
+                <?php 
+                    if(isset($text_cols)||isset($select_cols)){
+                ?>     
+                    <volist name='text_cols' id='text_col' key='k'> 
+                        <span class="title-con">{lingzh:$text_col[0]}：</span>
+                        <input class="input-text" type="text" name="text_cols[]"  placeholder="{lingzh:$text_col[1]}" value="{lingzh:$extDatas['text_cols'][$k-1]}"/>
+                        <br/>
+                    </volist>
+                    <volist name='select_cols' id='select_col' key='k'> 
+                        <span class="title-con">{lingzh:$select_col[0]}：</span>     
+                        <select name="select_cols[]" data-rule-required="true"  class="select-con">
+                            <php>
+                                foreach(explode('|',$select_col[1]) as $selectItem) {
+                            </php>
+                            <option value="<php>echo $selectItem;</php>" <php>if($selectItem==$extDatas["select_cols"][$k-1]){</php>selected="selected" <php>}</php> >
+                                <php>echo $selectItem;</php>
+                            </option>
+                            <php>   
+                            }
+                            </php>
+                        </select>
+                    <br/> 
+                </volist>
+                <php>}</php>  
+            </div>
+            <div>
+                <span class="title-con">余额:</span>
+                <input value='{lingzh:$data["total_money"]}' type="text" name="total_money" class="input-text"  disabled="disable" readonly="readonly"><br/>
+                <span class="title-con">已用金额:</span>
+                <input value='{lingzh:$data["spend_money"]}' type="text" name="spend_money" class="input-text"  disabled="disable" readonly="readonly"><br/>
+                <!--span class="title-con">地址:</span>
+                <input value='{lingzh:$data["address"]}' type="text" name="address" class="input-text"><br/--> 
+                <span class="title-con">剩余积分:</span>
+                <input value='{lingzh:$data["total_score"]}' type="text" name="total_score" class="input-text"  disabled="disable" readonly="readonly"><br/>
+                <span class="title-con">已用积分:</span>
+                <input value='{lingzh:$data["spend_score"]}' type="text" class= "input-text" disabled="disable" readonly="readonly"><br/>                
+                <span class="title-con">签到总积分:</span>
+                <input value='{lingzh:$data["sign_score"]}' type="text" class= "input-text" disabled="disable" readonly="readonly"><br/>
+                <span class="title-con">消费总积分:</span>
+                <input value='{lingzh:$data["expend_score"]}' type="text" class= "input-text" disabled="disable" readonly="readonly"><br/>
+                <span class="title-con">创建时间:</span>
+                <input value='{lingzh:$data["getcardtime"]|date="Y-m-d",###}' type="text" class="input-text" disabled="disable" readonly="readonly"><br/>
+            </div>
+            <input type="submit" class="btnGreen" style="margin-left:155px ; margin-top: 10px;" value="保存"/>
+            <input class="btnGreen" style="margin-left: 60px; margin-top: 10px;" onclick="location.reload()" type="button" value="取消"/>
+        </form>
+    </div>
+</div>
+<include file="Public:footer"/>

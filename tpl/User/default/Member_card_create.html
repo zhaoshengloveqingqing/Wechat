@@ -1,0 +1,173 @@
+<include file="Public:head"/>  
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+<style type="text/css">
+.actionlink{
+	margin-left: 5px;
+}
+.tbtn{
+	height: 38px;
+}
+.select{
+	height: 40px;width: 120px;margin-left: 5px; border: 1px solid #ccc; font-size: 12px;padding-bottom: 5px;
+}
+</style>
+<script type="text/javascript">
+function changeStateOfSginCard(){
+	$.ajax({
+		type: "POST",
+		url: "{lingzh::U('Member_card/change_card_signstate')}",
+		data: { "now": "<?php echo $stopsign; ?>"}
+	})
+	.done(function( data ) {
+		var res=JSON.parse(data);
+		if(res.success){
+			if(res.newvalue){
+				$('#cardofftip').text('开始接收会员');
+			}
+			else{
+				$('#cardofftip').text('停止接收会员');
+			}
+		}
+		alert( res.msg);
+	});
+}
+</script>
+<div class="content" style="box-sizing:content-box;-webkit-box-sizing:content-box;"> 
+	<div class="cLineB">
+   <h4 class="left">用户信息</h4>
+   <div class="clr"></div>
+ </div>
+ <div class="cLineB">
+  <div class="pageNavigator">
+   <div style="height: 40px ;display: inline-block;"> 
+    <a class="btnGrayS vm bigbtn" id="cardofftip" onclick="changeStateOfSginCard()">
+     <?php if($stopsign){ ?>开始<?php }else{ ?>停止<?php } ?>接收会员
+   </a>
+   <span style="font-size:14px; bottom: 5px; position: relative; left:5px;">
+     <strong>发卡限额 
+      <span style="color:red">{lingzh:$amount_limit}</span> 张，已用
+      <span style="color:red">{lingzh:$member_amount}</span>张，剩余
+      <span style="color:red"><?php echo $amount_limit - $member_amount; ?></span>张.
+    </strong>
+  </span>
+</div>
+<a onclick="history.go(-1);" class="right btnGrayS vm bigbtn" style="width: 60px">
+  返回
+</a> 
+</div>
+</div>
+<div class="msgWrap">
+  <div class="search_area left">
+    <div style="margin-top: 10px;display:inline-block;">
+      <span>来源选择：</span>
+      <a class='category <?php if($_GET['sourcekey']=='all') echo 'on'; ?>' href="{lingzh::U('Member_card/create',array('sourcekey'=>'all'))}">所有来源</a>
+      <a class='category <?php if($_GET['sourcekey']=='weixin') echo 'on'; ?>' href="{lingzh::U('Member_card/create',array('sourcekey'=>'weixin'))}">微信领卡</a>
+      <a class='category <?php if($_GET['sourcekey']=='offline') echo 'on'; ?>' href="{lingzh::U('Member_card/create',array('sourcekey'=>'offline'))}">实体绑定</a>  
+    </div>
+    <div class="searchbar right" style="display:inline-block">
+      <form method="post" action="">
+        <input size="60" value="{lingzh:$keyword}" name="searchkey" class="text textMiddle" placeholder="支持手机号、姓名查询">
+        <button type="submit" name="appidsubmit" value="true" class="btnGreen vm" style="margin-left: 5px;height: 38px; width: 100px">
+          <strong>查询</strong>
+        </button>
+      </form>
+    </div>
+  </div> 
+  <input name="delall" type="hidden" value="del">
+  <input name="wxid" type="hidden" value="gh_423dwjkewad">
+  <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%" style="display: block">
+    <thead>
+      <tr>
+       <th align="center" valign="middle" style="width: 100px">会员卡号</th>
+       <th align="center" valign="middle" style="width: 80px">姓名</th>
+       <th align="center" valign="middle" style="width: 100px">手机号码</th>
+       <th align="center" valign="middle" style="width: 90px">领卡时间</th>
+       <th align="center" valign="middle" style="width: 90px">余额</th>
+       <th align="center" valign="middle" style="width: 90px">剩余积分</th>	
+       <th align="center" valign="middle" style="width: 60px">等级</th>	
+       <th align="center" valign="middle" style="width: 60px">来源</th>
+       <th align="center" valign="middle" style="width: 60px">状态</th>
+       <th align="center" valign="middle">操作</th>
+     </tr>
+   </thead>
+   <tbody>
+    <volist name="data_vip" id="data_vip">           
+      <tr>
+       <td align="center" valign="middle">{lingzh:$data_vip.number}</td>
+       <td align="center" valign="middle">{lingzh:$data_vip.truename}</td>
+       <td align="center" valign="middle">{lingzh:$data_vip.tel}</td>
+       <td align="center" valign="middle">
+        <div class="category"><if condition="$data_vip.getcardtime neq false"> {lingzh:$data_vip.getcardtime|date='Y-m-d',###} <else/> 无 </if></div>
+      </td>
+      <td align="center" valign="middle">{lingzh:$data_vip.total_money}</td>
+      <td align="center" valign="middle">{lingzh:$data_vip.total_score}</td>
+      <td align="center" valign="middle">
+        <?php foreach ($class_info as $k => $val) {
+          if($val['groupid']==$data_vip['groupid']){
+            echo $val['title'];
+            break;
+          }
+        } ?>
+     </td>
+     <td align="center" valign="middle">
+      <?php if($data_vip['source']=='offline'){ echo '实体绑定';} elseif($data_vip['source']=='weixin') { echo '微信领卡';} ?>
+    </td>
+    <td align="center" valign="middle">
+      <!--a href="">使用统计</a--> 
+      <if condition="$data_vip['wecha_id'] eq false">空闲卡<else/><strong>正常</strong></if>
+    </td>
+    <td align="center" valign="middle">
+      <span class="actionlink">
+       <a href="index.php?g=User&m=Member&a=chargelist&id={lingzh:$data_vip.id}&card={lingzh:$data_vip.number}">充值</a>
+     </span>
+     <span class="actionlink">
+       <a href="index.php?g=User&m=Member&a=editmemberinfo&wid={lingzh:$data_vip.wid}">编辑</a>
+     </span>
+     <span class="actionlink">
+       <if condition="$data_vip['wecha_id'] neq false"><a href="/index.php?g=User&m=Member_card&a=edit&id={lingzh:$data_vip.id}">调整等级</a></if>
+     </span>
+     <span class="actionlink">
+      <a href="javascript:drop_confirm('您确定要删除吗?删除后此微信用户不能再次注册会员！', '/index.php?g=User&m=Member_card&a=card_del&id={lingzh:$data_vip.id}');">
+        <strong>删除</strong>
+      </a>
+    </span>
+  </td>
+</tr>
+</volist>
+</tbody>
+</table> 
+<script>
+function checkAll(form, name) {
+  for(var i = 0; i < form.elements.length; i++) {
+    var e = form.elements[i];
+    if(e.name.match(name)) {
+     e.checked = form.elements['chkall'].checked;
+   }
+ }
+} 
+
+function checkvotethis() {
+ var aa=document.getElementsByClassName('checkitem');
+ var mnum = aa.length;
+ j=0;
+ for(i=0;i<mnum;i++){
+  if(aa[i].checked){
+   j++;
+ }
+}
+if(j>0) {
+  document.getElementById('info').submit();
+} else {
+  alert('未选中内容！')
+}
+}
+</script>
+</div>
+<div class="cLine">
+  <div class="pageNavigator right">
+   <div class="pages">{lingzh:$page}</div>
+ </div>
+ <div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

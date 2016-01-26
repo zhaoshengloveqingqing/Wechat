@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>{lingzh:$vote.title}</title>
+<link rel="stylesheet" type="text/css" href="/themes/p/css/person.css?v=1" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/js/weixin.js"></script>
+<script>
+var dataForWeixin={
+   appId:"",
+   Img:"http://" + window.location.host + "/themes/p/images/vote_msg.png",
+   <?php if($vote['share_limit'] != 0){ ?>
+   path:"http://" + window.location.host + "/index.php?g=Wap&m=ShareVerify&a=verify&token={lingzh:$vote.token}",
+   <?php } else { ?>
+   path:"http://" + window.location.host + "/index.php?g=Person&m=Vote&a=showVote&id={lingzh:$vote.id}",
+   <?php } ?>
+   title:"{lingzh:$vote.shared_title}",
+   desc:"{lingzh:$vote.shared_content}",
+   fakeid:"",
+   callback:function(){}
+};
+</script>
+
+<style>
+body{background-color:#f0f0f0;}
+#mess_img img{width:300px; }
+copyright a, a:link, a:hover, a:active, a:visited{ color:#FFF}
+</style>
+</head>
+
+<body> 
+<div id="mess_title" data-id="{lingzh:$vote.id}" data-type="{lingzh:$vote.type}">{lingzh:$vote.title}</div>
+<div>
+  <div id="mess_info">{lingzh:$vote.date}&nbsp;&nbsp;&nbsp;<if condition="$vote.token neq ''">截止时间{lingzh:$vote.endtime}<else/>{lingzh:$vote.author}</if></div>
+  <div id="mess_report"><a href="/index.php?g=Person&m=Index&a=index">返回首页</a></div>
+  <div class="clear"></div>
+</div>
+<if condition="$vote.imgurl neq ''"><div id="mess_img"><img src="{lingzh:$vote.imgurl}"></div></if>
+
+<div id="mess_content">{lingzh:$vote.content}</div>
+<div id="mess_attch">
+<if condition='$vote.type eq 0'>单选投票<else/>多选投票</if>，已收到<span id="vote_counts">{lingzh:$vote.userNum}</span>票。投票后可见结果
+</div>
+<div id="attch_list">
+  <volist name="vote.options" id="option">
+  <div class="attch_item" state="0" data-index="{lingzh:$i}">
+    <div>
+      <if condition="$is_text_vote eq 0">
+      <div class="option_icon"><img src="{lingzh:$option.icon}" width="50" height="50"></div>
+      </if>
+      <div class="option_title">{lingzh:$option.option}</div>
+      <div class="option_vote">
+        <if condition="$vote.type eq 0">
+        <img src="/themes/p/images/vote_sg_no.png"/>
+        <else/>
+        <img src="/themes/p/images/vote_mt_no.png"/>
+        </if>
+      </div>
+      <div class="option_info">{lingzh:$option.num}票&nbsp;{lingzh:$option.percent}%</div>
+      <div class="clear"></div>
+    </div>
+    <div class="voteResult">
+      <div class="option_green" style="width:{lingzh:$option.percent}%;"></div>
+      <div class="option_gray" style="width:{lingzh:$option.opercent}%;"></div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  </volist>
+</div>
+<div>
+  <button id="voteButton" class="button1" id="voteButton">投票</button>
+</div>
+<div id="mess_share">
+  <div id="share_1"><button class="button2" ><img src="/themes/p/images/icon_timeline.png">&nbsp;分享</button></div>
+  <div id="share_2"><button class="button2" ><img src="/themes/p/images/icon_con.png">&nbsp;收藏投票工具</button></div>
+  <div class="clear"></div>
+</div>
+<!--div id="mess_save"><button class="button2">收藏投票工具以备后用</button></div-->
+<if condition="$vote.token eq ''">
+<div><button class="button2" onclick="location.href='/index.php?g=Person&m=Vote&a=index'">我也要发起投票</button></div>
+</if>
+
+<if condition="!empty($hots)">
+<div><div id="more_title">热门投票</div><div class="clear"></div></div>
+<div id="more_list">
+  <volist name="hots" id="hot">
+  <div class="list_item" onclick="location.href='/index.php?g=Person&m=Vote&a=showVote&id={lingzh:$hot.id}'">
+    <div class="list_icon"><img src="/themes/p/images/vote_icon.png"></div>
+    <div class="list_title">{lingzh:$hot.title}</div>
+    <div class="clear"></div>
+  </div>
+  </volist>
+</div>
+</if>
+
+<script>
+$(function() {
+    var _id = trim($("#mess_title").attr("data-id"));
+    if (getCookies("VOTE" + _id) != null) {
+       $(".attch_item").attr("state", 2);
+     $(".option_info").show();
+     $(".voteResult").show();
+     $(".option_vote").hide();
+     $("#voteButton").text("已投票");
+  } else {
+       $(".option_vote").show();
+       $(".option_info").hide();
+     $(".voteResult").hide();
+  }
+        $("#share_1 button").click(function() {
+       guide();
+  });
+        $("#share_2 button").click(function() {
+    location.href="http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5OTA1MTU5MA==&appmsgid=10012010&itemidx=1&sign=cbfd5b6d9d94a311dd28efbd974a54fa&uin=MjUyMTM2OTc1";
+       /*cover(true);
+       $("#guide2").show();*/
+  });
+  $("#guideCancel").click(function() {
+       cover(false);
+       $("#guide").hide();
+  });
+  $("#guideCancel2").click(function() {
+       cover(false);
+       $("#guide2").hide();
+  });
+    $(".attch_item").click(function() {
+       var state = $(this).attr("state");
+     if (state === "2") {return;} //有结果，点击无效果
+     var type = $("#mess_title").attr("data-type");
+     if (state==="1") {
+         $(this).attr("state", "0");
+       $(this).find(".option_vote img").attr("src", $(this).find(".option_vote img").attr("src").replace("_yes", "_no"));
+     } else if (state==="0") {
+         if (type == "0") {
+           $(".attch_item").attr("state", "0");
+           $(".attch_item .option_vote img").attr("src", $(this).find(".option_vote img").attr("src").replace("_yes", "_no"));  
+       }
+         $(this).attr("state", "1");
+       $(this).find(".option_vote img").attr("src", $(this).find(".option_vote img").attr("src").replace("_no", "_yes"));
+     }
+   });
+   $("#voteButton").click(function() {
+         var options = "";
+         $("[state=1]").each(function(){
+         options += $(this).attr("data-index") + ";";
+     });
+     if ($("#voteButton").text() == "已投票") {
+         _toast("你已投票");return;
+     }
+     if (options.length == 0) {
+         _toast("你没有做出任何选择");return;
+     }
+     options = options.substr(0, options.length - 1);
+     $.ajax({
+             url:"/index.php",
+             data:{
+                 g:"Person",
+                 m:"Vote",
+         a:"join",
+         options:options,
+         id:_id
+             },
+             success: function(data) {
+           data = $.parseJSON(data);
+         if (data.data.options) {
+             for (var i = 1; i <= data.data.options.optionNum; i++) {
+               if (data.data.options[""+i].option) {
+                   var info = "[data-index="+ i + "]"; 
+                     $(info + " .option_info").text(data.data.options[""+i].num + "票 " + data.data.options[""+i].percent + "%");
+                 $(info + " .option_green").attr("style", "width:" + data.data.options[""+i].percent + "%;");
+                 $(info + " .option_gray").attr("style", "width:" + data.data.options[""+i].opercent + "%;");
+             }
+             }
+           $("#vote_counts").text(data.data.options.num);
+             $(".attch_item").attr("state", 2);
+                 $(".option_info").show();
+                 $(".voteResult").show();
+                 $(".option_vote").hide();
+             $("#voteButton").text("已投票");
+           setCookies("VOTE" + _id, _id);
+           ok("投票成功");
+          }
+             },
+             error : function(data, error, e) {
+                 _toast("抱歉，服务器异常");
+             }
+         });
+  });
+});
+</script>
+
+<div class="none"><img src="/themes/p/images/vote_sg_yes.png"><img src="/themes/p/images/vote_mt_yes.png"></div>
+
+
+
+
+<div id="ok"><img src="/themes/p/images/ok.png"><div id="ok_text"></div></div>
+<div id="cover"></div>
+<div id="loading"><img src="/themes/p/images/loading.gif"><div id="loading_text"></div></div>
+<div id="guide"><div><img src="/themes/p/images/guide.png"></div>
+<div id="guide_button2">
+<button class="button2" id="guideCancel">取消</button>
+</div>
+</div>
+<div id="guide2"><div><img src="/themes/p/images/guide3.png"></div>
+<div id="guide_button2">
+<button class="button2" id="guideCancel2">取消</button>
+</div>
+</div>
+<div id="guide3"><img src="/themes/p/images/guide3.png"></div>
+<div id="toast"></div>
+<div id="copyright"><a href="/index.php?g=Person&m=Index&a=index">返回首页</a></div>
+</body>
+</html>
+ 

@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>OEM设置管理</title>
+    <include file="common:public" />
+</head>
+<body>
+<div class="cr"></div>
+<form action="{lingzh::U('OEMConfig/set')}" method="post" name="form" id="myform">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+    <tr>
+      <td height="48" align="right"><strong>服务热线：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="service_tel" class="ipt" size="45" value="{lingzh:$config.service_tel}" >
+      </td>
+    </tr>
+    <tr>
+      <td height="48" align="right"><strong>客服QQ：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="service_qq" class="ipt" size="45" value="{lingzh:$config.service_qq}">
+      </td>
+    </tr>
+    <tr>
+      <td height="48" align="right"><strong>客服QQ2：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="service_qq2" class="ipt" size="45" value="{lingzh:$config.service_qq2}">
+      </td>
+    </tr>
+    <tr>
+      <td height="48" align="right"><strong>企业全称：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="company_name" class="ipt" size="45" value="{lingzh:$config.company_name}">
+      </td>
+    </tr>
+    <tr>
+      <td height="48" align="right"><strong>企业简称：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="company_short_name" class="ipt" size="45" value="{lingzh:$config.company_short_name}">
+      </td>
+    </tr>
+    <tr>
+      <td height="48" align="right"><strong>企业LOGO：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="company_logo" class="ipt" size="45" value="{lingzh:$config.company_logo}">
+      </td>
+    </tr>
+    <tr>
+      <td height="48" align="right"><strong>企业二维码：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="company_qrcode_url" class="ipt" size="45" value="{lingzh:$config.company_qrcode_url}">
+      </td>
+    </tr>
+    <tr>
+      <td height="48" align="right"><strong>平台名称：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="platform_name" class="ipt" size="45" value="{lingzh:$config.platform_name}">
+      </td>
+    </tr>
+    <tr>
+      <td height="48" align="right"><strong>工信部ICP号：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="icp_info" class="ipt" size="45" value="{lingzh:$config.icp_info}">
+      </td>
+    </tr>
+    <tr>
+      <td height="48" align="right"><strong>技术支持链接：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="copyright_link" class="ipt" size="45" value="{lingzh:$config.copyright_link}">
+      </td>
+    </tr>
+        
+    <tr>
+      
+      <td>&nbsp;</td>
+      <td colspan="3">
+        <input class="bginput" type="submit" name="dosubmit" value="保 存" style="padding:5px 10px;" >
+        &nbsp;
+        <input class="bginput" type="button" onclick="javascript:history.back(-1);" value="返 回" style="padding:5px 10px;" >
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

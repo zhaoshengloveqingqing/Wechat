@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台首页</title>
+<link href="{lingzh::RES}/css/index.css" type="text/css" rel="stylesheet">
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+</head>
+<body style="background:none">
+<div class="content">
+<div class="box">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="alist">
+  <tr>
+    <td width="30%" style="font-size:15px;"><strong>用户名称</strong></td><td >{lingzh:$user.username}</td>
+  </tr>
+  <tr>
+    <td width="30%" style="font-size:15px;"><strong>角色名称</strong></td><td >{lingzh:$user.role_name}</td>
+  </tr>
+  <tr>
+    <td width="30%" style="font-size:15px;"><strong>账户余额</strong></td><td align='center'>¥{lingzh:$user.balance}</td>
+  </tr>
+  <tr>
+    <td width="30%" style="font-size:15px;"><strong>最后登录IP</strong></td><td align='center'>{lingzh:$user.last_login_ip}</td>
+  </tr>
+  <tr>
+    <td width="30%" style="font-size:15px;"><strong>最后登录时间</strong></td><td align='center'><php>echo date('Y-m-d H:i:s', $user['last_login_time'])</php></td>
+  </tr>
+  <tr>
+    <td width="30%" style="font-size:15px;"><strong>状态</strong></td>
+    <td align='center'><eq name="user.status" value="1"><font color="red">√</font><else/><font color="blue">×</font></eq></td>
+  </tr>
+</table>
+    </div>
+</div>
+<!--/box-->
+
+<!--/box-->
+</div>
+</body>
+</html>

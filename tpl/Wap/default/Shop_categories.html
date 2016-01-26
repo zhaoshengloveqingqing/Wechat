@@ -1,0 +1,29 @@
+<include file="Shop:header"/>
+
+<style type="text/css">
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+
+</style>
+<!--主体-->
+<section class="c_list">
+  <h1>全部分类：</h1>
+  <volist name="categories" id="cat"> 
+      <dl>
+    <dt>
+      <a href="{lingzh:cat.url}">
+        {lingzh:$cat.name}
+        <i></i>
+      </a>
+    </dt>
+  </dl>
+  </volist> 
+</section>
+
+<div class="clr"></div>
+<php>
+    echo CopyRightHelper::generateShopCopyRight($_GET["shop"]);
+</php>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+<title>领众科技 - 行业动态</title>
+<meta name="Keywords" content="领众科技,领众微信,微信营销,深圳微信营销案例,微信营销案例,微信成功案例,微信营销技巧,微信公众平台成功案例" >
+<meta name="Description" content="领众微信营销平台，是领众科技公司投入巨资研发的一款营销类产品，是目前全国最领先的微信营销平台。平台提供了微信客服、微网站、会员卡系统、微商城、预约/报名/订单系统、微信相册、中英翻译、快递查询等50多个功能模块，有效地帮助客户提升品牌形象，增强营销效果，提升经营价值。咨询热线:0755-36989386" >
+<include file="lingzh:header"/>
+
+
+<style>
+.page-main {margin:0 auto; width:1000px;}
+
+.page-title {margin:20px 0px;}
+.page-title h1{font-size:24px;}
+.page-title p{color:#353535; font-size:13px; line-height:24px;}
+
+.case-navi {float:left; background-color:#d6dcdf; color:#2e2e2e; width:202px; }
+.case-navi .title{border:1px #d6dcdf solid; background-color:#014c6e; color:#fff; height:34px;line-height:34px; padding:0px 5px 0px 35px; font-size:16px;}
+.case-navi .name{border-bottom:1px #555555 solid; height:34px;line-height:34px; padding:0px 5px 0px 35px; color:black; text-decoration:none;}
+.case-navi .name a{border-bottom:1px #555555 solid; height:34px;line-height:34px; padding:0px 5px 0px 35px; color:black; text-decoration:none;}
+.case-navi .name .arrow{float:right; font-family:宋体; font-size:12px; color:#252525; padding-right:15px;}
+.case-navi .name:hover{cursor:pointer;background-color:#93aab5;color: #FFF;}
+.case-navi div.selected{background-color:#93aab5; color:black;}
+
+
+.cases-show {float:left; width:753px;margin-left:45px;}
+.cases-show .case-digest { text-align: center; float:left; background-color:#E3E8EA; margin-bottom:0px;width:100%; padding-right:15px;}
+.cases-show .case-digest .name { font-size:23px; font-weight:bold;  color:#0A5F99; text-align:center;}
+.cases-show .case-digest .wx-id { font-size:13px; text-align:center;color:#93ACBC;}
+
+.cases-show .case-details {
+    float:left; background-color:#E3E8EA; margin-bottom:0px;width:100%; padding-right:15px;
+  
+}
+.cases-show .case-details p{font-size:14px; line-height:24px; color:#6c6c6c; margin:5px 10px 5px; text-indent:2em;}
+.cases-show .case-details .case-item {
+    margin-left:25px;
+  background-color:#E3E8EA
+}
+
+.none {display:none;}
+
+.dynamic_nav_header {
+    float: left;
+    background-color: #D6E2E8;
+    margin-bottom: 0px;
+    width: 100%;
+    font-size:14px;
+    padding: 15px 0px 15px 15px;
+  font-family:微软雅黑;
+}
+.dynamic_nav_header .dynamic_nav_title{
+    color: #085a92;
+}
+
+.dynamic_nav_footer {
+    background-color:#e3e8ea;
+    padding-top:15px;
+    margin-bottom:50px;
+    padding-left:15px;
+    width: 100%;
+    float: left;
+  font-weight:400;
+  font-size:13px;
+  
+  line-height:30px;
+  padding-bottom:15px;
+}
+.dynamic_nav_footer a {
+   color:#06426c;
+  font-weight:400;
+  font-family:微软雅黑
+}
+a{ text-decoration:none; }
+a:hover{ text-decoration: none; color:#06426c; }
+
+
+</style>
+
+<div class="page-main">
+  <div class="page-title">
+    <h1>更多资讯 敬请期待</h1>
+  </div>
+  <div class="case-navi">
+    <div class="title">最新动态</div>
+        <a href='{lingzh::U("Dynamics/index", array("cid"=>$cid))}'><div class="name"><span>企业动态</span><span class="arrow">></span></div></a>
+        <a href='{lingzh::U("Dynamics/index", array("cid"=>$cid))}'><div class="name selected"><span>行业动态</span><span class="arrow">></span></div></a>
+  <a href='{lingzh::U("Dynamics/index", array("cid"=>$cid))}'><div class="name"><span>系统更新/优化</span><span class="arrow">></span></div></a>
+    
+  </div>
+  <div class="cases-show">
+        <div class='dynamic_nav_header'> 
+            <a class='dynamic_nav_node' href='{lingzh::U("Index/index")}'>首页</a> >
+            <a class='dynamic_nav_node' href='{lingzh::U("Dynamics/index")}'>最新动态</a> >
+            <a class='dynamic_nav_node' href='{lingzh::U("Dynamics/index", array("cid"=>"$cid"))}'>
+                <switch name="cid">
+                    <case value="0">行业动态
+                    </case>
+                    <case value="2">企业动态
+                    </case>
+                    <case value="1">系统更新/优化
+                    </case>
+                    <default />
+                </switch>
+            </a> >
+            <a class='dynamic_nav_title' href='javascript:void(0)'><php>echo $curr_item['title'];</php></a>
+        </div>
+      
+        <div class="case-digest">
+          <p class="name"><php>echo $curr_item['title'];</php></p>
+          <p class="wx-id" style="line-height:5px">时间：<php>echo date('Y.m.d',$curr_item['create_time']);</php> | 来源：<php>echo $curr_item['source'];</php></p>
+        </div>
+        <div class='case-details'>
+          <div class= "case-item">
+            {lingzh:$curr_item['content']}
+          </div>
+        </div>
+      
+        <div class='dynamic_nav_footer'> 
+          <?php if($prev_item['has']) { ?>
+            <a href="{lingzh:$prev_item['url']}">上一篇：{lingzh:$prev_item['title']}</a>
+            <br/>
+          <?php 
+            }
+              if($next_item['has']) { ?>
+            <a href="{lingzh:$next_item['url']}">下一篇：{lingzh:$next_item['title']}</a>
+            <?php } ?>
+        </div>
+  
+    </div>
+    <script type='text/javascript'>
+        $(function() {
+            var item_id = "#dynamic_{lingzh:$curr_item.id}";
+            $(item_id).removeClass("none");
+        });
+    </script>
+</div>
+<include file="lingzh:footer"/>

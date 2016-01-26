@@ -1,0 +1,99 @@
+.c {
+	CLEAR: both; DISPLAY: none
+}
+#tag {
+	HEIGHT: 38px; BACKGROUND: #f5f5f5 0px 0px; BORDER-BOTTOM: #cccccc 1px solid; POSITION: relative
+}
+#tags LI {
+	BORDER-TOP: 1px solid; HEIGHT: 29px; BORDER-RIGHT: 1px solid; BACKGROUND: url(../images/tab_bg.png) repeat-x 0px 0px; BORDER-BOTTOM: 0px; POSITION: relative; FLOAT: left; TEXT-ALIGN: center; BORDER-LEFT: 1px solid; DISPLAY: block; LIST-STYLE: none none outside; MARGIN-RIGHT: 5px; -moz-border-bottom-colors: none; -moz-border-image: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none
+}
+#tags LI A {
+	TEXT-DECORATION: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 10px; LINE-HEIGHT: 30px; PADDING-RIGHT: 10px
+}
+#tags LI A {
+	
+}
+#tags LI.selectTag {
+	BACKGROUND: #ffffff 0px 0px
+}
+#tags LI.selectTag A {
+	FONT-WEIGHT: 500; COLOR: #000000; OUTLINE-WIDTH: medium; OUTLINE-STYLE: none
+}
+#tags LI P {
+	FONT-SIZE: 0px; HEIGHT: 7px; WIDTH: 7px; BACKGROUND: url(../images/tab_con.png) no-repeat 0px 0px; POSITION: absolute; DISPLAY: block; LINE-HEIGHT: 0
+}
+.thin#tag LI P {
+	FONT-SIZE: 0px; HEIGHT: 7px; WIDTH: 7px; BACKGROUND: url(../images/tab_con.png) no-repeat 0px 0px; POSITION: absolute; DISPLAY: block; LINE-HEIGHT: 0
+}
+.blue#tag LI P {
+	FONT-SIZE: 0px; HEIGHT: 7px; WIDTH: 7px; BACKGROUND: url(../images/tab_con.png) no-repeat 0px 0px; POSITION: absolute; DISPLAY: block; LINE-HEIGHT: 0
+}
+#tags LI P.l {
+	BACKGROUND-POSITION: 0px 0px; LEFT: -1px; TOP: -1px
+}
+#tags LI P.r {
+	RIGHT: -1px; BACKGROUND-POSITION: -7px 0px; TOP: -1px
+}
+#tags LI.selectTag P.l {
+	BACKGROUND-POSITION: -14px 0px
+}
+#tags LI.selectTag P.r {
+	BACKGROUND-POSITION: -21px 0px
+}
+.thin#tag {
+	BORDER-TOP-COLOR: #8fa9d5; BORDER-LEFT-COLOR: #8fa9d5; BORDER-BOTTOM-COLOR: #8fa9d5; BORDER-RIGHT-COLOR: #8fa9d5
+}
+.thin#tag UL {
+	HEIGHT: 30px; POSITION: absolute; MARGIN: 0px 20px; BOTTOM: -1px
+}
+.thin#tag LI {
+	BORDER-TOP: #8fa9d5 1px solid; HEIGHT: 28px; BORDER-RIGHT: #8fa9d5 1px solid; BACKGROUND: #f4fce9 0px 0px; BORDER-BOTTOM: #8fa9d5 1px solid; BORDER-LEFT: #8fa9d5 1px solid
+}
+.thin#tag LI.selectTag {
+	BACKGROUND: #ffffff 0px 0px; BORDER-BOTTOM: 0px; PADDING-BOTTOM: 1px
+}
+#tagContent {
+	MARGIN: 0px auto
+}
+.tagContent {
+	LINE-HEIGHT: 23px
+}
+.blue#tag {
+	BORDER-TOP: 0px; HEIGHT: 47px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; POSITION: relative; BORDER-LEFT: 0px; BACKGROUND-COLOR: #f4fce9
+}
+.blue#tag .gap {
+	FONT-SIZE: 0px; HEIGHT: 3px; WIDTH: 100%; BACKGROUND: #56850a 0px 0px; POSITION: absolute; LEFT: 0px; BOTTOM: 0px
+}
+.blue#tag UL {
+	MARGIN: 0px 15px; BOTTOM: 2px
+}
+.blue#tag LI P {
+	BACKGROUND: url(../images/tab_con_b_s.gif) 0px 0px
+}
+.blue#tag #tags LI {
+	BACKGROUND: url(../images/tab_con_b_s.gif) 0px 0px
+}
+.blue#tag #tags LI {
+	HEIGHT: 30px; BORDER-TOP-COLOR: #c6e2a8; BACKGROUND-REPEAT: repeat-x; BORDER-BOTTOM: #c6e2a8 0px; BACKGROUND-POSITION: 0px -38px; BORDER-LEFT-COLOR: #c6e2a8; BORDER-RIGHT-COLOR: #c6e2a8
+}
+.blue#tag #tags LI.selectTag {
+	BORDER-TOP-COLOR: #56850a; BACKGROUND-POSITION: 0px -7px; BORDER-LEFT-COLOR: #56850a; BORDER-BOTTOM-COLOR: #56850a; BORDER-RIGHT-COLOR: #56850a; BACKGROUND-COLOR: transparent
+}
+.blue#tag LI.selectTag A {
+	FONT-WEIGHT: bold; COLOR: #ffffff
+}
+.blue#tag LI A {
+	COLOR: #56850a
+}
+.blue#tag LI P.l {
+	BACKGROUND-POSITION: 0px 0px
+}
+.blue#tag LI P.r {
+	BACKGROUND-POSITION: -7px 0px
+}
+.blue#tag LI.selectTag P.l {
+	BACKGROUND-POSITION: -14px 0px
+}
+.blue#tag LI.selectTag P.r {
+	BACKGROUND-POSITION: -21px 0px
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title> {lingzh::C('site_title')} {lingzh::C('site_name')} 用户登陆</title>
+<meta name="keywords" content="{lingzh::C('keyword')}"/>
+<meta name="description" content="{lingzh::C('content')}"/>
+<meta http-equiv="Page-Exit" content="blendTrans(Duration=1.0)">
+<!--meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" -->
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<link href="/themes/a/css/home.css" rel="stylesheet" type="text/css">
+<style>
+
+body {background-color: #0a8dbd;height: 800px;background-position: 50% 0%;background-repeat: repeat no-repeat;}
+.page-main{width: 718px; margin-left: auto; margin-right: auto;}
+.login-page {margin:150px  0px 180px 0px; border-radius: 10px; padding: 15px;background-color: #90cde8;}
+.login-page .login-title {background-color: #0b7dcb;text-align:center;font-size:24px;color:#ffffff;height:90px; line-height:63px;border-radius: 10px 10px 0 0;}
+.login-page .login-title .login-logo{float: left;width: 230px; padding:10px 0 0 20px;}
+.login-page .login-title .login-name{float: left;text-align: center; font-size:28px; font-weight:bolder; margin-left:110px; margin-top:15px;}
+
+.login-page .login-form {background-color:#eef3f9; height:300px; border-radius:0 0 10px 10px ; }
+.login-page .login-form .login-icon{float: left;width: 230px; margin-top: 40px; text-align: center;border-right: 1px solid  #D3D3D3;}
+.login-page .login-form table {float: right;width:450px; padding:60px 20px 0px 10px;}
+.login-page .login-form table .input-field {width:90%;line-height:32px;color:#0a4268;font-size: 14px; padding: 5px;border: 1px solid  #D3D3D3;}
+.login-page .login-form table th {line-height:32px;color:#0a4268;font-size: 14px;}
+.login-page .login-form table .input-submit { color:#fff;border:0px;cursor:pointer;width: 120px;height: 45px;margin-right:20px; border-radius: 5px; font-size: 24px;
+  background: #518708;  
+  background:-moz-linear-gradient(top, #518708 , #82bf07 ); font-size:24px; font-family:"微软雅黑"; font-weight:bolder;
+  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#82bf07), to(#518708));/*Safari 、Chrome*/
+  FILTER: progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='#518708', endColorstr='#82bf07');
+ }
+.login-page .login-form table .input-submit:hover {background:#2F81BF;}
+.login-page .login-form table tr {margin-bottom:15px; line-height:40px;}
+
+.login-footer {
+	font-size:14px;
+    color:#ffffff;
+    text-align:center;
+}
+.login-page .login-form table .input-reg:hover {background: #2F81BF;}
+.login-page .login-form table .input-reg {width: 120px;height: 45px;background: #82bf07;color: #FFF;border: 0px;cursor: pointer;padding: 7px 30px;margin-left: 15px; border-radius: 5px; font-size: 24px;
+background:-moz-linear-gradient(top, #518708 , #82bf07 );  font-family:"微软雅黑"; font-weight:bolder;
+  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#82bf07), to(#518708));/*Safari 、Chrome*/
+  FILTER: progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='#518708', endColorstr='#82bf07');}
+</style>
+
+</head>
+<body>
+<script type="text/javascript">window.onerror=function(){return true;}</script>
+<div class="page-main">
+  <div class="login-page">
+    <div class="login-title">
+      <if condition="!empty($login_pic)"><div class="login-logo"><img src="{lingzh:$login_pic}" width="235" height="44"></img></div></if>
+      <div class="login-name">微信公众号管理平台</div>
+    </div>
+    <div class="login-form">
+      <div class="login-icon"><img src="/images/index_icon.jpg"></img></div>
+      <form action="{lingzh::U('Index/checklogin')}" method="post" class="login">
+        <table>
+          <tbody>
+		    <tr>
+              <th>用户名:</th>
+              <td><input class="input-field" type="text" name="username"></td>
+            </tr>
+            <tr>
+              <th>密　码:</th>
+              <td><input class="input-field" type="password" name="password"></td>
+            </tr>
+            <tr>
+              <th>&nbsp;</th>
+              <td>
+			     <input class="input-submit" type="submit" value="登 录"> </input>
+           <if condition="$is_oem neq 1">
+           <a href="/index.php?g=User&m=Index&amp;a=reg" target="_blank" class="input-reg">注 册</a>
+           </if>
+              </td>
+            </tr>
+          </tbody>
+		</table>
+      </form>
+    </div>
+
+  </div>
+    <div class="login-footer">
+  	&copy;版权所有 苏州派尔网络科技有限公司
+  </div>
+</div>
+
+</body>
+

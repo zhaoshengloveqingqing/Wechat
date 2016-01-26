@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+	{lingzh::C('site_name')}-{lingzh::C('company_short_name')}微信营销后台管理登录
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{lingzh::C('keyword')}" />
+<meta name="Description" content="{lingzh::C('content')}" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<link type="text/css" rel="stylesheet" href="{lingzh::RES}/css/reset.css" />
+<link type="text/css" rel="stylesheet" href="{lingzh::RES}/css/common.css" />
+<link type="text/css" rel="stylesheet" href="{lingzh::RES}/css/page.css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<!--[if IE 6]>
+ 
+<script language="javascript" type="text/javascript" src="{lingzh::RES}/js/DD_belatedPNG.js"></script>
+ 
+<script language="javascript" type="text/javascript">
+ 
+DD_belatedPNG.fix(".logo a img,.shade img");
+ 
+</script>
+ 
+<![endif]-->
+<script type="text/javascript">
+    $(function () {
+        $("input").focus(function () {
+            $(this).addClass("inputFocus");
+        }).blur(function () {
+            $(this).removeClass("inputFocus");
+        });
+    });
+
+    function refresh() {
+        var randomRZ = Math.random();
+        $("#imgCheckB").attr("src", "/index.php?g=Admin&m=Admin&a=verify&rz=" + randomRZ);
+    }
+</script>
+</head>
+<body style="background: #0b7dcb url(tpl/Admin/common/login/bg1.jpg)repeat-x center; height:800px;">
+<!--url(tpl/Admin/common/login/A001.jpg)repeat-x;-->
+<!--container-->
+<div class="container bc">
+	<div class="loginBox">
+    <div style="position:absolute; top:450px; margin-left:-50px;"><img src="tpl/Admin/common/login/icon.png"></div>
+    <div style="font-size:38px; color:#ffffff; font-family:黑体;padding-left:30px; line-height:70px;">{lingzh::C('company_short_name')}微信营销后台管理系统</div>
+			<!--<div class="top clearfix">
+				<div class="tl"></div>
+				<div class="tr"></div>
+				<div class="t"></div>
+			</div>-->
+			<div class="content">
+            	<form name="form1" method="post" action="{lingzh::U('Admin/insert')}" id="form1" class="myform">
+
+                	<fieldset>
+                		<legend></legend>
+                       
+                  		<p><span>用户名：<input name="username" type="text" id="username" class="username_input" /></span></p>
+                   	    <p>密 码：<span>
+                   	    <input name="password" type="password" id="pw" class="ps_input" /></span></p>
+                    	<p>验证码：
+                        	<span><input name="code" type="text" id="txtCheckCode" class="chk_input" maxlength="4" /></span>
+                        	<span class="chk_img"><img src="{lingzh::U('Admin/verify')}" id="imgCheckB"/></span>
+                            <span class="chk_txt"><a href="javascript:refresh();" style="color: #0033CC">看不清？换一张</a></span>
+                        </p>
+                      
+               <input type="submit" name="Button1" value="" id="Button1" class="subBtn" />
+
+                    </fieldset>
+
+                </form>	
+			</div>
+			<!--<div class="bottom clearfix">
+				<div class="bl"></div>
+				<div class="br"></div>
+				<div class="b"></div>
+			</div>-->
+		</div>
+
+        
+</div>
+
+<!--footer-->
+<div class="footer pt30">
+	CopyRight &copy <?php echo date("Y")?> {lingzh::C('site_domain')} All Rights Reserved 版权所有 {lingzh::C('company_short_name')}微信营销系统<br />
+	
+</div>
+</body>
+</html>

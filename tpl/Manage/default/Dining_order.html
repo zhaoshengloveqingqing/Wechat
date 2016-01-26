@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{lingzh:$page_title}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="/themes/m/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  <if condition="$is_ie eq 1">
+    <OBJECT  ID="jatoolsPrinter" CLASSID="CLSID:B43D3361-D075-4BE2-87FE-057188254255"  codebase="/js/jatoolsPrinter.cab#version=8,6,0,0" style="display:none;"></OBJECT>  
+  </if>
+  <style type="text/css">
+    body {
+       padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+  </style>
+
+</head>
+<body>
+<include file="Index:header"/>
+
+  <div class="container">
+    <div class="row">
+      <include file="Index:sidebar"/>
+      <div class="col-lg-10">
+
+        <div class="page-header">
+          <h4>订单详情</h4>
+        </div>
+        <div class="content"> 
+
+           <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">订单{lingzh:$order.sn}状态</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-lg-4">
+                  下单日期：{lingzh:$order.submittime|date="Y-m-d H:i:s",###}
+                </div>
+                <div class="col-lg-4">
+                  <if condition="$order['status'] == 2">
+                    <span style="color:red">{lingzh:$order.status_text}</span>
+                  <else/>
+                    <span style="color:green">{lingzh:$order.status_text}</span>
+                  </if>
+                </div>
+                <if condition="$order['status'] == 2">
+                  <div class="col-lg-4">
+                    <form method="post" action="{lingzh::U('Dining/cancel',array('oid'=>$order['sn']))}">
+                      <input type="hidden" name="order_sn" value="{lingzh:$order.sn}"/>
+                      <button type="submit" name="button" class="btn btn-block btn-primary">取消该订单</button>
+                    </form>
+                  </div>
+                </if>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">下单人信息</h3>
+            </div>
+            <div class="panel-body">
+              订购人：{lingzh:$order.username}<br>
+              电话：{lingzh:$order.tel}<br>
+              桌号：{lingzh:$order.table}<br>
+              预约用餐时间：{lingzh:$order.dinetime}<br>
+              预约人数：{lingzh:$order.guestnum}<br>
+              <if condition="!empty($order['note'])">
+              客户备注:{lingzh:$order.note}<br>
+              </if>
+              总价：<span style="color:#f30;font-size:16px;font-weight:bold">{lingzh:$order.price}</span>元
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">下单菜品</h3>
+            </div>
+            <div class="panel-body">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th width="30%" align="center" style="text-align:center">名称</th>
+                  <th class="40%" align="center" style="text-align:center">菜品详细</th>
+                  <th class="10%" align="center" style="text-align:center">数量</th>
+                  <th width="20%" align="center" style="text-align:center">单价（元）</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="menus" id="o"> 
+                <tr>
+                <td align="center"> {lingzh:$o.name}</td>
+                <td align="center"> <?php $des = $descriptions[$o['dishes_id']]; echo empty($des) ? "无" : $des; ?> </td>
+                <td align="center">{lingzh:$o.nums}</td>
+                <td align="center">{lingzh:$o.price}</td>
+                </tr>
+                </volist>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <button  id="printButton1" onClick="doPrint()" class="btn btn-info btn-lg"><strong>打印</strong></button>
+
+        </div> 
+
+
+        <div style="display:none;">
+          
+        <div id="page1" class="print-content" style="width:100%;">
+          <style type="text/css" media="print" >
+          .print-content h4 {font-size: 1em;}
+          .print-content div {font-size: 0.8em}
+          .print-content div.title {clear:both;float:left;}
+          .print-content div.content {float:right;}
+          </style>
+          <h4>{lingzh:$merchant_name}</h4>
+          <div>=================================</div>
+          <div class="title">订单号：</div><div class="content">{lingzh:$order.sn}</div>
+          <div class="title">下单时间：</div><div class="content">{lingzh:$order.submittime|date="Y/m/d H:i",###}</div>
+          <div class="title">订购人：</div><div class="content">{lingzh:$order.username}</div>
+          <div class="title">电话：</div><div class="content">{lingzh:$order.tel}</div>
+          <div class="title">桌号：</div><div class="content"><if condition="empty($order['table'])">无<else/>{lingzh:$order.table}</if></div>
+          <div class="title">用餐时间：</div><div class="content">{lingzh:$order.dinetime}</div>
+          <div class="title">用餐人数：</div><div class="content">{lingzh:$order.guestnum}</div>
+          <if condition="!empty($order['note'])">
+          <div class="title">客户备注:</div><div class="content">{lingzh:$order.note}</div>
+          </if>
+          <div>==================================</div>
+          <h4>下单菜品</h4>
+          <div class="title" style="width:40%;">名称</div>
+          <div class="content" style="margin-left:5px;width:35%;text-align:center">单价(元)</div>
+          <div class="content" style="text-align:center;width:20%;">数量</div>
+          <volist name="menus" id="o"> 
+            <div class="title" style="width:40%;"> {lingzh:$o.name}</div>
+            <div class="content"style="margin-left:5px;width:35%;text-align:center;">{lingzh:$o.price}</div>
+            <div class="content" style="width:20%;text-align:center;">{lingzh:$o.nums}</div>
+          </volist>
+          <div class="content" style="width:100%;margin-top:10px;text-align:right">总价：<span style="color:#f30;font-size:16px;font-weight:bold">{lingzh:$order.price}</span>元</div>
+          <div class="title" style="width:180px;margin-top:80px;">签字:_________________</div>
+        </div>
+        </div> <!-- /print-content -->
+
+      </div> <!-- /col -->
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.PrintArea.js" type="text/javascript"></script>
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script>
+<if condition="$is_ie eq 0">
+$(document).ready(function() {
+    $("#printButton").click(function(){
+        $(".print-content").printArea();
+    });
+    setInterval(function() {checkOrder("Dining"); }, 1000*60 + Math.random()*5000);
+});
+
+<else/>
+function doPrint() {
+  myDoc = {
+    documents: document,
+    copyrights: '杰创软件拥有版权  www.jatools.com' 
+  };
+  jatoolsPrinter.print(myDoc, false); // 直接打印，不弹出打印机设置对话框 
+  }
+</if>
+</script>
+
+</body>
+</html>

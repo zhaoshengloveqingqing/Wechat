@@ -1,0 +1,47 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^([0-9]+)\.manage\.(.*)\.com$
+RewriteCond %{REQUEST_URI} !^.*(\.css|\.js|\.gif|\.png|\.jpg|\.jpeg|\.xml|\.ico|\.htm|\.html|\.swf|\.mp3)
+RewriteCond %{QUERY_STRING}  !^.*(g=Manage).*$
+RewriteRule ^(.*)$ /index.php?g=Manage&m=Index&a=signin&mcode=%1 [QSA,L]
+
+RewriteCond %{HTTP_HOST} ^([0-9a-z]+)\.weixin\.(.*)\.com$
+RewriteCond %{REQUEST_URI} !^.*(\.css|\.js|\.gif|\.png|\.jpg|\.jpeg|\.xml|\.ico|\.htm|\.html|\.swf|\.mp3)
+RewriteCond %{QUERY_STRING}  !^.*(g=User).*$
+RewriteRule ^(.*)$ /index.php?g=User&m=Index&a=login&o=%1 [QSA,L]
+
+RewriteCond %{HTTP_HOST} ^www\.xa-huayue\.com$
+RewriteCond %{REQUEST_URI} !^.*(\.css|\.js|\.gif|\.png|\.jpg|\.jpeg|\.xml|\.ico|\.htm|\.html|\.swf|\.mp3)
+RewriteCond %{QUERY_STRING}  !^.*(g=User).*$
+RewriteRule ^(.*)$ /index.php?g=User&m=Index&a=login&o=huayue [QSA,L]
+
+RewriteCond %{REQUEST_URI} !^.*(\.css|\.js|\.gif|\.png|\.jpg|\.jpeg|\.xml|\.ico|\.htm|\.html|\.swf|\.mp3)
+RewriteCond %{REQUEST_URI}  ^wifi/([0-9a-z]+)$
+RewriteRule ^(.*)$ /index.php?g=Wap&m=Wifi&a=how&token=%1 [QSA,NC,L]
+
+RewriteCond %{REQUEST_URI} !^.*(\.css|\.js|\.gif|\.png|\.jpg|\.jpeg|\.xml|\.ico|\.htm|\.html|\.swf|\.mp3)
+RewriteCond %{REQUEST_URI}  ^vweb/([0-9a-z]+)$
+RewriteRule ^(.*)$  /index.php?g=Wap&m=Index&a=index&token=%1 [QSA,NC,L]
+
+RewriteCond %{HTTP_HOST} ^agent\.(.*)\.com$
+RewriteCond %{REQUEST_URI} !^.*(\.css|\.js|\.gif|\.png|\.jpg|\.jpeg|\.xml|\.ico|\.htm|\.html|\.swf|\.mp3)
+RewriteCond %{QUERY_STRING}  !^.*(g=Admin).*$
+RewriteRule ^(.*)$ /index.php?g=Admin&m=Admin&a=index [QSA,L]
+
+RewriteCond %{HTTP_HOST} ^([0-9]+)\.vshop\.weixinwz\.com$
+RewriteCond %{REQUEST_URI} !^.*(\.css|\.js|\.gif|\.png|\.jpg|\.jpeg|\.xml|\.swf|\.htm|\.html|\.swf|\.mp3)
+RewriteRule ^(.*)$ index.php?g=Wap&m=Shop&shop=%1 [QSA,L]
+
+RewriteCond %{HTTP_HOST} ^lingzhtech\.vshop\.weixinwz\.com$
+RewriteCond %{REQUEST_URI} !^.*(\.css|\.js|\.gif|\.png|\.jpg|\.jpeg|\.xml|\.swf|\.htm|\.html|\.swf|\.mp3)
+RewriteRule ^(.*)$ index.php?g=Wap&m=Shop&shop=889130 [QSA,L]
+
+RewriteCond %{HTTP_HOST} ^oem\.lingzhtech\.com|oem\.lingzon\.com$
+RewriteCond %{REQUEST_URI} !^.*(\.css|\.js|\.gif|\.png|\.jpg|\.jpeg|\.xml|\.swf|\.htm|\.html|\.swf|\.mp3)
+RewriteRule ^(.*)$ index.php?g=Home&m=Index&a=agent [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+</IfModule>

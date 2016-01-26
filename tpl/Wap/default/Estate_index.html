@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/wap/style.css" media="all">
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/wap/back.css" media="all">
+<script type="text/javascript" src="{lingzh::RES}/vhouse/wap/share.js"></script>
+<script type="text/javascript" src="{lingzh::RES}/vhouse/wap/common.js"></script>
+<script type="text/javascript" src="{lingzh::RES}/vhouse/wap/index.js"></script>
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/waphome.css" media="all">
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/reset.css" media="all">
+<script type="text/javascript" src="{lingzh::RES}/vhouse/jQuery.js"></script>
+<script type="text/javascript" src="{lingzh::RES}/vhouse/swipe.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/Tabs/css/easy-responsive-tabs.css" media="all">
+<script type="text/javascript" src="{lingzh::RES}/vhouse/Tabs/js/easyResponsiveTabs.js"></script>
+
+<title>{lingzh:$set['title']}</title>
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<!-- Mobile Devices Support @begin -->        
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Mobile Devices Support @end -->
+
+</head>
+<style type="text/css">
+#iframe_screen{
+    background:#fff;
+    position:absolute;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+    z-index:300000;
+    overflow:hidden;
+}
+</style>
+<body onselectstart="return true;" ondragstart="return false;">
+<iframe id="iframe_screen" src="/tpl/Wap/default/Animaid.html" frameborder="0"></iframe>
+
+<div class="wrapper" id="container">  
+<!-- start -->   
+<div class="act_top" id="actTop" style="">  
+  <div class="act_top_show">     
+  <img src="{lingzh:$set['banner']}" width="720" height="175" id="bannerPic">    
+  </div>  
+  </div>
+<style>
+    img{width: 100%;max-height: 245px;}
+</style>
+ <div id="verticalTab">
+            <ul class="resp-tabs-list">
+                <li>楼盘简介</li>
+                <li>楼盘位置</li>
+                <li>配套信息</li>
+				<li>联系我们</li>
+            </ul>
+            <div class="resp-tabs-container">
+                <div style="padding: 10px;">
+                    <div style="word-wrap: break-word;word-break: normal;">
+                       {lingzh:$set['description']|html_entity_decode|trim}
+                    </div>
+                  
+                </div>
+                 <div>
+                    <p>
+	  <a  href="http://chabus.duapp.com/mapapi.php?lng={lingzh:$set['longtitude']}&lat={lingzh:$set['latitude']}&title={lingzh:$set['title']}&info=温馨提示：楼盘大概位置"> 
+           
+    <span>地址： {lingzh:$set['address']}</span>
+   <img alt="" src="http://api.map.baidu.com/staticimage?width=600&height=235&center={lingzh:$set['address']}&markers={lingzh:$set['address']}|{lingzh:$set['longtitude']},{lingzh:$set['latitude']}&zoom=15&markerStyles=s,A,0xff0000"  height="175" style="max-height: 240px;max-width: 390px;"/> 
+      </a></p>
+                </div>
+                <div>
+                     {lingzh:$set['traffic_desc']|html_entity_decode|trim}
+                </div>
+				<div>
+                     联系电话：<a href="tel:{lingzh:$set['tel']}"><span>{lingzh:$set['tel']}</span></a>
+                </div>
+            </div>
+        </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#verticalTab').easyResponsiveTabs({
+            type: 'vertical', //Types: default, vertical, accordion           
+            width: 'auto', //auto or any width like 600px
+            fit: true,   // 100% fit in a container
+            closed: 'accordion', // Start closed if in accordion view
+            activate: function(event) { // Callback function if tab is switched
+                var $tab = $(this);
+                var $info = $('#tabInfo');
+                var $name = $('span', $info);
+                $name.text($tab.text());
+                $info.show();
+            }
+        });
+    });
+</script>
+</div>
+<include file="Estate:menu"/>
+    
+</body></html>

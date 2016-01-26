@@ -1,0 +1,35 @@
+<include file="Public:head"/>
+
+<div class="content">
+          <div class="cLineB"><h4>调整会员卡等级 </h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>
+         
+          <form method="post" action="">
+          <div class="msgWrap form">
+            <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <tbody>
+                <tr>
+              		<th>卡号英文编号：</th>
+              		<td>{lingzh:$card.number}</td>
+            		</tr>
+                <tr>
+              		<th >选择人群：</th>
+              		<td>
+                    <?php foreach ($class_info as $k => $val) { ?>
+
+                    <label><input name="groupid" type="radio" value="<?php echo $val['groupid']; ?>" <?php if($card['groupid']==$val['groupid']) echo 'checked="checked"'; ?> ><?php echo $val['title']; ?></label>　
+                      
+                    <?php } ?>
+        					</td>
+            		</tr>
+                <tr>
+                	<th></th>
+                	<td><button type="submit" id="button" name="button" class="btnGreen">保存</button>　<a href="javascript:history.go(-1);" class="btnGray vm">取消</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </form>
+          
+        </div>
+
+<include file="Public:footer"/>

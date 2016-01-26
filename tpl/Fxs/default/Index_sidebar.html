@@ -1,0 +1,12 @@
+<div class="col-lg-2">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-pills nav-stacked" style="padding: 10px;">
+      <volist name="sideMenus" id="menu" key="title"> 
+        <li class="nav-header" style="padding-left:10px;font-size:18px;">{lingzh:$menuLang[$key]}</li>
+        <volist name="menu" id="sub_menu" key="sub_title">
+          <li <?php   if($sub_menu['selected']){echo "class='active'";}  ?>  ><a href="{lingzh:$sub_menu['default_entry_url']}">{lingzh:$menuLang[$key]}</a></li>
+        </volist>
+      </volist>
+    </ul>
+  </div><!--/.well -->
+</div>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{lingzh:$page_title}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="/themes/m/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  <style type="text/css">
+    body {
+       padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+  </style>
+
+</head>
+<body>
+<include file="Index:header"/>
+
+  <div class="container">
+    <div class="row">
+      <include file="Index:sidebar"/>
+      <div class="col-lg-10">
+
+        <div class="page-header">
+          <h4>订单详情</h4>
+        </div>
+        <div class="content"> 
+
+           <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">订单{lingzh:$order.sn}状态</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-lg-4">
+                  下单日期：{lingzh:$order.create_time|date="Y-m-d H:i:s",###}
+                </div>
+                <div class="col-lg-4">
+                <php>
+                  if ($order['status'] == '1') 
+                  {
+                    echo '<span style="color:red">新订单</span>';
+                  }
+                  else if ($order['status'] == '2') 
+                  {
+                    echo '<span style="color:green">已付款</span>';
+                  }
+                  else if ($order['status'] == '3') 
+                  {
+                    echo '<span style="color:red">已发货</span>';
+                  }
+                  else if ($order['status'] == '4') 
+                  {
+                    echo '<span style="color:green">用户已取消</span>';
+                  }
+                  else if ($order['status'] == '5') 
+                  {
+                    echo '<span style="color:green">商户已取消</span>';
+                  }
+                </php>
+                </div>
+                <if condition="$order['status'] == 1">
+                  <div class="col-lg-4">
+                    <form method="post" action="{lingzh::U('Shop/cancel')}">
+                      <input type="hidden" name="order_sn" value="{lingzh:$order.sn}"/>
+                      <button type="submit" name="button" class="btn btn-block btn-primary">取消该订单</button>
+                    </form>
+                  </div>
+                </if>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">支付明细</h3>
+            </div>
+            <div class="panel-body">
+               支付方式：
+			    <if condition="$order.payment eq 'unionpay'">银联支付</if>
+               <if condition="$order.payment eq 'cod'">货到付款</if>
+               <if condition="$order.payment eq 'alipay'">支付宝支付<br/>流水号：{lingzh:$trade.trade_no}</if>
+            </div>
+          </div>
+		<volist name="orders" id="orders"> 
+		  <div class="panel panel-default">
+			<div class="panel-heading">
+			  <h3 class="panel-title">经销商信息</h3>
+			</div>
+			<div class="panel-body">
+			  经销商：{lingzh:$orders.pname}<br>
+			  手机{lingzh:$orders.tel}<br>
+			  地址：{lingzh:$orders.address}<br>
+			  所属部门：{lingzh:$orders.name}<br>
+			</div>
+          </div>
+		  </volist>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">收货人信息</h3>
+            </div>
+            <div class="panel-body">
+              订购人：{lingzh:$order.truename}<br>
+              电话：{lingzh:$order.tel}<br>
+              地址：{lingzh:$order.address}<br>
+              总数：{lingzh:$order.total}<br>
+
+              总价：<span style="color:#f30;font-size:16px;font-weight:bold">{lingzh:$order.price}</span>元
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">订购商品</h3>
+            </div>
+            <div class="panel-body">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th width="30%" align="center" style="text-align:center">商品</th>
+                  <th width="30%" align="center" style="text-align:center">名称</th>
+                  <th width="10%" align="center" style="text-align:center">编号</th>
+                  <th class="10%" align="center" style="text-align:center">数量</th>
+                  <th width="20%" align="center" style="text-align:center">单价（元）</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="products" id="o"> 
+                <tr>
+                <td align="center"><img src="{lingzh:$o.logo_url}"  width="100"/></td>
+                <td align="center"> {lingzh:$o.name}</td>
+                <td align="center">{lingzh:$o.sn}</td>
+                <td align="center">{lingzh:$o.count}</td>
+                <td align="center">{lingzh:$o.price}</td>
+                </tr>
+                </volist>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">发货明细</h3>
+            </div>
+            <div class="panel-body">
+              <if condition="isset($logistics)">
+                配送公司：{lingzh:$logistics.name}<br/>快递单号：{lingzh:$logistics.logistics_no}
+              <else/>
+                <form class="form-horizontal" role="form" method="post" action="{lingzh::U('Shop/delivery')}">
+                  <input type="hidden" name="order_sn" value="{lingzh:$order.sn}"/>
+                  <div class="form-group">
+                    <label for="logistics_name" class="col-sm-2 control-label">配送公司/快递员</label>
+                    <div class="col-sm-10">
+                      <input type="text" name="logistics_name" class="form-control" id="logistics_name" placeholder="快递公司或者配送员名字">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="logistics_no" class="col-sm-2 control-label">快递单号/电话号码</label>
+                    <div class="col-sm-10">
+                      <input type="text" name="logistics_no" class="form-control" id="logistics_no" placeholder="快递单号/电话号码">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-4">
+                       <button type="submit" name="button" class="btn btn-block btn-primary">发货</button>
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-4">
+                       <a target="blank" href="{lingzh::U('Shop/order',array('type'=>'deliveryNote', 'order_sn'=>$order['sn']))}" class="btn btn-block btn-primary">打印发货单</a>
+                    </div>
+                  </div>
+                 
+              </form>
+              </if>
+            </div>
+          </div>
+
+        </div> 
+      </div> <!-- /col -->
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</body>
+</html>

@@ -1,0 +1,112 @@
+<include file="Public:head"/>  
+<script>
+$(function(){
+        $('#smsForm').ajaxForm({
+            beforeSubmit:  checkForm,  // pre-submit callback
+            success:       complete,  // post-submit callback
+            error: showError,
+            dataType: 'json'
+        });
+        function checkForm(arr){
+            
+            var func="";
+            $(".smsset").each(function(){
+                if($(this).attr("checked")) {
+                    func += $(this).attr("name") + ";";
+                }
+            });
+			if (func.length > 1) {
+			    func = func.substring(0, func.length - 1);
+			}
+            var tel = $.trim($('#tel').val());
+            if (func.length > 0) {
+                if(tel == ''){
+                    alert("手机号不能为空");
+                    $('#tel').addClass('highlight');
+                    return false;
+                }
+            }
+			if (tel.length > 0) {
+                reg=/^0{0,1}(13[0-9]|14[0-9]|15[0-9]|18[0-9])[0-9]{8}$/i;
+                if(!reg.test(tel)) { 
+                    alert("错误,请输入11位的手机号！");            
+                    $('#tel').addClass('highlight');
+                       return false;
+                }
+			}
+            arr.push({name:'func', value:func});
+        }
+        function complete(data){
+            if (data.status == 0) {
+                alert(data.info);
+            } else {
+                alert("设置成功");
+            }
+        }
+
+        function showError(data){
+            alert(data);
+        }
+    });
+</script>
+<div class="content">
+  <div class="cLineB">
+    <h4 class="left">短信通知设置&nbsp;&nbsp;&nbsp;<a href="/index.php?g=User&amp;m=Index&amp;a=activate" style="text-decoration: underline">充值</a></h4>
+    <div class="clr"></div>
+  </div>
+
+  <form id="smsForm" method="post" action="{lingzh::U('User/Sms/set', array('r'=>time()))}" enctype="multipart/form-data">   
+  <div class="msgWrap">
+    <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tbody>
+      <tr>
+        <th>模块设置</th>
+        <td>
+          <input type="checkbox" class="smsset" name="dingdan" <eq name="info.dingdan" value="1">checked</eq>/>微预订新订单通知</input>
+          <input type="checkbox" class="smsset" name="canyin_order" <eq name="info.canyin_order" value="1">checked</eq>/>微餐饮新订单通知</input>
+          <input type="checkbox" class="smsset" name="huiyuan" <eq name="info.huiyuan" value="1">checked</eq>/>微会员卡绑定验证</input>
+          <input type="checkbox" class="smsset" name="vcdindan" <eq name="info.vcdindan" value="1">checked</eq>/>微订单短信验证</input>
+          <input type="checkbox" class="smsset" name="vccanyin" <eq name="info.vccanyin" value="1">checked</eq>/>微餐饮短信验证</input>
+          <input type="checkbox" class="smsset" name="vchotel" <eq name="info.vchotel" value="1">checked</eq>/>微酒店短信验证</input>
+        </td>
+      </tr>
+      <tr>
+        <th>手机号码</th>
+        <td>
+          <input class="ps" type="text" id="tel" <if condition="isset($info['tel'])">value="{lingzh:$info.tel}"</if> name="tel" /><span>接收通知短信的手机号</span></input>
+        </td>
+      </tr>
+      <tr>
+        <th>&nbsp;</th>
+        <td><button type="submit" name="button" class="btnGreen">保存</button>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  </form>
+  <div class="msgWrap">
+    <div class="cLineB">
+      <h4 class="left">短信统计</h4>
+      <div class="clr"></div>
+    </div>
+    <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" style="width:60%" width="60%">
+    <THEAD>
+      <TR>
+        <TH width="20%">上次充值时间</TH>
+        <TH width="20%">已发送短信数</TH>
+        <TH width="20%">剩余短信数</TH> 
+      </TR>
+    </THEAD>
+    <TBODY>
+      <TR>
+        <if condition="isset($smsaccount)">
+        <TD>{lingzh:$smsaccount.last_recharge_time|date='Y-m-d',###}</TD>
+        <TD>{lingzh:$count}</TD>
+        <TD><php>echo $smsaccount['total']-$smsaccount['used'];</php></TD>
+        </if>
+      </TR>
+    </TBODY>
+    </TABLE>
+  </div>
+</div>
+<include file="Public:footer"/>  

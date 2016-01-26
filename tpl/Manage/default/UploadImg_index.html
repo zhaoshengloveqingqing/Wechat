@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>上传图片</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/themes/m/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<style type="text/css">
+body {
+	font: 13px Arial, Helvetica, Sans-serif;
+}
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-9">
+            <h4>上传图片</h4>
+        </div>
+        <div class="col-xs-3">
+            <a class="btn btn-link"  href="javascript:$('#upload-panel, #upload-panel-1, #upload-panel-2',window.parent.document).hide();"> 关闭</a> 
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+      <form data-id="{lingzh:$id}">
+        <div id="queue"></div>
+        <input  type="file" name="uploadify" id="uploadify" /> 
+        <div id="fileQueue"></div> 
+      </form>
+      </div>
+    </div>
+	
+    <div class="panel panel-default">
+      <div class="panel-body">
+        支持JPG、PNG格式，大图片建议尺寸：360像素 * 200像素<br>
+        注意，大小不超过1MB，文件名请不要包含中文，且若同名则覆盖
+      </div>
+    </div>
+	
+  </div>
+
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+
+	<script type="text/javascript">
+	<?php $timestamp = time();?>
+         $(document).ready(function () {
+             $("#uploadify").uploadify({
+                'buttonText' : '选择图片',
+                'fileTypeDesc' : 'Image Files',
+                'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+                'fileSizeLimit' : '1MB',
+             	'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+                 'uploader': '{lingzh::U('Manage/UploadImg/upload')}&id=' + $("form").attr("data-id") + '&galleryid=' + {lingzh::$galleryid} + '&is3d=' + {lingzh::$is3d}, //一般处理程序 
+                 'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+                 'onFallback': function() {
+                     alert('您的浏览器没有安装Flash插件');
+                 },
+                 //'folder': 'uploadFile', //上传文件夹名 
+                 'queueID': 'fileQueue',
+                 'auto': true,
+                 'onUploadSuccess' :  function(file, data, response) {
+                   
+                    $('#upload-panel, #upload-panel-1, #upload-panel-2', window.parent.document).hide();
+                    if (response == true) {
+                        var res_json = eval("("+data+")"); 
+                        
+                        var node = "input#pic_url_input";
+                        // this control is used to store id of raw img
+                        var idnode = "input#pic_url_id_input";
+                        // this control is used to store image raw name.
+                        var namenode = "input#pic_url_name_input";
+                        
+                        if (res_json.id !== undefined && res_json.id !== "0") {
+                            node +=  "_" + res_json.id;
+                            idnode += "_" + res_json.id;
+                            namenode += "_" + res_json.id;
+                        }
+                        if (res_json.error == 0 ) {
+                            if($(node, window.parent.document).length > 0) {
+                                $(node, window.parent.document).attr('value',res_json.content);
+                                $(node, window.parent.document).val(res_json.content);
+                                $(node, window.parent.document).blur();
+                            }
+                            
+                            if($(idnode, window.parent.document).length > 0) {
+                             
+                                $(idnode, window.parent.document).attr('value',res_json.rawImageId);
+                                $(idnode, window.parent.document).val(res_json.rawImageId);
+                                $(idnode, window.parent.document).blur();
+                            }
+                            
+                            
+                            if($(namenode, window.parent.document).length > 0) {
+                             
+                                $(namenode, window.parent.document).attr('value',res_json.rawImageName);
+                                $(namenode, window.parent.document).val(res_json.rawImageName);
+                                $(namenode, window.parent.document).blur();
+                            }
+                        } else {
+                            alert(res_json.message);
+                        }
+                       
+                    } else {
+                       alert("网络不给力啊！亲");
+                    }
+                   
+                 },
+                 formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+                 //'uploadLimit' : 1,
+                 'multi': false,
+             });
+         });  
+    </script> 
+</body>
+</html>

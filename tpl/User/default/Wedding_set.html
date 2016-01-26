@@ -1,0 +1,449 @@
+ <include file="Public:head" />
+ <style type="text/css">
+ 	.picPreviewDiv{
+ 		display:inline-block;
+ 	}
+	.picPreviewDiv a.item_close {
+	position: absolute;
+	display: block;
+	width: 14px;
+	height: 14px;
+	background-position: -100px -182px;
+	text-indent: -9999px;
+	overflow: hidden;
+	background-image: url(/themes/a/images/image_upload.png);
+	}
+ </style>
+ <link href="/themes/w/css/reservation_setting.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/themes/a/css/car.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+ <script src="/js/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=ZkqN4MTTGPb3lo9gvwGhiScT"></script>
+ <script src="{lingzh::RES}/js/date/WdatePicker.js"></script>
+ <script>
+ String.format = function(src){
+     if (arguments.length == 0) return null;
+     var args = Array.prototype.slice.call(arguments, 1);
+     return src.replace(/\{(\d+)\}/g, function(m, i){
+         return args[i];
+ });};
+ 
+function add(url) {
+     var optionNum = $("input[name^='wedding_pic_url']").length;
+     if(optionNum>=10){alert("最多只能添加10张照片");return;}
+     optionNum++;
+     var res='<input type="hidden" onblur="preview({0})" id="wedding_pic_url{0}" name="wedding_pic_url{0}" value="{1}">';
+	 $('#weddingPicIpnutContainer').parent().append(String.format(res,optionNum,url));
+	 preview(optionNum,url);
+     return false;
+};
+
+function del(value) {
+	 $("#thumb_img_div_"+value).remove();
+	 $("#wedding_pic_url"+value).remove();
+     return false;
+};
+function preview(num,url) {
+	 var res='<div id="thumb_img_div_{0}" class="picPreviewDiv"><a class="item_close" onclick="del({0})" title="删除"></a><span><img id="thumb_img_{0}" class="thumb_img" src="{1}" style="max-height: 100px;margin-left: 10px;margin-right: 10px;"></span></div>';
+	 $("#thumb_imgs").append(String.format(res,num,url));
+     return false;
+}
+$(function(){
+        $('#weddingForm').ajaxForm({
+            beforeSubmit:  checkForm,  // pre-submit callback
+            success:       complete,  // post-submit callback
+			error: showError,
+            dataType: 'json'
+        });
+        function checkForm(arr){
+            if( '' == $.trim($('#title').val())){
+                alert("投票标题不能为空");
+                return false;
+            }
+			if( '' == $.trim($('#keyword').val())){
+                alert("关键词不能为空");
+                return false;
+            }
+			if( '' == $.trim($('#man').val())){
+                alert("新郎不能为空");
+                return false;
+            }
+			if( '' == $.trim($('#woman').val())){
+                alert("新娘不能为空");
+                return false;
+            }
+			if( '' == $.trim($('#wedding_time').val())){
+                alert("婚礼时间不能为空");
+                return false;
+            }
+			if( '' == $.trim($('#address').val())){
+                alert("婚礼地点不能为空");
+                return false;
+            }
+			var wedding_pic_urls = "";
+			var num = 0;
+			$("input[name^='wedding_pic_url']").each(function (index) {
+			    var option = $(this).val();
+				if ($.trim(option) != '') {
+				    wedding_pic_urls += option + "^";
+				    num++;
+				}
+			});
+			if (wedding_pic_urls.length > 1) {
+			    wedding_pic_urls = wedding_pic_urls.substring(0, wedding_pic_urls.length - 1);
+			}
+			if( '' == wedding_pic_urls){
+                alert("婚礼照片不能为空");
+                return false;
+            }
+			arr.push({name:'wedding_pic_urls', value:wedding_pic_urls});
+        }
+        function complete(data){
+            if (data.status == 0) {
+			    alert(data.info);
+			} else {
+			    window.location.href = data.url;
+			}
+        }
+
+		function showError(data){
+            alert(data);
+        }
+    });
+</script>
+  <div class="content"> 
+   <div class="cLineB"> 
+    <h4>喜帖设置 </h4> 
+    <a href="{lingzh::U('Wedding/index')}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+   </div> 
+   <form id="weddingForm" class="form" method="post" action="" enctype="multipart/form-data"> 
+    <input type="hidden" name="id" value="{lingzh:$set.id}" /> 
+     
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th width="120">关键词：</th> 
+        <td><input type="text" id="keyword" name="keyword" value="{lingzh:$set.keyword}" class="px" style="width:400px;" /> <span class="red">只能写一个关键词</span></td> 
+       </tr> 
+	   <tr> 
+        <th width="120">喜帖标题：</th> 
+        <td><input type="text" id="title" name="title" value="{lingzh:$set.title}" class="px" style="width:400px;" /> </td> 
+       </tr> 
+	   <tr> 
+        <th>喜帖封面：</th> 
+        <td>
+		  <img id="coverimg_thumb_img" class="thumb_img" src="<if condition="isset($set['msg_pic_url'])">{lingzh:$set.msg_pic_url}<else/>/themes/a/images/wedding/cover.jpg</if>" style="max-height: 100px;"><br/>
+		  <input  id='pic_url_input' onblur="syncPreviewImg('pic_url_input','thumb_img')" type="hidden" name="msg_pic_url" value="<if condition="isset($set['msg_pic_url'])">{lingzh:$set.msg_pic_url}<else/>http://img.weimob.com/static/92/b2/4c/image/20140228/20140228111311_91250.jpg</if>" class="px" style="width:400px;" /> 
+              <div class='img_upload_panel'>
+			       <div name='coverimg_uploadify'  id="coverimg_uploadify"  ></div>
+			       <div id="coverimg_Queue"></div>
+			       <div style="clr:both; height:0px;"></div>
+			  </div>
+        </td> 
+       </tr> 
+	   <tr> 
+        <th valign="top">开场动画：</th> 
+        <td valign="top">
+		      <img id="openscene_thumb_img" class="thumb_img" src="<if condition="isset($set['head_pic_url'])">{lingzh:$set.head_pic_url}<else/>/themes/a/images/wedding/opensecen.jpg</if>" style="max-height: 100px;"><br/>
+			  <div class='img_upload_panel'>
+			  	<div>
+			  		<input id='pic_url_input_1' onblur="syncPreviewImg('pic_url_input_1','thumb_img_1')" type="hidden" name="head_pic_url" value="<if condition="isset($set['head_pic_url'])">{lingzh:$set.head_pic_url}<else/>http://img.weimob.com/static/92/b2/4c/image/20140228/20140228111357_87133.jpg</if>" class="px" style="width:400px;" />
+			  	</div>
+			    <div name='openscene_uploadify'  id="openscene_uploadify"  ></div>
+			    <div id="openscene_Queue"></div>
+			    <div style="clr:both; height:0px;"></div>
+			  </div>
+	     </td>
+       </tr> 
+	   <tr> 
+        <th>背景音乐：</th> 
+        <td><input type="text" name="wedding_music_url" value="<if condition="isset($set['wedding_music_url'])">{lingzh:$set.wedding_music_url}<else/>/themes/a/images/wedding/婚礼用歌新版结婚进行曲.mp3</if>" class="px" style="width:400px;" /></td> 
+       </tr>
+	   <tr>
+		<th>婚纱照片：</th>
+		<td class="norightborder">
+		    <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="70%">
+				<tbody>
+				    <if condition="isset($wedding_pic_urls)">
+					<tr>
+						<td id="thumb_imgs" width="350" style="width:350px;">
+								<volist name="wedding_pic_urls" id="picurl">
+										<div class="picPreviewDiv" id="thumb_img_div_{lingzh:$i}">
+											<a class="item_close" onclick="del({lingzh:$i})" title="删除"></a>
+											<span>
+										    	<img id="thumb_img_{lingzh:$i}" class="thumb_img" src="{lingzh:$picurl}" style="max-height: 100px;margin-left:10px;margin-right:10px">
+										    </span>
+										</div>
+								</volist>
+						</td>
+					</tr>
+					<else/>
+					<tr>
+						<td id="thumb_imgs" width="350" style="width:350px;">
+						</td>
+					</tr>
+					</if>
+					<tr>
+						<td width="350" style="width:350px;">
+			              <div class='img_upload_panel'>
+			                <div name='uploadify'  id="uploadify"  ></div>
+			                <div id="fileQueue"></div> 
+							<div id="weddingPicIpnutContainer">
+								<if condition="isset($wedding_pic_urls)">
+									<volist name="wedding_pic_urls" id="picurl">
+											<input type="hidden"  id="wedding_pic_url{lingzh:$i}" name="wedding_pic_url{lingzh:$i}"  value="{lingzh:$picurl}" >
+									</volist>
+								</if>
+							</div>
+			                <div style="clr:both; height:0px;"></div>
+			              </div>
+            			</td>
+					</tr>
+				</tbody>
+			</table>
+		</td>
+       <tr> 
+        <th>新人名字：</th> 
+        <td>新郎：<input type="text" id="man" name="man" value="{lingzh:$set.man}" class="px" style="width:100px;" />
+		新娘：<input type="text" id="woman" name="woman" value="{lingzh:$set.woman}" class="px" style="width:100px;" /></td> 
+       </tr> 
+	   <tr> 
+        <th valign="top">婚礼寄语：</th> 
+        <td valign="top"><textarea class="px" id="info" name="description" style="width: 410px; height: 180px;">{lingzh:$set.description}</textarea></td> 
+       </tr>
+       <tr> 
+        <th>联系电话：</th> 
+        <td><input type="text" id="tel" name="tel" value="{lingzh:$set.tel}" class="px" style="width:400px;" /></td> 
+       </tr>
+	   <tr>
+        <th>婚礼时间：</th>
+          <td><input type="input" id="wedding_time" name="wedding_time" value="{lingzh:$set.wedding_time}" onClick="WdatePicker({minDate:'%y-%M-#{%d+1}', dateFmt:'yyyy-MM-dd HH:mm'})" class="px" style="width:200px;" />
+       </tr>
+	   <tr> 
+        <th valign="top">新人二维码：</th> 
+        <td valign="top">
+        	<if condition="isset($set['qrcode_url'])">
+		      <img id="qrcode_thumb_img" class="thumb_img" src="{lingzh:$set.qrcode_url}" style="max-height: 100px;">
+			  <else/>
+			  <img id="qrcode_thumb_img" class="thumb_img" style="max-height: 100px;">
+			</if><br/>
+			    <input id='pic_url_input_2' onblur="syncPreviewImg('pic_url_input_2','thumb_img_2')" type="hidden" name="qrcode_url" value="<if condition="isset($set['qrcode_url'])">{lingzh:$set.qrcode_url}</if>" class="px" style="width:400px;" />
+                <div class='img_upload_panel'>
+			       <div name='qrcodeimg_uploadify'  id="qrcodeimg_uploadify"  ></div>
+			       <div id="qrcodeimg_Queue"></div>
+			       <div style="clr:both; height:0px;"></div>
+			    </div>
+	     </td>
+       </tr> 
+       <tr>
+          <th>婚礼地址：</th>
+          <td >
+               <input  type="text" id="address" name="wedding_address" value="<php>echo empty($set['wedding_address'])?'苏州工业园区星湖街328号创意产业园':$set['wedding_address']</php>" class="px" style="width:400px;" tabindex="1" >
+               <input type="button" id="locate-btn" value="定位" class="btnGreen"  style=" margin:2px; "/>
+               <font style="color: red">请在地图上定位具体位置，用于一键导航功能</font>
+               <input type="text" style="display:none" id="customerLng" name="longtitude" value="{lingzh:$set.longtitude}"/>
+               <input type="text" style="display:none" id="customerLat" name="latitude" value="{lingzh:$set.latitude}"/>
+           </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <div id="container" style="height:300px;width: 600px;">
+                </div>
+
+            </td>
+        </tr>
+       
+      </tbody> 
+     </table> 
+    </div>
+       <div class="msgWrap" style=' text-align: center'> 
+            <button type="submit" name="button" class="btnGreen">保存</button>&nbsp; &nbsp; <a href="{lingzh::U('Wedding/index')}" class="btnGray vm">取消</a>
+     </div>
+    
+   </form> 
+     
+  </div> 
+ 
+  <script type="text/javascript">
+        function addHandler(className) {
+            var singlebody = $('.' + className).append(function(){
+                return $('.' + className + ' tr').first().clone(true);
+            });
+            
+            $('.' + className + ' tr:last input').val('');
+            $('.' + className + ' tr .numstrtxt').each(function(index){
+                $(this).html(index + 1);
+            });
+            
+            resetDisplay(className);
+        }
+        
+        function delHandler(className, element) {
+            if($('.' + className + ' tr').length > 1) {
+                $(element).parents('.trtxt').detach();
+                $('.' + className + ' tr .numstrtxt').each(function(index){
+                    $(this).html(index + 1);
+                });
+            }else{
+                $('.' + className + ' tr input').val('');
+            }
+            resetDisplay(className);
+        }
+        
+        function resetDisplay(className) {
+            $('.' + className + ' a.add').addClass('display_none');
+            $('.' + className + ' a.add:last').removeClass('display_none');
+        }
+      
+        $(function() {
+          $('.singlebody a.add').click(function(){addHandler('singlebody');});
+          $('.singlebody a.del').click(function(){delHandler('singlebody', this);});
+          
+          $('.fielddownloadbody a.add').click(function(){addHandler('fielddownloadbody');});
+          $('.fielddownloadbody a.del').click(function(){delHandler('fielddownloadbody', this);});
+          
+          //resetDisplay('singlebody');
+          //resetDisplay('fielddownloadbody');
+           var located = false;
+            //定位坐标
+            var lng = '{lingzh:$set.longtitude}';
+            var lat = '{lingzh:$set.latitude}';
+            if(lng.length <= 0 || lat.length <= 0) {
+                //lng = 113.972981;
+               // lat = 22.544814; 
+            	lng = 120.736155;
+            	lat = 31.268241;
+            }
+            var destPoint = new BMap.Point( lng, lat);
+            $(function(){
+                var map = new BMap.Map("container");
+                map.centerAndZoom(new BMap.Point(destPoint.lng, destPoint.lat), 20);//初始化地图
+                //map.enableScrollWheelZoom();
+                map.addControl(new BMap.NavigationControl());
+                var marker = new BMap.Marker(destPoint);
+                map.addOverlay(marker);//添加标注
+
+                map.addEventListener("click", function(e){
+                    if(confirm("确定红色标记为婚礼准确地址？")){
+                            destPoint = e.point;
+                            $('#customerLng').val(destPoint.lng);
+                            $('#customerLat').val(destPoint.lat);
+                            map.clearOverlays();
+                            var marker1 = new BMap.Marker(destPoint);  // 创建标注
+                            map.addOverlay(marker1); 
+                            located = true;
+                    }
+                });
+
+                var local;
+                function callback(posi){
+
+                        $("#locate-btn").removeAttr("disabled");
+                        for(var i=0;i<posi.length;i++){
+                                if(i==0){
+                                        destPoint = posi[0].point;
+                                         $('#customerLng').val(destPoint.lng);
+                                         $('#customerLat').val(destPoint.lat);
+                                }
+                                posi[i].marker.addEventListener("click", function(data){
+                                        destPoint = data.target.getPosition(0);
+                                        $('#customerLng').val(destPoint.lng);
+                                        $('#customerLat').val(destPoint.lat);
+                                });  
+                        }
+                }
+
+                $("#locate-btn").click(function(){
+                        if($("#address").val() == ""){
+                                alert("请输入宾馆详细地址！");
+                                return ;
+                        }
+                        $("#locate-btn").attr("disabled","disabled");
+                        local = new BMap.LocalSearch(map, { //智能搜索
+                                renderOptions:{map: map}
+                        });
+                        located = true;
+                        local.setMarkersSetCallback(callback);
+                        local.search($("#address").val());
+                        return false;
+                });
+            });
+
+            function ShowUploadPanel(id) {
+
+                 var url = '{lingzh::U("UploadImg/index")}' + '&id=' + id;
+
+                     $('#uploadIframe').attr('src', url);
+                     $('#upload-panel').show();
+            }
+			
+        });
+    function syncPreviewImg(fromId, toId) {    
+        document.getElementById(toId).src=document.getElementById(fromId).value;
+    }
+    </script>
+
+<script>
+function setUpload(selector,queueid,btnText,successCallback)
+	{
+		$(selector).uploadify({
+        'buttonText' : btnText,
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': queueid,
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                	successCallback(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+
+            } else {
+               alert("网络不给力啊！亲");
+            }
+
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+	 //alert(selector.html());
+     $(selector).css('width', '100%');
+	  //alert(selector.html());
+	 $(selector).append('<span class="img_upload_tips">图片大小640*320，图片大小不超过300K</span>');
+	 
+	 //alert(selector.html());
+	 return selector;
+	}
+	var tipSpan='<span class="img_upload_tips">图片大小640*320，图片大小不超过300K</span>';
+	$(function() {
+	    setUpload('#uploadify','fileQueue','上传图片',add);
+		setUpload('#coverimg_uploadify','coverimg_Queue','上传图片',function(content){
+			$('#pic_url_input').val(content);
+			syncPreviewImg('pic_url_input','coverimg_thumb_img');
+		});
+		setUpload('#openscene_uploadify','openscene_Queue','上传图片',function(content){
+			$('#pic_url_input_1').val(content);
+			syncPreviewImg('pic_url_input_1','openscene_thumb_img');
+		});
+		setUpload('#qrcodeimg_uploadify','qrcodeimg_Queue','上传图片',function(content){
+			$('#pic_url_input_2').val(content);
+			$('#qrcode_thumb_img').attr('src',content);
+		});
+	});  
+</script>
+    
+  <include file="Public:footer" />

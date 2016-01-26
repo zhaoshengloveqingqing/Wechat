@@ -1,0 +1,91 @@
+<include file="Public:head"/>  
+        <div class="content">
+          <div class="cLineB">
+              <h4 class="left">幸运大转盘活动信息 ({lingzh:$count}) 条</h4>
+                  <div class="searchbar right">  <form method="get"  action="index.php"  >
+                  <input type="text" id="msgSearchInput" class="txt left" placeholder="输入关键词搜索"  name="keyz" value="">
+                  <input type="hidden" name="ac" value="activity-lottery-list"  />
+                  <input type="hidden" name="id" value="9878"  />
+                  <input type="hidden" name="wxid" value="gh_423dwjkewad"  />
+                 
+                  <input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+                  </form>
+                  </div>
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator left">
+			<a href='/index.php?g=User&m=Lottery&a=add' title='新增幸运大转盘活动' class='btnGrayS vm bigbtn'><img src="{lingzh::RES}/images/img/activity-lottery.png" class="vm" />新增幸运大转盘活动</a>
+              
+            </div>
+          
+            <div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post"  action="" id="info" >
+          <input name="delall"  type="hidden" value="" />
+           <input name="wxid"  type="hidden" value="" />
+            <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <THEAD>
+                <TR>
+<TH align="center" valign="middle" class="select">选择</TH>
+<TH align="center" valign="middle">活动名称</TH>
+<TH align="center" valign="middle">关键字</TH>
+<TH align="center" valign="middle">有效参与人数</TH>
+<TH align="center" valign="middle">总浏览数</TH>
+<TH align="center" valign="middle">开始时间/结束时间</TH>
+<TH align="center" valign="middle">状态</TH>
+<TH align="center" valign="middle" class="norightborder">操作</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+                <TR></TR>
+                  <volist id="list" name="list">
+                <TR>
+                  <TD align="center" valign="middle"><input type="checkbox" name='del_id[]' value="842" class="checkitem"></TD>
+                  <TD align="center" valign="middle">{lingzh:$list.title}</TD>
+                  <TD align="center" valign="middle">{lingzh:$list.keyword}</TD> 
+				  <TD align="center" valign="middle">{lingzh:$list.joinnum}</TD>
+                  <TD align="center" valign="middle">{lingzh:$list.click}</TD>                  
+                  <TD align="center" valign="middle">{lingzh:$list.statdate|date='Y-m-d H:i:s',###}<br />{lingzh:$list.enddate|date='Y-m-d H:i:s',###}</TD>
+                  <TD align="center" valign="middle">
+				  <if condition="$list['status'] eq 0">未开始<elseif condition="$list['status'] eq 2"/>已经结束<else/>已经开始</if>
+				  
+				 </TD>
+                   <TD align="center" valign="middle" class="norightborder">
+				   <a href="index.php?g=User&m=Lottery&a=sn&id={lingzh:$list.id}">SN码管理</a> 
+				   <a href="index.php?g=User&m=Lottery&a=edit&id={lingzh:$list.id}">编辑</a>  
+				   <a href="
+				   <if condition="$list['status'] eq 1">				   
+				   javascript:drop_confirm('你确定要结束活动吗，结束后不可再开启本活动!', 'index.php?g=User&m=Lottery&a=setdes&id={lingzh:$list.id}');<else/>index.php?g=User&m=Lottery&a=setinc&id={lingzh:$list.id}   
+				   </if>">
+				   <if condition="$list['status'] eq 0">开始<elseif condition="$list['status'] eq 2"/><else/>结束</if>				   
+				   </a>
+				  
+				   <a href="index.php?g=User&m=Lottery&a=del&id={lingzh:$list.id}">删除</a></TD>
+                </TR>
+				</volist>
+                         
+              </TBODY>
+            </TABLE>
+           </form> 
+      
+          </div>
+            
+ 
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages"></div>
+              </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>
+ 

@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/dining.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/dining-dialog.css" media="all" />
+    <script type="text/javascript" src="/themes/w/js/jQuery.js"></script>
+    <script type="text/javascript" src="/themes/w/js/wei_webapp_v2_common.js"></script>
+    <title>{lingzh:$rest.name}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+</head>
+<body id="page_allMenu">
+    
+<div class="center">
+    <nav id='navBar'>
+        <dl>
+        </dl>
+    </nav>
+
+    <section id="infoSection">
+        <article>
+            <!--div class="h2">推荐菜</div-->
+            <div id="pInfo">
+                
+            </div>
+        </article>
+    </section>
+    <div id="footer_menu" class="footer footer_menu" style="clear:both">
+            <ul class="clear">
+			   
+                <li><a href="javascript:;" class="onactive" ><span class="icons icons_2"></span><label>点菜</label></a></li>
+                <li><a href="./index.php?g=Wap&m=Dining&a=order&token={lingzh:$token}&rest_id={lingzh:$rest_id}" ><span class="icons icons_3"></span><label>我的订单</label></a></li>
+                <!--li><a href="/sps/webfood/like?aid=13992&outletid=85&wechatid=oFovYjtyODsfp12yzVZNtNIuY4fw&v=e1fbf37c9f91764cf7423fb2d14f936e" ><span class="icons icons_4"></span><label>我的厨房</label></a></li-->
+                <li><a href="javascript:void(0);" id="my_menu"><span class="icons icons_5"><label id="num" class="num">{lingzh:$num}</label></span></a></li>
+            </ul>
+        </div>
+        <script>
+            var footer = document.getElementById("footer_menu");
+            var evtObj = {
+                handleEvent: function(evt){
+                    if("A" == evt.target.tagName){
+                        evt.target.classList.toggle("on");
+                    }
+                }
+            }
+            footer.addEventListener("touchstart", evtObj, false);
+            footer.addEventListener("touchend", evtObj, false);
+        </script>
+    </div>
+</div>
+<!--div id="mLoading" style="top: 1.5px; left: 567px;" style="display:none;"><div class="lbk"></div><div class="lcont">加载中</div></div-->
+    <script type="text/javascript">
+        window.selected = {
+            total:{lingzh:$num},
+            dishes:{lingzh:$orders}
+        };
+        var view_const_dish_SPECIAL_PRICE_YES = '2';
+        var view_const_dish_HOT_YES = '2';
+
+        function setHeight(){
+            var  cHeight;
+            cHeight = document.documentElement.clientHeight;
+            cHeight -= 50; //底部菜单的高度
+            cHeight = cHeight +"px";
+            $("#navBar").height(cHeight);
+            $("#infoSection").height(cHeight);
+        }
+        
+        //show img detail
+        function showImgDetail(thi){
+            var parentDl = $(thi).parent().parent();
+            var childImg = $(thi).children("img");
+
+            popPic(childImg.attr('src'),
+                    parentDl.attr('dname'),
+                    parentDl.attr('dprice') + '元/' + parentDl.attr('dunitName'),
+                    parentDl.attr('dIsSpecial'),
+                    parentDl.attr('dSpecialPrice') + '元/' + parentDl.attr('dunitName'),
+                    parentDl.attr('dsubCount'),
+                    parentDl.attr('dtaste'),
+                    parentDl.attr('ddescribe'),
+                    parentDl.attr('dishot')
+                );
+        }
+        //
+       function getAllList(){
+            var params = {
+            }
+            MLoading.show('加载中');
+            _doAjax('./index.php?g=Wap&m=Dining&a=menus&token={lingzh:$token}&rest_id={lingzh:$rest_id}&r='+Math.random(), 'POST', params, function(res) {
+                MLoading.hide();
+                window.res = res.data;
+                if(window.res && window.res.length){
+                    switchList();
+                    var navBar = $("#navBar");
+                    var TPL = '<dd categoryid="{id}" class="{selectedClass}" onclick="switchList({id});">{name}</dd>';
+                    (function(){
+                       var dds_HTML = iTemplate.makeList(TPL, res.data, function(k,v){
+                            return {
+                                selectedClass: 0 ==k?"active":""
+                            }
+                       });
+                       navBar.html("<dl>" + dds_HTML + "</dl>");
+                    })();
+                }
+            });
+        }
+        //
+        function switchList(id){
+            var ai = {};
+            if(id){
+                var dds = _qAll('#navBar dd');
+                for(var i = 0;ci=window.res[i]; i++){
+                    dds[i].className = null;
+                    if(id == ci.id){
+                        ai = ci;
+                        dds[i].className = "active";
+                    }
+                }
+            }else{
+                ai = window.res[0];
+            }
+//            alert(id);return false;
+            var checkHtml = '';
+            var TPL = '<dl dunitname="份" dsubcount="1" dishid="{id}" dname="{name}" dtaste="" ddescribe="{description}" dprice="{price}" dishot="{tag_name}" dspecialprice="{oprice}" disspecial="1" onclick="selectOne(this);">\
+                    <dt><h3>{name}</h3></dt>\
+                    <dd>\
+                        <a href="javascript:void(0)" class="dataIn" onclick="showImgDetail(this);event.stopPropagation();">\
+                            <img src="{imgurl}" alt="" title="">';
+
+                    TPL += '<span style="font-size:10px;">{tag_name}</span>';
+                                        
+                                        
+                 TPL +='</a>\
+                    </dd>\
+                    <dd>\
+                        <em>{price}元/份</em>\
+                    </dd>\
+                    <!--dd class="dpNum">961人点过</dd-->\
+                    <!--input type="checkbox" class="favourite" style="border:0;" value="{id}" {check} onclick="favourite(this, event);"-->\
+                    <button shopinfo="" class="{curState}"></button>\
+                </dl>';
+            document.getElementById("pInfo").innerHTML = iTemplate.makeList(TPL, ai.dishes, function(k,v){
+                if(v.discount_price){
+                    v.price = v.discount_price;
+                }
+                return {
+                    curState: (v.id in window.selected.dishes)? "selectBtn choose choosen":"selectBtn choose  unchoose",
+                    check : (v.check == '1') ? "checked" : ''
+                }
+            });
+        }
+        
+       function selectOne(container) {
+            var btn = $(container).children("button");
+            var dishid = $(container).attr("dishid");
+            var name = $(container).attr("dname");
+            var price = $(container).attr("dprice");
+            var describe=$(container).attr("ddescribe");
+            if (btn.hasClass("choosen")) {
+                btn.removeClass('choosen');
+                btn.addClass('unchoose');
+                //unselected
+                delete window.selected.dishes[dishid];
+                window.selected.total -=1;
+            } else {
+                btn.removeClass('unchoose');
+                btn.addClass('choosen');
+                //selected
+                window.selected.dishes[dishid] = {
+                    price:price,
+                    name:name,
+                    describe:describe,
+                    nums:1                    
+                }
+                window.selected.total +=1;
+
+            }
+            $(".footer_menu .num").text(window.selected.total);
+        }
+        //
+        function addToMenu(){
+            var params = '[';
+            var num = 0;
+            for(var key in window.selected.dishes){
+                params += '{"dishes_id":'+ key + ",",
+                params += '"name":"'+ window.selected.dishes[key].name + '",',
+                params += '"price":'+ window.selected.dishes[key].price + ",",
+                params += '"describe":"'+ window.selected.dishes[key].describe + '",',                
+                params += '"nums":'+ window.selected.dishes[key].nums + "},"
+                num++;
+            }
+            /*if (num == 0) {
+                return;
+            }*/
+            params = params.replace(/,$/, "");
+            params += ']';
+
+            $.ajax({
+                <if condition="isset($order_id)">
+                'url':'./index.php?g=Wap&m=Dining&a=cart&token={lingzh:$token}&cart_id={lingzh:$order_id}&r='+Math.random(),
+                <else/>
+                'url':'./index.php?g=Wap&m=Dining&a=cart&token={lingzh:$token}&r='+Math.random(),
+                </if>
+                'data':{'menus':params,'rest_id':{lingzh:$rest_id}},
+                'type':'POST',
+                'async':'false',
+                'success':function(db){
+                    var re = $.parseJSON(db);
+                    location.href='./index.php?g=Wap&m=Dining&a=mycart&token={lingzh:$token}&cart_id='+re.data;
+                }
+            });
+
+        }
+
+        //后台可自行扩展参数
+        //调用自定义弹层
+        function popPic(imgUrl,title,price, isSpecial, specialPrice, people,teast,assess,isHot){
+            var _title = title,
+                _price = price,
+                _people = null;//people,
+                _teast = teast,
+                _assess = assess;
+
+                var hotHtml = '<b>'+isHot+'</b>';
+                _tmpHtml = "<div class='content'>"+hotHtml+"<img src='"+imgUrl+"' alt='' title=''><h2>"+_title;
+
+                 if (isSpecial == view_const_dish_SPECIAL_PRICE_YES) {
+                     _tmpHtml += "<i>"+specialPrice+"</i><del>"+_price+"</del>";
+                 } else {
+                     _tmpHtml += "<i>"+_price+"</i>";
+                 }
+
+                if (_people) {
+                    _tmpHtml += "<span>"+_people+"人点过</span>";
+                }
+                _tmpHtml += "</h2>";
+
+                if (_teast) {
+                    _tmpHtml += "<h3>口味："+_teast+"</h3>";
+                }
+
+                if (_assess) {
+                    _tmpHtml += "<p>"+_assess+"</p>";
+                }
+
+                _tmpHtml += '</div>';
+            MDialog.popupCustom(_tmpHtml,true,true);
+        }
+
+        function favourite(thi, evt){
+            evt.stopPropagation();
+            var id = $(thi).val();
+            var check = '';
+            if($(thi).is(':checked')){
+                check = '1';
+            }else{
+                check = '0';
+            }
+            $.ajax({
+                url:'/sps/webfood/doLike'+'?aid=13992&outletid=85&wechatid=oFovYjtyODsfp12yzVZNtNIuY4fw&v=e1fbf37c9f91764cf7423fb2d14f936e',
+                data:{'id':id,'check':check},
+                type:'POST',
+                dataType:'json',
+                cache:false,
+                beforeSend:function(){
+                    //MLoading.show('加载中');
+                },
+                success:function(msgObj){
+                    MLoading.hide();
+                    if(msgObj.status == '0'){
+                        return false;
+                    }
+                }
+            });
+        }
+    $(document).ready(function(){
+        $('#my_menu').click(function(){
+            addToMenu();
+        });
+        getAllList();
+        setHeight();
+    });
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+    });
+</script>
+</body>
+</html>

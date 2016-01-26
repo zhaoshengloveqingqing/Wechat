@@ -1,0 +1,51 @@
+/* Write your styles */
+hr {
+	margin-left: 10px;
+	margin-right: 10px;
+	border:0;
+	height:1px;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+#account-info {
+	float: right;
+}
+
+.pi-btn-orange, .pi-btn-red {
+	width: 60px;
+	height: 60px;
+	color: #ffffff;
+}
+
+.pi-btn-orange i, .pi-btn-red i {
+	font-size: 27px;
+}
+
+.pi-btn-orange {
+	background-color: #fabe05;
+}
+
+.pi-btn-red {
+	background-color: #f15928;
+}
+
+#reminder p {
+	text-indent: 24px;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	font-size: 12px;
+	color: #fabe05;
+}
+
+#reminder p:first-child {
+	text-indent: 0;
+	padding-top: 10px;
+};
+
+.pi-data-title {
+	padding-bottom: 10px;
+}
+
+.pi-data-content {
+	text-align: center;
+}

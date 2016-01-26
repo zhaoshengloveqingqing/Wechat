@@ -1,0 +1,47 @@
+<include file="Public:head"/>
+
+<div class="content">
+  <div class="cLineB">
+    <h4>编辑转入条款</h4><a href="javascript:history.go(-1);"  class="right btnGrayS vm" style="margin-top:-27px" >返回</a>
+  </div> 
+  <div class="msgWrap">
+  <form class="form" method="post"   action=""  target="_top" enctype="multipart/form-data" >
+  <TABLE class="userinfoArea" style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+  <THEAD>
+    <TR>
+      <TH valign="top"><label for="keyword">关键词：</label></TH>
+      <TD>转入</TD>
+    </TR>
+  </THEAD>
+  <TBODY>
+  <TR>
+    <TH valign="top"><label for="text">标题：</label></TH>
+    <TD>
+      <input type="input" class="text textMiddle" id="sorts" value="<if condition='isset($terms)'> {lingzh:$terms.title} <else/> 1 </if>"  name="title" style="width:400px;" >
+    </TD>
+  </TR>
+  <TR>
+    <TH valign="top"><label for="text">内容或简介：</label></TH>
+    <TD>
+      <textarea  class="text textMiddle" id="Hfcontent" name="content" style="width:500px; height:150px">{lingzh:$terms['content']}</textarea><br />请不要多于1000字否则无法发送!
+    </TD>
+  </TR>
+  <TR>
+    <TH></TH>
+    <TD>
+      <button type="submit"  name="button"  class="btnGreen left" >保存</button>　
+      <a href="javascript:history.go(-1);"  class="btnGray vm">取消</a>
+  	</TD>
+  </TR>
+  </TBODY>
+  </TABLE>
+  </form>
+
+
+
+  </div> 
+</div>
+
+<!--底部-->
+  	</div>
+<include file="Public:footer"/>

@@ -1,0 +1,366 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="/js/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="/js/kindeditor/plugins/code/prettify.css" />
+<link rel="stylesheet" href="/themes/a/css/img_upload_panel.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+<script src="/js/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="/js/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="/js/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<style type="text/css">
+    .none {display:none}
+</style>
+<script type="text/javascript">
+function syncPreviewText(fromId, toId) {    
+  document.getElementById(toId).innerHTML=document.getElementById(fromId).value;
+}
+
+function syncPreviewImg(fromId, toId) {    
+  document.getElementById(toId).src=document.getElementById(fromId).value;
+}
+</script>
+<script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#info', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : true,
+uploadJson :'/index.php/upload/image',
+items : [
+'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut', 'image', 'multiimage']
+});
+
+});
+
+
+function resetParam() {
+            // 将所有链接参数行均隐藏
+            $('.link_param_l1,.link_param_l2').hide();
+             // 清空二级参数
+            $('#details_l2').html('');
+            // 将一级参数disable
+            $('[name="link_param_l1"]').attr('disabled', 1);
+        }
+        
+$(function () {
+        
+        // 链接类型变化事件处理
+        $("#linktype").change( function(){
+            resetParam();
+            
+            // 获得链接类型
+            var l1Module = $(this).val();
+            
+            // 显示该链接类型对应的控件
+            $('.' + l1Module).show();
+            // 将一级参数下的form控件enable
+            $('.' + l1Module + ' [name="link_param_l1"]').removeAttr('disabled');
+            if($('#linkurladdr:enabled').length > 0 && $('#linkurladdr:enabled').val().length <= 0) {
+                $('#linkurladdr').val('http://www.lingzhtech.com');
+            }
+            
+            // 如果一级参数控件是select控件，则触发change事件，去更新二级参数
+            $enabledL1SelectObject = $("select[name='link_param_l1']:enabled");
+            if($enabledL1SelectObject) {
+                 $enabledL1SelectObject.change();
+            }
+        });
+        
+        // 一级节点事件处理
+        $("select[name='link_param_l1']").change(function(){
+            var activityId = $(this).val();
+            
+            // 隐藏二级节点
+            $('.link_param_l2').hide();
+            //清空二级节点的参数内容
+            $('#details_l2').html('');
+            
+            // 若该活动二级节点不存在，退出
+            var l2Object = $('.' + activityId);
+            if(l2Object.length == 0){
+                return;
+            }
+            
+            
+            // 获取二级节点对应的详细信息
+            $.ajax({
+                url     : "index.php?g=User&m=Article&a=getActivityDetail",
+                dataType: "json",
+                type    : "POST",
+                data    : {
+                   activityId  : activityId,
+                   currentArticleId : $('#currentArticleId').val()
+                },
+                beforeSend : function(){
+                   $('#isloadingdetail').show();
+                },
+                success    : function(res){
+                   
+                    if(res == null || res.length <= 0 || res.details == null) {
+                        $('#details_l2').html('<tr><td colspan="3">您还没有创建相应的活动。请先创建活动，再从这里进行操作。</td></tr>');
+                        return;
+                    }
+                    var tbody = '';
+                    for(var i=0; i<res.details.length; i++) {
+                        
+                        tbody = tbody + '<TR><TD><input '+ (res.details[i].id==res.selected ? 'checked="1"':'') +' type="radio" required="" name="link_param_l2" value="'+res.details[i].id + '"/></TD>' 
+                                + '<TD>'+res.details[i].title+'</TD><TD>'
+                                +res.details[i].keyword+'</TD><TD>'
+                                +res.details[i].starttime+ '<br/>' + res.details[i].endtime + '</TD></TR>';
+                       
+                    }
+                    $('#details_l2').html(tbody);
+                },
+                error      : function(){
+                    alert('获取活动详细信息失败，请刷新重试！');
+                },
+                complete   : function(XMLHttpRequest, textStatus){
+                    $('#isloadingdetail').hide();
+                },
+                timeout    : 3000       
+
+          })//ajax
+            //alert($(this).children('option:selected').attr('hasSub'));
+            // 展示二级节点
+            l2Object.show();
+        });
+        
+        // 若为更新页面，则需要设置一级参数控件的初始值
+        
+        if($('#currentArticleId').length > 0){
+            $('.link_param_l1.{lingzh:$article.linktype} [name="link_param_l1"]').val('{lingzh:$article.link_param_l1}');
+        }
+        $('#linktype').change();
+        
+        
+    });
+</script>
+
+<div class="content">
+  <div class="cLineB">
+    <h4>发布文章<a id="preview" href="javascript:;" class="btnGrayS vm bigbtn">预览</a></h4>
+  </div>
+         
+  <form method="post"  action="<if condition='isset($article)'>{lingzh::U('Article/update')}<else/>{lingzh::U('Article/addNewArticle')}</if>"  enctype="multipart/form-data" >
+  <div class="msgWrap form">
+    <TABLE class="userinfoArea" border="0" cellSpacing="0" cellPadding="0" width="100%">
+        <THEAD>
+          <TR>
+            <TH><span class="red">*</span><label for="title">标题：</label></TH>
+            <TD><input type="input" class="text textMiddle" id="title" value="<if condition='isset($article)'>{lingzh:$article.title}</if>"    name="title" style="width:580px;"> </TD>
+          </TR>
+        </THEAD>
+        <TBODY>
+          <TR>
+            <TH valign="top"><span class="red">*</span><label for="classid">文章所属栏目：</label></TH>
+            <TD> 
+              <select name="classid">
+                <option   value="-1">请选择栏目</option>
+              <volist name="cls" id="vo">
+                <option   value="{lingzh:$vo.id}" <php> if (isset($article) && $article['c_id'] == $vo['id']) echo "selected='selected'";</php>>{lingzh:$vo.name}</option>
+              </volist>  
+              </select><a href="{lingzh::U('Classify/add')}"  target="ddd" >添加栏目</a>
+            </TD>
+          </TR>
+          <TR>
+            <TH valign="top"><label for="sorts">同类文章排序：</label></TH>
+            <TD><input id='sorts' class="text textMiddle"  name="sorts" value="<if condition='isset($article)'>{lingzh:$article.sorts}<else/>1</if>" style="width:400px;"  /><br/>数值越大同类中排序越靠前
+            </TD>
+          </TR>
+          <TR>
+            <TH valign="top"><label for="pic">封面图片地址：</label></TH>
+            <TD>
+                <input id="pic_url_input" type="text" name="pic" value="<if condition='isset($article)'>{lingzh:$article.pic}</if>" class="text textMiddle" style="width:400px;" onblur="syncPreviewImg('pic_url_input','art_img')">
+              <div class='img_upload_panel' >               
+                <div name='uploadify'  id="uploadify_art"  ></div>
+                <div id="fileQueue_art"></div> 
+                <div style="clr:both; height:0px;"></div>
+                </div>
+                 <img id="art_img" class="thumb_img" src="<if condition='isset($article)'>{lingzh:$article.pic}</if>" style="max-height: 100px;">
+            </TD>
+          </TR>
+          
+          <TR>
+            <TH valign="top"><label for="linktype">链接类型：</label></TH>
+            <TD>
+                <select id="linktype" name='linktype'>
+                    <volist name="linktypes" id="type">
+                        <option <eq name='article.linktype' value='$type["id"]'>selected="1"</eq>  value="{lingzh:$type.id}">{lingzh:$type.name}</option>
+                    </volist>
+                </select>
+            </TD>
+            <TD>&nbsp;</TD>
+          </TR>
+
+          <TR class='none link_param_l1 linkurls'>
+            <TH valign="top"><label for="linkurladdr">外链地址：</label></TH>
+            <TD><input type="input"  required="" class="px" id="linkurladdr" value="" name="link_param_l1" style="width:500px" ><br />
+                             </TD>
+            <TD>&nbsp;</TD>
+          </TR>
+<TR class='none link_param_l1 car'>
+  <TH valign="top"><label for="module">汽车方案：</label></TH>
+  <TD>
+      <select name="link_param_l1">
+          <volist name="carModules" id="modules">
+              <option value="{lingzh:$modules.id}">{lingzh:$modules.name}</option>
+          </volist>
+      </select>
+      <br />
+  </TD>
+  <TD>&nbsp;</TD>
+</TR>
+          <TR class='none link_param_l1 activitys' >
+            <TH valign="top"><label for="activity">活动类型：</label></TH>
+            <TD>
+                <select name="link_param_l1">
+                    <volist name="allActivities" id="activity">
+                          <option value="{lingzh:$activity.id}">{lingzh:$activity.name}</option>
+                    </volist>
+                </select>
+                <br />
+            </TD>
+            <TD>&nbsp;</TD>
+          </TR>
+
+          <TR class='none link_param_l1 modules'>
+            <TH valign="top"><label for="module">业务类型：</label></TH>
+            <TD>
+                <select name="link_param_l1">
+                    <volist name="allModules" id="modules">
+                        <option value="{lingzh:$modules.id}">{lingzh:$modules.name}</option>
+                    </volist>
+                </select>
+                <br />
+            </TD>
+            <TD>&nbsp;</TD>
+          </TR>
+
+          <TR class="none link_param_l2 dazhuanpan guaguaka youhuiquan zajindan toupiao dingdan hotel  pinglun yingxiang">
+            <TH valign="top"><label for="activity">业务：</label></TH>
+            <TD>
+                <table class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+                    <thead>
+                        <tr>
+                          <th>选择</th>
+                          <th>业务标题</th>
+                          <th>触发关键词</th>
+                          <th>时间段</th>
+                        </tr>
+                    </thead>
+                    <tbody id='details_l2'>
+
+                    </tbody>
+                </table>
+                <div id="isloadingdetail">正在获取详细信息。。。请稍后</div>
+                <br />
+            </TD>
+            <TD>&nbsp;</TD>
+          </TR>
+
+          <TR class="none link_param_l1 articles">
+            <TH valign="top"><label for="showpic">文章页是否显示封面：</label></TH>
+            <TD>
+              是<input class="radio" type="radio" name="display_pic" value="1" <php> if(!isset($article) || $article['display_pic']==1) echo 'checked="checked"'</php>/>
+              否<input class="radio" type="radio" name="display_pic" value="0" <php> if(isset($article) && $article['display_pic']==0) echo 'checked="checked"'</php>/>
+            </TD>
+          </TR>
+          
+        <TR class="none link_param_l1 articles">
+            <TH valign="top"><label for="showpic">文章页是否显示标题和时间：</label></TH>
+            <TD>
+              是<input class="radio" type="radio" name="display_title_time" value="1" <php> if(!isset($article) || $article['display_title_time']==1) echo 'checked="checked"'</php>/>
+              否<input class="radio" type="radio" name="display_title_time" value="0" <php> if(isset($article) && $article['display_title_time']==0) echo 'checked="checked"'</php>/>
+            </TD>
+          </TR>
+
+          <TR class="none link_param_l1 articles">
+            <TH valign="top"><label for="info">详细内容：</label></TH>
+            <TD><textarea name="content" id="info"  rows="5" style="width:590px;height:360px"><if condition='isset($article)'> {lingzh:$article.content} </if> </textarea></TD>
+          </TR>  
+
+          
+
+          <tr class="none link_param_l1 articles">
+            <TH valign="top"><label for="tmpl">文章模板：</label></TH>
+            <td>
+              <div>
+
+              <ul class="cateradio3">
+                <li><label><img src="{lingzh::RES}/images/content_pic_preview.png"><input class="radio3" type="radio" name="tmplId" value="1"  <php> if(!isset($article) || $article['tmpl']=='content_pic') echo 'checked'</php> /> 图文并茂模板（默认） </label>
+                </li>
+
+                <li><label><img src="{lingzh::RES}/images/news3.png"><input class="radio3" type="radio" name="tmplId" value="3" <php>if(isset($article) && $article['tmpl']=='content_simple') echo 'checked'</php>/>简约显示版 </label>
+                </li>
+
+                <li><label><img src="{lingzh::RES}/images/content_author_preview.png"><input class="radio3" type="radio" name="tmplId" value="2" <php>if(isset($article) && $article['tmpl']=='content_author') echo 'checked'</php>  />微信图文消息版（带作者） </label>
+                </li>
+              </ul>
+              </div>
+            </td>
+          </tr>
+
+
+          <TR>
+            <TH></TH>
+            <TD><input type="submit" value="保存" name="sbmt" class="btnGreen left">　<a href="{lingzh::U('Article/index')}"  class="btnGray vm">取消</a></TD>
+          </TR>
+        </TBODY>
+    </TABLE>
+            
+  </div>
+  <if condition='isset($article)'><input type="hidden" name="id" id="currentArticleId" value="{lingzh:$article.id}" /></if>
+  </form>
+          
+</div>     
+ 
+<script>
+
+$(function () {
+   
+    $("#uploadify_art").uploadify({
+        'buttonText' : '选择封面',
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': 'fileQueue_art',
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                    document.getElementById('art_img').src=  res_json.content ;
+                    //$('#picUrl_art').val(res_json.content);
+                    $('#pic_url_input').val(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+
+            } else {
+               alert("网络不给力啊！亲");
+            }
+
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+     $("#uploadify_art").css('width', '100%');
+     $("#uploadify_art").append('<span class="img_upload_tips">支持JPG、PNG、GIF等格式，但大小不超过1MB,<br />或者将图片上传到POCO.cn获取外链</span>');
+
+
+});
+
+</script>
+<include file="Public:footer"/>

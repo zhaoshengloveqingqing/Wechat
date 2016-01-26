@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="/themes/a/wall/core1.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/themes/a/wall/main1.css" media="all" />
+        <link href="/tpl/static/emoji.css" type="text/css"  rel="stylesheet"  />
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/themes/a/wall/helper_min.js"></script>
+        <script type="text/javascript" src="/themes/a/wall/main.js"></script>
+        <script type="text/javascript" src="/themes/a/wall/msgScroll.js"></script>
+		<title>{lingzh:$set.title}</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <!-- Mobile Devices Support @begin -->
+            <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+            <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+            <meta content="no-cache" http-equiv="pragma">
+            <meta content="0" http-equiv="expires">
+            <meta content="telephone=no, address=no" name="format-detection">
+            <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+            <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <!-- Mobile Devices Support @end -->
+    </head>
+    <body onselectstart="return true;" ondragstart="return false;">
+        <script type="text/javascript">
+	Date.prototype.Format = function (fmt) { //author: meizz 
+		var o = {
+			"M+": this.getMonth() + 1, //月份 
+			"d+": this.getDate(), //日 
+			"h+": this.getHours(), //小时 
+			"m+": this.getMinutes(), //分 
+			"s+": this.getSeconds(), //秒 
+			"q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+			"S": this.getMilliseconds() //毫秒 
+		};
+		if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+		for (var k in o)
+		if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+		return fmt;
+	}
+	$(function(){
+		window.msgr = new msg({
+			auto: true		}).init("#list_message").work();
+		window.msgr.index = 0;
+		window.msgr.getMessage();
+
+		 setInterval(function(){
+		 	window.msgr.getMessage();
+		 }, 10000);
+
+
+		window.msgr.getMessage = function(){
+			var that = this;
+			$.ajax({
+				url: "{lingzh::U('Wall/jsonreply')}",
+				type:"post",
+				data:{index: ++that.index,id:{lingzh:$set.id}},
+				dataType:"JSON",
+				success: function(res){
+					if(res.status == 1){
+						that.data = res.data;//that.data.concat(res.data);
+						var ols = [];
+						ols.push('<ol class="ol_0">');
+						ols.push("<!--list_lis_0-->");
+						ols.push('</ol><ol class="ol_1">');
+						ols.push("<!--list_lis_0-->");
+						ols.push('</ol><ol class="ol_2">');
+						ols.push("<!--list_lis_0-->");
+						ols.push('</ol>');
+						var TPL = '<li>\
+								<div class="header">\
+									<span><img src="{headimgurl}" /></span>\
+								</div>\
+								<div class="content">\
+									<h3>{nickname} <label style="font-size:14px;">{pdate}</label></h3>\
+									<p>{text}</p>\
+								</div>\
+							</li>';
+							var html = iTemplate.makeList(TPL, that.data, function(k,v){
+								return {
+									pdate:new Date(v.createtime * 1000).Format("yyyy-MM-dd hh:mm:ss")
+								}
+							});
+							if(that.data != null && that.data.length>3){
+								ols[1] = ols[3] = ols[5] = html;
+								that.length = that.data.length;
+							}else{
+								ols[3] = html;
+							}
+							
+							var ul = document.getElementById("list_message_ul");
+							ul.innerHTML = ols.join("<!----Eric_wu---->");
+							
+							/*if(!that.first){
+								that.first = true;
+								that.current = that.length-3;
+								that.container.animate({marginTop:-(that.current*176)}, 0);
+							}*/
+					}else{
+						return;
+					}
+				}
+			});
+			return that;
+		}
+		window.msgr.getMessage();
+	//
+	});
+
+</script>
+<style>
+body{
+	background-image: url({lingzh:$set.backgroud_pic_url});
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+</style>
+
+<div class="body">
+<!----header---->
+<div class="main_header">
+	<div class="relative"><label id="tip_f11" class="tip tip_f11">全屏请按F11</label></div>
+	<script type="text/javascript">
+		$("#tip_f11").delay(20000).animate({top:-60});
+	</script>
+</div>
+<!----header end---->
+
+<!----mainbody---->
+	<div class="main_body">
+		<div class="align_right pr_10 pt_10">
+				<img src="/themes/a/wall/logo.png" />
+			</div>
+	<div class="box_wall">
+		<div class="wrapper clear" style="background:none;">
+			<div class="fl">
+				<table>
+					<tr>
+						<td class="logo">
+							<div class="img">
+								<img src="{lingzh:$set.logo}" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="name vertical_middle">
+							<h2 class="h2">{lingzh:$set.name}</h2>
+							<h6 class="h6">{lingzh:$set.title}</h6>
+						</td>
+					</tr>
+					<if condition="isset($set['qrcode_url'])">
+					<tr>
+						<td class="vertical_bottom">
+							<div class="img">
+								<img src="{lingzh:$set.qrcode_url}" />
+							</div>
+						</td>
+					</tr>
+					</if>
+				</table>
+			</div>
+			<div class="fr">
+				<div id="list_message" >
+					<ul id = "list_message_ul" class="list_message">
+						<!--Eric_wu-->
+					</ul>
+				</div>
+				<div class="nav">
+					<a href="javascript:;" onclick="window.msgr.next();" class="pre">&nbsp;</a>
+					<a href="javascript:;" onclick="window.msgr.prev();" class="next">&nbsp;</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box_menu">
+	<ul class="clear">
+		<ol class="fl"><label>{lingzh:$set.description}</label></ol>
+				<li>
+			<a href="javascript:;" class="yy on" onclick="playMsc(this, event);">
+				<span></span>
+				<label>微信墙</label>
+			</a>
+			<audio id="msc" loop="true" hidden="true" autoplay="true"><source src="{lingzh:$set.music_url}" ></audio>
+		</li>
+				<li>
+			<a href="javascript:;" class="qp" onclick="fullScreen(event, this);">
+				<span></span>
+				<label>全屏</label>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:;" class="ewm" onclick="$('#qrcode').addClass('on');">
+				<span></span>
+				<label>二维码</label>
+			</a>
+		</li>
+		<if condition="isset($lotterys)">
+		<li>
+			<a href="{lingzh::U('Wall/lottery',array('id'=>$set['id']))}" class="cj">
+				<span></span>
+				<label>抽奖</label>
+			</a>
+		</li>
+		</if>
+		<li>
+			<a href="javascript:;" class="wxq on">
+				<span></span>
+				<label>微信墙</label>
+			</a>
+		</li>
+	</ul>
+	<div id="qrcode" class="qrcode">
+		<header class="header">
+			<ul>
+				<li style="float:left;"><h5>二维码</h5></li>
+				<li style="float:right;">
+					<span class="close" onclick="$('#qrcode').removeClass('on');" style="padding-left:0;"></span>
+				</li>
+			</ul>
+			<div class="qbody">
+				<span><img src="{lingzh:$set.qrcode_url}" /></span>
+			</div>
+		</header>
+	</div>
+</div>
+<div class="align_center white"><a href="." class="white">©{lingzh::C('company_short_name')}<a></div>
+</div>
+        		<div mark="stat_code" style="width:0px; height:0px; display:none;">
+					</div>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<include file="lingzh:header"/>
+
+<style type="text/css">
+a { color:#626262;}
+
+.maincontent { width: 1100px;  margin: 10px auto; }
+
+.sideBar { border: 1px solid #D3D3D3; float: left; width: 18%; }
+.sideBar .catalogList ul {background-color: #F3F3F3;width: 100%; min-height: 770px;}
+.sideBar .catalogList ul li{display: block; text-align:center;}
+
+.sideBar .catalogList ul li.selected { background-color: #72A4C7; color: #FFF; font-size:14px; height:35px; padding-top:5px;}
+.sideBar .catalogList ul li.nav-header { background-color: #f3f3f3; line-height: 40px;  font-size: 16px; font-weight: bold; }
+
+
+.sideBar .catalogList ul li.subCatalogList {  margin-top: 2px; line-height: 30px; font-size:14px;height:35px; padding-top:5px; border-top: 1px solid #D3D3D3;}
+.sideBar .catalogList ul li.subCatalogList a {display: block;}
+.sideBar .catalogList ul li.subCatalogList:hover {  background-color: #72A4C7;}
+.sideBar .catalogList ul li:hover a,.sideBar .catalogList ul li:hover span{  color:#fff; text-decoration: none;}
+
+
+.sideBar .catalogList ul li.selected a { color: #fff; }
+
+.content { border: 1px solid #D3D3D3;border-left:none;float: left; padding: 0px 20px; background-color: #FFF; min-height: 770px; width: 75% }
+
+.content .addwx {
+background: url(/themes/a/images/addwx.png) no-repeat 0 center;
+overflow: hidden;
+cursor: pointer;
+width: 259px;
+display: block;
+height: 80px;
+text-align: center;
+line-height: 80px;
+margin-left: 10px;
+color: #fff;
+ font-size: 20px;
+ font-weight:bolder;
+ 
+}
+
+.content .addNewWeixin {
+  color: #fff;
+  
+  font-size: 22px;
+  font-weight: 400;
+-webkit-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+-moz-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  margin: 25px 0px;
+}
+
+.content .addwx:hover {
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+-webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+-moz-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+-webkit-border-radius: 3px 3px;
+-moz-border-radius: 3px/3px;
+border-radius: 3px/3px;
+}
+
+.content .wx_token {color:#235575; font-size:13px; font-weight: bolder; line-height:26px; word-wrap: break-word;}
+
+.content .wx_edit_btn {background: url(/themes/a/images/wx_edit_btn.png) no-repeat 11px center; padding: 10px 30px 10px 32px; background-color: #dae0e3; }
+.content .wx_edit_btn:hover {text-decoration: none; box-shadow: 0 0 2px #828a8e;}
+
+.content .wx_del_btn {background: url(/themes/a/images/wx_del_btn.png) no-repeat 17px center; padding: 10px 30px 10px 32px; background-color: #DBE0E4;}
+.content .wx_del_btn:hover {text-decoration: none;  box-shadow: 0 0 2px #828a8e;}
+
+.content .wx_fun_btn {background: url(/themes/a/images/wx_fun_btn.png) no-repeat 0 center; padding: 10px 35px 10px 40px; color: #fff;font-weight: 500; font-size:15px; padding-left:21px;}
+.content .wx_fun_btn:hover {text-decoration: none; color: #fff;}
+
+.wx_container {border: 1px solid #D3D3D3; margin-top:10px;min-height: 500px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;} 
+.wx_container .header { line-height: 42px; height: 42px; border-bottom: 1px solid #D3D3D3;background-color:#f0f0f0;}
+.wx_container .header .wx_setting {float: left; width: 45%; text-align: center; font-size:16px; color:#424242; font-weight:400; background-color:#f0f0f0;}
+.wx_container .header .mp_setting {float: left; width: 54%; text-align: left;border-left: 1px solid #D3D3D3; }
+.wx_container  .wx_account {border-bottom: 10px solid #fff;width: 100%; height: 115px; background-color: #E8EDF2;}
+.wx_container  .wx_account .wx_logo{float:left;width: 20%; text-align: center; height: 95px; background-color: #ECF1F6; padding-top: 20px;}
+.wx_container  .wx_account .wx_edit{float:left;width: 25%; height: 95px; background-color: #ECF1F6;padding-top: 20px;}
+.wx_container  .wx_account .wx_handler{float:left;width: 54%; height: 95px; background-color: #e7edf0;padding: 13px 0px 0px 0px;}
+.mp_setting span a{ color:#c11111; font-size:12px; margin-left: 5px;}
+.mp_setting span a:hover{ color:#c11111; font-size:12px; text-decoration:none;}
+
+
+
+.content { border: 1px solid #D3D3D3;border-left:none;float: left; padding: 0px 20px; background-color: #FFF; min-height: 770px; width: 75% ;}
+
+.content .star { color: red; font-weight:bold;}
+
+.content .title {font-size: 18px; padding: 20px 0; border-bottom: 1px solid #EEE; font-weight: bold; color: #424242;}
+
+.content .input-box {width: 300px; height: 14px; padding: 8px 10px; margin:10px; border: 1px solid #CCC; border-radius: 2px 2px 2px 2px;} 
+.content label{ height: 14px;color: #626262; font-size:14px;} 
+
+.content  .btnGreen {
+border: 1px solid #3D810C;
+box-shadow: 0 1px 1px #AAA;
+-moz-box-shadow: 0 1px 1px #aaa;
+-webkit-box-shadow: 0 1px 1px #AAA;
+padding: 5px 20px;
+cursor: pointer;
+display: inline-block;
+text-align: center;
+vertical-align: bottom;
+overflow: visible;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+background-color: #5BA607;
+background-image: linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -moz-linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -webkit-linear-gradient(bottom, #4D910C 3%, #69B310 97%, #FFF 100%);
+color: #FFF;
+font-size: 14px;
+line-height: 1.5;
+}
+
+.content .btnGreen:hover {
+background-color: #5BA607;
+background-image: linear-gradient(bottom, #3d810c 3%, #69b310 97%, #fff 100%);
+background-image: -moz-linear-gradient(bottom, #3d810c 3%, #69b310 97%, #fff 100%);
+background-image: -webkit-linear-gradient(bottom, #3D810C 3%, #69B310 97%, #FFF 100%);
+color: #FFF;
+}
+
+
+.content .userinfoArea { margin: 20px 0; }
+.userinfoArea th {font-size:15px; color:#626262;}
+
+.apply_tip td{font-size:14px;color:gray;text-align:left;}.apply_tip a{text-decoration:none; color:blue}
+.manual-bind{
+	text-align: left;
+	margin-top: 10px;
+	font-size: 14px;
+}
+.manual-bind a{
+	text-decoration: none;
+        color:blue;
+}
+
+.msgWrap .tips {color: #d45b5b; font-weight:bold;}
+.msgWrap .tips a {color:#0b4f7a; font-weight: bolder; text-decoration: underline}
+.msgWrap .tips .li {}
+</style>
+
+<div class="maincontent">
+  <div class="sideBar">
+
+    <div class="catalogList">
+    <div style="float:left; position: absolute; top:115px; margin-left:45px;"> <img src="/themes/a/images/listicon2.png"/></div>
+      <ul>            
+        <li class="nav-header" >管理中心</li>
+        <li class="subCatalogList selected" > <a>我的公众号</a></li>
+        <li class="subCatalogList"> <a href="{lingzh::U('Index/useredit')}">修改密码</a> </li>
+        <li class="subCatalogList"> <a href="{lingzh::U('Index/activate')}">账户充值</a> </li>
+      </ul>
+    </div>
+  </div>
+
+    
+<div class="content">
+  <if condition="$public_count eq 0">
+    <div class="title"><span>欢迎体验一键绑定微信公众号</span></div>
+    <div>
+        <form id="login_form" action="{lingzh::U('User/Account/autobind')}" method="POST">
+            
+        <div class="msgWrap">
+            
+            <div class="tips" style="padding-top:15px; font-size:13px; line-height:28px; padding-left:15px; background-color:#dde8fa; padding-bottom:15px;">
+                <b>★ 注意事项 ★</b>
+                <ul>
+                    <li>1. 请使用<a href="https://mp.weixin.qq.com" >微信公众平台</a>的<b>登录账号</b>，不是<b>公众号名称</b>和<b>微信号</b>；</li>
+                    <li>2. 请务必在您登录<a href="https://mp.weixin.qq.com">微信公众平台</a>后，在左侧菜单“<b>设置</b>”－》“<b>账号信息</b>”页面设置微信号和头像，否则无法绑定；</li>
+                    <li>3. 如果一键绑定无法实现您的要求，请使用&gt;&gt;<a href="{lingzh::U('User/Account/add')}">手动绑定</a>&lt;&lt;；</li>
+                </ul>
+                <div style="padding-top:15px;padding-left:15px;"><img src="themes/a/images/wx.jpg" /></div>
+            </div>
+            
+             <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+                    <tbody>
+                    <tr>
+                            <td width="24%">&nbsp;</td>
+                            <td width="76%"><span class="error-text"></span></td>
+                    </tr>
+                    <tr>
+                            <th ><span class="star">*</span> 微信公众平台登录名:</th>
+                            <td>
+                                    <input required="" type="text" name="user_name" id="user_name" class="input-box" value=""><img src="themes/a/images/wx1.png" />
+                            </td>
+                    </tr>
+                    <tr>
+                        <th><span class="star">*</span> 微信公众平台密码:</th>
+                        <td><input type="password" required=""  name="password" id="password" class="input-box"><img src="themes/a/images/wx2.png" /></td>
+                    </tr>
+                    <tr class="apply_tip">
+                        <td colspan="2"><br/><span style='margin-left:30px'>提示：此处为微信公众平台的登录账号(非{lingzh::C('company_short_name')}账号)，尚未申请的请点击<a href="http://mp.weixin.qq.com" target="_blank">&gt;&gt;申请&lt;&lt;</a></span></td>
+                    </tr>
+                    <tr>
+                            <td>&nbsp;</td>
+                            <td >
+                                <div class="addNewWeixin">
+                                    <input class="addwx" title="一键绑定公众号" type="submit" value="  一键绑定公众号"/>
+                                  </div>
+                            <div class="manual-bind" style="font-family:微软雅黑; font-size:12px; color:#7a7979; font-weight:bolder; padding-left:15px;">不想输入账号和密码? 点击进入&gt;&gt;<a href="{lingzh::U('User/Account/add')}">手动绑定</a>&lt;&lt;</div>
+                            </td>
+                    </tr>
+            </tbody>
+        </table>
+        </div>
+        </form>
+    </div>
+  </if>
+  <if condition="isset($info)">
+  <div class="wx_container">
+    <div class="header">
+      <div class="wx_setting">公众号设置</div>
+      <div class="mp_setting">
+        
+        <span style='color:#c11111; font-size:14px; margin-left:10px'>● 请先到微信公众号后台配置</span>
+        <!--<span style='margin-left:80px'>
+          <img src="/themes/a/images/help.png" /><a href="{lingzh::U('Home/Index/help')}" >查看帮助</a>
+        </span>-->
+      </div>    
+    </div>            
+    <div class="wx_list">
+    <volist name="info" id="vo"> 
+      <div class="wx_account">
+        <div class="wx_logo">
+		       
+  				<div style="float:left; margin-left:15px; "><img src="/themes/a/images/logo.jpg" width="54" height="54"></div>
+                <div style="text-align:left; margin-left:85px;"> <if condition="$vo['type'] eq 1">
+		        <label style="color:red"><img src="/themes/a/images/fw.png" width="38" height="16"></label>
+				<else/>
+				<label style="color:red"><img src="/themes/a/images/dy.png" width="38" height="16"></label>
+				</if></div>
+  				<div style="color:#626262; font-size:14px; padding-top:5px; margin-left:85px; text-align:left;">{lingzh:$vo.wxname}</div>
+        </div>
+
+        <div class="wx_edit">
+          <div style="padding-top:10px;"><a class="wx_edit_btn" href="{lingzh::U('Account/edit',array('id'=>$vo['id']))}">编辑</a>　<a class="wx_del_btn" href="#" onclick="del({lingzh:$vo.id})">删除</a></div>
+          </br>
+          <div style="margin-top:10px; margin-left:20px;"><a class="wx_fun_btn" href="{lingzh::U('Function/index',array('id'=>$vo['id'],'token'=>$vo['token']))}" class="btnGreens" > 进入功能管理  </a></div>
+        </div>
+        
+        <div class="wx_handler">
+  				<span style="margin-left:10px; color:#565252; font-weight: bolder; font-size:14px; font-family:Arial;">URL:&nbsp;</span><span class="wx_token copy_text">http://{lingzh::C('wx_handler_server')}/index.php/api/<php>echo $vo['token'];</php></span>
+          <br />
+          <span style="margin-left:10px;color:#565252; font-weight: bolder; font-size:14px;">Token:&nbsp;</span><span class="wx_token copy_text"><php>echo$vo['token'];</php></span>&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+      </div>
+    </volist>
+    </div>          
+  </div>
+  </if>
+          
+        </div>
+        
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+
+</div>
+	 <script>
+	 function del(id) {
+	 	if(confirm("删除后系统中已设置好的各功能模块的内容将被清空，请您确认是否进行删除操作！如需绑定其他公众号，请点击编辑即可，无需删除重置。")){ 
+			location.href="{lingzh::U('Account/del')}" + "&id=" + id;
+		}
+	}
+
+</script>
+<include file="Public:footer"/>	

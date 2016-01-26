@@ -1,0 +1,129 @@
+<include file="Shop:header"/>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+<style type="text/css">
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+.o_num_input .number_box{
+  text-align: center;
+  border: none;
+  width: 35px;
+  margin:0px 0px 0px 0px;
+  font-size: 16px;
+}
+</style>
+
+<div class="main">
+  <div class="p_mod">
+    <h2 class="p_mod_title">
+      <?php if($_GET['token'] == '53cb3b7ez79'){echo '我的洗衣车';} else {echo '我的购物车';} ?>
+    </h2>
+    <div class="car">
+      <volist name="products" id="p">
+      <div class="car_list clearfix">
+        <div class="car_content clearfix">
+          <h3><a href="{lingzh:$p.url}">{lingzh:$p.name}</a></h3>
+          <a href="{lingzh:$p.url}">
+            <img src="{lingzh:$p.logo_url}" style="height: auto" />
+          </a>
+          <div class="car_property">
+            <span class="price_now">单价：<font>￥</font><font id='price{lingzh:$p.product_id}'>{lingzh:$p.price}</font></span>
+            <?php if($p['size_name']){ ?>
+            <span class="price_now">{lingzh:$p.size_alias}：<font style="font-size: 14px;" >{lingzh:$p.size_name}</font></span>
+            <?php } ?>
+            <?php if($p['size_name']){ ?>
+            <span class="price_now">{lingzh:$p.color_alias}：<font style="font-size: 14px;">{lingzh:$p.color_name}</font></span>
+            <?php } ?>
+            <?php if($p['inventory'] >= $p['amount']) { $key = $p['product_id'] . $p['key']; ?>
+            <div class="o_num_input clearfix" id="{lingzh:$key}">
+              <a class="minus ts2" href="javascript:;" onclick="plus_minus({lingzh:$p.product_id}, -1,{lingzh:$p.price},'{lingzh:$p.key}')">-</a>
+              <input id="qty{lingzh:$key}" type="number" class="number_box" readonly="readonly" min="1" lastnum="1" value="{lingzh:$p.amount}" data-max="{lingzh:$p.inventory}"/>
+              <a class="plus ts2 on" href="javascript:;" onclick="plus_minus({lingzh:$p.product_id},1,{lingzh:$p.price},'{lingzh:$p.key}')">+</a>
+            </div>
+            <?php } else { ?>
+              <span class="price_now limit_inventory"><font style="font-size: 14px; color:red">无货</font></span>
+            <?php } ?>
+            <a class="u_order_return delete" href="{lingzh:$p.delete_from_cart_url}">删除商品</a>                     
+          </div>
+        </div>
+      </div>
+      </volist>
+      <p><span class="price_now" id="total_fee">总价格：<font>￥</font><font id="item_amount">{lingzh:$item_amount}</font></span></p>
+    </div>            
+  </div>
+
+  <div class="o_btn clearfix">
+    <if condition="$item_amount neq 0">
+    <input type="button" class="o_btn_back ts1" onclick="go_shopping();" value="继续<?php if($_GET['token'] == '53cb3b7ez79'){echo '添加';} else {echo '购物';} ?>"/>
+    <input type="button" class="o_btn_submit ts1" onclick="goPay()" value="去结算" />
+    </if>
+  </div>
+ 
+</div>
+
+<div class="clr"></div>
+<notempty name="shop['name']">
+  <div class="copyright">
+    ©<php> echo date('Y').'  '.$shop['name'];</php> 
+  </div>
+</notempty>
+
+<script type="text/javascript">
+function goPay()
+{ 
+  if($('.limit_inventory').length > 0)
+  {
+    alert("请删除无货的商品！");
+    return;
+  }
+
+  location.href='{lingzh:$checkout_url}';
+}
+
+//加减
+function plus_minus(pid, number,price,key) {
+  var node = $('#qty'+pid + key);
+    var num = parseInt(node.val());
+    num = num + parseInt(number);
+    if (num < 1) {
+        return false;
+    }
+    if(num > parseInt(node.attr('data-max')))
+    {
+      return false;
+    }
+    $('#qty'+pid + key).attr('value',num);
+    update_cart(pid, num,price,key);     
+}
+
+//更新购物车
+function update_cart(pid, num,price,key) {
+  $.ajax({
+    url: '{lingzh:$ajax_update_cart_url}&id='+pid+'&count='+num+'&key='+key,
+    success: function( data ) {
+      var jsonObj = eval("("+data+")");
+      if(jsonObj){
+        var total = 0;
+
+        for(var productObj in jsonObj){
+            var unit_price =  parseInt($('#price'+productObj).html());
+            var count = jsonObj[productObj]['count']
+          total += unit_price *  count;
+        }
+        $('#item_amount').html(total);
+
+      }
+    }
+  });
+}
+
+function go_shopping(){
+	location.href = '{lingzh:$home_url}';
+}
+</script>
+</body>
+</html>

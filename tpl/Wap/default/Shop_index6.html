@@ -1,0 +1,56 @@
+<include file="Shop:header"/>
+<style type="text/css">
+.waterfall{
+  list-style: none outside none;
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.waterfall li{
+  margin-top: -38px;
+}
+.waterfall img{
+  width: 100%;
+}
+.waterfall #title{
+  filter:alpha(opacity=50);
+  -moz-opacity:0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  position: relative;
+  bottom: 43px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+</style>
+
+<ul class="waterfall">
+  <?php foreach ($categories as $key => $val) { ?>
+    <li onclick="view(this)" durl='{lingzh:$val.url}'>
+        <img src="{lingzh:$val.logo_url}">
+        <div id="title">{lingzh:$val.name}</div>
+    </li>
+  <?php } ?>
+</ul>
+
+<div class="clr"></div>
+<php>
+    echo CopyRightHelper::generateShopCopyRight($_GET["token"]);
+</php>
+<script type="text/javascript">
+function view($this){
+  window.location.href = $($this).attr('durl');
+}
+</script>
+</body>
+</html>

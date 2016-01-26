@@ -1,0 +1,125 @@
+<include file="Public:head"/>
+<div class="content">
+<div class="cLineB">
+  <h4><if condition='isset($apply)'>修改与会人员<else/>添加与会人员</if></h4>
+  <a href="{lingzh::U('AttendApply/index')}" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+<div class="msgWrap bgfc">
+  <form class="form" method="post" action="{lingzh::U('AttendApply/modify')}"  onSubmit="return formValidate();" >  
+    <input type="hidden" name="apply_id" value="<?php if(isset($apply)) echo $apply['id']; ?>"></input>
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tbody>
+        <tr>
+          <th width="186"><span class="red">*</span>姓名：</th>
+          <td>
+            <input style="width:400px;" name="name" class="text textMiddle" value="<?php if(isset($apply)) echo $apply['name']; ?>"></input>
+          </td>
+        </tr>
+        <tr>
+         <th width="186"><span class="red">*</span>手机号码：</th>
+          <td>
+            <input style="width:400px;" name="contact" class="text textMiddle" value="<?php if(isset($apply)) echo $apply['contact']; ?>"></input>
+          </td>
+        </tr>
+        <tr>
+         <th width="186"><span class="red">*</span>出席人数：</th>
+          <td>
+            <select style="width:420px;" name="attend_num">
+            	<option  value="" >请选择出席人数</option>
+            	<option  value="1" <?php if(isset($apply)) echo $apply['attend_num'] == '1' ? 'selected' : '';?>  >1</option>
+            	<option value="2"  <?php if(isset($apply)) echo $apply['attend_num'] == '2' ? 'selected' : '';?> >2</option>
+            	<option value="3"  <?php if(isset($apply)) echo $apply['attend_num'] == '3' ? 'selected' : '';?> >3</option>
+            	<option value="4"  <?php if(isset($apply)) echo $apply['attend_num'] == '4' ? 'selected' : '';?> >4</option>
+            	<option value="5"  <?php if(isset($apply)) echo $apply['attend_num'] == '5' ? 'selected' : '';?> >5</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+         <th width="186"><span class="red">*</span>房间类型：</th>
+          <td>
+            <select style="width:420px;" name="room_type">
+            	<option  value="" >请选择房间类型</option>
+            	<option  value="0" <?php if(isset($apply)) echo $apply['room_type'] == '0' ? 'selected' : '';?>  >标间</option>
+            	<option value="1"  <?php if(isset($apply)) echo $apply['room_type'] == '1' ? 'selected' : '';?> >单间</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+         <th width="186"><span class="red">*</span>入住时间：</th>
+          <td>
+            <input style="width:400px;" name="checkin_time" class="text textMiddle" value="<?php if(isset($apply)) echo $apply['checkin_time']; ?>"  onClick="WdatePicker({readOnly : true, dateFmt:'yyyy-MM-dd HH:mm:ss'})"></input>
+          </td>
+        </tr>
+        <tr>
+         <th width="186"><span class="red">*</span>退房时间：</th>
+          <td>
+            <input style="width:400px;" name="checkout_time" class="text textMiddle" value="<?php if(isset($apply)) echo $apply['checkout_time']; ?>"  onClick="WdatePicker({readOnly : true, dateFmt:'yyyy-MM-dd HH:mm:ss'})"></input>
+          </td>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+          <td>
+            <button type="submit" name="button" class="btnGreen">保存</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  </div> 
+</div>
+<script src="/js/date/WdatePicker.js"></script>
+<script>
+	function isMobileValid(mobile) {
+		if(mobile.length==0) {
+		   return false;
+		}    
+		if(mobile.length!=11) {
+		   return false;
+		}
+		return !!mobile.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+	}
+	function formValidate(){
+		var name = $("input[name='name']").val(),
+				mobile = $("input[name='contact']").val();
+				attend_num = $("select[name='attend_num']").val(),
+				room_type = $("select[name='room_type']").val(),
+				checkin_time = $("input[name='checkin_time']").val();
+				checkout_time = $("input[name='checkout_time']").val();
+		if (!name) {
+			alert("请输入姓名");
+			return false;
+		}
+		if(!isMobileValid(mobile)) {
+			alert("请输入正确的手机号！");
+			return false;
+		}
+		if (!attend_num) {
+			alert("请选择出席人数");
+			return false;
+		}
+		if (!room_type) {
+			alert("请选择房间类型");
+			return false;
+		}
+		if (!checkin_time) {
+			alert('请设置入住时间');
+			return false;
+		}
+		if (!checkout_time) {
+			alert("请设置退房时间");
+			return false;
+		}
+		if(checkout_time && checkin_time > checkout_time){
+			alert("大于退房时间，请重新设置");
+			$("input[name='checkin_time']").val('');
+			return false;
+		}
+		if(checkin_time && checkin_time> checkout_time){
+			alert("入住时间小于退房时间，请重新设置");
+			$("input[name='checkout_time']").val('');
+			return false;
+		}
+		return true;
+	}
+</script>
+<include file="Public:footer"/>

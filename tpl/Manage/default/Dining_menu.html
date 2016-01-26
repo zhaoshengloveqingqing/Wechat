@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{lingzh:$page_title}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="/themes/m/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  <style type="text/css">
+    body {
+       padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+  </style>
+>
+</head>
+<body>
+<include file="Index:header"/>
+
+  <div class="container">
+    <div class="row">
+      <include file="Index:sidebar"/>
+      <div class="col-lg-10">
+
+        <div class="page-header">
+          <h4>菜品设置</h4>
+        </div>
+        <div class="content"> 
+          <form method="post" action="" enctype="multipart/form-data" class="form-horizontal" role="form"> 
+            <if condition="isset($dine_menu)">
+            <input type="hidden" name="mid" value="{lingzh:$dine_menu.id}" />
+            </if>
+
+          <div class="form-group">
+            <label for="name" class="col-sm-2 control-label"><span class="red">*</span>名称</label>
+            <div class="col-sm-10">
+              <input id="name" type="text" name="name" class="form-control" value="<if condition='isset($dine_menu)'>{lingzh:$dine_menu.name}</if>" placeholder="产品名称">
+            </div>
+          </div>
+
+          
+
+          <div class="form-group">
+            <label for="price" class="col-sm-2 control-label"><span class="red">*</span>现价(元)</label>
+            <div class="col-sm-10">
+              <input id="price" type="text" name="price" class="form-control" value="<if condition='isset($dine_menu)'>{lingzh:$dine_menu.price}</if>" placeholder="现价">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="oprice" class="col-sm-2 control-label"><span class="red">*</span>原价(元)</label>
+            <div class="col-sm-10">
+              <input id="oprice" type="text" name="oprice" class="form-control" value="<if condition='isset($dine_menu)'>{lingzh:$dine_menu.oprice}</if>" placeholder="原价">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="orderNum" class="col-sm-2 control-label"><span class="red">*</span>显示顺序</label>
+            <div class="col-sm-10">
+              <input id="orderNum" type="text" name="orderNum" class="form-control" value="<if condition='isset($dine_menu)'>{lingzh:$dine_menu.orderNum}</if>" placeholder="显示顺序">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="orderNum" class="col-sm-2 control-label">是否推荐</label>
+            <div class="col-sm-10">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="tuijian[]" <if condition="$dine_menu['promt_status'] eq 1"> checked="checked" </if>>推荐
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="catid" class="col-sm-2 control-label"><span class="red">*</span>分类</label>
+            <div class="col-sm-10">
+            <select  id="catid" name="cid" class="form-control">
+              <volist name="categories" id="cate"> 
+                <option value="{lingzh:$cate['id']}" <if condition="(isset($dine_menu)) AND ($dine_menu['category_id'] eq $cate['id'])">selected="selected"</if>>{lingzh:$cate['name']}</option>
+              </volist>
+            </select>
+            <a href="{lingzh::U('Dining/category')}"  target="#" >添加分类</a>
+            </div>
+            
+          </div>
+
+          
+
+          <div class="form-group">
+            <label for="pic_url_input" class="col-sm-2 control-label">菜品图片</label>
+            <div class="col-sm-10">
+              <div class="media">
+              <a class="pull-left" href="#">
+                <img class="media-object" src="<if condition='isset($dine_menu)'>{lingzh:$dine_menu.imgurl}</if>" width="150px" height="150px">
+              </a>
+              <div class="media-body">
+                <span class="media-heading btn btn-primary" onclick="$('#upload-panel').show();" style="cursor:pointer;"> 点击此处上传 </span>
+              <div id="upload-panel" style="display:none" >
+                <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+                <div style="position:fixed; width:300px;height:300px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                  <iframe style=" width:300px;height:300px;" src="{lingzh::U('Manage/UploadImg/index')}"></iframe>
+                </div>
+              </div>
+                <input id='pic_url_input' type="text" class="form-control" placeholder="支持JPG、PNG等格式，或者将图片上传到POCO.cn获取外链" name="logo_url" value="<if condition='isset($dine_menu)'>{lingzh:$dine_menu.imgurl}</if>">
+                
+              </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="intro" class="col-sm-2 control-label"><span class="red">*</span>菜品详细介绍</label>
+            <div class="col-sm-10">
+              <textarea name="intro" id="intro"  rows="5" style="height:360px; width: 100%;"><if condition='isset($dine_menu)'>{lingzh:$dine_menu.description}</if></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-2">
+              <button type="submit" name="button" class="btn btn-block btn-primary"><if condition='isset($dine_menu)'>保存<else/>添加</if></button>
+                  
+            </div>
+            <div class="col-sm-6">
+              <a href="{lingzh::U('Dining/menuList')}" class="btn btn-default">取消</a>  
+            </div>
+          </div>
+
+          </form> 
+        </div> 
+      </div> <!-- /col -->
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</body>
+</html>

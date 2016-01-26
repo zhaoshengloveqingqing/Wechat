@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://www.weimob.com/tutorial/page1.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+  <meta name="viewport" content="width=1024"> 
+  <link href="/themes/3d/css/main.css" rel="stylesheet" type="text/css"> 
+  <title>如何制作一个360度全景</title> 
+  <meta name="keywords" content=""> 
+  <meta name="description" content="">
+ </head> 
+ <body style=""> 
+  <div class="content"> 
+            <h1 class="h1title">如何制作一个360度全景</h1>
+           360全景不是凭空生成的，要制作一个360全景，我们需要有原始的图像素材，原始图像素材的来源可以是： 
+           <p>A、在现实的场景中，使用相机的全景拍摄功能得到的鱼眼图像 </p>
+           <p>B、通过建模渲染得到的虚拟图像 </p>
+           <p>下文中的表格对比了在不同的设备、拍摄机位、拼合模式、拍摄难度下所能获得到的鱼眼图像</p>
+           <br>
+           <table cellspacing="0" cellpadding="0" bordercolor="#666666" border="0"> 
+            <tbody>
+             <tr> 
+              <td width="167" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">原始图像素材类型</td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td width="117" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">采用的相机设备</td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td width="92" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">采用的机位</td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td width="211" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">采用的拼合模式</td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td width="124" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">特点描述</td> 
+             </tr> 
+             <tr> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">鼓形，两边被切的鱼眼图像： <br> 上下弧线处180度 <br> <img width="240" height="119" src="/themes/3d/images/drum2.jpg"></td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">Nikon或Canon单反相机 <br> Sigma 8mm镜头 </td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">竖直拍摄 <br> <img width="50" height="70" src="/themes/3d/images/portrait.jpg"></td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">拍摄水平一圈四张鱼眼图像，用（Drum）模式拼合： <br> <img width="149" height="45" src="/themes/3d/images/drum.jpg"></td> 
+              <td width="5" valign="middle" align="left" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td valign="middle" align="left" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">拍摄简单 <br> 图像清晰 <br> <span class="STYLE1">推荐</span> </td> 
+             </tr> 
+             <tr> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">全帧，四边被切的鱼眼图像： <br> 对角线180度 <br> <img width="240" height="119" src="/themes/3d/images/illu_frame1.gif"> </td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">Nikon单反相机Nikon 10.5mm镜头 </td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">竖直拍摄 <br> <img width="50" height="70" src="/themes/3d/images/portrait.jpg"></td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">拍摄水平一圈六张或者加天地两张鱼眼图像，用（Fullframe6+X）模式拼合： <br> <img width="153" height="22" src="/themes/3d/images/fullframe.jpg"></td> 
+              <td width="5" valign="middle" align="left" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td valign="middle" align="left" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">拍摄较为复杂 <br> 图像清晰</td> 
+             </tr> 
+             <tr> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">全帧，四边被切的鱼眼图像： <br> 对角线180度 <br> <img width="240" height="119" src="/themes/3d/images/illu_frame2.gif"></td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">Nikon单反相机Nikon 10.5mm镜头 </td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">横向拍摄 <br> <img width="70" height="50" src="/themes/3d/images/landscape.jpg"></td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">拍摄水平一圈四张或者加天地两张鱼眼图像，用（Fullframe4+X）模式拼合： <br> <img width="153" height="33" src="/themes/3d/images/fullframe4.jpg"></td> 
+              <td width="5" valign="middle" align="left" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td valign="middle" align="left" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">拍摄较为复杂 <br> 图像清晰 </td> 
+             </tr> 
+             <tr> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">整圆，所有角度都能够达到180度及以上 <br><img width="240" height="119" src="/themes/3d/images/illu_circular.gif"></td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">Nikon或Canon全画幅单反相机适马8MM鱼眼镜头 </td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">横向拍摄或者竖向拍摄 <br> <img width="70" height="50" src="/themes/3d/images/landscape.jpg"><br> <img width="50" height="70" src="/themes/3d/images/portrait.jpg"><br> </td> 
+              <td width="5" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">拍摄水平两张或者三张鱼眼图像，用（Circular）模式拼合： <br> <img width="68" height="30" src="/themes/3d/images/circular.jpg"><br> <img width="116" height="34" src="/themes/3d/images/3circular.jpg"><br></td> 
+              <td width="5" valign="middle" align="left" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td valign="middle" align="left" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">拍摄简单 <br> 图像清晰 </td> 
+             </tr> 
+             <tr> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">虚拟图像，由三维建模的场景渲染获得： <br> 90度*90度 <br> <img width="75" height="75" src="/themes/3d/images/cube.jpg"></td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">3Dmax<br> Maya<br> AutoCAD<br> 或其他软件建模</td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">无 </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">渲染正方体形式六个面的图像，用（Cube Face）模式拼合： <br> <img width="200" height="50" src="/themes/3d/images/gx.jpg"> </td>
+              <td width="5" valign="middle" align="left" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium"> </td> 
+              <td valign="middle" align="left" style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium">效果可自行设定</td> 
+             </tr> 
+             <tr> 
+              <td style="border-top-style: solid; border-top-width: 1px; border-bottom-style: none; border-bottom-width: medium" colspan="9"> </td> 
+             </tr> 
+            </tbody>
+           </table>
+            <h1 class="h1title">要拍摄全景素材我们需要用到一些专业设备，如下：</h1>
+           <div><a href="http://115.29.193.180/index.php?g=User&m=Help&a=360help2">数码单反相机</a></div>
+           <div><a href="http://115.29.193.180/index.php?g=User&m=Help&a=360help3">鱼眼镜头</a></div>
+           <div><a href="http://115.29.193.180/index.php?g=User&m=Help&a=360help4">全景云台</a></div>
+           <div><a href="http://115.29.193.180/index.php?g=User&m=Help&a=360help5">三脚架</a></div>
+            <h1 class="h1title">最后我们来看看如何使用图片素材来生成360全景图片</h1>
+          <div> 
+    <div style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;">
+      <h1 class="h1title subh1">第一步：拍摄全景图原始素材 </h1>
+     <div>
+      由专业的摄影师使用专业相机、鱼眼镜头以及三脚架拍摄汽车、房间或者其他需要360全景展示的对象照片
+     </div>
+     <div>
+      我们来看下备用的三张原始素材
+     </div>
+	 <div>
+		<table>
+			<tbody><tr>
+				<td><img src="/themes/3d/images/Image.png" type="image/png" style="cursor: default;"></td>
+				<td><img src="/themes/3d/images/Image1.png" type="image/png" style="cursor: default;"></td>
+				<td><img src="/themes/3d/images/Image2.png" type="image/png" style="cursor: default;"></td>
+			</tr>
+		</tbody></table>
+	</div>
+     <div>
+      <h1 class="h1title subh1">第二步：使用“PTGui Pro”软件合成全景图片</h1>
+     </div>
+     <div>
+      下载“PTGui Pro”软件（
+      <font color="#1AADE0"><u><a href="http://pan.baidu.com/s/1mgLSUQc" target="_blank">下载地址</a></u></font>）并安装，然后打开软件：
+     </div>
+     <div>
+      <img src="/themes/3d/images/Image3.png" type="image/png" style="cursor: default;">
+     </div>
+     <div>
+      <br>
+     </div>
+     <div>
+      根据提示，点击“加载图像”，将拍摄的全景图原始素材导入，如下图：
+     </div>
+     <div>
+      <img src="/themes/3d/images/Image4.png" type="image/png" style="cursor: default;">
+     </div>
+     <div>
+      ----------
+     </div>
+     <div>
+      接下来点击“对准图像”
+     </div>
+     <div>
+      如果图像拍摄的位置准确，软件会直接进入到全景图编辑流程
+     </div>
+     <div>
+      <img src="/themes/3d/images/Image5.png" type="image/png" style="cursor: default;">
+     </div>
+     <div>
+      通常，这里我们不要对图片进行改动，直接关闭编辑器进入下一步“创建全景图”
+     </div>
+     <div>
+      而有时候图像拍摄的不那么准确，那么我们需要通过手动的方式来对图片进行调整
+     </div>
+     <div>
+      如图：
+     </div>
+     <div>
+      <img src="/themes/3d/images/Image6.png" type="image/png" style="cursor: default;">
+     </div>
+     <div>
+      我们需要比对左右的2张图片，找到图像上重合的点（至少3个点）来进行标记
+     </div>
+     <div>
+      如图：
+     </div>
+     <div>
+      <img src="/themes/3d/images/Image7.png" type="image/png" style="cursor: default;">
+     </div>
+     <div>
+      在上图我们一共找了若干个两张图片重合的点并作了标记，如此这般，需要对全部有可能有重合的图片都至少标记3个“控制点”。
+     </div>
+     <div>
+      ----------
+     </div>
+     <div>
+      调整完图像之后，我们可以创建全景图了
+     </div>
+     <div>
+      <img src="/themes/3d/images/Image8.png" type="image/png" style="cursor: default;">
+     </div>
+     <div>
+      设置输出的文件目录，点击“创建全景图”，我们就获得了加工好了全景图片。
+     </div>
+     <div>
+      来看下我们得到的全景图片：
+     </div>
+     <div>
+      <img src="/themes/3d/images/Image9.png" type="image/png" style="cursor: default;">
+     </div>
+     <div>
+      这个图片就是所谓的“全景图片”了，看得很晕吧，没关系，还只是半成品，通过第三步我们将进一步加工这张图片以生成效果精美的360全景展示效果
+     </div>
+     <div>
+      ----------------------------------------
+     </div>
+     <div>
+      <h1 class="h1title subh1">第三步：使用“Pano2VR”软件实现360全景效果</h1>
+     </div>
+     <div>
+      下载“Pano2VR”软件（
+      <font color="#1AADE0"><u><a href="http://pan.baidu.com/s/1o6ue770" target="_blank">下载地址</a></u></font>）并安装，然后打开软件：
+     </div>
+     <div>
+      <img src="/themes/3d/images/Image10.png" type="image/png" style="cursor: default;">
+     </div>
+     <div>
+      在上图中，点击“选择输入”，将第二步生成的全景图片导入进去；同时点击“新输出格式”的下拉框，选择“HTML5”选项，然后点击“增加”按钮
+     </div>
+     <div>
+      如图
+     </div>
+     <div>
+      <img src="/themes/3d/images/Image11.png" type="image/png" style="cursor: default;">
+     </div>
+     <div>
+      点击增加按钮后得到
+     </div>
+     <div>
+      <img src="/themes/3d/images/Image12.png" type="image/png" style="cursor: default;">
+     </div>
+    <div>
+    设置立方体面片尺寸为700
+    </div>
+     <div>
+      设置输出文件的输出目录后，点击确定，就开始生成360全景效果了
+     </div>
+     <div>
+      打开输出目录我们看到
+     </div>
+     <div>
+      <img src="/themes/3d/images/Image13.png" type="image/png" style="cursor: default;">
+     </div>
+     <div>
+      此时，浏览器会自动打开上图中的.html文件，360全景效果就可以被欣赏到了
+     </div>
+     <div>
+      请记得将“images”目录下的6张图片通过{lingzh::C('company_short_name')}后台上传全景图片的位置上传到{lingzh::C('company_short_name')}服务器，您就可以通过手机端来查看360全景效果了
+     </div>
+     <div>
+      <br>
+     </div>
+     <div>
+      <br>
+     </div>
+    </div> 
+   </div>
+        </div> 
+ 
+</body></html>

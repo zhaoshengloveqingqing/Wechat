@@ -1,0 +1,33 @@
+ <include file="Public:head" /> 
+  <div class="content"> 
+   <div class="cLineB"> 
+    <h4>包厢设置</h4> 
+    <a href="{lingzh::U('Dining/rooms', array('id'=>$id))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+   </div> 
+   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+    <if condition="isset($room)">
+    <input type="hidden" name="cid" value="{lingzh:$room.id}" /> 
+    </if>
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th><span class="red">*</span>包厢名称：</th> 
+        <td><input type="text" name="name" value="<if condition='isset($room)'>{lingzh:$room.name}</if>" class="px" style="width:400px;" /></td> 
+       </tr> 	   
+       <tr> 
+        <th><span class="red">*</span>容纳人数：</th> 
+        <td><input type="text" name="size" value="<if condition='isset($room)'>{lingzh:$room.size}</if>" class="px" style="width:400px;" /></td> 
+       </tr>
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <button type="submit" name="button" class="btnGreen">保存</button> &nbsp; <a href="{lingzh::U('Dining/rooms')}" class="btnGray vm">取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+  </div> 
+  <include file="Public:footer" />

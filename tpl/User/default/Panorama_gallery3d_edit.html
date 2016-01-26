@@ -1,0 +1,239 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="/themes/a/css/img_upload_panel.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+<style type="text/css">
+.userinfoArea th {
+width: 100px;
+}
+.clr{
+clear:both;
+}
+.chatPanel .mediaFullText .mediaContent {
+font-size: 14px;}
+.chatPanel .media {
+border:0px solid #D1D1D1;
+box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-moz-box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-webkit-box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-webkit-border-radius:5px 5px 10px 10px;
+-moz-border-radius:5px 5px 10px 10px;
+border-radius:5px 5px 10px 10px;
+background: url({lingzh::RES}/images/photo/bottom.png) repeat-x scroll left bottom #FFFFFF;
+background-size:2px auto;
+}
+.chatPanel .media .mediaHead .title {
+line-height:1.2em;
+font-size:16px;
+display:block;
+text-align: left;
+margin-top:0;
+padding:0;
+height: auto;
+}
+.chatPanel .media .mediaPanel {
+padding:0px;
+margin:0px;
+}
+.chatPanel .media .mediaHead {
+padding: 10px 10px 8px;
+border-bottom: 0px solid #D3D8DC;
+color: #000000;
+font-size: 20px;
+}
+
+.chatPanel .media .mediaFooter {
+padding: 0 10px;
+}
+.chatPanel .mediaFullText .mediaImg {
+width: 265px;
+margin: 0 10px;}
+.chatPanel .mediaFullText .mediaImg img{
+width: 100%;}
+.chatPanel .mediaFullText .mediaContentP {
+margin: 5px 10px 0px;
+}
+.chatPanel .mediaFullText .mediaContentP p{
+line-height:18px
+}
+.chatPanel .mediaFullText .mediaContent {
+padding: 0 0 5px;
+}
+</style>
+
+<div class="content">
+          <div class="cLineB">
+          	<h4>修改全景相册</h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>
+         
+          <form method="post" action="">
+         <div class="msgWrap bgfc">
+            <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+<tr>
+<th valign="top"><span class="red">*</span>相册名称：</th>
+<td width="430"><input type="text" name="title" value="{lingzh:$photo.title}" class="px" style="width:400px;" id="name" onkeyup="DivFollowingText1()">
+<script type="text/javascript">
+function DivFollowingText1()
+{
+document.getElementById("zname").innerHTML=document.getElementById("name").value;
+document.getElementById("zname2").innerHTML=document.getElementById("name").value;
+}
+</script> 
+<br>
+尽量简单，不要超过<span class="red">20字</span>.</td>
+<td width="430" rowspan="4" valign="top" class="chatPanel" style="padding:0px;">
+
+
+<!--完整显示所有内容的效果-->	
+<div class="chatItem you" id="photo1" style="width:350px;" <if condition="$photo['isshowinfo'] eq 1">display:none<else/> </if>> 
+  　<a target="ddd" href="">
+<div class="media mediaFullText">
+
+<div class="mediaPanel">
+<div class="mediaHead"><span class="title" id="zname">{lingzh:$photo.title}</span>
+</div>
+<div class="mediaImg"><img id="zpic" src="{lingzh:$photo.picurl}"></div>
+<div class="mediaContent mediaContentP">
+<p id="zinfo">{lingzh:$photo.info}</p>
+</div>
+<div class="mediaFooter">
+<span class="mesgIcon right"></span><span style="line-height:50px;" class="left">查看全文</span>
+<div class="clr"></div>
+</div>
+</div>
+</div>
+</a>
+</div>
+
+<!--最简单的显示效果-->	
+<div class="chatItem you" id="photo2" style="<if condition="$photo['isshowinfo'] eq 0">display:none<else/> </if>"> 
+  　<a target="ddd" href="">
+<div class="media mediaFullText">
+
+<div class="mediaPanel">
+<div class="mediaHead" style="padding: 10px 10px 0px;">
+</div>
+<div class="mediaImg"><img id="zpic2" src="{lingzh:$photo.picurl}"/></div>
+<div class="mediaFooter">
+<span class="mesgIcon right"></span>
+<span style="line-height:50px; font-size:16px" id="zname2">{lingzh:$photo.title}</span>
+<div class="clr"></div>
+</div>
+</div>
+</div>
+</a>
+</div>
+
+
+</td>
+
+</tr>
+<tr>
+<th valign="top"><span class="red">*</span>相册封面图：</th><input type="hidden" name="id" value="{lingzh:$photo.id}" />
+<td width="430"><input type="text" name="picurl" value="{lingzh:$photo.picurl}" class="px" style="width:400px;" id="pic_url_input" onblur="document.getElementById('zpic').src=document.getElementById('pic_url_input').value;document.getElementById('zpic2').src=document.getElementById('pic_url_input').value;">
+  <div class='img_upload_panel'>
+                       <div name='uploadify'  id="uploadify_3d_edit"  ></div>                                                  
+                       <div id="fileQueue_3d_edit"></div> 
+                       <div style="clr:both; height:0px;"></div>
+                        </div> 
+									
+</td>
+</tr>
+<tr>
+   <th valign="top">相册介绍：</th>
+	<td valign="top">
+		<textarea class="px" id="info" name="info" style="width:400px; height:120px" onkeyup="DivFollowingText2()">{lingzh:$photo.info}</textarea><br>
+			<script type="text/javascript">
+			function DivFollowingText2()
+			{
+			document.getElementById("zinfo").innerHTML=document.getElementById("info").value;
+			}
+	</script> 
+		请简单描述相册内容，尽量控制在<span class="red">150文字以内</span>。<br>
+		<label>
+			<input name="isshowinfo" <if condition="$photo['isshowinfo'] eq 0">checked="checked"</if> type="radio" id="RadioGroup0_0" value="0" checked="checked" onclick="document.getElementById('photo2').style.display='none';document.getElementById('photo1').style.display='';">
+			显示简介
+		</label>　　
+		<label>
+			<input type="radio" <if condition="$photo['isshowinfo'] eq 1">checked="checked"</if> name="isshowinfo" value="1" id="RadioGroup0_1" onclick="document.getElementById('photo1').style.display='none';document.getElementById('photo2').style.display='';">
+			不显示简介
+		</label>	
+	</td>
+</tr>
+<tr>
+<th valign="top">是否显示：</th>
+	<td valign="top">
+    	<label>
+		<input type="radio" <if condition="$photo['status'] eq 1">checked="checked"</if> name="status" value="1" id="RadioGroup1_1">
+		显示此相册
+        </label>     							
+		<label>
+		<input name="status" type="radio" <if condition="$photo['status'] eq 0">checked="checked"</if> id="RadioGroup1_0" value="0">
+		不显示此相册
+        </label>                       	
+	</td>
+</tr>
+<tr>
+	<th valign="top">&nbsp;</th>
+	<td>
+		<button type="submit" name="button" class="btnGreen">保存</button>
+		 <a href="{lingzh::U('Panorama/index', array('token'=>$token))}"  class="btnGray vm">取消</a></td>
+		<td>&nbsp;
+	</td>
+</tr>
+</tbody>
+</table>
+            
+          </div>
+          </form>
+          
+        </div>
+<div id="upload-panel" style="display:none" >
+    <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+    <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+        <iframe style=" width:500px;height:500px;" src="/index.php?g=User&m=UploadImg&a=index"></iframe>
+    </div>
+</div>
+<script>
+$(function() {
+    $(uploadify_3d_edit).uploadify({
+       'buttonText' : '上传封面',
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': 'fileQueue_3d_edit',
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                    document.getElementById('zpic').src=  res_json.content ;
+                    document.getElementById('zpic2').src=  res_json.content ;
+                    //$('#picUrl_fla').val(res_json.content);
+                    $('#pic_url_input').val(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+
+            } else {
+               alert("网络不给力啊！亲");
+            }
+
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+      $("#uploadify_3d_edit").css('width', '100%');
+      $("#uploadify_3d_edit").append('<span class="img_upload_tips">支持JPG、PNG、GIF等格式，大小不超过1MB,<br />图片尺寸720×400，支持图片外链。</span>');
+
+});  
+</script>
+<include file="Public:footer"/>  
+ 

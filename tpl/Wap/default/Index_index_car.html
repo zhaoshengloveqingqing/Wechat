@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lingzh:$tpl['wxname']}</title>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="/themes/w/css/reset.css" rel="stylesheet" type="text/css" />
+<script src="/themes/w/js/swipe.js"></script>
+<style>
+body {background-color: #000;margin: 0 auto;max-width: 640px;min-width: 320px;overflow-x: hidden;}
+
+.banner {background:url(/themes/w/images/lz/top-bg.jpg) 0 0 repeat-x; margin:10px 0px 10px 20px;}
+.banner a{width:40%;}
+
+
+
+.swipe {  overflow: hidden;    visibility: hidden;	  position: relative;	  }
+.swipe-wrap { overflow: hidden;		  position: relative;  }
+.swipe-wrap > div {		    float:left;	  width:100%;  position: relative;}
+.swipe-wrap > div img{width:100%;	}
+
+ul#indicator{text-align: center;list-style: none;margin: -24px 0px 0px 0px;padding: 0;background-color:#afb1b3;}
+ul#indicator li {display: inline-block;width: 10px;height: 10px;border-radius: 10px;background: #7d8083; margin: 0 2px;cursor: pointer;}
+ul#indicator li.on {display: inline-block;width: 10px;height: 10px;border-radius: 10px;background: #000; ;margin: 0 2px;cursor: pointer;}
+.navi {opacity:0.25;}
+
+.mainmenu { display: block; margin: 10px auto; padding: 5px 0px 0px 0px; width: 100%; color: #fff}
+.mainmenu li { float: left; display: block; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; }
+
+
+
+.mainmenu li .menubtn { display: block;  text-decoration: none; color: #000;}
+.mainmenu li.longmenu { height: 100px; width: 100%; background-color: inherit; border: none;margin: 0;padding: 0;}
+.mainmenu li.shortmenu { height: 40px; width: 32%; background-color: #4B4B4B; border: none;margin: 5px 2px;padding: 0; line-height: 40px; }
+.mainmenu li a { display: block; padding: 0px; font-size: 14px; color: #000; text-decoration: none; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; }
+
+.mainmenu li .menubtn .menuimg {
+margin: auto;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+background-image: url(images/weiba-icons.png);
+overflow: hidden;
+}
+
+.mainmenu li .menutitle {text-align: center;text-decoration: none;color: #fff;overflow: hidden; font-size:16px;}
+
+.mainmenu li .left-title {float:left; width:32%;  height:100px; text-align: left;text-decoration: none;color: #fff;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size:16px;  background: url(http://wx.lingzhtech.com/themes/w/images/car-arrow.png) right bottom no-repeat;}
+
+.mainmenu li .left-title {background-color: #2995C4;}
+
+.mainmenu li .left-title span, .mainmenu li .right-title span {position: relative; top: 10px; left: 10px;}
+
+.mainmenu li .right-icon {float:right; width:67%; overflow: hidden; height:100px }
+
+.mainmenu li .right-title {float:right; width:32%; height:100px; text-align: left; text-decoration: none;color: #fff;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size:16px; background: url(http://wx.lingzhtech.com/themes/w/images/car-arrow.png) right bottom no-repeat;}
+.mainmenu li .right-title {background-color: #ED940D;}
+
+.mainmenu li .left-icon {float:left; width:67%; overflow: hidden;  height:100px }
+
+div.copyright{font-size:14px;text-align:center;color:#fff;margin:15px 0px 0px 0px; }
+div.tech-support{font-size:12px;text-align:center;color:#fff;margin:8px;}
+div.tech-support a{text-decoration: underline;color:#fff;}
+.clr {clear: both;}
+</style>
+</head>
+
+<body>
+
+<div id='slider' class='swipe'>
+  <div class='swipe-wrap'>
+    <volist name="flash" id="so">
+      <div><a href="{lingzh:$so.hyperlink}"><img src="{lingzh:$so.img}" /></a></div>
+	</volist>
+  </div>
+</div>
+
+<div class="navi">
+	<ul id="indicator">
+		<volist name="flash" id="so">
+		<li   <if condition="$i eq 1">class="on"</if>  ></li>
+		</volist>
+	</ul>
+</div>
+
+
+<ul class="mainmenu">
+  <volist name="info" id="vo">   
+	<li class="<if condition='($i%8 eq 1) or ($i%8 eq 5) '>longmenu<else/>shortmenu</if>">
+	<div class="menubtn ">
+	<a href="{lingzh:$vo.hyperlink}">
+		<div class="menumesg">
+			<div class="menutitle <if condition='$i%8 eq 1'>left-title</if> <if condition='$i%8 eq 5 '>right-title</if>"><span>{lingzh:$vo.name}</span></div>
+			<if condition='($i%8 eq 1) or ($i%8 eq 5) '>
+				<div class="menuimg <if condition='$i%8 eq 1'>right-icon</if> <if condition='$i%8 eq 5 '>left-icon</if>" style="background-image: url({lingzh:$vo.img})	"></div>
+			</if>
+		</div>
+	</a>
+	</div>
+
+	</li>
+ </volist>	
+</ul>
+
+<div class="clr"></div>
+<include file="Index:navi"/> 
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+
+<script type="text/javascript">
+var slider = Swipe(document.getElementById('slider'), {
+      auto: 3000,
+      continuous: true,
+      callback: function(pos) {
+          var i = bullets.length;
+	      while (i--) {
+	          bullets[i].className = ' ';
+	       }
+	      bullets[pos].className = 'on';
+      }
+  });
+
+  var bullets = document.getElementById('indicator').getElementsByTagName('li');
+
+
+</script>
+
+</body>
+</html>

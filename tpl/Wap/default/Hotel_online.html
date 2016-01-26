@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>在线预订</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<link href="/themes/w/css/hotels.css" rel="stylesheet" type="text/css">
+<script src="/themes/w/js/jquery.min.js" type="text/javascript"></script>
+
+<style>
+div.copyright{font-size:14px;text-align:center;color:#000;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#000;margin:8px;}
+div.tech-support a{text-decoration: underline;color:#000}
+</style>
+
+</head>
+<body id="hotelsmore" >
+<div class="cardexplain">
+<!--连锁店-->
+<ul class="round">
+ <li class="title"><span class="none">宾馆分店</span></li>
+ <volist name="list" id="vo"> 
+    <li class="detail"><a href="index.php?g=Wap&m=Hotel&a=index&token={lingzh:$vo.token}&hid={lingzh:$vo.id}&wecha_id={lingzh:$Think.get.wecha_id}"><span>{lingzh:$vo.title}</span></a></li>     
+</volist>
+</ul>
+</div>
+<div class="plugback">
+			<a href="javascript:history.back(-1)">
+				<div class="plugbg themeStyle">
+					<span class="plugback"></span>
+				</div>
+			</a>
+</div>
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+</body>
+</html>

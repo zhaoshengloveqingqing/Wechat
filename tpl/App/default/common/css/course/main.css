@@ -1,0 +1,54 @@
+@charset "utf-8";
+/* CSS Document */
+
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input,img{margin:0px;padding:0px;}
+h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,th,p,a,li,td,div{
+	font-family:tahoma, Arial, Simsun;font-size:12px;
+	color:#000;line-height:1.5em;
+}
+ul,ol{list-style:none;}
+input,select,option{font-family:Tahoma, Arial, Simsun, Helvetica, sans-serif;font-size:12px;margin:0;}
+fieldset,img{border:none;}
+a{color:#333;text-decoration:none;}
+.fl{float:left;}
+.fr{float:right;}
+.clear{clear:both;}
+
+.main{width:100%; margin:0 auto; }
+.header{ background:url(../images/header_bg.png) no-repeat; height: 970px;}
+.header img {width: 100%;}
+
+.left{ width:490px; padding:20px;}
+.right{ width:490px; padding:20px; }
+.footer{width:100%; margin:0 auto; margin-top:20px; }
+.footer p{ width:100%; margin:0 auto; text-align:center; font-size:14px;color:#FFF; padding-bottom:15px; font-size:12px;}
+
+@media screen and (max-width: 1280px) {
+	.header {
+		height: 770px;
+	}
+}
+
+@media screen and (max-width: 960px) {
+	.header {
+		height: 670px;
+	}
+}
+
+@media screen and (max-width: 720px) {
+	.header {
+		height: 570px;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.header {
+		height: 510px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.header {
+		height: 470px;
+	}
+}

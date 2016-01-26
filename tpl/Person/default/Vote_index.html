@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>微助手-发起投票</title>
+<link rel="stylesheet" type="text/css" href="/themes/p/css/person.css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/js/weixin.js"></script>
+
+</head>
+<body> 
+<div class="area2 notice"><a href="/index.php?g=Person&m=Index&a=index">返回首页</a></div>
+<div class="area1">
+   <input type="text" id="vote_title" maxlength="70" placeholder="输入投票标题，直接抛出问题" />
+</div>
+<div class="area1">
+   <textarea id="vote_content" class="textarea4" placeholder="补充说明，可不填"></textarea>
+</div>
+<div class="area2">
+   <div class="select">
+      <ul>
+	  <li id="vote_kind_1" class="select_y" ontouchstart="select(0)" onclick="select(0)">单选</li>
+	  <li id="vote_kind_2" class="select_n" ontouchstart="select(1)" onclick="select(1)">多选</li>
+	  <div class="clear"></div>
+	  </ul>
+   </div>
+</div>
+<div id="vote_options" class="area1">
+   <input type="text" id="vote_option_1" maxlength="50" placeholder="投票选项"/>
+   <div class="line"></div>
+   <input type="text" id="vote_option_2" maxlength="50" placeholder="投票选项"/>
+   <div class="line"></div>
+   <input type="text" id="vote_option_3" maxlength="50" placeholder="投票选项"/>
+   <div class="line"></div>
+   <div id="vote_add" class="add"><img src="/themes/p/images/add.png" onclick="add()"></div>
+</div>
+<!--div class="area1">
+   <textarea id="vote_result" class="textarea4" placeholder="投票结果，可不填，投票后显示"   onblur="localStorage.vote_result=this.value"></textarea>
+</div-->
+<div class="area1">
+   <input type="text" id="vote_author" maxlength="20" placeholder="留下发起者名称" value=""/>
+</div>
+<div>
+   <button class="button1" id="sendButton">发送</button>
+</div>
+<script>
+var dataForWeixin={
+   appId:"",
+   Img:"http://" + window.location.host + "/themes/p/images/vote_msg.png",
+   path:"http://" + window.location.host + "/index.php?g=Person&m=Vote&a=index",
+   title:"使用领众微助手在微信发起投票",
+   desc:"快速在微信群、朋友圈发起投票、调查、测试。直观展现投票结果，轻松掌握投票数据",
+   fakeid:"",
+   callback:function(){}
+};
+var kind = 0;
+var optionNum = 3;
+function select(value){
+      if(value==0){
+         $("#vote_kind_1").attr("class", "select_y");
+         $("#vote_kind_2").attr("class", "select_n");
+	     kind=0;
+      }else{
+         $("#vote_kind_1").attr("class", "select_n");
+         $("#vote_kind_2").attr("class", "select_y");
+	     kind=1;
+      }
+}
+function add(value) {
+     if(optionNum>=15){_toast("最多只能添加15项");return;}
+	 var lastId = "#vote_option_" + optionNum;
+     optionNum++;
+	 $("<input type=\"text\" id=\"vote_option_" + optionNum + "\" maxlength=\"50\" placeholder=\"投票选项\"/>").insertAfter(lastId);
+	 $("<div class=\"line\"></div>").insertAfter(lastId); 
+};
+function checkOptionsLen(){
+      for(var i=1;i<=this._n;i++){
+         if(trim($("#vote_option_"+i).val().trim()).length>50){return i;break;}
+      }
+      return 0;
+};
+$(function() {
+    $("#guideCancel").click(function() {
+         cover(false);
+         $("#guide").hide();
+    });
+
+    $("#sendButton").click(function() {
+         var _title = trim($("#vote_title").val());
+	     var _content = trim($("#vote_content").val());
+	     var _author=trim($("#vote_author").val());
+		 
+         if(_title==""){_toast("没有输入投票标题");return;}
+         if(_title.length>70){_toast("标题请在70字节以内");return;}
+         if(_content.length>1500){_toast("补充说明写得有点多了");return;}
+         var _n=checkOptionsLen();
+         if(_n>0){_toast("第"+_n+"选项写多了，请在50字节内");return;}
+         var _options="";
+         for(var i=1;i<=optionNum;i++){
+            var _option=trim($("#vote_option_"+i).val());
+            if(_option!=""){_options+=_option}
+			if(i<optionNum && _option!=""){_options+="^";}
+         }
+         if(_options.match(/(.*\^.*){2,}/)==null){_toast("至少需要输入2个投票选项");return;}
+         if (_options.substring(_options.length - 1) == "^") { _options = _options.substring(0, _options.length - 1);}
+         if(_author==""){_toast("请署上你的大名");return;}
+         if(_author.length>20){_toast("署名请在20字节以内");return;}
+		 $.ajax({
+             url:"/index.php",
+             data:{
+                 g:"Person",
+                 m:"Vote",
+				 a:"send",
+				 title:encode(_title),
+				 content:encode(_content),
+				 author:encode(_author),
+				 options:encode(_options),
+				 type:kind
+             },
+             success: function(data) {
+			     data = $.parseJSON(data);
+                 //
+				 if (data.data.id > 0) {
+				     dataForWeixin.title = data.data.title;
+				     dataForWeixin.desc = data.data.content;
+				     dataForWeixin.path = "http://" + window.location.host + "/index.php?g=Person&m=Vote&a=showVote&id=" + data.data.id;
+					 guide();
+			    } else {
+				     _toast("你填写的内容有问题");
+				}
+             },
+             error : function(data, error, e) {
+                 alert(data);
+             }
+         });
+     });
+});
+</script>
+
+
+
+<div id="ok"><img src="/themes/p/images/ok.png"><div id="ok_text"></div></div>
+<div id="cover"></div>
+<div id="loading"><img src="/themes/p/images/loading.gif"><div id="loading_text"></div></div>
+<div id="guide"><div><img src="/themes/p/images/guide.png"></div>
+<div id="guide_button2">
+<button class="button2" id="guideCancel">取消</button>
+</div>
+</div>
+<div id="guide2"><img src="/themes/p/images/guide2.png"></div>
+<div id="guide3"><img src="/themes/p/images/guide3.png"></div>
+<div id="toast"></div>
+<div class="copyright" style="margin-left:-12px; margin-right:-12px;  margin-bottom:-20px;background-color:#FFF;padding:15px;font-size:14px;color:#333;text-align:center;">  <a href="/index.php?g=Person&m=Index&a=index">返回首页</a></div>
+</body>
+</html>

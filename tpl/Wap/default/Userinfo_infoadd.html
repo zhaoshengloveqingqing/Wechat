@@ -1,0 +1,204 @@
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/userinfo/main.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/userinfo/dialog.css" media="all">
+    <script type="text/javascript" src="/themes/w/js/userinfo/tool.js"></script>
+    <script type="text/javascript" src="/themes/w/js/userinfo/aSelect.js"></script>
+    <script type="text/javascript" src="/themes/w/js/userinfo/aLocation.js"></script>
+    <script type="text/javascript" src="/themes/w/js/userinfo/dialog_min.js"></script>
+    <script type="text/javascript" src="/themes/w/js/userinfo/dater_min.js"></script>
+    <script type="text/javascript" src="/themes/w/js/userinfo/main.js"></script>
+    <script src="/themes/w/js/jquery.min.js"></script>
+    <title>会员卡</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <!-- Mobile Devices Support @begin -->
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="yes"> <!-- apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script type="text/javascript">
+    $(function(){
+        $('#defaultdiv input,#defaultdiv select').each(function(){
+            $(this).change(function(){
+                $('#defaultinfochanged').val(1);
+            });
+        });
+        $('#extdiv input,#extdiv select').each(function(){
+            $(this).change(function(){
+                $('#extinfochanged').val(1);
+            });
+        });
+        if(<?php echo $card_off? 1 : 0;?>){
+            alert("抱歉，商家已经停止会员卡发放！",3000);
+        }
+    });
+    </script>
+    <body onselectstart="return true;" ondragstart="return false;">
+        <div class="container info_tx">
+            <div class="body pt_10">
+                <ul class="list_ul_card">
+                    <form id="form1" action="javascript:;" method="post">
+                        <li data-card="">
+                            <header class="center">
+                                <label style="display:inline-block;"><span>&nbsp;</span><if condition="$cardnum neq false">修改您的会员信息<else/>填写会员资料 </if></label>
+                            </header>
+                            <input type="hidden" name="defaultinfochanged" value="0" id="defaultinfochanged">
+                            <input type="hidden" name="extinfochanged" value="0" id="extinfochanged">
+                            <div class="forms" id="defaultdiv">
+                                <dl>
+                                    <dt>姓 名： </dt>
+                                    <dd>
+                                        <input name="truename" id="truename" value='{lingzh:$userdata["truename"]}' placeholder="请输入您的真实姓名" maxlength="30" class="input" type="text">
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>手机号：</dt>
+                                    <dd>
+                                        <input name="tel" id="tel" placeholder="请输入您的11位手机号" maxlength="11" class="input" value='{lingzh:$userdata["tel"]}' type="tel">
+                                    </dd>
+                                </dl>
+                                <php>
+                                    $has=array_intersect(array('nickname','birthday','sex','address'),$default_show_cols);
+                                    if(empty($default_show_cols)||in_array('nickname',$has)){
+                                </php> 
+                                <dl>
+                                    <dt>微信名：</dt>
+                                    <dd>
+                                        <input id='nickname' name='nickname' type='text' placeholder='请输入您的微信名' class="input" value='{lingzh:$userdata["nickname"]}'> 
+                                    </dd>
+                                </dl>
+                                <php>
+                                }
+                                if(empty($default_show_cols)||in_array('sex',$has)){</php> 
+                                <dl>
+                                    <dt>性 别： </dt>
+                                    <dd>
+                                        <select name="sex" id="sex" class="select" style="width:100%;">
+                                            <option value="1" <?php if($userdata['sex'] == 1) { echo 'selected="selected"'; } ?> >男</option>
+                                            <option value="2" <?php if($userdata['sex'] == 2) { echo 'selected="selected"'; } ?>>女</option>
+                                            <option value="0" <?php if($userdata['sex'] == 0) { echo 'selected="selected"'; } ?>>其他</option>
+                                        </select>
+                                    </dd>
+                                </dl>
+                                <php>
+                                }
+                                if(empty($default_show_cols)||in_array('birthday',$has)){</php> 
+                                <dl>
+                                    <dt>出生日期：</dt>
+                                    <dd> 
+                                     <input id='birthday' name='birthday' class="input"  type='date' placeholder='请选择您的出生日期（如2000-10-11）' value='<php>echo isset($userdata["birthday"])?$userdata["birthday"]:date("Y-m-d");</php>'> 
+                                 </dd>
+                             </dl>
+                             <php>
+                             }
+                             if(in_array('address',$has)){</php> 
+                             <dl>
+                                <dt>地 区:</dt>
+                                <dd>
+                                    <div class="box select_box">
+                                        <div>
+                                            <select style="width: 100%;" selectedindex="0" name="addr_prov" class="select" id="selectProvince"></select>
+                                        </div>
+                                        <div>
+                                            <select style="width: 100%;" selectedindex="0" name="addr_city" class="select" id="selectCity"></select>
+                                        </div>
+                                        <div>
+                                            <select style="width: 100%;" selectedindex="0" name="addr_area" class="select" id="selectArea"></select>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>详细地址:</dt>
+                                <dd><input name="addr_detail" id="addr_detail" value='{lingzh:$addressData["addr_detail"]}' placeholder="请输入您的详细地址" maxlength="100" class="input" type="text"></dd>
+                            </dl>
+                            <php>}</php>
+                    </div>
+                    <div id="extdiv"  class="forms" >
+                            <php>    if(isset($text_cols)||isset($select_cols)){</php>
+                            <volist name='text_cols' id='text_col' key='k'>
+                                <dl>
+                                    <dt>{lingzh:$text_col[0]}：</dt>
+                                    <dd>
+                                        <input class="input" type="text" name="text_cols[]"  placeholder="{lingzh:$text_col[1]}" value="{lingzh:$extDatas['text_cols'][$k-1]}"/>
+                                    </dd>
+
+                                </dl>
+                            </volist>
+                            <volist name='select_cols' id='select_col' key='k'> 
+                                <dl>
+                                    <dt>{lingzh:$select_col[0]}：</dt> 
+                                    <dd>
+                                        <select name="select_cols[]" data-rule-required="true"  class="select" style="width:100%;">
+                                            <php>
+                                                foreach(explode('|',$select_col[1]) as $selectItem) {
+                                            </php>
+                                            <option value="<php>echo $selectItem;</php>" <php>if($selectItem==$extDatas["select_cols"][$k-1]){</php>selected="selected" <php>}</php> >
+                                                <php>echo $selectItem;</php>
+                                            </option>
+                                            <php>   
+                                            }
+                                        </php>
+                                    </select>
+                                </dd>
+                            </dl> 
+                        </volist>
+                        <php>}</php>
+                    </div></li>
+                    <div class="pt_10 pb_10">
+                        <a href="javascript:sendMsg();" class="button">提&nbsp;&nbsp;&nbsp;交</a>
+                    </div>
+                    <div class="pt_10 pb_10">
+                        <a href="javascript:backToCard();" class="link">返回会员卡页</a>
+                    </div>
+
+                </form>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+    function backToCard()
+    {
+        <php> $action=isset($cardnum)?'Card/vip':'Card/get_card';</php>
+        location.href="{lingzh::U($action,array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}";
+    }
+    function sendMsg(){
+        if($("#truename").val()==''){alert('请输入您的姓名',1500);return;} 
+        if($("#tel").val()==''||$("#tel").val().length != 11){alert('请输入您的11位手机号码',1500);return;} 
+        //if($("#birthday").val()==''){alert('请输入您的出生日期',1500);return;} 
+        var wecha_id = '{lingzh:$Think.get.wecha_id}';
+        if(wecha_id.length <= 0) {
+            alert('非法请求',1500);
+            return;
+        }
+        var msg = $('form').serializeArray();
+        <?php if($cardnum){ ?>
+        var postUrl = 'index.php?g=Wap&m=Userinfo&a=update_user_info&token={lingzh:$_GET["token"]}&wecha_id={lingzh:$_GET["wecha_id"]}';
+        <?php }else{ ?>
+        var postUrl = 'index.php?g=Wap&m=Userinfo&a=member_regist&token={lingzh:$_GET["token"]}&wecha_id={lingzh:$_GET["wecha_id"]}';
+        <?php } ?>
+        $.post(postUrl, 
+            msg,
+            function(data) {
+                if (data.success == true) {
+                    alert(data.msg,2000);
+                    location.href = "{lingzh::U('Card/vip',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}";
+                } else {
+                    alert(data.msg,1500);
+                }
+            },
+            "json"); 
+    }
+    $(function () {
+        var sel = aSelect({data: aLocation});
+        sel.bind('#selectProvince',"{lingzh:$addressData['addr_prov']}" );
+        sel.bind('#selectCity', "{lingzh:$addressData['addr_city']}");
+        sel.bind('#selectArea', "{lingzh:$addressData['addr_area']}");
+    })
+    </script>
+
+</body>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>{lingzh:$activity.title}</title>
+<link rel="stylesheet" type="text/css" href="/themes/p/css/person.css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/js/weixin.js"></script>
+<script>
+var dataForWeixin={
+   appId:"",
+   Img:"http://" + window.location.host + "/themes/p/images/party_msg.png",
+   path:"http://" + window.location.host + "/index.php?g=Person&m=Activity&a=showAct&id={lingzh:$activity.id}",
+   title:"{lingzh:$activity.title}",
+   desc:"{lingzh:$activity.content}",
+   fakeid:"",
+   callback:function(){}
+};
+</script>
+</head>
+<body> 
+
+<style>body{background-color:#f0f0f0;}
+copyright a, a:link, a:hover, a:active, a:visited{ color:#FFF}
+</style>
+<div id="mess_title" data-id="{lingzh:$activity.id}">{lingzh:$activity.title}</div>
+<div>
+<div id="mess_info">{lingzh:$activity.date}&nbsp;&nbsp;&nbsp;{lingzh:$activity.author}</div>
+<div id="mess_report"><a href="/index.php?g=Person&m=Index&a=index">返回首页</a></div>
+<div class="clear"></div>
+</div>
+<!--div id="mess_info">刚刚&nbsp;&nbsp;&nbsp;{lingzh:$activity.author}&nbsp;&nbsp;&nbsp;阅读1&nbsp;&nbsp;&nbsp;分享0</div-->
+<div id="mess_content">{lingzh:$activity.content}<br></div>
+
+
+<div id="mess_attch">
+   <div id="attch_title">已有<span id="party_counts">{lingzh:$activity.joinNum}</span>人报名</div>
+   <div id="record_manage">查看已报名人员联系电话</div>
+   <div class="clear"></div>
+</div>
+<div id="attch_list">
+    <div id="record_nodata">欢迎报名</div>
+</div>
+<div>
+	<button  id="join_post" class="button1">我要报名</button>
+</div>
+
+
+<div id="party_join" class="box">
+   <div>输入你的名字与电话</div>
+   <div><input id="join_nick" type="text" placeholder="输入你的大名"  value=""&Request.Cookies("AUTHOR")&"" maxlength="20"/></div>
+   <div><input id="join_phone" type="tel" placeholder="手机号，别轻易向陌生人提供"  maxlength="11"/></div>
+   <div>
+       <div class="left"><button id="joinButton" class="button1" >提交</button></div>
+       <div class="right"><button id="joinCancel" class="button2" >取消</button></div><div class="clear"></div>
+   </div>
+</div>
+<div id="party_pass" class="box">
+   <div>请先输入管理密码</div>
+   <div><input id="pass_pass" type="password" placeholder="输入管理密码"  maxlength="16"/></div>
+   <div><div class="left"><button id="passButton" class="button1">提交</button></div>
+   <div class="right"><button id="passCancel" class="button2">取消</button></div>
+   <div class="clear"></div>
+</div>
+</div>
+<div id="mess_share">
+   <div id="share_1"><button class="button2"><img src="/themes/p/images/icon_timeline.png">&nbsp;分享</button></div>
+   <div id="share_2"><button class="button2"><img src="/themes/p/images/icon_con.png">&nbsp;收藏活动工具</button></div>
+   <div class="clear"></div>
+</div >
+<!--div id="mess_save"><button class="button2">收藏活动工具以备后用</button></div-->
+<div><button class="button2" onclick="location.href='/index.php?g=Person&m=Activity&a=index'">我也要组织活动</button></div>
+<div><div id="more_title">热门活动</div><div class="clear"></div></div>
+   <div id="more_list">
+<volist name="hots" id="hot">
+		  <div class="list_item" onclick="location.href='/index.php?g=Person&m=Activity&a=showAct&id={lingzh:$hot.id}'">
+		     <div class="list_icon"><img src="/themes/p/images/party_icon.png"></div>
+	         <div class="list_title">{lingzh:$hot.title}</div>
+	         <div class="clear"></div>
+	      </div>
+</volist>
+</div>
+
+<script>
+
+ $(function() {
+     var _id = trim($("#mess_title").attr("data-id"));
+	 if (getCookies("ACTIVITY" + _id) != null) {
+	     $("#join_post").text("已报名");
+	 };
+         $("#share_1 button").click(function() {
+	     guide();
+	 });
+     $("#share_2 button").click(function() {
+		 location.href="http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5OTA1MTU5MA==&appmsgid=10012010&itemidx=1&sign=cbfd5b6d9d94a311dd28efbd974a54fa&uin=MjUyMTM2OTc1";
+         /*cover(true);
+	     $("#guide2").show();*/
+	 });
+	 $("#guideCancel").click(function() {
+	     cover(false);
+	     $("#guide").hide();
+	 });
+         $("#guideCancel2").click(function() {
+	     cover(false);
+	     $("#guide2").hide();
+	});
+	 $("#join_post").click(function() {
+	     if ($("#join_post").text() == "已报名") {
+		     _toast("你已报名");return;
+		 }
+	     cover(true);
+		 $("#party_join").show().center();
+	 });
+	 $("#joinCancel").click(function() {
+	     cover(false);
+		 $("#party_join").hide();
+	 });
+	 $("#record_manage").click(function() {
+	     cover(true);
+		 $("#party_pass").show().center();
+	 });
+	 $("#passCancel").click(function() {
+	     cover(false);
+		 $("#party_pass").hide();
+	 });
+	 $("#joinButton").click(function() {
+         var _nick = trim($("#join_nick").val());
+	     var _phone=trim($("#join_phone").val());
+		 var _id = trim($("#mess_title").attr("data-id"));
+         if(_nick==""){_toast("请报上你的大名");return;}
+         if(_nick.length>20){_toast("大名要在20字节以内");return;}
+         if(_phone==""){_toast("请录入你的手机号码");return;}
+         if(_phone.match(/^\d{7,11}$/)==null){_toast("手机号输入有误");return;}
+		 $.ajax({
+             url:"/index.php",
+             data:{
+                 g:"Person",
+                 m:"Activity",
+				 a:"join",
+				 id:_id,
+				 nick:encode(_nick),
+				 phone:encode(_phone),
+             },
+             success: function(data) {
+			     data = $.parseJSON(data);
+				 $("#party_join").hide();
+				 cover(false);
+				 if(data.data.state=="0"){_toast("你已经报过名了");return;}
+				 $("#join_post").text("已报名");
+				 setCookies("ACTIVITY" + _id, data.data.id);
+				 if($("#record_nodata").length > 0){$("#record_nodata").remove();}
+                 $("#attch_list").append("<div class=\"attch_item\"><div class=\"left\">"+data.data.nick+"</div><div class=\"right\">刚刚</div><div class=\"clear\"></div></div>");
+				 ok("报名成功");
+	
+             },
+             error : function(data, error, e) {
+                 _toast("抱歉，服务器异常");
+             }
+         });
+	});
+	$("#passButton").click(function() {
+	     var _pass = trim($("#pass_pass").val());
+		 var _id = trim($("#mess_title").attr("data-id"));
+	     if(_pass==""){_toast("请输入管理密码");return;}
+         if(_pass.length<6 || _pass.length>16 ){_toast("密码输入有误");return;}
+		 $.ajax({
+             url:"/index.php",
+             data:{
+                 g:"Person",
+                 m:"Activity",
+				 a:"pass",
+				 id:_id,
+				 pass:encode(_pass)
+             },
+             success: function(data) {
+			     data = $.parseJSON(data);
+				 if (data.data.pass === 0) {
+				     _toast("密码输入有误");
+					 return;
+				 }
+                 $("#attch_list").html("");
+				 for (var i = 0; i < data.data.joins.length; i++) {
+				     $("#attch_list").append("<div class=\"attch_item\"><div class=\"left\">"+data.data.joins[i].nick+"&nbsp;<strong>" + data.data.joins[i].phone+ "</strong></div><div class=\"right\">"+data.data.joins[i].date+"</div><div class=\"clear\"></div></div>");
+				 }
+				 $("#party_pass").hide();
+				 cover(false);
+             },
+             error : function(data, error, e) {
+                 _toast("抱歉，服务器异常");
+             }
+         });
+	});
+});
+
+</script>
+
+
+
+<div id="ok"><img src="/themes/p/images/ok.png"><div id="ok_text"></div></div>
+<div id="cover"></div>
+<div id="loading"><img src="/themes/p/images/loading.gif"><div id="loading_text"></div></div>
+<div id="guide"><div><img src="/themes/p/images/guide.png"></div>
+<div id="guide_button2">
+<button class="button2" id="guideCancel">取消</button>
+</div>
+</div>
+<div id="guide2"><div><img src="/themes/p/images/guide3.png"></div>
+<div id="guide_button2">
+<button class="button2" id="guideCancel2">取消</button>
+</div>
+</div>
+<div id="guide3"><img src="/themes/p/images/guide3.png"></div>
+<div id="toast"></div>
+<div id="copyright"><a href="/index.php?g=Person&m=Index&a=index">返回首页</a></div>
+</body>
+</html>
+ 

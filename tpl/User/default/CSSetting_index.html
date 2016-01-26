@@ -1,0 +1,57 @@
+<include file="Public:head"/>
+<style type="text/css">
+.settingArea label{margin: 0px 20px;}
+.settingArea td {height: 60px;}
+</style>
+<div class="content">
+  <div class="cLineB">
+    <h4>多客服设置</h4><a href="javascript:history.go(-1);"  class="right btnGrayS vm" style="margin-top:-27px" >返回</a>
+  </div> 
+
+  <div class="cLineD" style=" margin: 0px 10px 10px 0px; border: 1px #E0E0E0  solid; padding: 10px; border-radius: 5px;font-size:13px; line-height:28px; padding-left:15px; background-color:#dde8fa; padding-bottom:15px;color: #d45b5b; font-weight:bold;" >
+      此设置仅对<strong>已开通"多客服"的已认证服务号</strong>有效<br>
+      客户系统有两种接入方式，“始终接入”和“按需接入”。<br>
+      若商户设置“始终接入”，则关注者发送的消息都将被转发到“客服系统”上。<br>
+      若商户设置“按需接入”来接入客服系统，关注者发送该关键词后，这次发送的和以后一段时间内发送的消息都将转发“客服系统”。
+    </div>   
+
+  <div class="msgWrap">
+  <form class="form" method="post"   action="{lingzh::U('CSSetting/set')}"  target="_top" enctype="multipart/form-data" >
+    <TABLE class="settingArea" style=" margin:20px 0 0 0;" border="1" cellSpacing="0" cellPadding="0" width="100%">
+    <TBODY>
+    <TR>
+      <TH width="15%" align="center">接入类型：</TH>
+      <TD width="85%">
+        <label for="radio3"><input class="radio" id="radio3" type="radio" onclick="$('.access_on_demand').slideUp(100);" name="type" value="0" <if condition="$setting['type'] eq 0 or empty($setting)"> checked="checked"</if>/>不接入</label>
+        <label for="radio1" style="margin:10px 0 ;"><input id="radio1" class="radio" type="radio" name="type" onclick="$('.access_on_demand').slideUp(100);" value="1" <if condition="$setting['type'] eq 1" style=" padding-bottom:10px;" > checked="checked"</if>/>始终接入</label>
+        <label for="radio2"><input class="radio" id="radio2" type="radio" onclick="$('.access_on_demand').slideDown(100);" name="type" value="2" <if condition="$setting['type'] eq 2"> checked="checked"</if>/>按需接入</label>
+        
+      </TD>
+    </TR>
+
+    <TR class="access_on_demand" <if condition="$setting['type'] neq 2"> style="display:none;"</if>>
+      <TH width="15%" align="center"><label for="keyword">按需接入：</label></TH>
+      <TD  width="85%">
+        <input type="input" class="text textMiddle" id="keyword" value="<if condition='isset($setting)'>{lingzh:$setting.keyword}</if>" name="keyword" style="width:500px; margin-bottom:8px;" placeholder="触发关键词，如‘联系客服’，不设置请留空" >
+      </TD>
+    </TR>
+    <TR>
+      <TH width="15%"></TH>
+      <TD width="85%">
+        <button type="submit"  name="button"  class="btnGreen left" >保存</button>　
+        <a href="index.php?ac=importtxt&amp;id=9379"  class="btnGray vm">取消</a>
+      </TD>
+    </TR>
+
+    <TR>
+      <TH width="15%" align="center">多客服帮助：</TH>
+      <TD width="85%">
+        <iframe style="margin-top:20px;" frameborder="0" width="100%" height="500px" src="http://wkd.qq.com/php/static/mp/html/guide.html"></iframe>
+      </TD>
+    </TR>
+    </TBODY>
+    </TABLE>
+  </form>
+  </div> 
+</div>
+<include file="Public:footer"/>

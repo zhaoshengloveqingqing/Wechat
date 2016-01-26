@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lingzh:$tpl.wxname}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="/themes/w/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="/themes/w/css/page.css" rel="stylesheet" type="text/css" />
+<script src="/themes/w/js/jquery.min.js"></script>
+<style>
+body {background-color: #F0EFEF;margin: 0 auto;max-width: 640px;min-width: 320px;overflow-x: hidden;}
+
+.navi {background-color:#363636; }
+.none {display:none}
+.article-list {margin:0px 10px;}
+.article-list table.article{background-color:#fff; margin:10px;}
+.article-list table.article img {margin:10px;}
+.article-list table.article {margin:10px 0px;}
+.article-list table.article p.title {font-size:18px;font-weight:bold;color:#0a0a0a;margin:10px 0px; text-overflow:ellipsis;overflow: hidden;white-space: nowrap;width: 180px;}
+.article-list table.article p.content {font-size:14px;color:#808080;line-height:22px;}
+
+
+
+.navi li.icon{float:left;height:55px;width:24.5%;text-align:center;background-color:#363636;}
+.navi li.sep{ border-left: 1px solid #ffffff;}
+.navi li.icon img{margin:8px;width: 39px;}
+
+.navi ul{background-color: #363636;height: 55px;}
+
+.dropdown{ background-color: #363636;z-index: 500;}
+
+.navi-fly{position: absolute;right: 0px; margin:10px;}
+.navi-fly li{color:#fff; border-bottom:1px #fff solid; line-height:20px;margin: 15px;}
+.navi-fly li a {color:#fff; }
+
+.addr-fly{position: absolute;left: 15%; margin:10px;}
+.addr-fly p{color:#fff; border-bottom:1px #fff solid; line-height:20px;margin: 15px;}
+.addr-fly a {color:#fff; }
+
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px;}
+a.copyright{font-size:14px;text-align:center;color:#272828;margin:8px 0px;text-decoration:underline;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+</style>
+</head>
+
+<body>
+<div class="header">
+<div class="navi">
+<ul>
+    <li class="icon "><a href="{lingzh::U('Index/index',array('token'=>$token,'wxref'=>'mp.weixin.qq.com', 'wecha_id'=>$wecha_id))}"><img src="/themes/w/images/lz/banner_home.png"></img></a> </li>
+  <li class="icon sep"><a href="{lingzh:$navigationLink}"><img src="/themes/w/images/lz/banner_nav.png"></img></a> </li>
+  <li class="icon sep"><a href='tel:{lingzh:$tpl.telephone}'><img src="/themes/w/images/lz/banner_tel.png"></img></a></li>
+  <li class="icon sep"><a onclick="$('.navi-fly').toggleClass('none');"><img src="/themes/w/images/lz/banner_cls.png"></img></a></li>
+</ul>
+</div>
+
+</div>
+<ul class="dropdown none navi-fly"> 
+<volist name="info" id="vo">
+<li><a href="{lingzh:$vo.hyperlink}"><span>{lingzh:$vo.name}</span></a></li>
+</volist>   
+<div class="clr"></div>
+</ul>
+
+<div class="dropdown none addr-fly"> 
+  <p>地址:{lingzh:$tpl.address} </p>
+<div class="clr"></div>
+
+</ul>
+</div>
+
+
+<div class="article-list">
+  <table width="100%" border="0" cellspacing="0" >
+    <volist name="res" id="so">   
+    <tr>
+	  <td>
+	    <table class="article" width="100%">
+		  <tr>
+	  <td width="15%" align="center" valign="middle">
+	    <img class="cover" src="{lingzh:$so.pic}" height="60px" width="60px"></img>
+      </td>
+	  <td width="80%" align="left" valign="center">
+		<div>
+      <a href="{lingzh:$so.hyperlink}">
+          <p class="title">{lingzh:$so.title}</p>
+          <!--p class="content"><php> echo substr($so['content'],0,72);</php></p-->
+      </a>
+		</div>
+	  </td>
+	  <td width="5%" align="center" valign="middle">
+        <img class="arrow" src="/themes/w/images/lz/article-arrow.jpg"></img>
+	  </td>
+	    </tr>
+	   </table>
+	  </td>
+	</tr>
+    </volist>
+  </table>
+</div>
+
+<div id="page-navi">
+<div class="page-navi-block">
+    <div class="page-navi-inline">
+
+      <div class='page-prev <eq name="p" value="1"> page-grey </eq> '><span class="page-arrow-area"><em></em></span><a <gt name="p" value="1">href="/index.php?g=Wap&m=Index&a=lists&classid=<php>echo $_GET['classid'];</php>&token={lingzh:$tpl.token}&wecha_id={lingzh:$wecha_id}&wxref=mp.weixin.qq.com&p=<php>echo $p-1;</php>"</gt>  >上一页</a>
+      </div>
+	  
+	  
+      <div class="page-cur">
+        <div class="page-cur-bg page-arrow-down"><span>{lingzh:$p}/{lingzh:$page}</span><span></span></div>
+        <select class="page-drop-down" onchange="dourl('/index.php?g=Wap&m=Index&a=lists&classid=<php>echo $_GET['classid'];</php>&token={lingzh:$tpl.token}&p='+this.value + '&wecha_id={lingzh:$wecha_id}&wxref=mp.weixin.qq.com')">
+		<?php
+			for($i=1;$i<=$page;$i++){
+				if($i==$p){
+					echo '<option value="'.$i.'" selected>第'.$i.'页</option>';
+				}else{
+					echo '<option value="'.$i.'">第'.$i.'页</option>';
+				}
+			}
+		?>
+        </select>
+      </div>
+
+      <div class='page-next <eq name="p" value="$page"> page-grey </eq>'  >
+
+<?php
+	if($p < $page){
+		echo '<a href="/index.php?g=Wap&m=Index&a=lists&classid='.(int)$_GET['classid'].'&token='.$tpl['token'].'&p='.($p+1)
+                .'&wecha_id='.$wecha_id.'&wxref=mp.weixin.qq.com'
+                .'">';
+	}else{
+		echo '<a>';
+	}
+?>
+下一页</a><span class="page-arrow-area"><em></em></span></div>
+    </div>
+</div>
+</div>
+
+
+
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+<script>
+function dourl(url){
+location.href= url;
+}
+</script>
+
+</body>
+</html>

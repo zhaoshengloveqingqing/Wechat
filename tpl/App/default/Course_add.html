@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>课程预约</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="./tpl/App/default/common/css/course/main.css"/>
+<link rel="stylesheet" type="text/css" href="./tpl/App/default/common/css/course/yuyue.css?v=16"/>
+<script src="./tpl/App/default/common/js/jquery-1.8.3.min.js"></script>
+<script src="./tpl/App/default/common/js/mobile_tip.min.js"></script>
+</head>
+<body>
+<form method="post"  action="{lingzh::U('Course/add', array('token'=>$_GET['token']))}" onsubmit="return check_submit();">
+<div class="main">
+  <div class="content">
+    <div class="cont">
+      <ul>
+        <h1>请填写信息</h1>
+        <li>
+          <label><span>*</span>姓名:</label>
+          <input type="text" name="username" class="input"/>
+        </li>
+        <li style="display:none;">
+          <label><span>*</span>性别:</label>
+          <select  name="sex">
+            <option selected value="1"> 男 </option>
+            <option value="0"> 女 </option>
+          </select>
+        </li>
+        <li style="display:none;">
+          <label><span>*</span>学历：</label>
+          <input type="text" name="degree" class="input"/>
+        </li>
+        <li>
+          <label><span>*</span>联系方式：</label>
+           <input type="text" name="phone" class="input"/>
+        </li>
+        <li>
+          <label><span>*</span>企业名称：</label>
+           <input type="text" name="company" class="input"/>
+        </li>
+        <li>
+          <label><span>*</span>职务：</label>
+           <input type="text" name="position" class="input"/>
+        </li>
+        <li style="display:none;">
+          <label><span>*</span>企业总资产：</label>
+           <input type="text" name="total_assets" class="input"/>
+        </li>
+          <li style="display:none;">
+          <label><span>*</span>邮箱地址</label>
+           <input type="text" name="email" class="input"/>
+        </li>
+        <li style="display:none;">
+          <label><span>*</span>QQ号码</label>
+           <input type="text" name="qq" class="input"/>
+        </li>
+        
+        
+        <li class="qudao">
+          <label><span>*</span>您是通过什么渠道了解北大总裁班的？</label>
+          <select name="access_from">
+            <option selected  value="1">网络媒体 </option>
+            <option value="2">朋友推荐 </option>
+            <option value="3">省经信委 </option>
+            <option value="4">省农委 </option>
+            <option value="5">省商务厅</option>
+            <option value="6">商会</option>
+          </select>
+        </li>
+        <li class="xuanzhe">
+          <label><span>*</span>请选择您要报名的课程</label>
+          <br>
+            <if condition='count($course) gt 0'>
+		        <volist name="course" id="vo"> 
+					<input type="checkbox" id="enroll_course_{lingzh:$vo.id}" name="enroll_course[]" value="{lingzh:$vo.id}" <?php echo in_array($vo['id'], $ids) ? 'checked' : ''; ?>/>
+	           		<label  class="xuan" for="enroll_course_{lingzh:$vo.id}">{lingzh:$vo.course} </label>
+				</volist>
+	        <else />
+	           	请添加课程信息
+	        </if>
+        </li>
+        <li>
+          <input type="submit" class="submit l" value="提交"/>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</form>
+</body>
+</html>
+<script>
+	$(document).ready(function() {
+		if(""!=""){
+			toAlert = "";
+			addToAlert();
+		}
+	});
+
+	function check_submit(){
+
+		var username = $("input[name='username']").val(),
+			sex = $("select[name='sex']").val(),
+			degree = $("input[name='degree']").val(),
+			phone = $("input[name='phone']").val(),
+			company = $("input[name='company']").val(),
+			position = $("input[name='position']").val(),
+			total_assets = $("input[name='total_assets']").val(),
+			email = $("input[name='email']").val(),
+			qq = $("input[name='qq']").val();
+			
+		if(username =="" || username==null){
+		    toAlert = "请填写姓名";
+			addToAlert();
+			return false;
+		}
+
+		/*if(!sex){
+		    toAlert = "请选择性别";
+			addToAlert();
+			return false;
+		}
+
+		if(!degree){
+		    toAlert = "请填写学历";
+			addToAlert();
+			return false;
+		}*/
+
+		if(phone == ""|| phone == null){
+	    	toAlert = "请填写手机号码";
+	  		addToAlert();
+	  		return false;
+	    }
+	    
+	    if((!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone)))){
+	    	toAlert = "手机号码格式不正确";
+	  		addToAlert();
+	  		return false; 
+	    }
+
+		if(!company){
+		    toAlert = "请填写企业名称";
+			addToAlert();
+			return false;
+		}
+
+		/*if(!position){
+		    toAlert = "请填写职务";
+			addToAlert();
+			return false;
+		}
+		
+		if(!email){
+		    toAlert = "请填写邮箱";
+			addToAlert();
+			return false;
+		}else{
+			var regex = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i;
+			if((!(regex.test(email)))){
+		    	toAlert = "邮箱格式不正确";
+		  		addToAlert();
+		  		return false; 
+		    }
+		}
+
+		if(!position){
+		    toAlert = "请填写企业总资产";
+			addToAlert();
+			return false;
+		}
+
+		if (!qq) {
+			toAlert = "请填写QQ号码";
+			addToAlert();
+			return false;
+		}*/
+		
+
+		if(!($('input[name="enroll_course[]"]:checked') && $('input[name="enroll_course[]"]:checked').length)){
+			toAlert = "请选择报名的课程";
+			addToAlert();
+			return false;
+		}
+		return true;
+	}
+
+    /*** 报名成功提示！ ***/
+    function addToCart(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert("注册成功！");
+    }
+        /*** 报名失败提示！ ***/
+    function addToAlert(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert(toAlert);
+    }
+        /*** 注册提示！ ***/
+    function SignAlert(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert(toAlert);
+    }
+</script>

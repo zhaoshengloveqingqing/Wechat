@@ -1,0 +1,128 @@
+<include file="Public:head"/>
+<style type="text/css">
+.cLine {
+    display: block;
+    width: 100%;
+}
+.photo li{ float:left; margin:10px 10px 10px 0; position:relative;}
+.photoimg{border: 1px solid #DDDDDD;
+box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.15);
+-moz-box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.15);
+-webkit-box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.15);
+-webkit-border-radius:5px 5px 5px 5pxx;
+-moz-border-radius:5px 5px 10px 10px;
+border-radius:5px 5px 10px 10px;
+width:235px;padding: 0 0 10px;
+background: url({lingzh::RES}/images/photo/bottom.png) repeat-x scroll left bottom #FFFFFF;
+background-size:2px auto;
+ *background:none;
+}
+.photoimg .cover{ width:100%;height:131px; overflow:hidden;display:block; background:url({lingzh::RES}/images/photo/noneimg.jpg) no-repeat 0 0 #f5f5f5;
+-webkit-border-radius:5px 5px 0 0;
+-moz-border-radius:5px 5px 0 0;
+border-radius:5px 5px 0 0;
+}
+.photoimg img{ width:100%;
+-webkit-border-radius:5px 5px 0 0;
+-moz-border-radius:5px 5px 0 0;
+border-radius:5px 5px 0 0;
+}
+.bd h6{ font-size:14px;margin:5px 10px; font-weight:normal;overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap !important;}
+.bd p{ margin:5px 10px;}
+.sn{ color:#999}
+.fr{ position:absolute; bottom:15px;right:10px; display:none;* display: block}
+.photoimg:hover .fr{ display:block}
+.userinfoArea th {
+width: 200px;
+}
+.STYLE1 {
+	color: #FF0000;
+	font-weight: bold;
+}
+</style>
+
+<div class="content">
+<div class="cLineB">
+<h4 class="left">相册 ({lingzh:$count}) 个</h4>
+<div class="searchbar right">
+ 
+</div>
+<div class="clr"></div>
+</div>
+<!--div class="msgWrap bgfc">
+<th>所有相册的展示地址：<a href="http://{lingzh::C('wx_handler_server')}/index.php/photo/{lingzh:$Think.session.token}" class="green">http://{lingzh::C('wx_handler_server')}/index.php/photo/{lingzh:$Think.session.token}</a></th>
+                 <!--form method="post" action="" enctype="multipart/form-data">
+                   <input type="hidden" name="formhash" value="7566c850">
+<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+<tr>
+<th>所有相册的展示地址：</th>
+<td><strong>关注lingzhtech, 输入</strong><a href="/" class="green"><span class="STYLE1">相册</span></a><strong><a href="/" class="green">即可测试</a></strong></td>
+</tr>
+<tr>
+<th>相册图文消息封面图片地址:</th>
+<td><input type="text" name="picurl" id="pic_url_input" value="" class="px" style="width:400px;"><span onclick="$('#upload-panel').show();" style="text-decoration:underline;cursor:pointer;"> 上传图片 </span><button type="submit" name="homesubmit" value="true" class="btnGreen vm"><strong>保存</strong></button></td>
+</tr></tbody></table>
+                            </form-->
+<!--/div-->
+<div class="cLine">
+<div class="pageNavigator left"> 
+<a href="{lingzh::U('Photo/add',array('token'=>$_SESSION['token']))}" title="创建相册" class="btnGrayS vm bigbtn"><img src="{lingzh::RES}/images/pic.png" class="vm">创建相册</a> 
+<a id="preview" href="javascript:;" class="btnGrayS vm bigbtn">预览</a></div>
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<ul class="photo">
+<volist name="photo" id="photo">                     
+<li>
+<div class="photoimg">
+ <a title="{lingzh:$photo.title}" class="cover" href="{lingzh::U('Photo/list_add',array('id'=>$photo['id']))}">
+  <img src="{lingzh:$photo.picurl}" alt="{lingzh:$photo.title}">
+ </a>
+<div class="bd">
+<h6>{lingzh:$photo.title}</h6>
+<p class="sn">有{lingzh:$photo.num}张照片</p>
+</div>
+<div class="fr">
+<a href="{lingzh::U('Photo/list_add',array('id'=>$photo['id']))}">上传图片</a>　
+<a href="{lingzh::U('Photo/edit',array('token'=>session('token'),'id'=>$photo['id']))}">编辑</a>　<a href="javascript:drop_confirm('您确定要删除吗?', '{lingzh::U('Photo/del',array('token'=>session('token'),'id'=>$photo['id']))}');">删除</a>
+</div>
+</div>
+</li>
+</volist>
+</ul>
+<div class="clr"></div>
+</div>
+
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lingzh:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<script>
+$("#preview").click(function(){
+    var left = ($(window.parent.parent).width() - 450)/2;
+    window.open("/index.php?g=User&m=Preview&a=index&model=photo","我的微相册",
+	    "height=650,width=450,top=0,left="+left+",toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no");
+});
+function checkAll(form, name) {
+  for(var i = 0; i < form.elements.length; i++) {
+    var e = form.elements[i];
+    if(e.name.match(name)) {
+      e.checked = form.elements['chkall'].checked;
+    }
+  }
+}
+
+  </script> 
+<div id="upload-panel" style="display:none" >
+    <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+    <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+        <iframe style=" width:500px;height:500px;" src="/index.php?g=User&m=UploadImg&a=index"></iframe>
+    </div>
+</div>
+<include file="Public:footer"/>  
+ 

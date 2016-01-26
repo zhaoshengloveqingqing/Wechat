@@ -1,0 +1,107 @@
+@charset "utf-8";
+/* CSS Document */
+
+.content{width:80%; background-color: #ffffff; border-radius: 4px; margin: 0 auto; height: 600px; margin-top:-300px; }
+.content .cont{margin:0 auto; padding:20px 40px;}
+ul{width: 50%; float: right; margin-top:10px; }
+ul li, h1, .submit{
+	text-align: left;
+	margin-top:20px;
+	line-height:30px;
+}
+ul li span {
+	display: inline-block;
+	width: 20%;
+}
+.content .cont h1{ color:#0489f7; font-size:20px; padding-top:20px;}
+.iphone_logo {
+	width: 50%;
+	float: left;
+}
+
+.input, select{
+	width: 280px;
+}
+
+.input{
+	border:0px;
+	height:30px;
+	margin-top:0px;
+	line-height:30px;
+	border:1px solid #CCC;
+	margin-left:10px
+}
+
+select{
+	border:0px;
+	height:30px;
+	margin-top:0px;
+	line-height:30px;
+	border:1px solid #CCC;
+	margin-left:10px
+}
+
+.submit{
+	border-radius:5px;
+	width:155px;
+	height:40px;
+	font-size:20px;
+	text-align:center;
+	margin-top:20px;
+	line-height:35px;
+	color:#fff;
+	cursor:pointer;
+	background:#0489f7;
+	border:0px;
+	display:inline-block;
+}
+
+@media screen and (max-width: 1280px) {
+	ul li, .submit{
+		text-align: center;
+	}
+
+	ul h1 {
+		margin-left: 5%;
+	}
+
+	.content {
+		width: 100%;
+		height: 619px;
+	}
+
+	.content .cont {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.iphone_logo {
+		width: 60px;
+		position: absolute;
+		right: 10%;
+	}
+
+	.iphone_logo img {
+		width: 100%;
+		height: 100%;
+	}
+
+	ul {
+		width: 100%;
+	}
+
+	ul li {
+		width: 100%;
+	}
+
+	ul li label {
+		display: inline-block;
+		width: 20%;
+		text-align: left;
+	}
+
+	.input, select{
+		width: 70%;
+	}
+}
+

@@ -1,0 +1,79 @@
+<include file="Public:head"/>
+<script src="/js/fusioncharts/FusionCharts.js" type="text/javascript"></script>
+<script src="/js/fusioncharts/swf/MSLine.swf" language="javascript" type="text/javascript"></script>      
+
+<div class="content">
+  <h4 class="cLineB">选择月份（可查看最近12个月）
+    <select class="setting-period" name="month_before" id="month_before" onchange="doit()">
+      {lingzh:$month_options}
+    </select>
+  </h4>
+<script>
+function doit(){
+location.href= '/index.php?g=User&m=WeixinStatics&a=index&month_before='+$('#month_before').val();
+}
+</script>
+<div class="msgWrap">
+  <table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin:20px 0; ">
+    <tbody>
+    <tr>
+      <td align="center" bgcolor="#f9f9f9">
+        <div id="chartdiv1" align="center"></div>
+          <script type="text/javascript">
+            var chart = new FusionCharts("/js/fusioncharts/swf/MSLine.swf", "ChartId", "996", "400", "0", "1");
+            //chart.setTransparent("false");
+            chart.setDataXML('{lingzh:$xml}');
+            //chart.setDataURL("data.html");
+            chart.render("chartdiv1");
+          </script>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" bgcolor="#f9f9f9">
+        <div id="chartdiv2" align="center"></div>
+      </td>
+    </tr>
+    </tbody>
+  </table>          
+</div>
+          
+<div class="msgWrap">
+  <table width="100%" cellspacing="0" cellpadding="0" border="0" class="ListProduct">
+    <thead>
+    <tr>
+      <th>日期</th>
+      <th>菜单点击数</th>
+      <th>文本请求数</th>
+      <th>图文请求数</th>
+      <th>语音请求数</th>
+      <th>地理位置</th>
+      <th>关注人数</th>        
+      <th>取消关注人数</th> 
+      <th>总请求数/日</th>
+    </tr>
+    </thead>
+    <tbody>
+      <if condition="empty($day_statics)">
+      <tr>
+        <td colspan='9'>木有统计数据</td>
+      </tr>
+      </if>
+      <volist id="static_item" name="day_statics">                
+      <tr>
+        <td>{lingzh:$key}</td>
+        <td><if condition="empty($static_item['click'])">0<else/>{lingzh:$static_item.click}</if></td>
+        <td><if condition="empty($static_item['text'])">0<else/>{lingzh:$static_item.text}</if></td>
+        <td><if condition="empty($static_item['image'])">0<else/>{lingzh:$static_item.image}</if></td>
+        <td><if condition="empty($static_item['voice'])">0<else/>{lingzh:$static_item.voice}</if></td>
+        <td><if condition="empty($static_item['location'])">0<else/>{lingzh:$static_item.location}</if></td>          
+        <td><if condition="empty($static_item['subscriber_num'])">0<else/>{lingzh:$static_item.subscriber_num}</if></td>
+        <td><if condition="empty($static_item['unsubscriber_num'])">0<else/>{lingzh:$static_item.unsubscriber_num}</if></td>                       
+        <td><if condition="empty($static_item['total'])">0<else/>{lingzh:$static_item.total}</if></td>
+      </tr>
+      </volist>
+    </tbody>      
+  </table>            
+</div>  
+</div>
+
+  <include file="Public:footer"/>

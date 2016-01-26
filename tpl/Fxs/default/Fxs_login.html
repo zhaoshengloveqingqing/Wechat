@@ -1,0 +1,180 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>分销商登陆</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<meta name="viewport" content="initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" type="text/css" href="./tpl/Fxs/default/common/css/login.css" />
+<link rel="stylesheet" type="text/css" href="./tpl/Fxs/default/common/css/home.css" />
+<link rel="stylesheet" type="text/css" href="./tpl/Fxs/default/common/css/public.css" />
+<script src="./tpl/Fxs/default/common/js/jquery-1.8.3.min.js"></script>
+
+<script src="./tpl/Fxs/default/common/js/mobile_tip.min.js"></script>
+</head>
+<body style="background:#efefef;">
+  <!-- 头部 -->
+  <header class="ysh_header">
+      <p>分销商登陆</p> 
+  </header>
+  
+  <article class="ysh_art">
+	<form action="{lingzh::U('Fxs/login',array('token'=>$_GET['token']))}" method="post" onsubmit="return check_d();">
+      <div class="ysh_art_box ysh_art_t">
+           用户名：<input type="text" class="ysh_art_int" placeholder="请输入用户名" id="user_name" name="user_name" value=""/>
+      </div>
+      <div class="ysh_art_box2 ysh_art_t">
+           <span style=" letter-spacing:17px;"></span>密码：<input type="password" class="ysh_art_int" placeholder="请输入密码" id="user_psw" name="user_psw" value=""/>
+      </div>
+      <input class="ysh_art_but but_col" type="submit" value="登录"> 
+      <input type="hidden" name="refer" value="/wxpay/index.php?g=Shop&m=User&a=index" />
+      <div class="ysh_art_text">
+		          <pre><a href="{pigcms::U('Index/reg',array('token'=>$_GET['token']))}">无账号请注册</a>    <a href="{pigcms::U('Index/me')}">找回密码？</a></pre>
+      </div>
+    <input type="hidden" name="__hash__" value="7234acca1800eb8137ab27d9c8d50f2a_ea93649ecbd1c58f0b7e95c9d9f5d607" /></form>
+  </article>
+<script>
+$(document).ready(function() {
+	if(""!=""){
+		toAlert="";
+		addToAlert();
+	}
+});
+	function usernamevalidate(choose){
+		$.ajax({
+			type : "POST",
+			url : "username_validate.html",
+			data : {
+				"username" : choose.value,
+			},
+			success : function(msg) {
+				var jj = msg.trim();
+				if(msg ==null || msg ==""){
+				}else{
+					$("#userName").attr("value","");
+					toAlert=".该用户名已经被注册，请重新输入！";
+					addToAlert();
+					return false;
+				}
+			},
+			error : function(err) {
+				SignAlert("系统报错");
+			}
+		});
+	}
+	//身份证即时校验
+	function idcardcheck(choose){
+		$.ajax({
+			type : "POST",
+			url : "idcardcheck.html",
+			data : {
+				"idcard" : choose.value,
+			},
+			success : function(msg) {
+				var jj = msg.trim();
+				if(msg ==null || msg ==""){
+				}else{
+					$("#userIdcard").attr("value","");
+					toAlert=".身份证号码已注册过，请重新输入！";
+					addToAlert();
+					return false;
+				}
+			},
+			error : function(err) {
+				SignAlert("系统报错");
+			}
+		});
+	}
+	
+    var width = $(window).width() -20;
+    $("#container table").each(function(){
+        if($(this).width() > width){
+            //兼容低版本浏览器 暂时不适用wrap
+            $(this).width(width);//.wrap("<div style='"+width+"px;overflow:auto;'></div> ");
+        }
+    });
+
+    $("#container img").each(function(){
+        if($(this).width() > width){
+            //兼容低版本浏览器 暂时不适用wrap
+            $(this).width(width);//.wrap("<div style='"+width+"px;overflow:auto;'></div> ");
+        }
+    });
+
+    /*** 数据校验 ***/
+//匹配身份证(15位或18位) 
+function NotIdcard(str) 
+{ 
+var result=str.match(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/); 
+if(result==null) return true; 
+return false; 
+} 
+
+
+function check_d(){
+	var userName=$("#user_name").val();
+	var userPassword=$("#user_psw").val();
+
+      if(userName =="" || userName==null){
+	    toAlert="用户名不能为空";
+		addToAlert();
+		return false;
+		}
+      if(userPassword==""||userPassword==null){
+    	 toAlert="密码不能为空";
+  		addToAlert();
+  		return false;
+      }
+      if(userPassword.length < 6 || userPassword.length >30){
+    	 toAlert="密码长度是6-30位";
+  		addToAlert();
+  		return false;
+      }
+
+	return true;
+	
+}
+
+    /*** 报名成功提示！ ***/
+    function addToCart(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert("注册成功！");
+    }
+        /*** 报名失败提示！ ***/
+    function addToAlert(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert(toAlert);
+    }
+        /*** 注册提示！ ***/
+    function SignAlert(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert(toAlert);
+    }
+
+</script>
+
+</body>
+</html>

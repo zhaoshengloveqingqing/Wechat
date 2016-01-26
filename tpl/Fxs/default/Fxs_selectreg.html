@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>苏州派尔网络科技</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<meta name="viewport" content="initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<script src="./themes/Shop/Cycms/common/js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./tpl/Fxs/default/common/css/userRegister.css" media="all" />
+<link rel="stylesheet" type="text/css" href="./tpl/Fxs/default/common/css/reg/weixin.css" media="all" />
+<link rel="stylesheet" type="text/css" href="./tpl/Fxs/default/common/css/reg/weixinwebsit_tip.css" media="all" />
+<script src="./themes/Shop/Cycms/common/js/mobile_tip.min.js"></script>
+<script src="./themes/Shop/Cycms/common/js/xrarea.js"></script>
+</head>
+
+<body id="activity-detail">
+<div id="page">
+
+<div id="header" class="bg-FF2E12-ff6f42"><!--头部-->
+    <a class="btn2 btn_primary" href="{lingzh::U("User/Index/login")}" style="color:white;height:32px;">首页 </a>
+    <span class="title">申请Hi电分销</span>
+    <!-- 顶部导航-->
+</div>
+	<div class="flowstep" id="J_Flowstep">
+          <ol class="flowstep-4">
+      	</ol>
+	</div>
+	
+      <div id="container">
+        <div class="article-content liebiao-x">
+        	<div class="page-bizinfo">
+		 <div class="header">
+			<h1 id="activity-name"
+				style="font-size: 17px;margin-left:5%;margin-right:5%;"></h1>
+			<p class="activity-info">
+				<a href="weixin://profile/" id="post-user" class="activity-meta"><i
+					class="icon_link_arrow"></i></a>
+			</p>
+		</div>
+	</div>
+	<div class="page-content">
+		<div class="text" style="font-size:15px;">
+			
+				  <input id="submit" type="submit" class="input_button" onclick="window.open('{lingzh::U("Fxs/Fxs/oauth",array('ver'=>'personalreg','token'=>$_GET['token'],'partner_id'=>$_GET['partner_id']))}')" value="个人注册"/>
+					<div>
+						<h1 id="activity-name"
+						style="font-size: 17px;margin-left:5%;margin-right:5%;font-weight:bold;">
+						<b style="color:red;"></h1>
+						</div>
+						<input id="submit" type="submit"  class="input_button" onclick="window.open('{lingzh::U("Fxs/Fxs/customer_oauth",array('ver'=>'customersreg','token'=>$_GET['token'],'partner_id'=>$_GET['partner_id']))}')" value="商家注册"/>
+						<h1 id="activity-name"
+							style="color:red;font-size: 17px;margin-left:5%;margin-right:5%;font-weight:bold;">
+						</h1>
+						</div>
+					<input type="hidden" name="__hash__" value="02e81e3820d39d89df93b4bb74343a01_3c3526177e173c6a69023a9f83bf381b" /></form>
+				</div>
+			</div>
+        </div>
+    </div>
+
+<!-- 底部导航栏 -->
+</div>
+</body>
+</html>

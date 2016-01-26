@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>微助手-组织活动</title>
+<link rel="stylesheet" type="text/css" href="/themes/p/css/person.css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/js/weixin.js"></script>
+
+</script>
+</head>
+<body> 
+<div class="area2 notice"><a href="/index.php?g=Person&m=Index&a=index">返回首页</a></div>
+<div class="area1">
+   <input type="text" id="party_title" maxlength="70" placeholder="输入活动主题，说明时间、地点、事件"/>
+</div>
+<div class="area1">
+   <textarea id="party_content" class="textarea3" placeholder="活动详情，尽量生动、具体"></textarea>
+</div>
+<div class="area1">
+   <input type="text" id="party_author" maxlength="20" placeholder="留下组织者名称" value=""/>
+</div>
+<div class="area1">
+   <input type="password" id="party_pass" maxlength="16" placeholder="设置管理密码，用于查看报名人员信息"/>
+</div>
+<div>
+   <button id="sendButton" class="button1">发送</button>
+</div>
+<script type="text/javascript">
+var dataForWeixin={
+   appId:"",
+   Img:"http://" + window.location.host + "/themes/p/images/party_msg.png",
+   path:"",
+   title:"使用微助手在微信组织活动",
+   desc:"K歌、聚餐、户外、会议，轻松发起各类活动。随时查看报名信息、精确统计报名人数",
+   fakeid:"",
+   callback:function(){}
+};
+
+$(function() {
+    $("#guideCancel").click(function() {
+         cover(false);
+         $("#guide").hide();
+    });
+     $("#sendButton").click(function() {
+         var _title = trim($("#party_title").val());
+	     var _content = trim($("#party_content").val());
+	     var _author=trim($("#party_author").val());
+		 var _pass=trim($("#party_pass").val());
+		 if(_title==""){_toast("没有输入活动主题");return;}
+         if(_title.lenght>70){_toast("主题请在70字节以内");return;}
+         if(_content.length<10){_toast("活动详情写得太少了");return;}
+         if(_content.length>5000){_toast("活动详情写得有点多了");return;}
+         if(_author==""){_toast("请署上你的大名");return;}
+         if(_author.length>20){_toast("署名请在20字节以内");return;}
+         if(_pass==""){_toast("请设置管理密码");return;}
+         if(_pass.length<6 || _pass.length>16 ){_toast("密码请设在6-16字节");return;}
+      
+		 $.ajax({
+             url:"/index.php",
+             data:{
+                 g:"Person",
+                 m:"Activity",
+				 a:"send",
+				 title:encode(_title),
+				 content:encode(_content),
+				 author:encode(_author),
+				 pass:encode(_pass)
+             },
+             success: function(data) {
+			     data = $.parseJSON(data);
+                 //
+				 if (data.data.id > 0) {
+				     dataForWeixin.title = data.data.title;
+				     dataForWeixin.desc = data.data.content;
+				     dataForWeixin.path = "http://" + window.location.host + "/index.php?g=Person&m=Activity&a=showAct&id=" + data.data.id;
+					 guide();
+			    } else {
+				     _toast("你填写的内容有问题");
+				}
+             },
+             error : function(data, error, e) {
+                 alert(data);
+             }
+         });
+     });
+});
+</script>
+
+<div id="ok"><img src="/themes/p/images/ok.png"><div id="ok_text"></div></div>
+<div id="cover"></div>
+<div id="loading"><img src="/themes/p/images/loading.gif"><div id="loading_text"></div></div>
+<div id="guide"><div><img src="/themes/p/images/guide.png"></div>
+<div id="guide_button2">
+<button class="button2" id="guideCancel">取消</button>
+</div>
+</div>
+<div id="guide2"><img src="/themes/p/images/guide2.png"></div>
+<div id="guide3"><img src="/themes/p/images/guide3.png"></div>
+<div id="toast"></div>
+<div class="copyright" style="margin-left:-12px; margin-right:-12px;  margin-bottom:-20px;background-color:#FFF;padding:15px;font-size:14px;color:#333;text-align:center;"><a href="/index.php?g=Person&m=Index&a=index">返回首页</a></div>
+</body>
+</html>
+ 

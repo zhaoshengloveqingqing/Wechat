@@ -1,0 +1,350 @@
+<include file="Public:head"/>  
+<script src="/js/jscolor/jscolor.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+<link rel="stylesheet" href="/themes/a/css/bootstrapSwitch.css">
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+<script src="/themes/a/js/bootstrapSwitch.js"></script>
+<style type="text/css">
+	.vipcard{
+		margin: 0 auto;
+		position: relative;
+		height: 159px;
+		text-align: left;
+		width: 267px;
+	}
+	#cardbg{
+		height: 159px;
+		width: 267px;
+		position:absolute;
+		border-radius: 8px;
+		-webkit-border-radius:8px;
+		-moz-border-radius:8px;
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+		-moz-box-shadow:0 0 4px rgba(0, 0, 0, 0.6);
+		-webkit-box-shadow:0 0 8px rgba(0, 0, 0, 0.6);
+		top:0;
+		left:0;
+		z-index:1;
+	}
+	.vipcard .logo {
+		max-height:70px;
+		position:absolute;
+		top:8px;
+		left:5px;
+		z-index:2;
+	}
+	.vipcard .verify {
+		display:inline-block;
+		height:40px;
+		top:105px;
+		right:12px;
+		text-align:right;
+		line-height:24px;
+		color:#000;
+		font-size:20px;
+		text-shadow:0 1px rgba(255, 255, 255, 0.2);
+		z-index:2;
+	}
+
+	.vipcard h1 {
+		position:absolute;
+		right:10px;
+		top:7px;
+		text-shadow:0 1px rgba(255, 255, 255, 0.2);
+		color:#000;
+		font-size:11px;
+		line-height:25px;
+		text-align:right;
+		font-weight: normal;
+		z-index:2;
+	}
+	.vipcard .verify span {
+		display:inline-block;
+		text-align:left;
+	}
+	.vipcard .verify em {
+		display:block;
+		line-height:13px;
+		font-size:10px;
+		font-weight:normal;
+		font-style:normal;
+	}
+	.pdo {
+		position:absolute;
+		top:0;
+		left:0;
+		display:inline-block;
+	}
+	.userinfoArea td {
+		padding: 8px 0 0px 15px;
+	}
+	#tishi{
+		text-align: center;display: block;
+	}
+	.banner{
+		display:block; width:213px;height: 278px;overflow: hidden;
+	}
+	.banner img{
+		display:block; width:213px; border:0;
+	}
+	.bannerbtn{ position:relative; display:block}
+	.bannerbtn .qiaodaobtn{ position: absolute; display:block; bottom:0}
+	.bigtitle{
+		width: 220px;
+		display: inline-block;
+	}
+	.smalltitle{
+		width: 60px;
+		display: inline-block;
+		margin-left: 5px;
+	}
+</style>
+<div class="content">
+
+  <div class="cLineB"> 
+    <div class="clr"></div>
+  </div>
+  <!--tab start-->
+  <div class="tab">
+    <ul>
+	  <li class="tabli" id="tab0"><a href="{lingzh::U('Membership/img')}">会员卡图文消息</a></li>
+	  <li class="tabli" id="tab3"><a href="{lingzh::U('Member_card/info')}">商家信息设置</a></li>
+	  <li class="current tabli" id="tab1"><a href="{lingzh::U('Member_card/index')}">卡片设计</a></li>
+	  <li class="tabli" id="tab4"><a href="{lingzh::U('Member/setmemberinfo')}">会员资料设置</a></li>
+    <li class="tabli" id="tab5"><a href="{lingzh::U('Member/setclassinfo')}">自定义会员等级</a></li>
+    <li class="tabli" id="tab6"><a href="{lingzh::U('Member_card/exchange')}">积分规则设置</a></li>
+	</ul>
+  </div>
+  <!--tab end-->
+
+  <div class="cLineB"> 
+    <div class="clr"></div>
+  </div>
+	<form class="form" method="post" action="" target="_top" enctype="multipart/form-data">
+
+	<div class="cLineB">
+		<h4><a id="preview" href="javascript:;" class="btnGrayS vm bigbtn">预览</a> </h4>
+	</div>  
+	<div class="msgWrap bgfc">
+		<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+			<tr>
+				<th width="303" rowspan="4" valign="top">
+					<div class="vipcard">
+						<img id="cardbg" src='<if condition="!empty($card['diybg'])">{lingzh:$card['diybg']}<else/>{lingzh:$card['bg']}</if>'>
+						<img id="cardlogo" class="logo" src="{lingzh:$card.logo}">
+						<h1 id="vipname" style="color:{lingzh:$card.vipnamecolor}"><if condition="$card.cardname neq false"> {lingzh:$card.cardname} <else/> {lingzh::C('company_short_name')}会员卡</if></h1>
+						<strong class="pdo verify" id="number" style="color:{lingzh:$card.numbercolor}"><span><em>会员卡号</em>2188 5539</span></strong>
+					</div>
+
+				</th>
+				<td colspan="2">
+					<span class="bigtitle">会员卡名称（见左边会员卡右上角）：</span>
+					<input type="text" name="cardname" value="<if condition="$card.cardname neq false"> {lingzh:$card.cardname} <else/> {lingzh::C('company_short_name')}会员卡</if>" id="cardname" class="px" style="width:200px;" onkeyup="DivFollowingText()"> 
+					<script type="text/javascript">
+					function DivFollowingText()
+					{
+						document.getElementById("vipname").innerHTML=document.getElementById("cardname").value;
+					}
+					</script>
+					<span class="smalltitle">字体颜色：</span>
+					<input type="text" name="vipnamecolor" id="vipnamecolor" value="{lingzh:$card.vipnamecolor}" class="px color" style="width: 55px; background-image: none; background-color: {lingzh:$card.vipnamecolor}; color: rgb(255, 255, 255);" onblur="document.getElementById(&#39;vipname&#39;).style.color=document.getElementById(&#39;vipnamecolor&#39;).value;">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<span class="bigtitle">LOGO图标（左边会员卡左上方）：</span>
+            <div class='img_upload_panel' style="display: inline-block">
+				       <div name='logoimg_uploadify'  id="logoimg_uploadify"  ></div>
+				       <div id="logoimg_Queue"></div> 
+				    </div>
+					<input type="hidden" name="logo" id="pic_url_input_1" value="{lingzh:$card.logo}" onblur="document.getElementById(&#39;cardlogo&#39;).src=document.getElementById(&#39;pic_url_input_1&#39;).value;" class="px" style="width:200px;"> 
+				</tr>
+				<tr>
+					<td colspan="2">
+						<span  class='bigtitle'>会员卡的背景：</span>
+						<select name="bg" onchange="onSelectCardBg(this.options[this.selectedIndex].value);" class="pt" style="width:210px;"> 
+							<option selected="">请选择会员卡背景图</option>
+							<?php 
+							for($i=1;$i<=23;$i++){
+								$i=$i<10?'0'.$i:$i;
+								$str='./tpl/User/default/common/images/card/card_bg'.$i.'.png';
+								if($card['bg']==$str){
+									echo $str='<option value="'.$str.'" selected="selected" >'.$i.'</option>';
+								}else{
+									echo $str='<option value="'.$str.'">'.$i.'</option>';
+								}
+							}
+							?>
+						</select>
+					</td>
+					<script type="text/javascript">
+						function onSelectCardBg(url){
+							$('#pic_url_input').val(url);
+							$('#cardbg').attr('src',url);
+						}
+					</script>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<span class='bigtitle' style="line-height: 20px;bottom: 25px;position: relative;">自定义背景图：</span>
+		                <div class='img_upload_panel' style="display: inline-block;">
+					       <div name='backimg_uploadify'  id="backimg_uploadify"></div>
+					       <div id="backimg_Queue"></div>
+					    </div>
+						<input type="hidden" name="diybg" id="pic_url_input" class="px" value="{lingzh:$card.diybg}" onblur="document.getElementById(&#39;cardbg&#39;).src=document.getElementById(&#39;pic_url_input&#39;).value;" style="width:200px;"> 
+					</td>
+				</tr>
+				<tr>
+					<th width="303" valign="top"><span id="tishi" style="margin-top: -20px">{lingzh:$card.msg}</span></th>
+					<td colspan="2">
+						<span class="bigtitle" >会员卡号字体颜色 (左边会员卡右下方):</span>
+						<input type="text" name="numbercolor" id="numbercolor" value="{lingzh:$card.numbercolor}" class="px color" style="width: 55px; background-image: none; background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);" onblur="document.getElementById(&#39;number&#39;).style.color=document.getElementById(&#39;numbercolor&#39;).value;">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="2">
+						<span class="bigtitle">卡号规则设置:</span>
+						<input name="is_diy_num" type='radio' value='0' onclick ="hide_num_set()" <?php if(!$num_set['prefix'] && !$num_set['suffix']) echo 'checked="checked"'; ?> >
+						<span>默认规则</span>
+						<div style="margin-top:5px;">
+							<span class="bigtitle"></span>
+							<input name="is_diy_num" type='radio' value='1' onclick ="show_num_Set()" <?php if($num_set['prefix'] || $num_set['suffix']) echo 'checked="checked"'; ?> >
+							<span>自定义规则</span>
+						</div>
+						<div id="num_set_div"  style="margin-top:5px;<?php if(!$num_set['prefix'] && !$num_set['suffix']) echo 'display:none'; ?>">
+							<span class="bigtitle"></span>
+							<input type="text" maxlength="6" name="prefix" class="px" style="width:60px;" value="{lingzh:$num_set.prefix}">
+							前缀(最多6位) 
+							<input type="text" maxlength="6" name="suffix" class="px" style="width:60px;" value="{lingzh:$num_set.suffix}">
+							后缀(最多6位) 
+						</div>
+						<script type="text/javascript">
+							function hide_num_set(){
+								$('#num_set_div').hide();
+							}
+							function show_num_Set(){
+								$('#num_set_div').show();
+							}
+						</script>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="2">
+						<span class="bigtitle">提示文字 (出现在会员卡页面的下方):</span>
+						<input type="text" name="msg" value="{lingzh:$card.msg}" id="tishi2" class="px" style="width:287px;" onkeyup="DivFollowingText2()"> 请不要超过20个字。
+						<script type="text/javascript">
+						function DivFollowingText2()
+						{
+							document.getElementById("tishi").innerHTML=document.getElementById("tishi2").value;
+						}
+					</script></td>
+				</tr>
+				<tr style="height: 45px;">
+					<td></td>
+					<td> 
+						<span class="bigtitle" style="line-height: 20px;bottom: 8px;position: relative;">是否在手机会员卡页显示充值余额:</span> 
+						<div class="switch switch_anchor"  data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+	                        <input type="checkbox" id='showMoney' name="showMoney" <?php echo $show_items['showMoney'] ? "checked" : "" ?> value="1"/>
+	                    </div>
+					</td>
+				</tr>
+				<tr style="height: 45px;">
+					<td></td>
+					<td>
+						<span class="bigtitle" style="line-height: 20px;bottom: 8px;position: relative;">是否在手机会员卡页显示可用积分:</span> 
+						<div class="switch switch_anchor" data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+	                        <input type="checkbox" id="showScore" name="showScore" <?php echo !$show_items ? "checked" : ($show_items['showScore'] ? "checked":"") ?> value="1"/>
+	                    </div> 	
+					</td>
+				</tr>
+				<tr>
+					<th valign="top" height="40"></th>
+					<td><span class="red"></span><button type="submit" name="button" class="btnGreen">保存</button></td></td>
+					<td>
+				</tr>
+			</tbody>
+		</table>
+	</div> 
+	<div class="clr"></div>
+	</form>
+</div>
+
+<div class="clr"></div>
+<div id="upload-panel" style="display:none" >
+	<div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+	<div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+		<iframe style=" width:500px;height:500px;" src="/index.php?g=User&m=UploadImg&a=index"></iframe>
+	</div>
+</div>
+<div id="upload-panel-1" style="display:none" >
+	<div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+	<div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+		<iframe style=" width:500px;height:500px;" src="/index.php?g=User&m=UploadImg&a=index&id=1"></iframe>
+	</div>
+</div>
+<script>
+$("#preview").click(function(){
+	var left = ($(window.parent.parent).width() - 450)/2;
+	window.open("/index.php?g=User&m=Preview&a=index&model=card","我的会员卡",
+		"height=650,width=450,top=0,left="+left+",toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no");
+});
+</script>
+<include file="Public:footer"/>
+
+<script>
+function setUpload(selector,queueid,btnText,successCallback)
+	{
+		$(selector).uploadify({
+        'buttonText' : btnText,
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+        'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+        'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+        "onFallback": function() {
+             alert('您的浏览器没有安装Flash插件');
+        },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': queueid,
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                	successCallback(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+
+            } else {
+               alert("网络不给力啊！亲");
+            }
+
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+	 //alert(selector);
+     $(selector).css('width', '100%'); 
+	 
+	 //alert(selector);
+	 return selector;
+	} 
+	$(function() { 
+		setUpload('#logoimg_uploadify','logoimg_Queue','上传图片',function(content){
+			$('#pic_url_input_1').val(content);
+			$('#cardlogo').attr('src',content);
+		}); 
+		setUpload('#backimg_uploadify','backimg_Queue','上传图片',function(content){
+			$('#pic_url_input').val(content);
+			$('#cardbg').attr('src',content);
+		});
+		$('#backimg_uploadify').append('<span class="img_upload_tips">尺寸建议宽370像素×高170像素，图案上下左右居中</span>');
+	});  
+</script>
+    

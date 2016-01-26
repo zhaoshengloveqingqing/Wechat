@@ -1,0 +1,117 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>【我最喜欢的节目评选】2014北大安徽总裁同学会嘉年华</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+
+  <link rel="stylesheet" href="/tpl/Wap/default/common/vote/assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="/tpl/Wap/default/common/vote/assets/css/app1.css">
+</head>
+<body>
+
+<div class="am-g">
+	<div class="am-u-sm-12 am-u-sm-centered header">
+ 		<p>
+			<img alt="" src="/tpl/Wap/default/common/vote/images/header.png" />
+		</p>
+	</div>
+</div>
+<div class="am-g content">
+	<div class="am-u-sm-12 am-u-sm-centered info">
+ 		<p>
+			<span></span>
+			以下是投票的结果
+		</p>
+	</div>
+	<if condition="!empty($vote)">
+		<volist name="prizes" id="prize">
+			<div class="am-u-sm-12 am-u-sm-centered chart">		
+		 		<div class="con">
+		        	<div id="echarts{lingzh:$i}" style="height:360px;"></div>
+		    	</div>
+			</div>
+		</volist>
+	</if>
+</div>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="/tpl/Wap/default/common/vote/assets/js/jquery.min.js"></script>
+<script src="/tpl/Wap/default/common/vote/assets/js/amazeui.js"></script>
+ <script src="/tpl/Wap/default/common/vote/assets/echarts/echarts.js"></script>
+<script type="text/javascript">
+        String.prototype.splice = function( idx, rem, s ) {
+            return (this.slice(0,idx) + s + this.slice(idx + Math.abs(rem)));
+        };
+
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: '/tpl/Wap/default/common/vote/assets/echarts'
+            }
+        });
+   <if condition="!empty($vote)">
+	<volist name="vote" id="vote">
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/theme/{lingzh:$color[$i-1]}',
+                'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec, theme) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('echarts{lingzh:$i}'), theme);
+				var option = {
+				    title : {
+				        text: '{lingzh:$prizes[$i]}',
+				    },
+				   /* tooltip : {
+				        trigger: 'axis'
+				    },*/
+				    grid : {x:50, x2 : 50},
+				    calculable : true,
+				    xAxis : [
+				        {
+				            type : 'value',
+				            boundaryGap : [0, 0]
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'category',
+				            data : [<php> echo "'".implode("','", array_keys($vote))."'"</php>]
+				        }
+				    ],
+				    series : [
+				        {
+				              type:'bar',
+				              itemStyle : { normal: {label : {show: true, position: 'right'}}},
+				              data:[<php> echo implode(",", $vote);</php>],
+				        }
+				    ]
+				};
+                // 为echarts对象加载数据
+                myChart.setOption(option);
+            }
+        );
+        </volist>
+    </if>
+    </script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<![endif]-->
+</body>
+</html>

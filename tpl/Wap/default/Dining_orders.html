@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/dining.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/dining-dialog.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/datepicker_canyin.css" media="all" />
+    <script type="text/javascript" src="/themes/w/js/jQuery.js"></script>
+    <script type="text/javascript" src="/themes/w/js/wei_webapp_v2_common.js"></script>
+    <script type="text/javascript" src="/themes/w/js/bootstrap-datepicker_canyin.js"></script>
+<title>我的菜单</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+</head>
+<body id="page_intelOrder" class="myOrderCon">
+<div class="center">
+    <header style="padding-top:20px;">
+        <span class="pCount" style="">我的点餐历史</span>
+    </header>
+	<if condition="isset($orders)">
+	<volist name="orders" id="order">
+    <section style="margin-bottom:10px;padding:0;">
+	    <article>
+			<ul>
+                <li style="border-top:0;margin-top:0;height:auto;padding-right: 0px;">
+				    
+                    <a href="javascript:void(0);" style="color:#888;display:block;">
+                        <p style="font-size:12px;">就餐时间：{lingzh:$order.dinetime} </p>
+                        <p style="font-size:12px;">就餐人数：{lingzh:$order.guestnum} </p>
+                        <p style="font-size:12px;">总价：{lingzh:$order.price}元</p>
+                        <p style="font-size:12px;">菜品明细：</p>
+						<volist name="order['menu']" id="menu">
+						<p style="font-size:12px;">&nbsp;&nbsp;{lingzh:$menu.name}</p>
+						</volist>
+						<if condition="$order['status'] eq 4">
+                           <p id="orderStatus" style="font-size:12px;">状态：商家已取消</p>
+						<elseif condition="$order['status'] eq 5"/>
+						   <p id="orderStatus" style="font-size:12px;">状态：用户已取消</p>
+						<elseif condition="$order['status'] eq 3"/>
+						   <p id="orderStatus" style="font-size:12px;">状态：已付款</p>
+						<elseif condition="$order['status'] eq 2"/>
+						   <p id="orderStatus" style="font-size:12px;">状态：已下单</p>
+						</if>
+                    </a>
+                </li>
+			</ul>
+        </article>
+    </section>
+	</volist>
+	</if>
+    <div id="footer_menu" class="footer footer_menu">
+            <ul class="clear">
+                <li><a href="./index.php?g=Wap&m=Dining&a=index&token={lingzh:$token}&rest_id={lingzh:$rest_id}" ><span class="icons icons_2"></span><label>点菜</label></a></li>
+                <li><a href="./index.php?g=Wap&m=Dining&a=order&token={lingzh:$token}&rest_id={lingzh:$rest_id}" class="onactive"><span class="icons icons_3"></span><label>我的订单</label></a></li>
+                <li><a href="javascript:void(0);" id="my_menu"><span class="icons icons_5"></span></a></li>
+            </ul>
+        </div>
+        <script>
+            var footer = document.getElementById("footer_menu");
+            var evtObj = {
+                handleEvent: function(evt){
+                    if("A" == evt.target.tagName){
+                        evt.target.classList.toggle("on");
+                    }
+                }
+            }
+            footer.addEventListener("touchstart", evtObj, false);
+            footer.addEventListener("touchend", evtObj, false);
+        </script>
+</div>
+</body></html>

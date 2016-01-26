@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lingzh:$tpl.wxname}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="{lingzh::RES}/css/yl/news.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+div.copyright{font-size:14px;text-align:center;color:#000;margin:8px;}
+a.copyright{font-size:14px;text-align:center;color:#000;margin:8px 0px;text-decoration:underline;}
+div.tech-support{font-size:12px;text-align:center;color:#000;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+.clr {clear: both;}
+</style>
+</head>
+<script>
+window.onload = function ()
+{
+var oWin = document.getElementById("win");
+var oLay = document.getElementById("overlay");	
+var oBtn = document.getElementById("popmenu");
+var oClose = document.getElementById("close");
+oBtn.onclick = function ()
+{
+oLay.style.display = "block";
+oWin.style.display = "block"	
+};
+oLay.onclick = function ()
+{
+oLay.style.display = "none";
+oWin.style.display = "none"	
+}
+};
+</script>
+<body id="listhome1">
+<div id="ui-header">
+<div class="fixed">
+<a class="ui-title" id="popmenu">选择分类</a>
+<a class="ui-btn-left_pre" href="javascript:history.go(-1)"></a>
+<a class="ui-btn-right" href="{lingzh::U('Index/index',array('token'=>$token,'wxref'=>'mp.weixin.qq.com', 'wecha_id'=>$wecha_id))}"></a>
+</div>
+</div>
+<div id="overlay"></div>
+<div id="win">
+<ul class="dropdown"> 
+<volist name="info" id="vo">
+<li><a href="{lingzh:$vo.hyperlink}"><span>{lingzh:$vo.name}</span></a></li>
+</volist> 	
+<div class="clr"></div>
+</ul>
+</div>
+<div class="Listpage">
+<div class="top46"></div>
+    <div id="todayList">
+<ul  class="todayList">
+   <volist name="res" id="so">   
+<li>
+<a href="{lingzh:$so.hyperlink}">
+<h2>{lingzh:$so.title}</h2>
+<div class="commentNum"></div>
+</a>
+</li>
+ </volist>
+
+</ul>
+</div>
+<section id="Page_wrapper">
+<div id="pNavDemo" class="c-pnav-con">
+<section class="c-p-sec">
+<div class='c-p-pre <eq name="p" value="1"> c-p-grey </eq> '><span class="c-p-p"><em></em></span><a <eq name="p" value="1"><else/>href="/index.php?g=Wap&m=Index&a=lists&classid=<php>echo $_GET['classid'];</php>&token={lingzh:$tpl.token}&wecha_id={lingzh:$wecha_id}&wxref=mp.weixin.qq.com&p=<php>echo $p-1;</php>"</eq>  >上一页</a></div>
+<div class="c-p-cur">
+<div class="c-p-arrow c-p-down"><span>{lingzh:$p}/{lingzh:$page}</span><span></span></div>
+	<select class="c-p-select" onchange="dourl('/index.php?g=Wap&m=Index&a=lists&classid=<php>echo $_GET['classid'];</php>&token={lingzh:$tpl.token}&p='+this.value + '&wecha_id={lingzh:$wecha_id}&wxref=mp.weixin.qq.com')">
+		<?php
+			for($i=1;$i<=$page;$i++){
+				if($i==$p){
+					echo '<option value="'.$i.'" selected>第'.$i.'页</option>';
+				}else{
+					echo '<option value="'.$i.'">第'.$i.'页</option>';
+				}
+			}
+		?>
+	</select>
+</div>
+<div class='c-p-next <eq name="p" value="$page"> c-p-grey </eq>'  >
+
+<?php
+	if($p<$page){
+		echo '<a href="/index.php?g=Wap&m=Index&a=lists&classid='.(int)$_GET['classid'].'&token='.$tpl['token'].'&p='.($p+1)
+                .'&wecha_id='.$wecha_id.'&wxref=mp.weixin.qq.com'
+                .'">';
+	}else{
+		echo '<a>';
+	}
+?>
+下一页</a><span class="c-p-p"><em></em></span></div>
+</section>
+</div>
+</section>
+</div>
+
+
+<div class="clr"></div>
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+
+<script>
+function dourl(url){
+location.href= url;
+}
+</script>
+</body>
+</html>

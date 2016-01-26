@@ -1,0 +1,96 @@
+<include file="Public:head" /> 
+<div class="content"> 
+  <div class="cLineB"> 
+    <h4>操作员设置</h4> 
+    <a href="{lingzh::U('Admin/index')}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+  </div> 
+  <form class="form" method="post" action="" enctype="multipart/form-data"> 
+    <if condition="isset($admin)">
+    <input type="hidden" name="aid" value="{lingzh:$admin.user_id}" /> 
+    </if>
+    <div class="msgWrap bgfc"> 
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+      <tr> 
+        <th><span class="red">*</span>操作员登陆名称：</th> 
+        <td><input type="text" name="name" value="<if condition='isset($admin)'>{lingzh:$admin.user_name}</if>" class="px" style="width:300px;" /><span>@{lingzh:$code}(商家6位ID)</span></td> 
+      </tr>
+
+      <tr> 
+        <th><span class="red">*</span>密码：</th> 
+        <td><input type="password" name="password" value="" class="px" style="width:400px;" placeholder="若不修改密码请留空" /></td> 
+      </tr>
+
+      <tr> 
+        <th><span class="red">*</span>重复密码：</th> 
+        <td><input type="password" name="re-password" value="" class="px" style="width:400px;" placeholder="若不修改密码请留空" /></td> 
+      </tr>
+
+      <tr> 
+        <th><span class="red">*</span>是否自动打印：</th> 
+        <td>
+          <label><input class="radio" type="radio" name="printable" value="0" <if condition='empty($admin["printable"]) or $admin["printable"] eq 0'>checked</if>>否</label>
+          <label><input class="radio" type="radio" name="printable" value="1" <if condition='$admin["printable"] eq 1'>checked</if>>是(仅支持IE8.0以上浏览器)</label>
+        </td> 
+      </tr>  
+
+      <if condition="!isset($all_actions) or count($all_actions) == 0 ">
+      <tr> 
+        <th></th> 
+        <td>您没有需要操作员管理的功能。</td> 
+      </tr>
+      </if>
+      
+      <volist name="all_actions" id="act">
+      <tr> 
+        <th><span class="red">*</span>分派{lingzh:$action_lang[$key]}权限：</th> 
+		    <td>
+      		<if condition='$action_lang[$key] eq "餐饮管理" and !empty($rests)'>
+      		<div style="border: 1px solid #E0E0E0;;width:400px;padding:5px;">
+      		   <label>选择分店：<label>
+      		   <volist name="rests" id="rest"> 
+      		        <input class="radio" type="radio" name="diningsub" value="{lingzh:$rest.id}" <if condition='$admin["diningsub"] eq $rest["id"]'>checked</if>>{lingzh:$rest.name}
+      		   </volist>
+             （若不选择，则默认选择第一个）
+      		   <br/><br/>
+      		<elseif condition='$action_lang[$key] eq "宾馆预订管理" and !empty($hotels)'/>
+      		<div style="border: 1px solid #E0E0E0;;width:400px;padding:5px;">
+      		   <label>选择分店：<label>
+      		   <volist name="hotels" id="hotel"> 
+      		        <input class="radio" type="radio" name="hotelsub" value="{lingzh:$hotel.id}" <if condition='$admin["hotelsub"] eq $hotel["id"]'>checked</if>>{lingzh:$hotel.title}
+      		   </volist>
+      		   <br/><br/>
+          <elseif condition='$action_lang[$key] eq "商城管理权限" and !empty($shops)'/>
+          <div style="border: 1px solid #E0E0E0;;width:400px;padding:5px;">
+             <label>选择分店：<label>
+             <volist name="shops" id="shop"> 
+                  <input class="radio" type="radio" name="shopsub" value="{lingzh:$shop.fake_id}" <if condition='$admin["shopsub"] eq $shop["fake_id"]'>checked</if>>{lingzh:$shop.name}
+             </volist>
+             <br/><br/>
+      		<else/>
+      		<div>
+          </if>
+            <volist name="act" id="code">
+            <lable for="{lingzh:$code}">
+  		      <input type="checkbox" name="action_code[]" value="{lingzh:$code}" id="{lingzh:$code}" <php> if (in_array($code, $my_actions)) echo 'checked';</php>/>
+             {lingzh:$action_lang[$code]}
+            </lable>
+            </volist>
+		      </div>
+        </td> 
+      </tr> 
+      </volist>
+       
+      <tr>         
+        <th>&nbsp;</th>
+        <td>
+          <button type="submit" name="button" class="btnGreen">保存</button> &nbsp; <a href="{lingzh::U('Admin/index')}" class="btnGray vm">取消</a>
+        </td> 
+      </tr> 
+      </tbody> 
+    </table> 
+    </div>
+    
+  </form> 
+</div> 
+<include file="Public:footer" />

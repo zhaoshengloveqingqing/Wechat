@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{lingzh:$page_title}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/themes/m/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  <style type="text/css">
+    body {
+       padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+  </style>
+
+</head>
+<body>
+<include file="Index:header"/>
+
+  <div class="container">
+    <div class="row">
+      <include file="Index:sidebar"/>
+      <div class="col-lg-10">
+
+        <div class="page-header">
+          <h3>积分兑换管理</h3>
+        </div>
+        <div class="content"> 
+
+          <div class="row">   
+            <div class="col-lg-5">
+              <a onclick="$('#new_expense_info').toggle();" title='录入兑换记录'  class='btn btn-sm btn-default'>录入兑换记录</a>
+            </div>
+
+            <div class="col-lg-5 col-lg-offset-2">
+              <form method="post" action="">
+              <div class="input-group">
+                <input type="text" value="" name="searchkey" class="form-control" placeholder="请输入卡号查询兑换记录">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">查询!</button>
+                </span>
+              </div>
+              </form>
+            </div> <!-- /col -->
+        </div>
+
+          <div class="row" id="new_expense_info" style="display:none;margin-top:5px;">
+          <form method="post" action="{lingzh::U('Manage/Member/addExchanges')}">
+          <div class="panel panel-default" style=" margin: 0px 10px 10px 0px; ">
+            <div class="panel-heading">添加兑换记录</div>
+            <div class="panel-body">
+              <table class="table">
+                <tbody>
+                <tr>
+                  <td align="center" width="15%">会员卡号</td>
+                  <td width="15%"> 
+                    <input type="input" class="form-control" id="number" placeholder="请输入卡号" name="number">
+                  </td>
+                  <td align="center" width="15%">兑换积分</td>
+                  <td>
+                    <input type="input" class="form-control" id="cost_score"  name="cost_score">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" width="15%">消费日期</td>
+                  <td width="15%">
+                    <input type="input" class="form-control" id="cost_date"  onClick="WdatePicker()" name="cost_date" value="{lingzh:$date}">
+                  </td>
+                  <td align="center" width="15%">备注</td>
+                  <td>
+                    <input type="input" class="form-control" id="comment"  name="comment" placeholder="可记录礼品等">
+                  </td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td colspan=3>
+                    <button type="submit" class="btn btn-default">提交</button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          </form>
+          </div>
+
+        <div class="row">
+          <TABLE class="table">
+              <THEAD>
+                <TR>
+                  <TH width="20%">卡号</TH>
+                  <TH width="10%">兑换积分</TH> 
+                  <TH width="10%">兑换日期</TH>
+                  <TH width="30%">备注</TH> 
+                  <TH width="10%">操作</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+                <volist id="ex" name="exchanges">
+                <TR>
+                  <TD>{lingzh:$ex.cardnum}<a style="color:red" href="{lingzh::U('Manage/Member/users', array('uid'=>$point['uid']))}">(查看会员)</a></TD>
+                  <TD>{lingzh:$ex.expense}</TD>
+                  <TD>{lingzh:$ex.sign_time|date='Y-m-d',###} </TD>
+                  <TD>{lingzh:$ex.remark} </TD>
+                  <TD class="norightborder"> 
+                    <a href="javascript:if(confirm('您确定要删除吗?')){ window.location.href='{lingzh::U('Manage/Member/delExchanges',array('id'=>$ex['id']))}'};">删除</a>         
+                  </TD>
+                </TR>
+                </volist>
+              </TBODY>
+              </TABLE>
+            </div>
+         
+          </div>
+          
+        </div> 
+      </div> <!-- /col -->
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/date/WdatePicker.js"></script>  
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</body>
+</html>

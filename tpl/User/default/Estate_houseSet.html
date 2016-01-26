@@ -1,0 +1,285 @@
+<include file="Public:head" /> 
+<link rel="stylesheet" href="/js/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="/js//kindeditor/plugins/code/prettify.css" />
+<link rel="stylesheet" href="/themes/a/css/img_upload_panel.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+<script src="/js/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="/js/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="/js/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#description', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : true,
+uploadJson :'/index.php/upload/image',
+items : [
+'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut', 'image'],
+
+});
+
+});
+</script>
+
+
+<div class="content"> 
+  <div class="cLineB"> 
+    <h4>户型设置</h4> 
+    <a href="{lingzh::U('Estate/houses')}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+  </div> 
+
+  <div class="msgWrap bgfc" style="margin-top:10px;">
+      <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">     
+        <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+            <tbody>
+                <tr>
+                    <th width="150">户型名称：</th>
+                    <td> <input type="text" id="name" name="name" value="{lingzh:$house['name']}" class="input-large px" data-rule-required="true" data-rule-maxlength="20">
+                                        <span class="maroon">*</span>
+                                        <span class="help-inline">尽量简单，不要超过20字</span></td>
+                </tr>
+               <tr>
+                    <th>请选择子楼盘：</th>
+                    <td><select id="list_id" name="list_id" class="input-medium" data-rule-required="true">
+                        <option value="0">请选择子楼盘</option>
+                                         
+                        <volist name="estate_list" id="vo">
+                        <option value="{lingzh:$vo['id']}" <if condition="$vo['id'] eq $house['list_id']">selected="selected"</if>>{lingzh:$vo['name']}</option>
+                        </volist>
+                    </select></td>
+                </tr>
+
+                <tr>
+                    <th width="150">楼层：</th>
+                    <td> <input type="text" id="floor_num" name="floor_num" value="{lingzh:$house['floor_num']}" class="input-large px" data-rule-required="true">
+                                        <span class="maroon">*</span>
+                                        <span class="help-inline">如：1-10</span></td>
+                </tr>
+                <tr>
+                    <th width="150">建筑面积：</th>
+                    <td> <input type="text" id="area" name="area" value="{lingzh:$house['area']}" class="input-large px" data-rule-required="true">
+                                        <span class="maroon">*</span>
+                                        <span class="help-inline">如：约120平方米</span></td>
+                </tr>
+                <tr>
+                    <th>房屋户型：</th>
+                    <td> 
+                             <select id="fang" name="fang" class="input-mini" data-rule-required="true"> 
+                                            <option value="1" <if condition="$house['fang'] eq 1">selected="selected"</if>>1</option>                       
+                                            <option value="2" <if condition="$house['fang'] eq 2">selected="selected"</if>>2</option>
+                                            <option value="3" <if condition="$house['fang'] eq 3">selected="selected"</if>>3</option>
+                                            <option value="4" <if condition="$house['fang'] eq 4">selected="selected"</if>>4</option>
+                                            <option value="5" <if condition="$house['fang'] eq 5">selected="selected"</if>>5</option>
+                                            <option value="6" <if condition="$house['fang'] eq 6">selected="selected"</if>>6</option>
+                                            <option value="7" <if condition="$house['fang'] eq 7">selected="selected"</if>>7</option>
+                                        </select>
+                                        房
+                                        <select id="ting" name="ting" class="input-mini" data-rule-required="true">     
+                                            <option value="1" <if condition="$house['ting'] eq 1">selected="selected"</if>>1</option>                           
+                                            <option value="2" <if condition="$house['ting'] eq 2">selected="selected"</if>>2</option>
+                                            <option value="3" <if condition="$house['ting'] eq 3">selected="selected"</if>>3</option>
+                                            <option value="4" <if condition="$house['ting'] eq 4">selected="selected"</if>>4</option>
+                                            <option value="5" <if condition="$house['ting'] eq 5">selected="selected"</if>>5</option>
+                                            <option value="6" <if condition="$house['ting'] eq 6">selected="selected"</if>>6</option>
+                                        </select>
+                                        厅    
+                    </td>
+                </tr>
+                <tr>
+                    <th width="150">显示顺序：</th>
+                    <td>  <input type="text" id="orderNum" name="orderNum" value="{lingzh:$house['orderNum']|default=1}" class="input-mini px" data-rule-required="true" data-rule-number="true">
+                                        <span class="maroon">*</span>
+                                        <span class="help-inline">数值越大越靠前</span></td>
+                </tr>
+				<tr>
+            <th>3D全景相册：</th>
+                <td><select id="panorama_id" name="panorama_id" class="input-medium" data-rule-required="true">
+                    <option value="0">请选择相册</option>
+                    <volist name="panoramas" id="panorama">
+                        <option value="{lingzh:$panorama['id']}" <if condition="$panorama['id'] eq $house['panorama_id']">selected="selected"</if>>{lingzh:$panorama['title']}</option>
+                    </volist>
+                    </select>
+				<span class="help-inline">如果没有，请先到 <a href="/index.php?g=User&amp;m=Panorama&amp;a=gallery3d_add" class="btn"><strong><font color="red">3D全景相册</font></strong></a>添加</span>
+			 </td>
+            </tr>
+                <tr>
+                    <th width="150">户型图片:</th>
+                    <td> <div id="upimg_main">
+                                        <p>
+                                            <img id="thumb_img_1" class="thumb_img" src="<if condition="isset($house['pic_url_input'])">{lingzh:$house.pic_url_input}</if>" style="max-height: 100px;<if condition="!isset($house['pic_url_input']) OR (isset($house['pic_url_input']) AND empty($house['pic_url_input']))">visibility: hidden;</if>"><br/>
+          <input  id='pic_url_input' onblur="syncPreviewImg('pic_url_input','thumb_img_1')" type="text" name="pic_url_input" value="<if condition="isset($house['pic_url_input'])">{lingzh:$house.pic_url_input}</if>" class="px" style="width:400px;" /> 
+         <div class='img_upload_panel' style="position: relative;left: 420px;bottom: 37px;" >
+                       <div name='uploadify'  id="uploadify_houseSet"  ></div>                                                  
+                       <div id="fileQueue_houseSet"></div> 
+                       <div style="clr:both; height:0px;"></div>
+                         </div> 
+                                        </p>
+                                            <br />
+                                        <p>
+                                            <img id="thumb_img_2" class="thumb_img" src="<if condition="isset($house['pic_url_input_1'])">{lingzh:$house.pic_url_input_1}</if>" style="max-height: 100px;<if condition="!isset($house['pic_url_input_1']) OR (isset($house['pic_url_input_1']) AND empty($house['pic_url_input_1']))">visibility: hidden;</if>"><br/>
+          <input  id='pic_url_input_1' onblur="syncPreviewImg('pic_url_input_1','thumb_img_2')" type="text" name="pic_url_input_1" value="<if condition="isset($house['pic_url_input_1'])">{lingzh:$house.pic_url_input_1}</if>" class="px" style="width:400px;" /> 
+          <div class='img_upload_panel' style="position: relative;left: 420px;bottom: 37px;" >
+                       <div name='uploadify'  id="uploadify_houseSet_1"  ></div>                                                  
+                       <div id="fileQueue_houseSet_1"></div> 
+                       <div style="clr:both; height:0px;"></div>
+                         </div> 
+                                        </p>
+                                            <br />
+                                        <p>
+                                            <img id="thumb_img_3" class="thumb_img" src="<if condition="isset($house['pic_url_input_2'])">{lingzh:$house.pic_url_input_2}</if>" style="max-height: 100px;<if condition="!isset($house['pic_url_input_2']) OR (isset($house['pic_url_input_2']) AND empty($house['pic_url_input_2']))">visibility: hidden;</if>"><br/>
+          <input  id='pic_url_input_2' onblur="syncPreviewImg('pic_url_input_2','thumb_img_3')" type="text" name="pic_url_input_2" value="<if condition="isset($house['pic_url_input_2'])">{lingzh:$house.pic_url_input_2}</if>" class="px" style="width:400px;" /> 
+         <div class='img_upload_panel' style="position: relative;left: 420px;bottom: 37px;" >
+                       <div name='uploadify'  id="uploadify_houseSet_2"  ></div>                                                  
+                       <div id="fileQueue_houseSet_2"></div> 
+                       <div style="clr:both; height:0px;"></div>
+                         </div> 
+                                        </p>
+                                                <br />
+                                        <!--p>
+                                            <img id="thumb_img_4" class="thumb_img" src="<if condition="isset($house['type4'])">{lingzh:$house.type4}</if>" style="max-height: 100px;">
+          <input  id='type4' onblur="syncPreviewImg('type4','thumb_img_4')" type="text" name="type4" value="<if condition="isset($house['type4'])">{lingzh:$house.type4}</if>" class="px" style="width:400px;" /> 
+          <span onclick="$('#upload-panel-4').show();" style="text-decoration:underline;cursor:pointer;"> 上传图片 </span>
+              <div id="upload-panel-4" style="display:none" >
+                <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+                <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                  <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+                </div>
+              </div>
+                                        </p-->
+
+                                        </div></td>
+                </tr>
+                
+                <tr>
+                    <th width="150">户型介绍：</th>
+                    <td>  <textarea id="description" name="description" class='input-xxlarge'  placeholder="户型介绍简单明了就好" style="width:100%;height:125px">{lingzh:$house['description']}</textarea></td>
+                </tr>
+                                            <if condition="$house['id'] neq ''">
+                                    <input type="hidden" name="id" value="{lingzh:$house['id']}" />
+                                    </if>
+                <th>&nbsp;</th>
+                    <td>
+                    <input type="hidden" name="token" value="{Pigcms:$token}" />
+                        <button type="submit" name="button" class="btnGreen">保存</button>
+                        <a href="javascript:history.go(-1);" class="btnGray vm">取消</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+  </div> 
+</div> 
+<script>
+ function syncPreviewImg(fromId, toId) {    
+        document.getElementById(toId).src=document.getElementById(fromId).value;
+    }
+</script>
+<script>
+$(function () {   
+    $("#uploadify_houseSet").uploadify({
+        'buttonText' : '上传图片',
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': 'fileQueue_houseSet',
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                	$("#thumb_img_1").css("visibility", "visible");
+                    document.getElementById('thumb_img_1').src=  res_json.content ;
+                    $('#pic_url_input').val(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+            } else {
+               alert("网络不给力啊！亲");
+            }
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+     //$("#uploadify_Dining_set").css('width', '100%');
+     //$("#uploadify_Dining_set").append('<span class="img_upload_tips">支持JPG、PNG、GIF等格式，像素500x500以下,<br />或者将图片上传到POCO.cn获取外链</span>');
+     $("#uploadify_houseSet_1").uploadify({
+        'buttonText' : '上传图片',
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': 'fileQueue_houseSet_1',
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                	$("#thumb_img_2").css("visibility", "visible");
+                    document.getElementById('thumb_img_2').src=  res_json.content ;
+                    $('#pic_url_input_1').val(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+            } else {
+               alert("网络不给力啊！亲");
+            }
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+     
+      $("#uploadify_houseSet_2").uploadify({
+        'buttonText' : '上传图片',
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': 'fileQueue_houseSet_2',
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                	$("#thumb_img_3").css("visibility", "visible");
+                    document.getElementById('thumb_img_3').src=  res_json.content ;
+                    $('#pic_url_input_2').val(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+            } else {
+               alert("网络不给力啊！亲");
+            }
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+});
+</script>
+<include file="Public:footer" />

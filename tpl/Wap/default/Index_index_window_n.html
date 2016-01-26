@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lingzh:$tpl['wxname']}</title>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="/themes/w/css/reset.css" rel="stylesheet" type="text/css" />
+<script src="/themes/w/js/swipe.js"></script>
+
+<style>
+body {background-color: #891e1a;margin: 0 auto;max-width: 640px;min-width: 320px;overflow-x: hidden;}
+
+
+.swipe {  overflow: hidden;    visibility: hidden;	  position: relative;	  }
+.swipe-wrap { overflow: hidden;		  position: relative;  }
+.swipe-wrap > div {	 float:left;	  width:100%;  position: relative;}
+.swipe-wrap > div img{width:100%;	height: 200px;	display:block;}
+
+ul#indicator{text-align: center;list-style: none;padding: 0;}
+ul#indicator li {display: inline-block;width: 10px;height: 10px;border-radius: 10px; margin: 0 2px;cursor: pointer;background:#fff;}
+ul#indicator li.on {display: inline-block;width: 10px;height: 10px;border-radius: 10px;background: #a34b4b ;margin: 0 2px;cursor: pointer;}
+.navi {opacity:0.5;padding:5px 0;background:#000;height:22px;margin-top:-32px;}
+
+.mainmenu {margin:0 auto;width:100%;}
+.mainmenu li{width:50%;float:left;background:#4e90cd}
+
+.mainmenu li>div{width:90%;margin-left:5%;margin-right:5%;height:110px;}
+
+.mainmenu li>div span{width:64px;height:58px;text-align:center;line-height:45px;float:right;margin-top:30px;}
+.mainmenu li:nth-of-type(1){background:#c13409;}
+.mainmenu li:nth-of-type(2),.mainmenu li:nth-of-type(3){background:#be7f00;}
+.mainmenu li:nth-of-type(4){background:#891e1a;}
+.mainmenu li:nth-of-type(4)>div{height:140px;text-align:center;}
+.mainmenu li:nth-of-type(4)>div a,.mainmenu li:nth-of-type(4)>div span{float:none;display:block;margin:0 auto;}
+.mainmenu li:nth-of-type(4)>div span{margin-top:80px;}
+.mainmenu li:nth-of-type(4)>div a{margin-top:20px;}
+.mainmenu li:nth-of-type(5){margin-top:-110px;}
+.mainmenu li:nth-of-type(6){width:100%;background:#1e1e1e;}
+.mainmenu li>div>span i.icon{display:inline-block;background-image:url(/themes/w/images/iconbg/allbgs-window.png);background-repeat:no-repeat;line-height:58px;vertical-align:middle}
+.mainmenu li>div a{font-size:18px;color:#fff;float:left;margin-top:40px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:80px;}
+
+
+.bg1 i.icon{background-position:0px 0px;height:46px;width:62px;}
+.bg2 i.icon{background-position:0px -46px;height:54px;width:55px;}
+.bg3 i.icon{background-position:0px -100px;height:54px;width:66px;}
+.bg4 i.icon{background-position:0px -154px;height:57px;width:58px;}
+.bg5 i.icon{background-position:0px -211px;height:57px;width:55px;}
+.bg0 i.icon{background-position:0px -268px;height:58px;width:59px;}
+
+
+
+div.copyright{font-size:14px;text-align:center;color:#fff;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#fff;margin:8px;}
+div.tech-support a{text-decoration: underline;color:#fff;}
+</style>
+
+
+</head>
+
+<body>
+
+<div id='slider' class='swipe'>
+  <div class='swipe-wrap'>
+    <volist name="flash" id="so">
+      <div><a href="{lingzh:$so.hyperlink}"><img src="{lingzh:$so.img}" /></a></div>
+	</volist>
+  </div>
+</div>
+
+<div class="navi">
+	<ul id="indicator">
+		<volist name="flash" id="so">
+		<li   <if condition="$i eq 1">class="on"</if>  ></li>
+		</volist>
+	</ul>
+</div>
+
+<div class="mainmenu">
+	<ul>
+		<volist name="info" id="vo"> 
+		<li>
+			<div class="menubtn bg{lingzh:$i%6}">
+				<span><i class="icon"></i></span>
+				<a href="{lingzh:$vo.hyperlink}">{lingzh:$vo.name}</a>
+			</div>
+		</li>
+		</volist>
+	</ul>
+</div>
+<include file="Index:navi"/> 
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+
+<script type="text/javascript">
+
+	var slider = Swipe(document.getElementById('slider'), {
+		  auto: 3000,
+		  continuous: true,
+		  callback: function(pos) {
+			  var i = bullets.length;
+			  while (i--) {
+				  bullets[i].className = ' ';
+			   }
+			  bullets[pos].className = 'on';
+		  }
+	});
+
+  var bullets = document.getElementById('indicator').getElementsByTagName('li');
+
+</script>
+</body>
+</html>

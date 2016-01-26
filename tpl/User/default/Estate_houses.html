@@ -1,0 +1,78 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />  
+        <div class="content">
+<div class="cLineB">
+<h4 class="left">户型管理 </h4>
+
+<div class="clr"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul>
+  <li class="tabli" id="tab0"><a href="{lingzh::U('Estate/index')}">楼盘简介</a></li>
+  <li class="tabli" id="tab2"><a href="{lingzh::U('Estate/lists')}">楼盘管理</a></li>
+  <li class="current tabli" id="tab2"><a href="#">户型管理</a></li>
+  <li class="tabli" id="tab2"><a href="{lingzh::U('Estate/experts')}">专家点评</a></li>
+ 
+</ul>
+</div>
+<!--tab end-->
+<div class="cLine">
+<div class="pageNavigator left"> <a href="{lingzh::U('Estate/houseAdd')}" title="新增户型" class="btnGrayS vm bigbtn"><img src="/themes/a/images/add.png" class="vm">新增户型</a></div>
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th width="160">户型名称</th>
+<th width="160">户型类型</th>
+<th width="260">显示顺序</th>
+
+<th width="150" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="roomlist"> 
+<tr>
+<td>{lingzh:$roomlist.name}</td>
+<td>{lingzh:$roomlist.fang}房{lingzh:$roomlist.ting}厅</td>
+<td>{lingzh:$roomlist.orderNum}</td>
+
+<td class="norightborder">
+    <a href="{lingzh::U('Estate/houseSet',array('cid'=>$roomlist['id']))}">修改</a> 
+    <a href="javascript:drop_confirm('您确定要删除吗?', '{lingzh::U('Estate/houseDel',array('cid'=>$roomlist['id']))}');">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+<script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script> 
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lingzh:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

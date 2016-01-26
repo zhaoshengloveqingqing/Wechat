@@ -1,0 +1,42 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+ <link rel="stylesheet" href="/themes/a/css/img_upload_panel.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+<div class="content">
+
+<div class="cLineB">
+  <h4>基本信息</h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+ <volist name="info" id="info">
+ </volist>
+<div class="msgWrap bgfc">
+  <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">  
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tbody>
+        <tr>
+          <th width="186">分店名称：</th>
+          <td><input style="width:400px;" name="name" id="info" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.name}</if>"></input></td>
+        </tr>
+        <tr>
+          <th width="186">联系电话：</th>
+          <td><input type="text" name="telephone" value="<if condition='isset($info)'>{lingzh:$info.telephone}</if>" class="text textMiddle" style="width:400px;"></td>
+        </tr>
+        <tr>
+          <th width="186">店面地址：</th>
+          <td><input style="width:400px;" name="address" id="info" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.address}</if>"></input><br/>最多填写100个字</td>
+        </tr>
+
+        <tr>
+          <th>&nbsp;</th>
+          <td>
+            <button type="submit" name="button" class="btnGreen">保存</button>
+            <a href="javascript:history.go(-1);" class="btnGray vm">取消</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  </div> 
+</div>
+<include file="Public:footer"/>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人注册 </title>
+    <link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="./tpl/Fxs/default/common/css/reg/register.css">
+    <link rel="stylesheet" href="./tpl/Fxs/default/common/css/reg/jquery.mobile-1.4.4.min.css">
+    <link rel="stylesheet" href="./tpl/Fxs/default/common/css/reg/jqm-demos.css">
+    <script src="./tpl/Fxs/default/common/js/jquery.js"></script>
+    <script src="./tpl/Fxs/default/common/js/jquery.mobile-1.4.4.min.js"></script>
+	<script src="./tpl/Fxs/default/common/js/mobile_tip.min.js"></script>
+	<script src="./tpl/Fxs/default/common/js/xrarea.js"></script>
+	<script src="./tpl/Fxs/default/common/js/province.js"></script>
+
+   <script src="./tpl/Fxs/default/common/js/jquery-1.8.3.min.js"></script>
+      <script src="./tpl/Fxs/default/common/js/jqBootstrapValidation.js"></script>
+	<script>
+		jQuery(document).ready(function($){
+			
+			$("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+		});
+	</script>
+    <style id="popup-arrow-css">
+    .clickable-area {
+        display: block;
+        width: 100%;
+        height: 300px;
+        background-color: #ffefef;
+    }
+    .clickable-area:focus {
+        outline: 0;
+    }
+    </style>
+    <style id="tooltip-btn">
+    .ui-btn.my-tooltip-btn,
+    .ui-btn.my-tooltip-btn:hover,
+    .ui-btn.my-tooltip-btn:active {
+        background: none;
+        border: 0;
+    }
+    </style>
+    <style>
+    .ul-field-img {
+        overflow: hidden;
+    }
+    .ul-field-img img {
+        width: 100%!important;
+    }
+    </style>
+	
+</head>
+<body>
+<div data-role="page" class="jqm-demos i-content jqm-content ">
+
+    <div data-role="header" class="jqm-header">
+        <h2><a style="padding:10px 0px;font-size:30px;" href="" title="jQuery Mobile Demos home">个人注册</a></h2>
+ 
+        
+       
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content jqm-content">
+     <h2>个人基本信息登记(<b style="color:red;">*</b>为必填)</h2>
+  
+       
+       <form data-ajax="false" method="post" action="{lingzh::U('Fxs/checkreg',array('ver'=>$_GET['ver'],'token'=>$_GET['token'],'partner_id'=>$_GET['partner_id']))}">
+            <div data-demo-html="true">
+                <div data-demo-html="true">
+					<div class="control-group ui-field-contain">
+						<label for="username" class="control-label">用户名：<b style="color:red;">*</b></label>
+						<input required minlength="4" maxlength="15" type="text" name="username" id="username" placeholder="用户名长度为4-15数字或字母组成" data-validation-minlength-message="用户名长度必须超过4个字符"  data-validation-required-message="未输入用户名" value="">
+						 <p class="help-block"></p>
+					</div>
+				</div>
+                </div>
+                    <div data-demo-html="true">
+                    <div class="control-group ui-field-contain">
+                        <label for="password">密&nbsp;码：<b style="color:red;">*</b></label>
+                        <input required minlength="6" type="password" name="password" id="password" placeholder="密码长度为6-30数字或字母组成" data-validation-minlength-message="密码长度必须超过6个字符" 
+						data-validation-required-message="未输入密码" value="">
+						<p class="help-block"></p>
+                    </div>
+                </div>
+                    <div data-demo-html="true">
+                    <div class="control-group ui-field-contain">
+                        <label for="truename">姓名：<b style="color:red;">*</b></label>
+                        <input required minlength="4" type="text" name="truename" id="truename" placeholder="输入真实姓名" value="" data-validation-minlength-message="姓名长度必须超过4个字符"
+						data-validation-required-message="未输入姓名">
+						<p class="help-block"></p>
+                    </div>
+                </div>
+                <div data-demo-html="true">
+                    <div class="control-group ui-field-contain">
+                        <label for="mb">手机号码：<b style="color:red;">*</b></label>
+                        <input required type="text" name="mb" id="mb" placeholder="输入手机号码" value="" data-validation-regex-regex="1[3|4|5|8]\d{9}" data-validation-regex-message="请输入正确的手机号码"
+						data-validation-required-message="请输入正确的手机号码">
+						<p class="help-block"></p>
+                    </div>
+					
+                </div>
+                <div data-demo-html="true">
+                    <div class="control-group ui-field-contain">
+                        <label for="idnum">身份证：<b style="color:red;">*</b></label>
+                        <input required minlength="15" maxlength="18" type="text" name="idnum" id="idnum" placeholder="输入身份证号码" value="" data-validation-minlength-message="身份证号长度为15-18位"
+						data-validation-required-message="请输入正确的身份证号码">
+						<p class="help-block"></p>
+                    </div>				
+                </div>       
+               	<div data-demo-html="true">
+					<label for="select-native-2">支付方式:<b style="color:red;">*</b></label></label>
+				   <select name="sel" id="sel" onchange="javascript:doit();">
+											 
+										<option value="0">微信支付账号</option>								 
+										<option value="1">支付宝账号</option>								 
+										<option value="2">财付通账号</option>								 
+					</select>
+					<input required minlength="0" maxlength="25" type="text" name="wxnumber" id="a0" placeholder="输入微信支付账号" value="" data-validation-minlength-message="微信支付账号不能为空">
+					<input  minlength="0" maxlength="25" type="text" name="alipay" id="a1" placeholder="输入支付宝账号" value="" data-validation-minlength-message="支付宝账号不能为空" style="display:none;"/>
+					<input  minlength="0" maxlength="25" type="text" name="tenpay" id="a2" placeholder="输入财付通账号" value="" data-validation-minlength-message="财付通账号不能为空" style="display:none;"/>
+				</div>
+                <div data-demo-html="true">
+                    <div class="control-group ui-field-contain">
+                        <label for="email">邮箱：<b style="color:red;">*</b></label>
+                        <input required type="email" name="email" id="email" placeholder="输入邮箱" value="" data-validation-required-message="请输入邮箱" data-validation-email-message="邮箱格式不正确"
+						data-validation-required-message="邮箱格式不真确">
+						<p class="help-block"></p>
+                    </div>
+                </div>
+            <div data-demo-html="true">
+                <label for="select-native-2">所属区域:<b style="color:red;">*</b></label>
+                <select name="province" id="province">
+                </select>
+                 <select name="city" id="city">
+                </select>
+                 <select name="area" id="area">
+                </select>
+				<script language="javascript">
+					new PCAS("province","city","area","","","");
+				</script>
+            </div>
+            <div data-demo-html="true">
+                    <div class="ui-field-contain">
+                        <label for="textinput-1">详细地址：<b style="color:red;">*</b></label>
+                        <input type="text" name="address" id="address" placeholder="输入详细信息" value="">
+                    </div>
+                </div>
+            <div data-demo-html="true">
+                <label for="select-native-2">所属行业:<b style="color:red;">*</b></label></label>
+                <select name="select-native-2" id="select-native-2">
+                    <option>-请选择行业-</option>
+								 
+								 	<option value="4">美食特产</option>
+								 
+								 	<option value="5">日用百货</option>
+								 
+								 	<option value="6">汽车摩托</option>
+								 
+								 	<option value="7">文化娱乐</option>
+								 
+								 	<option value="8">运动户外</option>
+								 
+								 	<option value="10">母婴用品</option>
+								 
+								 	<option value="26">家具建材</option>
+								 
+								 	<option value="12">护肤彩妆</option>
+								 
+								 	<option value="13">手机数码</option>
+								 
+								 	<option value="14">家电办公</option>
+								 
+								 	<option value="19">本地生活</option>
+								 
+								 	<option value="23">虚拟服务</option>
+								 
+								 	<option value="28">服装内衣</option>
+								 
+								 	<option value="29">鞋包配饰</option>
+								 
+								 	<option value="30">珠宝首饰</option>
+								 
+								 	<option value="31">家纺居家</option>
+								 
+								 	<option value="32">积分活动</option>
+								 
+								 	<option value="127">红酒</option>
+								 
+								 	<option value="179">洗护系列产品</option>
+								 
+								 	<option value="177">银饰饰品</option>
+								 
+								 	<option value="180">哺育系列产品</option>
+								 
+								 	<option value="181">安全防护系列</option>
+								 
+								 	<option value="182">育儿杂志</option>
+								 
+								 	<option value="183">微信营销</option>
+								 
+								 	<option value="191">纸品系列产品</option>
+								 
+								 	<option value="208">保健用品</option>
+								 
+								 	<option value="221">保健按摩</option>
+								 
+								 	<option value="223">五金机械</option>
+                </select>
+            </div>
+            <div data-demo-html="true">
+				<div class="control-group ui-field-contain">
+					<label for="num">协同发展部门编码:<b style="color:red;">*</b></label>
+					<input required minlength="6" maxlength="20" type="text" name="num" id="num" placeholder="发展编码请向发展人咨询提供" value="" validation-minlength-message="发展部门编码长度必须大于6位"
+					data-validation-required-message="请输入发展部门编码">
+					<p class="help-block"></p>
+				</div>
+             </div>
+             <div data-demo-html="true">
+				<div class="control-group ui-field-contain">
+					<label for="textinput-1">验证码:</label>
+					<div class="ui-field-img"><img src="{lingzh::U('Fxs/verify')}" id="imgCheckB">
+					<span class="chk_txt"><a href="javascript:refresh();" style="color: #0033CC">看不清？换一张</a></span>
+					<input required minlength="4" maxlength="4" type="text" name="vercode" id="vercode" placeholder="" value="" validation-minlength-message="验证码长度必须为4位"
+					data-validation-required-message="请输入验证码">
+					<p class="help-block"></p>
+					</div>
+				</div>
+            </div>   <a href="{lingzh::U('Fxs/legal')}" target="_blank">服务条款</a>
+            <div data-demo-html="true">						
+				<div class="ui-field-contain">
+				  <label for="textinput-1">我同意
+				 <input  name="IsRead" id="IsRead" type="checkbox" data-validation-required-message="请阅读服务条款" value=""/>
+				<p class="help-block"></p>
+				</div>
+			</div>      
+        <input type="submit"  class="ui-btn ui-corner-all" value="提交">
+         </form>
+</div><!-- /page -->
+
+    <div id="pre-rendered-page" data-role="page">
+        <div data-role="header" data-add-back-btn="true">
+        <h1>Pre-rendered popup demo</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <a href="#pre-rendered" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" aria-owns="pre-rendered" aria-haspopup="true" aria-expanded="false">Open Popup</a>
+            <div style="display: none;"><!-- placeholder for pre-rendered --></div>
+        </div>
+        <div id="pre-rendered-screen" class="ui-popup-screen ui-screen-hidden"></div>
+        <div id="pre-rendered-popup" class="ui-popup-container fade ui-popup-hidden ui-body-inherit ui-overlay-shadow ui-corner-all">
+            <div id="pre-rendered" class="ui-popup" data-role="popup" data-enhanced="true" data-transition="fade">
+                <p>This is the contents of the pre-rendered popup</p>
+            </div>
+        </div>
+    </div><!-- /page -->
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		$("#province").change(function(){
+	       $('#city-button span').html('--请选择城市--');
+	       $('#area-button span').html('--请选择城市--');
+		});
+		
+		$("#city").change(function(){
+			$('#area-button span').html('--请选择城市--');
+		});
+	});
+
+	function refresh() {
+        var randomRZ = Math.random();
+        $("#imgCheckB").attr("src", "/index.php?g=Fxs&m=Fxs&a=verify&rz=" + randomRZ);
+    }
+</script>
+<script type="text/javascript">
+function $(obj){return document.getElementById(obj);}
+function show(objid) {$(objid).style.display='inline';}
+function hidden(objid) {$(objid).style.display='none';}
+function doit(){
+var sel_val=$('sel').value;
+if (sel_val=='') {hidden('a1');hidden('a2');}
+if (sel_val==0) {show('a0'); hidden('a1');hidden('a2');}
+if (sel_val==1) {show('a1');hidden('a2');hidden('a0')}
+if (sel_val==2) {show('a2');hidden('a1');hiden('a0')}
+}
+</script>

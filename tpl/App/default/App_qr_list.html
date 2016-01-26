@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="./tpl/App/default/common/css/App/main.css"/>
+<link rel="stylesheet" type="text/css" href="./tpl/App/default/common/css/App/list.css"/>
+<title>Iphone预约管理</title>
+</head>
+
+<body>
+<div class="main">
+  <div class="header">
+    <div style="width:1020px;margin:0 auto;"> <img src="./tpl/App/default/common/images/App/top.png" /> </div>
+  </div>
+  
+  <div class="content">
+    <div class="cont">
+      <ul>
+	  <volist name="list" id="list">
+        <li>     <span>{lingzh:$list.develop_name} </span>
+        <img src="{lingzh:$list.img}">
+		
+		<iframe name="I1" style="display:none"></iframe> 
+		<p> <a href="javascript:void(0)" onclick="saveit('{lingzh:$list.img}')"><span style="width:105px;color:red; padding:5px 0;float:left">点击下载 </span></a> 
+		<div class="title" id="txt"><a href="{lingzh:$list.qrcode_pic_url}" onclick="copy_clip('{lingzh:$list.qrcode_pic_url}');alert('恭喜，复制成功！');return false;"><span style="width:105px;color:red;padding:5px 0;float:right">点击复制 </span><a></div></p>
+        </li>
+       </volist>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>Copyright(C)2006-2014 All Rights Reserved </p>
+  </div>
+</div>
+</body>
+</html>
+<!--<script language=javascript>  
+		  
+	document.onkeydown = function (e) {
+            var ev = window.event || e;
+            var code = ev.keyCode || ev.which;
+            if (code == 116) {
+                ev.keyCode ? ev.keyCode = 0 : ev.which = 0;
+                cancelBubble = true;
+                return false;
+            }
+        }
+		  
+</script>-->
+<script type="text/javascript">
+	function copy_clip(txt) {
+        if (window.clipboardData) {
+                window.clipboardData.clearData();
+                window.clipboardData.setData("Text", txt);
+        } else if (navigator.userAgent.indexOf("Opera") != -1) {
+                window.location = txt;
+        } else if (window.netscape) {
+                try {
+                        netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                } catch (e) {
+                        alert("您的firefox安全限制限制您进行剪贴板操作，请在新窗口的地址栏里输入'about:config'然后找到'signed.applets.codebase_principal_support'设置为true'");
+                        return false;
+                }
+                var clip = Components.classes["@mozilla.org/widget/clipboard;1"].createInstance(Components.interfaces.nsIClipboard);
+                if (!clip)
+                        return;
+                var trans = Components.classes["@mozilla.org/widget/transferable;1"].createInstance(Components.interfaces.nsITransferable);
+                if (!trans)
+                        return;
+                trans.addDataFlavor('text/unicode');
+                var str = new Object();
+                var len = new Object();
+                var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+                var copytext = txt;
+                str.data = copytext;
+                trans.setTransferData("text/unicode", str, copytext.length * 2);
+                var clipid = Components.interfaces.nsIClipboard;
+                if (!clip)
+                        return false;
+                clip.setData(trans, null, clipid.kGlobalClipboard);
+        }
+	}
+</script>
+<script language="javascript">
+function saveit(src){
+ I1.document.location=src;
+ savepic();
+}
+function savepic(){
+ if(I1.document.readyState=="complete"){
+  I1.document.execCommand("saveas");
+ }else{
+  window.setTimeout("savepic()",10);
+ }
+}
+</script>

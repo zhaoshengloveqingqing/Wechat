@@ -1,0 +1,1146 @@
+.about_content {
+	margin: 0px auto 20px; width: 972px;
+}
+#header {
+	height: 80px;
+}
+.mytree {
+	background: url("http://images.e-chinalife.com/media/images/general/about_line_bg01.png") no-repeat 0px; margin: 12px 0px 0px 24px; padding: 0px 0px 0px 6px; height: 48px; text-align: left; text-indent: -300em; overflow: hidden; float: left; display: inline;
+}
+.mytree a {
+	text-indent: -300em; overflow: hidden; display: block;
+}
+.mytree span {
+	text-indent: -300em; overflow: hidden; display: block;
+}
+.mytree#filialeheader a {
+	text-indent: 0em; overflow: visible; display: block;
+}
+#filialeheader {
+	margin: 15px 0px 0px 4px; width: auto; text-indent: 0px;
+}
+.mytree#about__us a {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_ico_button.jpg") no-repeat 0px -145px; width: 96px; height: 48px;
+}
+.mytree#sitemap span {
+	background: url("http://images.e-chinalife.com/media/images/other/sitemap.gif") no-repeat 0px 0px; width: 96px; height: 48px;
+}
+.mytree#statement span {
+	background: url("http://images.e-chinalife.com/media/images/other/law.gif") no-repeat 0px 0px; width: 96px; height: 48px;
+}
+.mytree#branch span {
+	background: url("http://images.e-chinalife.com/media/images/about-us/fz_bg.gif") no-repeat 0px 0px; width: 157px; height: 48px;
+}
+.mytree#clause span {
+	background: url("http://images.e-chinalife.com/media/images/other/clause.gif") no-repeat 0px 0px; width: 96px; height: 48px;
+}
+.news_line_c {
+	background-position: top; margin: 8px 0px; height: 1px; background-image: url("http://images.e-chinalife.com/media/images/general/news_line_bg01.gif"); background-repeat: no-repeat;
+}
+#about_95519 {
+	margin: 10px 30px 0px 0px; float: right; display: inline;
+}
+#about_95519 span {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -1137px; width: 123px; height: 58px; text-indent: -300em; overflow: hidden; display: block;
+}
+.about_content div.abox {
+	background: url("http://images.e-chinalife.com/media/images/general/content_tran_bg02.png") repeat-y 0px 0px; padding: 6px 10px 10px; overflow: hidden; zoom: 1;
+}
+.about_content div.atopx {
+	background: url("http://images.e-chinalife.com/media/images/general/content_tran_bg01.png") no-repeat 0px 0px; height: 8px;
+}
+.about_content div.abottomx {
+	background: url("http://images.e-chinalife.com/media/images/general/content_tran_bg01.png") no-repeat 0px -33px; height: 8px;
+}
+.about_leftmenu {
+	padding: 0px 5px 0px 2px; width: 169px; float: left;
+}
+.about_leftmenu h1 {
+	text-align: center; color: rgb(22, 135, 80); font-size: 12px; font-weight: bold;
+}
+.about_leftmenu h1 a {
+	color: rgb(22, 135, 80); line-height: 50px; text-decoration: none; display: block;
+}
+.m_channel a {
+	margin: 10px auto; width: 100px; height: 20px; color: rgb(132, 132, 132); line-height: 22px; padding-left: 32px; text-decoration: none; display: block;
+}
+.m_channel a:hover {
+	text-decoration: none;
+}
+.m_channel a.current {
+	background: url("http://images.e-chinalife.com/media/images/help-center/help_ico.gif") no-repeat -435px -132px rgb(234, 254, 244); border: 1px solid rgb(163, 206, 185); color: rgb(22, 135, 80);
+}
+.about_txtbox {
+	margin-left: 188px;
+}
+.about_crumb {
+	padding: 8px 0px 5px; overflow: hidden; zoom: 1;
+}
+.about_crumb .crumb {
+	padding: 5px 0px 0px 5px; width: 430px; float: left;
+}
+.about_crumb .pointline {
+	width: 530px; margin-top: 5px; float: left;
+}
+.about_crumb #topsearch {
+	width: 210px; margin-top: 12px; float: right;
+}
+.about_crumb #topsearch .input {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 0px -87px; padding: 2px 7px; width: 140px; height: 18px; float: left;
+}
+.about_crumb #topsearch .input input {
+	padding: 0px; border: 0px currentColor; width: 130px; height: 18px; color: rgb(189, 189, 189); line-height: 16px;
+}
+.about_crumub #topsearch .search_btn {
+	margin-left: 5px; display: inline;
+}
+.about_list {
+	padding: 5px 15px 0px 16px; line-height: 22px;
+}
+.about_list h1 {
+	color: rgb(22, 135, 80); font-weight: bold; margin-bottom: 8px;
+}
+.about_list li.icoaimg {
+	padding-bottom: 10px; margin-right: 20px; float: left; display: block;
+}
+.about_list p {
+	text-indent: 2em; margin-bottom: 6px;
+}
+.about_list ul {
+	padding: 10px 0px; overflow: hidden; zoom: 1;
+}
+.about_list .pdf_dw_area ul {
+	padding: 0px;
+}
+.about_list li.tit {
+	color: rgb(22, 135, 80); font-weight: bold; margin-bottom: 6px;
+}
+.about_list li.tit a {
+	color: rgb(22, 135, 80);
+}
+.about_list li.txt {
+	color: rgb(132, 132, 132); line-height: 20px; text-indent: 2em; display: block;
+}
+.about_list li.txt a {
+	color: rgb(132, 132, 132);
+}
+.r_downc {
+	width: 182px; overflow: hidden; margin-left: 10px; float: right;
+}
+.rtodown .mar-r-list {
+	background: url("http://images.e-chinalife.com/media/images/about-us/line_b_bg01.gif") repeat-x 0px bottom; margin-right: 200px;
+}
+.rtodown .r_downc {
+	margin-top: 5px;
+}
+.rtodown {
+	overflow: hidden; padding-top: 5px; zoom: 1;
+}
+.rtodown ol {
+	margin-right: 220px;
+}
+.rtodown ol.nr_list {
+	margin-right: 0px; margin-left: 20px;
+}
+.rtodown ol.nr_list li {
+	margin-top: 5px; margin-bottom: 5px; list-style-type: circle;
+}
+.rtodown .mframe_top {
+	width: auto; overflow: hidden; float: none; zoom: 1;
+}
+.rtodown .mframe_btm {
+	width: auto; overflow: hidden; float: none; zoom: 1;
+}
+.rtodown .mframe_top .mframe_top_bg {
+	width: auto; float: left;
+}
+.rtodown .mframe {
+	padding: 11px; width: auto; float: none;
+}
+.pdf_dw_area {
+	margin-bottom: 12px; background-color: rgb(231, 254, 250);
+}
+.rtodown .pdf_dw_area ul {
+	margin: 0px;
+}
+.pdf_d__s {
+	height: 3px; overflow: hidden; zoom: 1;
+}
+.pdf_d__s div {
+	width: 3px; height: 3px;
+}
+.pdf_d__s .p_t_left {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_conner.gif") no-repeat 0px 0px; float: left;
+}
+.pdf_d__s .p_t_right {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_conner.gif") no-repeat -5px 0px; float: right;
+}
+.pdf_d__s .p_b_left {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_conner.gif") no-repeat -10px 0px; float: left;
+}
+.pdf_d__s .p_b_right {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_conner.gif") no-repeat -15px 0px; float: right;
+}
+.pdf_d_file {
+	padding: 6px 6px 0px; color: rgb(102, 102, 102);
+}
+.about_list .pdf_d_file h1 {
+	color: rgb(22, 135, 80); font-weight: bold; margin-bottom: 0px;
+}
+.pdf_d_file h1 a {
+	color: rgb(22, 135, 80); font-weight: bold; margin-bottom: 0px;
+}
+.pdf_d_file li {
+	overflow: hidden; zoom: 1;
+}
+.pdf_d_file li a {
+	background: url("http://images.e-chinalife.com/media/images/help-center/down_bigico.gif") no-repeat 0px 6px; width: 25px; height: 35px; text-align: left; text-indent: -100em; overflow: hidden; margin-right: 8px; float: left; display: block; zoom: 1;
+}
+.pdf_soft_d {
+	line-height: 15px; padding-top: 10px; padding-left: 10px; font-family: Arial; border-top-color: rgb(234, 234, 234); border-top-width: 1px; border-top-style: solid;
+}
+.pdf_soft_d a {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_ico_button.jpg") no-repeat -123px -290px; height: 32px; color: rgb(82, 208, 239); padding-left: 38px; display: block;
+}
+.about_list ul.about_r_ad {
+	margin: 12px 0px 0px; padding: 0px;
+}
+.rtodown ul.about_r_ad {
+	margin: 12px 0px 0px; padding: 0px;
+}
+.about_r_ad {
+	margin: 12px 0px 0px; padding: 0px;
+}
+.about_list .about_r_ad li {
+	margin: 0px 0px 15px; padding: 0px; text-align: center;
+}
+.rtodown .about_r_ad li {
+	margin: 0px 0px 15px; padding: 0px; text-align: center;
+}
+.about_r_ad img {
+	margin: 0px; padding: 0px;
+}
+.about_class_index {
+	width: 560px; overflow: hidden; padding-left: 5px; margin-top: 3px; float: left; zoom: 1;
+}
+.about_class_index ul {
+	margin: 5px 9px !important; width: 262px; height: 170px; float: left; display: inline-block;
+}
+.about_class_index .news_c_tit a {
+	border: 1px solid rgb(232, 232, 232); width: 250px; height: 25px; text-align: right; color: rgb(22, 135, 80); padding-top: 60px; padding-right: 10px; font-weight: bold; text-decoration: none; display: block;
+}
+.about_class_index li {
+	margin: 0px 0px 10px;
+}
+.news_c_tit#about_c_1 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_c_1.jpg") no-repeat 0px 0px;
+}
+.news_c_tit#about_c_2 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_c_2.jpg") no-repeat 0px 0px;
+}
+.news_c_tit#about_c_3 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_c_3.jpg") no-repeat 0px 0px;
+}
+.news_c_tit#about_c_4 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_c_4.jpg") no-repeat 0px 0px;
+}
+.news_c_tit#about_c_5 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_c_5.jpg") no-repeat 0px 0px;
+}
+.news_c_tit#about_c_6 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_c_6.jpg") no-repeat 0px 0px;
+}
+.news_c_tit#about_c_7 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_c_7.jpg") no-repeat 0px 0px;
+}
+.news_c_tit#about_c_8 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_c_8.jpg") no-repeat 0px 0px;
+}
+.about_class_index .blue_more {
+	background-position: 0px -427px; margin: 0px 15px 0px 0px; line-height: 22px; padding-left: 14px; float: right; display: inline;
+}
+.about_class_index h1 {
+	color: rgb(22, 135, 80); font-size: 13px; font-weight: bold; margin-top: 4px; margin-bottom: 15px; float: none;
+}
+.about_class_index ul.t_img_bline {
+	margin: 10px 0px 20px !important; width: auto; height: auto; float: none;
+}
+.t_img_bline {
+	background: url("http://images.e-chinalife.com/media/images/about-us/line_b_bg01.gif") repeat-x left bottom;
+}
+.t_img_bline li span {
+	color: rgb(22, 135, 80); font-weight: bold; margin-right: 15px;
+}
+.t_img_bline li.imgs img {
+	margin-right: 15px; margin-bottom: 10px;
+}
+.honor_pdiv {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_honor_titbg.gif") repeat-x 0px 0px;
+}
+.honor_years_ti {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_honor_t2.gif") no-repeat right 0px; height: 44px;
+}
+.about_class_index .honor_pdiv .honor_tag {
+	margin: 0px !important; padding: 18px 10px 0px; width: auto; height: 26px; float: none;
+}
+.honor_tag {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_honor_t1.gif") no-repeat 0px 0px; height: 26px;
+}
+.honor_tag li {
+	margin: 0px 2px; float: left;
+}
+.honor_tag li a span {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_honor_tag_1.gif") no-repeat 0px 0px; padding-left: 12px; display: block;
+}
+.honor_tag li a {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_honor_tag_2.gif") no-repeat right 0px; padding: 0px 12px 0px 0px; color: rgb(59, 59, 59); line-height: 26px; text-decoration: none; display: block;
+}
+.honor_tag li a.current {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_honor_tag_2.gif") no-repeat right -34px; font-weight: bold;
+}
+.honor_tag li a.current span {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_honor_tag_1.gif") no-repeat 0px -34px; font-weight: bold;
+}
+.honor_content {
+	padding: 16px 20px 0px; border-right-color: rgb(232, 232, 232); border-left-color: rgb(232, 232, 232); border-right-width: 1px; border-left-width: 1px; border-right-style: solid; border-left-style: solid;
+}
+.about_class_index .honor_content ul {
+	margin: 0px 10px 0px 0px !important; width: auto; height: auto; float: none;
+}
+.honor_content ul li {
+	margin: 10px 0px 15px;
+}
+.honor_content ul li.tit {
+	margin: 0px 0px 10px; color: rgb(22, 135, 80); font-weight: bold;
+}
+.honor_content h3 {
+	color: rgb(22, 135, 80); float: none;
+}
+.con_bottom {
+	clear: both;
+}
+.about_list .s1 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_ico_button.jpg") no-repeat 0px 0px; padding-left: 25px;
+}
+.about_list .s2 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_ico_button.jpg") no-repeat 0px -23px; padding-left: 25px;
+}
+.about_list .s3 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_ico_button.jpg") no-repeat 0px -48px; padding-left: 25px;
+}
+.about_list .s4 {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_ico_button.jpg") no-repeat 0px -80px; padding-left: 25px;
+}
+.about_list p.clear_indent {
+	text-indent: 0px;
+}
+.blut_type {
+	color: rgb(22, 135, 80);
+}
+.floatp {
+	margin-right: 55px; float: left;
+}
+.clear-all {
+	padding: 15px 0px; overflow: hidden; clear: both; margin-bottom: 15px; zoom: 1;
+}
+.clear-all .pointline {
+	margin: 20px 0px;
+}
+.online_tyse {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_ico_button.jpg") no-repeat 0px -112px; width: 112px; height: 24px; text-indent: -300em; overflow: hidden; display: inline-block;
+}
+.down_report {
+	overflow: hidden; zoom: 1;
+}
+.pdf_report {
+	width: 156px; height: 86px; margin-right: 10px; float: left; display: inline;
+}
+.xdownths {
+	background-position: -121px -210px; height: 40px; color: rgb(124, 124, 124); padding-left: 50px; text-decoration: none; display: block; background-image: url("http://images.e-chinalife.com/media/images/about-us/about_ico_button.jpg"); background-repeat: no-repeat;
+}
+.pdf_report h1 {
+	margin: 0px 0px 5px;
+}
+.pdf_report .mframe {
+	padding-top: 4px; padding-bottom: 4px;
+}
+.events_web .pointline {
+	width: auto; clear: none;
+}
+.events_web h1 {
+	margin-top: 10px; margin-bottom: 10px;
+}
+.events_web .pic img {
+	border: 1px solid rgb(218, 218, 218); margin-bottom: 6px;
+}
+.events_web .pic {
+	text-align: center; margin-right: 15px; float: left;
+}
+.events_web .events_list ul {
+	overflow: hidden; padding-right: 30px; margin-bottom: 20px; zoom: 1;
+}
+.events_web .events_list ul a {
+	color: rgb(129, 129, 129);
+}
+.events_web ul.liab_report a {
+	color: rgb(129, 129, 129);
+}
+.events_web .events_list ul h2 {
+	color: rgb(22, 135, 80); font-weight: bold; float: none;
+}
+.about_list .liab_report {
+	margin: 0px 0px 10px; padding: 0px;
+}
+.about_list .liab_report li {
+	margin-top: 2px; margin-bottom: 2px;
+}
+.filiale_box {
+	width: 727px; float: left; display: inline;
+}
+.filiale_box .main {
+	margin-top: 20px;
+}
+.filiale_contents {
+	overflow: hidden; zoom: 1;
+}
+.filiale_right {
+	margin-left: 740px;
+}
+.filiale_event {
+	overflow: hidden; margin-top: 16px; zoom: 1;
+}
+.filiale_event .news {
+	width: 356px; float: left; display: inline;
+}
+.filiale_event .news .mframe_top {
+	width: auto; overflow: hidden; float: none; zoom: 1;
+}
+.filiale_event .news .mframe {
+	width: auto; overflow: hidden; float: none; zoom: 1;
+}
+.filiale_event .news .mframe_btm {
+	width: auto; overflow: hidden; float: none; zoom: 1;
+}
+.filiale_event .news .mframe_top_bg {
+	width: auto;
+}
+.filiale_event .news .mframe {
+	padding: 10px; height: 212px;
+}
+.newstit {
+	padding: 1px 0px; height: 20px;
+}
+.newstit h1 {
+	color: rgb(22, 135, 80); font-size: 13px; font-weight: bold; float: left;
+}
+.news .pointline {
+	margin: 0px auto; width: 98%; float: none;
+}
+.newslist a:link {
+	color: rgb(102, 102, 102); text-decoration: none;
+}
+.newslist a:visited {
+	color: rgb(102, 102, 102); text-decoration: none;
+}
+.newslist a:hover {
+	color: rgb(22, 135, 80); text-decoration: none;
+}
+.newslist {
+	margin: 10px 2px 0px;
+}
+.newslist li {
+	line-height: 18px; margin-bottom: 8px;
+}
+.newslist li span {
+	color: rgb(201, 200, 200); font-family: Arial; font-size: 11px;
+}
+.nevent.news {
+	margin-left: 15px;
+}
+.nevents_list {
+	margin: 10px 2px 0px;
+}
+.nevents_list li {
+	line-height: 18px; margin-bottom: 4px;
+}
+.nevents_list li.tit {
+	overflow: hidden; zoom: 1;
+}
+.nevents_list li.tit a {
+	color: rgb(22, 135, 80); text-decoration: none; float: left;
+}
+.nevents_list li.tit span {
+	color: rgb(201, 200, 200); font-family: Arial; font-size: 11px; float: right;
+}
+.nevents_list li.detail {
+	text-align: right;
+}
+.nevents_list li.detail a {
+	color: rgb(2, 160, 226);
+}
+.product_extend {
+	padding: 0px 6px; line-height: 20px; margin-top: 20px;
+}
+.product_extend h1 {
+	color: rgb(22, 135, 80); font-size: 13px; font-weight: bold; margin-bottom: 10px; float: none;
+}
+.product_extend ul {
+	overflow: hidden; zoom: 1;
+}
+.product_extend .icoaimg {
+	margin-right: 30px; float: left;
+}
+.product_extend li.tit {
+	color: rgb(22, 135, 80); font-size: 12px; font-weight: bold; margin-bottom: 5px;
+}
+.product_extend li.txt {
+	text-indent: 2em; margin-bottom: 3px;
+}
+.product_extend .pointline {
+	margin: 30px 0px 16px;
+}
+.product_extend p {
+	text-indent: 2em; margin-bottom: 6px;
+}
+.sys_enter li {
+	margin-bottom: 16px;
+}
+.sys_enter {
+	margin-bottom: 20px;
+}
+.filiale_contact {
+	line-height: 20px;
+}
+.filiale_contact p {
+	margin-bottom: 10px;
+}
+.filiale_contact .mframe_top {
+	width: auto; overflow: hidden; float: none; zoom: 1;
+}
+.filiale_contact .mframe {
+	width: auto; overflow: hidden; float: none; zoom: 1;
+}
+.filiale_contact .mframe_btm {
+	width: auto; overflow: hidden; float: none; zoom: 1;
+}
+.filiale_contact .mframe_top_bg {
+	width: auto;
+}
+.filiale_contact .mframe {
+	padding: 6px 20px; background-color: rgb(255, 255, 255);
+}
+.filiale_contact h1 {
+	color: rgb(22, 135, 80); font-size: 12px; font-weight: bold; margin-bottom: 10px; float: none;
+}
+.findser1 {
+	width: 93px; height: 26px; text-align: left; text-indent: -300em; overflow: hidden; display: block; background-image: url("http://images.e-chinalife.com/media/images/about-us/about_bnt.gif"); background-repeat: no-repeat;
+}
+.findser2 {
+	background-position: left -28px; width: 142px; height: 26px; text-align: left; text-indent: -300em; overflow: hidden; display: block; background-image: url("http://images.e-chinalife.com/media/images/about-us/about_bnt.gif"); background-repeat: no-repeat;
+}
+.fgsjs {
+	overflow: hidden; margin-top: 20px; zoom: 1;
+}
+.fgsjs .maps {
+	background: url("http://images.e-chinalife.com/media/images/about-us/map.jpg") no-repeat 0px 0px; width: 505px; height: 400px; overflow: hidden; float: left; position: relative;
+}
+.fgsjs .maps a {
+	background: url("http://images.e-chinalife.com/media/images/about-us/logo1.png") no-repeat center; width: 15px; height: 15px; text-indent: -300em; overflow: hidden; display: block; position: absolute;
+}
+.fgsjs .maps a.beijing {
+	left: 362px; top: 117px;
+}
+.fgsjs .maps a.chongqing {
+	left: 284px; top: 221px;
+}
+.fgsjs .maps a.dalian {
+	left: 417px; top: 120px;
+}
+.fgsjs .maps a.ningbo {
+	left: 432px; top: 221px;
+}
+.fgsjs .maps a.qingdao {
+	left: 411px; top: 144px;
+}
+.fgsjs .maps a.shanghai {
+	left: 433px; top: 198px;
+}
+.fgsjs .maps a.shenzhen {
+	left: 377px; top: 290px;
+}
+.fgsjs .maps a.tianjin {
+	left: 378px; top: 132px;
+}
+.fgsjs .maps a.xiamen {
+	left: 420px; top: 262px;
+}
+.fgsjs .maps a.anhui {
+	left: 392px; top: 196px;
+}
+.fgsjs .maps a.fujian {
+	left: 421px; top: 246px;
+}
+.fgsjs .maps a.guizhou {
+	left: 280px; top: 250px;
+}
+.fgsjs .maps a.guangdong {
+	left: 365px; top: 284px;
+}
+.fgsjs .maps a.gansu {
+	left: 255px; top: 163px;
+}
+.fgsjs .maps a.hebei {
+	left: 352px; top: 135px;
+}
+.fgsjs .maps a.henan {
+	left: 346px; top: 171px;
+}
+.fgsjs .maps a.hubei {
+	left: 358px; top: 205px;
+}
+.fgsjs .maps a.hunan {
+	left: 346px; top: 236px;
+}
+.fgsjs .maps a.hainan {
+	left: 332px; top: 324px;
+}
+.fgsjs .maps a.liaoning {
+	left: 420px; top: 100px;
+}
+.fgsjs .maps a.jiangxi {
+	left: 384px; top: 225px;
+}
+.fgsjs .maps a.jiangsu {
+	left: 410px; top: 186px;
+}
+.fgsjs .maps a.jilin {
+	left: 421px; top: 75px;
+}
+.fgsjs .maps a.qinghai {
+	left: 228px; top: 158px;
+}
+.fgsjs .maps a.shanxi1 {
+	left: 300px; top: 182px;
+}
+.fgsjs .maps a.shandong {
+	left: 380px; top: 151px;
+}
+.fgsjs .maps a.shanxi2 {
+	left: 331px; top: 142px;
+}
+.fgsjs .maps a.sichuan {
+	left: 251px; top: 210px;
+}
+.fgsjs .maps a.yunnan {
+	left: 240px; top: 270px;
+}
+.fgsjs .maps a.zhejiang {
+	left: 418px; top: 205px;
+}
+.fgsjs .maps a.heilongjiang {
+	left: 428px; top: 58px;
+}
+.fgsjs .maps a.guangxi {
+	left: 305px; top: 290px;
+}
+.fgsjs .maps a.neimeng {
+	left: 317px; top: 116px;
+}
+.fgsjs .maps a.ningxia {
+	left: 275px; top: 141px;
+}
+.fgsjs .maps a.xizang {
+	left: 134px; top: 216px;
+}
+.fgsjs .maps a.xinjiang {
+	left: 126px; top: 89px;
+}
+.selectareamxp {
+	padding: 5px 12px 5px 18px; border: 1px solid rgb(214, 213, 213); width: 206px; height: 383px; line-height: 21px; margin-left: 6px; float: left; display: inline;
+}
+.selectareamxp h1 {
+	color: rgb(22, 135, 80); font-weight: bold; margin-bottom: 9px; float: none;
+}
+.selectareamxp p {
+	margin-bottom: 6px;
+}
+.selectareamxp a {
+	color: rgb(102, 102, 102); margin-right: 11px;
+}
+.ppx {
+	height: 1px; text-align: left; position: relative; z-index: 100;
+}
+.ppx .ppw {
+	padding: 16px; width: 325px; display: none; position: absolute; z-index: 100;
+}
+.ppx .ppw .pbowr {
+	padding: 8px 10px; border: 1px solid rgb(153, 153, 153); width: 303px; line-height: 20px; font-family: Tahoma; background-color: rgb(255, 255, 255);
+}
+.pbowr h1 {
+	color: rgb(22, 135, 80); font-weight: bold; margin-bottom: 2px; float: none;
+}
+.pbowr h1 a {
+	color: rgb(22, 135, 80);
+}
+.pbowr .arrow1 {
+	left: 250px; top: 3px; position: absolute; z-index: 101;
+}
+.pbowr .arrow2 {
+	top: 80px; right: 3px; position: absolute; z-index: 101;
+}
+.pbowr .arrow3 {
+	left: 250px; bottom: 3px; position: absolute; z-index: 101;
+}
+.pbowr .arrow4 {
+	left: 170px; top: 3px; position: absolute; z-index: 101;
+}
+.pbowr .arrow5 {
+	left: 290px; top: 3px; position: absolute; z-index: 101;
+}
+.pbowr .arrow6 {
+	left: 170px; bottom: 3px; position: absolute; z-index: 101;
+}
+.pbowr .arrow7 {
+	left: 50px; bottom: 3px; position: absolute; z-index: 101;
+}
+.pbowr .arrow8 {
+	left: 50px; top: 3px; position: absolute; z-index: 101;
+}
+.pbowr .rxvo {
+	overflow: hidden; zoom: 1;
+}
+.pbowr .xnvc a {
+	color: rgb(22, 135, 80);
+}
+.pbowr .close {
+	background: url("http://images.e-chinalife.com/media/images/about-us/close.gif") no-repeat 0px 0px; top: 25px; width: 13px; height: 13px; right: 25px; text-indent: -300em; overflow: hidden; position: absolute; cursor: pointer;
+}
+.pbowr .rxnet {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_bnt1.gif") no-repeat 0px 0px; color: rgb(255, 255, 255); padding-left: 15px; text-decoration: none; margin-top: 8px; float: left; display: block !important;
+}
+.pbowr .rxnet span {
+	background: url("http://images.e-chinalife.com/media/images/about-us/about_bnt1.gif") no-repeat right -34px; height: 26px; line-height: 26px; padding-right: 10px; display: block !important;
+}
+.slogo-r {
+	left: 240px; top: -35px; position: absolute;
+}
+.slogo-r1 {
+	left: 160px; top: -35px; position: absolute;
+}
+.slogo-r2 {
+	left: 280px; top: -35px; position: absolute;
+}
+.slogo-r3 {
+	left: 40px; top: -35px; position: absolute;
+}
+.slogo-t {
+	top: 68px; right: -30px; position: absolute;
+}
+.slogo-b {
+	left: 240px; bottom: -42px; position: absolute;
+}
+.slogo-b1 {
+	left: 160px; bottom: -42px; position: absolute;
+}
+.slogo-b2 {
+	left: 40px; bottom: -42px; position: absolute;
+}
+#beijing {
+	left: 113px; top: 160px;
+}
+#chongqing {
+	left: 30px; top: 260px;
+}
+#dalian {
+	left: 165px; top: 159px;
+}
+#ningbo {
+	left: 70px; top: 158px;
+}
+#qingdao {
+	left: 158px; top: 188px;
+}
+#shanghai {
+	left: 73px; top: 136px;
+}
+#shenzhen {
+	left: 125px; top: 112px;
+}
+#tianjin {
+	left: 125px; top: 173px;
+}
+#xiamen {
+	left: 60px; top: 200px;
+}
+#anhui {
+	left: 30px; top: 135px;
+}
+#fujian {
+	left: 60px; top: 185px;
+}
+#guizhou {
+	left: 28px; top: 74px;
+}
+#guangdong {
+	left: 112px; top: 103px;
+}
+#gansu {
+	left: 82px; top: 205px;
+}
+#hebei {
+	left: 101px; top: 176px;
+}
+#henan {
+	left: 95px; top: 212px;
+}
+#hubei {
+	left: 106px; top: 247px;
+}
+#hunan {
+	left: 93px; top: 56px;
+}
+#hainan {
+	left: 80px; top: 144px;
+}
+#liaoning {
+	left: 129px; top: 144px;
+}
+#jiangxi {
+	left: 24px; top: 166px;
+}
+#jiangsu {
+	left: 49px; top: 126px;
+}
+#jilin {
+	left: 129px; top: 117px;
+}
+#qinghai {
+	left: 57px; top: 200px;
+}
+#shanxi1 {
+	left: 49px; top: 221px;
+}
+#shandong {
+	left: 86px; top: 194px;
+}
+#shanxi2 {
+	left: 79px; top: 184px;
+}
+#sichuan {
+	left: 78px; top: 28px;
+}
+#yunnan {
+	left: 70px; top: 90px;
+}
+#zhejiang {
+	left: 59px; top: 144px;
+}
+#heilongjiang {
+	left: 136px; top: 100px;
+}
+#guangxi {
+	left: 132px; top: 110px;
+}
+#neimeng {
+	left: 66px; top: 157px;
+}
+#ningxia {
+	left: 103px; top: 185px;
+}
+#xizang {
+	left: 83px; top: 36px;
+}
+#xinjiang {
+	left: 74px; top: 130px;
+}
+.copythis {
+	background: url("http://images.e-chinalife.com/media/images/about-us/copyic.gif") no-repeat 0px 2px; padding: 0px 0px 2px 15px; color: rgb(0, 142, 86); margin-left: 15px;
+}
+.fazxvc {
+	padding: 6px; text-align: center; background-color: rgb(255, 255, 255);
+}
+.text {
+	line-height: 30px; padding-top: 5px; padding-bottom: 5px;
+}
+.sdfasd {
+	text-align: right; padding-bottom: 5px;
+}
+.sitemaps {
+	padding: 40px 0px 0px 20px;
+}
+.lixbl {
+	overflow: hidden; margin-top: 30px; zoom: 1;
+}
+.lixbl ul {
+	background: url("http://images.e-chinalife.com/media/images/other/sm_bg01.gif") repeat-y 2px 0px; width: 230px; float: left; display: inline;
+}
+.lixbl ul a {
+	color: rgb(68, 184, 170);
+}
+.lixbl ul li {
+	line-height: 20px; padding-left: 15px; margin-bottom: 5px;
+}
+.lixbl ul ul {
+	width: auto; padding-left: 40px; float: none; display: block;
+}
+.lixbl ul li.li1 {
+	background: url("http://images.e-chinalife.com/media/images/other/sm_bg02.gif") no-repeat 0px 6px; color: rgb(0, 142, 86); font-weight: bold; margin-bottom: 30px;
+}
+.lixbl ul li.li2 {
+	background: url("http://images.e-chinalife.com/media/images/other/sm_bg03.gif") no-repeat 0px 6px;
+}
+.lixbl ul li.li1 a {
+	color: rgb(0, 142, 86);
+}
+.net_statement {
+	padding: 30px; line-height: 22px;
+}
+.net_statement h1 {
+	color: rgb(22, 135, 80); font-size: 12px; font-weight: bold; float: none;
+}
+.net_statement h3 {
+	color: rgb(102, 102, 102); font-size: 12px; font-weight: bold; float: none;
+}
+.net_statement p {
+	text-indent: 2em; margin-bottom: 15px;
+}
+.net_statement .txp {
+	color: rgb(250, 135, 0);
+}
+.product_clause {
+	padding: 30px; line-height: 22px;
+}
+.product_clause ul {
+	margin: 0px 0px 0px 10px; padding: 0px 0px 10px;
+}
+.product_clause li {
+	margin: 0px; padding: 0px 0px 0px 14px; line-height: 24px;
+}
+.product_clause li a {
+	color: rgb(0, 153, 255);
+}
+.product_clause li a:hover {
+	color: rgb(0, 153, 255); text-decoration: underline;
+}
+.product_clause h1 {
+	text-align: center; color: rgb(22, 135, 80); font-size: 14px; font-weight: bold; float: none;
+}
+.product_clause h2 {
+	text-align: center; color: rgb(102, 102, 102); line-height: 28px; font-size: 14px; font-weight: bold; float: none;
+}
+.product_clause h3 {
+	color: rgb(102, 102, 102); font-size: 12px; font-weight: bold; float: none;
+}
+.product_clause p {
+	text-indent: 2em; margin-bottom: 15px;
+}
+.topp {
+	float: right;
+}
+.rtodown .about_class_index ul.nopadx {
+	margin: 0px !important; padding: 0px; width: auto; height: auto; float: none; display: block;
+}
+.rtodown .about_class_index ul.nopadx li.tit {
+	margin: 8px 0px; line-height: 22px; overflow: hidden; padding-right: 10px; padding-left: 10px; zoom: 1;
+}
+.rtodown .about_class_index ul.nopadx li.crbg {
+	margin: 0px;
+}
+.rtodown .about_class_index ul.nopadx li.tit a {
+	color: rgb(102, 102, 102); float: left;
+}
+.rtodown .about_class_index ul.nopadx li.tit span {
+	float: right;
+}
+.rtodown .about_class_index ul.nopadx li.nr {
+	background: url("http://images.e-chinalife.com/media/images/about-us/line_b_bg01.gif") repeat-x 0px bottom rgb(230, 247, 246); padding: 10px; line-height: 20px; margin-bottom: 8px; display: none;
+}
+.rtodown .about_class_index ul.nopadx li.nr p {
+	margin-bottom: 10px;
+}
+.crbg {
+	background: rgb(52, 194, 180); color: rgb(255, 255, 255);
+}
+.movebg {
+	background: rgb(180, 233, 227); color: rgb(255, 255, 255);
+}
+.rtodown .about_class_index ul.nopadx li.crbg a {
+	color: rgb(255, 255, 255);
+}
+#slogo {
+	background: url("http://images.e-chinalife.com/media/images/about-us/slogo.jpg") no-repeat 0px 0px; width: 312px; height: 48px; margin-top: 15px; float: left;
+}
+#slogo a {
+	width: 312px; height: 48px; text-decoration: none; display: block;
+}
+#slogo a:hover {
+	text-decoration: none;
+}
+.xcontent_txt h1 {
+	padding: 0px 10px; font-size: 14px; float: none;
+}
+.xcontent_txt h2 {
+	padding: 0px 10px; color: rgb(22, 135, 80); font-size: 13px; float: none;
+}
+.xcontent_txt h2 span {
+	font-weight: normal; margin-left: 10px;
+}
+.xcontent_txt h3 {
+	padding: 0px 10px; color: rgb(135, 140, 138); font-size: 13px; float: none;
+}
+.xcontent_txt h4 {
+	color: rgb(22, 135, 80); font-size: 13px; font-weight: bold; float: none;
+}
+.xcontent_txt h5 {
+	color: rgb(102, 102, 102); font-size: 12px; font-weight: bold; float: none;
+}
+.xcontent_txt p a {
+	color: rgb(0, 152, 239);
+}
+.mcontent .newstit {
+	overflow: hidden; zoom: 1;
+}
+.mcontent .newstit h1 {
+	float: left;
+}
+.mcontent .newstit span {
+	font-size: 12px; margin-right: 5px; float: right; display: block;
+}
+.mcontent .newstit span a {
+	line-height: 20px;
+}
+.xcontent_txt .txt_type {
+	padding: 0px 10px;
+}
+.xcontent_txt #txtxvbxc {
+	padding: 0px 10px;
+}
+.xcontent_txt {
+	line-height: 35px; padding-top: 20px;
+}
+.xcontent_txt .txt_type {
+	line-height: 28px;
+}
+.xcontent_txt #txtxvbxc {
+	line-height: 28px;
+}
+#txtxvbxc p {
+	text-indent: 2em; margin-top: 0px; margin-bottom: 5px;
+}
+.mimicsel {
+	text-align: left; position: relative; z-index: 500; _width: 222px;
+}
+.selectpux .input_bg {
+	float: left;
+}
+.selectpux span.foc {
+	background: url("http://images.e-chinalife.com/media/images/general/input.gif") no-repeat right -176px; width: 26px; height: 28px; float: left; display: block;
+}
+.mimicsel input {
+	border: currentColor; cursor: default;
+}
+.ami1 {
+	z-index: 400;
+}
+.ami2 {
+	z-index: 300;
+}
+.ami3 {
+	z-index: 200;
+}
+.ami4 {
+	z-index: 100;
+}
+.input_bg {
+	background: url("http://images.e-chinalife.com/media/images/general/input.gif") no-repeat 0px 0px; padding-left: 5px;
+}
+.selectoption {
+	left: 0px; top: 25px; width: 100%; padding-top: 2px; display: none; position: absolute; z-index: 510;
+}
+.selectoption ul {
+	padding: 1px; border-right-color: rgb(204, 204, 204); border-bottom-color: rgb(208, 208, 208); border-left-color: rgb(171, 171, 171); border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);
+}
+.selectoption ul li {
+	padding: 1px 5px; height: 20px; line-height: 19px; cursor: default; background-color: rgb(255, 255, 255);
+}
+.selectoption ul li a {
+	color: rgb(102, 102, 102); text-decoration: none; display: block; _width: 100%;
+}
+.selectoption ul li a:hover {
+	color: rgb(255, 255, 255); text-decoration: none; display: block;
+}
+.selectoption ul li.curror {
+	color: rgb(255, 255, 255); background-color: rgb(44, 131, 229);
+}
+.selectoption ul li.curror a {
+	color: rgb(255, 255, 255); display: block; background-color: rgb(44, 131, 229);
+}
+.msginput_7 {
+	width: 188px !important;
+}
+.txtselect {
+	width: 230px;
+}
+.inputstyle input {
+	padding: 5px 6px 0px 5px; border: currentColor; height: 23px;
+}
+.inputstyle .input_bg_l {
+	background: url("http://images.e-chinalife.com/media/images/general/input.gif") no-repeat 0px 0px; padding-left: 5px; float: left;
+}
+.inputstyle {
+	width: auto; height: 28px; line-height: 24px; margin-bottom: 8px; float: none; zoom: 1;
+}
+.inputstyle .input_bg_r {
+	background: url("http://images.e-chinalife.com/media/images/general/input.gif") no-repeat right -55px; width: auto; height: 28px; overflow: hidden; padding-right: 5px;
+}
+.boxbxid .inputstyle {
+	width: auto; height: 24px; line-height: 24px; padding-right: 19px; zoom: 1;
+}
+.inputstyle span.seclass {
+	color: rgb(22, 135, 80); line-height: 21px; padding-top: 5px; font-family: SimSun,Tahoma; font-weight: bold; margin-right: 15px; float: left;
+}
+.vippic {
+	margin: 12px 20px 0px; clear: both;
+}
+.vippic p {
+	text-indent: 0px;
+}
+.vippic img {
+	margin-right: 10px; float: left; display: inline;
+}
+#result {
+	margin: 0px auto; width: 828px; padding-top: 20px;
+}
+table {
+	border: 0px currentColor; width: 100%; text-align: left; color: rgb(74, 74, 74); border-collapse: collapse;
+}
+#table_list {
+	width: 100%; border-bottom-color: rgb(90, 213, 204); border-bottom-width: 2px; border-bottom-style: solid;
+}
+#table_list td {
+	padding: 5px; border-right-color: rgb(204, 204, 204); border-bottom-color: rgb(90, 213, 204); border-right-width: 1px; border-bottom-width: 1px; border-right-style: dotted; border-bottom-style: solid;
+}
+td {
+	padding: 14px; border: 0px currentColor; line-height: 18px; font-size: 12px; font-weight: normal;
+}
+#table_list td p {
+	line-height: 20px;
+}
+.td_first {
+	padding: 0px 2px; text-indent: 14px; font-family: ""; font-size: 14px; font-weight: bold; border-left-color: rgb(204, 204, 204); border-left-width: 1px; border-left-style: dotted;
+}
+.td_information {
+	padding: 0px 2px; font-family: ""; font-size: 14px; border-left-color: rgb(204, 204, 204); border-left-width: 1px; border-left-style: dotted;
+}
+.td_last {
+	padding: 0px 2px; width: 5%;
+}
+th {
+	background: rgb(90, 213, 204); border-width: 2px; border-style: solid; border-color: rgb(53, 94, 53) rgb(90, 213, 204) rgb(90, 213, 204); padding: 0px 3px; text-align: left; color: rgb(255, 255, 255); font-size: 12px; font-weight: normal;
+}
+.tr_green {
+	background: rgb(255, 255, 255);
+}
+.p_bold {
+	color: rgb(22, 135, 80); font-weight: bold;
+}

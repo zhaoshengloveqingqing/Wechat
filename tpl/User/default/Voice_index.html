@@ -1,0 +1,56 @@
+<include file="Public:head"/>
+<div class="content">
+  <div class="cLineB">
+    <h4 class="left">自定义回复信息</h4>
+    <div class="clr"></div>
+  </div>
+  <div class="cLine">
+    <div class="pageNavigator left">
+      <a href='{lingzh::U("Voice/add")}' title='新增语音回复' class='btnGrayS vm bigbtn'><img src="{lingzh::RES}/images/music.png" class="vm" />新增语音回复</a>
+    </div>
+    <div class="clr"></div>
+  </div>
+  <div class="msgWrap">
+    <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+      <THEAD>
+      <TR>
+        <TH align="center" valign="middle" class="keywords">关键词</TH>
+        <TH align="center" valign="middle" class="keywords">标题</TH>
+        <TH align="center" valign="middle" class="answer">试听</TH>
+                            
+        <TH align="center" valign="middle" class="time">时间</TH>
+        <TH align="center" valign="middle" class="edit norightborder">操作</TH>
+      </TR>
+      </THEAD>
+      <TBODY>
+			<volist name="info" id="vo">
+			<tr>            
+        <td align="center" valign="middle">{lingzh:$vo.keyword}</td>
+        <td align="center" valign="middle">{lingzh:$vo.title}</td>
+        <td align="center" valign="middle">
+					<audio controls="controls">
+					  <source src="{lingzh:$vo.musicurl}" type="audio/mp3" />
+                      您的浏览器不支持 audio 标签。	
+					</audio>
+					<audio controls="controls">
+					  <source src="{lingzh:$vo.hqmusicurl}" type="audio/mp3" />
+                      您的浏览器不支持 audio 标签。	
+					</audio>
+			  </td>
+                
+        <td align="center" valign="middle"><php>echo date('Y-m-d',$vo['updatetime']);</php></td>
+        <td align="center" valign="middle" class="norightborder"> <a href="{lingzh::U('Voice/edit',array('id'=>$vo['id']))}" title="编辑图文自定义回复">编辑</a>  <a href="javascript:drop_confirm('您确定要删除吗?', \'{lingzh::U('Voice/del',array('id'=>$vo['id']))}\');">删除</a></td>
+          
+      </tr>
+			</volist>
+      </TBODY>
+    </TABLE>
+  </div>
+  <div class="cLine">
+    <div class="pageNavigator right">
+      <div class="pages"></div>
+    </div>
+    <div class="clr"></div>
+  </div>
+</div>
+<include file="Public:footer"/>

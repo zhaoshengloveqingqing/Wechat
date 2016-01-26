@@ -1,0 +1,143 @@
+ <include file="Public:head" />
+
+ <link href="/themes/w/css/reservation_setting.css" rel="stylesheet" type="text/css">
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=ZkqN4MTTGPb3lo9gvwGhiScT"></script>
+ <script src="{lingzh::RES}/js/date/WdatePicker.js"></script>
+ 
+ <script>
+ 
+ function add(value) {
+     var optionNum = $(".adminlist").length;
+     if(optionNum>=5){alert("最多只能添加5个管理员");return;}
+	 var lastId = "#admin" + optionNum;
+     optionNum++;
+	 if (optionNum == 1) {
+	     $("#adminButton").before("<tr id=\"admin" + optionNum +"\" class=\"adminlist\"><td><input type=\"text\" name=\"admin_openids[]\" value=\"\" class=\"px\" style=\"width:220px;\"></td>"
+						+ "<td><button  type=\"button\" onclick=\"del("+ optionNum +")\" class=\"btnGreen\" style=\"width: 70px;\">删除</button></td></tr>");
+	 } else {
+	     $(lastId).after("<tr id=\"admin" + optionNum +"\" class=\"adminlist\"><td><input type=\"text\" name=\"admin_openids[]\" value=\"\" class=\"px\" style=\"width:220px;\"></td>"
+						+ "<td><button  type=\"button\" onclick=\"del("+ optionNum +")\" class=\"btnGreen\" style=\"width: 70px;\">删除</button></td></tr>");
+	 }
+	 return false;
+};
+
+function del(value) {
+	 $("#admin"+value).remove();
+     return false;
+};
+</script>
+  <div class="content"> 
+   <div class="cLineB"> 
+    <h4>微评论设置 </h4> 
+    <a href="{lingzh::U('Reply/index')}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+   </div> 
+   <form id="wallForm" class="form" method="post" action="" enctype="multipart/form-data"> 
+    <input type="hidden" name="id" value="{lingzh:$set.id}" /> 
+     
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th width="120"><span class="red">*</span>关键词：</th> 
+        <td><input type="text" id="keyword" name="keyword" data-rule-required="true" value="<if condition="isset($set['keyword'])">{lingzh:$set.keyword}<else/>微评论</if>" class="px" style="width:400px;" /></td> 
+       </tr> 
+	   <tr> 
+        <th width="120">主题：</th> 
+        <td><input type="text" id="title" name="title" value="{lingzh:$set.title}" class="px" style="width:400px;" /> </td> 
+       </tr> 
+	   <tr> 
+        <th valign="top">图文消息图片：</th> 
+        <td valign="top">
+		      <img id="thumb_img_0" class="thumb_img" src="<if condition="isset($set['msg_pic_url'])">{lingzh:$set.msg_pic_url}<else/>{lingzh::C('site_url')}/themes/a/images/twfm.jpg</if>" style="max-height: 100px;"><br/>
+			  <input id='pic_url_input' onblur="syncPreviewImg('pic_url_input','thumb_img_0')" type="text" name="msg_pic_url" value="<if condition="isset($set['msg_pic_url'])">{lingzh:$set.msg_pic_url}<else/>{lingzh::C('site_url')}/themes/a/images/twfm.jpg</if>" class="px" style="width:400px;" />
+              <span onclick="$('#upload-panel-1').show();" class="btnGreens"> 上传图片 </span><br/>
+			  <div id="upload-panel-1" style="display:none" >
+                <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+                <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                  <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+                </div>
+              </div>
+	     </td>
+       </tr>
+	   <tr> 
+        <th valign="top">评论页图片：</th> 
+        <td valign="top">
+		      <img id="thumb_img_2" class="thumb_img" src="<if condition="isset($set['head_pic_url'])">{lingzh:$set.head_pic_url}<else/>{lingzh::C('site_url')}/themes/a/images/mpic.jpg</if>" style="max-height: 100px;"><br/>
+			  <input id='pic_url_input_2' onblur="syncPreviewImg('pic_url_input_2','thumb_img_2')" type="text" name="head_pic_url" value="<if condition="isset($set['head_pic_url'])">{lingzh:$set.head_pic_url}<else/>{lingzh::C('site_url')}/themes/a/images/mpic.jpg</if>" class="px" style="width:400px;" />
+			  <span onclick="$('#upload-panel-2').show();" class="btnGreens"> 上传图片 </span><br/>
+              <div id="upload-panel-2" style="display:none" >
+                <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+                <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                  <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index?id=2')}"></iframe>
+                </div>
+              </div>
+	     </td>
+       </tr> 
+	   <tr>
+       <th>审核设置：</th>
+        <td><p style="width: 220px; float: left; display: block; line-height: 32px; height: 32px;">
+
+	<label>
+	<input name="check" type="radio" id="RadioGroup1_0" value="1" <if condition="$set['check'] eq 1">checked="checked"</if>>
+	需要审核</label>
+	<label>
+	<input type="radio" name="check" value="2" <if condition="$set['check'] eq 2">checked="checked"</if> id="RadioGroup1_1">
+	无需审核</label></p>
+	</td>
+</tr>
+	   <tr>
+		<th>评论管理员：</th>
+		<td class="norightborder">
+		    <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="70%" style="width:400px;">
+			    
+				<tbody>
+				    <if condition="isset($admins)">
+					
+					<volist name="admins" id="admin">
+					<tr id="admin{lingzh:$i}" class="adminlist">
+						<td>
+						<input type="text" name="admin_openids[]" value="<php>echo $admin[0];</php>" class="px" style="width:220px;">
+						</td>
+						<td><button  type="button" onclick="del({lingzh:$i})" class="btnGreen" style="width: 70px;">删除</button></td>
+					</tr>
+					</volist>
+					<else/>
+					<tr id="admin1" class="adminlist">
+						<td>
+						<input type="text" name="admin_openids[]" value="" class="px" style="width:220px;">
+						</td>
+					</tr>
+					</if>
+					<tr id="adminButton">
+						<td width="350" style="width:350px;"><button  type="button" onclick="add(this)" class="btnGreen">添加管理员</button></td>
+						<span class="red">您可以：先不设置“评论管理员”＝》点击“保存”创建新的评论项目＝》打开微信在留言板中留个言＝》回到“评论管理”中找到您的的openid并在这里设置＝》点击保存，大功告成！管理员微信号是可以删除别人留言的哦～</span>
+					</tr>
+				</tbody>
+			</table>
+		</td>
+       <tr> 
+      </tbody> 
+     </table> 
+    </div>
+       <div class="msgWrap" style=' text-align: center'> 
+            <button type="submit" name="button" class="btnGreen">保存</button>&nbsp; &nbsp; <a href="{lingzh::U('Reply/index')}" class="btnGray vm">取消</a>
+     </div>
+    
+   </form> 
+     
+  </div> 
+ 
+  <script type="text/javascript">
+            function ShowUploadPanel(id) {
+
+                 var url = '{lingzh::U("UploadImg/index")}' + '&id=' + id;
+
+                     $('#uploadIframe').attr('src', url);
+                     $('#upload-panel').show();
+            }
+    function syncPreviewImg(fromId, toId) {    
+        document.getElementById(toId).src=document.getElementById(fromId).value;
+    }
+    </script>
+    
+  <include file="Public:footer" />

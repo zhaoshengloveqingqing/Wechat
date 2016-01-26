@@ -1,0 +1,55 @@
+<include file="Public:head"/>
+<script type="text/javascript">
+	$(function(){
+		$('#submit').click(function(){
+			var forms=$('#form').serialize();
+			$.ajax({
+				type:'POST',
+				url:'{lingzh::U("Department/add")}',
+				data:forms,
+				success:function(msg){
+					msg=eval('('+msg+')');
+					alert(msg.info);
+				}
+			});
+		})
+	});
+</script>
+
+<div class="content">
+<div class="cLineB">
+  <h4>修改部门 </h4>
+  <a href="{lingzh::U('Department/index')}" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+ <div class="msgWrap bgfc">
+  <form class="form" method="post" action="{lingzh::U('Department/edit',array('id'=>$_GET['id'],'name'=>$_GET['name']))}" target="_top" enctype="multipart/form-data"> 
+
+<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr>
+    <th colspan="4">{lingzh:$name}</th>
+    </tr>
+     <tr> 
+      <td height="48" align="right"><strong>归属部门：</strong></td>
+      <td>
+		<select name="pid" style="width:136px">
+			{lingzh:$select_categorys}
+		</select>
+	  </td>
+    </tr>
+	<tr> 
+      <td  height="48" align="right"><strong>部门名称：</strong></td>
+      <td><input type="text" name="name" value="{lingzh:$department}"  class="text textMiddle" size="45" /></td>
+    </tr>
+
+	<input type="hidden" name="dosubmit" />
+   <tr>
+          <th>&nbsp;</th>
+          <td>
+            <button type="submit" name="button" class="btnGreen">保存</button>
+          </td>
+        </tr>
+</table>
+</form>
+ </div>
+</div>
+<include file="Public:footer"/>

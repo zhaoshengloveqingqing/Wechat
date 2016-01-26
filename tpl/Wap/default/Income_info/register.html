@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="viewport"
+	    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>注册页面</title>
+	<!-- Set render engine for 360 browser -->
+	<meta name="renderer" content="webkit">
+
+	<!-- No Baidu Siteapp-->
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+	<link rel="stylesheet" type="text/css" href="/tpl/Wap/default/common/phone/css/amazeui.css">
+	<link rel="stylesheet" type="text/css" href="/tpl/Wap/default/common/phone/css/app.css">
+	<link rel="stylesheet" type="text/css" href="/tpl/Wap/default/common/phone/css/login.css">
+</head>
+<body>
+<header data-am-widget="header" class="am-header am-header-default">
+  <div class="am-header-left am-header-nav">
+    <a href="#left-link" class="">
+      <i class="am-header-icon am-icon-chevron-left"></i>
+    </a>
+  </div>
+  <h1 class="am-header-title">
+    <a href="#title-link">注册页面</a>
+  </h1>
+</header>
+<div id="alert" class="am-g">
+	<div class="col-sm-12">
+		<div class="am-alert">
+		</div>
+	</div>
+</div>
+<form class="am-form"  method="post" action="{lingzh::U('Income/register', array('token'=>$token))}">
+  <fieldset>
+   <div class="am-col col-lg-6">
+    <div class="am-form-group">
+   	 <input id="mobile" name="mobile" type="number" pattern="\d*" class="am-form-field" placeholder="请输入手机号">
+ 	 </div>
+   </div>
+   <div class="am-col col-lg-6">
+    <div class="am-input-group">
+      <input type="number" id="code" name="code" pattern="\d*" class="am-form-field" placeholder="请输入获取的验证码"> 
+      <span class="am-input-group-btn">
+        <button id="send" class="am-btn am-btn-primary pi-btn-send" type="button">点击获取</button>
+      </span>
+    </div>
+   </div>
+   <div class="am-col col-lg-6 pi-btn-submit">
+ 	<input id="submit" type="submit" disabled="disabled" class="am-btn am-btn-block am-btn-primary pi-btn-blue" value="提交"/>
+   </div>
+  </fieldset>
+</form>
+
+</body>
+<script type="text/javascript" src="./tpl/Wap/default/common/phone/js/zepto.min.js"></script>
+<script type="text/javascript" src="./tpl/Wap/default/common/phone/js/amazeui.js"></script>
+<script type="text/javascript" src="./tpl/Wap/default/common/phone/js/jquery.min.js"></script>
+<script type="text/javascript">
+	jQuery(function($){
+		$("#alert").hide();
+
+		var counter = 60;
+		var handle = null;
+
+		function count_down() {
+			clearTimeout(handle);
+			if(counter-- == 1) {
+				$("#alert").hide();
+				$("#send").removeAttr("disabled").text("点击获取");
+				$("#submit").removeAttr("disabled");
+				counter = 60;
+				return;
+			}
+			$("#alert").find('.am-alert').text(counter + "秒后可以再次获取短信");
+			$("#alert").show();
+			$("#send").text(" " + counter + "秒");
+			handle = setTimeout(count_down, 1000);
+		}
+
+		function isMobileValid(mobile) {
+			if(mobile.length==0) {
+			   return false;
+			}    
+			if(mobile.length!=11) {
+			   return false;
+			}
+			return !!mobile.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+		}
+
+		function isVerificationCode(code) {
+			return !!String(code).match(/^\d{6}$/);
+		}
+
+		$(".pi-btn-send").click(function(){
+			var mobile = $("#mobile").val();
+			if(isMobileValid(mobile)) {
+				$("#alert").find('.am-alert').removeClass('am-alert-warning').addClass('am-alert-success')
+							.text('激活码发送成功，60秒内未收到请重新获取').show();
+				$("#alert").show();
+				$.get("{lingzh::U('Income/send_sms')}", {mobile: mobile}, function(data){
+					//alert('手机验证码：'+ data.code);
+					$("#send").attr("disabled", "disabled");
+					count_down();
+				}, 'json');
+			}
+			else {
+
+				$("#alert").find('.am-alert').removeClass('am-alert-success').addClass('am-alert-warning').text('请输入正确的手机号');
+				$("#alert").show();
+				// alert("请输入正确的手机号！");
+			}
+		});
+
+		$("#mobile").keyup(function(){
+			var mobile = $("#mobile").val();
+			if(isMobileValid(mobile)) {
+				$("#alert").hide();
+			}
+		});
+
+		function checkCode(show) {
+			var codeVal = $("#code").val();
+			var mobileVal = $("#mobile").val();
+			if(isMobileValid(mobileVal)) {
+				if (isVerificationCode(codeVal)) {
+					$("#alert").hide();
+					$("#submit").removeAttr("disabled");
+				}else{
+					$("#submit").attr("disabled", "disabled");
+					if (show) {
+						$("#alert").find('.am-alert').removeClass('am-alert-success').addClass('am-alert-warning').text('验证码格式不正确, 验证码是6位有效数字');
+						$("#alert").show();
+					};
+				}
+			}
+		}
+
+		$("#code").blur(function(){
+			checkCode(true);
+		});
+
+		$("#code").change(function(){
+			checkCode(true);
+		});
+
+		$("#code").keyup(function(){
+			checkCode(false);
+		});
+	});
+</script>
+</html>
+

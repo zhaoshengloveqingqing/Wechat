@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lingzh:$tpl['wxname']}</title>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="/themes/w/css/reset.css" rel="stylesheet" type="text/css" />
+<style>
+body {background-color: #494949;margin: 0 auto;max-width: 640px;min-width: 320px;overflow-x: hidden;}
+
+
+.mainmenu { display: block; margin: 0px auto; width: 100%; color: #fff}
+
+.mainmenu  .menubtn { display: block;  text-decoration: none; color: #000;  border-radius: 5px; margin: 5px;}
+.mainmenu  a { display: block; padding: 0px; font-size: 14px; color: #000; text-decoration: none; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; }
+
+.mainmenu  .menubtn .menuimg {
+margin: auto;
+width: 100%;
+height :100%;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+
+overflow: hidden; border-radius: 5px 5px 0 0;
+}
+
+.mainmenu  .menutitle {text-align: center;padding: 5px;text-decoration: none;color: #fff;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size:16px; margin:-40px 0px 0px 0px;position: relative;background-color: #eee;opacity: 0.5;}
+.mainmenu  .menutitle span{
+   color: #000;
+}
+
+div.copyright{font-size:14px;text-align:center;color:#fff;margin:8px;}
+a.copyright{font-size:14px;text-align:center;color:#fff;margin:8px 0px;text-decoration:underline;}
+div.tech-support{font-size:12px;text-align:center;color:#fff;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+.clr {clear: both;}
+</style>
+</head>
+
+<body>
+
+<div class="mainmenu">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
+  <tr> <td width="33.333333%"></td><td width="33.333333%"></td><td width="33.333333%"></td></tr>
+  <tr>
+    <td width="33.333333%" colspan='2' rowspan='2'>
+      <if condition="isset($info['0'])">
+      <a href="{lingzh::U('Wap/Index/lists',array('classid'=>$info['0']['id'],'token'=>$info['0']['token'],'wxref'=>'mp.weixin.qq.com'))}">
+      	<div class="menubtn">
+          <img class="menuimg" src="{lingzh:$info['0']['img']}"  border="none" />
+      		<div class="menutitle"><span>{lingzh:$info['0']['name']}</span></div>
+      	</div>
+      </a>
+      </if>
+    </td>
+    <td width="33.333333%">
+      <if condition="isset($info['1'])">
+      <a href="{lingzh:$info['1']['hyperlink']}">
+      	<div class="menubtn">
+      		<img class="menuimg" src="{lingzh:$info['2']['img']}"  border="none" />
+      		<div class="menutitle"><span>{lingzh:$info['1']['name']}</span></div>
+      	</div>
+      </a>
+      </if>
+    </td>
+  </tr>
+  <tr>
+    <td width="33.333333%">
+      <if condition="isset($info['2'])">
+      <a href="{lingzh:$info['2']['hyperlink']}">
+      	<div class="menubtn">
+      		<img class="menuimg"  src="{lingzh:$info['2']['img']}"  border="none" />
+      		<div class="menutitle"><span>{lingzh:$info['2']['name']}</span></div>
+      	</div>
+      </a>
+      </if>
+    </td>
+  </tr>
+
+
+  <php>
+
+  	if (count($info) > 2)
+  	{
+  	  for($i = 3; $i < count($info); $i++ )
+  	  {
+  	    if($i % 3 == 0)
+  	    {
+  	      $str = '<tr><td width="33.333333%">';
+  	      $str .= '<a href='.U('Wap/Index/lists',array('classid'=>$info[$i]['id'],'token'=>$info[$i]['token'],'wxref'=>'mp.weixin.qq.com')).'><div class="menubtn"><img  class="menuimg"  src="'.$info[$i]['img'].'"  border="none" /></div><div class="menutitle"><span >'.$info[$i]['name'].'</span></div></a></td><td width="33.333333%">';
+
+  	      if (isset($info[$i + 1]))
+  	      {
+  	      	$str .= '<a href='.U('Wap/Index/lists',array('classid'=>$info[$i+1]['id'],'token'=>$info[$i+1]['token'],'wxref'=>'mp.weixin.qq.com')).'><div class="menubtn"><img  class="menuimg" src="'.$info[$i+1]['img'].'"  border="none" /><div class="menutitle"><span>'.$info[$i+1]['name'].'</span></div></div></a>';
+  	      }
+  	      $str .= '</td><td width="33.333333%">';
+
+
+  	      if (isset($info[$i + 2]))
+  	      {
+  	      	$str .= '<a href='.U('Wap/Index/lists',array('classid'=>$info[$i+2]['id'],'token'=>$info[$i+2]['token'])).'><div class="menubtn"><img  class="menuimg" src="'.$info[$i+2]['img'].'"  border="none" /><div class="menutitle"><span>'.$info[$i+2]['name'].'</span></div></div></a>';
+  	      }
+  	      $str .= '</td></tr>';
+  	      echo $str;
+  	    }
+  	  }
+  	  
+    }
+  	
+  </php>
+  
+  </table>
+</div>
+
+<div class="clr"></div>
+<include file="Index:navi"/> 
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+
+</body>
+</html>

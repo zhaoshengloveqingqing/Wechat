@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>{lingzh:$res.title}-{lingzh:$tpl.wxname}</title> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<link href="{lingzh::RES}/css/yl/news.css" rel="stylesheet" type="text/css" />
+<script src="{lingzh::RES}/js/yl/audio.min.js" type="text/javascript"></script>   
+    <script>
+      audiojs.events.ready(function() {
+        audiojs.createAll();
+      });
+    </script>
+
+
+<style type="text/css">
+
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+</style>
+</head> 
+    <script>
+window.onload = function ()
+{
+var oWin = document.getElementById("win");
+var oLay = document.getElementById("overlay");	
+var oBtn = document.getElementById("popmenu");
+var oClose = document.getElementById("close");
+oBtn.onclick = function ()
+{
+oLay.style.display = "block";
+oWin.style.display = "block"	
+};
+oLay.onclick = function ()
+{
+oLay.style.display = "none";
+oWin.style.display = "none"	
+}
+};
+</script>
+<body id="news">
+<div id="ui-header">
+<div class="fixed">
+<a class="ui-title" id="popmenu">选择分类</a>
+<a class="ui-btn-left_pre" href="javascript:history.go(-1)"></a>
+<a class="ui-btn-right_home" href="{lingzh::U('Index/index',array('token'=>$tpl['token']))}"></a>
+</div>
+</div>
+<div id="overlay"></div>
+<div id="win">
+<ul class="dropdown"> 
+<volist name="info" id="vo">
+<li><a href="{lingzh:$vo.hyperlink}"><span>{lingzh:$vo.name}</span></a></li>
+</volist>
+ 	
+<div class="clr"></div>
+</ul>
+</div>
+<div class="Listpage">
+<div class="top46"></div>
+<div class="page-bizinfo">
+<?php if(!isset($res) || $res['display_title_time']){ ?>
+<div class="header" style="position: relative;">
+<h1 id="activity-name">{lingzh:$res.title}</h1>
+<span id="post-date">{lingzh:$res.createtime|date="y-m-d",###}</span>
+</div>
+<?php } ?>
+<a id="biz-link" class="btn" href="{lingzh::U('Index/index',array('token'=>$res['token']))}"  data-transition="slide" >
+<div class="arrow">
+<div class="icons arrow-r"></div>
+</div>
+<div class="logo">
+<div class="circle"></div>
+<img id="img" src="/themes/w/images/logo.jpg">
+</div>
+<div id="nickname">{lingzh:$tpl.wxname}</div>
+<div id="weixinid">微信号:{lingzh:$tpl.weixin}</div>
+</a>
+ <if condition="isset($res['pic']) and !empty($res['pic']) and $res['display_pic'] eq 1">
+    <div class="showpic"><img src="{lingzh:$res.pic}" /></div> 
+  </if>
+<div class="text" id="content">
+{lingzh:$res.content|htmlspecialchars_decode}
+</div>
+
+ <script>
+
+function dourl(url){
+location.href= url;
+}
+</script>
+
+</div>	
+    
+<a class="footer" href="#news" target="_self"><span class="top">返回顶部</span></a>
+<eq name="copyright" value="0">
+<div class="copyright"  >
+<php>echo htmlspecialchars_decode(C('copyright'))</php>
+</div>
+</eq>
+</div>
+
+<div class="clr"></div>
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+<!--div class="tech-support"  >
+  <php>echo htmlspecialchars_decode(C('tech_support'))</php>
+</div-->
+<script src="/tpl/Wap/default/common/js/wxshare.js"></script>
+<script>
+	var imgUrl = '{lingzh:$res.pic}';
+	var lineLink = "{lingzh:$url}";
+	var descContent = '{lingzh:$res.strcontent}';
+	var shareTitle = '{lingzh:$res.title}';
+	var appid = '';
+	wxshare(imgUrl, lineLink, descContent, shareTitle, appid);
+</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="/themes/a/css/img_upload_panel.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+<style type="text/css">
+.clr{
+clear:both;
+}
+.chatPanel .mediaFullText .mediaContent {
+font-size: 14px;}
+.chatPanel .media {
+border:0px solid #D1D1D1;
+box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-moz-box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-webkit-box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-webkit-border-radius:5px 5px 10px 10px;
+-moz-border-radius:5px 5px 10px 10px;
+border-radius:5px 5px 10px 10px;
+background: url({lingzh::RES}/images/photo/bottom.png) repeat-x scroll left bottom #FFFFFF;
+background-size:2px auto;
+}
+.chatPanel .media .mediaHead .title {
+line-height:1.2em;
+font-size:16px;
+display:block;
+text-align: left;
+margin-top:0;
+padding:0;
+height: auto;
+}
+.chatPanel .media .mediaPanel { padding:0px; margin:0px;}
+.chatPanel .media .mediaHead { padding: 10px 10px 8px; border-bottom: 0px solid #D3D8DC; color: #000000; font-size: 20px; }
+
+.chatPanel .media .mediaFooter { padding: 0 10px; }
+.chatPanel .mediaFullText .mediaImg { width: 265px; margin: 0 10px;}
+.chatPanel .mediaFullText .mediaImg img{ width: 100%; height:150px;}
+.chatPanel .mediaFullText .mediaContentP { margin: 5px 10px 0px; }
+.chatPanel .mediaFullText .mediaContentP p{ line-height:18px; }
+.chatPanel .mediaFullText .mediaContent { padding: 0 0 5px; }
+</style>
+
+<div class="content">         
+  <div class="cLineB"><h4>编辑微信回复内容</h4></div> 
+  <div class="msgWrap">
+  <form class="form" method="post"   action="{lingzh::U('Wifi/setResponse')}"  enctype="multipart/form-data" >
+  <TABLE class="userinfoArea" style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+    <THEAD>
+      <TR>
+        <TH valign="top"><label for="keyword">关键词：</label></TH>
+        <TD><input type="input" class="px" id="keyword" value="<if condition='isset($text) && empty($img)'>{lingzh:$text.keyword}</if><if condition='isset($img) && empty($text)'>{lingzh:$img.keyword}</if>" name="keyword" style="width:500px" ><br />
+                        多个关键词请用空格格开：例如: wifi&nbsp;密码</TD>
+        <TD>&nbsp;</TD>
+      </TR>
+      <TR>
+        <TH valign="top">匹配类型：</TH>
+        <TD>
+          <label for="radio1"> <input id="radio1" class="radio" type="radio" name="type" value="1" <php> if (!isset($text) || $text['type'] == 1 ) echo "checked";</php>/>完全匹配</label> 
+          <label for="radio2"><input class="radio" id="radio2" type="radio" name="type" value="2" <php>if (isset($text) && $text['type'] == 2 ) echo "checked";</php>/>包含匹配</label>
+        </TD>
+      </TR>
+    </THEAD>
+    <TBODY>
+      <TR>
+        <TH valign="top">回复类型：</TH>
+        <TD>
+          <label for="radio3"> <input onclick="switchTo('text');" id="radio3" class="radio" type="radio" name="resp_type" value="1" <php> if (isset($ap) &&  $ap['resp_type'] == 1 ) echo "checked";</php>/>文本回复</label> 
+          <label for="radio4"><input  onclick="switchTo('img')" class="radio" id="radio4" type="radio" name="resp_type" value="2" <php>if (isset($ap) && $ap['resp_type'] == 2 ) echo "checked";</php>/>图文回复</label>
+          <label for="radio5"><input  onclick="switchTo('img')" class="radio" id="radio5" type="radio" name="resp_type" value="3" <php>if (isset($ap) && $ap['resp_type'] == 3 ) echo "checked";</php>/>图文回复（一键登录）</label>
+        </TD>
+      </TR>
+      <TR class="text_resp" style="<if condition='empty($text) && isset($img)'>display:none</if>">
+        <TH valign="top"><label for="text">回复内容：</label></TH>
+        <TD><textarea  class="px" id="textContent" name="textContent" style="width:500px; height:150px"><if condition='isset($text)'>{lingzh:$text['text']}</if></textarea><br /><p>注：回复内容中请插入#wifi#， #wifi#将会被自动替换成wifi的上网密码;插入#认证链接#，将自动替换成上网连接。
+          <br>示例：欢迎使用WI-FI，请疯狂点击&lt;a href="#认证链接#"&gt;【我要上网】&lt;/a &gt;。（1小时内有效）</p>
+        </TD>
+      </TR>
+
+      <TR class="img_resp" style="<if condition='empty($img)'>display:none</if>">
+        <TH><span class="red">*</span><label for="title">标题：</label></TH>
+        <TD><input type="input" class="text textMiddle" id="title" value="<if condition='isset($img)'>{lingzh:$img.title}</if>"    name="title" style="width:400px;" onkeyup="syncPreviewText('title', 'zname')"> </TD>
+        <td width="300px" rowspan="5" valign="top" class="chatPanel" style="padding:0px;" align="left">
+              <div class="chatItem you" id="photo1"> 
+      　        <a target="ddd" href="">
+                  <div class="media mediaFullText">
+                    <div class="mediaPanel">
+                      <div class="mediaHead"><span class="title" id="zname"><if condition='isset($img)'>{lingzh:$img.title}<else/>示例标题</if></span></div>
+                      <div class="mediaImg"><img id="zpic" src="<if condition='isset($img)'>{lingzh:$img.pic}<else/>/themes/a/images/img_prev_noneimg.jpg</if>"></div>
+                      <div class="mediaContent mediaContentP"><p id="zinfo"><if condition='isset($img)'>{lingzh:$img.text} <else/>说明文字，尽量简短，突出重点就好！</if></p></div>
+                      <div class="mediaFooter">
+                        <span class="mesgIcon right"></span><span style="line-height:50px;" class="left">查看全文</span>
+                        <div class="clr"></div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </td>
+      </TR>
+
+      <TR class="img_resp" style="<if condition='empty($img)'>display:none</if>">
+        <TH valign="top"><label for="text">消息摘要：</label></TH>
+        <TD><textarea  class="text textMiddle" id="imgContent"     name="imgContent" style="width:400px;  height:100px" onkeyup="syncPreviewText('imgContent', 'zinfo')"><if condition='isset($img)'>{lingzh:$img.text}</if></textarea><br />限制200字内,内容中请插入#wifi#， #wifi#将会被自动替换成wifi的上网密码；若是一键登录可不插入#wifi#</TD>
+      </TR>
+      <TR class="img_resp" style="<if condition='empty($img)'>display:none</if>">
+        <TH valign="top"><label for="pic">封面图片地址：</label></TH>
+        <TD>
+          <input id='pic_url_input' class="text textMiddle"  name="pic" value="<if condition='isset($img)'>{lingzh:$img.pic}</if>" style="width:400px;"  onblur="syncPreviewImg('pic_url_input','zpic')"/>
+          <div class='img_upload_panel' >
+                       <div name='uploadify'  id="uploadify_wifi"  ></div>                                                  
+                       <div id="fileQueue_wifi"></div> 
+                       <div style="clr:both; height:0px;"></div>
+                         </div> 
+          <!--<span onclick="$('#upload-panel').show();" style="text-decoration:underline;cursor:pointer;"> 点击此处上传 </span><br /> 支持JPG、PNG等格式，或者将图片上传到POCO.cn获取外链
+          <div id="upload-panel" style="display:none" >
+            <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+            <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+              <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+            </div>
+          </div>-->
+        </TD>
+      </TR>
+
+      <TR class="img_resp" style="<if condition='empty($img)'>display:none</if>">
+        <TH valign="top" colspan="3"><label for="url">图文消息链接网址为Wifi认证地址,不需要输入</label></TH>
+      </TR>
+
+   
+      <TR>
+        <TH></TH>
+        <TD>
+          <button type="submit"  name="button"  class="btnGreen left" >保存</button>　
+          <a href="{lingzh::U('Wifi/index')}"  class="btnGray vm">取消</a>
+        </TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  </form>
+
+
+  </div> 
+
+        </div>
+        
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div> 
+
+<!--底部-->
+    </div>
+
+
+<script type="text/javascript">
+
+function switchTo(resp_type) {
+  if (resp_type == 'text') {
+    $('.text_resp').show();
+    $('.img_resp').hide();
+  } else if (resp_type == 'img') {
+    $('.img_resp').show();
+    $('.text_resp').hide();
+    
+  }
+}
+
+function syncPreviewText(fromId, toId) {    
+  document.getElementById(toId).innerHTML=document.getElementById(fromId).value;
+}
+
+function syncPreviewImg(fromId, toId) {    
+  document.getElementById(toId).src=document.getElementById(fromId).value;
+}
+</script>
+ <script>
+
+ $(function() {
+   
+    $("#uploadify_wifi").uploadify({
+        'buttonText' : '上传图片',
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': 'fileQueue_wifi',
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                    document.getElementById('zpic').src=  res_json.content ;
+                    $('#pic_url_input').val(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+
+            } else {
+               alert("网络不给力啊！亲");
+            }
+
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+     $("#uploadify_wifi").css('width', '100%');
+     $("#uploadify_wifi").append('<span class="img_upload_tips">支持JPG、PNG、GIF等格式，大小不超过1MB,支持图片外链。</span>');
+
+});  
+</script>
+<include file="Public:footer"/>

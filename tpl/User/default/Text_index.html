@@ -1,0 +1,48 @@
+<include file="Public:head"/>
+<div class="content">
+
+  <div class="cLine">
+    <div class="pageNavigator left">
+      <a href='{lingzh::U("Text/add")}' title='新增文本回复' class='btnGrayS vm bigbtn'><img src="{lingzh::RES}/images/text.png" class="vm" />添加文本回复</a>　
+    </div>
+    <div class="clr"></div>
+  </div>
+          
+  <div class="msgWrap">
+    <form method="post"  action="index.php?ac=importtxt&amp;id=9379&amp;wxid=gh_858dwjkeww5" id="info" >
+    <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+      <THEAD>
+      <TR>
+        <TH align="center" valign="middle" >编号</TH>
+        <TH align="center" valign="middle" class="keywords">关键词</TH>
+        <TH align="center" valign="middle" class="answer">回答</TH>
+        <TH align="center" valign="middle"  class="category" >匹配类型</TH>
+        <TH align="center" valign="middle" class="time">浏览次数</TH>
+        <TH align="center" valign="middle" class="time">时间</TH>             
+        <TH align="center" valign="middle" class="edit norightborder">操作</TH>
+      </TR>
+      </THEAD>
+      <TBODY>
+				<volist name="info" id="vo">
+				<tr>
+          <td align="center" valign="middle">  {lingzh:$i}</td>
+          <td align="center" valign="middle">{lingzh:$vo.keyword}</td>
+          <td align="center" valign="middle"><div class="answer_text">{lingzh:$vo.text}</div></td>
+          <td align="center" valign="middle"><eq name="vo.type" value="1">完全匹配<else/>模糊匹配</eq></td>
+          <td align="center" valign="middle">{lingzh:$vo.click}</td>
+          <td align="center" valign="middle"><php>echo date('Y-m-d',$vo['updatetime']);</php></td>
+          <td align="center" valign="middle" class="norightborder"> <a href="{lingzh::U('Text/edit',array('id'=>$vo['id']))}" title="编辑文本">编辑</a> <a href="{lingzh::U('Text/del',array('id'=>$vo['id']))}">删除</a></td>
+        </tr>
+				</volist>
+      </TBODY>
+    </TABLE>
+    </form> 
+  </div>
+  <div class="cLine">
+    <div class="pageNavigator right">
+      <div class="pages">{lingzh:$page}</div>
+    </div>
+    <div class="clr"></div>
+  </div>
+</div>
+<include file="Public:footer"/>

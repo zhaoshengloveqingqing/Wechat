@@ -1,0 +1,117 @@
+<link type="text/css" rel="stylesheet" href="/themes/w/css/shop.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<if condition="$_GET['success'] eq 1"><a class="more" id="show_more" href="javascript:void(0);" style="color:#fff;background:#f90"></a>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideOptionMenu');
+});
+$(function() {
+	$('#show_more').show().html('订购成功').delay(1600).slideUp(1600);
+});
+</script>
+
+</if>
+
+<style type="text/css">
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+
+</style>
+
+<div class="u_main">
+  <ul class="u_order clearfix">
+    <if condition="!empty($orders)">
+      <volist name="orders" id="o">
+      <li>
+        <div class="u_img"></div>
+        <div class="u_text">
+          <h2>{lingzh:$o.create_time|date="Y-m-d H:i:s",###}</h2>
+          <p class="u_color1">订单编号：{lingzh:$o.sn}(
+                 <switch name="o.status">
+                        <case value="1">
+                           <span style="color:red;">未付款</span>
+                        </case>
+                        <case value="2">
+                             <span style="color:red;">已付款<if condition="$o.payment neq 'cod'">，等待发货</if></span>
+                        </case>
+                        <case value="3">
+                            <span style="color:green;">已发货</span>
+                        </case>
+            			<case value="6">
+                            <span style="color:blue;">已收货</span>
+                        </case>
+                        <case value="4">
+                            <span style="color:red;">用户已取消</span>
+                        </case>
+                        <case value="5">
+                            <span style="color:red;">商户已取消</span>
+                        </case>
+                        <case value="7">
+                            <span style="color:red;">维权中</span>
+                        </case>
+                        <case value="8">
+                            <span style="color:red;">维权完成</span>
+                        </case>
+                       <default />
+                  </switch>
+              )</p>
+          <p class="u_color1">
+		            商品数量：<font class="org">{lingzh:$o.total}</font>
+		            订单总价： <font class="org">￥<?php echo $o['price']?></font>
+          </p>
+          <p>
+           <!-- <span class="u_mt5">收货人：{lingzh:$o.truename}</span> -->
+            <a class="u_btn ts1" href="{lingzh:$o.url}" style="margin-left:10px;background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ECA09D), to(#FD0505)); border: 1px solid #DF6868;">查看</a> 
+            <if condition="$o.status eq 1 and $o.payment eq 'alipay'"><a class="u_btn ts1" href="{lingzh:$o.alipay_url}">支付宝支付</a></if>
+            <if condition="$o.status eq 1 and $o.payment eq 'wxpay'"><a class="u_btn ts1" href="{lingzh:$o.wxpay_url}">微信支付</a></if>
+            <if condition="$o.status eq 1 and $o.payment eq 'cftpay'"><a class="u_btn ts1" href="{lingzh:$o.cftpay_url}">财付通支付</a></if>
+             <if condition="$o.status eq 1 and $o.payment eq 'cod'"><a class="u_btn ts1" href="{lingzh:$o.cod_url}">货到付款</a></if>
+			 <if condition="$o.status eq 1 and $o.payment eq 'unionpay'"><a class="u_btn ts1" href="{lingzh:$o.unionpay_url}">银联支付</a></if>
+			 <if condition="$o.status eq 1 and $o.payment eq 'wingpay'"><a class="u_btn ts1" href="{lingzh:$o.wingpay_url}">翼支付</a></if>
+          </p>
+        </div>
+      </li>
+      </volist>
+    <else/>
+      <div style="padding:10px; text-align:center">没有订单</div>
+    </if>
+  </ul>  
+      
+</div>
+
+<div class="clr"></div>
+<notempty name="shop['name']">
+  <div class="copyright">
+    ©<php> echo date('Y').'  '.$shop['name'];</php> 
+  </div>
+</notempty>
+</body>
+</html>
+<script language="javascript"> 
+function changeapp(obj,id,status){
+if(status==1){
+var myurl='index.php?g=Admin&m=BranchUser&a=updatestatus&fxs_id='+id+'&status='+status;
+$.get(myurl,function(data){
+	 if(data==1){
+			alert('激活成功');
+			parent.location.reload(); 
+
+
+
+		}
+	});
+}else{
+  
+var myurl='index.php?g=Admin&m=BranchUser&a=updatestatus&fxs_id='+id+'&status='+status;
+$.get(myurl,function(data){
+	 if(data==2){
+			alert('激活成功');
+			parent.location.reload(); 
+
+
+		}
+	});
+	}
+}
+</script>

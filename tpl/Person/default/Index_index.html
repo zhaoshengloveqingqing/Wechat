@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>{lingzh::C('company_short_name')}微助手</title>
+<link rel="stylesheet" type="text/css" href="/themes/p/css/person.css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/js/weixin.js"></script>
+
+<script>
+var dataForWeixin={
+   appId:"",
+   Img:"http://" + window.location.host + "/themes/p/images/logo.png",
+   path:"http://" + window.location.host + "/index.php?g=Person&m=Index&a=index",
+   title:"微助手",
+   desc:"发起投票,组织活动,发送贺卡,轻轻松松在朋友圈或聊天对话框中实现。还有天气查询,快递查询,中英翻译等功能,是工作生活好帮手！",
+   fakeid:"",
+   callback:function(){}
+};
+</script>
+
+</head>
+<body>
+<div id="tip1" style="text-decoration:none;font-size:large;"><img src="/themes/p/images/icon_save.png" width="32" style="margin-top:-5px;"/> 收藏微助手</div>
+<div class="area1 menu1" onclick="location.href='/index.php?g=Person&m=Vote&a=index'">
+   <div class="menu1_icon"><img src="/themes/p/images/vote_icon.png"  onerror="this.parentNode.removeChild(this)"></div>
+   <div class="left">
+      <div class="menu1_title">发起投票</div>
+      <div class="menu1_intro">快速在微信群、朋友圈发起投票、调查、测试。直观展现投票结果，轻松掌握投票数据</div>
+   </div>
+   <div class="menu1_arrow"><img src="/themes/p/images/arrow.png"></div>
+   <div class="clear"></div>
+</div>
+<div class="area1 menu1" onclick="location.href='/index.php?g=Person&m=Activity&a=index'">
+   <div class="menu1_icon"><img src="/themes/p/images/party_icon.png"  onerror="this.parentNode.removeChild(this)"></div>
+   <div class="left">
+      <div class="menu1_title">组织活动</div>
+      <div class="menu1_intro">K歌、聚餐、户外、会议，轻松发起各类活动。随时查看报名信息、精确统计报名人数</div>
+   </div>
+   <div class="menu1_arrow"><img src="/themes/p/images/arrow.png"></div>
+   <div class="clear"></div>
+</div>
+<div class="area1 menu1" onclick="location.href='/index.php?g=Person&m=Greetcard&a=index'">
+   <div class="menu1_icon"><img src="/themes/p/images/card_icon.png"  onerror="this.parentNode.removeChild(this)"></div>
+   <div class="left">
+      <div class="menu1_title">发送贺卡</div>
+      <div class="menu1_intro">生日、节日、纪念日，少不了祝福；爱情、友情、亲情，少不了问候</div>
+   </div>
+   <div class="menu1_arrow"><img src="/themes/p/images/arrow.png"></div>
+   <div class="clear"></div>
+</div>
+<div class="pic" style="padding-bottom:20px; margin-top:-5px;"><img src="/themes/p/images/yd.png" width="100%"></div>
+<div id="cover"></div>
+<div id="guide2"><div><img src="/themes/p/images/guide3.png"></div>
+<div id="guide_button2">
+<button class="button2" id="guideCancel2">取消</button>
+</div>
+</div>
+<div class="copyright" style="margin-left:-12px; margin-right:-12px;  margin-bottom:-20px;background-color:#1c2225;padding:15px;font-size:14px;color:#ffffff;text-align:center;">  
+    <a style="font-size:14px;color:#ffffff;text-align:center;text-decoration:underline;" href="{lingzh::C('copyright_weixin_link')}"><php>echo '©'.date('Y').' ';</php>{lingzh::C('copyright_weixin_text')}</a>
+</div>
+</body>
+<script>
+$(function() {
+    $("#tip1, .pic").click(function() {
+	    location.href="http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5OTA1MTU5MA==&appmsgid=10012010&itemidx=1&sign=cbfd5b6d9d94a311dd28efbd974a54fa&uin=MjUyMTM2OTc1";
+	    /* cover(true);
+	     $("#guide2").show();*/
+	});
+	$("#guideCancel2").click(function() {
+	     cover(false);
+	     $("#guide2").hide();
+	});
+});
+</script>
+</html>
+ 
+</div>
+</body>
+<script>
+$(function() {
+    $("#tip1, .pic").click(function() {
+	    location.href="http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5OTA1MTU5MA==&appmsgid=10012010&itemidx=1&sign=cbfd5b6d9d94a311dd28efbd974a54fa&uin=MjUyMTM2OTc1";
+	    /* cover(true);
+	     $("#guide2").show();*/
+	});
+	$("#guideCancel2").click(function() {
+	     cover(false);
+	     $("#guide2").hide();
+	});
+});
+</script>
+</html>
+ 

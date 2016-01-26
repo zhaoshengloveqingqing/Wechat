@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>权限管理</title>
+    <include file="common:public" />
+</head>
+<body>
+<div class="cr"></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="alist">
+	  <tr>
+		<td width="70" style="font-size:15px;"><strong>ID</strong></td>
+		<td width="150" style="font-size:15px;"><strong>用户名称</strong></td>
+		<td width="150" style="font-size:15px;"><strong>角色名称</strong></td>
+		<td  style="font-size:15px;"><strong>用户描述</strong></td>
+                <td width="150" style="font-size:15px;"><strong>账户余额</strong></td>
+		<td width="100" style="font-size:15px;"><strong>最后登录IP</strong></td>
+		<td width="150" style="font-size:15px;"><strong>最后登录位置</strong></td>
+		<td width="150" style="font-size:15px;"><strong>最后登录时间</strong></td>
+		<td width="70" style="font-size:15px;"><strong>状态</strong></td>
+		<td width="100" style="font-size:15px;"><strong>管理操作</strong></td>
+	  </tr>
+	    <volist name="list" id="vo">
+			<tr>
+				<td align='center'>{lingzh:$vo.id}</td>
+				<td >{lingzh:$vo.username}</td>
+				<td >{lingzh:$role[$vo['role']]}</td>
+				<td >{lingzh:$vo.remark}</td>
+                                <td align='center'>¥{lingzh:$vo.balance}</td>
+				<td align='center'>{lingzh:$vo.last_login_ip}</td>
+				<td align='center'>{lingzh:$vo.last_location}</td>
+				<td align='center'><php>echo date('Y-m-d H:i:s', $vo['last_login_time'])</php></td>
+				<td align='center'><eq name="vo.status" value="1"><font color="red">√</font><else/><font color="blue">×</font></eq> 
+				</td>
+				<td align='center'>
+					<a href="{lingzh::U('User/edit/',array('id'=>$vo['id']))}">修改</a>
+					| <eq name="vo.username" value="admin"><font color="#cccccc">删除</font><else/><a href="javascript:void(0)" onclick="return confirmurl('{lingzh::U('User/del/',array('id'=>$vo['id']))}','确定删除该用户吗?')">删除</a></eq>
+				</td>
+			</tr>
+	    </volist>
+     <tr bgcolor="#FFFFFF"> 
+      <td colspan="10"><div class="listpage">{lingzh:$page}</div></td>
+    </tr>
+   
+</table>
+
+<div class="bottom">
+<span><a href="{lingzh::U('User/add/')}"><b> 添加后台用户 </b></a></span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<include file="Public:head"/>
+
+<div class="content">
+         
+          <div class="cLineB">
+              <h4 class="left">第三方接入设置</h4>
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator left">
+  <a href="{lingzh::U('Openapi/add')}" title="添加" class="btnGrayS vm bigbtn"><img src="/tpl/User/default/common/images/text.png" class="vm">添加</a>　
+            </div>
+          
+            <div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <input name="delall" type="hidden" value="del">
+           <input name="wxid" type="hidden" value="gh_423dwjkewad">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+					<th align="center" valign="middle">接口号</th>
+				  <th align="center" valign="middle">关键词</th>
+					<th align="center" valign="middle">合作方名</th>
+					<th class="norightborder" align="center" valign="middle">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+                <volist name="list" id="vo">  
+                <tr>
+				   <td align="center" valign="middle">lingzhtech_{lingzh:$vo.id}</td>
+                   <td align="center" valign="middle">{lingzh:$vo.keyword}</td>
+                   <td align="center" valign="middle">{lingzh:$vo.user}</td>
+                   <td class="norightborder" align="center" valign="middle">
+				   <a href="{lingzh::U('Openapi/edit',array('id'=>$vo['id']))}" title="查看">查看</a>
+				   <a href="javascript:drop_confirm('您确定要删除吗?', '{lingzh::U('Openapi/del',array('id'=>$vo['id']))}');">删除</a> 
+				   </td>
+                </tr>
+				</volist>
+              </tbody>
+            </table>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages"></div>
+              </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+<include file="Public:footer"/>

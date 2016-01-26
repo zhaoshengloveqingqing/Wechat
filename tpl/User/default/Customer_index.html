@@ -1,0 +1,167 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="/themes/a/css/branch.css" />  
+      
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=ZkqN4MTTGPb3lo9gvwGhiScT"></script>
+  <div class="content">
+      <div class="cLineB">
+        <h4>公司详细信息</h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+      </div>
+      <div class="tab">
+            <ul>
+            <li class="tabli current" id="tab0"><a href="{lingzh::U('Customer/index')}">公司详细信息</a></li>
+            <li class="tabli" id="tab2"><a href="{lingzh::U('Customer/branchstore')}">分店/分公司</a></li>
+            </ul>
+    </div>
+    
+    <form method="post" action="{lingzh::U('User/Customer/upsave', array('id'=>$info['id']))}" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="{lingzh:$info.id}">
+          <div class="msgWrap bgfc">
+            <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+               
+              <input type="hidden" name="token" value="{lingzh:$info.token}" >
+                
+                 <tr>
+                  <th width="12%">公司名称：</th>
+                  <td width="88%"><input type="text" name="company" value="<php>echo empty($info['company'])?C('company_short_name'):$info['company']</php>" class="input-box" tabindex="1" size="25" ><font style="color:#666">如需在各微应用底部显示公司版权信息，请购买相应充值码</font></td>
+                </tr>
+                
+                <tr>
+                  <th>联系电话：</th>
+                   <td><input type="text" name="telephone" value="<php>echo empty($info['telephone'])?'0755-36989386':$info['telephone']</php>" class="input-box" tabindex="1" size="25" ><font style="color:#666">用于一键拨号功能</font></td>
+                </tr>
+             
+                <tr >
+                  <th>公司地址：</th>
+                  <td >
+                       <input  type="text" id="address" name="address" value="<php>echo empty($info['address'])?'苏州工业园区星湖街328号创意产业园':$info['address']</php>" class="input-box" tabindex="1" size="25" >
+                       <input type="button" id="locate-btn" value="定位" class="btnGreen"  style=" margin:2px; "/>
+                       <font style="color: #666">请在地图上定位具体位置，用于一键导航功能</font>
+                       <input type="text" style="display:none" id="customerLng" name="longtitude" value="{lingzh:$info.longtitude}"/>
+                       <input type="text" style="display:none" id="customerLat" name="latitude" value="{lingzh:$info.latitude}"/>
+                  </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="container" style="height:300px;width: 700px; margin-left: 120px;">
+                        </div>
+                       
+                    </td>
+                </tr>
+                <tr>
+                    <th>公司展示图片：</th>
+                    <td>
+                        <input disabled="1" class="px" id="pic_url_name_input_1" style="width:300px;" type="text" value="{lingzh:$info.raw_name}">&nbsp;
+                        <span onclick="ShowUploadPanel(1)" class="uploadPictureBtn" style="text-decoration:underline;cursor:pointer;"> 上传图片 </span>
+                        <input id="pic_url_id_input_1" style="display:none" type="text" name="picture" value="{lingzh:$info.picture}">
+                        
+                        <span >&nbsp;（建议尺寸：700像素 * 380像素）</span>
+                    </td>
+                </tr>
+                 <tr>
+                    <th>公司简介：</th>
+                    <td>
+                        <textarea id="description" name="description" class="detailTextArea" value="">{lingzh:$info.description}</textarea>
+                        <span>最多为1000个字符。</span>
+                    </td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td><button type="submit" class="btnGreen" id="saveSetting">保存</button></td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+          </form>
+        </div>
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+  <div id="upload-panel" style="display:none" >
+    <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+    <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+      <iframe id="uploadIframe" style=" width:500px;height:500px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+    </div>
+  </div>
+<script type="text/javascript">
+
+               var located = false;
+               //定位坐标
+               var lng = '{lingzh:$info.longtitude}';
+               var lat = '{lingzh:$info.latitude}';
+               if(lng.length <= 0 || lat.length <= 0) {
+                   //lng = 113.972981;
+                   //lat = 22.544814; 
+            	   lng = 120.736155;
+                  	lat = 31.268241;
+               }
+               var destPoint = new BMap.Point( lng, lat);
+               $(function(){
+                   var map = new BMap.Map("container");
+                   map.centerAndZoom(new BMap.Point(destPoint.lng, destPoint.lat), 20);//初始化地图
+                   //map.enableScrollWheelZoom();
+                   map.addControl(new BMap.NavigationControl());
+                   var marker = new BMap.Marker(destPoint);
+                   map.addOverlay(marker);//添加标注
+
+                   map.addEventListener("click", function(e){
+                       if(confirm("确定红色标记为公司准确地址？")){
+                               destPoint = e.point;
+                               $('#customerLng').val(destPoint.lng);
+                               $('#customerLat').val(destPoint.lat);
+                               map.clearOverlays();
+                               var marker1 = new BMap.Marker(destPoint);  // 创建标注
+                               map.addOverlay(marker1); 
+                               located = true;
+                       }
+                   });
+
+                   var local;
+                   function callback(posi){
+
+                           $("#locate-btn").removeAttr("disabled");
+                           for(var i=0;i<posi.length;i++){
+                                   if(i==0){
+                                           destPoint = posi[0].point;
+                                            $('#customerLng').val(destPoint.lng);
+                                            $('#customerLat').val(destPoint.lat);
+                                   }
+                                   posi[i].marker.addEventListener("click", function(data){
+                                           destPoint = data.target.getPosition(0);
+                                           $('#customerLng').val(destPoint.lng);
+                                           $('#customerLat').val(destPoint.lat);
+                                   });  
+                           }
+                   }
+
+                   $("#locate-btn").click(function(){
+                           if($("#address").val() == ""){
+                                   alert("请输入公司详细地址！");
+                                   return ;
+                           }
+                           $("#locate-btn").attr("disabled","disabled");
+                           local = new BMap.LocalSearch(map, { //智能搜索
+                                   renderOptions:{map: map}
+                           });
+                           located = true;
+                           local.setMarkersSetCallback(callback);
+                           local.search($("#address").val());
+                           return false;
+                   });
+
+                   $( "#tabs" ).tabs();
+               });
+               
+               function ShowUploadPanel(id) {
+       
+                    var url = '{lingzh::U("UploadImg/index")}' + '&id=' + id;
+
+                        $('#uploadIframe').attr('src', url);
+                        $('#upload-panel').show();
+               }
+               </script>
+<include file="Public:footer"/> 

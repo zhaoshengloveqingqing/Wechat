@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <meta name="Keywords" content="{lingzh::C('keyword')}" />
+        <meta name="Description" content="{lingzh::C('content')}" />
+        <!-- Mobile Devices Support @begin -->
+        <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+        <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta content="0" http-equiv="expires">
+        <meta content="telephone=no, address=no" name="format-detection">
+        <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <!-- Mobile Devices Support @end -->
+        <link href="/themes/w/css/car/reset.css" rel="stylesheet" type="text/css" />
+        <link href="/themes/w/css/car/common.css" rel="stylesheet" type="text/css" />
+        <script src="/themes/w/js/com_clanmo_gallery_min.js"></script>
+        <script src="/themes/w/js/car/jquery152_min.js"></script>
+        <script src="/themes/w/js/car/jquery_easing.js"></script>
+        <script type="text/javascript" src="/themes/w/js/car/swipe.js"></script>
+        
+        <title>{lingzh:$model.name}</title>
+        <style type='text/css'>
+            img{max-width:100%!important;}
+            div.copyright{font-size:14px;text-align:center;color:#000;margin:8px;}
+            div.tech-support{font-size:12px;text-align:center;color:#000;margin:8px;}
+            div.tech-support a{text-decoration: underline;color:#000}
+        </style>
+    </head>
+<body class="portrait">
+        <div class="header">
+		<div class="logo">
+                            <img src="{lingzh:$brand.logo}" width="213" height="29" alt="" style="width:auto!important;max-width:213px;"/>
+		</div>
+		<!-- <div style="clear: both;"></div>-->
+	</div>
+	<span class="gradient_h_wbw"></span>
+	<div class="top">
+		<div id="roundabout_container" class="relative">
+			<a id="scrollLeft__7f8fc196" class="scrollLeft__7f8fc196 btn_ra_prev"></a>
+			<a id="scrollRight__7f8fc196" class="scrollRight__7f8fc196 btn_ra_next"></a>
+			<div id='roundabout__7f8fc196' class="ofh">
+                            <ul class="list_ul_top">
+                                <volist name='series' id='s'>
+                                    <li data-start="start" >
+                                            <a href="{lingzh::U('Wap/Car/series', array('token'=>$_GET['token'], 'wecha_id'=>$_GET['wecha_id'], 'id'=>$s['id'],'bid'=>$s['brand_id']))}"><span>{lingzh:$s.short_name}</span></a>
+                                    </li>
+                                </volist>
+                            </ul>
+			</div>
+		</div>
+                <span class="gradient_h_wbw"></span>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		$(window).load(function() {
+			var roundabout = new Gallery({id: 'roundabout__7f8fc196',type: 'roundabout',leftClass: 'scrollLeft__7f8fc196',rightClass: 'scrollRight__7f8fc196',});});
+		/* ]]> */
+		</script>
+                <div class="stage_container relative">
+			<article id="indicator_36eea047" class="indicator" data-maxBullets="8">
+                            <php>
+                                for($imgIndex=0;$imgIndex < count($pic_id_list); $imgIndex ++) {
+                                    foreach($pics as $pic) {
+                                        if($pic['id'] == $pic_id_list[$imgIndex]) {
+                                            if($imgIndex==0) {
+                                                echo '<span class="ind_a"></span> ';
+                                            }else{
+                                                echo '<span></span>';
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            </php>
+			</article>
+			<div id="stage_36eea047" class="ofh">
+                            <ul class="list_ul_scroll">
+                                <php>
+                                    foreach($pic_id_list as $imgId) {
+                                        foreach($pics as $pic) {
+                                            if($pic['id'] == $imgId) {
+                                                echo '<li data-itemid="1" data-start="start" >'.
+                                                        '<img alt="" src="'.$pic["link"].'" data-touchable="touchable"/>'.
+                                                     '</li>';
+                                                break;
+                                            }
+                                        }
+                                    }
+                                </php>
+                                
+                            </ul>
+                        </div>
+                </div>
+		
+                <script type="text/javascript">
+                        $(document).ready(function() {
+                                new Swipe(document.getElementById('stage_36eea047'), {
+                                        speed:500,
+                                        auto:3000,
+                                        callback: function(){
+                                                var lis = $("#indicator_36eea047 span");
+                                              
+                                                lis.removeClass("ind_a").eq(this.index).addClass("ind_a");
+                                        },
+                                        callback2: function(){
+                                                console.log("user op");
+                                        }
+                                });
+                        });
+                </script>
+    </div>
+    <div class="main" style="padding-top: 10px;">
+            <ul class="car_detail">
+                <!--
+                <div style="margin:5px;border: 1px solid #ccc;line-height:35px;text-indent:10px;border-radius:5px;background: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));-webkit-box-shadow: 0 1px 1px #fff;">
+
+                            <a href="" style="color:#666;display:block;">特别关注：360全景看车</a>
+                </div>
+                -->
+                <table>
+                            <tr>
+                                    <td>指导价：</td>
+                                    <td><php>echo sprintf("%.2f", $model['guide_price']);</php>万</td>
+                            </tr>
+                            <tr>
+                                    <td>排量：</td>
+                                    <td><php>echo sprintf("%.2f", $model['emission']);</php>L</td>
+                            </tr>
+                            <tr>
+                                    <td>年款：</td>
+                                    <td>{lingzh:$model.model_year}</td>
+                            </tr>
+                            <tr>
+                                    <td>经销商报价：</td>
+                                    <td><php>echo sprintf("%.2f", $model['dealer_price']);</php>万</td>
+                            </tr>
+                            <tr>
+                                    <td>档位：</td>
+                                    <td>{lingzh:$model.stalls}档</td>
+                            </tr>
+                            <tr>
+                                    <td>变速箱：</td>
+                                    <td><php>echo $car_box_options[$model['box']]['name'];</php></td>
+                            </tr>
+                    </table>
+                    <li class="box group_btn">
+                        <div><a href="{lingzh::U('Wap/Car/sales', array('token'=>$_GET['token'], 'wecha_id'=>$_GET['wecha_id'], 'mid'=>$model['id'], 'wxref' => 'mp.weixin.qq.com'))}" class="gray">联系销售</a></div>
+                            <div><a href="{lingzh::U('Wap/Car/rdrive', array('token'=>$_GET['token'], 'wecha_id'=>$_GET['wecha_id'], 'mid'=>$model['id'], 'bid'=>$model['car_brand'],'sid'=>$model['car_series'] ,'wxref' => 'mp.weixin.qq.com'))}">预约试驾</a></div>
+                    </li>
+            </ul>
+    </div>
+    <div style="clr:both;min-height:30px;"></div>
+    <div class="footer">
+          <php>
+            echo CopyRightHelper::generateCopyRight($_GET["token"]);
+          </php>
+    </div>
+    <footer class="nav_footer">
+            <ul class="box">
+                    <li><a href="javascript:history.go(-1);" >返回</a></li>
+                    <li><a href="javascript:history.go(1);" >前进</a></li>
+                    <li><a href="{lingzh::U('Wap/Index/index', array('token'=>$_GET['token'], 'wecha_id'=>$_GET['wecha_id'],'wxref'=>'mp.weixin.qq.com'))}" >首页</a></li>
+                    <li><a href="javascript:location.reload();" >刷新</a></li>
+            </ul>
+    </footer>
+</body>        	
+
+<script type='text/javascript'>
+function shareFriend() {
+    WeixinJSBridge.invoke('sendAppMessage',{
+                            "appid":window.shareData.appid,
+                            "img_url":window.shareData.imgUrl,
+                            "img_width":"640",
+                            "img_height":"640",
+                            "link":window.shareData.sendFriendLink,
+                            "desc":window.shareData.tContent,
+                            "title":window.shareData.tTitle
+                            }, function(res) {
+                            _report('send_msg', res.err_msg);
+                            })
+}
+function shareTimeline() {
+    WeixinJSBridge.invoke('shareTimeline',{
+                            "img_url":window.shareData.imgUrl,
+                            "img_width":"640",
+                            "img_height":"640",
+                            "link":window.shareData.timeLineLink,
+                            "desc": window.shareData.tContent,
+                            "title": window.shareData.tTitle
+                            }, function(res) {
+                            _report('timeline', res.err_msg);
+                            });
+}
+function shareWeibo() {
+    WeixinJSBridge.invoke('shareWeibo',{
+                            "content":window.shareData.wContent,
+                            "url":'http://meishi.qq.com/weixin',
+                            }, function(res) {
+                            _report('weibo', res.err_msg);
+                            });
+}
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv){
+            shareFriend();
+            });
+
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function(argv){
+            shareTimeline();
+            });
+
+        // 分享到微博
+        WeixinJSBridge.on('menu:share:weibo', function(argv){
+            shareWeibo();
+            });
+        }, false)
+</script>
+</html>

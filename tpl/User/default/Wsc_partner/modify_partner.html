@@ -1,0 +1,61 @@
+<include file="Public:head"/>
+<div class="content">
+
+<div class="cLineB">
+  <h4><if condition='isset($partner)'>修改发展部门 <else/>添加发展部门</if></h4>
+  <a href="{lingzh::U('Wsc/partner_index')}" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+<div class="msgWrap bgfc">
+  <form class="form" method="post" action="{lingzh::U('Wsc/save_partner')}" target="_top" enctype="multipart/form-data">  
+    <input type="hidden" name="part_id" value="<if condition='isset($partner)'>{lingzh:$partner.part_id}</if>"></input>
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tbody>
+        <tr>
+          <th width="186"><span class="red">*</span>名称：</th>
+          <td>
+            <input style="width:400px;" name="part_name" class="text textMiddle" value="<if condition='isset($partner)'>{lingzh:$partner.part_name}</if>"></input>
+          </td>
+        </tr>
+        <!-- <tr>
+          <th width="186">编号：</th>
+          <td>
+            <input style="width:400px;" name="part_num" class="text textMiddle" value="<if condition='isset($partner)'>{lingzh:$partner.part_num}</if>"></input>
+          </td>
+        </tr> -->
+        <tr>
+          <th width="186">所在部门：</th>
+          <td>
+            <select name="dept_id" class="valid" style="width:136px">
+             			{lingzh:$select_categorys}
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th width="186"><span class="red">*</span>手机号码：</th>
+          <td>
+            <input style="width:400px;" name="mobile" class="text textMiddle" value="<if condition='isset($partner)'>{lingzh:$partner.mobile}</if>"></input>
+          </td>
+        </tr>
+        <tr>
+          <th width="186">银行账号：</th>
+          <td>
+            <input style="width:400px;" name="bank_account" class="text textMiddle" value="<if condition='isset($partner)'>{lingzh:$partner.bank_account}</if>"></input>
+          </td>
+        </tr>
+        <tr>
+          <th width="186"><span class="red">*</span>地址：</th>
+          <td>
+            <input style="width:400px;" name="address" class="text textMiddle" value="<if condition='isset($partner)'>{lingzh:$partner.address}</if>"></input>
+          </td>
+        <tr>
+          <th>&nbsp;</th>
+          <td>
+            <button type="submit" name="button" class="btnGreen">保存</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  </div> 
+</div>
+<include file="Public:footer"/>

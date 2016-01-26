@@ -1,0 +1,93 @@
+.ysh_header {
+	background: rgb(227, 227, 227); width: 100%; height: 52px; border-bottom-color: rgb(194, 194, 194); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.ysh_header p {
+	text-align: center; color: rgb(102, 102, 102); line-height: 52px; font-size: 18px;
+}
+.ysh_art {
+	padding: 0px 10px;
+}
+.ysh_art_box {
+	border-radius: 5px 5px 0px 0px; border: 1px solid rgb(215, 215, 215); width: 100%; height: 52px; margin-top: 30px; background-color: rgb(255, 255, 255); -webkit-border-radius: 5px 5px 0 0; -moz-border-radius: 5px 5px 0 0;
+}
+.ysh_art_t {
+	text-align: left; color: rgb(95, 95, 95); line-height: 52px; text-indent: 5px; font-size: 16px;
+}
+.ysh_art_int {
+	border: currentColor; width: 64%; height: 40px; line-height: 40px; font-size: 14px;
+}
+.ysh_art_box2 {
+	border-radius: 0px 0px 5px 5px; width: 100%; height: 52px; border-right-color: rgb(215, 215, 215); border-bottom-color: rgb(215, 215, 215); border-left-color: rgb(215, 215, 215); border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255); -webkit-border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px;
+}
+.ysh_art_but {
+	border-radius: 5px; width: 100%; color: rgb(255, 255, 255); line-height: 45px; font-size: 20px; margin-top: 15px; -webkit-border-radius: 5px; -moz-border-radius: 5px;
+}
+.but_col {
+	border: 1px solid rgb(185, 35, 0); background-color: rgb(233, 44, 0);
+}
+.ysh_art_text {
+	text-align: center; color: rgb(42, 113, 165); line-height: 30px; font-size: 16px; margin-top: 15px;
+}
+.ysh_art_text a {
+	color: rgb(42, 113, 165);
+}
+.ysh_art_text a:hover {
+	color: rgb(255, 0, 0);
+}
+.slideTxtBox {
+	width: 100%; text-align: center;
+}
+.slideTxtBox .hd {
+	background: rgb(227, 227, 227); width: 100%; height: 52px; line-height: 52px; font-size: 20px; border-bottom-color: rgb(194, 194, 194); border-bottom-width: 1px; border-bottom-style: solid; position: relative;
+}
+.slideTxtBox .hd ul {
+	width: 100%; height: 52px; float: left; position: absolute;
+}
+.slideTxtBox .hd ul li {
+	width: 50%; color: rgb(102, 102, 102); float: left; cursor: pointer;
+}
+.slideTxtBox .hd ul li.on {
+	width: 50%; height: 52px; color: rgb(209, 0, 0); border-bottom-color: rgb(209, 0, 0); border-bottom-width: 2px; border-bottom-style: solid;
+}
+.slideTxtBox .bd ul {
+	padding: 20px 10px 0px; zoom: 1;
+}
+.TxtBox1_li {
+	border-radius: 5px 5px 0px 0px; border: 1px solid rgb(215, 215, 215); width: 100%; height: 52px; background-color: rgb(255, 255, 255); -webkit-border-radius: 5px 5px 0 0; -moz-border-radius: 5px 5px 0 0;
+}
+.TxtBox1_li2 {
+	width: 100%; height: 52px; border-right-color: rgb(215, 215, 215); border-bottom-color: rgb(215, 215, 215); border-left-color: rgb(215, 215, 215); border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);
+}
+.TxtBox1_li3 {
+	border-radius: 0px 0px 5px 5px; width: 100%; height: 52px; border-right-color: rgb(215, 215, 215); border-bottom-color: rgb(215, 215, 215); border-left-color: rgb(215, 215, 215); border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255); -webkit-border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px;
+}
+.TxtBox1_li4 {
+	background: url("../images/xuan.png") no-repeat 90% 50% rgb(255, 255, 255); width: 100%; height: 52px; border-right-color: rgb(215, 215, 215); border-bottom-color: rgb(215, 215, 215); border-left-color: rgb(215, 215, 215); border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-right-style: solid; border-bottom-style: solid; border-left-style: solid;
+}
+.TxtBox1_li5 {
+	background: url("../images/xuan.png") no-repeat 90% 50% rgb(255, 255, 255); border-radius: 0px 0px 5px 5px; width: 100%; height: 52px; border-right-color: rgb(215, 215, 215); border-bottom-color: rgb(215, 215, 215); border-left-color: rgb(215, 215, 215); border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; -webkit-border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px;
+}
+.TxtBox1_tc {
+	color: rgb(245, 81, 0);
+}
+.dropdown-select {
+	padding: 8px 10px; border-radius: 0px; border: currentColor; width: 65%; height: auto; color: rgb(102, 102, 102); overflow: visible; font-size: 16px; vertical-align: middle; display: inline; white-space: nowrap; text-overflow: ellipsis; background-color: transparent; -webkit-user-select: none; -webkit-appearance: button; -webkit-border-radius: 0px; -moz-border-radius: 0px;
+}
+.ysh_art_box3 {
+	width: 100%; height: 52px;
+}
+.ysh_art_box3_in {
+	background: rgb(255, 255, 255); border-radius: 6px; border: 1px solid rgb(215, 215, 215); width: 30%; height: 46px; line-height: 46px; font-size: 14px; margin-top: 10px; -moz-border-radius: 6px;
+}
+.ysh_art_box3_in input {
+	border: 0px currentColor; width: 100%; height: 35px; text-align: center; color: rgb(186, 180, 180); font-family: "Î¢ÈíÑÅºÚ";
+}
+.ysh_art_box3_t {
+	width: 65%; line-height: 20px; font-size: 14px; margin-top: 10px;
+}
+.ysh_art_box3_t a {
+	color: rgb(42, 113, 165);
+}
+.ysh_art_box3_t a:hover {
+	color: rgb(255, 0, 0);
+}

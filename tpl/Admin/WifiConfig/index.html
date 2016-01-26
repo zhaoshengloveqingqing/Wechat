@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>WIFI 接入设置管理</title>
+    <include file="common:public" />
+</head>
+<body>
+<div class="cr"></div>
+<form action="{lingzh::U('WifiConfig/set')}" method="post" name="form" id="myform">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+    <tr>
+      <td height="48" align="right"><strong>APP-KEY：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="app_key" class="ipt" size="45" value="{lingzh:$config.app_key}" >
+      </td>
+    </tr>
+    <tr>
+      <td height="48" align="right"><strong>APP-SECRET：</strong></td>
+      <td colspan="3" class="lt">
+        <input type="text" name="app_secret" class="ipt" size="45" value="{lingzh:$config.app_secret}">
+      </td>
+    </tr>
+    <tr>
+      <td height="48" ></td>
+      <td colspan="3" class="lt">
+        <span style="color:#bd1c1c;">请Witown代理商联系Witown厂家获取，用于{lingzh::C('company_short_name')}科技接入witown系统，若非Witown代理商请忽略</span>
+      </td>
+    </tr>
+        
+    <tr>
+      
+      <td>&nbsp;</td>
+      <td colspan="3">
+        <input class="bginput" type="submit" name="dosubmit" value="保 存" style="padding:5px 10px;" >
+        &nbsp;
+        <input class="bginput" type="button" onclick="javascript:history.back(-1);" value="返 回" style="padding:5px 10px;" >
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{lingzh:$reply.title}</title>
+	<meta charset="utf-8">
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+	<meta content="eric.wu" name="author">
+	<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+	<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+	<meta content="no-cache" http-equiv="pragma">
+	<meta content="0" http-equiv="expires">
+	<meta content="telephone=no, address=no" name="format-detection">
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/message.css" media="all" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script> 
+<style type="text/css">
+div.copyright{font-size:14px;text-align:center;color:#000;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#000;margin:8px;}
+div.tech-support a{text-decoration: underline;color:#000}
+</style>
+	<script type="text/javascript"> 
+	
+		function delreply(id) 
+		{
+				$.ajax({
+					url: "/index.php?g=Wap&m=Reply&a=delreply&token={lingzh:$reply.token}",
+					type:"post",
+					data:{"id":id},
+					dataType:"JSON",
+					success: function(res){
+						if(res.status == 1){
+							$("#message_"+id).remove();
+							$("#rmessage_"+id).remove();
+						}else{
+							alert(res.info);
+						}
+					}
+				});
+		}
+		$(document).ready(function () { 
+			$("#showcard1").click(function () { 
+				var btn = $(this);
+				var wxname = $("#wxname1").val();
+				if (wxname  == '') {
+					alert("请输入昵称");
+					return;
+				}
+				var info = $("#info1").val();
+					if (info == '') {
+					alert("请输入内容");
+					return;
+				}
+				var submitData = {
+					nickname:wxname,
+					text: info,
+					wecha_id:"{lingzh:$wecha_id}"
+				};
+				$.post("/index.php?g=Wap&m=Reply&a=reply&id={lingzh:$reply.id}&token={lingzh:$reply.token}", submitData,
+					function(data) {
+						alert(data.data);
+					    setTimeout('window.location.href=location.href',1000);
+						return;
+					},
+				    "json")
+			}); 
+			//
+			$(".hhsubmit").click(function () { 
+				var objid = $(this).attr("date");
+				var info = $(".hly"+objid).val();
+					if (info == '') {
+					alert("请输入内容");
+					return;
+				}
+				var submitData = {
+					nickname:"{lingzh:$nickname}",
+					text: info,
+					parentid:objid,
+					wecha_id:"{lingzh:$wecha_id}"
+				};
+				$.post('/index.php?g=Wap&m=Reply&a=reply&id={lingzh:$reply.id}&token={lingzh:$reply.token}', submitData,
+				function(data) {
+					alert(data.data);
+					setTimeout('window.location.href=location.href',1000);
+					return;
+				},
+				"json")
+			});  
+			//
+			$(".hfinfo").click(function () { 
+				var objid = $(this).attr("date");
+				$(".hhly"+objid).slideToggle();
+			}); 
+			//
+			$(".hhbt").click(function () { 
+				var objid = $(this).attr("date");
+				$(".hhly"+objid).slideToggle();
+			});
+			//
+			$("#windowclosebutton").click(function () { 
+				$("#windowcenter").slideUp(500);
+			});
+			//
+			$("#alertclose").click(function () { 
+				$("#windowcenter").slideUp(500);
+			});
+		}); 
+		//
+		function alert(title){ 
+			window.scrollTo(0, -1);
+			$("#windowcenter").slideToggle("slow"); 
+			$("#txt").html(title);
+			setTimeout(function(){$("#windowcenter").slideUp(500);},4000);
+		}
+		//
+		$(document).ready(function(){
+			$(".first1").click(function(){
+				$(".ly1").slideToggle();
+			});
+			
+		});
+	</script> 
+</head>
+ 
+<body id="message" onselectstart="return true;" ondragstart="return false;">
+	<div class="container">
+	  	<div class="qiandaobanner">
+		  	<a href="javascript:history.go(-1);">
+		  		<img src="{lingzh:$reply.head_pic_url}" style="width:100%;" />
+		  	</a>
+	  	</div>
+
+		<div class="cardexplain">
+			<div class="window" id="windowcenter">
+				<div id="title" class="wtitle">操作提示<span class="close" id="alertclose"></span></div>
+				<div class="content">
+					<div id="txt"></div>
+				</div>
+			</div>
+ 
+			<div class="history">
+				<div class="history-date">
+					<ul>
+						<a><h2 class="first first1" style="position: relative;">请点击留言</h2></a>
+						<li class="green bounceInDown nob ly1" style="display:none">
+							<dl>
+								<dt>
+									<input name="wxname" type="text" class="px" id="wxname1" value="{lingzh:$nickname}" placeholder="请输入您的昵称">
+								</dt>
+								<dt>
+									<textarea name="info" class="pxtextarea" style=" height:60px;" id="info1" placeholder="请输入留言"></textarea>
+								</dt>
+								<dt><a id="showcard1" class="submit" href="javascript:void(0)">提交留言</a></dt>
+							</dl>
+						</li>			
+						    <volist name="replys" id="vo">  
+							<if condition="$vo['id'] eq $vo['parentid']">
+							<li id="message_{lingzh:$vo.id}" class="green bounceInDown">
+							<h3>
+								{lingzh:$vo.nickname}<span>{lingzh:$vo.createtime|date="Y-m-d H:i:s",###}</span>
+								<div class="clr"></div>
+							</h3>
+							<dl>
+								<dt class="hfinfo">{lingzh:$vo.text}</dt>
+							</dl>
+							<dl class="huifu">
+								<dt>
+									<span>
+									    <if condition="$admin eq 1">
+										<a class=" czan" href="javascript:;"  onclick="delreply({lingzh:$vo.id});">删除</a>
+										</if>
+                                        <a class="hhbt czan" date="{lingzh:$vo.id}" href="javascript:void(0)">回复</a>
+										<p style="display:none;" class="hhly{lingzh:$vo.id}">
+											<textarea name="info" class="pxtextarea hly{lingzh:$vo.id}" placeholder="请回复"></textarea> 
+										<a class="hhsubmit submit" date="{lingzh:$vo.id}" href="javascript:void(0)">确定</a>
+										</p>
+									</span>
+								</dt>
+							</dl>
+							 <volist name="vo['sub']" id="sub">  
+							<dl id="rmessage_<php>echo $sub[0];</php>" class="huifu">
+								<dt><span><php>echo $sub[2];</php>回复：<php>echo $sub[1];</php>
+								<if condition="$admin eq 1">
+								<a style=" color:#093" href="javascript:;"  onclick="delreply(<php>echo $sub[0];</php>);" >删除</a>
+								</if>
+								</span></dt>
+							</dl>
+							</volist>
+							</li>
+							</if>
+							</volist>
+							<a><h2 class="first first2" style="position: relative;"></h2></a>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+        <php>
+            echo CopyRightHelper::generateCopyRight($_GET["token"]);
+        </php>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{lingzh:$page_title}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="/themes/m/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  <if condition="$is_ie eq 1 and $auto_printable eq 1">
+    <OBJECT  ID="jatoolsPrinter" CLASSID="CLSID:B43D3361-D075-4BE2-87FE-057188254255"  codebase="/js/jatoolsPrinter.cab#version=8,6,0,0" style="display:none"></OBJECT>  
+  </if>
+  <style type="text/css">
+    body {
+       padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+
+
+  </style>
+
+  <style type="text/css" media="print" >
+    .print-content { font-family:"Microsoft YaHei","微软雅黑","宋体";margin-bottom: 20px;}
+    .print-content h4 {font-size: 1em;}
+    .print-content div {font-size: 0.8em}
+    .print-content div.title {clear:both;float:left;}
+    .print-content div.content {float:right;}
+  </style>
+</head>
+<body>
+<include file="Index:header"/>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="content"> 
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">{lingzh:$branch_name}-- 实时订单显示</h3> 
+            </div>
+            <div class="panel-body">
+              <div class="row" style="margin-bottom: 10px;">
+                <div class="col-lg-12">
+                  <button  id="startQuery" class="btn btn-info btn-block btn-lg"><strong>开始自动查询</strong></button>
+                </div>
+              </div>
+              <div class="row" style="margin-bottom: 10px;">
+                <div class="col-lg-12">
+                  <button  id="stopQuery" class="btn btn-info btn-block btn-lg"><strong>停止自动查询</strong></button>
+                </div>
+              </div>
+              <div class="row" style="margin-bottom: 10px;">
+                <div class="col-lg-12">
+                  <button  id="doQuery" class="btn btn-info btn-block btn-lg"><strong>立即查询</strong></button>
+                </div>
+              </div>
+              <div class="row" style="margin-bottom: 10px;">
+                <div class="col-lg-12">
+                  <button  id="clearResult" class="btn btn-info btn-block btn-lg"><strong>清空查询结果</strong></button>
+                </div>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <div class="row"  style="margin-bottom: 10px;">
+                <div class="col-lg-12">
+                  <div class="alert alert-info" style="margin-bottom:0px;"><span class="query-status">自动查询未开始</span></div>
+                </div>
+              </div>
+              
+              <div class="row" style="margin-bottom: 10px;">
+                <div class="col-lg-12">
+                  <div class="alert alert-warning" style="margin-bottom:0px;"><if condition="$is_ie eq 0">当前浏览器不支持自动打印 <else/> <if condition="$auto_printable eq 1">新订单自动打印<else/>仅提示新订单</if></if>,若开启多个实时查询窗口，新订单将只在其中一个窗口弹出提醒。</div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="alert alert-success" style="margin-bottom:0px;"><span class="query-result">无查询结果</span></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          
+        </div> 
+
+      </div> <!-- /col -->
+      <div class="col-lg-9" id="order-list-panel">
+        <div class="panel panel-default order-panel"   order-sn="init" style="display:none"></div>
+      </div>
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+
+  <div style="display:none;">
+    <div class="print_orders">
+      
+    </div>
+  </div> <!-- /print-content -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.PrintArea.js" type="text/javascript"></script>
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script>
+<if condition="$is_ie eq 1 and $auto_printable eq 1">
+
+function doPrint() {
+  myDoc = {
+    settings:{topMargin:100,
+                  leftMargin:20,
+                  bottomMargin:100,
+                  rightMargin:20},
+    documents: document,
+    copyrights: '杰创软件拥有版权  www.jatools.com' 
+  };
+  jatoolsPrinter.print(myDoc, false); // 直接打印，不弹出打印机设置对话框 
+  }
+</if>
+var queryTimer ="";
+
+var isQuerying = false;
+$(document).ready(function() 
+{
+  $('#startQuery').click(function(){
+    if(queryTimer == "" ){
+      queryTimer = setInterval(function() {queryOrder("Dining"); }, 1000*40 + Math.random()*5000);
+      $(".query-status").text('自动查询已开启。');
+      $(this).addClass('active');
+    }
+  })
+
+  $('#doQuery').click(function(){
+    queryOrder("Dining");
+  })
+
+  $('#clearResult').click(function(){
+    $("#order-list-panel [order-sn!='init']").remove();
+  })
+
+  $('#stopQuery').click(function(){
+    if(queryTimer != "" ){
+      clearInterval(queryTimer);
+      queryTimer = "";
+      $("#startQuery").removeClass('active');
+    }
+    $(".query-status").text('自动查询已停止。');
+  })
+    
+});
+function queryOrder(){
+  if (isQuerying) { return};
+  isQuerying = true;
+    $.ajax({
+        url:"/index.php",
+        data:{
+          g:"Manage",
+          m:"Dining",
+          a:"ajaxNewestOrder",
+          t:"orders"
+        },
+        success: function(data) {
+          data = $.parseJSON(data);
+
+          $("#order-list-panel").find('.panel-primary').each(function(){
+            $(this).removeClass('panel-primary').addClass('panel-default');
+          })
+
+          var orders = data.data.orders;
+          if   (typeof(orders)   !=   "undefined") {
+            $('.print_orders').html('');
+            var print_orders_str = '';
+            for (var i =  0; i < orders.length; i++) {
+
+              var order = orders[i];
+              $(orders[i]['html']).insertBefore(".order-panel:first");
+              $("[order-sn='" + orders[i]['sn'] + "']").slideDown(500);
+              
+              var print_order = orders[i]['print_html'];
+              var print_idx = i+1;
+              print_order = print_order.replace('#idx#',print_idx);
+              print_orders_str += print_order;
+            };
+            $(".query-result").text(data.data.info);
+
+            $('.print_orders').html( print_orders_str);
+            <if condition="$is_ie eq 1 and $auto_printable eq 1">
+            doPrint();
+            </if>
+          } else {
+            $(".query-result").text(data.data.info);
+          }
+          isQuerying = false;
+
+        },
+        error: function() {
+          $(".query-result").text('出错了，请稍后再试。');
+          isQuerying = false;
+        }
+    });
+  }
+
+</script>
+
+</body>
+</html>

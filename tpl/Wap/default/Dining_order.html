@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/dining.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/dining-dialog.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/datepicker_canyin.css" media="all" />
+    <script type="text/javascript" src="/themes/w/js/jQuery.js"></script>
+    <script type="text/javascript" src="/themes/w/js/wei_webapp_v2_common.js"></script>
+    <script type="text/javascript" src="/themes/w/js/bootstrap-datepicker_canyin.js"></script>
+<title>我的菜单</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+</head>
+<body id="page_intelOrder" class="myOrderCon">
+<div class="center">
+    <section style="margin-bottom:10px;padding:0;">
+        <article>
+		    <h2>最新菜单
+			<if condition="isset($order)">
+            <button class="btn_add" onClick="location.href = './index.php?g=Wap&m=Dining&a=orders&token={lingzh:$token}&rest_id={lingzh:$order.rest_id}'">点餐历史</button>
+			</if>
+            </h2>
+            <ul>
+                <li style="border-top:0;margin-top:0;height:auto;padding-right: 0px;">
+				    <if condition="isset($order)">
+                    <a href="javascript:void(0);" style="color:#888;display:block;">
+                        <p>订餐人：{lingzh:$order.username} </p>
+                        <p style="font-size:12px;">就餐时间：{lingzh:$order.dinetime} </p>
+                        <p style="font-size:12px;">就餐人数：{lingzh:$order.guestnum} </p>
+                        <if condition="!empty($order['table'])">
+                        <p style="font-size:12px;">桌号：{lingzh:$order.table} </p>
+                        </if>
+						<if condition="!empty($order['note'])">
+                        <p style="font-size:12px;">备注：{lingzh:$order.note} </p>
+						</if>
+                        <if condition="$order['status'] eq 4">
+                           <p id="orderStatus" style="font-size:12px;">状态：商家已取消</p>
+						<elseif condition="$order['status'] eq 5"/>
+						   <p id="orderStatus" style="font-size:12px;">状态：用户已取消</p>
+						<elseif condition="$order['status'] eq 3"/>
+						   <p id="orderStatus" style="font-size:12px;">状态：已付款</p>
+						<elseif condition="$order['status'] eq 2"/>
+						   <p id="orderStatus" style="font-size:12px;">状态：已下单</p>
+						</if>
+                    </a>
+					<else/>
+					<a href="javascript:void(0);" style="color:#888;display:block;">
+					    <p style="font-size:12px;">暂无订单</p>
+					</a>
+					</if>
+                </li>
+            </ul>
+        </article>
+    </section>
+	<if condition="isset($order)">
+    <section style="margin-bottom:20px;">
+        <article>
+            <h2>菜品明细
+        </h2>
+
+
+        <ul id="myorder" class="myorder">
+        <volist name="menus" id="menu">
+            <li style="overflow: visible; height:auto;" class="dish_item" dname="{lingzh:$menu.name}" dprice="{lingzh:$menu.price}" ddescribe="{lingzh:$menu.describe}">
+                <div  style="display: inline-block">
+                    <span class="dishName">{lingzh:$menu.name} <i>{lingzh:$menu.price}元/份</i></span>
+                    <p style="color: #b8b8b8;padding: 10px 0 12px;font-size: 12px;line-height: 18px;"> {lingzh:$menu.describe}</p> 
+                </div>
+                
+                
+
+                <section class="bbox" dishname="{lingzh:$menu.name}">
+                    <input class="numBox" name="numBox" type="text" value="{lingzh:$menu.nums}" readonly="readonly">
+                </section>
+            </li>
+</volist>
+        </ul> 
+
+
+        </article>
+    </section>
+    <header style="border-bottom:1px solid #ccc;overflow:hidden;">
+        <label style="margin-top:0;">
+            <i>应付金额：</i>
+            <b class="duiqi"><span id="total">{lingzh:$price}</span>元</b>
+        </label>
+    </header>
+	<if condition="$order['status'] eq 2">
+	<footer style="margin-bottom:60px;">
+        <a href="#" class="btn_2" style="background: #ecedef;color:#4c4c4d" id="confirm_order" onclick="cancelOrder();">取消订单</a>
+    </footer>
+	</if>
+	</if>
+    <div id="footer_menu" class="footer footer_menu">
+            <ul class="clear">
+                <li><a href="./index.php?g=Wap&m=Dining&a=index&token={lingzh:$token}&rest_id={lingzh:$rest_id}" ><span class="icons icons_2"></span><label>点菜</label></a></li>
+                <li><a href="javascript:;" class="onactive"><span class="icons icons_3"></span><label>我的订单</label></a></li>
+                <li><a href="javascript:void(0);" id="my_menu"><span class="icons icons_5"></span></a></li>
+            </ul>
+        </div>
+        <script>
+            var footer = document.getElementById("footer_menu");
+            var evtObj = {
+                handleEvent: function(evt){
+                    if("A" == evt.target.tagName){
+                        evt.target.classList.toggle("on");
+                    }
+                }
+            }
+            footer.addEventListener("touchstart", evtObj, false);
+            footer.addEventListener("touchend", evtObj, false);
+        </script>
+</div>
+
+<script>
+    function cancelOrder() {
+        MDialog.confirm(
+                '', '是否取消已点菜单？', null,
+                '确定', function() {
+                    $.ajax({
+                        'url': './index.php?g=Wap&m=Dining&a=cancel&token={lingzh:$token}&cart_id={lingzh:$order.id}',
+                        'success': function(db) {
+                            $('#orderStatus').html("用户已取消");
+                            $('#confirm_order').hide();
+                        }
+                    });
+
+                }, null,
+                '取消', null, null,
+                null, true, true
+                );
+    }
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+    });
+</script>
+</body></html>

@@ -1,0 +1,2028 @@
+* {
+	margin: 0px; padding: 0px;
+}
+body {
+	background: url("http://images.e-chinalife.com/media/images/general/bg.jpg") repeat-x top rgb(255, 255, 255); text-align: center; color: rgb(102, 102, 102); font-family: Tahoma,"宋体"; font-size: 12px;
+}
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+form {
+	margin: 0px; padding: 0px;
+}
+img {
+	border: 0px currentColor;
+}
+ul {
+	list-style: none; margin: 0px; padding: 0px; line-height: 20px;
+}
+li {
+	list-style: none; margin: 0px; padding: 0px; line-height: 20px;
+}
+table {
+	font-size: 12px;
+}
+input {
+	border: 1px solid rgb(198, 198, 198); color: rgb(85, 85, 85);
+}
+.select {
+	color: rgb(198, 198, 198);
+}
+.selectxt {
+	color: rgb(85, 85, 85); font-size: 12px;
+}
+.clearfloat {
+	clear: both;
+}
+.clearfloat_sm {
+	width: 100%; height: 7px; float: left;
+}
+.blank {
+	height: 12px; overflow: hidden; clear: both;
+}
+.inputstyle {
+	width: 690px; float: left;
+}
+.inputstyle .input_bg_l {
+	background: url("http://images.e-chinalife.com/media/images/general/input.gif") no-repeat 0px 0px; height: 28px; overflow: hidden; float: left;
+}
+.inputstyle .input_bg_r {
+	background: url("http://images.e-chinalife.com/media/images/general/input.gif") no-repeat -680px -55px; width: 20px; height: 28px; overflow: hidden; float: left;
+}
+h1 {
+	font-size: 12px; font-weight: normal;
+}
+h2 {
+	font-size: 12px; font-weight: normal;
+}
+h3 {
+	font-size: 12px; font-weight: normal;
+}
+h4 {
+	font-size: 12px; font-weight: normal;
+}
+h5 {
+	font-size: 12px; font-weight: normal;
+}
+h6 {
+	font-size: 12px; font-weight: normal;
+}
+h3 a {
+	text-decoration: none;
+}
+.pointline {
+	background: url("http://images.e-chinalife.com/media/images/general/repeatimg.gif") repeat-x 0px 0px; margin: 0px auto; width: 100%; height: 1px; overflow: hidden; clear: both;
+}
+.point_transparent {
+	background: url("http://images.e-chinalife.com/media/images/general/repeatimg.gif") repeat-x 0px 0px; margin: 5px 0px; height: 1px; overflow: hidden;
+}
+.grayline {
+	background: rgb(226, 226, 226); width: 100%; height: 1px; overflow: hidden; margin-bottom: 8px;
+}
+.more {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -121px -429px; margin: 5px 0px; padding: 0px 20px 0px 10px; float: right;
+}
+.more a {
+	color: rgb(255, 120, 0);
+}
+.empty {
+	margin: 75px auto; text-align: center; color: rgb(0, 152, 239);
+}
+.loadings {
+	margin: 30px auto 40px; text-align: center; color: rgb(0, 152, 239);
+}
+.loadings img {
+	margin-bottom: 20px;
+}
+.delete {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -1577px; margin: 5px 0px; width: 60px; float: right;
+}
+.delete a {
+	width: 50px; height: 17px; color: rgb(255, 120, 0); text-decoration: none; display: block;
+}
+.delete_gray a {
+	width: 50px; height: 17px; color: rgb(255, 120, 0); text-decoration: none; display: block;
+}
+.delete_gray {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -134px -1577px; margin: 5px 0px; width: 60px; float: right;
+}
+.column_more {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -121px -429px; margin: 5px 0px; padding-left: 10px; float: right;
+}
+.column_more a {
+	color: rgb(255, 120, 0);
+}
+.blue_more {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -429px; line-height: 20px; padding-left: 14px; margin-top: 6px; float: left;
+}
+.blue_more a {
+	color: rgb(82, 208, 239);
+}
+.blue_more a:hover {
+	color: rgb(82, 208, 239);
+}
+.tabstyle {
+	margin: 4px 0px; width: 100%; border-top-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-top-width: 2px; border-left-width: 2px; border-top-style: solid; border-left-style: solid; border-collapse: collapse;
+}
+.tabstyle td.title {
+	background: rgb(52, 194, 180); padding: 0px 5px; height: 30px; color: rgb(255, 255, 255); overflow: hidden;
+}
+.tabstyle td.title_1 {
+	background: rgb(52, 194, 180); padding: 0px 5px; width: 60px; height: 30px; color: rgb(255, 255, 255); overflow: hidden;
+}
+.tabstyle tr.green {
+	background: rgb(180, 233, 227);
+}
+.tabstyle td {
+	background: rgb(230, 247, 246); padding: 2px 3px; color: rgb(102, 102, 102); line-height: 24px; border-right-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-right-width: 2px; border-bottom-width: 2px; border-right-style: solid; border-bottom-style: solid;
+}
+.tabstyle td.green {
+	background: rgb(180, 233, 227);
+}
+.tabstyle td.red {
+	width: 50%; color: rgb(255, 0, 0);
+}
+#container {
+	background: url("http://images.e-chinalife.com/media/images/general/bg.jpg") repeat-x top rgb(255, 255, 255); margin: 0px auto; width: 970px; text-align: left;
+}
+#container .title {
+	margin-top: 3px;
+}
+#logo {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -482px; width: 150px; height: 48px; margin-top: 15px; float: left;
+}
+#logo a {
+	width: 150px; height: 48px; display: block;
+}
+#logo a:hover {
+	text-decoration: none;
+}
+#topnav {
+	width: 970px; overflow: hidden; zoom: 1;
+}
+#topnav ul {
+	color: rgb(255, 255, 255); font-family: Arial, ""; float: right;
+}
+#topnav li {
+	margin: 0px 5px; float: left;
+}
+#topnav li a {
+	color: rgb(255, 255, 255);
+}
+#topnav li a:hover {
+	color: rgb(255, 255, 255);
+}
+#topnav li.disline {
+	line-height: 15px; float: left;
+}
+#topnav li.help {
+	background: url("http://images.e-chinalife.com/media/images/general/i.gif") no-repeat 3px 2px; text-indent: 25px; float: left;
+}
+#topnav li.help a {
+	color: rgb(255, 255, 255);
+}
+#topnav li.help a:hover {
+	color: rgb(255, 255, 255);
+}
+#topnav li.home {
+	background: url("http://images.e-chinalife.com/media/images/general/home.png") no-repeat 0px 2px; text-indent: 20px; float: left;
+}
+#topnav li.home a {
+	color: rgb(255, 255, 255);
+}
+#topnav li.home a:hover {
+	color: rgb(255, 255, 255);
+}
+.investor_relations {
+	width: 574px; height: 19px; margin-top: 15px; float: left;
+}
+.relations_nav {
+	background: url("http://images.e-chinalife.com/media/images/general/investor_relations.png") no-repeat right top; width: 300px; height: 19px; float: right;
+}
+.relations_en a {
+	width: 126px; height: 19px; margin-left: 6px; float: left; display: block;
+}
+.relations_en a:hover {
+	text-decoration: none;
+}
+.relations_utf-8 a:hover {
+	text-decoration: none;
+}
+.relations_big a:hover {
+	text-decoration: none;
+}
+.relations_utf-8 a {
+	width: 80px; height: 19px; margin-left: 3px; float: left; display: block;
+}
+.relations_big a {
+	width: 66px; height: 19px; margin-left: 7px; float: left; display: block;
+}
+.relations_nav_1 {
+	background: url("http://images.e-chinalife.com/media/images/general/investor_relations_bg.png") no-repeat right top; width: 300px; height: 19px; float: right;
+}
+.relations_nav_1 p {
+	color: rgb(0, 71, 36); line-height: 22px; text-indent: 10px; font-size: 12px;
+}
+.relations_nav_1 p a {
+	color: rgb(0, 71, 36);
+}
+#topsearch {
+	margin-top: 20px; float: left;
+}
+#topsearch .input {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 0px -87px; padding: 2px 7px; width: 140px; height: 18px; margin-left: 5px; float: left;
+}
+#topsearch .input input {
+	padding: 0px; border: 0px currentColor; width: 130px; height: 18px; color: rgb(102, 102, 102); line-height: 17px;
+}
+#topsearch .search_btn {
+	background: url("http://images.e-chinalife.com/media/images/general/search_icon.png") no-repeat right; width: 30px; height: 22px; margin-left: 10px; float: left;
+}
+#topsearch .search_btn a {
+	width: 30px; height: 22px; display: block;
+}
+#topsearch .search_btn a:hover {
+	text-decoration: none;
+}
+.logo_95519 {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -531px; margin: 8px 0px 10px 50px; width: 117px; height: 50px; display: block;
+}
+.logo_95519 a {
+	height: 50px; text-decoration: none; display: block;
+}
+.logo_95519 a:hover {
+	text-decoration: none;
+}
+#header {
+	width: auto; height: 90px; overflow: visible;
+}
+#nav {
+	width: 600px; height: 41px; margin-top: 15px; float: left; position: relative; z-index: 500;
+}
+#nav ul {
+	top: 1px !important; height: 48px; float: left; position: absolute; z-index: 500;
+}
+#nav li {
+	height: 48px; float: left;
+}
+#nav li a {
+	height: 48px; text-align: left; text-indent: -300em; overflow: hidden; text-decoration: none; display: block;
+}
+#nav li.nav01 a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -3px -98px; width: 92px; float: left;
+}
+#nav li.nav01now a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -3px 0px; width: 92px; float: left;
+}
+#nav li.nav01mouseover a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -3px -47px; width: 92px; float: left;
+}
+#nav li.nav02 a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -102px -98px; width: 98px; float: left;
+}
+#nav li.nav02now a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -102px 0px; width: 98px; float: left;
+}
+#nav li.nav02mouseover a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -102px -47px; width: 98px; float: left;
+}
+#nav li.nav03 a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -205px -98px; width: 98px; float: left;
+}
+#nav li.nav03now a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -205px 0px; width: 98px; float: left;
+}
+#nav li.nav03mouseover a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -205px -47px; width: 98px; float: left;
+}
+#nav li.nav04 a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -308px -98px; width: 98px; float: left;
+}
+#nav li.nav04now a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -308px 0px; width: 98px; float: left;
+}
+#nav li.nav04mouseover a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -308px -47px; width: 98px; float: left;
+}
+#nav li.nav05 a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -403px -98px; width: 98px; float: left;
+}
+#nav li.nav05now a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -403px 0px; width: 98px; float: left;
+}
+#nav li.nav05mouseover a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -403px -47px; width: 98px; float: left;
+}
+#nav li.nav06 {
+	text-align: center; position: relative;
+}
+#nav li.nav06 a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -500px -98px; width: 100px; float: left;
+}
+#nav li.nav06now a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -500px 0px; float: left;
+}
+#nav li.nav06mouseover a {
+	background: url("http://images.e-chinalife.com/media/images/general/nav.gif") no-repeat -500px -47px; width: 100px; float: left;
+}
+.submenu {
+	background: url("http://images.e-chinalife.com/media/images/general/emenu_bg.jpg") no-repeat; padding: 8px 0px 7px 10px; height: 100px; text-align: left; overflow: hidden; display: block;
+}
+.zwdh {
+	width: 717px; text-align: left; position: relative; z-index: 200;
+}
+.zwdh .submenu {
+	width: 100%; display: none; position: absolute; z-index: 200;
+}
+.zwdh .submenu .emenu {
+	
+}
+.submenu .emenu {
+	overflow: hidden; zoom: 1;
+}
+.emenu_rs ul {
+	width: 260px; margin-right: 5px !important; margin-left: 0px !important; float: left; display: block;
+}
+.submenu .emenu .emenu_t {
+	background: url("http://images.e-chinalife.com/media/images/general/submenu_line_bg.gif") no-repeat right; height: 100px; float: left;
+}
+.emenu .bigred a:link {
+	color: rgb(255, 102, 0); font-weight: bold;
+}
+.emenu .bigred a:visited {
+	color: rgb(255, 102, 0); font-weight: bold;
+}
+.emenu .bigred a:hover {
+	color: rgb(255, 102, 0); font-weight: bold;
+}
+.emenu_t a:link {
+	height: 23px !important; color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; display: block; position: relative; _height: 22px;
+}
+.emenu_t a:visited {
+	height: 23px !important; color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; display: block; position: relative; _height: 22px;
+}
+.emenu_t a:hover {
+	height: 23px !important; color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; display: block; position: relative; _height: 22px;
+}
+.emenu_t li {
+	margin: 1px 5px 1px 0px; width: 125px; line-height: 23px; float: left; display: block;
+}
+.emenu_rs .nomarl li.lengthx {
+	width: 136px;
+}
+.emenu_rs img {
+	border: 3px solid rgb(231, 236, 234); margin-right: 6px; float: left; display: inline;
+}
+.emenu_rs .tit__px a {
+	color: rgb(22, 135, 80); text-decoration: none;
+}
+.emenu_rs {
+	margin-left: 10px; display: inline;
+}
+.emenu_rs .emenu_r_txt a.r_m_link {
+	background-position: left 2px !important; color: rgb(82, 208, 239); line-height: 22px; padding-left: 15px; background-image: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif"); background-attachment: scroll; background-repeat: no-repeat; background-size: auto; background-origin: padding-box; background-clip: border-box; background-color: transparent;
+}
+.emenu_r_txt {
+	height: 66px; color: rgb(156, 156, 156);
+}
+.emenu_r_txt p {
+	margin: 0px; height: 48px;
+}
+.emenu_rs .nomarl li {
+	width: 125px; line-height: 22px; padding-top: 2px; margin-right: 5px; float: left; display: block;
+}
+.emenu_rs ul.nomarl a:link {
+	color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; margin-bottom: 1px; display: block;
+}
+.emenu_rs ul.nomarl a:visited {
+	color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; margin-bottom: 1px; display: block;
+}
+.emenu_rs ul.nomarl a:hover {
+	color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; margin-bottom: 1px; display: block;
+}
+.emenu .nextbr {
+	margin-right: 40px;
+}
+.emenu_t li a span {
+	padding-right: 6px; display: block;
+}
+.emenu_rs ul.nomarl li a span {
+	padding-right: 6px; display: block;
+}
+.emenu_t li a:hover {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat -184px 0px; color: rgb(0, 132, 255);
+}
+.emenu_t li a.current {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat -184px 0px; color: rgb(0, 132, 255);
+}
+.emenu_rs ul.nomarl li a:hover {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat -184px 0px; color: rgb(0, 132, 255);
+}
+.emenu_rs ul.nomarl li a.current {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat -184px 0px; color: rgb(0, 132, 255);
+}
+.emenu_t li a:hover span {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat right -24px;
+}
+.emenu_t li a.current span {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat right -24px;
+}
+.emenu_rs ul.nomarl li a:hover span {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat right -24px;
+}
+.emenu_rs ul.nomarl li a.current span {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat right -24px;
+}
+.emenu_rs .nomarl li.newwindow {
+	padding-left: 16px;
+}
+.emenu .emenu_rs .nomarl li.newwindow a {
+	color: rgb(0, 132, 255); padding-right: 0px; padding-left: 0px;
+}
+.emenu .emenu_rs .nomarl li.newwindow a:link {
+	color: rgb(0, 132, 255); padding-right: 0px; padding-left: 0px;
+}
+.emenu .emenu_rs .nomarl li.newwindow a:hover {
+	color: rgb(0, 132, 255); padding-right: 0px; padding-left: 0px;
+}
+.emenu_rs .nomarl li.newwindow a span {
+	background: url("http://images.e-chinalife.com/media/images/general/ico_menuother.gif") no-repeat right 2px; color: rgb(0, 132, 255); padding-right: 15px; padding-left: 0px; display: inline;
+}
+.emenu_rs .nomarl li.newwindow a:hover span {
+	background: url("http://images.e-chinalife.com/media/images/general/ico_menuother.gif") no-repeat right 2px; color: rgb(0, 132, 255); padding-left: 0px;
+}
+.submenu .emenu h1 {
+	color: rgb(22, 135, 80); line-height: normal; font-size: 13px; font-weight: bold; margin-bottom: 5px;
+}
+#m1_emenu .emenu_t {
+	width: 420px;
+}
+#m2_emenu .emenu_t {
+	width: 420px;
+}
+#m1x_emenu .emenu_t {
+	width: 420px;
+}
+#m2x_emenu .emenu_t {
+	width: 420px;
+}
+#m1_emenu .emenu_rs {
+	padding-right: 1px; padding-left: 2px; float: left;
+}
+#m2_emenu .emenu_rs {
+	padding-right: 1px; padding-left: 2px; float: left;
+}
+#m3_emenu .emenu_rs {
+	padding-right: 1px; padding-left: 2px; float: left;
+}
+#m4_emenu .emenu_rs {
+	padding-right: 1px; padding-left: 2px; float: left;
+}
+#m1x_emenu .emenu_rs {
+	padding-right: 1px; padding-left: 2px; float: left;
+}
+#m2x_emenu .emenu_rs {
+	padding-right: 1px; padding-left: 2px; float: left;
+}
+#m3x_emenu .emenu_rs {
+	padding-right: 1px; padding-left: 2px; float: left;
+}
+#m4x_emenu .emenu_rs {
+	padding-right: 1px; padding-left: 2px; float: left;
+}
+#m3_emenu .emenu_t {
+	width: auto;
+}
+#m4_emenu .emenu_t {
+	width: auto;
+}
+#m3x_emenu .emenu_t {
+	width: auto;
+}
+#m4x_emenu .emenu_t {
+	width: auto;
+}
+.onlinehelp {
+	background: rgb(255, 255, 255); top: 40px; width: 402px; right: 7px !important; display: none; position: absolute; z-index: 500;
+}
+.onlinehelp .topxbg {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_bg02.gif") no-repeat 0px 0px; height: 10px; overflow: hidden;
+}
+.onlinehelp .tmtxbg {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_bg03.gif") no-repeat 0px 0px; height: 10px; overflow: hidden;
+}
+.onlinehelp .fdnav {
+	padding: 2px 15px; border-right-color: rgb(211, 211, 211); border-left-color: rgb(211, 211, 211); border-right-width: 1px; border-left-width: 1px; border-right-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);
+}
+#nav .onlinehelp span.new {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -435px -191px; left: 25px; top: -2px; width: 23px; height: 12px; text-align: left; line-height: 12px; text-indent: -10em; overflow: hidden; display: block; position: absolute;
+}
+#nav .onlinehelp a {
+	height: 38px; color: rgb(132, 132, 132); line-height: 38px; text-indent: 0em; float: left; display: block;
+}
+#nav .onlinehelp a:hover {
+	color: rgb(22, 135, 80);
+}
+#nav .onlinehelp a.c1 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c2 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c3 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c4 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c5 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c6 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c7 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c8 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c9 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c10 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c11 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c12 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c13 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c14 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c15 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c16 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c17 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c18 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c19 {
+	width: 84px; padding-left: 38px;
+}
+#nav .onlinehelp a.c1 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat 0px 9px; margin: 0px; text-align: left; position: relative;
+}
+#nav .onlinehelp a.c2 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat 0px -32px;
+}
+#nav .onlinehelp a.c3 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat 0px -77px;
+}
+#nav .onlinehelp a.c4 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat 0px -130px;
+}
+#nav .onlinehelp a.c5 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat 0px -180px;
+}
+#nav .onlinehelp a.c6 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat 0px -230px;
+}
+#nav .onlinehelp a.c7 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat 0px -285px;
+}
+#nav .onlinehelp a.c8 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -230px 9px;
+}
+#nav .onlinehelp a.c9 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -230px -32px;
+}
+#nav .onlinehelp a.c10 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -230px -77px;
+}
+#nav .onlinehelp a.c11 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -225px -130px;
+}
+#nav .onlinehelp a.c12 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -230px -180px;
+}
+#nav .onlinehelp a.c13 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -232px -235px;
+}
+#nav .onlinehelp a.c14 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -230px -290px;
+}
+#nav .onlinehelp a.c15 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -434px 9px;
+}
+#nav .onlinehelp a.c16 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -434px -32px;
+}
+#nav .onlinehelp a.c17 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -432px -77px;
+}
+#nav .onlinehelp a.c18 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat -430px -140px; margin: 0px; line-height: 16px;
+}
+#nav .onlinehelp a.c19 {
+	background: url("http://images.e-chinalife.com/media/images/general/nav_ico.gif") no-repeat 0px -179px; margin: 0px; line-height: 41px;
+}
+.objx {
+	margin: 10px 0px; overflow: hidden; zoom: 1;
+}
+.crumb li.location {
+	width: auto; font-weight: normal;
+}
+.submenu .emenu h1 a {
+	color: rgb(22, 135, 80); padding-left: 0px; text-decoration: none;
+}
+.submenu .emenu h1 a:link {
+	color: rgb(22, 135, 80); padding-left: 0px; text-decoration: none;
+}
+.submenu .emenu h1 a:hover {
+	color: rgb(22, 135, 80); padding-left: 0px; text-decoration: none;
+}
+.submenu .emenu .emenu_t h1 a {
+	height: auto !important; color: rgb(22, 135, 80); padding-left: 0px; text-decoration: none;
+}
+.submenu .emenu .emenu_t h1 a:link {
+	height: auto !important; color: rgb(22, 135, 80); padding-left: 0px; text-decoration: none;
+}
+.submenu .emenu .emenu_t h1 a:hover {
+	height: auto !important; color: rgb(22, 135, 80); padding-left: 0px; text-decoration: none;
+}
+.appreplay {
+	width: 100%; position: absolute; z-index: 1;
+}
+.appreplay .aadx {
+	width: 100%; position: relative;
+}
+.appreplay span {
+	display: none; position: absolute;
+}
+#filiale_ad {
+	height: 202px; text-align: left; overflow: hidden; position: relative;
+}
+#filiale_ad .palist {
+	right: 10px; bottom: 10px; position: absolute; z-index: 2;
+}
+#filiale_ad #indexplist {
+	left: 10px; bottom: -20px; position: absolute; z-index: 2;
+}
+#filiale_ad .palist a.current {
+	background: url("http://images.e-chinalife.com/media/images/general/pic_rst.gif") no-repeat 0px -37px; width: 20px; height: 12px;
+}
+#filiale_ad #indexplist a {
+	width: 20px; height: 12px; text-align: center; color: rgb(23, 168, 188); line-height: 12px; text-decoration: none; margin-right: 2px; margin-left: 1px; float: left; display: block;
+}
+#indexplist .rlx {
+	
+}
+#indexplist .rlx .bgxl {
+	padding: 2px 2px 2px 0px; line-height: 9px; overflow: hidden; font-size: 11px; display: inline-block; zoom: 1;
+}
+.palist .rlx {
+	background: url("http://images.e-chinalife.com/media/images/general/pic_rst.gif") no-repeat 0px 0px; height: 15px; padding-left: 2px; display: inline-block;
+}
+.palist .rlx .bgxl {
+	background: url("http://images.e-chinalife.com/media/images/general/pic_rst.gif") no-repeat right -18px; padding: 2px 2px 2px 0px; line-height: 9px; overflow: hidden; font-size: 11px; display: inline-block; zoom: 1;
+}
+.palist .rlx .bgxl a {
+	width: 20px; height: 12px; text-align: center; color: rgb(255, 255, 255); line-height: 12px; text-decoration: none; margin-right: 2px; margin-left: 1px; float: left; display: block;
+}
+#indexplist .rlx .bgxl a {
+	width: 20px; height: 12px; text-align: center; color: rgb(23, 168, 188); line-height: 12px; font-family: Verdana; font-weight: bold; text-decoration: none; margin-right: 2px; margin-left: 1px; float: left; display: block;
+}
+#indexplist .rlx .bgxl a.current {
+	background: url("http://images.e-chinalife.com/media/images/general/pic_rst.gif") no-repeat -24px -37px; width: 20px; height: 12px;
+}
+#rightsidebar {
+	width: 229px; float: left;
+}
+.column_sidebar {
+	margin-top: 15px;
+}
+.column_sidebar h1 {
+	color: rgb(22, 135, 80); line-height: 22px; text-indent: 14px; padding-top: 0px; font-size: 14px; font-weight: normal;
+}
+.column_sidebar h1 span {
+	line-height: 22px; display: block;
+}
+.column_sidebar_txt h1 span {
+	line-height: 22px; display: block;
+}
+.column_sidebar_txt h1 {
+	color: rgb(22, 135, 80); text-indent: 15px; padding-top: 14px; font-size: 14px; font-weight: normal;
+}
+.column_sidebar_txt {
+	margin-top: 7px;
+}
+.right_top_ad {
+	margin-top: 6px; float: left;
+}
+.cs95519 {
+	width: 210px; padding-top: 5px; margin-top: 9px; margin-left: 12px; float: left; display: inline;
+}
+.cs95519 h1 {
+	color: rgb(22, 135, 80); line-height: 26px; text-indent: 0px; font-size: 14px; font-weight: normal;
+}
+.cs95519 p {
+	line-height: 18px; font-size: 12px;
+}
+.greenfont {
+	color: rgb(0, 142, 86);
+}
+.greenfont a {
+	color: rgb(0, 142, 86); text-decoration: underline;
+}
+.greenfont a:hover {
+	color: rgb(0, 142, 86); text-decoration: none;
+}
+.greenfont img {
+	padding: 6px 4px 0px;
+}
+.answertitle {
+	background: url("http://images.e-chinalife.com/media/images/general/title_icon.png") no-repeat left top; width: 100%; height: 38px; float: left;
+}
+.answertitle h1 {
+	color: rgb(22, 135, 80); text-indent: 14px; font-size: 14px; font-weight: normal; margin-top: 18px;
+}
+.faq_title {
+	background: url("http://images.e-chinalife.com/media/images/general/faq_title.gif") no-repeat left top; width: 100%; height: 38px; float: left;
+}
+.faq_title h1 {
+	color: rgb(22, 135, 80); text-indent: 14px; font-size: 14px; font-weight: normal; margin-top: 18px;
+}
+.consult_title h1 {
+	color: rgb(22, 135, 80); text-indent: 14px; font-size: 14px; font-weight: normal; margin-top: 18px;
+}
+.downloadtitle h1 {
+	color: rgb(22, 135, 80); text-indent: 14px; font-size: 14px; font-weight: normal; margin-top: 18px;
+}
+.directiontitle h1 {
+	color: rgb(22, 135, 80); text-indent: 14px; font-size: 14px; font-weight: normal; margin-top: 18px;
+}
+.recommendtitle h1 {
+	color: rgb(22, 135, 80); text-indent: 14px; font-size: 14px; font-weight: normal; margin-top: 18px;
+}
+.consult_title {
+	background: url("http://images.e-chinalife.com/media/images/general/consult_icon.jpg") no-repeat left top; width: 100%; height: 38px; float: left;
+}
+.downloadtitle {
+	background: url("http://images.e-chinalife.com/media/images/general/download_title.gif") no-repeat left top; width: 100%; height: 42px; float: left;
+}
+.directiontitle {
+	background: url("http://images.e-chinalife.com/media/images/general/direction_title.gif") no-repeat left top; width: 100%; height: 44px; float: left;
+}
+.recommendtitle {
+	background: url("http://images.e-chinalife.com/media/images/general/recommend_title.gif") no-repeat left top; width: 100%; height: 38px; overflow: hidden; float: left;
+}
+.more_type {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -86px -272px; width: 100%; height: 27px; float: left;
+}
+.textlist {
+	width: 100%; float: left;
+}
+.numbericon_list {
+	background: rgb(255, 255, 255); width: 227px; text-align: center; border-right-color: rgb(237, 237, 237); border-left-color: rgb(237, 237, 237); border-right-width: 1px; border-left-width: 1px; border-right-style: solid; border-left-style: solid; float: left;
+}
+.numbericon_list ul {
+	margin: 5px auto; width: 199px; text-align: left;
+}
+.numbericon_list li {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -672px; width: 199px; color: rgb(124, 124, 124); line-height: 28px; float: left;
+}
+.numbericon_list li a {
+	color: rgb(124, 124, 124);
+}
+.numbericon_list li a:hover {
+	color: rgb(124, 124, 124);
+}
+.numbericon_list li span {
+	color: rgb(255, 255, 255); padding-left: 4px; font-family: Arial, Helvetica, sans-serif; font-size: 11px; margin-right: 12px;
+}
+.numbericon_list_m {
+	margin-left: 12px; float: left;
+}
+.numbericon_list_m p {
+	color: rgb(102, 102, 102); line-height: 24px; padding-left: 21px;
+}
+.numbericon_list_m ul {
+	margin: 5px auto; text-align: left;
+}
+.numbericon_list_m li {
+	background: url("http://images.e-chinalife.com/media/images/general/blueicon.gif") no-repeat left 8px; color: rgb(102, 102, 102); line-height: 29px;
+}
+.numbericon_list_m li a {
+	color: rgb(102, 102, 102);
+}
+.numbericon_list_m li a:hover {
+	color: rgb(102, 102, 102);
+}
+.numbericon_list_m li span {
+	color: rgb(255, 255, 255); padding-left: 4px; font-family: Arial, Helvetica, sans-serif; font-size: 11px; margin-right: 12px;
+}
+.consult_list {
+	width: 227px; text-align: center; border-right-color: rgb(237, 237, 237); border-left-color: rgb(237, 237, 237); border-right-width: 1px; border-left-width: 1px; border-right-style: solid; border-left-style: solid; float: left;
+}
+.consult_list ul {
+	margin: 0px auto; width: 199px; text-align: left;
+}
+.consult_list li {
+	width: 199px; color: rgb(124, 124, 124); line-height: 22px; float: left;
+}
+.consult_list li a {
+	color: rgb(112, 112, 112); text-decoration: none;
+}
+.consult_list li a:hover {
+	color: rgb(112, 112, 112); text-decoration: underline;
+}
+.services_list {
+	width: 227px; text-align: center; float: left;
+}
+.services_list ul {
+	margin: 3px auto 0px; width: 208px; text-align: left; padding-left: 12px;
+}
+.services_list li {
+	margin: 5px 5px 0px 0px; width: 96px; height: 53px; float: left; display: inline;
+}
+.services_list li a {
+	width: 96px; height: 53px; display: block;
+}
+.services_list li a:hover {
+	text-decoration: none;
+}
+.services_list li.hotservice_01 {
+	background: url("http://images.e-chinalife.com/media/images/general/hot_service.gif") no-repeat 0px 0px; display: block;
+}
+.services_list li.hotservice_02 {
+	background: url("http://images.e-chinalife.com/media/images/general/hot_service.gif") no-repeat right 0px; display: block;
+}
+.services_list li.hotservice_03 {
+	background: url("http://images.e-chinalife.com/media/images/general/hot_service.gif") no-repeat 0px -58px; display: block;
+}
+.services_list li.hotservice_04 {
+	background: url("http://images.e-chinalife.com/media/images/general/hot_service.gif") no-repeat right -58px; display: block;
+}
+.services_list li.hotservice_05 {
+	background: url("http://images.e-chinalife.com/media/images/general/hot_service.gif") no-repeat 0px -115px; display: block;
+}
+.services_list li.hotservice_06 {
+	background: url("http://images.e-chinalife.com/media/images/general/hot_service.gif") no-repeat right -115px; display: block;
+}
+.services_list li.hotservice_07 {
+	background: url("http://images.e-chinalife.com/media/images/general/hot_service.gif") no-repeat right -115px; display: block;
+}
+.floatnew {
+	background: url("http://images.e-chinalife.com/media/images/general/float_new.gif") no-repeat left top; margin: 8px 0px 0px 40px; width: 23px; height: 13px; overflow: hidden; float: left; display: inline;
+}
+.visited_list {
+	width: 220px; text-align: center; float: left;
+}
+.visited_list .text .pointline {
+	margin: 2px 0px 10px; width: 200px;
+}
+.visited_list .pointline {
+	margin: 18px 0px 0px 14px; width: 200px;
+}
+.visited_list .text {
+	margin: 5px 0px 7px 16px; width: 200px; height: 168px; text-align: left; display: inline;
+}
+.visited_list .text p {
+	line-height: 28px;
+}
+.visited_list .text p a:link {
+	color: rgb(112, 112, 112);
+}
+.visited_list .text p a:visited {
+	color: rgb(171, 171, 171);
+}
+.visited_list .text p a:hover {
+	color: rgb(171, 171, 171);
+}
+.visited_list .text p a:active {
+	color: rgb(171, 171, 171);
+}
+.keyrow {
+	padding: 5px 10px; float: left; display: inline;
+}
+.keyrow p {
+	line-height: 28px;
+}
+.keyrow p a {
+	color: rgb(0, 125, 196); text-decoration: none;
+}
+.keyrow p a:hover {
+	color: rgb(0, 125, 196); text-decoration: underline;
+}
+.keyrow h1 {
+	color: rgb(0, 125, 196); line-height: 28px; font-size: 12px; float: left;
+}
+h2 {
+	color: rgb(0, 125, 196); line-height: 28px; font-size: 12px; float: left;
+}
+h3 {
+	color: rgb(0, 125, 196); line-height: 28px; font-size: 12px; float: left;
+}
+h4 {
+	color: rgb(0, 125, 196); line-height: 28px; font-size: 12px; float: left;
+}
+h5 {
+	color: rgb(0, 125, 196); line-height: 28px; font-size: 12px; float: left;
+}
+h6 {
+	color: rgb(0, 125, 196); line-height: 28px; font-size: 12px; float: left;
+}
+.keyrow h1 a {
+	color: rgb(0, 125, 196); text-decoration: underline;
+}
+.keyrow h2 a {
+	color: rgb(0, 125, 196); text-decoration: underline;
+}
+.keyrow h3 a {
+	color: rgb(0, 125, 196); text-decoration: underline;
+}
+.keyrow h4 a {
+	color: rgb(0, 125, 196); text-decoration: underline;
+}
+.keyrow h5 a {
+	color: rgb(0, 125, 196); text-decoration: underline;
+}
+.keyrow h6 a {
+	color: rgb(0, 125, 196); text-decoration: underline;
+}
+.keyrow h1 a:hover {
+	color: rgb(0, 125, 196); text-decoration: none;
+}
+.keyrow h2 a:hover {
+	color: rgb(0, 125, 196); text-decoration: none;
+}
+.keyrow h3 a:hover {
+	color: rgb(0, 125, 196); text-decoration: none;
+}
+.keyrow h4 a:hover {
+	color: rgb(0, 125, 196); text-decoration: none;
+}
+.keyrow h5 a:hover {
+	color: rgb(0, 125, 196); text-decoration: none;
+}
+.keyrow h6 a:hover {
+	color: rgb(0, 125, 196); text-decoration: none;
+}
+.keyrow h1 {
+	margin: 0px 45px 0px 0px; color: rgb(212, 120, 0); text-indent: 0px;
+}
+.keyrow h2 {
+	color: rgb(225, 85, 0); margin-right: 10px;
+}
+.keyrow h3 {
+	margin-right: 30px; float: left;
+}
+.keyrow h4 {
+	color: rgb(212, 185, 0); margin-right: 30px;
+}
+.keyrow h5 {
+	color: rgb(50, 80, 164); margin-right: 5px;
+}
+.keyrow h6 {
+	color: rgb(126, 102, 4); margin-right: 20px;
+}
+.slidingdoor_bg_l {
+	background: url("http://images.e-chinalife.com/media/images/general/repeatimg.gif") repeat-x 0px -77px; width: 6px; height: 27px; overflow: hidden; float: left;
+}
+.slidingdoor_bg_r {
+	background: url("http://images.e-chinalife.com/media/images/general/repeatimg.gif") repeat-x 0px -77px; width: 12px; height: 27px; overflow: hidden; float: left;
+}
+.slidingdoor_bg {
+	background: url("http://images.e-chinalife.com/media/images/general/repeatimg.gif") repeat-x 0px -77px; width: 124px; height: 27px; overflow: hidden; float: left;
+}
+.slidingdoor_bg_dark {
+	background: url("http://images.e-chinalife.com/media/images/general/repeatimg.gif") repeat-x 0px -49px; width: 2px; height: 27px; overflow: hidden; float: left;
+}
+.slidingdoor_bg_s {
+	background: url("http://images.e-chinalife.com/media/images/general/repeatimg.gif") repeat-x 0px -77px; width: 2px; height: 27px; overflow: hidden; float: left;
+}
+.hot_product {
+	width: 83px; height: 27px; float: left;
+}
+.hot_product1 {
+	width: 83px; height: 27px; float: left;
+}
+.hot_product a {
+	width: 83px; height: 27px; float: left; display: block;
+}
+.hot_product1 a {
+	width: 83px; height: 27px; float: left; display: block;
+}
+.hot_product a {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -272px;
+}
+.hot_product1 a {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -300px;
+}
+.hot_product1 a:hover {
+	text-decoration: none;
+}
+.hot_product1 a:hover {
+	text-decoration: none;
+}
+.hotproduct_now {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -300px; width: 83px; height: 27px; float: left;
+}
+a.hotproduct_now {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -300px;
+}
+.poxlist {
+	height: 288px; overflow: hidden; padding-left: 13px; float: left !important; display: block; zoom: 1;
+}
+.attentProduct {
+	width: 124px; height: 27px; float: left;
+}
+.attentProduct a {
+	background: url("http://images.e-chinalife.com/media/imageset.jpg") no-repeat 0px -215px; width: 124px; height: 27px; display: block;
+}
+.attentProduct a:hover {
+	background: url("http://images.e-chinalife.com/media/imageset.jpg") no-repeat 0px -243px; text-decoration: none;
+}
+.attentProduct {
+	width: 124px; height: 27px; float: left;
+}
+.attentProduct1 {
+	width: 124px; height: 27px; float: left;
+}
+.attentProduct a {
+	width: 124px; height: 27px; display: block;
+}
+.attentProduct1 a {
+	width: 124px; height: 27px; display: block;
+}
+a.attentProduct_now {
+	width: 124px; height: 27px; display: block;
+}
+.attentProduct a {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -215px;
+}
+.attentProduct1 a {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -215px;
+}
+.attentProduct a {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -215px; width: 124px; height: 27px; display: block;
+}
+.attentProduct a:hover {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -215px; width: 124px; height: 27px; display: block;
+}
+.attentProduct1 a {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -243px; width: 124px; height: 27px; text-decoration: none; display: block;
+}
+.attentProduct1 a:hover {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -243px; width: 124px; height: 27px; text-decoration: none; display: block;
+}
+.attentProduct a:hover {
+	text-decoration: none;
+}
+.attentProduct1 a:hover {
+	text-decoration: none;
+}
+a.attentProduct_now {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -243px;
+}
+.directlist {
+	margin: 0px auto; width: 201px; text-align: left; overflow: hidden; zoom: 1;
+}
+.directlist h2 {
+	color: rgb(22, 135, 80); line-height: 24px; font-weight: bold;
+}
+.directlist img {
+	margin: 13px 10px 15px 0px; border: currentColor; float: left;
+}
+.directlist .text {
+	width: 140px; margin-top: 7px; float: left;
+}
+.directlist .text p {
+	line-height: 18px;
+}
+.productlist {
+	margin: 0px auto; width: 201px; text-align: left; overflow: hidden; zoom: 1;
+}
+.productlist img {
+	margin: 15px 10px 15px 0px; border: currentColor; float: left;
+}
+.productlist .text {
+	width: 120px; margin-top: 15px; float: left;
+}
+.productlist .text p {
+	line-height: 20px;
+}
+.rightbar_list {
+	margin: 0px auto; width: 201px; text-align: left; overflow: hidden; zoom: 1;
+}
+.rightbar_list img {
+	margin: 15px 10px 15px 0px; border: 3px solid rgb(239, 239, 239); float: left;
+}
+.rightbar_list td {
+	padding: 2px 0px 0px 8px; text-align: left; line-height: 20px; border-bottom-color: rgb(226, 242, 239); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.rightbar_list .td_last {
+	background: rgb(237, 254, 251); border-bottom-color: currentColor; border-bottom-width: medium; border-bottom-style: none;
+}
+.rightbar_list .text {
+	background: url("http://images.e-chinalife.com/media/images/general/rside_bg_blue01.gif") no-repeat left top; width: 199px; text-align: left; padding-bottom: 3px; float: left;
+}
+.rightbar_list .text h1 {
+	margin: 0px; color: rgb(22, 135, 80); line-height: 22px; text-indent: 10px; padding-top: 3px; font-size: 12px; font-weight: bold; float: none;
+}
+.rightbar_list .text p {
+	line-height: 18px;
+}
+.rightbar_list .pdf {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 10px -481px;
+}
+.rightbar_list .zip {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 10px -222px;
+}
+.rightbar_list .rar {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 10px -415px;
+}
+.rightbar_list .word {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 10px -356px;
+}
+.rightbar_list .html {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 10px -545px;
+}
+.rightbar_list .pdf {
+	padding: 0px 5px 10px 55px; text-align: left; line-height: 22px; clear: both; float: left;
+}
+.rightbar_list .html {
+	padding: 0px 5px 10px 55px; text-align: left; line-height: 22px; clear: both; float: left;
+}
+.rightbar_list .zip {
+	padding: 0px 5px 10px 55px; text-align: left; line-height: 22px; clear: both; float: left;
+}
+.rightbar_list .rar {
+	padding: 0px 5px 10px 55px; text-align: left; line-height: 22px; clear: both; float: left;
+}
+.rightbar_list .word {
+	padding: 0px 5px 10px 55px; text-align: left; line-height: 22px; clear: both; float: left;
+}
+.rightbar_list .pdf span {
+	padding-right: 5px; margin-top: 0px; float: right;
+}
+.rightbar_list .html span {
+	padding-right: 5px; margin-top: 0px; float: right;
+}
+.rightbar_list .rar span {
+	padding-right: 5px; margin-top: 0px; float: right;
+}
+.rightbar_list .zip span {
+	padding-right: 5px; margin-top: 0px; float: right;
+}
+.rightbar_list .word span {
+	padding-right: 5px; margin-top: 0px; float: right;
+}
+.rightbar_list .pdf span a {
+	color: rgb(0, 180, 255);
+}
+.rightbar_list .html span a {
+	color: rgb(0, 180, 255);
+}
+.rightbar_list .rar span a {
+	color: rgb(0, 180, 255);
+}
+.rightbar_list .zip span a {
+	color: rgb(0, 180, 255);
+}
+.rightbar_list .word span a {
+	color: rgb(0, 180, 255);
+}
+.rightbar_list .pdf span a:hover {
+	text-decoration: underline;
+}
+.rightbar_list .html span a:hover {
+	text-decoration: underline;
+}
+.rightbar_list .rar span a:hover {
+	text-decoration: underline;
+}
+.rightbar_list .zip span a:hover {
+	text-decoration: underline;
+}
+.rightbar_list .word span a:hover {
+	text-decoration: underline;
+}
+.rightbar_list .pdf a {
+	color: rgb(102, 102, 102);
+}
+.rightbar_list .html a {
+	color: rgb(102, 102, 102);
+}
+.rightbar_list .zip a {
+	color: rgb(102, 102, 102);
+}
+.rightbar_list .word a {
+	color: rgb(102, 102, 102);
+}
+.rightbar_list .rar a {
+	color: rgb(102, 102, 102);
+}
+.rightbar_list .pdf a:hover {
+	text-decoration: none;
+}
+.rightbar_list .html a:hover {
+	text-decoration: none;
+}
+.rightbar_list .zip a:hover {
+	text-decoration: none;
+}
+.rightbar_list .word a:hover {
+	text-decoration: none;
+}
+.rightbar_list .rar a:hover {
+	text-decoration: none;
+}
+.down_acrobat {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -1368px; width: 200px; height: 35px; margin-top: 10px; float: left;
+}
+.down_acrobat a {
+	width: 130px; height: 35px; display: block;
+}
+.down_acrobat a:hover {
+	text-decoration: none;
+}
+.font_red {
+	color: rgb(230, 70, 0);
+}
+.font_blue {
+	color: rgb(0, 180, 255);
+}
+.gray_top {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 0px -158px; width: 199px; height: 4px; overflow: hidden;
+}
+.gray_btm {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 0px -178px; width: 199px; height: 5px; overflow: hidden; float: left;
+}
+#content {
+	width: 727px; margin-right: 14px; float: left; display: inline;
+}
+.visual {
+	width: 727px; float: left;
+}
+.visual .palist {
+	padding: 2px 0px 0px;
+}
+.visual_pic {
+	float: left;
+}
+.visual_text_form {
+	width: 727px; text-align: left; float: left; position: relative;
+}
+.visual_text {
+	left: 261px; top: -94px; width: 440px; line-height: 18px; position: absolute;
+}
+.visual_text_long {
+	left: 261px; top: -94px; width: 440px; line-height: 20px; position: absolute;
+}
+.main {
+	width: 727px; overflow: hidden; padding-bottom: 15px; float: left; zoom: 1; background-color: rgb(255, 255, 255);
+}
+.mframe {
+	width: 725px; border-right-color: rgb(237, 237, 237); border-left-color: rgb(237, 237, 237); border-right-width: 1px; border-left-width: 1px; border-right-style: solid; border-left-style: solid; float: left;
+}
+.sidebar_frame {
+	width: 227px; border-right-color: rgb(237, 237, 237); border-left-color: rgb(237, 237, 237); border-right-width: 1px; border-left-width: 1px; border-right-style: solid; border-left-style: solid; float: left;
+}
+.sidebar_frame h1 {
+	color: rgb(22, 135, 80); font-size: 14px; margin-top: 5px;
+}
+.sidebar_frame_white {
+	background: rgb(255, 255, 255); width: 227px; border-right-color: rgb(237, 237, 237); border-left-color: rgb(237, 237, 237); border-right-width: 1px; border-left-width: 1px; border-right-style: solid; border-left-style: solid; float: left;
+}
+.sidebar_frame_white h1 {
+	color: rgb(22, 135, 80); font-size: 14px; margin-top: 5px;
+}
+.mframe_transparent_top {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 0px -142px; width: 100%; height: 9px; overflow: hidden; float: left;
+}
+.mframe_top {
+	background: url("http://images.e-chinalife.com/media/images/general/repeatimg.gif") repeat-x 0px -2px; width: 100%; height: 4px; overflow: hidden; float: left;
+}
+.mframe_top_bg {
+	background: url("http://images.e-chinalife.com/media/images/general/repeatimg.gif") repeat-x 0px -2px; width: 717px; height: 4px; overflow: hidden;
+}
+.mframe_top_l {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -72px -202px; width: 4px; height: 4px; overflow: hidden; float: left;
+}
+.mframe_top_r {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -72px -207px; width: 4px; height: 4px; overflow: hidden; float: right;
+}
+.mframe_top_bg_blue {
+	background: url("http://images.e-chinalife.com/media/images/general/repeatimg.gif") repeat-x 0px -7px; width: 719px; height: 4px; overflow: hidden; float: left;
+}
+.mframe_top_l_blue {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -77px -202px; width: 4px; height: 4px; overflow: hidden; float: left;
+}
+.mframe_top_r_blue {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -77px -207px; width: 4px; height: 4px; overflow: hidden; float: right;
+}
+.mframe_btm {
+	background: url("http://images.e-chinalife.com/media/images/general/repeatimg.gif") repeat-x 0px -12px; width: 100%; height: 4px; overflow: hidden; float: left;
+}
+.mframe_btm_l {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -67px -202px; width: 4px; height: 4px; overflow: hidden; float: left;
+}
+.mframe_btm_r {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -67px -207px; width: 4px; height: 4px; overflow: hidden; float: right;
+}
+.mcontent {
+	margin: 10px auto; width: 691px; text-align: left;
+}
+.mcontent h2 {
+	color: rgb(132, 132, 132); font-weight: bold;
+}
+.mcontent h1 {
+	color: rgb(22, 135, 80); line-height: 22px; font-size: 13px; font-weight: bold; float: left;
+}
+#product_trace_id {
+	font-size: 14px;
+}
+.columntitle {
+	width: 100%; padding-top: 15px; float: left;
+}
+.columnContent {
+	width: 100%; padding-top: 10px; float: left;
+}
+.crumb {
+	width: 691px;
+}
+.crumb ul {
+	overflow: hidden; zoom: 1;
+}
+.crumb li {
+	margin: 0px 4px; color: rgb(0, 142, 86); float: left;
+}
+.crumb li.arrow {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat -128px 5px !important; width: 6px; height: 15px;
+}
+.crumb li.redarrow {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 0px -118px !important; width: 6px; height: 15px;
+}
+.crumb li a {
+	color: rgb(0, 142, 86);
+}
+.crumb li a:hover {
+	color: rgb(0, 152, 239);
+}
+.crumb li.location {
+	margin: 0px; padding: 0px; color: rgb(0, 142, 86); font-weight: bold;
+}
+.crumb li.red {
+	color: rgb(0, 152, 239);
+}
+.crumb li.current a {
+	color: rgb(0, 152, 239);
+}
+#footer {
+	background: url("http://images.e-chinalife.com/media/images/general/footer_bg.jpg") repeat-x top rgb(255, 255, 255);
+}
+#copyright {
+	margin: 0px auto; width: 956px; text-align: left; color: rgb(255, 255, 255); padding-left: 10px;
+}
+#copyright .text {
+	margin: 0px; padding: 0px; width: 956px; color: rgb(255, 255, 255); overflow: hidden; font-size: 12px; zoom: 1;
+}
+#copyright .text .footer_left {
+	line-height: 29px; float: left;
+}
+#copyright .text .footer_right {
+	line-height: 29px; padding-right: 10px; float: right;
+}
+#copyright .text a {
+	color: rgb(255, 255, 255);
+}
+#copyright .text .footer_right a {
+	color: rgb(153, 255, 204);
+}
+#copyright .text a:hover {
+	color: rgb(255, 255, 255);
+}
+#copyright .webinfor {
+	padding: 10px 0px 5px; width: 936px; clear: both;
+}
+#copyright .ip {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -127px -238px; width: 23px; height: 33px; margin-right: 10px; float: left; display: block;
+}
+#copyright .ip a {
+	width: 24px; height: 30px; color: rgb(106, 106, 106); display: block;
+}
+#copyright .ip a:hover {
+	color: rgb(106, 106, 106); text-decoration: none;
+}
+#copyright .information {
+	color: rgb(106, 106, 106); margin-top: 8px; float: left;
+}
+#copyright .information a {
+	color: rgb(106, 106, 106);
+}
+#copyright .information a:hover {
+	color: rgb(106, 106, 106);
+}
+.new {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -134px -190px; margin: 4px 0px 0px 5px; width: 41px; height: 14px; overflow: hidden; float: left;
+}
+.new a {
+	width: 41px; height: 14px; overflow: hidden; display: block;
+}
+.hot a {
+	width: 41px; height: 14px; overflow: hidden; display: block;
+}
+.new a:hover {
+	text-decoration: none;
+}
+.hot a:hover {
+	text-decoration: none;
+}
+.hot {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -134px -180px; margin: 4px 0px 0px 5px; width: 41px; height: 14px; overflow: hidden; float: left;
+}
+.fontsizes {
+	margin-right: 20px; float: right;
+}
+.fontsizes h1 {
+	margin: 2px 8px 0px 0px; color: rgb(0, 152, 239); line-height: 24px; font-weight: normal; float: left;
+}
+.fontsizes .big {
+	margin: 0px 3px; width: 25px; height: 20px; text-align: center; color: rgb(255, 255, 255); line-height: 20px; overflow: hidden; float: left;
+}
+.small {
+	margin: 0px 3px; width: 25px; height: 20px; text-align: center; color: rgb(255, 255, 255); line-height: 20px; overflow: hidden; float: left;
+}
+.fontsizes .big a {
+	width: 25px; height: 17px; color: rgb(255, 255, 255); margin-top: 3px; display: block;
+}
+.fontsizes .small a {
+	width: 25px; height: 17px; color: rgb(255, 255, 255); margin-top: 3px; display: block;
+}
+.fontsizes .big a:hover {
+	text-decoration: none;
+}
+.fontsizes .small a:hover {
+	text-decoration: none;
+}
+.fontsizes .big {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -650px;
+}
+.fontsizes .small {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -43px -650px;
+}
+.fontchoice {
+	float: right;
+}
+.fontchoice h3 {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -1057px; color: rgb(0, 152, 239); padding-left: 16px; margin-right: 5px; float: left; cursor: pointer;
+}
+.fontchoice h4 {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -88px -1057px; color: rgb(0, 152, 239); padding-left: 16px; margin-right: 5px; float: left; cursor: pointer;
+}
+.fontchoice h5 {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat -169px -1057px; color: rgb(0, 152, 239); padding-left: 18px; margin-left: 3px;
+}
+.fontchoice h5 a {
+	color: rgb(0, 152, 239);
+}
+.fontchoice h4 a {
+	color: rgb(0, 152, 239);
+}
+.fontchoice h5 a:hover {
+	color: rgb(0, 152, 239);
+}
+.fontchoice h4 a:hover {
+	color: rgb(0, 152, 239);
+}
+.fontchoice h3 a {
+	color: rgb(0, 152, 239);
+}
+.fontchoice h3 a:hover {
+	color: rgb(0, 152, 239);
+}
+.clause_link {
+	margin: 12px 0px 0px 10px; color: rgb(0, 152, 239); float: left;
+}
+.clause_link img {
+	margin-left: 3px;
+}
+.clause_link a {
+	color: rgb(0, 152, 239); text-decoration: underline;
+}
+.clause_link a:hover {
+	color: rgb(0, 152, 239); text-decoration: none;
+}
+.detail_btn {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -378px; width: 112px; height: 24px; margin-top: 10px; float: left;
+}
+.buy_btn {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -328px; width: 112px; height: 24px; margin-top: 10px; float: left;
+}
+.consult_btn {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -353px; margin: 10px 3px 0px 0px; width: 110px; height: 24px; float: left; display: inline;
+}
+.count_btn {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -1298px; width: 112px; height: 24px; margin-top: 10px; float: left;
+}
+.count_btn_new {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -1530px; width: 112px; height: 24px; margin-top: 10px; float: left;
+}
+.active_btn {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 2px -595px; width: 112px; height: 24px; margin-top: 10px; float: left;
+}
+.detail_btn a {
+	width: 112px; height: 24px; display: block;
+}
+.buy_btn a {
+	width: 112px; height: 24px; display: block;
+}
+.consult_btn a {
+	width: 112px; height: 24px; display: block;
+}
+.count_btn a {
+	width: 112px; height: 24px; display: block;
+}
+.active_btn a {
+	width: 112px; height: 24px; display: block;
+}
+.count_btn_new a {
+	width: 112px; height: 24px; display: block;
+}
+.active_btn a {
+	width: 112px; height: 24px; display: block;
+}
+.detail_btn a:hover {
+	text-decoration: none;
+}
+.buy_btn a {
+	text-decoration: none;
+}
+.consult_btn a:hover {
+	text-decoration: none;
+}
+.count_btn a:hover {
+	text-decoration: none;
+}
+.active_btn a:hover {
+	text-decoration: none;
+}
+.count_btn_new a:hover {
+	text-decoration: none;
+}
+.active_btn a:hover {
+	text-decoration: none;
+}
+.buyhelp_btn a:hover {
+	text-decoration: none;
+}
+.telsale_btn a:hover {
+	text-decoration: none;
+}
+.applicant_btn a:hover {
+	text-decoration: none;
+}
+.buyhelp_btn {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 6px -403px; width: 191px; height: 26px; margin-top: 10px; float: left; cursor: pointer;
+}
+.buyhelp_btn a {
+	width: 182px; height: 24px; display: block;
+}
+.telsale_btn {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -1482px; width: 182px; height: 26px; margin-top: 10px; float: left;
+}
+.telsale_btn a {
+	width: 182px; height: 24px; display: block;
+}
+.applicant_btn {
+	background: url("http://images.e-chinalife.com/media/images/general/imageset.jpg") no-repeat 0px -1427px; width: 122px; height: 24px; margin-top: 10px; float: right;
+}
+.applicant_btn a {
+	width: 122px; height: 24px; display: block;
+}
+.float_r_btn {
+	margin-top: 3px; float: right;
+}
+.next_btn {
+	background: url("http://images.e-chinalife.com/media/images/other/formicon.gif") no-repeat -91px -429px; width: 78px; height: 27px; float: left;
+}
+.next_btn a {
+	width: 76px; height: 26px; display: block;
+}
+.next_gray_btn {
+	background: url("http://images.e-chinalife.com/media/images/other/formicon.gif") no-repeat -91px -477px; width: 78px; height: 27px; margin-left: 5px; float: left;
+}
+.next_gray_btn a {
+	width: 76px; height: 26px; display: block;
+}
+.definite_btn {
+	background: url("http://images.e-chinalife.com/media/images/other/formicon.gif") no-repeat -188px -429px; margin: 0px auto; width: 58px; height: 27px;
+}
+.definite_btn a {
+	width: 58px; height: 26px; display: block;
+}
+.pages {
+	color: rgb(151, 151, 151); line-height: 14px; font-family: Arial; font-size: 11px; float: right;
+}
+.pages a {
+	float: left; display: block;
+}
+.pages span {
+	float: left; display: block;
+}
+.pages span {
+	margin-right: 10px;
+}
+.pages a {
+	width: 20px; text-align: center; color: rgb(151, 151, 151); margin-right: 3px; margin-left: 3px;
+}
+.pages a.page_up {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat 0px -50px; width: 8px; text-indent: -20em; overflow: hidden; margin-right: 10px;
+}
+.pages a.page_down {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat -13px -50px; width: 8px; text-indent: -20em; overflow: hidden; margin-left: 10px;
+}
+.pages a.current {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat -43px -50px; height: 16px;
+}
+.numtype {
+	font-family: Verdana;
+}
+#nav li .newuserreg {
+	margin-right: 10px; float: right;
+}
+#nav li .newuserreg a {
+	width: auto; height: auto; color: rgb(0, 129, 86); text-decoration: underline; float: none;
+}
+#nav li.nav02 {
+	text-align: left; position: relative;
+}
+#nav li.nav02now {
+	text-align: left; position: relative;
+}
+#nav li.nav02mouseover {
+	text-align: left; position: relative;
+}
+#nav li.nav03 {
+	text-align: left; position: relative;
+}
+#nav li.nav03now {
+	text-align: left; position: relative;
+}
+#nav li.nav03mouseover {
+	text-align: left; position: relative;
+}
+#nav li.nav04 {
+	text-align: left; position: relative;
+}
+#nav li.nav04now {
+	text-align: left; position: relative;
+}
+#nav li.nav04mouseover {
+	text-align: left; position: relative;
+}
+#nav li.nav05 {
+	text-align: left; position: relative;
+}
+#nav li.nav05now {
+	text-align: left; position: relative;
+}
+#nav li.nav05mouseover {
+	text-align: left; position: relative;
+}
+.submenua {
+	background: url("http://images.e-chinalife.com/media/images/general/emenu_bg.jpg") no-repeat; padding: 8px 0px 7px 10px; left: 0px; top: 40px; width: 717px; height: 100px; text-align: left; overflow: hidden; display: none; position: absolute; z-index: 200;
+}
+#nav li.nav02 .submenua {
+	left: -242px;
+}
+#nav li.nav02mouseover .submenua {
+	left: -242px;
+}
+#nav li.nav02now .submenua {
+	left: -242px;
+}
+#nav li.nav03 .submenua {
+	left: -340px;
+}
+#nav li.nav03mouseover .submenua {
+	left: -340px;
+}
+#nav li.nav03now .submenua {
+	left: -340px;
+}
+#nav li.nav04 .submenua {
+	left: -438px;
+}
+#nav li.nav04mouseover .submenua {
+	left: -438px;
+}
+#nav li.nav04now .submenua {
+	left: -438px;
+}
+#nav li.nav05 .submenua {
+	left: -536px;
+}
+#nav li.nav05mouseover .submenua {
+	left: -536px;
+}
+#nav li.nav05now .submenua {
+	left: -536px;
+}
+#nav li.nav02mouseover .submenua {
+	display: block; _display: inline;
+}
+#nav li.nav03mouseover .submenua {
+	display: block; _display: inline;
+}
+#nav li.nav04mouseover .submenua {
+	display: block; _display: inline;
+}
+#nav li.nav05mouseover .submenua {
+	display: block; _display: inline;
+}
+#nav li .emenu a {
+	width: auto; height: auto; text-indent: 0em;
+}
+#nav li.nav02mouseover a {
+	position: absolute; z-index: 202;
+}
+#nav li.nav02now a {
+	position: absolute; z-index: 202;
+}
+#nav li.nav02 a {
+	position: absolute; z-index: 202;
+}
+#nav li.nav03mouseover a {
+	position: absolute; z-index: 202;
+}
+#nav li.nav03now a {
+	position: absolute; z-index: 202;
+}
+#nav li.nav03 a {
+	position: absolute; z-index: 202;
+}
+#nav li.nav04mouseover a {
+	position: absolute; z-index: 202;
+}
+#nav li.nav04now a {
+	position: absolute; z-index: 202;
+}
+#nav li.nav04 a {
+	position: absolute; z-index: 202;
+}
+#nav li.nav05mouseover a {
+	position: absolute; z-index: 202;
+}
+#nav li.nav05now a {
+	position: absolute; z-index: 202;
+}
+#nav li.nav05 a {
+	position: absolute; z-index: 202;
+}
+#nav li .submenua a {
+	display: block; position: relative;
+}
+#nav li .submenua a span {
+	display: block;
+}
+#nav li.nav06 {
+	width: 100px;
+}
+#nav li.nav06now {
+	width: 100px;
+}
+#nav li.nav06mouseover {
+	width: 100px;
+}
+#nav li.nav05 {
+	width: 98px;
+}
+#nav li.nav05now {
+	width: 98px;
+}
+#nav li.nav05mouseover {
+	width: 98px;
+}
+#nav li.nav04 {
+	width: 98px;
+}
+#nav li.nav04now {
+	width: 98px;
+}
+#nav li.nav04mouseover {
+	width: 98px;
+}
+#nav li.nav03 {
+	width: 98px;
+}
+#nav li.nav03now {
+	width: 98px;
+}
+#nav li.nav03mouseover {
+	width: 98px;
+}
+#nav li.nav02 {
+	width: 98px;
+}
+#nav li.nav02now {
+	width: 98px;
+}
+#nav li.nav02mouseover {
+	width: 98px;
+}
+#nav li.nav01 {
+	width: 92px;
+}
+#nav li.nav01now {
+	width: 92px;
+}
+#nav li.nav01mouseover {
+	width: 92px;
+}
+#nav .submenua .emenu_t li {
+	margin: 1px 5px 1px 0px; width: 125px; float: left; display: block;
+}
+.submenua .emenu {
+	width: 717px; overflow: hidden; zoom: 1;
+}
+#nav .submenua .emenu_rs ul {
+	width: 260px; margin-right: 5px !important; margin-left: 0px !important; float: left; display: block;
+}
+#nav .submenua .emenu .emenu_t {
+	background: url("http://images.e-chinalife.com/media/images/general/submenu_line_bg.gif") no-repeat right; height: 100px; float: left;
+}
+#nav .emenu .bigred a:link {
+	color: rgb(255, 102, 0); font-weight: bold;
+}
+#nav .emenu .bigred a:visited {
+	color: rgb(255, 102, 0); font-weight: bold;
+}
+#nav .emenu .bigred a:hover {
+	color: rgb(255, 102, 0); font-weight: bold;
+}
+#nav li .emenu_t a:link {
+	color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; float: none; display: block;
+}
+#nav .emenu_t a:visited {
+	color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; float: none; display: block;
+}
+#nav .emenu_t a:hover {
+	color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; float: none; display: block;
+}
+#nav .emenu ul {
+	top: 0px !important; height: auto; float: none; position: relative;
+}
+#nav .submenua .emenu .emenu_t h1 a {
+	height: auto !important; color: rgb(22, 135, 80); line-height: normal !important; padding-left: 0px;
+}
+#nav .submenua .emenu .emenu_t h1 a:link {
+	height: auto !important; color: rgb(22, 135, 80); line-height: normal !important; padding-left: 0px;
+}
+#nav .submenua .emenu .emenu_t h1 a:hover {
+	height: auto !important; color: rgb(22, 135, 80); line-height: normal !important; padding-left: 0px;
+}
+#nav .submenua .emenu .emenu_rs h1 a {
+	color: rgb(22, 135, 80);
+}
+#nav .submenua .emenu .emenu_rs h1 a:link {
+	color: rgb(22, 135, 80);
+}
+#nav .submenua .emenu .emenu_rs h1 a:hover {
+	color: rgb(22, 135, 80);
+}
+#nav .emenu_t li {
+	margin: 1px 5px 1px 0px; width: 125px; height: auto; line-height: 23px; float: left; display: block;
+}
+#nav .emenu_rs .nomarl li.lengthx {
+	width: 136px;
+}
+#nav .emenu_rs img {
+	border: 3px solid rgb(231, 236, 234); margin-right: 6px; float: left; display: inline;
+}
+#nav .emenu_rs .tit__px a {
+	color: rgb(22, 135, 80); text-decoration: none;
+}
+#nav .emenu_rs {
+	margin-left: 10px; display: inline;
+}
+#nav .emenu_rs .emenu_r_txt a.r_m_link {
+	background-position: left 2px !important; color: rgb(82, 208, 239); line-height: 22px; padding-left: 15px; background-image: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif"); background-repeat: no-repeat;
+}
+#nav .emenu_r_txt {
+	height: 66px; color: rgb(156, 156, 156);
+}
+#nav .emenu_r_txt p {
+	margin: 0px; height: 48px;
+}
+#nav .emenu_rs ul.nomarl a:link {
+	color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; margin-bottom: 1px; display: block;
+}
+#nav .emenu_rs ul.nomarl a:visited {
+	color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; margin-bottom: 1px; display: block;
+}
+#nav .emenu_rs ul.nomarl a:hover {
+	color: rgb(132, 132, 132); padding-left: 16px; text-decoration: none; margin-bottom: 1px; display: block;
+}
+#nav .emenu .nextbr {
+	margin-right: 40px;
+}
+#nav .emenu_rs li {
+	height: auto;
+}
+#nav .emenu_rs .nomarl li {
+	width: 125px; height: auto; line-height: 22px; padding-top: 2px; margin-right: 5px; float: left; display: block;
+}
+#nav .emenu_t li a span {
+	padding-right: 6px; display: block;
+}
+#nav .emenu_rs ul.nomarl li a span {
+	padding-right: 6px; display: block;
+}
+#nav .emenu_t li a:hover {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat -184px 0px; color: rgb(0, 132, 255);
+}
+#nav .emenu_t li a.current {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat -184px 0px; color: rgb(0, 132, 255);
+}
+#nav .emenu_rs ul.nomarl li a:hover {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat -184px 0px; color: rgb(0, 132, 255);
+}
+#nav .emenu_rs ul.nomarl li a.current {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat -184px 0px; color: rgb(0, 132, 255);
+}
+#nav .emenu_t li a:hover span {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat right -24px;
+}
+#nav .emenu_t li a.current span {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat right -24px;
+}
+#nav .emenu_rs ul.nomarl li a:hover span {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat right -24px;
+}
+#nav .emenu_rs ul.nomarl li a.current span {
+	background: url("http://images.e-chinalife.com/media/images/general/png_ico_all.gif") no-repeat right -24px;
+}
+#nav .emenu_rs .nomarl li.newwindow {
+	padding-left: 16px;
+}
+#nav .emenu .emenu_rs .nomarl li.newwindow a {
+	color: rgb(0, 132, 255); padding-right: 0px; padding-left: 0px;
+}
+#nav .emenu .emenu_rs .nomarl li.newwindow a:link {
+	color: rgb(0, 132, 255); padding-right: 0px; padding-left: 0px;
+}
+#nav .emenu .emenu_rs .nomarl li.newwindow a:hover {
+	color: rgb(0, 132, 255); padding-right: 0px; padding-left: 0px;
+}
+#nav .emenu_rs .nomarl li.newwindow a span {
+	background: url("http://images.e-chinalife.com/media/images/general/ico_menuother.gif") no-repeat right 2px; color: rgb(0, 132, 255); padding-right: 15px; padding-left: 0px; display: inline;
+}
+#nav .emenu_rs .nomarl li.newwindow a:hover span {
+	background: url("http://images.e-chinalife.com/media/images/general/ico_menuother.gif") no-repeat right 2px; color: rgb(0, 132, 255); padding-left: 0px;
+}
+#nav .submenua .emenu h1 {
+	color: rgb(22, 135, 80); line-height: normal; font-size: 13px; font-weight: bold; margin-bottom: 5px;
+}
+#nav .submenua #m3x_emenu .emenu_t {
+	width: auto;
+}
+#nav .submenua #m4x_emenu .emenu_t {
+	width: auto;
+}
+.emenu_t ul {
+	width: 100%;
+}
+#nav .emenu_t li a {
+	height: 23px !important; display: block; _height: 22px;
+}
+#demo {
+	height: 130px; overflow: hidden;
+}
+#demo1 {
+	height: 130px; overflow: hidden;
+}
+#demo2 {
+	height: 130px; overflow: hidden;
+}
+.spacediv {
+	height: 1px; overflow: hidden; margin-top: 10px;
+}
+.bannerx {
+	margin: 0px auto; width: 712px; padding-top: 4px;
+}

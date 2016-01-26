@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title><if condition="empty($metaTitle)">{lingzh:$shop.name}<else/>{lingzh:$metaTitle}</if></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="format-detection" content="telephone=no" />
+  <link type="text/css" rel="stylesheet" href="/themes/w/css/shop.css" />
+  <script src="/js/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="/themes/w/js/shop.js"></script>
+  <?php require_once APP_PATH.'cs.php';echo '<img src="'._cnzzTrackPageView(1253959150).'" width="0" height="0"/>';?>
+</head>
+
+<body>
+  <!--头部-->
+  <header class="ts1">
+    <a class="u_back fl" href="javascript:history.go(-1)"></a>
+    <ul class="topbar fr">
+      <li>
+        <a class="icon_user" href="{lingzh:$my_url}"> 
+          <img src="/themes/w/images/shop/icon_user.png" width="24px" height="22px"></img>
+        </a>
+      </li>
+      <li>
+        <a class="icon_shopping" href="{lingzh:$cart_url}"> 
+          <img src="/themes/w/images/shop/icon_shopping.png" width="24px" height="22px"></img>
+        </a>
+      </li>
+      <li>
+        <a class="icon_index" href="{lingzh:$home_url}">
+          <img src="/themes/w/images/shop/icon_index.png" width="24px" height="22px"></img>
+          
+        </a>
+      </li>
+    </ul>
+  </header><!--主体-->
+  
+  <if condition="ACTION_NAME neq 'cart' and ACTION_NAME neq 'checkout'">
+  <div id="cart_top" class="p_floatbox" <if condition="$cart_item_count eq 0">style="display:none"</if> >
+    <div class="f_list_car p_buy clearfix" id="p_buy">
+      <span class="item_count">
+        您的<?php if($_GET['token'] == '53cb3b7ez79'){echo '洗衣车';} else { echo '购物车'; } ?>中总共有
+        <font id="cart_item_count">{lingzh:$cart_item_count}</font>件商品
+      </span>
+      <a href="{lingzh:$cart_url}" class="p_btn_buy">
+        <span class="ts1">结算<?php if($GET['token'] == '53cb3b7ez79'){echo '洗衣车';} else { echo '购物车'; } ?></span>
+        </a>
+    </div>
+  </div>
+  </if>
+  

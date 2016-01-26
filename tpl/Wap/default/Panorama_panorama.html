@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="/themes/w/css/panorama/3dview.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/themes/w/css/panorama/back.css" media="all" />
+        <script type="text/javascript" src="/js/panorama/skin.js"></script>
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <title>{lingzh:$panorama['title']}</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <meta name="Keywords" content="{lingzh::C('keyword')}" />
+        <meta name="Description" content="{lingzh::C('content')}" />
+        <!-- Mobile Devices Support @begin -->
+            <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+            <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+            <meta content="no-cache" http-equiv="pragma">
+            <meta content="0" http-equiv="expires">
+            <meta content="telephone=no, address=no" name="format-detection">
+            <meta content="width=device-width, initial-scale=1.0" name="viewport">
+            <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+            <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+            
+        <!-- Mobile Devices Support @end -->
+        
+<script>
+$(function() {
+   var onBridgeReady=function(){
+       WeixinJSBridge.on('menu:share:appmessage', function(argv){
+          WeixinJSBridge.invoke('sendAppMessage',{
+             "appid":dataForWeixin.appId,
+             "img_url":dataForWeixin.Img,
+             "img_width":"120",
+             "img_height":"120",
+             "link":dataForWeixin.path,
+             "desc":dataForWeixin.desc,
+             "title":dataForWeixin.title
+          }, function(res){(dataForWeixin.callback)();});
+       });
+       WeixinJSBridge.on('menu:share:timeline', function(argv){
+          (dataForWeixin.callback)();
+          WeixinJSBridge.invoke('shareTimeline',{
+             "img_url":dataForWeixin.Img,
+             "img_width":"120",
+             "img_height":"120",
+             "link":dataForWeixin.path,
+             "desc":dataForWeixin.desc,
+             "title":dataForWeixin.title
+          }, function(res){});
+       });
+       WeixinJSBridge.on('menu:share:weibo', function(argv){
+          WeixinJSBridge.invoke('shareWeibo',{
+             "content":dataForWeixin.title,
+             "url":dataForWeixin.path
+          }, function(res){(dataForWeixin.callback)();});
+       });
+       WeixinJSBridge.on('menu:share:facebook', function(argv){
+          (dataForWeixin.callback)();
+          WeixinJSBridge.invoke('shareFB',{
+             "img_url":dataForWeixin.Img,
+             "img_width":"120",
+             "img_height":"120",
+             "link":dataForWeixin.path,
+             "desc":dataForWeixin.desc,
+             "title":dataForWeixin.title
+          }, function(res){});
+       });
+   };
+     if(document.addEventListener){  
+             document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);  
+     } else if(document.attachEvent){  
+             document.attachEvent('WeixinJSBridgeReady'   , onBridgeReady);  
+             document.attachEvent('onWeixinJSBridgeReady' , onBridgeReady);  
+     };
+});
+var dataForWeixin={
+   appId:"",
+   Img:"{lingzh:$shareimg}",
+   path: 'http://{lingzh::C("wx_handler_server")}/index.php/3d/p/{lingzh:$_GET["token"]}/{lingzh:$_GET["galleryid"]}/{lingzh:$_GET["panoramaid"]}',
+  
+   title:"{lingzh:$panorama.title}",
+   desc:"{lingzh:$panorama.info}",
+   fakeid:"",
+   callback:function(){}
+};
+</script>
+    </head>
+    <body onselectstart="return true;" ondragstart="return false;">
+        <div id="container" style="width:100%;height:100%;">
+	This content requires HTML5/CSS3, WebGL, or Adobe Flash Player Version 9 or higher.
+</div>
+<script type="text/javascript">
+	if (ggHasHtml5Css3D() || ggHasWebGL()) {
+		pano=new pano2vrPlayer("container");
+		skin=new pano2vrSkin(pano);
+    pano.readConfigUrl("http://{lingzh::C('wx_handler_server')}/index.php/3d/pm/{lingzh:$panoramaid}/{lingzh:$token}");
+	} else{
+		alert("not support 360view");
+	}
+</script>
+<noscript>
+	<p><b>Please enable Javascript!</b></p>
+</noscript>
+
+<if condition="!empty($prevPanoId)">
+<a href='http://{lingzh::C("wx_handler_server")}/index.php/3d/p/{lingzh:$_GET["token"]}/{lingzh:$_GET["galleryid"]}/{lingzh:$prevPanoId}' class="prev360" style="">&nbsp;</a>    
+
+<a href="http://{lingzh::C('wx_handler_server')}/index.php/3d/g/{lingzh:$_GET['token']}/{lingzh:$_GET['galleryid']}" class='home360'>&nbsp;</a>
+
+<a href='http://{lingzh::C("wx_handler_server")}/index.php/3d/p/{lingzh:$_GET["token"]}/{lingzh:$_GET["galleryid"]}/{lingzh:$nextPanoId}' class="next360" style="">&nbsp;</a>  
+<else/>
+<a href="javascript:history.go(-1);" class="back360" style="">&nbsp;</a>
+</if>
+
+<div mark="stat_code" style="width:0px; height:0px; display:none;">
+					</div>
+	</body>
+<script type="text/javascript">
+
+</script>
+</html>

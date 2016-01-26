@@ -1,0 +1,111 @@
+<include file="Public:head"/> 
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+<script src="/themes/a/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<link href="/themes/a/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+
+<div class="content">
+  <div class="cLineB">
+    <h4 class="left">商品管理</h4>
+    
+    <div class="clr"></div>
+  </div>
+  <!--tab start-->
+  <div class="tab">
+  <ul>
+  <li class="current tabli" id="tab0"><a href="#">商品管理</a></li>
+  <li class="tabli" id="tab2"><a href="{lingzh::U('Shop/orders',array('bid'=>$_GET['bid']))}">订单管理</a></li>
+  <li class="tabli" id="tab2"><a href="{lingzh::U('Shop/cats',array('bid'=>$_GET['bid']))}">商品分类管理</a></li>
+  <li class="tabli" id="tab5"><a href="{lingzh::U('Shop/setShopInfo',array('bid'=>$_GET['bid']))}">商城信息配置</a></li>
+  <li class="tabli" id="tab21"><a href="{lingzh::U('Shop/setTemplate',array('bid'=>$_GET['bid']))}">商城模板配置</a></li>
+  <li class="tabli" id="tab22"><a href="{lingzh::U('Shop/payconf',array('bid'=>$_GET['bid']))}">支付方式配置</a></li>
+  </ul>
+  </div>
+  <!--tab end-->
+  <div class="cLine">
+    <div class="pageNavigator left"> 
+      <a href="{lingzh::U('Shop/add',array('bid'=>$_GET['bid']))}" title="添加" class="btnGrayS vm bigbtn"><img src="/themes/a/images/add.png" width="16" class="vm">添加商品</a>
+    </div>
+    <div class="clr"></div>
+
+    <div class="search_area left">
+      <span>分类选择：</span>
+      <a class='category <if condition="!isset($_GET['cid'])"> on </if>' href="{lingzh::U('Shop/products',array('bid'=>$_GET['bid']))}">所有商品</a>
+      <volist name="categories" id="category"> 
+        <a class='category <if condition="$_GET['cid'] eq $category['category_id']"> on </if>' href="{lingzh::U('Shop/products',array('cid'=>$category['category_id'],'bid'=>$_GET['bid']))}">{lingzh:$category.name}</a>
+      </volist>
+      
+      <div class="searchbar right">
+      <form method="post" action="">
+        <input type="text" id="msgSearchInput" class="txt " placeholder="输入商品名称搜索" name="searchkey" value="">
+        <input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+      </form>
+      </div>
+    
+    </div>
+
+    <div class="clr"></div>
+  </div>
+
+  <div class="msgWrap">
+    <form method="post" action="" id="info">
+    <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+    <thead>
+    <tr>
+    <th width="30%" align="center" valign="middle">商品名称</th>
+    <th width="20%" align="center" valign="middle">商品分类</th>
+    <th width="10%" align="center" valign="middle">价格</th>
+    <th width="10%" align="center" valign="middle">库存</th>
+    <th width="15%" align="center" valign="middle">更新时间</th>
+    <th width="20%" class="norightborder" align="center" valign="middle">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="list" id="product"> 
+    <tr>
+    <td align="center" valign="middle">{lingzh:$product.name}</td>
+    <td align="center" valign="middle">{lingzh:$product.category_name}</td>
+    <td align="center" valign="middle">{lingzh:$product.shop_price}元</td>
+    <td align="center" valign="middle">{lingzh:$product.inventory}</td>
+    <td align="center" valign="middle">{lingzh:$product.update_time|date="Y-m-d H:i:s",###}</td> 
+
+    <td class="norightborder" align="center" valign="middle">
+      <a href="{lingzh::U('Shop/qr',array('gid'=>$product['product_id'],'bid'=>$_GET['bid']))}"  target="_blank">二维码</a> 
+      <a href="{lingzh::U('Shop/set',array('gid'=>$product['product_id'],'bid'=>$_GET['bid']))}">修改</a> 
+      <a href="javascript:drop_confirm('您确定要删除吗?', '{lingzh::U('Shop/del',array('gid'=>$product['product_id'],'bid'=>$_GET['bid']))}');">删除</a>
+    </td>
+    </tr>
+    </volist>
+    </tbody>
+    </table>
+    </form>
+  </div>
+
+  <div class="cLine">
+    <div class="pageNavigator right">
+    <div class="pages">{lingzh:$page}</div>
+    </div>
+  </div>
+</div>
+<include file="Public:footer"/>
+<script>
+$(document).ready(function() {
+$('.ListProduct').dataTable({
+    "oLanguage": {
+        "sLengthMenu": "每页显示 _MENU_ 记录",
+        "sZeroRecords": "对不起，没有找到相关的商品",
+        "sInfo": "第 _START_ 条到 _END_ 条，总共 _TOTAL_ 条记录",
+        "sInfoEmpty": "显示 0 条记录",
+        "sInfoFiltered": "(从 总共_MAX_条记录)",
+        "sSearch": "查找",
+        "bJQueryUI": true,
+        "sPaginationType": "full_numbers",
+        "oPaginate": {
+            "sPrevious" : "前一页",
+            "sNext": "下一页"
+        },
+    },
+    "bPaginate": false,
+    "bFilter": false,
+});
+} );
+</script>

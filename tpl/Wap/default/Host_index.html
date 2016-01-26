@@ -1,0 +1,145 @@
+﻿<html>
+  <head>
+    <title>{lingzh:$set['title']}|在线{lingzh:$type_text}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="/themes/w/css/hotels.css" rel="stylesheet" type="text/css">
+    <style>
+    .footFix{width:100%;text-align:center;position:fixed;left:0;bottom:0;z-index:99;}
+    #footReturn a, #footReturn2 a {
+    display: block;
+    line-height: 41px;
+    color: #fff;
+    text-shadow: 1px 1px #282828;
+    font-size: 14px;
+    font-weight: bold;
+    }
+    #footReturn, #footReturn2 {
+    z-index: 89;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    width: 100%;
+    outline: 0 none;
+    overflow: visible;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    height: 41px;
+    opacity: .95;
+    border-top: 1px solid #181818;
+    box-shadow: inset 0 1px 2px #b6b6b6;
+    background-color: #515151;
+    background-image: -ms-linear-gradient(top,#838383,#202020);
+    background-image: -webkit-linear-gradient(top,#838383,#202020);
+    background-image: -moz-linear-gradient(top,#838383,#202020);
+    background-image: -o-linear-gradient(top,#838383,#202020);
+    background-image: -webkit-gradient(linear,0% 0,0% 100%,from(#838383),to(#202020));
+    }
+    div.copyright{font-size:14px;text-align:center;color:#000;margin:8px;}
+    div.tech-support{font-size:12px;text-align:center;color:#000;margin:8px;}
+    div.tech-support a{text-decoration: underline;color:#000}
+    .stock{margin-left: 5px;display: inline-block;}
+    </style>
+  </head>
+  <body id="" >
+    <div class="qiandaobanner">
+      <if condition="$set['picurl'] neq false">
+      <img src="{lingzh:$set['picurl']}"  />
+      <else />
+      <img src="/themes/w/images/hotels/default.jpg"  />
+      </if>
+    </div>
+    <div class="cardexplain">
+      <ul class="round">
+        <li>
+          <span>
+          <a href="index.php?g=Wap&m=Host&a=orders&token={lingzh:$set.token}&wecha_id={lingzh:$Think.get.wecha_id}&hid={lingzh:$hid}">
+          <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td><p style='font-size: 14px;color: #666;'>查看我的{lingzh:$type_text}</p></td>
+            </tr>
+          </table>
+          </a>
+          </span>
+        </li>
+      </ul>
+      
+      <!--商家房价及类型-->
+      <ul class="round">
+        <li class="title"><span class="none">{lingzh:$set['title']}</span></li>
+        
+        <volist name="list" id="vo">
+          <li class="dandanb">
+            <a href="index.php?g=Wap&m=Host&a=lists&token={lingzh:$vo.token}&id={lingzh:$vo.id}&wecha_id={lingzh:$Think.get.wecha_id}&hid={lingzh:$hid}&wxref=mp.weixin.qq.com">
+            <span>
+              <table class="jiagebiao" width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td>
+                    <div>
+                      {lingzh:$vo.type}
+                      <?php if($vo['open_inventory'] == 1 && $vo['inventory'] !== false && $vo['inventory'] >= 0) { ?>
+                        <label style="display: inline-block;font-size: 12px">
+                         （剩余：<a class="youhuijia">{lingzh:$vo.inventory}</a>）
+                        </label>
+                      <?php } ?>
+                    </div>
+                    <div>
+                      <img src="{lingzh:$vo.picurl}" class="showimg">
+                      <p>
+                        {lingzh:$vo.typeinfo}
+
+                      </p>
+                      <if condition="!empty($vo['price']) && $vo['price'] != '0.00' ">
+                       <p>原价：<a class="yuanjia">￥{lingzh:$vo.price}</a></p>
+                      </if>
+                      <if condition="!empty($vo['yhprice']) &&  $vo['price'] != '0.00'">
+                        <p>优惠价：<a class="youhuijia">￥{lingzh:$vo.yhprice}</a></p>
+                      </if>
+                      
+                    </td>
+                  </tr>
+                </table>
+              </span>
+            </a>
+          </li>
+        </volist>
+        <div class="pages" style="margin: 5px;text-align: right;">{lingzh:$show}</div>
+      </ul>
+        <!--后台可控制是否显示-->
+        <if condition="$set['info2'] neq false">
+        <ul class="round">
+          <li class="title"><span class="none">{lingzh:$type_text}说明</span></li>
+          <li>
+            <div class="text">
+              {lingzh:$set['info2']}
+            </div>
+          </li>
+        </ul>
+        </if>
+        <if condition="$set['info'] neq false">
+        <ul class="round">
+          <li class="title"><span class="none">关于我们</span></li>
+          <li><div class="text">{lingzh:$set['info']}</div>
+        </li>
+      </ul>
+      </if>
+      <ul class="round">
+        <li class="addr"><a href="{lingzh:$navigationLink}"><span>{lingzh:$set['address']}</span></a></li>
+        <li class="tel"><a href="tel:{lingzh:$set['tel2']}"><span>{lingzh:$set['tel2']} 电话{lingzh:$type_text}</span></a></li>
+        <if condition="$set['tel'] neq false">
+        <li class="tel"><a href="tel:{lingzh:$set['tel']}"><span>{lingzh:$set['tel']} 电话{lingzh:$type_text}</span></a></li>
+        </if>
+      </ul>
+    </div>
+    
+    <php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+    </php>
+  </body>
+</html>

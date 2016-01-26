@@ -1,0 +1,120 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+<script type="text/javascript">
+  if (!String.prototype.format) {
+    String.prototype.format = function () {
+        var args = arguments;
+        return this.replace(/{(\d+)}/g, function (match, number) {
+            return typeof args[number] != 'undefined'
+              ? args[number]
+              : match
+            ;
+        });
+    };
+}
+</script>
+<style type="text/css">
+  .class_form {
+    font-size: 16px;
+  }
+  .class_form span, .op_a, #class_name_span, input[type=text]{
+    padding-left: 3px;
+    border-radius: 2px;
+    font-size: 16px;
+    height: 30px;
+    vertical-align: center;
+    display: inline-block;
+    margin-left: 18px;
+    margin-top: 5px;
+  }
+  .class_form  input[type=text]{
+    border: 1px solid #bbb;
+  }
+  .class_form  #class_name_span,input[type=text]{
+    width: 250px;
+  }
+</style>
+<div class="content">
+  <div class="cLineB"> 
+    <div class="clr"></div>
+  </div> 
+
+  <!--tab start-->
+  <div class="tab">
+    <ul>
+      <li class="tabli" id="tab0"><a href="{lingzh::U('Membership/img')}">会员卡图文消息</a></li>
+      <li class="tabli" id="tab3"><a href="{lingzh::U('Member_card/info')}">商家信息设置</a></li>
+      <li class="tabli" id="tab1"><a href="{lingzh::U('Member_card/index')}">卡片设计</a></li>
+      <li class="tabli" id="tab4"><a href="{lingzh::U('Member/setmemberinfo')}">会员资料设置</a></li>
+      <li class="current tabli" id="tab5"><a href="{lingzh::U('Member/setclassinfo')}">自定义会员等级</a></li>
+      <li class="tabli" id="tab6"><a href="{lingzh::U('Member_card/exchange')}">积分规则设置</a></li>
+    </ul>
+  </div>
+  <!--tab end-->
+  <div class="cLineB"> </div> 
+  <form id="class_form" action="" method="POST" class="class_form">
+    <ul id="info_ul">
+      <li>
+        <span id="class_name_span">会员等级</span><span id="op_span">操作</span>
+      </li>
+    </ul>
+    <input type="button" value="添加" onclick="addclass()" class="btnGreen vm" style="margin-top: 10px;margin-left: 50px; display: inline-block;">
+    <input type="submit" value="保存" class="btnGreen vm" style="margin-top: 10px;margin-left:25px;display: inline-block;">
+  </form>
+</div>
+
+<script type="text/javascript">
+$(function(){
+  $('form').submit(function(){
+    var ret = true;
+    $('input[type=text]').each(function(){
+        ret = ret && $(this).val()
+    });
+    if(!ret){
+      alert('请将会员等级填写完整！');
+      return false;
+    }
+    return ret;
+  });  
+});
+</script>
+<script type="text/javascript">
+var classInfo = <?php echo $class_info;?>;
+var edit_del_tp = '<input type="hidden" name="group[{1}][isNew]" value="0"><a class="op_a" href="javascript:void(0)" onclick="del_class(\'{0}\',this)">删除</a>';
+var li_tp = '<li id="item_{1}">' + 
+            '<input type="hidden" name="group[{1}][id]" value="{0}">' +
+            '<input id="group_{1}" type="hidden" name="group[{1}][groupid]" value="{1}">'+
+            '<input id="delete_{1}" type="hidden" name="group[{1}][isDelete]" value="0">' +
+            '<input type="text" name="group[{1}][title]" value="{2}"> {3} </li>';
+var maxGroupId = <?php echo $maxGroupId; ?> ;
+var newItem = function(){
+  return {'title':'','id':'','groupid':++ maxGroupId};
+}
+$(function(){
+  if(classInfo){
+    var str='';
+    var del_node='';
+    for (var i = 0 ; i < classInfo.length ; i ++) {
+      del_node = i > 0 ? edit_del_tp.format( classInfo[i]['groupid'], classInfo[i].groupid ) : '<span class="op_a">默认等级，不可删除</span>';
+      str += li_tp.format(classInfo[i].id, classInfo[i].groupid , classInfo[i].title , del_node);
+    }
+    $('#info_ul').append(str);
+  }
+});
+var add_del_node = '<input type="hidden" name="group[{0}][isNew]" value="1"><a class="op_a" href="javascript:void(0)" onclick="$(this).parent().remove()">删除</a>';
+function addclass(){
+  var item = newItem();
+  var node = add_del_node.format(item.groupid);
+  var str = li_tp.format(item.id, item.groupid ,item.title,node);
+  $('#info_ul').append(str);
+}
+
+function del_class(index,$this){
+  var ret = confirm("此等级正在使用中，点击确认并保存后会，会删除等级并将此等级的会员移至默认等级！");
+  if(ret){
+    $('#delete_' + index).val(1);
+    $($this).parent().hide();
+  }
+}
+</script>
+<include file="Public:footer"/>

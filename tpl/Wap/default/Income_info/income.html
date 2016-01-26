@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="viewport"
+	    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>账户管理</title>
+	<!-- Set render engine for 360 browser -->
+	<meta name="renderer" content="webkit">
+
+	<!-- No Baidu Siteapp-->
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+	<link rel="stylesheet" type="text/css" href="/tpl/Wap/default/common/income/assets/css/amazeui.css">
+	<link rel="stylesheet" type="text/css" href="/tpl/Wap/default/common/income/assets/css/app.css">
+</head>
+<body>
+<header data-am-widget="header" class="am-header am-header-default">
+  <div class="am-header-left am-header-nav" style="display:none;">
+    <a href="#left-link" class="">
+      <i class="am-header-icon am-icon-chevron-left"></i>
+    </a>
+  </div>
+  <h1 class="am-header-title">
+    <a href="#title-link">我的收益</a>
+  </h1>
+</header>
+
+<section>
+	<div class="am-g">
+		<div class="col-sm-12">你好, <?php echo $user['truename']; ?>!</div>
+	</div>
+	<div class="am-g">
+	  <div class="col-sm-6">
+	  	<div id="account-info">
+	  		<a href="{lingzh::U('Agents/index', array('token'=>$token))}" class="am-btn am-img-circle pi-btn-orange">
+	  			<i class="am-icon-user"></i>
+	  		</a>
+	  		<p><a href="{lingzh::U('Agents/index', array('token'=>$token))}">账户信息</a></p>
+	  	</div>
+	  </div>
+	  <div class="col-sm-6">
+	  	<div id="order-management">
+	  		<a href="{lingzh::U('Fxs/Fxs/fxs_orderList', array('token'=>$token))}" class="am-btn am-img-circle pi-btn-red">
+	  			<i class="am-icon-home"></i>
+	  		</a>
+	  		<p>订单管理</p>
+	  	</div>
+	  </div>
+	</div>
+</section>
+<volist name="list" id="list">
+</volist>
+<volist name="lastprofit" id="lastprofit">
+</volist>
+<volist name="allprofit" id="allprofit">
+</volist>
+<section class="pi-data-map">
+	<div class="am-g pi-data-title">
+		<div class="col-sm-12 am-text-center" style="padding-top:10px;">
+			<h3>已成交计算收益</h3>
+		</div>
+	</div>
+	<div class="am-g pi-data-content">
+		<div class="col-sm-6">
+			<h3>当月预估收益(元)</h3>
+			<p><if condition="$list['rebate'] eq null">0.00</if><if condition="$list['rebate']!=null">{lingzh:$list.rebate}</if></p>
+		</div>
+		<div class="col-sm-6">
+			<h3>上月收益(元)</h3>
+			<p><if condition="$lasttotalcount==null">0.00</if><if condition="$lasttotalcount!=null">{lingzh:$lasttotalcount}</if></p>
+		</div>
+		<div class="col-sm-6 col-end">
+			<h3>总收益(元)</h3>
+			<p><if condition="$alltotalcount==null">0.00</if><if condition="$alltotalcount!=null">{lingzh:$alltotalcount}</if></p>
+		</div>
+	</div>
+</section>
+<footer>
+	<div id="reminder" class="am-g">
+		<div class="col-sm-12">
+			<p>温馨提示：</p>
+			<p>估算收入：“确认收货的CPS订单”计算得到的佣金，确认收货的第二天会有数据。</p>
+			<p>预计收益：已经拍下但未付款的订单佣金为您的预计收益金额。</p>
+			<p>累计收益：从1号截至到目前，总共付款的订单的收益金额</p>
+			<p>月收益：当月所有付款订单的收益金额。</p>
+		</div>
+	</div>
+</footer>
+</body>
+<script type="text/javascript" src="/tpl/Wap/default/common/income/assets/js/zepto.min.js"></script>
+<script type="text/javascript" src="/tpl/Wap/default/common/income/assets/js/amazeui.js"></script>
+<script type="text/javascript" src="/tpl/Wap/default/common/income/assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+	jQuery(function($){
+	});
+</script>
+</html>

@@ -1,0 +1,197 @@
+<include file="Public:head"/>  
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+<style>
+.search_area {margin: 10px 10px;width: 100%;}
+a.all, a.new, a.paid, a.delivered, a.c_cancel, a.m_cancel,a.category{display: inline-block;  height: 24px; line-height: 24px; text-align: center; padding: 0 12px;} 
+a.on {color: #F00; background-color: #F6F3EB;}
+</style>
+       <div class="content">
+           <div class="cLineB">
+              	  <h4 class="left"> 宾馆预订管理</h4>
+                  <div class="searchbar right" >  
+                  	  <a href="{lingzh::U('Hotel/index')}" class="right btnGreen vm">返回</a>
+	                  <form method="get" action="index.php" style="display:none">
+		                  <input type="text" id="msgSearchInput" class="txt left" placeholder="输入关键词搜索" name="keyz" value="">
+		                  <input type="hidden" name="ac" value="hotels-sncode">
+		                  <input type="hidden" name="id" value="9878">
+		                  <input type="hidden" name="tid" value="285">
+		                  <input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+	                  </form>
+                  </div>
+              <div class="clr"></div> 
+          </div>
+           <!--tab start-->
+		  <div class="tab">
+			  <ul>
+				  <li class="tabli" id="tab0"><a href="{lingzh::U('Hotel/rooms',array('id'=>$hid))}">客房管理</a></li>
+				  <li class="current tabli" id="tab1"><a href="{lingzh::U('Hotel/admin',array('id'=>$hid))}">订单管理</a></li>
+				  <li class="tabli" id="tab3" style="display:none;"><a href="{lingzh::U('Hotel/payconf',array('id'=>$hid))}">支付方式配置</a></li>
+			  </ul>
+		  </div>
+		  <!--tab end-->
+          <div class="cLineB">
+            	订单总数：<span class="redamount">{lingzh:$count}</span>个　　
+            	预订成功：<span class="redamount">{lingzh:$ok_count}</span>个　　
+            	已取消订单：<span class="redamount">{lingzh:$lost_count}</span>个　　
+            	未处理订单：<span class="redamount">{lingzh:$no_count}</span>个
+          </div>
+          <div class="msgWrap">
+		  <div class="search_area">
+			<a class='all <if condition="!isset($_GET['status'])"> on </if>' href="{lingzh::U('Hotel/admin', array('id'=>$_GET['id']))}">所有订单</a> 
+			<a class='new <if condition="$_GET['status'] eq 3"> on </if>' href="{lingzh::U('Hotel/admin',array('status'=>3,'id'=>$_GET['id']))}">未确认</a>
+			<a class='paid <if condition="$_GET['status'] eq 1"> on </if>' href="{lingzh::U('Hotel/admin',array('status'=>1,'id'=>$_GET['id']))}">已确认</a>
+			<a class='m_cancel <if condition="$_GET['status'] eq 2"> on </if>' href="{lingzh::U('Hotel/admin',array('status'=>2,'id'=>$_GET['id']))}">用户取消</a>
+			<a class='m_cancel <if condition="$_GET['status'] eq 4"> on </if>' href="{lingzh::U('Hotel/admin',array('status'=>4,'id'=>$_GET['id']))}">商户取消</a>
+          </div>
+          <form method="post" action="" id="info">
+          <input name="delall" type="hidden" value="">
+           <input name="wxid" type="hidden" value="">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+                    <th align="center" valign="middle">订单号</th>
+                    <th align="center" valign="middle">预订人</th>
+                    <th align="center" valign="middle">电话</th>
+                    <th align="center" valign="middle">房间类型</th>
+              <php>
+                  if(empty($default_col_show) || in_array('book_time', $default_col_show)) {echo ' <th width="80" align="center" valign="middle">入住日期</th>';}
+                  if(empty($default_col_show) || in_array('book_lefttime', $default_col_show)) {echo ' <th width="80" align="center" valign="middle">离店日期</th>';}
+                  if(empty($default_col_show) || in_array('book_num', $default_col_show)) {echo '<th width="60" align="center" valign="middle">预订房数</th>';}
+             </php>      
+                    <th align="center" valign="middle">总价</th>
+               <php>
+                  if(empty($default_col_show) || in_array('sale_price', $default_col_show)) {echo '<th width="60" align="center" valign="middle">预付款</th>';}
+                  if(empty($default_col_show) || in_array('payment', $default_col_show)) {echo '<th width="60" align="center" valign="middle">支付方式</th>';}
+             </php>     
+             	
+              <volist name="text_cols" id="text_col">
+                  <th align="center" valign="middle">{lingzh:$text_col}</th>
+              </volist>
+              <volist name="select_cols" id="select_col">
+                  <th align="center" valign="middle">{lingzh:$select_col}</th>
+              </volist>
+                    <th align="center" valign="middle">订单状态</th>
+                    <th align="center" valign="middle" style="display:none;">备注</th>
+                    <th align="center" valign="middle" style="display:none;">提交时间</th>
+                    <th class="norightborder" align="center" valign="middle">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+<tr></tr>
+<volist name="li" id="list"> 
+ <form action="{lingzh::U('Hotel/admin')}" method="post">  
+<tr>
+<td align="center" valign="middle">{lingzh:$list.sn}</td>
+<td align="center" valign="middle">{lingzh:$list.book_people}</td>
+<td align="center" valign="middle">{lingzh:$list.tel}</td>
+<td align="center" valign="middle">{lingzh:$list.room_type}</td>
+ <php>
+    if(empty($default_col_show) || in_array('book_time', $default_col_show)) {echo ' <td align="center" valign="middle">'.(date("Y-m-d",$list["book_time"])).'</td>';}
+    if(empty($default_col_show) || in_array('book_lefttime', $default_col_show)) {echo ' <td align="center" valign="middle"> '.(date("Y-m-d",$list["book_lefttime"])).'</td>';}
+    if(empty($default_col_show) || in_array('book_num', $default_col_show)) {echo '<td align="center" valign="middle">'.$list["book_num"].'</td>';}
+ </php>
+ 
+ <td align="center" valign="middle">{lingzh:$list.price}</td>
+ <php>
+    if(empty($default_col_show) || in_array('sale_price', $default_col_show)) {echo '<td align="center" valign="middle">'.$list["prepayment"].'</th>';}
+	if(empty($default_col_show) || in_array('payment', $default_col_show)) {
+		$payment = '';
+		switch($list["payment"]){
+			case 'wingpay':
+				$payment = '翼支付';
+				break;
+			case 'wxpay':
+				$payment = '微信支付';
+				break;
+			case 'wxpay':
+				$payment = '微信支付';
+				break;
+			case 'unionpay':
+				$payment = '银联支付';
+				break;
+			default:
+				break;
+		}
+		echo '<td align="center" valign="middle">'.$payment.'</th>';
+	}
+</php>   
+<php>
+    
+    $textColVals = unserialize($list['text_cols']);
+    if(count($textColVals) !== count($text_cols)) {
+        for($ij=0; $ij<count($text_cols); $ij++) {
+            echo "<td></td>";
+        }
+    }else {
+        foreach($textColVals as $textColVal) {
+            echo "<td>".$textColVal."</td>";
+        }
+    }
+</php>
+<php>
+    $selectColVals = unserialize($list['select_cols']);
+    if(count($selectColVals) !== count($select_cols)) {
+        for($ik=0; $ik<count($select_cols); $ik++) {
+            echo "<td></td>";
+        }
+    }else{
+        foreach($selectColVals as $selectColVal) {
+            echo "<td>".$selectColVal."</td>";
+        }
+    }    
+</php>
+ <td align="center" valign="middle" style="display:none;">{lingzh:$list.remarks}</td>
+ <td align="center" valign="middle" style="display:none;">{lingzh:$list.submit_time|date="Y-m-d H:i:s",###}</td>
+  <td align="center" valign="middle">
+	 <php>
+	 	$status = '';
+	 	switch($list['order_status']){
+	 		case '1':
+			 	$status = '<font color=green>已确认</font>';
+	 			break;
+	 		case '2':
+			 	$status = '<font color=black>用户取消</font>';
+	 			break;
+	 		case '3':
+			 	$status = '<font color=red>未确认</font>';
+	 			break;
+	 		case '4':
+			 	$status = '<font color=black>商户取消</font>';
+	 			break;
+	 		case '5':
+			 	$status = '<font color=black>退房</font>';
+	 		case '6':
+			 	$status = '<font color=blue>预付款已付</font>';
+	 			break;
+	 	}
+	 	echo $status;
+	 </php>
+  	</td>
+	<td colspan="10" class="norightborder" align="center" valign="middle">  
+		<if condition="$list.order_status eq 3">
+			<a href="{lingzh::U('Hotel/change_status',array('status'=>4, 'id'=>$list['id'], 'hid'=>$_GET['id']))}">商户取消</a>
+		<elseif condition="$list.order_status eq 4" />
+			
+		<elseif condition="$list.order_status neq 5"/>
+			
+		<elseif condition="$list.order_status eq 6" />
+			<a href="{lingzh::U('Hotel/change_status',array('status'=>1, 'id'=>$list['id'], 'hid'=>$_GET['id']))}">已确认</a>
+			<a href="{lingzh::U('Hotel/change_status',array('status'=>5, 'id'=>$list['id'], 'hid'=>$_GET['id']))}">退房</a>
+		</if>
+	</td>
+</tr>
+</form>
+</volist>
+		</tbody>
+    </table>
+   </form> 
+  </div>
+  <div class="cLine">
+    <div class="pageNavigator right">
+         <div class="pages">{lingzh:$page}</div>
+      </div>
+    <div class="clr"></div>
+  </div>
+</div>
+</div>
+<include file="Public:footer"/>

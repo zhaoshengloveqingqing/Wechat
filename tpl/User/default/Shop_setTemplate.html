@@ -1,0 +1,102 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+<div class="content">
+
+<div class="cLineB">
+  <h4>商城模板配置</h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+ <!--tab start-->
+<div class="tab">
+<ul>
+<li class="tabli" id="tab0"><a href="{lingzh::U('Shop/products',array('bid'=>$_GET['bid']))}">商品管理</a></li>
+<li class="tabli" id="tab3"><a href="{lingzh::U('Shop/orders',array('bid'=>$_GET['bid']))}">订单管理</a></li>
+<li class="tabli" id="tab2"><a href="{lingzh::U('Shop/cats',array('bid'=>$_GET['bid']))}">商品分类管理</a></li>
+<li class="tabli" id="tab20"><a href="{lingzh::U('Shop/setShopInfo',array('bid'=>$_GET['bid']))}">商城信息配置</a></li>
+<li class="current tabli" id="tab21"><a href="{lingzh::U('Shop/setTemplate',array('bid'=>$_GET['bid']))}">商城模板配置</a></li>
+<li class="tabli" id="tab22"><a href="{lingzh::U('Shop/payconf',array('bid'=>$_GET['bid']))}">支付方式配置</a></li>
+</ul>
+</div>
+<!--tab end-->  
+
+<div class="msgWrap bgfc">
+  <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">  
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tbody>
+        <tr>
+          <th width="120">首页模板：</th>
+          <td>
+            <ul class="cateradio2">
+              <li class="free  <if condition="empty($template['tmpl_name']) || $template['tmpl_name'] == 'index'">active</if>"><label><img src="/images/shop/tmpl_1_prev.png"><input class="radio2" type="radio" name="tmpl_name" value="index"  <if condition="empty($template['tmpl_name']) || $template['tmpl_name'] ==  'index'">checked</if> />模板1</label>
+                  <div class="mbtip">栏目图片尺寸上传为接近正方形 1:1，或近似等比例图片，页面效果最佳。
+                  </div>
+              </li>
+              <li class="<eq name="template.tmpl_name" value="index2">active</eq>"><label><img src="/images/shop/tmpl_2_prev.png"><input class="radio2" type="radio" name="tmpl_name" value="index2"  <eq name="template.tmpl_name" value="index2">checked</eq> />模板2</label>
+                  <div class="mbtip">栏目图片尺寸上传为长方形（比例为 长2：宽1）或近似等比例图片，页面效果最佳。
+                  </div>
+              </li>
+              <li class="<eq name="template.tmpl_name" value="index3">active</eq>"><label><img src="/images/shop/tmpl_3_prev.png"><input class="radio2" type="radio" name="tmpl_name" value="index3"  <eq name="template.tmpl_name" value="index3">checked</eq> />模板3</label>
+                  <div class="mbtip">首页需上传商城背景图，尺寸为320px宽480px高，上传图片必须清晰，使得页面效果最佳。
+                  </div>
+              </li>
+               <li class="<eq name="template.tmpl_name" value="index4">active</eq>"><label><img src="/images/shop/tmpl_4_prev.png"><input class="radio2" type="radio" name="tmpl_name" value="index4"  <eq name="template.tmpl_name" value="index4">checked</eq> />模板4</label>
+                  <div class="mbtip">栏目图片尺寸上传为长方形（比例为 长2：宽1）或近似等比例图片，页面效果最佳。
+                  </div>
+               </li>
+               <li class="<eq name="template.tmpl_name" value="index5">active</eq>"><label><img src="/images/shop/tmpl_5_prev.png"><input class="radio2" type="radio" name="tmpl_name" value="index5"  <eq name="template.tmpl_name" value="index5">checked</eq> />模板5</label>
+                  <div class="mbtip">栏目图片尺寸上传为长方形或近似等比例图片，页面效果最佳。
+                  </div>
+               </li>
+                <li class="<eq name="template.tmpl_name" value="index6">active</eq>"><label><img src="/images/shop/tmpl_6_prev.png"><input class="radio2" type="radio" name="tmpl_name" value="index6"  <eq name="template.tmpl_name" value="index6">checked</eq> />模板6</label>
+                  <div class="mbtip">栏目图片尺寸上传为长方形或近似等比例图片（比例为 长2：宽1），页面效果最佳。
+                  </div>
+               </li>
+                <li class="<eq name="template.tmpl_name" value="index7">active</eq>"><label><img src="/images/shop/tmpl_7_prev.png"><input class="radio2" type="radio" name="tmpl_name" value="index7"  <eq name="template.tmpl_name" value="index7">checked</eq> />模板7</label>
+                  <div class="mbtip">栏目图片尺寸上传为长方形或近似等比例图片，页面效果最佳。
+                  </div>
+               </li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <th>商城首页背景：</th>
+          <td>
+            <input id='pic_url_input' type="text" name="bg_pic_url" value="<if condition='isset($template)'>{lingzh:$template.bg_pic_url}</if>" class="text textMiddle" style="width:300px;">
+            <span onclick="$('#upload-panel').show();" style="text-decoration:underline;cursor:pointer;"> 点击此处上传 </span><br /> 支持JPG、PNG等格式，或者将图片上传到POCO.cn获取外链
+            <div id="upload-panel" style="display:none" >
+              <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+              <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        
+        <th>&nbsp;</th>
+          <td>
+              <button type="submit" name="button" class="btnGreen">保存</button>
+              <a href="javascript:history.go(-1);" class="btnGray vm">取消</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  </div> 
+</div>
+<script type="text/javascript">
+    var currSelect = "{lingzh:$template['tmpl_name']}";
+    if(currSelect.length <= 0) {
+        currSelect = 'index';
+    }
+    $(".radio2").click(function(){
+        if($(this).val() != "index") {
+            var canSelectTemplate = '{lingzh:$canSelectTemplate}';
+            if(canSelectTemplate != '1') {
+                $(this).removeAttr('checked');
+                alert('购买充值码后方能使用该模版！');
+                return;
+            }
+         }
+    });
+</script>
+<include file="Public:footer"/>

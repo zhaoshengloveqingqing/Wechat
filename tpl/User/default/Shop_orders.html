@@ -1,0 +1,225 @@
+<include file="Public:head"/>  
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+<script src="/js/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/js/artDialog/plugins/iframeTools.js"></script>
+
+<script>
+function delorder(id) 
+{
+    $.ajax({
+	    url: "{lingzh::U('Shop/deleteOrder')}",
+		type:"post",
+		data:{"oid":id},
+		dataType:"JSON",
+		success: function(res){
+		    if(res.status == 1){
+			    window.location.href = '{lingzh::U('Shop/orders',array('bid'=>$_GET['bid']))}';
+			    //$("#status_"+id).html("<span style=\"color:red\">商户已取消</span>");
+				//$("#delorder_"+id).remove();
+			}else{
+			    alert(res.info);
+			}
+		}
+	});
+}
+</script> 
+
+<script src="/themes/a/js/jquery.dataTables.min.js" type="text/javascript"></script>
+ <!--link href="/themes/a/css/jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css"-->
+ <link href="/themes/a/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+        
+<div class="content">
+<div class="cLineB">
+<h4 class="left">订单管理（<a href="{lingzh::U('Shop/orders',array('status'=>9,'bid'=>$_GET['bid']))}">未处理订单<span style="color:#f00">{lingzh:$unhandledCount}</span>个</a>） </h4>
+<div class="clr"></div>
+
+<!--tab start-->
+<div class="tab">
+<ul>
+<li class="tabli" id="tab0"><a href="{lingzh::U('Shop/products',array('bid'=>$_GET['bid']))}">商品管理</a></li>
+<li class="current tabli" id="tab2"><a href="{lingzh::U('Shop/orders',array('bid'=>$_GET['bid']))}">订单管理</a></li>
+<li class="tabli" id="tab2"><a href="{lingzh::U('Shop/cats',array('bid'=>$_GET['bid']))}">商品分类管理</a></li>
+<li class="tabli" id="tab5"><a href="{lingzh::U('Shop/setShopInfo',array('bid'=>$_GET['bid']))}">商城信息配置</a></li>
+<li class="tabli" id="tab21"><a href="{lingzh::U('Shop/setTemplate',array('bid'=>$_GET['bid']))}">商城模板配置</a></li>
+<li class="tabli" id="tab22"><a href="{lingzh::U('Shop/payconf',array('bid'=>$_GET['bid']))}">支付方式配置</a></li>
+</ul>
+</div>
+
+<!--tab end-->
+<div class="msgWrap">
+  <div class="search_area">
+    <a class='all <if condition="!isset($_GET['status'])"> on </if>' href="{lingzh::U('Shop/orders',array('bid'=>$_GET['bid']))}">所有订单</a>
+    <a class='new <if condition="$_GET['status'] eq 9"> on </if>' href="{lingzh::U('Shop/orders',array('status'=>9,'bid'=>$_GET['bid']))}">未处理订单</a>
+    <a class='new <if condition="$_GET['status'] eq 1"> on </if>' href="{lingzh::U('Shop/orders',array('status'=>1,'bid'=>$_GET['bid']))}">新订单</a>
+    <a class='paid <if condition="$_GET['status'] eq 2"> on </if>' href="{lingzh::U('Shop/orders',array('status'=>2,'bid'=>$_GET['bid']))}">已付款</a>
+    <a class='delivered <if condition="$_GET['status'] eq 3"> on </if>' href="{lingzh::U('Shop/orders',array('status'=>3,'bid'=>$_GET['bid']))}">已配送</a>
+    <a class='delivered <if condition="$_GET['status'] eq 6"> on </if>' href="{lingzh::U('Shop/orders',array('status'=>6,'bid'=>$_GET['bid']))}">已收货</a>
+    <a class='c_cancel <if condition="$_GET['status'] eq 4"> on </if>' href="{lingzh::U('Shop/orders',array('status'=>4,'bid'=>$_GET['bid']))}">用户取消</a>
+    <a class='m_cancel <if condition="$_GET['status'] eq 5"> on </if>' href="{lingzh::U('Shop/orders',array('status'=>5,'bid'=>$_GET['bid']))}">商户取消</a>
+    <div class="searchbar right">
+	    <form method="post" action="">
+	      <input type="text" id="msgSearchInput" class="txt " placeholder="输入订购人名字搜索" name="searchkey" value="<php>if(isset($search)) echo trim($search);</php>">
+	      <input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+	    </form>
+    </div>
+  </div>
+</div>
+
+<form method="post" action="" id="info">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th align="center" valign="middle">订单号</th>
+ <if condition="$token eq '54447845z7b'">
+	<th align="center" valign="middle">分销商</th>
+ </if>
+<th align="center" valign="middle">姓名</th>
+<th align="center" valign="middle">电话</th>
+<th align="center" valign="middle">总价（元）</th>
+<th align="center" valign="middle">佣金</th>
+<th align="center" valign="middle">支付方式</th>
+<th align="center" valign="middle">状态</th>
+<th align="center" valign="middle">创建时间</th>
+<th class="norightborder" align="center" valign="middle">操作</th>
+</tr>
+</thead>
+<tbody>
+
+
+<volist name="orders" id="o"> 
+<tr>
+  <td align="center" valign="middle">{lingzh:$o.sn}</td>
+  <if condition="$token eq '54447845z7b'">
+  	<td align="center" valign="middle">{lingzh:$o.pname|default="Hi电"}</td>
+  </if>
+<td align="center" valign="middle">{lingzh:$o.truename}</td>
+<td align="center" valign="middle">{lingzh:$o.tel}</td>
+<td align="center" valign="middle">{lingzh:$o.price}</td>
+<td align="center" valign="middle">{lingzh:$o.commission}</td>
+<td align="center" valign="middle">
+    <switch name="o.payment">
+		<case value="unionpay">银联支付</case>
+        <case value="cod">货到付款</case>
+        <case value="alipay">支付宝支付</case>
+        <case value="wxpay">微信支付</case>
+        <case value="cftpay">财付通</case>
+        <case value="wingpay">翼支付</case>
+        <default />
+    </switch>
+</td>
+<td id="status_{lingzh:$o.order_id}" align="center" valign="middle">
+	<php>
+		if ($o['status'] == 1) 
+		{
+			echo '<span style="color:red">新订单</span>';
+		}
+		else if ($o['status'] == 2) 
+		{
+			echo '<span style="color:green">已付款</span>';
+		}
+		else if ($o['status'] == 3) 
+		{
+			echo '<span style="color:green">已发货</span>';
+		}
+		else if ($o['status'] == 6) 
+		{
+			echo '<span style="color:blue">已收货</span>';
+		}
+		else if ($o['status'] == 4) 
+		{
+			echo '<span style="color:black">用户已取消</span>';
+		}
+		else if ($o['status'] == 5) 
+		{
+			echo '<span style="color:red">商户已取消</span>';
+		}
+                else if ($o['status'] == 7) 
+		{
+			echo '<span style="color:green">维权中</span>';
+		}
+                else if ($o['status'] == 8) 
+		{
+			echo '<span style="color:green">维权完成</span>';
+		}
+	</php>
+</td>
+<td align="center" valign="middle">{lingzh:$o.create_time|date="Y-m-d H:i:s",###}</td> 
+<td class="norightborder" align="center" valign="middle">
+  <?php
+  	if(($o['status'] == 2 && $o['payment'] != 'cod') || ($o['status'] == '1' && $o['payment'] == 'cod')|| ($o['status'] == '1' && $o['payment'] == 'unionpay') ||
+		 ($o['status'] == '1' && $o['payment'] == 'wingpay') 	||  ($o['status'] == '1' && $o['payment'] == 'wxpay') ){
+  ?>
+	  <a href="{lingzh::U('Shop/delivery',array('oid'=>$o['order_id'],'bid'=>$_GET['bid']))}" >发货</a> 
+ 	<?php
+  		}
+  ?>
+  <a href="#" onclick="showIntroDetail({lingzh:$o.order_id})">详细</a> 
+  <?php
+  	if($o['status'] == 1){
+  ?>
+  <a href="#" onclick="modifymerchantcalcel({lingzh:$o.order_id})">取消订单</a> 
+ 	<!--<a id="delorder_{lingzh:$o.order_id}" href="javascript:;" onclick="if (confirm('您确定要取消吗?')) {delorder({lingzh:$o.order_id});}">取消订单</a>-->
+  <?php
+  	}
+  ?>
+  
+ <a href="#" onclick="modifycommission({lingzh:$o.order_id})">修改佣金</a> 
+</td>
+</tr>
+
+</volist>
+</tbody>
+</table>
+<input type="hidden" name="token" value="{lingzh:$token}" />
+<input type="hidden" name="bid" value="{lingzh:$_GET['bid']}" />
+</form>
+
+<script>
+function modifymerchantcalcel(id){
+	art.dialog.open('{lingzh::U('Shop/merchant_cancel',array('token'=>$token, 'bid'=>$_GET['bid']))}&oid='+id,{lock:false,title:'取消原因',yesText:'关闭',background: '#000',opacity: 0.87});
+}
+
+function modifycommission(id){
+	art.dialog.open('{lingzh::U('Shop/commission',array('token'=>$token, 'bid'=>$_GET['bid']))}&oid='+id,{lock:false,title:'修改佣金',yesText:'关闭',background: '#000',opacity: 0.87});
+}
+
+function showIntroDetail(id){
+	art.dialog.open('{lingzh::U('Shop/orderInfo',array('token'=>$token, 'bid'=>$_GET['bid']))}&oid='+id,{lock:false,title:'订单详情',width:700,height:420,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+
+function deliverIt(id){
+  art.dialog.open('{lingzh::U('Shop/delivery',array('token'=>$token, 'bid'=>$_GET['bid']))}&oid='+id,{lock:false,title:'发货',width:700,height:420,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+
+$(document).ready(function() {
+$('.ListProduct').dataTable({
+    "aaSorting": [],
+    "oLanguage": {
+        "sLengthMenu": "每页显示 _MENU_ 记录",
+        "sZeroRecords": "对不起，没有找到相关的订单",
+        "sInfo": "第 _START_ 条到 _END_ 条，总共 _TOTAL_ 条记录",
+        "sInfoEmpty": "显示 0 条记录",
+        "sInfoFiltered": "(从 总共_MAX_条记录)",
+        "sSearch": "查找",
+        "bJQueryUI": true,
+        "sPaginationType": "full_numbers",
+        "oPaginate": {
+            "sPrevious" : "前一页",
+            "sNext": "下一页"
+        },
+    },
+    "bPaginate": false,
+    "bFilter": false,
+});
+} );
+</script>
+
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lingzh:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

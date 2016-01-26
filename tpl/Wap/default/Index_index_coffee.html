@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lingzh:$tpl['wxname']}</title>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="/themes/w/css/reset.css" rel="stylesheet" type="text/css" />
+<script src="/themes/w/js/swipe.js"></script>
+
+<style>
+body {background-color: #FFF;margin: 0 auto;max-width: 640px;min-width: 320px;overflow-x: hidden;}
+
+
+.swipe {  overflow: hidden;    visibility: hidden;	  position: relative;	  }
+.swipe-wrap { overflow: hidden;		  position: relative;  }
+.swipe-wrap > div {	 float:left;	  width:100%;  position: relative;}
+.swipe-wrap > div img{width:100%;	}
+
+ul#indicator{text-align: center;list-style: none;margin: -24px 0px 0px 0px;padding: 0;background-color:#afb1b3;}
+ul#indicator li {display: inline-block;width: 10px;height: 10px;border-radius: 10px;background: #7d8083; margin: 0 2px;cursor: pointer;}
+ul#indicator li.on {display: inline-block;width: 10px;height: 10px;border-radius: 10px;background: #000 ;margin: 0 2px;cursor: pointer;}
+.navi {opacity:0.25;}
+
+
+table a.category-item {display: block; height: 60px; background: -webkit-gradient(linear,left top,left bottom,from(#734631), to(#411D0A)); text-decoration: none; margin-bottom:  2px; padding: 10px; text-align: right;}
+
+table .category-item .category-icon {float:left; width: 36px; height: 36px; margin:12px 0px 12px 6px;} 
+table .category-item .category-icon img { width: 36px; height: 36px;  float: left;} 
+
+table .category-item .category-text {line-height: 24px; float: right;}
+table .category-item .category-text .category-title { font-size:18px;color: #FFF; height: 18px; line-height: 18px; overflow: hidden; }
+table .category-item .category-text .category-desc { font-size:14px;color: #CCCC38; height: 14px; line-height: 14px; overflow: hidden;  }
+
+div.mainmenu { margin-top:10px;}
+
+div.copyright{font-size:14px;text-align:center;color:#000;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+</style>
+
+
+</head>
+
+<body>
+
+<div id='slider' class='swipe'>
+  <div class='swipe-wrap'>
+    <volist name="flash" id="so">
+      <div><a href="{lingzh:$so.hyperlink}"><img src="{lingzh:$so.img}" /></a></div>
+	</volist>
+  </div>
+</div>
+
+<div class="navi">
+<ul id="indicator">
+<volist name="flash" id="so">
+<li   <if condition="$i eq 1">class="on"</if>  ></li>
+</volist>
+ 
+</ul>
+</div>
+
+<div  class="mainmenu">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+  <volist name="info" id="vo" offset="0" mod="2">
+    <eq name="mod" value="1">
+      <tr>
+      	<td width="49.5%" align="left" valign="top">
+          <a class='category-item' href="{lingzh:$info[$i-2]['hyperlink']}">
+            <div class="category-icon">
+              <img src="{lingzh:$info[$i-2]['img']}">
+            </div>
+            <div class="category-text">
+              <span class="category-title">{lingzh:$info[$i-2]['name']}</span><br/>
+              <span class="category-desc">{lingzh:$info[$i-2]['info']}</span>
+
+            </div>
+          </a>
+        </td>
+        
+        <td width="1%" align="center" valign="top" >
+        <td width="49.5%" align="left" valign="top" >
+          <a class='category-item' href="{lingzh:$vo.hyperlink}">
+            <div class="category-icon">
+              <img src="{lingzh:$vo['img']}">
+            </div>
+            <div class="category-text">
+              <span class="category-title">{lingzh:$vo['name']}</span><br/>
+              <span class="category-desc">{lingzh:$vo['info']}</span>
+            </div>
+          </a>
+        </td>
+        
+      </tr>
+    </eq>
+  </volist>
+</table>
+
+</div>
+<include file="Index:navi"/> 
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+
+<script type="text/javascript">
+var slider = Swipe(document.getElementById('slider'), {
+      auto: 3000,
+      continuous: true,
+      callback: function(pos) {
+          var i = bullets.length;
+	      while (i--) {
+	          bullets[i].className = ' ';
+	       }
+	      bullets[pos].className = 'on';
+      }
+  });
+
+  var bullets = document.getElementById('indicator').getElementsByTagName('li');
+
+
+</script>
+</body>
+</html>

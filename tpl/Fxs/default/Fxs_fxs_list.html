@@ -1,0 +1,88 @@
+
+
+<!DOCTYPE html>
+<link href="/themes/a/css/page-u.css" rel="stylesheet" type="text/css" />
+<html>
+  <head>
+    <title>{lingzh:$page_title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="/themes/m/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+
+    
+    <link href="/js/dataTables/jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css">
+    <link href="/js/dataTables/jquery.dataTables.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <include file="Index:header"/>
+    <div class="container">
+      <div class="row">
+        <include file="Index:sidebar"/>
+        <div class="col-lg-10">
+
+          <div class="page-header">
+            <h4>订单管理</h4>
+          </div>
+				<volist name="list" id="list">
+				</volist>
+				<div class="bdrcontent">
+				<div id="div_ptype">
+				<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+					<thead>
+						<tr>
+							  <th width="15%" align="center" valign="middle">名称</th>
+							  <th width="15%" align="center" valign="middle">手机</th>
+							  <th width="8%" align="center" valign="middle">所属部门</th>
+							  <th width="15%" align="center" valign="middle">电子邮箱</th>
+							  <th width="7%" align="center" valign="middle">状态</th>
+							  <th width="15%" align="center" valign="middle">详细地址</th>
+							<th class="norightborder" align="center">操作</th>
+						</tr>
+					</thead>
+					<volist name="info" id="vo">
+						<tr>
+							<td align="center" valign="middle">{lingzh:$vo.truename}</td>
+							<td align="center" valign="middle">{lingzh:$vo.mb}</td>
+							<td align="center" valign="middle">{lingzh:$list.pname}</td>
+							<td align="center" valign="middle">{lingzh:$vo.email}</td>
+							<td align="center" valign="middle"><if condition="$vo['status'] eq 0">未激活</if>
+								<if condition="$vo['status'] eq 1">已激活</if>
+							</td>
+							<td align="center" valign="middle">{lingzh:$vo.address}</td>
+							<td class="norightborder" align="center">
+							  <a href="{lingzh::U('Fxs/fxs_check',array('fxs_id'=>$vo['id']))}">审核</a> 		 
+							</td>
+						</tr>
+					</volist>
+				  </table>
+				</div>
+				</div>
+            </div>
+         </div> <!-- /col -->
+    </div> <!-- /row -->
+ </div> <!-- /container -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/dataTables/jquery.dataTables.min.js" type="text/javascript"></script>
+  </body>
+</html>
+

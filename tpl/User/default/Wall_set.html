@@ -1,0 +1,231 @@
+<include file="Public:head" />
+<link href="/themes/w/css/reservation_setting.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=ZkqN4MTTGPb3lo9gvwGhiScT"></script>
+<script src="/js/date/WdatePicker.js"></script>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js"></script>
+<script>
+	function add(value) {
+		var optionNum = $(".lotterylist").length;
+		if(optionNum>=10){alert("最多只能添加10个奖项");return;}
+		var lastId = "#lottery" + optionNum;
+		optionNum++;
+		if (optionNum == 1) {
+			$("#lotteryButton").before("<tr id=\"lottery" + optionNum +"\" class=\"lotterylist\">"
+		   	  + "<td><input type=\"text\" name=\"lottery_name[]\" value=\"\" class=\"px\"></td>"
+		      + "<td><input type=\"text\" name=\"lottery_value[]\" value=\"\" class=\"px\"></td>"
+		      + "<td><input type=\"text\" name=\"lottery_num[]\" data-rule-number=\"true\" value=\"\" class=\"px\"></td>"
+		      + "<td><input type=\"text\" id=\"lottery_img_" +optionNum+"\" name=\"lottery_img[]\" value=\"\" class=\"px\">"
+		      + "<a href=\"###\" onclick=\"upyunPicUpload('lottery_img_"+optionNum+"', 200, 200,'{lingzh:$set[\'token\']}')\" class=\"a_upload\">上传</a></td>"
+		      + "<td><button  type=\"button\" onclick=\"del("+ optionNum +")\" class=\"btnGreen\">删除</button></td></tr>");
+		} else {
+			$(lastId).after("<tr id=\"lottery" + optionNum +"\" class=\"lotterylist\">"
+			  + "<td><input type=\"text\" name=\"lottery_name[]\" value=\"\" class=\"px\"></td>"
+		      + "<td><input type=\"text\" name=\"lottery_value[]\" value=\"\" class=\"px\"></td>"
+		      + "<td><input type=\"text\" name=\"lottery_num[]\" data-rule-number=\"true\" value=\"\" class=\"px\"></td>"
+		      + "<td><input type=\"text\" id=\"lottery_img_" +optionNum+"\"  name=\"lottery_img[]\" value=\"\" class=\"px\" style=\"width:150px;\">"
+		      + "<a href=\"###\" onclick=\"upyunPicUpload('lottery_img_"+optionNum+"', 200, 200,'{lingzh:$set[\'token\']}')\" class=\"a_upload\">上传</a></td>"
+		      + "<td><button  type=\"button\" onclick=\"del("+ optionNum +")\" class=\"btnGreen\">删除</button></td></tr>");
+		}
+	   /*$(lastId).after("<tr id=\"lottery" + optionNum +"\" class=\"lotterylist\"><td><input type=\"text\" id=\"lottery_name" + optionNum +"\" name=\"lottery_name" + optionNum +"\" value=\"\" class=\"px\" style=\"width:150px;\"></td>"
+	            + "<td><input type=\"text\" id=\"lottery_value" + optionNum + "\" name=\"lottery_value" + optionNum + "\" value=\"\" class=\"px\" style=\"width:150px;\"></td>"
+	            + "<td><input type=\"text\" id=\"lottery_num" + optionNum + "\" name=\"lottery_num" + optionNum +"\" value=\"\" class=\"px\" style=\"width:50px;\"></td><td><button  type=\"button\" onclick=\"del("+ optionNum +")\" class=\"btnGreen\">删除</button></td></tr>");
+	     */
+	    return false;
+	};
+	
+	function del(value) {
+	   $("#lottery"+value).remove();
+	     return false;
+	};
+</script>
+<div class="content"> 
+  <div class="cLineB"> 
+    <h4>微现场设置 </h4> 
+    <a href="{lingzh::U('Wall/index')}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+  </div> 
+  <form id="wallForm" class="form" method="post" action="" enctype="multipart/form-data"> 
+  <input type="hidden" name="id" value="{lingzh:$set.id}" /> 
+     
+  <div class="msgWrap bgfc"> 
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+      <tr> 
+        <th width="120"><span class="red">*</span>消息关键词：</th> 
+        <td>
+        	<input type="text" id="keyword" name="keyword" data-rule-required="true" value="<if condition="isset($set['keyword'])">{lingzh:$set.keyword}<else/>微现场</if>" class="px" style="width:400px;" /> 
+    		<br/><span class="red">“关键词+消息”，显示时关键词会被去掉，比如“微现场真酷”，最终显示为“真酷”</span>
+    	</td> 
+      </tr> 
+      <tr> 
+        <th width="120"><span class="red">*</span>昵称关键词：</th> 
+        <td>
+        	<input type="text" id="name_prefix" name="name_prefix" data-rule-required="true" value="<if condition="isset($set['name_prefix'])">{lingzh:$set.name_prefix}<else/>微现场</if>" class="px" style="width:400px;" /> 
+    		<br/><span class="red">认证服务号可不填，“关键词+昵称”，显示时关键词会被去掉，比如“我叫张三”，昵称则显示为“张三”</span></td> 
+      </tr> 
+      <tr> 
+        <th width="120"><span class="red">*</span>中奖查询关键词：</th> 
+        <td>
+        	<input type="text" id="lot_prefix" name="lot_prefix" data-rule-required="true" value="<if condition="isset($set['lot_prefix'])">{lingzh:$set.lot_prefix}<else/>微现场</if>" class="px" style="width:400px;" /> 
+    		<br/><span class="red">用户发送“关键词”到公众号会收到中奖提示，如“张三先生/女士，恭喜您中了一等奖ipod一台”或“很遗憾，您没中奖”</span></td> 
+      </tr>
+      <tr> 
+        <th width="120"><span class="red">*</span>活动主题：</th> 
+        <td><input type="text" id="title" name="title" data-rule-required="true" value="{lingzh:$set.title}" class="px" style="width:400px;" /> </td> 
+      </tr> 
+      <tr> 
+        <th width="120">主办方：</th> 
+        <td><input type="text" id="name" name="name" value="<if condition="isset($set['name'])">{lingzh:$set.name}<else/>{lingzh::C('company_short_name')}</if>" class="px" style="width:400px;" /> </td> 
+      </tr>
+      <tr> 
+        <th valign="top">LOGO/头像：</th> 
+        <td valign="top">
+          <img id="thumb_img_0" class="thumb_img" src="<if condition="isset($set['logo'])">{lingzh:$set.logo}<else/>{lingzh::C('company_logo')}</if>" style="max-height: 100px;"><br/>
+          <input id='pic_url_input' onblur="syncPreviewImg('pic_url_input','thumb_img_0')" type="text" name="logo" value="<if condition="isset($set['logo'])">{lingzh:$set.logo}<else/>{lingzh::C('company_logo')}</if>" class="px" style="width:400px;" />
+              <span onclick="$('#upload-panel').show();" class="btnGreens"> 上传图片 </span><br/>
+          	  <div id="upload-panel" style="display:none" >
+                <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+                <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                  <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+                </div>
+              </div>
+      </td>
+      </tr>
+      <tr> 
+        <th valign="top">微现场背景：</th> 
+        <td valign="top">
+        <img id="thumb_img_1" class="thumb_img" src="<if condition="isset($set['backgroud_pic_url'])">{lingzh:$set.backgroud_pic_url}</if>" style="max-height: 100px;"><br/>
+        <select name="bg" onchange="document.getElementById(&#39;pic_url_input_1&#39;).value=this.options[this.selectedIndex].value;document.getElementById(&#39;thumb_img_1&#39;).src=this.options[this.selectedIndex].value;document.getElementById(&#39;pic_url_input_1&#39;).src=this.options[this.selectedIndex].value;" class="pt" style="width:210px;"> 
+        <option selected="">微现场背景模板</option>
+          <?php 
+            for($i=1;$i<=6;$i++){
+              $str='./themes/a/wall/web'.$i.'.jpg';
+              if($set['backgroud_pic_url']==$str){
+                echo $str='<option value="'.$str.'" selected="selected" >'.$i.'</option>';
+              }else{
+                echo $str='<option value="'.$str.'">'.$i.'</option>';
+              
+              }
+            }
+          ?>
+          
+        </select>
+        <span onclick="$('#upload-panel-1').show();" class="btnGreens"> 自定义背景 </span><br/><br/>
+        <input id='pic_url_input_1' onblur="syncPreviewImg('pic_url_input_1','thumb_img_1')" type="text" name="backgroud_pic_url" value="<if condition="isset($set['backgroud_pic_url'])">{lingzh:$set.backgroud_pic_url}</if>" class="px" style="width:400px;" />
+        <div id="upload-panel-1" style="display:none" >
+                <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+                <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                  <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index?id=1')}"></iframe>
+                </div>
+              </div>
+       </td>
+      </tr> 
+      <tr> 
+        <th valign="top">主办方二维码：</th> 
+        <td valign="top">
+          	<img id="thumb_img_2" class="thumb_img" src="<if condition="isset($set['qrcode_url'])">{lingzh:$set.qrcode_url}<else/>{lingzh::C('company_qrcode_url')}</if>" style="max-height: 100px;"><br/>
+	        <input id='pic_url_input_2' onblur="syncPreviewImg('pic_url_input_2','thumb_img_2')" type="text" name="qrcode_url" value="<if condition="isset($set['qrcode_url'])">{lingzh:$set.qrcode_url}<else/>{lingzh::C('company_qrcode_url')}</if>" class="px" style="width:400px;" />
+	        <span onclick="$('#upload-panel-2').show();" class="btnGreens"> 上传图片 </span><br/>
+              <div id="upload-panel-2" style="display:none" >
+                <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+                <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                  <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index?id=2')}"></iframe>
+                </div>
+              </div>
+        </td>
+      </tr> 
+      <tr>
+        <th>抽奖设置：</th>
+        <td class="norightborder">
+        <table class="ListProduct" border="0" cellspacing="0" cellpadding="0">
+          <thead>
+          <tr>
+            <th width="30px">奖品类型</th>
+            <th>奖品名</th>
+            <th>奖品个数</th>
+            <th>图片</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <if condition="isset($lotterys) and count($lotterys) gt 0">
+	          <volist name="lotterys" id="lottery">
+		          <tr id="lottery{lingzh:$i}" class="lotterylist">
+		            <td>
+		            	<input type="text" name="lottery_name[]" value="<php>echo $lottery[0];</php>" class="px">
+		            </td>
+		            <td>
+		            	<input type="text" name="lottery_value[]" value="<php>echo $lottery[1];</php>" class="px">
+		            </td>
+		            <td>
+		            	<input type="text" name="lottery_num[]" data-rule-number="true" value="<php>echo $lottery[2];</php>" class="px">
+		            </td>
+		            <td>
+			            <input type="text" id="lottery_img_{lingzh:$i}" name="lottery_img[]" value="<php>echo $lottery[3];</php>" class="px">
+			            <a href="###" onclick="upyunPicUpload('lottery_img_{lingzh:$i}', 200, 200,'{lingzh:$set[\'token\']}')" class="a_upload">上传</a>
+		            </td>
+		            <td><button  type="button" onclick="del({lingzh:$i})" class="btnGreen">删除</button></td>
+		          </tr>
+	          </volist>
+          <else/>
+	          <tr id="lottery1" class="lotterylist">
+	            <td>
+	            	<input type="text" name="lottery_name[]" value="" class="px">
+	            </td>
+	            <td>
+	            	<input type="text" name="lottery_value[]" value="" class="px">
+	            </td>
+	            <td>
+	            	<input type="text" name="lottery_num[]" value="" class="px">
+	            </td>
+	            <td>
+			        <input type="text" id="lottery_img_1" name="lottery_img[]"  class="px">  
+			        <a href="###" onclick="upyunPicUpload('lottery_img_1', 200, 200,'{lingzh:$set[\'token\']}')" class="a_upload">上传</a>
+	            </td>
+	          </tr>
+          </if>
+          <tr id="lotteryButton">
+            <td colspan="2" style="width:350px;border:0px;"><button  type="button" onclick="add(this)" class="btnGreen">添加奖项</button></td>
+          </tr>
+        </tbody>
+        </table>
+        </td>
+      <tr> 
+      <tr> 
+        <th>背景音乐：</th> 
+        <td><input type="text" name="music_url" value="<if condition="isset($set['music_url'])">{lingzh:$set.music_url}</if>" class="px" style="width:400px;" /></td> 
+      </tr>
+      <tr> 
+        <th valign="top">说明：</th> 
+        <td valign="top"><textarea class="px" id="info" name="description" style="width: 410px; height: 180px;">{lingzh:$set.description}</textarea></td> 
+      </tr>
+      <tr>
+        <th>起止时间：</th>
+        <td>
+          <input type="input" id="start_time" name="start_time" data-rule-required="true" value="{lingzh:$set.start_time}" onFocus="WdatePicker({minDate:'%y-%M-%d %H:%m', dateFmt:'yyyy-MM-dd HH:mm'})" class="px" style="width:200px;" />
+          <input type="input" id="end_time" name="end_time" data-rule-required="true" value="{lingzh:$set.end_time}" onFocus="WdatePicker({minDate:'%y-%M-%d %H:#{%m+10}', dateFmt:'yyyy-MM-dd HH:mm'})" class="px" style="width:200px;" />
+      </tr>
+      </tbody> 
+    </table> 
+    </div>
+    <div class="msgWrap" style=' text-align: center'> 
+        <button type="submit" name="button" class="btnGreen">保存</button>&nbsp; &nbsp; <a href="{lingzh::U('Wall/index')}" class="btnGray vm">取消</a>
+    </div>
+    
+   </form> 
+     
+  </div> 
+ 
+  <script type="text/javascript">
+	function ShowUploadPanel(id) {
+		var url = '{lingzh::U("UploadImg/index")}' + '&id=' + id;
+		$('#uploadIframe').attr('src', url);
+		$('#upload-panel').show();
+	}
+    function syncPreviewImg(fromId, toId) {    
+        document.getElementById(toId).src=document.getElementById(fromId).value;
+    }
+    </script>
+    
+<include file="Public:footer" />

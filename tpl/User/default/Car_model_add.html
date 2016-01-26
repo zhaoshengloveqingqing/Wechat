@@ -1,0 +1,209 @@
+
+<include file="Public:head" /> 
+<!doctype html>
+<link rel="stylesheet" href="/js/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="/js//kindeditor/plugins/code/prettify.css" />
+<link rel="stylesheet" href="/themes/a/css/car.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/cascading_select.js" type="text/javascript"></script>
+<script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+ 
+<div class="content"> 
+  <div class="cLineB"> 
+    <h4>车型设置</h4> 
+    <a href="{lingzh::U('Car/model')}" class="right  btnGreen" style="margin-top:-27px">车型管理</a> 
+  </div> 
+
+  <form class="form" method="post" action="" enctype="multipart/form-data">
+    <div class="msgWrap bgfc"> 
+        <if condition='isset($model)'> <input type='hidden' name='id' value='{lingzh:$model.id}' /></if>
+        
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+          <tr> 
+          <th><span class="red">*</span>车型名称：</th> 
+          <td><input type="text" required="" name="name" value="<if condition='isset($model)'>{lingzh:$model.name}</if>" required="" class="px" style="width:200px;" /></td> 
+          </tr> 
+          <tr> 
+          <th><span class="red">*</span>品牌/车系：</th> 
+          <td>
+              <select class='normal_select' style='width:150px;' name="car_brand" id='car_brand'>
+              </select>
+              <select class='normal_select' style='width:150px;' name="car_series" id='car_series'>
+              </select>
+          </td>
+        </tr> 
+        <tr> 
+          <th>年款：</th> 
+          <td>
+                <select class='normal_select' style='width:150px;' name="model_year">
+                    <option value="0">请选择</option>
+                    <for start='2014' end='2001' comparison='gt' step='-1' name='year'>
+                        <option <php>if(isset($model) && $model['model_year'] == $year) echo "selected=''";</php> value="{lingzh:$year}">{lingzh:$year}</option>
+                    </for>
+                </select>
+        </tr> 
+        <tr> 
+          <th><span class="red">*</span>显示顺序：</th> 
+          <td><input type="text" required="" name="sequence" value="<if condition='isset($model)'>{lingzh:$model.sequence}<else/>1</if>" class="px" style="width:200px;" />数值小者优先显示</td> 
+        </tr> 
+        <tr> 
+          <th>指导价：</th> 
+          <td><input type="text"  name="guide_price" value="<php>if(isset($model)) { echo sprintf('%.2f', $model['guide_price']);}</php>"  class="px" style="width:200px;" /><span class='help-inline'>(万元)</span></td> 
+        </tr> 
+        <tr> 
+          <th>经销商报价：</th> 
+          <td><input type="text"  name="dealer_price" value="<php>if(isset($model)) { echo sprintf('%.2f', $model['dealer_price']);}</php>"  class="px" style="width:200px;" /><span class='help-inline'>(万元) 如:19.24-23.52</span></td> 
+        </tr> 
+        <tr> 
+          <th><span class="red">*</span>图片：</th> 
+          <td>
+              <div class='img_upload_panel'>
+                <div name='uploadify'  id="uploadify"  ></div>
+                <div id="fileQueue"></div> 
+                <div style="clr:both; height:0px;"></div>
+              </div>
+              
+              <div class="img_upload_preview">
+                 
+                <ul class="ipost-list ui-sortable" id="fileList">
+                    <php>
+                        if(isset($model) && !empty($model['pic_id_list_input'])) {
+                            $pic_id_list_inputs = $model['pic_id_list_input'];
+                            foreach($pic_id_list_inputs as $picId) {
+                                $picInfo = NULL;
+                                foreach($pics as $p) {
+                                    if($p['id'] == $picId) {
+                                        $picInfo = $p;
+                                        break;
+                                    }
+                                }
+                                
+                                // output one pic item
+                                echo '<li class="imgbox"> '.
+                                   '<a class="item_close" href="javascript:void(0)" title="删除"></a> ' .
+                                   '<input type="hidden" value="' . $picInfo["id"] . '" name="pic_id_list_input[]"> '. 
+                                   '<span class="item_box"> ' .
+                                       '<img src="' . $picInfo["link"] . '"> ' .
+                                   '</span> ' .
+                                   '<span class="item_input"> ' .
+                                       '<textarea readonly="readonly" class="bewrite valid" cols="3" rows="4" style="resize: none" data-rule-maxlength="150" placeholder="图片描述...">' . $picInfo["raw_name"] . '</textarea> ' .
+
+                                   '</span> ' . 
+                               '</li> ';
+                            }
+                        }
+                    </php>
+                </ul>
+              </div>
+           </td> 
+        </tr> 
+        <tr> 
+          <th>排量：</th> 
+          <td><input type="text"  name="emission" value="<if condition='isset($model)'>{lingzh:$model.emission}<else/>1</if>" class="px" style="width:200px;" /><span class='help-inline'>(L)</span></td> 
+        </tr> 
+        <tr> 
+          <th>档位个数：</th> 
+          <td><input type="text"  name="stalls" value="<if condition='isset($model)'>{lingzh:$model.stalls}<else/>1</if>" class="px" style="width:200px;" /></td> 
+        </tr> 
+        <tr> 
+          <th>变速箱：</th> 
+          <td>
+              
+              <select class='normal_select' style='width:150px;' name="box">
+                  <volist name='car_box_options' id='box_option'>
+                      <option <php>if(isset($model) && $model['box'] == $box_option['id']) echo "selected='1'";</php> value="{lingzh:$box_option.id}">{lingzh:$box_option.name}</option>
+                  </volist>
+              </select>
+              
+        </tr> 
+        <tr>         
+          <th>&nbsp;</th>
+          <td style='vertical-align: middle;'>
+          <button type="submit"  class="btnGreen">保存</button> &nbsp; <a href="{lingzh::U('Car/model')}" class="btnGray vm">取消</a></td> 
+        </tr> 
+      </tbody> 
+    </table> 
+    </div>
+  </form> 
+</div> 
+        
+<script>
+
+
+function syncPreviewImg(fromId, toId) {    
+        document.getElementById(toId).src=document.getElementById(fromId).value;
+ }
+ new CS("car_brand", "car_series", '<if condition="isset($model)">{lingzh:$model["car_brand"]}</if>', '<if condition="isset($model)">{lingzh:$model["car_series"]}</if>', '{lingzh:$cs}');
+ 
+ $(function() {
+   
+    $("#uploadify").uploadify({
+                'buttonText' : '选择图片',
+                'fileTypeDesc' : 'Image Files',
+                'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+                'fileSizeLimit' : '1MB',
+             	'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+                 'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+                 'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+                 'onFallback': function() {
+                     alert('您的浏览器没有安装Flash插件');
+                 },
+                 //'folder': 'uploadFile', //上传文件夹名 
+                 'queueID': 'fileQueue',
+                 'auto': true,
+                 'onUploadSuccess' :  function(file, data, response) {
+                    if (response == true) {
+                        var res_json = eval("("+data+")");
+                        if (res_json.error == 0 ) {
+                            var previewNode = "#fileList";
+                            $(previewNode).append(
+                              '<li class="imgbox"> ' +
+                                   '<a class="item_close" href="javascript:void(0)" title="删除"></a> ' + 
+                                   '<input type="hidden" value="' + res_json.rawImageId + '" name="pic_id_list_input[]"> '+ 
+                                   '<span class="item_box"> ' + 
+                                       '<img src="' + res_json.content + '"> ' +
+                                   '</span> ' +
+                                   '<span class="item_input"> ' +
+                                       '<textarea readonly="readonly" class="bewrite valid" cols="3" rows="4" style="resize: none" data-rule-maxlength="150" placeholder="图片描述...">' + res_json.rawImageName + '</textarea> ' +
+
+                                   '</span> ' + 
+                               '</li> '
+                             );
+                     
+                            $('#fileList a.item_close').click(function() {
+                                if(window.confirm('您确定要删除吗？')) {
+                                   $(this).parent().remove();
+                               }
+                           });
+                        } else {
+                            alert(res_json.message);
+                        }
+                       
+                    } else {
+                       alert("网络不给力啊！亲");
+                    }
+                   
+                 },
+                 formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+                 //'uploadLimit' : 1,
+                 'multi': false,
+             });
+             $("#uploadify").css('width', '100%');
+             $("#uploadify").append('<span class="img_upload_tips">图片大小640*320，图片大小不超过300K</span>');
+             
+             $('#fileList a.item_close').click(function() {
+                 if(window.confirm('您确定要删除吗？')) {
+                    $(this).parent().remove();
+                }
+            });
+            
+            $( "#fileList" ).sortable();
+            $( "#fileList" ).disableSelection();
+            
+
+});  
+</script>
+
+<include file="Public:footer" />

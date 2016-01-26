@@ -1,0 +1,53 @@
+<include file="Public:head"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<div class="content">
+<link href="/themes/a/css/page-u.css" rel="stylesheet" type="text/css" />
+<div class="cLineB">
+  <h4><if condition='isset($info)'>修改分销商 <else/>添加分销商</if></h4>
+  <a href="{lingzh::U('Fxs/index')}" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+ <volist name="info" id="info">
+ </volist>
+<div class="msgWrap bgfc">
+  <form class="form" method="post" action="{lingzh::U('Fxs/save_fxs',array('fxs_id'=>$info['id']))}" target="_top" enctype="multipart/form-data">  
+    <input type="hidden" name="fxs_id" value="<if condition='isset($info)'>{lingzh:$info.id}</if>"></input>
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tbody>
+        <tr>
+          <th width="186"><span class="red">*</span>名称：</th>
+          <td>
+            <input style="width:400px;" name="truename" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.truename}</if>"></input>
+          </td>
+        </tr>
+      
+		<tr>
+          <th width="186">邮件：</th>
+          <td>
+            <input style="width:400px;" name="email" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.email}</if>"></input>
+          </td>
+        </tr>
+        <tr>
+          <th width="186"><span class="red">*</span>手机号码：</th>
+          <td>
+            <input style="width:400px;" name="mb" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.mb}</if>"></input>
+          </td>
+        </tr>
+      
+        <tr>
+          <th width="186"><span class="red">*</span>地址：</th>
+          <td>
+            <input style="width:400px;" name="address" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.address}</if>"></input>
+          </td>
+        <tr>
+          <th>&nbsp;</th>
+          <td>
+            <button type="submit" name="button" class="btnGreen">保存</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  </div> 
+</div>
+</html>

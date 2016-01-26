@@ -1,0 +1,283 @@
+html {
+	background: rgb(255, 255, 255); color: rgb(0, 0, 0);
+}
+body {
+	margin: 0px; padding: 0px;
+}
+div {
+	margin: 0px; padding: 0px;
+}
+dl {
+	margin: 0px; padding: 0px;
+}
+dt {
+	margin: 0px; padding: 0px;
+}
+dd {
+	margin: 0px; padding: 0px;
+}
+h1 {
+	margin: 0px; padding: 0px;
+}
+h2 {
+	margin: 0px; padding: 0px;
+}
+h3 {
+	margin: 0px; padding: 0px;
+}
+h4 {
+	margin: 0px; padding: 0px;
+}
+h5 {
+	margin: 0px; padding: 0px;
+}
+h6 {
+	margin: 0px; padding: 0px;
+}
+pre {
+	margin: 0px; padding: 0px;
+}
+code {
+	margin: 0px; padding: 0px;
+}
+form {
+	margin: 0px; padding: 0px;
+}
+fieldset {
+	margin: 0px; padding: 0px;
+}
+legend {
+	margin: 0px; padding: 0px;
+}
+input {
+	margin: 0px; padding: 0px;
+}
+textarea {
+	margin: 0px; padding: 0px;
+}
+p {
+	margin: 0px; padding: 0px;
+}
+blockquote {
+	margin: 0px; padding: 0px;
+}
+th {
+	margin: 0px; padding: 0px;
+}
+td {
+	margin: 0px; padding: 0px;
+}
+table {
+	border-collapse: collapse; border-spacing: 0;
+}
+fieldset {
+	border: 0px currentColor; border-image: none;
+}
+img {
+	border: 0px currentColor; border-image: none;
+}
+address {
+	font-style: normal; font-weight: normal;
+}
+caption {
+	font-style: normal; font-weight: normal;
+}
+cite {
+	font-style: normal; font-weight: normal;
+}
+code {
+	font-style: normal; font-weight: normal;
+}
+dfn {
+	font-style: normal; font-weight: normal;
+}
+th {
+	font-style: normal; font-weight: normal;
+}
+var {
+	font-style: normal; font-weight: normal;
+}
+ol {
+	list-style: none;
+}
+ul {
+	list-style: none;
+}
+caption {
+	text-align: left;
+}
+th {
+	text-align: left;
+}
+h1 {
+	font-size: 100%; font-weight: normal;
+}
+h2 {
+	font-size: 100%; font-weight: normal;
+}
+h3 {
+	font-size: 100%; font-weight: normal;
+}
+h4 {
+	font-size: 100%; font-weight: normal;
+}
+h5 {
+	font-size: 100%; font-weight: normal;
+}
+h6 {
+	font-size: 100%; font-weight: normal;
+}
+abbr {
+	border: 0px currentColor; border-image: none; font-variant: normal;
+}
+acronym {
+	border: 0px currentColor; border-image: none; font-variant: normal;
+}
+sup {
+	vertical-align: text-top;
+}
+sub {
+	vertical-align: text-bottom;
+}
+input {
+	font-family: inherit; font-size: inherit; font-weight: inherit;
+}
+textarea {
+	font-family: inherit; font-size: inherit; font-weight: inherit;
+}
+select {
+	font-family: inherit; font-size: inherit; font-weight: inherit;
+}
+input {
+	font-size: 100%;
+}
+textarea {
+	font-size: 100%;
+}
+select {
+	font-size: 100%;
+}
+legend {
+	color: rgb(0, 0, 0);
+}
+html {
+	background-color: rgb(248, 247, 245);
+}
+body {
+	padding: 0px; height: 100%; color: rgb(34, 34, 34); font-family: Helvetica,STHeiti STXihei,Microsoft JhengHei,Microsoft YaHei,Tohoma,Arial; position: relative;
+}
+body > .tips {
+	padding: 20px; left: 50%; top: 50%; width: 200px; text-align: center; display: none; position: fixed; z-index: 100;
+}
+.page {
+	padding: 15px;
+}
+.page .page-error {
+	text-align: center; line-height: 30px; position: relative;
+}
+.page .page-loading {
+	text-align: center; line-height: 30px; position: relative;
+}
+.btn {
+	margin: 15px 0px; padding: 10px; border-radius: 5px; border: 1px solid rgb(204, 204, 204); border-image: none; text-align: center; color: rgb(34, 34, 34); font-size: 15px; font-weight: bold; text-decoration: none; display: block; cursor: pointer; box-shadow: 0px 1px 4px rgba(0,0,0,0.3); background-color: rgb(252, 252, 252); moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+.icons {
+	background: url("../images/icons151fd8.png") no-repeat 0px 0px; border-radius: 5px; width: 25px; height: 25px; overflow: hidden; position: relative;
+}
+.arrow-r.icons {
+	background: url("../images/brand_profileinweb_arrow@2x151fd8.png") no-repeat center / 100%; width: 12px; height: 16px;
+}
+.check.icons {
+	background-position: -25px 0px;
+}
+#activity-detail .page-bizinfo .header #activity-name {
+	color: rgb(0, 0, 0); font-size: 20px; font-weight: bold; -ms-word-break: normal; -ms-word-wrap: break-word;
+}
+#activity-detail .page-bizinfo .header #post-date {
+	margin: 0px; color: rgb(140, 140, 140); font-size: 11px;
+}
+#activity-detail .page-bizinfo .btn#biz-link {
+	background: url("../images/brand_profileinweb_bg@2x151fd8.png") no-repeat center / 100% 100%; padding: 12px 12px 12px 62px; border-radius: 0px; border: 0px currentColor; border-image: none; height: 42px; text-align: left; position: relative; box-shadow: none;
+}
+#activity-detail .page-bizinfo .btn#biz-link .arrow {
+	top: 25px; right: 15px; position: absolute;
+}
+#activity-detail .page-bizinfo .btn#biz-link .logo {
+	padding: 6px; left: 5px; top: 6px; width: 42px; height: 42px; overflow: hidden; position: absolute;
+}
+#activity-detail .page-bizinfo .btn#biz-link .logo img {
+	width: 42px; position: relative; z-index: 10;
+}
+#activity-detail .page-bizinfo .btn#biz-link .logo .circle {
+	background: url("../images/brand_photo_middleframe@2x151fd8.png") no-repeat center / 100% 100%; left: 0px; top: 0px; width: 54px; height: 54px; position: absolute; z-index: 100;
+}
+#activity-detail .page-bizinfo .btn#biz-link #nickname {
+	color: rgb(69, 69, 69); font-size: 15px; text-shadow: 0px 1px 1px white;
+}
+#activity-detail .page-bizinfo .btn#biz-link #weixinid {
+	color: rgb(163, 163, 163); line-height: 20px; font-size: 12px; text-shadow: 0px 1px 1px white;
+}
+#activity-detail .page-content {
+	padding-bottom: 18px;
+}
+input#store{
+ width:600px;
+ height:60px;
+}
+#activity-detail .page-content .media {
+	margin: 18px 0px;
+}
+#activity-detail .page-content .media img {
+	width: 100%;
+}
+#activity-detail .page-content .text {
+	width: 100%; color: rgb(62, 62, 62); line-height: 1.5; overflow: hidden; -ms-zoom: 1;
+}
+#activity-detail .page-content .text p {
+	min-height: 1.5em;
+}
+#activity-list .header {
+	font-size: 20px;
+}
+#activity-list .page-list {
+	margin: 18px 0px; border-radius: 5px; border: 1px solid rgb(204, 204, 204); border-image: none; overflow: hidden;
+}
+#activity-list .page-list .btn.line {
+	margin: 0px; border-radius: 0px; text-align: left;
+}
+#activity-list .page-list .btn.line .checkbox {
+	height: 25px; line-height: 25px; padding-left: 35px; position: relative;
+}
+#activity-list .page-list .btn.line .checkbox .icons {
+	left: 0px; top: 0px; position: absolute; background-color: rgb(204, 204, 204);
+}
+#activity-list .page-list .off.btn.line .icons {
+	background-image: none;
+}
+.vm {
+	vertical-align: middle;
+}
+.tc {
+	text-align: center;
+}
+.db {
+	display: block;
+}
+.dib {
+	display: inline-block;
+}
+.b {
+	font-weight: 700;
+}
+.clr {
+	clear: both;
+}
+.text img {
+	height: auto !important; max-width: 100% !important;
+}
+.page-url {
+	padding-top: 18px;
+}
+.page-url-link {
+	color: rgb(96, 127, 166); font-size: 14px; text-decoration: none; text-shadow: 0px 1px #fff; -webkit-text-shadow: 0 1px #fff; -moz-text-shadow: 0 1px #fff;
+}

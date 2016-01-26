@@ -1,0 +1,120 @@
+<include file="Public:head" /> 
+<link rel="stylesheet" href="/js/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="/js//kindeditor/plugins/code/prettify.css" />
+
+<link rel="stylesheet" href="/themes/a/css/car.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+<script src="/js/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="/js/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="/js/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+
+function syncPreviewImg(fromId, toId) {    
+        document.getElementById(toId).src=document.getElementById(fromId).value;
+ }
+</script>
+<div class="content"> 
+  <div class="cLineB"> 
+    <h4>车系设置</h4> 
+    <a href="{lingzh::U('Car/series')}" class="right  btnGreen" style="margin-top:-27px">车系管理</a> 
+  </div> 
+
+  <form class="form" method="post" action="" enctype="multipart/form-data">
+    <div class="msgWrap bgfc"> 
+        <if condition='isset($series)'> <input type='hidden' name='id' value='{lingzh:$series.id}' /></if>
+        
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+          <tr> 
+          <th><span class="red">*</span>品牌：</th> 
+          <td>
+              <select class='normal_select' style='width:200px;' name="brand_id">
+                  <volist name='brands' id='brand'>
+                      <option <php>if(isset($series) && $series['brand_id'] == $brand['id']) {echo "selected='1'";}</php> value="{lingzh:$brand.id}">{lingzh:$brand.name}</option>
+                  </volist>
+              </select>
+          </td>
+        </tr> 
+        <tr> 
+          <th><span class="red">*</span>车系名称：</th> 
+          <td><input type="text" required="" name="name" value="<if condition='isset($series)'>{lingzh:$series.name}</if>" required="" class="px" style="width:200px;" /><span class='help-inline'>请添加车系的完整名称，如“宝马X5”</span></td> 
+        </tr> 
+        <tr> 
+          <th><span class="red">*</span>车系简称：</th> 
+          <td><input type="text" required="" name="short_name" value="<if condition='isset($series)'>{lingzh:$series.short_name}</if>" required="" class="px" style="width:200px;" /><span class='help-inline'>请添加车系的简称,如“X5”；手机端显示的是车系简称</span></td> 
+        </tr> 
+         <tr> 
+          <th><span class="red">*</span>图片：</th> 
+          <td>
+              <div class='img_upload_panel'>
+                <img id="thumb_img" class="thumb_img" src="<if condition="isset($series['picture'])">{lingzh:$series.picture}<else/>http://{lingzh::C('wx_handler_server')}/themes/a/images/car/car_series.jpg</if>" style="max-height: 100px;">
+                <div name='uploadify'  id="uploadify"  ></div>
+                <div id="fileQueue"></div> 
+                <input type='hidden' value="<if condition="isset($series['picture'])">{lingzh:$series.picture}<else/>http://{lingzh::C('wx_handler_server')}/themes/a/images/car/car_series.jpg</if>" name='picture' id='picture'>
+                <div style="clr:both; height:0px;"></div>
+              </div>
+          </td> 
+        </tr> 
+        <tr> 
+          <th><span class="red">*</span>显示顺序：</th> 
+          <td><input type="text" required="" name="sequence" value="<if condition='isset($series)'>{lingzh:$series.sequence}<else/>1</if>" class="px" style="width:200px;" />数值小者优先显示</td> 
+        </tr> 
+        <TR>
+          <TH valign="top"><label for="description">车系简介：</label></TH>
+          <TD><textarea name="description" id="description" class="px" rows="5" style="width:500px;height:120px"><if condition='isset($series)'>{lingzh:$series.description}</if></textarea><br/><span class="help-inline">请用简短的文字描述该车系的亮点所在,不超过200字</span></TD>
+        </TR>
+        <tr>         
+          <th>&nbsp;</th>
+          <td style='vertical-align: middle;'>
+          <button type="submit"  class="btnGreen">保存</button> &nbsp; <a href="{lingzh::U('Car/series')}" class="btnGray vm">取消</a></td> 
+        </tr> 
+      </tbody> 
+    </table> 
+    </div>
+  </form> 
+</div> 
+
+<script>
+
+ $(function() {
+   
+    $("#uploadify").uploadify({
+        'buttonText' : '选择图片',
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': 'fileQueue',
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                    document.getElementById('thumb_img').src=  res_json.content ;
+                    $('#picture').val(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+
+            } else {
+               alert("网络不给力啊！亲");
+            }
+
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+     $("#uploadify").css('width', '100%');
+     $("#uploadify").append('<span class="img_upload_tips">建议图片尺寸640*180，图片大小不超过300K</span>');
+             
+});  
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,87 @@
+
+<include file="Public:head"/>
+<script>
+$(function(){
+        $('#ListForm').ajaxForm({
+            beforeSubmit:  checkForm,  // pre-submit callback
+            success:       complete,  // post-submit callback
+			error: showError,
+            dataType: 'json'
+        });
+        function checkForm(arr){
+        }
+        function complete(data){
+            alert(data.info);
+            window.location.reload();
+        }
+
+		function showError(data){
+            alert(data);
+        }
+    });
+</script>
+<style>
+.rh{ color:#b90707;text-decoration: underline;}
+.rh a{ color:#b90707;text-decoration: underline;}
+.rh a hover{ color:#b90707; text-decoration: underline;}
+</style>
+<div class="content">
+
+<div class="cLineB">
+<h4>相册管理</h4>
+
+<a href="{lingzh::U('Panorama/index')}" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>
+ 
+ <div class="cLineB">
+<div class="pageNavigator left" style="float:left;">   
+    <a href="{lingzh::U('Panorama/panorama_add',array('token'=>$_SESSION['token'], 'galleryid'=>$galleryid))}" title="添加全景图" class="btnGrayS vm bigbtn"><img src="{lingzh::RES}/images/pic.png" class="vm">添加全景图
+    </a>
+</div>
+ <div class="rh" style="float:left; margin-left:10px; margin-top:15px; font-size:14px; color:#b90707; font-weight:bold;"><a href="{lingzh::U('Help/360help1')}" target="_blank">如何制作一个360度全景？</a></div>
+ <div style="clear:both"></div>
+<div class="clr"></div>
+</div>
+ <div class="msgWrap form">
+<div class="bdrcontent">
+<div id="div_ptype">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+
+ <thead>
+    <tr>
+        <th style=" width:120px;">名称 <font style='font-size:9px; color: red'> (点击图名可预览)<font></th>
+        <th style=" width:40px;">显示顺序</th>
+        <th style=" width:150px;" class="norightborder">操作</th>
+    </tr>
+  </thead> 
+<volist name="photo" id="photo">          
+    <tr>
+        <td><a href="http://{lingzh::C('wx_handler_server')}/index.php/3d/p/{lingzh:$photo['token']}/{lingzh:$photo['galleryid']}/{lingzh:$photo['id']}">
+                <lable style="text-decoration:underline;cursor:pointer;"><h4>{lingzh:$photo.title}</h4> </lable>
+                </a>
+        </td>
+        <td><lable>{lingzh:$photo.sort}</lable></td>
+        <td class="norightborder">
+            <a class="btnGreen vm" href="{lingzh::U('Panorama/panorama_edit',array('galleryid'=>$galleryid, 'panoramaid'=>$photo['id']))}">修改</a>
+            <a class="btnGreen vm" href="{lingzh::U('Panorama/addmultipano',array('galleryid'=>$galleryid, 'panoramaid'=>$photo['id']))}">添加导航</a>
+            <a href="javascript:drop_confirm('您确定要删除该全景图吗?', '{lingzh::U('Panorama/panorama_del',array('galleryid'=>$galleryid, 'panoramaid'=>$photo['id']))}');">删除</a>
+        </td>
+    </tr>
+</volist>
+  </table>
+</div>
+</div>
+<div class="footactions" style="padding-left:10px">
+  <div class="pages"></div>
+</div>
+
+
+ </div>
+  
+        </div>
+              <div id="upload-panel" style="display:none" >
+                <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+                <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                  <iframe style=" width:500px;height:500px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+                </div>
+              </div>
+<include file="Public:footer"/>  

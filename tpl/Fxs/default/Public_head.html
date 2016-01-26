@@ -1,0 +1,292 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> {lingzh::C('site_title')} {lingzh:$agentInfo.platform_name}</title>
+<meta name="keywords" content="{lingzh::C('keyword')}" />
+<meta name="description" content="{lingzh::C('content')}" />
+<meta http-equiv="MSThemeCompatible" content="Yes" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<link rel="shortcut icon" href="/favicon.ico" >
+<script src="{lingzh::RES}/js/common.js" type="text/javascript"></script>
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/jquery.form.js" type="text/javascript"></script>
+<script src="/js/tips/XY_Base.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery_ui_widget_min.js"></script>
+<script type="text/javascript" src="/js/jquery_validate_min.js"></script>
+<script type="text/javascript" src="/js/jquery_form_wizard_min.js"></script>
+<script type="text/javascript" src="/js/zeroclipboard/zeroclipboard_min.js"></script>
+<link href="/themes/a/css/page-u.css" rel="stylesheet" type="text/css" />
+<link href="/js/tips/core.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body id="nv_member" class="pg_CURMODULE" onkeydown="if(event.keyCode==27) return false;">
+
+<style>
+
+.head{ width:100%; height:93px; background-color:#f3f3f3; box-shadow: 0 0 5px black;}
+.head .main{ width:1000px; margin:0px auto;}
+.head .logo{ float:left; width:300px; margin: 22px 0px 10px 0px;}
+.head .main .login-part {float: right;line-height: 30px;}
+
+.head .tel{ float:right;  text-align:right; line-height:30px; padding-right:20px; color:#565656}
+.head .tel span{  width:128px; padding-left:3px; font-size:18px; color:#547907; font-style:italic ; font-weight:bold; }
+.head .login-part .login{ color:#000695; }
+.head .login-part .reg { color:#8a8888; }
+.head .login-part .logout { color:#c11111 }
+
+.head .tel a:hover{ color:#000695; text-decoration:none;}
+.head .tel  .logout:hover{ color:#c11111; text-decoration:none;}
+
+.navi {clear: right;float:left;}
+.anv{  padding-left:5px;}
+.anv li{ width: 100px; float:left; line-height:38px; margin-left:5px; display:inline; font-size:14.5px; text-align:center; font-weight:bold;}
+.anv li a{ color:#3e494e ; display:block;}
+.anv li a:hover{ color:#fff; text-decoration:none; background: #006685;}
+.anv li a.selected{ color:#fff; text-decoration:none; background: #006685;}
+.copy{
+position: relative;
+padding: 4px 12px;
+margin: 0;
+color: #333;
+text-shadow: 0 1px 0 #fff;
+white-space: nowrap;
+font-family: Arial,Helvetica,sans-serif;
+font-weight: bold;
+font-size: 13px;
+text-align: center;
+vertical-align: middle;
+background-color: #f3f3f3;
+background-repeat: repeat-x;
+border: 1px solid #dcdcdc;
+border-radius: 2px;
+box-shadow: none;
+background-image: linear-gradient(to bottom,#f5f5f5,#f1f1f1);
+}
+</style>
+
+<div class="head">
+ <div class="main">
+  <div class="logo">
+    <p><a href='<if condition="$user_role eq 'oem'">#<else/>/</if>' title="微信营销"><img src="{lingzh:$agentInfo.company_logo}" class="pngfix"  border="0"  width="235" height="44" /></a></p>
+  </div>
+  <div class="login-part">
+        <if condition="!isset($_SESSION['uid'])">&nbsp;
+            <a href="{lingzh::U('Index/login')}" class="login">登录</a>&nbsp;|&nbsp;
+            <a href="{lingzh::U('Index/reg')}" class="reg">注册</a>
+        <else/>
+            您好,{lingzh:$Think.session.uname}!   
+            <a href="{lingzh::U('User/Index/logout')}" class="logout" >[退出]</a>
+        </if>   
+  </div>
+  <!--<div class="tel">全国服务热线:<span>{lingzh:$agentInfo.service_tel}</span>
+  --></div>
+  <div class="navi">
+    <ul class="anv">
+      <if condition="$user_role neq 'oem'">
+      <li>
+        <a href="/" title="首页" target="_self"> 网站首页</a>
+      </li>
+      </if>
+      <li>
+        <a href="/index.php?g=User&m=Index&a=index" title="平台功能" target="_self" <if condition="GROUP_NAME eq 'User'">class="selected"</if>>管理中心</a>
+      </li>
+       <li>
+      <a href="/index.php?g=User&m=Help&a=index" title="帮助中心" target="_self" <if condition="GROUP_NAME eq 'Helper'">class="selected"</if>>帮助中心</a>
+      </li>
+     </ul>
+  </div>
+ </div>
+</div>
+
+
+<div id="wp" class="wp">
+  <!--中间内容-->  
+  <div class="contentmanage">
+    <div class="developer">
+      <div class="appTitle normalTitle2">
+        <div class="vipuser">
+          <div class="logo"><img src="/themes/a/images/logo.jpg" width="100" height="100"></div>
+          <div class="nickname">
+          <span>{lingzh:$wecha.wxname}</span>
+          <if condition="$wecha['type'] eq 1">
+          <label><img src="/themes/a/images/fw.png" width="38" height="16"></label>
+          <else/>
+          <label><img src="/themes/a/images/dy.png" width="38" height="16"></label>
+          </if>
+          </div>
+          <div class="weixinid">微信号:{lingzh:$wecha.weixin}</div>
+        </div>
+
+        <div class="accountInfo"></div>
+        <div class="clr"></div>
+      </div>
+     
+      <div class="tableContent">
+      <!--左侧功能菜单-->
+        <div  class="sideBar" id="sideBar">
+          <div class="catalogList">
+
+            <volist name="sideMenu" id="menu">
+            <ul>
+              <div class="nav-header"><span class="menu_icon menu_icon_{lingzh::$menu['id']}"></span><span class="menu_title">{lingzh::$menu['name']}</span><span class="menu_icon <if condition="$menu['selected'] eq 1">menu_icon_dropdown <else/> menu_icon_collapse</if>" id="menu_dropdown_icon"></span></div>
+                <volist name="menu.sub_menu" id="smenu">
+                  <php> 
+                    $li_str ='';
+                    $smenu_url = empty($smenu['url']) ? '#':$smenu['url'];
+                    if ($menu['selected'] == 1) 
+                    {
+                      if ($smenu['selected'] == 1)
+                      {
+                        $li_str .= '<li class="selected"><a href="'.$smenu_url.'">'.$smenu['name'].'</a>';
+                      }
+                      else 
+                      {
+                        $li_str .= '<li class="subCatalogList"><a href="'.$smenu_url.'">'.$smenu['name'].'</a>';
+                      }
+                    } 
+                    else 
+                    {
+                      $li_str .= '<li class="subCatalogList" style="display:none"><a href="'.$smenu_url.'">'.$smenu['name'].'</a>';
+                    }
+                    
+
+                    if (isset($smenu['status'])) 
+                    {
+                      $li_str .= '<span class="'.$smenu['status'].'">';
+                    }
+                    $li_str .= '</li>';
+                    echo $li_str;
+                  </php>
+                </volist>
+            </ul>
+            </volist>
+
+          </div>
+        </div>
+<script type="text/javascript" >
+var audio = null;
+var tipid = null;
+var isOpened = false;
+function showTips(id, text) {
+  Util.loadJS("XY_Dialog.js",function(){
+    Util.Dialog({
+    title : "提醒",
+    width: 200,
+    height: 150,
+    fixed: true,
+    content : "text:" + text,
+    position: {
+      right: "0",
+      bottom: "0"
+    },
+    ofns: function() {
+       isOpened = true;
+        if(window.Audio) {
+                if(!audio) {
+                    audio = new Audio("/js/tips/msg.mp3");
+                    audio.loop = true;
+                }
+                audio.play();
+      }
+    },
+    cfns: function() {
+      isOpened = false;
+        Util.cookie.set("TIPS" + id,  id);
+        if(audio && !audio.paused) audio.pause();
+    },
+    });
+  });
+}
+
+$(document).ready(function() {
+  $(".nav-header").click(function() {
+    if ($(this).siblings("li.selected").length == 0 ){
+      $(this).siblings("li").toggle();
+      $(this).find("#menu_dropdown_icon").toggleClass("menu_icon_dropdown").toggleClass("menu_icon_collapse");
+    }
+  });
+    if (!String.prototype.format) {
+		String.prototype.format = function () {
+			var args = arguments;
+			return this.replace(/{(\d+)}/g, function (match, number) {
+				return typeof args[number] != 'undefined' ? args[number] : match
+			})
+		}
+    };
+    ZeroClipboard.setDefaults({
+        moviePath: "/js/zeroclipboard/zeroclipboard.swf"
+    });
+    $(".copy_text").each(function (i) {
+         var $id = "copy_button{0}".format(i),
+	     _tmp = '  <button class="btn copy" id="{0}" type="button" data-clipboard-target="{2}" data-clipboard-text="{1}"><i class="icon-copy"><\/i>复制<\/button>  <span class="alert copy-success help-inline alert-success" style="display:none;">复制成功,请粘帖到您需要的地方<\/span>',
+	     $this = $(this),
+	     v = $this.text(),
+		 $iid = $this.attr("id");
+        /*if (/^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(v)) {
+            var _atmp = '<a href="{0}" target="_blank" title="点击新窗口打开">{0}<\/a>';
+            $this.html(_atmp.format(v))
+        };*/
+        if ($iid) {
+            $this.after(_tmp.format($id, "", $iid))
+        } else {
+            $this.append(_tmp.format($id, v))
+        };
+		var el = $("#" + $id);
+        var clip = new ZeroClipboard(el);
+		clip.setHandCursor( true ); 
+        var success = function (el) {
+            var span = el.nextAll("span.copy-success");
+            span.show();
+            setTimeout(function () {
+                span.hide()
+            }, 2e3)
+        };
+        clip.on('complete', function (client, args) {
+            success($(client.options.button))
+        })
+	});
+  <if condition="isset($show_order_tips) and $show_order_tips eq true">
+  
+  function checkOrder(){
+    if (isOpened == true) { return;};
+    $.ajax({
+        url:"/index.php",
+        data:{
+          g:"User",
+          m:"Tips",
+          a:"check"
+        },
+        success: function(data) {
+          data = $.parseJSON(data);
+          if (data.data.num > 0) {
+            if (Util.cookie.get("TIPS"+data.data.id) !== "") {
+                return;
+            }
+            var text = "";
+            for (var i = 0; i < data.data.msg.length; i++) {
+              if (data.data.msg[i].type == "order")
+              {
+                  text += "你有" + data.data.msg[i].num + "份新到的微订单未处理！<br/>" + "<a class=\"tipClick\" href=\"" + data.data.msg[i].href + "\">请点击</a><br/>";
+              }
+            }
+            tipid = data.data.id;
+            showTips(data.data.id, text);
+          }
+        }
+    });
+  }
+  setInterval(function() {checkOrder(); }, 1000*60 + Math.random()*5000);
+
+  $(".tipClick").live("click",function(){
+    isOpened = false;
+    Util.cookie.set("TIPS" + tipid,  tipid);
+    if(audio && !audio.paused) audio.pause();
+    return true;
+  });
+
+  </if>
+});
+
+</script>

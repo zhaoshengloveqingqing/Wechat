@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+
+.content{background:url(/tpl/App/default/common/images/App/form_content-bg.png) no-repeat center 0;height:599px;margin-top:-560px; }
+.content .cont{width:980px; margin:0 auto; background:url(/tpl/App/default/common/images/App/content_left_bg.png) no-repeat 80px 50px; height:499px; padding:20px 40px;}
+ul{margin-top:120px;width:404px;  float:right; padding-right:38px}
+ul li{ float:left; width:204px;margin-top:10px; line-height:30px;}
+
+.input{ border:0px; width:280px; height:30px;margin-top:10px; line-height:30px; border:1px solid #CCC; padding-left:10px}
+.submit{ border-radius:5px; width:155px; height:40px;font-size:20px;text-align:center; margin-top:60px;line-height:35px;  color:#fff; cursor:pointer;  background:#0489f7; border:0px; display:block;}

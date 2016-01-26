@@ -1,0 +1,146 @@
+<include file="Public:head"/>
+
+<style type="text/css">
+.clr{
+clear:both;
+}
+.chatPanel .mediaFullText .mediaContent {
+font-size: 14px;}
+.chatPanel .media {
+border:0px solid #D1D1D1;
+box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-moz-box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-webkit-box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-webkit-border-radius:5px 5px 10px 10px;
+-moz-border-radius:5px 5px 10px 10px;
+border-radius:5px 5px 10px 10px;
+background: url({lingzh::RES}/images/photo/bottom.png) repeat-x scroll left bottom #FFFFFF;
+background-size:2px auto;
+}
+.chatPanel .media .mediaHead .title {
+line-height:1.2em;
+font-size:16px;
+display:block;
+text-align: left;
+margin-top:0;
+padding:0;
+height: auto;
+}
+.chatPanel .media .mediaPanel {
+padding:0px;
+margin:0px;
+}
+.chatPanel .media .mediaHead {
+padding: 10px 10px 8px;
+border-bottom: 0px solid #D3D8DC;
+color: #000000;
+font-size: 20px;
+}
+
+.chatPanel .media .mediaFooter {
+padding: 0 10px;
+}
+.chatPanel .mediaFullText .mediaImg {
+width: 265px;
+margin: 0 10px;}
+.chatPanel .mediaFullText .mediaImg img{
+width: 100%; height: 150px;}
+.chatPanel .mediaFullText .mediaContentP {
+margin: 5px 10px 0px;
+}
+.chatPanel .mediaFullText .mediaContentP p{
+line-height:18px
+}
+.chatPanel .mediaFullText .mediaContent {
+padding: 0 0 5px;
+}
+</style>
+
+
+<div class="content">
+
+<div class="cLineB">
+    <h4><empty name='panorama'> 添加全景图<else/>修改全景图</empty></h4>
+<a href="{lingzh::U('Panorama/panorama_list', array('galleryid'=>$galleryid))}" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>
+
+<div class="msgWrap bgfc">
+    <empty name='panorama'>
+        <form id='ListForm' action="{lingzh::U('Panorama/panorama_add', array('galleryid'=>$galleryid))}" method="post">
+    <else />
+    <form id='ListForm' action="{lingzh::U('Panorama/panorama_edit', array('galleryid'=>$panorama['galleryid'], 'panoramaid'=>$panorama['id']))}" method="post">
+    </empty>    
+        <table  class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+            <tr>
+                <th style="width:150px;">全景图标题：</th>
+                <td><input class="px" style="width:300px;" type="text" name="title" value="<notempty name='panorama'>{lingzh:$panorama.title}</notempty>"  /></td>
+                
+            </tr>
+            <tr>
+                <th style="width:150px;">全景图介绍：</th>
+                <td><input class="px" style="width:300px;" type="text" name="info" value="<notempty name='panorama'>{lingzh:$panorama.info}</notempty>"  /></td>
+                
+            </tr>
+            <tr>
+                <th>在相册中的显示顺序：<br><font style=" font-size: 8px" color="red">(数值小者优先显示)</font></br></th>
+                <td><input class="px" style="width:300px;" type="text" name="sort" value="<notempty name='panorama'>{lingzh:$panorama.sort}</notempty>"  /></td>
+            </tr>
+            <tr>
+                <th colspan="2" > <font color='red'>请按序依次上传六张全景图切片：</font></th>
+            </tr>
+            <php>
+                for($i=1;$i<7;$i++){
+                
+                    $imageIdValue = '';
+                    $picUrlNameValue = '';
+                    
+                    if(isset($slices[$i])) {
+                        $imageIdValue = $slices[$i]['raw_image_id'];
+                        $picUrlNameValue = $slices[$i]['raw_name'];
+                    };
+                    
+                    echo '<tr>'.
+                        '<th>'.PanoramaAction::$SliceNameList[$i - 1].'</th>'.
+                        '<td>'.
+                            '<input disabled="1" class="px" id="pic_url_name_input_'.$i.'" style="width:300px;" type="text" value="'.$picUrlNameValue.'" />'.
+                            '&nbsp;<span onclick="ShowUploadPanel('.$i.')" class="btnGreen" style="text-decoration:underline;cursor:pointer;"> 上传图片 </span>'.
+                            '<input id="pic_url_id_input_'.$i.'" style="display:none" type="text" name="pic_url_id_input_'.$i.'" value="'.$imageIdValue.'" />'.
+                        '</td>'.
+                        '</tr>';
+                }
+            </php>
+            <tr>
+                <th></th>
+                <td>
+                    <button type="submit" name="button" class="btnGreen">保存</button>
+                    <empty name='panorama'>
+	                    <a href="{lingzh::U('Panorama/panorama_list', array('galleryid'=>$galleryid))}" class="btnGray vm">取消</a>
+				    <else />
+				    	<a href="{lingzh::U('Panorama/panorama_list', array('galleryid'=>$panorama['galleryid']))}" class="btnGray vm">取消</a>
+				    </empty>   
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div class="clr"></div>
+</div>
+</div>
+
+   <div id="upload-panel" style="display:none" >
+    <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+    <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+      <iframe id="uploadIframe" style=" width:500px;height:500px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+    </div>
+  </div>
+
+<script>
+    function ShowUploadPanel(id) {
+       
+        var url = '{lingzh::U("UploadImg/index")}' + '&id=' + id + '&galleryid=' + '{lingzh:$galleryid}' + '&is3d=1';
+        
+        $('#uploadIframe').attr('src', url);
+        $('#upload-panel').show();
+    }
+    </script>
+
+<include file="Public:footer"/>  
+ 

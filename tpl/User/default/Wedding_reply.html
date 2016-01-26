@@ -1,0 +1,69 @@
+<include file="Public:head"/>  
+<div class="content">
+         
+          <div class="cLineB">
+              <h4 class="left">婚礼祝福</h4>
+              <br />
+           
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+			<a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:10px">返回</a>          
+			<div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post" action="index.php?g=User&m=Wedding&a=dels" id="info">
+          <input name="delall" type="hidden" value="del">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+					<th align="center" valign="middle">姓名</th>
+				    <th align="center" valign="middle">手机</th>
+					<th align="center" valign="middle">祝福留言</th>
+					<th align="center" valign="middle">屏蔽</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+                <volist name="list" id="vo">  
+                <tr>
+                   <td align="center" valign="middle">{lingzh:$vo.name}</td>
+                   <td align="center" valign="middle">{lingzh:$vo.tel}</td>
+				   <td align="center" valign="middle">{lingzh:$vo.text}</td>
+				   <td><a href="javascript:drop_confirm('您确定要屏蔽吗?', '{lingzh::U('Wedding/delreply',array('id'=>$vo['id'], 'wid'=>$wid))}');">屏蔽</a></td>
+                </tr>
+				</volist>
+              </tbody>
+            </table>
+           </form> 
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages">{lingzh:$page}</div>
+             </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+<include file="Public:footer"/>
+<script>
+$(document).ready(function() {
+$('.ListProduct').dataTable({
+    "oLanguage": {
+        "sLengthMenu": "每页显示 _MENU_ 记录",
+        "sZeroRecords": "对不起，没有找到相关的商品",
+        "sInfo": "第 _START_ 条到 _END_ 条，总共 _TOTAL_ 条记录",
+        "sInfoEmpty": "显示 0 条记录",
+        "sInfoFiltered": "(从 总共_MAX_条记录)",
+        "sSearch": "查找",
+        "bJQueryUI": true,
+        "sPaginationType": "full_numbers",
+        "oPaginate": {
+            "sPrevious" : "前一页",
+            "sNext": "下一页"
+        },
+    },
+    "bPaginate": false,
+    "bFilter": false,
+});
+} );
+</script>

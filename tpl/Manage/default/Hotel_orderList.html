@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{lingzh:$page_title}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="/themes/m/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="/js/dataTables/jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css">
+  <link href="/js/dataTables/jquery.dataTables.css" rel="stylesheet" type="text/css">
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery-migrate-1.2.1.min.js"></script>
+  <script src="/js/tips/XY_Base.js" type="text/javascript"></script>
+
+  <style type="text/css">
+    body {padding-top: 60px;padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+  </style>
+
+
+
+</head>
+<body>
+<include file="Index:header"/>
+
+  <div class="container">
+    <div class="row">
+      <include file="Index:sidebar"/>
+      <div class="col-lg-10">
+
+        <div class="page-header">
+          <h3>宾馆预定管理</h3>
+        </div>
+        <div class="content"> 
+
+          <div class="well row">
+            <div class="col-lg-3">
+              名称：{lingzh:$merchant.title}              
+            </div>
+             <div class="col-lg-2">
+              关键词：{lingzh:$merchant.keyword}
+            </div>
+            <div class="col-lg-4">
+              地址：{lingzh:$merchant.address}
+            </div>
+            <if condition="empty($merchant['tel']) eq false">
+            <div class="col-lg-3">
+              电话：{lingzh:$merchant.tel}
+            </div>
+            </if>
+          </div>
+          <div class="row" style="margin-bottom:15px;">
+            <div class="col-lg-12">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default <if condition="!isset($_GET['status']) || $_GET['status'] eq 3"> active </if>" onclick="location.href='{lingzh::U('Hotel/orderList',array('status'=>3))}'" >新订单</button>
+                <button type="button" class="btn btn-default <if condition="$_GET['status'] eq 1"> active </if>" onclick="location.href='{lingzh::U('Hotel/orderList',array('status'=>1))}'">已确认</button>
+                <button type="button" class="btn btn-default <if condition="$_GET['status'] eq 4"> active </if>" onclick="location.href='{lingzh::U('Hotel/orderList',array('status'=>4))}'">商户取消</button>
+                <button type="button" class="btn btn-default <if condition="$_GET['status'] eq 2"> active </if>" onclick="location.href='{lingzh::U('Hotel/orderList',array('status'=>2))}'">用户取消</button>
+                <button type="button" class="btn btn-default <if condition="$_GET['status'] eq 5"> active </if>" onclick="location.href='{lingzh::U('Hotel/orderList',array('status'=>5))}'">已处理</button>
+              </div>
+            </div>
+          </div>
+
+
+          <table class="orderList table table-bordered table-striped" align="center">
+            <thead>
+              <tr>
+                <th width="50">序号</th>
+                <th width="60">姓名</th>
+                <th width="100">电话</th>
+                <th width="80">预约时间</th>
+                <th width="80">预约内容</th>
+                <th width="120">下单时间</th>
+                <th width="60">数量</th>
+                <th width="60">价格</th>
+                <th width="80">订单状态</th>
+                <th width="120">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <volist name="orders" id="order"> 
+              <tr>
+              <form action="{lingzh::U('Hotel/manage')}" method="post">  
+              <td>{lingzh:$order.sn}</td>
+              <td>{lingzh:$order.book_people}</td>
+              <td>{lingzh:$order.tel}</td>
+              <td>{lingzh:$order.book_time|date="y-m-d",###}</td>
+              <td>{lingzh:$order.room_type}</td>
+              <td>{lingzh:$order.submit_time|date="y-m-d H:i",###}</td>
+              <td>{lingzh:$order.book_num}</td>
+              <td>{lingzh:$order.price}</td>
+              <td>
+                <input type="hidden" name="id" value="{lingzh:$order.id}">
+                <input type="hidden" name="mid" value="{lingzh:$Think.get.mid}">
+                <if condition="$order.order_status eq 2"> 客户取消 
+                <elseif condition="$order.order_status eq 4"/> 商户取消 
+                <elseif condition="$order.order_status eq 5"/> 已退房
+                <else /> 
+                  <select name="status" > 
+                    <option value="1" <if condition="$order.order_status eq 1">selected="selected"</if>>已确认</option>
+                    <?php if($order['order_status'] != 1){ ?>
+                    <option value="3" <if condition="$order.order_status eq 3">selected="selected"</if>>未确认</option>
+                    <option value="4" <if condition="$order.order_status eq 4">selected="selected"</if>>商户取消</option>
+                    <?php } ?>
+                    <?php if($order['order_status'] == 1){ ?>
+                    <option value="4" <if condition="$order.order_status eq 5">selected="selected"</if>>已退房</option>
+                    <?php } ?>
+                  </select>
+                </if>  
+              </td>
+              <td colspan="10" class="norightborder">  
+              <if condition="$order.order_status eq 3">
+                <?php if($order['order_status'] == 3 || $order['order_status'] == 1) { ?>
+                <button type="submit" class="btn btn-primary btn-xs" ><font color="white">保存</font></button>
+              <?php } ?>
+              <a href="{lingzh:$order.url}">查看</a>
+              </td>
+              </form>
+              </tr>
+              
+              </volist>
+
+ 
+            </tbody>
+          </table>
+        </div> 
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-8">
+              <div class="pages">{lingzh:$page}</div>
+            </div>
+          </div>
+      </div> <!-- /col -->
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/dataTables/jquery.dataTables.min.js" type="text/javascript"></script>
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+<script src="/themes/m/js/tips.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+$(document).ready(function() 
+{
+  setInterval(function() {checkOrder("Hotel"); }, 1000*60 + Math.random()*5000);
+});
+</script>
+</body>
+</html>

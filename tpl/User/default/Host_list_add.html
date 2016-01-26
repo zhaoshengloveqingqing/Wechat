@@ -1,0 +1,145 @@
+<include file="Public:head"/>
+<script src="/themes/a/js/bootstrapSwitch.js"></script>
+<link rel="stylesheet" href="/themes/a/css/bootstrapSwitch.css">
+<div class="content">
+    <div class="cLineB">
+        <h4>预定内容设置 [ 都是必填项 ]</h4>
+    <a href="{lingzh::U('Host/lists',array('id'=>$hid))}" class="right btnGreen" style="margin-top:-27px">返回</a> </div>
+    <div class="msgWrap bgfc">
+        <form id="booking_add_form" class="form" method="post" action="" target="_top" enctype="multipart/form-data">
+            
+            <table class="userinfoArea" style="margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+                <tbody>
+                    <tr>
+                        <th>订单商品：</th>
+                        <td width="309"><input type="text" name="type" value="{lingzh:$list['type']}" class="px" style="width:200px;"><br />如:"标准房/商务套房"</td>
+                        <th width="117">简要说明：</th>
+                        <td width="639" colspan="3"><input type="text" name="typeinfo" value="{lingzh:$list['typeinfo']}" class="px" style="width:200px;"> <br />字尽量少，如“大床，双床，适合2人”</td>
+                    </tr>
+                    <tr>
+                        <th>原价：</th>
+                        <td><input type="text" name="price" value="{lingzh:$list['price']}" class="px required number" style="width:200px;"></td>
+                        <th>优惠价：</th>
+                        <td colspan="3"><input type="text" name="yhprice" value="{lingzh:$list['yhprice']}" class="px required number" style="width:200px;"></td>
+                    </tr>
+                    <tr>
+                        <th>开启库存：</th>
+                        <td>
+                            <div class="switch switch_anchor" data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+                                <input type="checkbox" onChange="inventory_change(this)" id="open_inventory" name="open_inventory" <?php echo $list['open_inventory'] == 1 ? "checked" : "" ; ?> value="1"/>
+                            </div>
+                        </td>
+                        <th>
+                            <span id = "inventory_title">库存：</span>
+                        </th>
+                        <td colspan="3">
+                            <input id="inventory_value" type="text" name="inventory" value="{lingzh:$list['inventory']}" class="px required digits" style="width:200px;">
+                        </td>
+                    </tr>
+                    <script type="text/javascript">
+                        function inventory_change($this)
+                        {
+                            var a = $($this).is(':checked');
+                            hide_inventory(a)
+                            
+                        }
+                        function hide_inventory(isHide)
+                        {
+                            if(isHide)
+                            {
+                                $('#inventory_title').show();
+                                $('#inventory_value').show();
+                            }
+                            else
+                            {
+                                $('#inventory_title').hide();
+                                $('#inventory_value').hide();
+                            }
+                        }
+                        $().ready(function(){
+                            <?php 
+                            if($list['open_inventory'] == 1) 
+                            {
+                                echo 'hide_inventory(true);';
+                            }
+                            else
+                            {
+                                echo 'hide_inventory(false);';
+                            }
+                            ?>
+
+                        });
+                    </script>
+                    <tr>
+                        <th valign="top">订单信息：</th>
+                        <td colspan="5">
+                            <div class="bdrcontent">
+                                <div id="div_ptype">
+                                    <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th width="160">文字描述</th>
+                                                <th width="160">图片地址</th>
+                                                <!--th width="160">图片跳转地址以http://开头</th-->
+                                            </tr>
+                                        </thead>
+                                        <tbody id="div_add_del" name="div_add_del">
+                                            <tr>
+                                                <td width="160"><input type="text" name="name" value="{lingzh:$list['name']}" class="px" style="width:160px;"></td>
+                                                <td width="200">
+                                                    <input type="text" id="pic_url_input" name="picurl" value="{lingzh:$list['picurl']}" class="px" style="width:260px;">
+                                                    <span onclick="$('#upload-panel').show();" style="text-decoration:underline;cursor:pointer;"> 点击上传图片 </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th valign="top">订单商品详细说明：</th>
+                        <td valign="top" colspan="5"><textarea class="px" id="info" name="info" style="width: 600px; height: 180px; ">{lingzh:$list['info']}</textarea></td>
+                    </tr>
+                    <tr><th width="146">&nbsp;</th>
+                    <td><button type="submit" name="button" class="btnGreen">保存</button>
+                    <!--<a href="{lingzh::U('Host/lists',array('token'=>$token,'id'=>$_GET['hid']))}" class="btnGray vm">取消</a></td>
+                --></tr>
+            </tbody></table>
+        </form>
+    </div>
+</div>
+<div id="upload-panel" style="display:none" >
+    <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+    <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+        <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+    </div>
+</div>
+<script src="/js/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="/js/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="/js/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script type="text/javascript">
+$().ready(function() {
+	$("#booking_add_form").validate();
+});
+
+var editor;
+KindEditor.ready(function(K) {
+	editor = K.create('#info', {
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		allowImageUpload : true,
+		uploadJson :'/index.php/upload/image',
+		items : [
+			'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut', 'image', 'multiimage'
+		]
+	});
+});
+
+</script>
+<include file="Public:footer"/>

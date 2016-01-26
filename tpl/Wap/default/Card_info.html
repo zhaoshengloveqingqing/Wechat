@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="format-detection" content="telephone=no" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/css/card/wei_webapp_new_v1.0.4.css" />
+<script src="{lingzh::RES}/js/card/jquery.js"  type="text/javascript" ></script>
+<script src="{lingzh::RES}/js/card/rotate.js"  type="text/javascript"></script>
+</head>
+<style>
+body{font: 12px/1.5 Microsoft YaHei,Helvitica,Verdana,Arial,san-serif;}
+.footReturn {
+display: block;
+margin: 11px auto;
+padding: 0;
+position: relative;}
+.submit {
+background-color: #179F00;
+padding: 10px 20px;
+font-size: 16px;
+text-decoration: none;
+border: 1px solid #0B8E00;
+background-image: linear-gradient(bottom, #179F00 0%, #5DD300 100%);
+background-image: -o-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
+background-image: -moz-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
+background-image: -webkit-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
+background-image: -ms-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
+background-image: -webkit-gradient(
+ linear,
+ left bottom,
+ left top,
+ color-stop(0, #179F00),
+ color-stop(1, #5DD300)
+ );
+-webkit-box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
+-moz-box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
+box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+-o-border-radius: 5px;
+border-radius: 5px;
+color: #ffffff;
+display: block;
+text-align: center;
+text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	var value = 360;
+	$(".card").bind('click',function(){		
+		if($("#card2").is(":hidden")){
+			$("#card").rotate({ animateTo:value});
+			$("#card").delay(600).hide(0);
+			$("#card2").delay(600).show(0);
+		
+		}else{
+			$("#card2").rotate({ animateTo:value});
+			$("#card").delay(600).show(0);
+			$("#card2").delay(600).hide(0);
+		
+		}
+		
+	});	
+});
+
+</script>
+<body id="page_card">
+
+<div id="mappContainer">
+  <div class="inner root" style="height: 468px;">
+    <div id="card" class="card" style="<if condition="!empty($card['diybg'])"> background:url('{lingzh:$card['diybg']}') <else/> background:url('{lingzh:$card['bg']}')</if> no-repeat 0 0;-webkit-background-size:267px 159px;background-size:267px 159px;">
+		  <if condition="!empty($card['logo'])"><img src="{lingzh:$card.logo}" class="logo"/></if>
+		  <h1 style="color:{lingzh:$card.vipnamecolor};text-shadow:0 1px #e2ded2;">
+        {lingzh:$card.cardname}
+        ({lingzh:$group_info})
+      </h1>
+		  <!--<h2></h2>-->
+		  <figure class="pdo twodim" hidden=""><img data-src="006 4655"></figure>
+		  <figure class="pdo barcode" hidden=""><img data-src="006 4655"></figure>
+		  <strong class="pdo verify" style="">
+				<span style="color:#847d64;text-shadow:0 1px #ebe9e0;">
+					<em style="color:#847d64;text-shadow:0 1px #ebe9e0;">会员卡号</em>
+					<span style="color:{lingzh:$card.numbercolor}">{lingzh:$mycard.number}</span>
+				</span>
+		  </strong>
+	  </div>
+	  <!--会员卡背面-->
+	  <div id="card2" class="card" style="<if condition="!empty($card['diybg'])"> background:url('{lingzh:$card['diybg']}') <else/> background:url('{lingzh:$card['bg']}')</if> no-repeat 0 0;-webkit-background-size:267px 159px;background-size:267px 159px;display:none">
+	  	<div style="height:80px;">	
+		  <if condition="!empty($card['logo'])"><img src="{lingzh:$card.logo}" class="logo"/></if>
+		  <h1 style="color:{lingzh:$card.vipnamecolor};text-shadow:0 1px #e2ded2;">{lingzh:$card.cardname}<if condition="$mycard['groupid'] eq 3">(银卡)<elseif condition="$mycard['groupid'] eq 4"/>(金卡)<elseif condition="$mycard['groupid'] eq 5"/>(钻卡)</if></h1>
+			</div>
+		  <!--<h2></h2>-->
+		  <div style="padding-top:10px;color:#847d64;font-size:12px;margin-left:10px;">
+		  	<span style="color:{lingzh:$card.vipnamecolor}">总店电话：{lingzh:$contact.tel}</span><br>
+		  	<span style="color:{lingzh:$card.vipnamecolor}">总店地址：{lingzh:$contact.info}</span>
+		  </div>		  
+	  </div>
+    <p><span data-hidden-when-lost="使用时向服务员出示此卡">{lingzh:$card.msg}</span></p>
+
+     <ul class="round" style="display:block">
+     <li class="intro">
+		<div style="width:99%;background:rgb(134, 141, 46);color:white;line-height:30px;padding-left:10px;">{lingzh:$info.description}</div>
+		<div >
+		<if condition="$info['logo'] neq ''">
+			<div><span><img src="{lingzh:$info.logo}" width="100%"/></span></div>
+		</if>
+			<div>{lingzh:$info.info}</div>
+		</div>
+		
+	</li>   
+	</ul>
+	
+	<div style="height:40px;">&nbsp;</div>
+  </div>
+  
+  	<div class="footFix" id="footReturn"><a href="javascript:void(0)" onClick="location.href='{lingzh::U('Card/vip',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}';"><span>返回会员卡页</span></a></div>
+</div>
+<div style="clear:both"></div>
+<script>
+  $(function(){
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+      WeixinJSBridge.call('hideOptionMenu');
+    });
+  })();
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+      document.addEventListener('WeixinJSBridgeReady', function() {
+        var WJ = WeixinJSBridge;
+        // 发送给好友
+        WJ.on('menu:share:appmessage', function() {
+          WJ.invoke('sendAppMessage', config, function(res) {
+            // _report('sendAppMessage', res.err_msg);
+          });
+        });
+        // 发送到朋友圈
+        WJ.on('menu:share:timeline', function() {
+          WJ.invoke('shareTimeline', config, function(res) {
+            // _report('shareTimeline', res.err_msg);
+          });
+        });
+
+        // 发送到微博
+        WJ.on('menu:share:weibo', function() {
+          WJ.invoke('shareWeibo', config, function(res) {
+            // _report('shareWeibo', res.err_msg);
+          });
+        });
+      });
+
+    });
+  </script>
+</body>
+</html>

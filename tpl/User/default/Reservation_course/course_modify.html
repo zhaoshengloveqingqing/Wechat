@@ -1,0 +1,35 @@
+<include file="Public:head"/>
+<div class="content">
+<div class="cLineB">
+  <h4><if condition='isset($res_course)'>修改课程 <else/>添加课程</if></h4>
+  <a href="{lingzh::U('Reservation/course')}" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+<div class="msgWrap bgfc">
+  <form class="form" method="post" action="{lingzh::U('Reservation/course_modify')}" target="_top">  
+    <input type="hidden" name="course_id" value="<?php if(isset($res_course)) echo $res_course['id']; ?>"></input>
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tbody>
+        <tr>
+          <th width="186"><span class="red">*</span>课程名：</th>
+          <td>
+            <input style="width:400px;" name="course" class="text textMiddle" value="<?php if(isset($res_course)) echo $res_course['course']; ?>"></input>
+          </td>
+        </tr>
+        <tr>
+         <th width="186"><span class="red">*</span>排序：</th>
+          <td>
+            <input style="width:400px;" name="sort" class="text textMiddle" value="<?php if(isset($res_course)) echo $res_course['sort']; ?>"></input>
+          </td>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+          <td>
+            <button type="submit" name="button" class="btnGreen">保存</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  </div> 
+</div>
+<include file="Public:footer"/>

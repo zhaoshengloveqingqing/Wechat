@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="format-detection" content="telephone=no" />
+<title><if condition="isset($pub_account['wxname'])">{lingzh:$pub_account.wxname}</if>></title>
+<style type="text/css">
+body{height:480px;margin:0px;}
+ul, li, ol {
+list-style: none;
+}
+body, div, table, dl, dt, dd, ul, ol, li, h1, h2 {
+padding: 0;
+margin: 0;
+}
+.head{
+width: 100%; 
+text-align: center;
+color: #FFF;
+background: #0775CA;
+line-height: 48px;
+font-size: 24px;
+font-weight: bold;
+position: fixed;
+top: 0;
+left:0;
+}
+li{line-height: 20px;margin: 0px 15px;}
+p {margin-left: 40px; color:##232323; font-size:16px; line-height:26px;}
+.icon{border-radius: 15px;background: #F18449;height: 30px;width: 30px;text-align: center;line-height: 30px;float: left;color: #fff;font-weight: bold; font-size:20px;}
+.wxname{color: #0675ca;font-weight: bold;}
+.wifi{color: #0675ca;font-weight: bold;}
+.qrcode{text-align: center;}
+.main{ 
+  max-width: 640px;width: 320px;margin: 0 auto;margin-top: 90px;
+  }
+</style>
+
+</head>
+<body>
+  <if condition="isset($pub_account)">
+  <div class="head" id="head">{lingzh:$pub_account.wxname}</div>
+  <div class="main">
+    <ul>
+      <li>
+        <div class="icon">1</div>
+        <p>打开微信搜索并关注公众号"<span class="wxname">{lingzh:$pub_account.weixin}</span>"。
+        <?php if(isset($pub_account['qrcode_pic']) && empty($pub_account['qrcode_pic']) == false) { ?>
+          或者扫描以下二维码</p>
+          <div class="qrcode">
+            <img width="160" height="160" src="{lingzh:$pub_account.qrcode_pic}">
+          </div>
+        
+        <?php }  else { ?>
+          </p>
+        <?php }  ?>
+      </li>
+      <li>
+        <div class="icon">2</div><p>关注后向该公众号发送消息"<span class="wifi">wifi</span>"</div>
+      </li>
+    </ul>
+  </div>
+  <else/>
+    <div class="main">
+      <p>请联系商家获取上网密码</div>
+    </div>
+  </if>
+</body>
+</html>

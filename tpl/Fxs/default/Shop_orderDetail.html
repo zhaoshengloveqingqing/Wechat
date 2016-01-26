@@ -1,0 +1,166 @@
+<include file="Shop:header"/>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+<div class="main">
+
+  <div class="p_mod">
+    <h2 class="p_mod_title">订单信息</h2>
+      <div class="car">
+      <p><span class="price_now">订单编号：{lingzh:$order.sn}</span></p>
+      <p><span class="price_now" id="total_fee">总价格：<font>￥{lingzh:$order.price}</font></span></p>
+      </div>
+    </div>            
+  </div>
+
+  <if condition="$order.status eq 4" >
+  <div class="p_mod">
+    <h2 class="p_mod_title">订单状态</h2>
+      <div class="car">
+      <p><span class="price_now">用户取消</span></p>
+      </div>
+    </div>            
+  </div>
+  </if>
+
+  <div class="p_mod">
+    <h2 class="p_mod_title">支付方式</h2>
+    <div class="car">
+      <if condition="$order.payment eq cod" >
+        <p><span class="price_now">货到付款</span></p>
+	  <elseif condition="$order.payment eq unionpay" />
+ 		<p>银联支付
+ 		<switch name="order.status">
+                <case value="1">
+                    <span class="price_now">（尚未支付）</span>
+                    <a href="{lingzh:$order.unionpay_url}" class="u_btn ts1" style="margin-top: 6px;"><span class="ts1">去付款</span></a>
+                </case>
+                <case value="2">
+                    <span class="price_now"> (已付款)</span>
+                </case>
+                <default />
+            </switch>
+	 	</p>
+      <elseif condition="$order.payment eq wxpay" />
+            <p>微信支付
+                <switch name="order.status">
+                    <case value="1">
+                        <span class="price_now">（尚未支付）</span>
+                        <a href="{lingzh:$order.wxpay_url}" class="u_btn ts1" style="margin-top: 6px;"><span class="ts1">去付款</span></a>
+                    </case>
+                    <case value="2">
+                        <span class="price_now"> (已付款)</span>
+                    </case>
+                    <default />
+                </switch>
+            </p>
+        <elseif condition="$order.payment eq cftpay" />
+            <p>
+                <switch name="order.status">
+                    <case value="1">
+                        <span class="price_now">财付通支付（尚未支付）</span>
+                        <a href="{lingzh:$order.cftpay_url}" class="u_btn ts1" style="margin-top: 6px;"><span class="ts1">去付款</span></a>
+                    </case>
+                    <case value="2">
+                        <span class="price_now">财付通支付 (已付款)</span>
+                    </case>
+                    <default />
+                </switch>
+            </p>
+      <elseif condition="$order.payment eq wingpay" />
+            <p>
+                <switch name="order.status">
+                    <case value="1">
+                        <span class="price_now">翼支付（尚未支付）</span>
+                        <a href="{lingzh:$order.wingpay_url}" class="u_btn ts1" style="margin-top: 6px;"><span class="ts1">去付款</span></a>
+                    </case>
+                    <case value="2">
+                        <span class="price_now">翼支付 (已付款)</span>
+                    </case>
+                    <default />
+                </switch>
+            </p>
+      <else />
+        <p>
+             <switch name="order.status">
+                    <case value="1">
+                         <span class="price_now">支付宝支付（尚未支付）</span>
+                         <a href="{lingzh:$order.alipay_url}" class="u_btn ts1" style="margin-top: 6px;"><span class="ts1">去付款</span></a>
+                    </case>
+                    <case value="2">
+                        <span class="price_now">支付宝支付(已付款)</span>
+                    </case>
+                    <default />
+                </switch>
+        </p>
+      </if>
+    </div>            
+  </div>
+  
+  <div class="p_mod">
+    <h2 class="p_mod_title">发货信息</h2>
+    <div class="car">
+        <if condition="$order.status eq 3" >
+        	<p><span class="price_now">已发货</span></p>
+            <if condition="isset($logistics)">
+                <p><span class="price_now">物流公司：{lingzh:$logistics.name}</span></p>
+                <p><span class="price_now">运单编号：{lingzh:$logistics.logistics_no}</span></p>
+            </if>
+         <elseif condition="($order.status eq 2) AND ($order.payment eq 'cod')"/>
+	        <p><span class="price_now">已发货</span></p>
+	        <if condition="isset($logistics)">
+                <p><span class="price_now">物流公司：{lingzh:$logistics.name}</span></p>
+                <p><span class="price_now">运单编号：{lingzh:$logistics.logistics_no}</span></p>
+            </if>
+        <else />
+        	<p><span class="price_now">未发货</span></p>
+        </if>
+    </div>            
+  </div>
+
+  <div class="p_mod">
+    <h2 class="p_mod_title">商品信息</h2>
+    <div class="car">
+      <volist name="products" id="p">
+      <div class="car_list clearfix">
+        <div class="car_content clearfix">
+          <h3><a href="{lingzh:$p.url}">{lingzh:$p.name}</a></h3>
+          <a href="{lingzh:$p.url}">
+            <img src="{lingzh:$p.logo_url}" />
+          </a>
+          <div class="car_property">
+            <span class="price_now">单价：<font>￥{lingzh:$p.price}</font></span>
+            <div class="o_num_input clearfix" id="{lingzh:$p.product_id}">数量：{lingzh:$p.count}</div>
+          </div>
+        </div>
+      </div>
+      </volist>
+      
+    </div>            
+  </div>
+
+
+  <div class="p_mod">
+    <h2 class="p_mod_title">收件人信息</h2>
+    <div class="car">
+      <p><span class="price_now">姓名：{lingzh:$order.truename}</span></p>
+      <p><span class="price_now">电话：{lingzh:$order.tel}</span></p>
+      <p><span class="price_now">地址：{lingzh:$order.cmbProvince}{lingzh:$order.cmbCity}{lingzh:$order.cmbArea}{lingzh:$order.address}</span></p>
+    </div>            
+  </div>
+  
+  <if condition="$order.status eq 1" >
+	  <div class="o_btn clearfix">
+	  <input type="button"  style="background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(248,204,88)), to(rgb(248, 184, 1)));" class="o_btn_cancel ts1" onclick="location.href='{lingzh:$cancel_url}'" value="取消订单">
+	  </div>
+  <elseif condition="$order.status eq 3"/>
+ 	  <div class="o_btn clearfix">
+ 	  	<input type="button" class="u_btn ts1" style="width: 100%;background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ECA09D), to(#FD0505)); border: 1px solid #DF6868;" onclick="location.href='{lingzh::$confirm_url}'" value="确认收货">
+	  </div>
+  </if>
+</div>
+</div>
+</body>
+</html>

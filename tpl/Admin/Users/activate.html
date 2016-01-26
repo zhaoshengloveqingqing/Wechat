@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Public:head"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{lingzh::RES}/images/main.css" type="text/css" rel="stylesheet">
+<script src="{lingzh::STATICS}/jquery-1.4.2.min.js" type="text/javascript"></script>
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+ <link href="/themes/w/css/reservation_setting.css" rel="stylesheet" type="text/css">
+ <link rel="stylesheet" href="/themes/a/css/car.css" />
+<style type='text/css'>
+    
+.btnGreen {
+    border: 1px solid #3D810C;
+    box-shadow: 0 1px 1px #AAA;
+    -moz-box-shadow: 0 1px 1px #aaa;
+    -webkit-box-shadow: 0 1px 1px #AAA;
+    padding: 5px 20px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    vertical-align: bottom;
+    overflow: visible;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #5BA607;
+    background-image: linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+    background-image: -moz-linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+    background-image: -webkit-linear-gradient(bottom, #4D910C 3%, #69B310 97%, #FFF 100%);
+    color: #FFF;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.table tr td {
+    padding:0px;
+}
+</style>
+</head>
+<body class="warp">
+<div id="artlist" class="addn">
+<form action="{lingzh::U('Users/activate')}" method="post" name="form" id="myform">
+    <input  name='userid' type='text' style='display:none' value='{lingzh:$userid}'></input>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+
+            <tr>
+                   <th colspan="4">{lingzh:$title}</th>
+           </tr>
+           <tr>
+                   <td colspan="4">
+请在下面的”充值码"输入框中输入您的充值码，然后点击"充值”按钮，可以延长相应功能模块的使用时间；
+<br/>充值成功后，您可以在“开通功能组”中看到每个功能模块的使用期限。</td>
+           </tr>
+           <tr>
+                   <td height="48" align="right">
+                       <strong>充值码：</strong>
+                       
+                      </td>
+                   <td  colspan="2" class="lt">
+                           <input type="text" name="invitecode" class="ipt" size="45" value="" >
+                           &nbsp;
+                           <input class='btnGreen' type="submit" name="activateSubmit" value="充 值"/>  
+                   </td>
+           </tr>
+              <tr>
+                  <td colspan="4">请在下面的“开通功能组”列表中，选择您要给商户开通的功能模块。<span style="color:red">（结束时间只能改小）</spa></td>
+           </tr>
+        <tr >
+              <td height="48" align="right"><strong>开通功能组：</strong></td>
+              <td colspan="2" class="lt">
+                  <table class="table table-bordered table-hover dataTable" >
+                      <thead>
+                            <th style="width:10%">开关</th>
+                            <th style="width:25%">功能组</th>
+                            <th style="width:25%">开始时间</th>
+                            <th style="width:40%">结束时间</th>
+                      </thead>
+                      <tbody>
+                            <volist name='func_groups' id='group'>
+                                <eq name="group.visible" value="1">
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input type="checkbox" onchange="changeapp(this,{lingzh:$group.id}, {lingzh:$userid})" name="func_group[]" class="ipt" value="{lingzh:$group.id}" <if condition="$group['status'] eq '1'">checked</if> />
+                                        </td>
+                                        <td>
+                                             <label>{lingzh:$group.name}</label> 
+                                        </td>
+                                        <td>
+                                             <input type="input" disabled="disabled" readonly="readonly" class="input-medium" value="<if condition="$group['start_time'] neq ''">{lingzh:$group.start_time|date="Y-m-d",###}</if>" name="start_time{lingzh:$group.id}" />  
+                                        </td>
+                                        <td>
+                                            <input type="input" class="input-medium"  <if condition="$group['expire_time'] eq ''">disabled="disabled" readonly="readonly" </if> onfocus="$('#savebtn_{lingzh:$group.id}').show()" value="<if condition="$group['expire_time'] neq ''">{lingzh:$group.expire_time|date="Y-m-d",###}</if>"  name="expire_time{lingzh:$group.id}" id="expire_time{lingzh:$group.id}" /> 
+                                        
+                                            <if condition="$group['expire_time'] neq ''">
+                                              <input id="savebtn_{lingzh:$group.id}" style="display:none" type="button" onclick="update_expire({lingzh:$group.id}, {lingzh:$userid})" value="保存">
+                                            </if>  
+                                        </td>
+                                    </tr>
+                                </eq>
+                            </volist>
+                          
+                      </tbody>
+                  </table>
+              </td>
+        </tr>
+        <tr>
+            <td colspan="4" style='font-size: 14px;font-weight: bold'>短信包：</td>
+        </tr>
+        <tr>
+            <td>总量(条)：</td>
+            <td>已使用(条)：</td>
+            <td>剩余(条)：</td>
+            <td>上次充值时间：</td>
+        </tr>
+        <tr>
+        <empty name='smsaccount'>
+            <td colspan='4' style='font-size: 14px;font-weight: '>短信功能未开通</td>
+            <else/>
+            <td>{lingzh:$smsaccount.total}</td>
+            <td>{lingzh:$smsaccount.used}</td>
+            <td>{lingzh:$smsaccount.balance}</td>
+            <td><php>echo date('Y-m-d H:i:s', $smsaccount['last_recharge_time']);</php></td>
+        
+        </empty>
+        </tr>
+        
+    </table>
+</form>
+<br />
+<br />
+<br />
+
+</div>
+    <script>
+function changeapp(obj, gid, userid ){
+    var myurl='index.php?g=Admin&m=Users&a=updatefuncgroup&userid='+userid + '&gid='+gid 
+            + '&checked=' + (obj.checked == true ? '1' : '0') + '&r='+Math.random(); 
+     $.get(myurl,function(data){
+        if(data==1){
+                alert('修改该功能成功！');
+        }  else {
+         alert('修改失败，请刷新页面重试！');
+      }
+     });
+}
+function update_expire(gid,  userid) {
+    var sel = '#expire_time' + gid;
+    var reg = new RegExp("^20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]$");
+    var new_time = $(sel).val();
+    if(!reg.test(new_time)) {
+        alert('日期不合法，请使用如2014-01-01');
+        return;
+    }
+    
+    var myurl='index.php?g=Admin&m=Users&a=updatefgtime&userid='+userid + '&gid='+gid 
+            + '&expiretime=' + new_time + '&r='+Math.random(); 
+     $.get(myurl,function(data){
+         switch(data) {
+             case '0':
+                 alert('修改成功！'); 
+                 $('#savebtn_' + gid).hide();
+                 break;
+             case '1':
+                 alert('修改失败！请刷新重试！'); 
+                 break;
+             case '2':
+                 alert('修改失败！只能改小不能改大！');
+                 break;
+             case '3':
+                 alert('修改失败！不能小于开始时间！');
+                 break;
+             default:
+                 alert('修改失败！请刷新重试！'); 
+                 break;
+         }
+     });
+}
+</script>
+</body>
+</html>

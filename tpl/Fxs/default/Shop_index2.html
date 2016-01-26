@@ -1,0 +1,95 @@
+<include file="Shop:header"/>
+
+<style type="text/css">
+.mainmenu { display: block; width: 100%; color: #fff; margin: 0px auto;}
+.mainmenu li { float: left; display: block; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; }
+
+.mainmenu li .menubtn { display: block;  text-decoration: none; color: #000;}
+.mainmenu li.longmenu {  width: 100%; background-color: inherit; border: none;margin:5px 5px 0px 5px;padding: 0;}
+.mainmenu li a { display: block; padding: 0px; font-size: 14px; color: #000; text-decoration: none; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; }
+
+.mainmenu li .menubtn .menuimg {
+margin: auto;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+overflow: hidden;
+}
+
+.mainmenu li .menutitle {text-align: center;text-decoration: none;color: #fff;overflow: hidden; font-size:16px;}
+
+.mainmenu li .left-title {float:left; width:39.5%;  text-align: center;text-decoration: none;color: #fff;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size:16px; background-color: #947e67;}
+
+.mainmenu li .right-icon {float:right; width:60%; overflow: hidden;}
+
+.mainmenu li .right-title {float:right; width:39.5%; text-align: center; text-decoration: none;color: #fff;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size:16px; background-color: #6fb6d6;}
+
+.mainmenu li .left-icon {float:left; width:60%; overflow: hidden; }
+
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+
+</style>
+
+<div class="clearfix">
+  <ul class="mainmenu">
+    <volist name="categories" id="vo">   
+	<li class="longmenu">
+	  <div class="menubtn">
+	  <a href="{lingzh:$vo.url}">
+  		<div class="menumesg">
+  		  <div class="menutitle <if condition='$i%2 eq 0'>left-title</if> <if condition='$i%2 eq 1 '>right-title</if>">
+            <span>{lingzh:$vo.name}</span><br />
+            <span>&gt;</span>
+          </div>
+  		  <div class="menuimg <if condition='$i%2 eq 0'>right-icon</if> <if condition='$i%2 eq 1 '>left-icon</if>">
+            <img src="{lingzh:$vo.logo_url}" width="100%"/>
+          </div>
+  		</div>
+	  </a>
+      
+	  </div>
+	</li>
+  </volist>	
+  </ul>
+</div>
+
+<div class="clr"></div>
+<php>
+    echo CopyRightHelper::generateShopCopyRight($_GET["token"]);
+</php>
+<script type="text/javascript">
+  
+$().ready(function(){
+  var max_x = $('.menuimg').width();
+  console.log(max_x);
+  $('.mainmenu li').each(function(){
+    var img = new Image();
+    img.src = $(this).find('img').attr('src');
+    img.onload = function(){
+      console.log(this.height  );
+      var height = max_x  * (this.height / this.width);
+      height = height + 'px';
+      //console.log("h:" + height + " w:" + max_x + " this H:" + this.height + " this W:"+this.width);
+
+      var p = $(this).parent().parent().parent().parent().parent(); // li-div-a-div-div-img
+      p.ready( function(){
+        $(this).find('.right-icon').css('height',height);
+        $(this).find('.right-title').css('height',height);
+        $(this).find('.right-title').css('line-height',height);
+        $(this).find('.left-icon').css('height',height);
+        $(this).find('.left-title').css('height',height);
+        $(this).find('.left-title').css('line-height',height);
+        $(this).find('.menumesg').css('height',height);
+        $(this).css('height',height);
+        $(this).find('.menubtn').css('height',height);
+        $(this).find('.menuimg img').css('height',height);
+      });
+
+    };
+  });
+});
+</script>
+</body>
+</html>

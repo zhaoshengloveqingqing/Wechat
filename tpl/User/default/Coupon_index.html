@@ -1,0 +1,78 @@
+<include file="Public:head"/>  
+        <div class="content">
+          <div class="cLineB">
+              <h4 class="left">优惠券列表 ({lingzh:$count}) 条</h4>
+                 
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator left">
+  <a href='{lingzh::U('Coupon/add',array('token'=>$token))}' title='新增优惠券' class='btnGrayS vm bigbtn'><img src="{lingzh::RES}/images/img/activity-scratch-card.png" class="vm" />新增优惠券</a>
+              
+            </div>
+          
+            <div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post"  action="" id="info" >
+          <input name="delall"  type="hidden" value="" />
+           <input name="wxid"  type="hidden" value="" />
+            <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <THEAD>
+                <TR>
+					<TH align="center" valign="middle">优惠券名称</TH>
+					<TH align="center" valign="middle">关键字</TH>
+					<TH align="center" valign="middle">优惠券状态</TH>
+					<TH align="center" valign="middle">总浏览数</TH>
+					<TH align="center" valign="middle">开始时间/结束时间</TH>
+					<TH align="center" valign="middle">状态</TH>
+					<TH align="center" valign="middle" class="norightborder">操作</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+                <TR></TR>
+                  <volist id="list" name="list">
+                <TR>
+                  <TD align="center" valign="middle">{lingzh:$list.title}</TD>
+                  <TD align="center" valign="middle">{lingzh:$list.keyword}</TD> 
+				  <TD align="center" valign="middle">{lingzh:$list.joinnum}</TD>
+                  <TD align="center" valign="middle">{lingzh:$list.click}</TD>                  
+                  <TD align="center" valign="middle">{lingzh:$list.statdate|date='Y-m-d',###}<br />{lingzh:$list.enddate|date='Y-m-d',###}</TD>
+                  <TD align="center" valign="middle">
+				  <if condition="$list['status'] eq 0">未开始<elseif condition="$list['status'] eq 2"/>已经结束<else/>已经开始</if>
+				  
+				 </TD>
+                   <TD align="center" valign="middle" class="norightborder">
+				   <a href="index.php?g=User&m=Coupon&a=qr&id={lingzh:$list.id}" target="_blank">二维码</a> 
+				   <a href="index.php?g=User&m=Coupon&a=sn&id={lingzh:$list.id}&type=3">SN码管理</a> 
+				   <a href="index.php?g=User&m=Coupon&a=edit&id={lingzh:$list.id}">编辑</a>  
+				   <a href="
+					   <if condition="$list['status'] eq 1">				   
+					   	javascript:drop_confirm('你确定要结束活动吗，结束后不可再开启本活动!', 'index.php?g=User&m=Coupon&a=setdes&id={lingzh:$list.id}');<else/>index.php?g=User&m=Coupon&a=setinc&id={lingzh:$list.id}   
+					   </if>">
+				   	   <if condition="$list['status'] eq 0">开始<elseif condition="$list['status'] eq 2"/><else/>结束</if>				   
+				   </a>
+				   <a href="index.php?g=User&m=Coupon&a=del&id={lingzh:$list.id}">删除</a></TD>
+                </TR>
+				</volist>
+              </TBODY>
+            </TABLE>
+           </form> 
+          </div>
+            
+ 
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages"></div>
+              </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>

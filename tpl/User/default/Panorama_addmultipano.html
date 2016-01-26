@@ -1,0 +1,209 @@
+<include file="Public:head"/>  
+<link rel="stylesheet" type="text/css" href="/themes/w/css/panorama/back.css" media="all" />
+<script type="text/javascript" src="/js/panorama/skin.js"></script>
+<style type="text/css">
+#spotList span{
+  margin-left: 5px;
+  width: 80px;
+}
+#spotList select{
+  width: 150px;
+  margin-left: 5px;
+  text-align: center;
+}
+#spotList span,select,input,#add_nav{
+  margin-top: 5px;
+  display: inline-block;
+  height: 30px;
+  font-size: 14px;
+
+}
+#spotList input,form input,#add_nav{
+  border: 1px solid #bbb;
+  width: 150px;height: 30px;
+  -webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
+  -moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
+}
+input[type='text'][disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
+cursor: not-allowed;
+background-color: #eee;
+}
+</style>
+
+<div class ="content" style="height: 100%">
+  <div class="cLineB">
+    <h4 class="left">添加全景图导航</h4>
+    <?php $back_url = U('Panorama/panorama_list',array('galleryid'=>$_GET['galleryid'])); ?>
+    <a onclick="location.href='<?php echo $back_url; ?>'" class="right btnGrayS vm bigbtn" style="width: 60px">
+      返回
+    </a> 
+  </div>
+  <div id="guide">
+    <a id="preview" href="javascript:;" onclick="preview()" class="btnGrayS vm bigbtn" style="margin-left:10px;display: inline-block;position: relative;bottom: 50px;">预览</a>
+    <pre style="display: inline-block">
+      <font style="font-size: 12px">
+      温馨提示：请将全景图中需要添加导航点的地方移至红色靶心内，然后点击添加导航按钮；在新增的一行导航记录中，选择目标相册以及全景图；
+                注：现在只支持导航点的添加或删除，若需要修改某一个点，请删除后再次添加,每张全景图最多添加8个导航点。
+      </font>
+    </pre>
+  </div>
+  <div id="all" style="height: 100%;margin-top:-15px;">
+    <div id="container" style="width:800px; height: 300px;margin-left: auto;margin-right: auto;">
+      This content requires HTML5/CSS3, WebGL, or Adobe Flash Player Version 9 or higher.
+    </div>
+    <div>
+      <div style="margin-left: auto; margin-right: auto;width: 800px;">
+        <button id="add_nav" onclick="addHotSpot()" style="width:80px;margin-top: 10px;margin-bottom: 10px;">添加导航</button>
+      </div>
+      <form action="" method="POST">
+        <ul id="spotList" style="margin-left: auto; margin-right: auto;width: 800px">
+          <li>
+            <span style="width: 150px;text-align: center;margin-left: 5px;">名称</span>
+            <span  style="width: 150px;text-align: center;margin-left: 5px;">目标相册</span>
+            <span  style="width: 150px;text-align: center;">全景图</span>
+            <span  style="width: 180px;text-align: center;margin-left: 5px;">坐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标</span>
+            <span  style="width: 50px;text-align: center;margin-left: 5px;">操作</span>
+          </li>
+        </ul>
+        <div style="margin-left: auto; margin-right: auto;width: 260px;margin-top: 10px;">
+          <input type="submit" value="保存" style="width:80px;margin-left: 5px; height: 30px;display: inline">
+          <span id="tip" style="color:red;font-size: 16px;width: 160px;display: inline;margin-left:10px;margin-bottom: 10px;"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  if (ggHasHtml5Css3D() || ggHasWebGL()) {
+    pano=new pano2vrPlayer("container");
+    skin=new pano2vrSkin(pano);
+    <?php $config_url = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].'/index.php/3d/pm/'.$panoramaid.'/'.$token; ?>
+    pano.readConfigUrl("{lingzh::$config_url}");
+  } else{
+    alert("not support 360view");
+  }
+</script>
+<noscript>
+  <p><b>Please enable Javascript!</b></p>
+</noscript>
+<script type="text/javascript">
+function preview(){
+    var left = ($(window.parent.parent).width() - 450)/2;
+    <?php $url = 'http://'.C('wx_handler_server').'/index.php/3d/p/'.$token.'/'.$_GET['galleryid'].'/'.$panoramaid; ?>
+    window.open("{lingzh:$url}");
+}
+</script>
+<script type="text/javascript">
+$('form').submit(function(){
+    $('#tip').text("");
+    var noError=true;
+    $('input[type="text"]').each(function(){
+      var temp = $(this).val();
+      noError = noError && (temp !== null || temp !== undefined || temp !== '');
+    });
+    $('select').each(function(){
+      var temp = $(this).val();
+      noError = noError && temp > 0;
+    });
+    if(noError){
+      return true;
+    }
+    else{
+      $('#tip').text("请将数据填充完整！");
+      return false;
+    }
+  }
+);
+
+var header = '<input type="text" name="desc[]" value="{5}" placeholder="请输入名称" maxlength="10">' +
+              '<select id="album_{0}" onChange="albumChanged({0},$(this).val())" name="album[]">'+
+                '<option value="-1">请选择</option>'+
+                '{1}' +
+              '</select>' +
+              '<select id="pano_{0}" name="pano[]">' +
+                '<option value="-1">请选择</option>'+
+                '{2}' +
+              '</select>' +
+              '<input type = "text" name="pan[]" value="{3}" style="width:100px;margin-left:5px;" readonly="readonly">'+
+              '<input type = "text" name="tilt[]" value="{4}" style="width:100px;margin-left:5px;" readonly="readonly">'+
+              '<input onclick="deleteRow(this)" value="删除" type="button" style="width:40px;margin-left:5px;">';
+var albumList = <?php if($albumList){ echo $albumList; } else {echo 'new Array()';}?> ;
+var panoList = <?php if(isset($panoList)){ echo $panoList; } else {echo 'new Array()';}?> ;
+function deleteRow($this){
+  $($this).parent().remove();
+}
+
+function getPanoOptions(aid,pid){
+  panoOptions = "";
+  var tmp = "<option value={0} {2}>{1}</option>";
+  for (var i = panoList.length - 1; i >= 0; i--) {
+    if(panoList[i]['aid']==aid){
+      var checkedStr = panoList[i]['id'] == pid ? "selected = 'selected'" : "";
+      panoOptions += String.format(tmp,panoList[i]['id'],panoList[i]['title'],checkedStr);
+    }
+  }
+  return panoOptions;
+}
+
+function addItem(aid,pid,pan,tilt,desc){
+  albumOptions = "";
+  var tmp = "<option value={0} {2}>{1}</option>";
+  for (var i = albumList.length - 1; i >= 0; i--) {
+    var checkedStr =aid && albumList[i]['id'] == aid ? "selected = 'selected'" : "";
+    albumOptions += String.format(tmp,albumList[i]['id'],albumList[i]['title'] ,checkedStr);
+  }
+  panoOptions = getPanoOptions(aid,pid);
+  var row = String.format(header,$('#spotList li').length,albumOptions,panoOptions,pan,tilt,desc);
+  $("#spotList li:eq(0)").after('<li>' + row + '</li>');
+}
+
+
+function addHotSpot () {
+  if($('#spotList li').length >8){
+    alert("每张全景图最多添加8个导航点，已到达最大限制。");
+  }
+  else{
+    addItem(-1,-1,pano.getPan(),pano.getTilt(),"");
+  }
+}
+
+$(function(){
+  var nav_info = <?php if($nav_info){ echo json_encode($nav_info); echo ";" ; } else { ?> new Array(); <?php } ?> 
+  if(nav_info && nav_info.length < 0){return;}
+  for (var i = 0; i < nav_info.length; i++) {
+    addItem(nav_info[i]['album'], nav_info[i]['pano'], nav_info[i]['pan'], nav_info[i]['tilt'], nav_info[i]['desc']);
+  };
+});
+
+function albumChanged(index,aid){
+  var pano_selector = '#pano_' + index;
+
+  var first = '<option value="-1">请选择</option>';
+  var options = getPanoOptions(aid);
+  $(pano_selector).empty();
+  $(pano_selector).append(first + options);
+}
+
+$(function(){
+ String.format = function(src){
+              if (arguments.length == 0) return null;
+              var args = Array.prototype.slice.call(arguments, 1);
+              return src.replace(/\{(\d+)\}/g, function(m, i){
+                  return args[i];
+              });
+            };
+
+  var url='/images/tagret.png';
+  var h =123;// = $('#container').height() / 2;
+  var w = 397 ;//= $('#container').width() / 2;
+  var style = "width: 30px;height: 30px;z-index: 1;position: relative;top: {0}px;left: {1}px;";
+  style = String.format(style,h,w);
+  var str = '<img src="{0}" style="{1}" ></img>';
+  str = String.format(str,url,style);
+  $('#container').append(str);
+  pano.stopAutorotate();//停止转动
+}());
+
+</script>
+<include file="Public:footer"/>

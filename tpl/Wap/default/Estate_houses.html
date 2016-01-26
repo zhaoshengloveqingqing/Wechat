@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html class=" clickberry-extension clickberry-extension-standalone"><head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+        <!-- Mobile Devices Support @begin -->
+            <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+            <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+            <meta content="no-cache" http-equiv="pragma">
+            <meta content="0" http-equiv="expires">
+            <meta content="telephone=no, address=no" name="format-detection">
+            <meta content="width=device-width, initial-scale=1.0" name="viewport">
+            <meta name="apple-mobile-web-app-capable" content="yes"> <!-- apple devices fullscreen -->
+            <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <!-- Mobile Devices Support @end -->
+<meta content="clickberry-extension-here">
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/style.css" media="all">
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/back.css" media="all">
+<script type="text/javascript" src="{lingzh::RES}/vhouse/jQuery.js"></script>
+<script type="text/javascript" src="{lingzh::RES}/vhouse/common.js"></script>
+<script type="text/javascript" src="{lingzh::RES}/vhouse/house.js"></script>
+<script type="text/javascript" src="{lingzh::RES}/vhouse/swipe.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/reset.css" media="all">
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/home.css" media="all" />
+
+
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/Tabs/css/easy-responsive-tabs.css" media="all">
+<script type="text/javascript" src="{lingzh::RES}/vhouse/Tabs/js/easyResponsiveTabs.js"></script>
+
+<title>楼盘户型</title>
+
+    </head>
+    <body onselectstart="return true;" ondragstart="return false;">
+
+  <div class="act_top" id="actTop">
+            <div class="act_top_show">
+                <img src="{lingzh:$set['house_banner']}" width="720" height="130" id="bannerPic">
+            </div>
+    </div>
+
+    <span class="gradient_h_wbw"></span>
+    <div class="header">
+        <div class="logohead">
+            <h1 style="margin:5px;text-align: center;padding-top: 5px;">{lingzh:$set['title']}</h1>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+        <div class="main" style="padding-top: 10px;">
+
+             <div id="horizontalTab">
+            <ul class="resp-tabs-list">
+            <volist name='houses' id='vo'>
+                <li><img src="{lingzh:$vo['logo']}" width="140" height="29" alt="" style="width:auto!important;max-width:180px;">{lingzh:$vo['name']} {lingzh:$set['title']}</li>
+             </volist>
+            </ul>
+            <div class="resp-tabs-container">
+             <volist name='houses' id='vo'>
+                <div>
+                    <a href="javascript:void(0);" onclick="List.toggleList({lingzh:$vo['id']},0);" style="color:#5b5b5b">
+                  <strong>{lingzh:$set['title']}</strong> <br/>
+                
+                <br />
+                 
+                <strong>{lingzh:$vo['name']}</strong> <br/> <em style="color:#2c2c2c">{lingzh:$vo['fang']}房{lingzh:$vo['ting']}厅  {lingzh:$vo['area']} 平方米</em><br/>
+                <br /> 
+                 </a>
+                 <div class="house_photo house_arrow" style="display: -webkit-box;">
+                 <a href="{lingzh::U('Estate/photos',array('token'=>$token,'id'=>$vo['id'],'wecha_id'=>$wecha_id))}"  class="ico_type">户型图</a>
+				 <if condition="$vo['panorama_id'] neq ''">
+                    &nbsp;
+                    <a href="/index.php/3d/po/{lingzh:$token}/{lingzh:$vo['panorama_id']}"  class="ico_360">全景图</a>
+                 </if>
+                 </div>
+                </div>
+                </volist>
+            </div>
+        </div>
+
+        </div>
+       
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#horizontalTab').easyResponsiveTabs({
+            type: 'vertical', //Types: default, vertical, accordion           
+            width: 'auto', //auto or any width like 600px
+            fit: true,   // 100% fit in a container
+            //closed: 'accordion', // Start closed if in accordion view
+            activate: function(event) { // Callback function if tab is switched
+                var $tab = $(this);
+                var $info = $('#tabInfo');
+                var $name = $('span', $info);
+
+                $name.text($tab.text());
+
+                $info.show();
+            }
+        });
+    });
+</script>
+<!-- end -->
+<br> <br> <br>
+<include file="Estate:menu"/>
+</body></html>

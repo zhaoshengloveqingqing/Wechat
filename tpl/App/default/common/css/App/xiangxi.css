@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+
+.content{width:100%; margin:0 auto; margin-top:-300px;}
+.cont{ background:#fff;  }
+.content .cont .tu1,.content .cont .tu2,.content .cont .tu3,.content .cont .tu4,.content .cont .tu5,.content .cont .tu6,.content .cont .tu7,.content .cont .tu8,.content .cont .tu9,.content .cont .tu10{
+	width:80%; 
+	margin:0 auto;
+}
+.content .cont a {
+	width: 100%;
+}
+.content .cont img {
+	width: 100%;
+}
+
+table.table {
+	table-layout: fixed;
+	font-family:"Microsoft YaHei";	
+}
+
+table.table thead tr th {
+	text-align: center;
+	border: none;
+	padding: 10px 0;
+	font-size: 9px;
+	background-color；#000;
+}
+
+table.table caption {
+	font-size: 16px;
+}
+
+table.table caption strong {
+	color: red;
+}
+
+table.table tbody tr td {
+	text-align: center;
+	padding:10px 0;
+}
+
+.tu9 {
+	padding-bottom: 10px;
+}
+
+.tu10 {
+	padding-bottom: 10px;
+}
+
+.tu10 table.table caption {
+	font-size: 12px;
+}
+
+@media screen and (max-width: 1280px) { 
+	.header {
+		height: 570px;
+	}
+	
+	.content .cont {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	
+	.content .cont .tu2,.content .cont .tu3,.content .cont .tu4,.content .cont .tu5,.content .cont .tu6,.content .cont .tu7,.content .cont .tu8,.content .cont .tu9,.content .cont .tu10{ 
+		width: 100%;
+	}	
+}
+
+@media screen and (max-width: 960px) { 
+	.header {
+		height: 470px;
+	}
+}
+
+@media screen and (max-width: 640px) { 
+	.header {
+		height: 420px;
+	}
+}

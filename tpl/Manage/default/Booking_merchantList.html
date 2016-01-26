@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{lingzh:$page_title}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="/themes/m/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  <style type="text/css">
+    body {
+       padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+  </style>
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+<include file="Index:header"/>
+
+  <div class="container">
+    <div class="row">
+      <include file="Index:sidebar"/>
+      <div class="col-lg-10">
+
+        <div class="page-header">
+          <h4>预订商家管理</h4>
+        </div>
+        <div class="content"> 
+
+        <form method="post" action="" id="info">
+        <table class="table" id="merchantList">
+        <thead>
+        <tr>
+        <th width="15%">商家名称</th>
+        <th width="15%">关键词</th>
+        <th width="30%">地址</th>
+        <th width="15%">电话</th>
+        <th width="15%">创建时间</th>
+        <th width="10%" class="norightborder">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="merchants" id="merchant"> 
+        <tr>
+        <td>{lingzh:$merchant.title}</td>
+        <td>{lingzh:$merchant.keyword}</td>
+        <td>{lingzh:$merchant.address}</td>
+        <td>{lingzh:$merchant.tel}</td>
+        <td>{lingzh:$merchant.creattime|date="Y-m-d H:i:s",###}</td> 
+        <td class="norightborder"><a href="{lingzh::U('Booking/orderList',array('mid'=>$merchant['id']))}">订单管理</a></td>
+        </tr>
+        </volist>
+        </tbody>
+        </table>
+        </form>
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-10">
+              <div class="pages">{lingzh:$page}</div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /col -->
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

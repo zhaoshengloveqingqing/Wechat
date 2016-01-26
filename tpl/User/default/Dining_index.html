@@ -1,0 +1,222 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />  
+<style>
+#tableWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    width: 100%;
+    height: 100%;
+}
+.dialog {
+    border-radius: 5px;
+    position: absolute;
+}
+.dialog-inner {
+    background: white;
+}
+.dialog-hd {
+    background: #f8f8f8;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+}
+.dialog-title {
+    font-weight: bold
+}
+.dialog-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height:40px;
+    overflow: hidden;
+    font-size: 30px;
+    line-height: 40px;
+    text-indent: 8px;
+    border-left: 1px solid #fff;
+    color: #8f8f8f;
+}
+.dialog-close:hover {
+    background-position: -115px -3px;
+}
+
+.dialog-bd {
+    background: #f8f8f8;
+}
+
+.dialog p {
+    margin-bottom: 10px;
+}
+.dialog-headline{
+    font-size: 1.2em;
+    color: #666;
+    padding: 0 20px;
+}
+
+.dialog .btn {
+    /*min-width: 60px;*/
+    line-height: 28px;
+    padding:0 10px;
+}
+.dialog-btns {
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    background: #f8f8f8;
+    height: 38px;
+    padding-top: 6px;
+}
+
+#settings {
+    position: relative;
+    z-index: 0;
+    margin: 200px auto 0;
+    width: 320px;
+}
+#settings .dialog-bd{
+    padding: 0 20px;
+}
+.mask {
+    background-color: #000;
+    position: fixed;
+    _position: absolute;
+    top: 0;
+    left:0;
+    z-index: 100;
+    width: 100%;
+    _width: expression(documentElement.clientWidth+documentElement.scrollLeft);
+    height: 100%;
+    _height: expression(documentElement.clientHeight+documentElement.scrollTop);
+    opacity: 0.5;
+    filter: alpha(opacity = 50);
+}
+
+</style>
+        <div class="content">
+<div class="cLineB">
+<h4 class="left">餐饮服务行业</h4>
+
+<div class="clr"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul>
+<li class="current tabli" id="tab0"><a href="#">分店管理</a></li>
+<li class="tabli" id="tab5"><a href="{lingzh::U('Dining/setShopInfo')}">饭店消息配置</a></li>
+</ul>
+</div>
+<!--tab end-->
+<div class="cLine">
+<div class="pageNavigator left"> <a href="{lingzh::U('Dining/restAdd')}" title="新增分店" class="btnGrayS vm bigbtn"><img src="/themes/a/images/add.png" class="vm">新增分店</a></div>
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th width="160" align="center" valign="middle">分店名称</th>
+<th width="260" align="center" valign="middle">分店电话</th>
+<th width="260" align="center" valign="middle">分店地址</th>
+
+<th width="150" class="norightborder" align="center" valign="middle">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="rest"> 
+<tr>
+<td align="center" valign="middle"><a href="{lingzh::U('Dining/menus',array('id'=>$rest['id']))}">{lingzh:$rest.name}</a></td>
+<td align="center" valign="middle">{lingzh:$rest.telephone}</td>
+<td align="center" valign="middle">{lingzh:$rest.address}</td>
+
+<td class="norightborder" align="center" valign="middle">
+    <a href="{lingzh::U('Dining/menus',array('id'=>$rest['id']))}">进入分店</a>
+	<a data-oid="{lingzh:$rest.id}" class="modButton" href="javascript:;">导入菜单</a>
+	<a href="{lingzh::U('Dining/restSet',array('id'=>$rest['id']))}">修改</a> 
+    <a href="javascript:drop_confirm('您确定要删除吗?', '{lingzh::U('Dining/restDel',array('id'=>$rest['id']))}');">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lingzh:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<div id="mask" class="mask" style="display: none;"></div>
+<div id="tableWrapper" style="display:none;">
+    <div id="settings" class="dialog">
+        <div class="dialog-inner">
+            <div class="dialog-hd">
+                <span class="dialog-title">导入菜单</span>
+                <a id="tableClose" href="javascript:void(0)" class="dialog-close">×</a>
+            </div>
+            <div class="dialog-bd">
+                <span class="dialog-desc">导入分店菜单：</span>
+				<select id="importSelect">
+				<volist name="list" id="rest"> 
+                    <option value="{lingzh:$rest.id}">{lingzh:$rest.name}</option>
+				</volist>
+				</select>
+                <div class="dialog-btns">
+                    <button id="tableCancel" class="btn btnGray">取消</button>
+                    <button id="tableSave" data-id="" type="submit" name="button" class="btnGreen">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+jQuery.fn.center = function () {  
+  $win = $(window);  
+  this.css('position','absolute');  
+  this.css('top', (($win.height() - this.outerHeight()) / 2) + $win.scrollTop() + 'px');  
+  this.css('left', (($win.width() - this.outerWidth()) / 2) + $win.scrollLeft() + 'px');  
+  return this;  
+} 
+$(document).ready(function() {
+    $(".modButton").click(function(){
+		$("#tableWrapper").show();
+		$("#tableWrapper").center();
+		$("#mask").show();
+		$("#tableSave").attr("data-id", $(this).attr("data-oid"));
+	});
+	$("#tableClose").click(function(){
+		$("#tableWrapper").hide();
+		$("#mask").hide();
+	});
+	$("#tableCancel").click(function(){
+		$("#tableWrapper").hide();
+		$("#mask").hide();
+	});
+	$("#tableSave").click(function(){
+		var id = $(this).attr("data-id");
+		var oid = $("#importSelect").val();
+		if (id == oid) {
+		   alert("选择不同分店导入！");
+		}
+		$("#tableWrapper").hide();
+		$("#mask").hide();
+		$.ajax({
+			'type':'POST',
+			'url': './index.php?g=User&m=Dining&a=import',
+			'data': {'id': id,"oid":oid},
+			 dataType:"JSON",
+			'success': function(res) {
+				alert(res.data);
+			},
+			'error': function(res) {
+				alert(res.data);
+			}
+		});
+	});
+});
+</script>
+<include file="Public:footer"/>

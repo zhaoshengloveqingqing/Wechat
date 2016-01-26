@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lingzh:$tpl['wxname']}</title>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="/themes/w/css/reset.css" rel="stylesheet" type="text/css" />
+<script src="/themes/w/js/swipe.js"></script>
+<style>
+body {background-color: #eee;margin: 0 auto;max-width: 640px;min-width: 320px;overflow-x: hidden;}
+
+.banner {background:url(/themes/w/images/lz/top-bg.jpg) 0 0 repeat-x; margin:10px 0px 10px 20px;}
+.banner a{width:40%;}
+
+
+
+.swipe {  overflow: hidden;    visibility: hidden;	  position: relative;	  }
+.swipe-wrap { overflow: hidden;		  position: relative;  }
+.swipe-wrap > div {		    float:left;	  width:100%;  position: relative;}
+.swipe-wrap > div img{width:100%;height:94%;}
+
+ul#indicator{text-align: center;list-style: none;margin: -24px 0px 0px 0px;padding: 0; }
+ul#indicator li {display: inline-block;width: 10px;height: 10px;border-radius: 10px;background: #7d8083; margin: 0 2px;cursor: pointer;}
+ul#indicator li.on {display: inline-block;width: 10px;height: 10px;border-radius: 10px;background: #fff; margin: 0 2px;cursor: pointer;}
+.navi {opacity:0.5;}
+
+.mainmenu {margin:0 auto;margin-top:55px;}
+.mainmenu li{width:50%;float:left;}
+
+.mainmenu li>div{margin:0 auto;margin:0 14px 16px 14px;padding:5px 0 20px 0;position:relative;}
+.mainmenu li>div>div.cont{position:relative;z-index:99;}
+.mainmenu li>div span{display:block;width:64px;height:58px;margin:10px auto 0px auto;;text-align:center;line-height:50px;}
+.mainmenu li>div i.icon{display:inline-block;background-image:url(/themes/w/images/house/allbgs-indoor.png);background-repeat:no-repeat;line-height:58px;vertical-align:middle}
+/*字体颜色设置*/
+.mainmenu li>div a{text-align:center;font-size:16px;color:{lingzh:$web_setting['classify_font_color']};display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/*背景颜色设置*/
+.mainmenu li>div>div.mask{position:absolute;width:100%;height:100%;left:0;top:0;background-color: {lingzh:$web_setting['classify_bg_color']};opacity:0.8;z-index:9;}
+.bg1 i.icon{background-position:0 0;width:62px;height:46px;}
+.bg2 i.icon{background-position:0 -46px;width:55px;height:54px;}
+.bg3 i.icon{background-position:0 -100px;width:66px;height:54px;}
+.bg4 i.icon{background-position:0 -154px;width:58px;height:57px;}
+.bg0 i.icon{background-position:0 -268px;width:59px;height:58px;}
+
+
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px 0px;}
+a.copyright{font-size:14px;text-align:center;color:#272828;margin:8px 0px;text-decoration:underline;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px 0px;}
+div.tech-support a{text-decoration: underline;}
+.clr {clear: both;}
+
+.bodybg{background-size:cover;background-image:url(/themes/w/images/house/wap-index10_03.jpg);background-repeat:no-repeat;}
+
+
+</style>
+</head>
+
+<body class="bodybg">
+
+<!--<div id='slider' class='swipe'>
+  <div class='swipe-wrap'>
+    <volist name="flash" id="so">
+      <div><a href="{lingzh:$so.hyperlink}"><img src="{lingzh:$so.img}" /></a></div>
+	</volist>
+  </div>
+</div>-->
+<div class="navi">
+	<ul id="indicator">
+		<volist name="flash" id="so">
+		<li   <if condition="$i eq 1">class="on"</if>  ></li>
+		</volist>
+	</ul>
+</div>
+
+<div class="mainmenu">
+<ul>
+	<volist name="info" id="vo"> 
+	<li>
+		<div class="menubtn bg{lingzh:$i%6}">
+			<div class="mask"></div>
+			<div class="cont">
+				<span><i class="icon"></i></span>
+				<a href="{lingzh:$vo.hyperlink}">{lingzh:$vo.name}</a>
+			</div>
+		</div>
+	</li>
+	</volist>
+</ul>
+</div>
+
+<div class="clr"></div>
+<include file="Index:navi"/> 
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+
+<script type="text/javascript">
+var slider = Swipe(document.getElementById('slider'), {
+      auto: 3000,
+      continuous: true,
+      callback: function(pos) {
+          var i = bullets.length;
+	      while (i--) {
+	          bullets[i].className = ' ';
+	       }
+	      bullets[pos].className = 'on';
+      }
+  });
+
+  var bullets = document.getElementById('indicator').getElementsByTagName('li');
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>绑定卡号</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<link href="{lingzh::RES}/css/userinfo/fans.css" rel="stylesheet" type="text/css"> 
+
+<script type="text/javascript" src="/js/jquery.min.js"></script> 
+
+<style>
+
+.footFix{width:100%;text-align:center;position:fixed;left:0;bottom:0;z-index:99;}
+#footReturn a, #footReturn2 a {
+display: block;
+line-height: 41px;
+color: #fff;
+text-shadow: 1px 1px #282828;
+font-size: 14px;
+font-weight: bold;
+}
+#footReturn, #footReturn2 {
+z-index: 89;
+display: inline-block;
+text-align: center;
+text-decoration: none;
+vertical-align: middle;
+cursor: pointer;
+width: 100%;
+outline: 0 none;
+overflow: visible;
+box-sizing: border-box;
+padding: 0;
+height: 41px;
+opacity: .95;
+border-top: 1px solid #181818;
+box-shadow: inset 0 1px 2px #b6b6b6;
+background-color: #515151;
+background-image: -webkit-linear-gradient(top,#838383,#202020);
+background-image: -webkit-gradient(linear,0% 0,0% 100%,from(#838383),to(#202020));
+}
+
+ .highlight { border:2px solid red; }
+</style>
+</head>
+<body id="fans" >
+<div class="qiandaobanner"> <img src="{lingzh:$homepic}" > </div>
+<div class="cardexplain">
+<li class="nob">
+<div class="beizhu">输入实体卡号及关联手机号，通过短信验证即可完成绑定</div>
+</li>
+<ul class="round">
+<li>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+	<tr>
+	<th><font color='red'>会员卡号</font></th>
+	<td><input onblur="check1(this.id)" name="card" id="card" style="color:red" type="text" class="px" placeholder="请输入您线下会员卡号"></td>
+	</tr>
+	</table>
+	</li>
+
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+<tr>
+<th><font color='red'>手机号码</font></th>
+<td><input onfocus="recover(this.id)" onblur="check3(this.id)" name="tel"  class="px" id="tel" value=""  type="text" placeholder="请输入您的11位手机电话">
+</td>
+<td><a id="getcode"  class="submit" >验证码</a></td>
+</tr>
+</table>
+</li>
+<li>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+<tr>
+<th><font color='red'>验证码</font></th>
+<td><input onfocus="recover(this.id)" onblur="check1(this.id)" name="code"  class="px" id="code" value=""  type="text" placeholder="请输入短信验证码"></td>
+</tr>
+</table>
+</li>
+</ul>
+
+
+<div class="footReturn">
+<a id="showcard"  class="submit" >提交</a>
+<div class="window" id="windowcenter" >
+<div id="title" class="wtitle"><span class="close" id="alertclose"></span></div>
+<div class="content">
+<div id="txt"></div>
+</div>
+</div>
+</div>
+<div style="height:60px;" id="msg">&nbsp;</div>
+<div id="footReturn">
+<a href="javascript:void(0)" onClick="location.href='{lingzh::U('Card/get_card',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}';"><span>返回会员卡页</span></a>
+</div>
+<script type="text/javascript">
+
+function vify() {
+    var btn = $(this);
+  var tel     = $("#tel").val();
+  var code    = $("#code").val();
+  var card    = $("#card").val();
+  
+  if (!check1('card')) {
+        return;
+    }
+  
+  if (!check1('code')) {
+        return;
+    }
+  
+    if (!check3('tel')) {
+        //alert("请认真输入手机号");
+        return;
+    }
+    $('#showcard').unbind('click',vify);
+    var submitData = { 
+        tel     : tel,
+        code  : code,
+        card : card,
+    };
+    $.post('index.php?g=Wap&m=Userinfo&a=verify&token={lingzh:$Think.get.token}&wecha_id={lingzh:$Think.get.wecha_id}', submitData,
+    function(data) {
+        if(data.success==1){       
+            alert(data.msg);
+            location.href = "{lingzh::U('Card/vip',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}";
+          }else{  
+            alert(data.msg);
+            $("#showcard").bind('click',vify);
+          }
+    },
+    "json")
+}
+$("#showcard").bind('click',vify);
+
+$("#getcode").bind("click",
+function() {
+    var btn = $(this);
+  	var tel 	  = $("#tel").val();
+    var cardnum = $('#card').val();
+	
+    if (!check3('tel')) {
+        //alert("请认真输入手机号");
+        return;
+    }
+    var submitData = {
+        tel 	  : tel,
+        cardnum :cardnum,
+    };
+    $.post('index.php?g=Wap&m=Userinfo&a=getcode&token={lingzh:$Think.get.token}&wecha_id={lingzh:$Think.get.wecha_id}', submitData,
+    function(data) {
+        if(data.success==1){			 
+      			alert(data.msg);
+      		}else{  
+      			alert(data.msg);
+      		}
+    },
+    "json")
+});
+
+function check1(objId) {
+
+	if ($('#'+objId).val() == '') {
+		//alert("请输入您的微信名称.");
+		$('#'+objId).addClass('highlight');
+		return;
+	}
+	return true;
+}
+
+function recover(objId){   
+	$('#'+objId).removeClass('highlight');
+}
+
+function check3(objId){
+	var content = $('#'+objId).val();
+	if (content == "") {
+		//alert("请输入您的手机名称.");
+		$('#'+objId).addClass('highlight');
+		return false;
+	}
+	reg=/^0{0,1}(13[0-9]|14[0-9]|15[0-9]|18[0-9])[0-9]{8}$/i;
+	if(!reg.test(content)) {   
+			//alert("错误,请输入11位的手机号！");
+			$('#'+objId).addClass('highlight');
+			return false;
+	 }
+	 return true;
+}
+</script>
+</div>
+
+</body>
+</html>

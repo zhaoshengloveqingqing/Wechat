@@ -1,0 +1,134 @@
+/* Write your styles */
+#user-info {
+	width: 240px;
+	margin: 0 auto;
+}
+
+#user-info img {
+	width: 120px;
+	height: 120px;
+}
+
+.reminder p {
+	text-indent: 24px;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	font-size: 12px;
+	color: red;
+}
+
+.reminder p:first-child {
+	text-indent: 0;
+};
+
+#user-header {
+	height: 275px;
+}
+
+.share {
+	border-top: 1px solid #eee;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.share h3 {
+	margin-bottom: 0;
+	font-weight: normal;
+}
+
+.share p {
+	margin-top: 6px;
+	margin-bottom: 6px;
+	font-size: 14px;
+}
+
+.share .pi-url{
+	color: #666;
+	font-size: 14px;
+}
+
+.pi-list-news {
+	margin: 0;
+}
+
+.pi-list-news .am-list-news-bd .am-list {
+	margin-bottom: 0px;
+}
+
+.pi-list-news .am-list-news-bd .am-list .am-list-item-dated {
+	border-top-color: #eee;
+	border-bottom-color: #eee;
+}
+
+.pi-accordion {
+	margin-top: 0;
+	border: 0;
+	box-shadow: none;
+}
+
+.am-accordion-item .am-accordion-title {
+	border-bottom: 1px solid #eee;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.am-accordion-item .am-accordion-title b {
+	float: right;
+	font-weight: normal;
+	font-size: 14px;
+}
+
+.am-accordion-item.am-active .am-accordion-title{
+	background: none;
+}
+
+.pi-panel-group .am-panel {
+	border: 0;
+}
+
+.pi-panel-group .am-panel .am-panel-hd{
+	background: none;
+}
+
+.pi-list-news-title {
+	padding-left: 0;
+}
+
+.pi-list-news-btn {
+	padding-right: 0;
+}
+
+.pi-list-news-btn i {
+	float: right;
+}
+
+.pi-list-news-content {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.pi-copy {
+	font-size: 12px;
+	padding: 6px;
+	margin-left: 10px;
+}
+
+.pi-erweima {
+	display: block;
+	position: absolute;
+	width: 105px;
+	height: 105px;
+	top: -105px;
+	right: 10px;
+	margin: 0
+}
+
+.pi-erweima img {
+	border: none;
+	padding: 0;
+}
+
+.pi-erweima  .am-figure-capition-btm {
+	font-size: 12px;
+	margin-bottom: 0;
+}

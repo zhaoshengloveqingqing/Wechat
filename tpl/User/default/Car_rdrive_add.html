@@ -1,0 +1,505 @@
+ <include file="Public:head" />
+
+ <link href="/themes/w/css/reservation_setting.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+<link rel="stylesheet" href="/themes/a/css/car.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=ZkqN4MTTGPb3lo9gvwGhiScT"></script>
+ 
+<script src="{lingzh::RES}/js/date/WdatePicker.js"></script>
+
+<div class="content"> 
+  <div class="cLineB"> 
+    <h4>预约试驾设置 </h4> 
+    <a href="{lingzh::U('Car/rdrive')}" class="right btnGreen" style="margin-top:-27px">预约试驾</a> 
+  </div> 
+
+  <form class="form" method="post" action="" enctype="multipart/form-data"> 
+      <if condition="isset($rdrive)">
+          <input type="hidden" name="id" value="{lingzh:$rdrive.id}" />    
+      </if>
+  <div class="msgWrap bgfc"> 
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+      <tr> 
+        <th width="150"><span class="red">*</span>关键词：</th> 
+        <td><input type="text" required="" name="keyword" value="<if condition="isset($rdrive)">{lingzh:$rdrive.keyword}</if>" class="px" style="width:300px;" /> <span class="red">只能写一个关键词</span></td> 
+      </tr> 
+      <tr> 
+        <th width="150"><span class="red">*</span>图文消息标题：</th> 
+        <td><input type="text" required="" name="img_title" value="<if condition="isset($rdrive)">{lingzh:$rdrive.img_title}</if>" class="px" style="width:300px;" /> </td> 
+      </tr> 
+      <tr> 
+        <th><span class="red">*</span>图文消息配图：</th> 
+        <td>
+           <div class='img_upload_panel'>
+            <img id="thumb_img" class="thumb_img" src="<if condition="isset($rdrive['img_url'])">{lingzh:$rdrive.img_url}<else/>http://{lingzh::C('wx_handler_server')}/themes/a/images/car/drive.png</if>" style="max-height: 100px;">
+            <div name='uploadify'  id="uploadify"  ></div>
+            <div id="fileQueue"></div> 
+            <input type='hidden' value="<if condition="isset($rdrive['img_url'])">{lingzh:$rdrive.img_url}<else/>http://{lingzh::C('wx_handler_server')}/themes/a/images/car/drive.png</if>" name='img_url' id='img_url'>
+            <div style="clr:both; height:0px;"></div>
+          </div>
+        </td> 
+      </tr> 
+       <tr> 
+        <th><span class="red">*</span>预约电话：</th> 
+        <td><input type="text" required="" name="tel" value="<if condition="isset($rdrive)">{lingzh:$rdrive.tel}</if>" class="px" style="width:300px;" /><span class="help-inline">如0755-12345678</span></td> 
+      </tr> 
+       <tr >
+        <th><span class="red">*</span>预约地址：</th>
+        <td>
+          <input  type="text" required=""  id="address" name="address" value="<php>echo empty($rdrive['address'])?'苏州工业园区星湖街328号创意产业园':$rdrive['address']</php>" class="px" style="width:300px;" tabindex="1" >
+          <input type="button" id="locate-btn" value="定位" class="btnGreen"  style=" margin:2px; "/>
+          <font style="color: red">请在地图上定位具体位置，用于一键导航功能</font>
+          <input type="text" style="display:none" id="customerLng" name="longtitude" value="<if condition="isset($rdrive)">{lingzh:$rdrive.longtitude}</if>"/>
+                 <input type="text" style="display:none" id="customerLat" name="latitude" value="<if condition="isset($rdrive)">{lingzh:$rdrive.latitude}</if>"/>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <div id="container" style="height:250px;width: 600px;"></div>
+        </td>
+      </tr>
+      <tr> 
+        <th><span class="red">*</span>预约页面头部图片：</th> 
+        <td>
+           <div class='img_upload_panel'>
+            <img id="thumb_img_1" class="thumb_img" src="<if condition="isset($rdrive['picture'])">{lingzh:$rdrive.picture}<else/>http://{lingzh::C('wx_handler_server')}/themes/a/images/car/drive.png</if>" style="max-height: 100px;">
+            <div name='uploadify_1'  id="uploadify_1"  ></div>
+            <div id="fileQueue_1"></div> 
+            <input type='hidden' value="<if condition="isset($rdrive['picture'])">{lingzh:$rdrive.picture}<else/>http://{lingzh::C('wx_handler_server')}/themes/a/images/car/drive.png</if>" name='picture' id='picture'>
+            <div style="clr:both; height:0px;"></div>
+          </div>
+        </td> 
+      </tr> 
+      <tr> 
+        <th valign="top">预约试驾说明：</th> 
+        <td valign="top"><textarea class="px" id="description" name="description" placeholder="请简要描述该预约项目和用户填写订单时的注意事项" style="width: 350px; height: 120px;"><if condition="isset($rdrive)">{lingzh:$rdrive.description}</if></textarea></td> 
+      </tr> 
+      <tr> 
+        <th><span class="red">*</span>订单接收设置：</th> 
+        <td>
+            <div class="limit_settings">
+                <label>
+                    <input type="radio" name="setting_type" id="limit_settings_1" value="1" checked="checked">
+                    限定时间
+                </label>
+                <label >
+                    <input type="radio" name="setting_type" id="limit_settings_2"  value="2">
+                    限定每日量
+                </label>
+                <label>
+                    <input type="radio" name="setting_type" id="limit_settings_3"  value="3">
+                    限定全部总量
+                </label>
+                <span class="help-inline" id="setting_type1" style="display: inline-block;">设定您接受订单的起始和结束时间</span>
+                <span class="help-inline" id="setting_type2" style="display: none;">设定您每日接收的订单总数</span>
+                <span class="help-inline" id="setting_type3" style="display: none;">设定您总计可接收的订单总数</span>
+            </div>
+            <div id="settings_time" class="limit_settings_time">
+                <input type="input" class="px" id="start_time" value="<if condition="!empty($rdrive['start_time'])">{lingzh:$rdrive.start_time|date="Y-m-d",###}</if>" onClick="WdatePicker()" name="starttime" />                
+		到
+		<input type="input" class="px" id="end_time" value="<if condition="!empty($rdrive['end_time'])">{lingzh:$rdrive.end_time|date="Y-m-d",###}</if>" name="endtime"  onClick="WdatePicker()"  /> 
+	
+                <span class="help-inline">订单的开始和结束时间(为空表示不限制)</span>
+            </div>
+            <div id="settings_num" class="limit_settings_num" style="display:none">
+                <input type="text" name="upperbound" value="<if condition="!empty($rdrive['upperbound'])">{lingzh:$rdrive.upperbound}</if>" class="px" style="width:80px;" />
+                <span class="help-inline">填写最大接收订单数(为空表示不限制)</span>
+            </div>
+            
+         
+        </td> 
+      </tr> 
+      <tr> 
+        <th valign="top">订单内容设置：</th> 
+        <td valign="top">
+            <div class='ordersettings'>
+                <span class="help-inline">填写你要收集的内容！订单默认项不允许修改！</span>
+                <table id="listTable" class="table table-bordered table-hover dataTable">
+                    <thead>
+                        <tr>
+                            <th style="width:10%">字段类型</th>
+                            <th style="width:37%">字段名称</th>
+                            <th style="width:38%">初始内容</th>
+                            <th style="width:15%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>单行文字：</td>
+                                <td>
+                                    <input name="default_text_name" disabled="disabled"  type="text" class="wizard-ignore" value="联系人" readonly="readonly"></td>
+                                <td>
+                                    <input name="default_placeholder_name" type="text" disabled="disabled" class="wizard-ignore" value="请输入您的名字" readonly="readonly"></td>
+                                <td><input type="checkbox" name="default_show_name" style="display:none" checked="checked" value="1">
+                                    订单默认项
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>单行文字：</td>
+                                <td>
+                                    <input name="default_text_tel" disabled="disabled"  type="text" class="wizard-ignore" value="联系电话" readonly="readonly"></td>
+                                <td>
+                                    <input name="default_placeholder_tel" disabled="disabled"  type="text" class="wizard-ignore" value="请输入您的电话" readonly="readonly"></td>
+
+                                <td>
+                                    <input type="checkbox" name="default_show_tel" style="display:none" checked="checked" value="1">
+                                    订单默认项
+                                </td>
+                            </tr>
+                            <tr>
+                             <td>单行文字：</td>
+                             <td>
+                                   <input name="default_text_brand" disabled="disabled"  type="text" class="wizard-ignore" value="品牌" readonly="readonly">
+                             </td>
+                             <td>
+                                   <input name="default_placeholder_brand" disabled="disabled"  type="text" class="wizard-ignore" value="关联已添加品牌" readonly="readonly">
+                             </td>
+                             <td><label class="checkbox">
+                                     <input type="checkbox" name="default_show_brand"  value="1"
+                                        <php>
+                                            if(empty($default_col_show) || in_array( "brand", $default_col_show) == TRUE) 
+                                            {
+                                               echo 'checked="checked"' ;
+                                            }
+                                        </php> >是否显示
+                                  </label>
+                             </td>
+                           </tr>
+                           <tr>
+                             <td>单行文字：</td>
+                             <td>
+                                   <input name="default_text_series" disabled="disabled"  type="text" class="wizard-ignore" value="车系" readonly="readonly">
+                             </td>
+                             <td>
+                                   <input name="default_placeholder_series" disabled="disabled"  type="text" class="wizard-ignore" value="关联已添加车系" readonly="readonly">
+                             </td>
+                             <td><label class="checkbox">
+                                     <input type="checkbox" name="default_show_series"  value="1"
+                                        <php>
+                                            if(empty($default_col_show) || in_array( "series", $default_col_show) == TRUE) 
+                                            {
+                                               echo 'checked="checked"' ;
+                                            }
+                                        </php> >是否显示
+                                  </label></td>
+                           </tr>
+                           <tr>
+                             <td>单行文字：</td>
+                             <td>
+                                   <input name="default_text_model" disabled="disabled"  type="text" class="wizard-ignore" value="车型" readonly="readonly">
+                             </td>
+                             <td>
+                                   <input name="default_placeholder_model" disabled="disabled"  type="text" class="wizard-ignore" value="关联已添加车型" readonly="readonly">
+                             </td>
+                             <td><label class="checkbox">
+                                     <input type="checkbox" name="default_show_model"  value="1"
+                                        <php>
+                                            if(empty($default_col_show) || in_array( "model", $default_col_show) == TRUE) 
+                                            {
+                                               echo 'checked="checked"' ;
+                                            }
+                                        </php> >是否显示
+                                  </label></td>
+                           </tr>
+
+                            <tr>
+                                <td>日期选择：</td>
+                                <td>
+                                    <input name="default_text_reserve_date" disabled="disabled"  type="text" class="wizard-ignore" value="预约日期"></td>
+                                <td>
+                                    <input name="default_placeholder_reserve_date" disabled="disabled"  type="text"  class="wizard-ignore" value="请输入预约日期"></td>
+
+                                <td>
+                                     <label class="checkbox">
+                                         <input type="checkbox" name="default_show_reserve_date"  value="1"
+                                         <php>
+                                             if(empty($default_col_show)|| in_array( "reserve_date", $default_col_show)) 
+                                             {
+                                                echo 'checked="checked" ';
+                                             }
+                                         </php> >是否显示
+                                     </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>时间选择：</td>
+                                <td>
+                                    <input name="default_text_reserve_time" disabled="disabled"  type="text" class="wizard-ignore" value="预约时间"></td>
+                                <td>
+                                    <input name="default_placeholder_reserve_time" disabled="disabled"  type="text"  class="wizard-ignore" value="请输入预约时间"></td>
+
+                                <td>
+                                     <label class="checkbox">
+                                         <input type="checkbox" name="default_show_reserve_time"  value="1"
+                                         <php>
+                                             if(empty($default_col_show)|| in_array( "reserve_time", $default_col_show)) 
+                                             {
+                                                echo 'checked="checked" ';
+                                             }
+                                         </php> >是否显示
+                                     </label>
+                                </td>
+                            </tr>
+                    </tbody>
+                    <tbody class="singlebody">
+                         <volist name='text_cols' id='text_col'>
+                             <tr class="trtxt">
+                                <td>单行文字<span class="numstrtxt">{lingzh:$i}</span>：</td>
+                                <td>
+                                    <input type="text" name="text_text[]" value="<php>echo $text_col[0];</php>" class="input-medium"></td>
+                                <td>
+                                    <input name="text_placeholder[]" type="text" value="<php>echo $text_col[1];</php>" class="input-medium"></td>
+                                <td colspan="2">
+                                    <p><a class="add <php>if($i < count($text_cols)){echo 'display_none';}</php>" href="javascript:void(0);">添加</a>　<a class="del" href="javascript:void(0);">删除</a></p>
+                                </td>
+                             </tr>
+                         </volist>
+                    </tbody>
+                        <tbody class="fielddownloadbody">
+                        <volist name='select_cols' id='select_col'>
+                             <tr class="trtxt">
+                                <td>下拉框<span class="numstrtxt">{lingzh:$i}</span>：</td>
+                                <td>
+                                    <input type="text" name="select_text[]"  value="<php>echo $select_col[0];</php>" class="input-medium"></td>
+                                <td>
+                                    <input name="select_placeholder[]" placeholder='每个选项之间以"|"分割' type="text" value="<php>echo $select_col[1];</php>" class="input-medium"></td>
+
+                                <td colspan="2">
+                                    <p><a class="add <php>if($i < count($select_cols)){echo 'display_none';}</php>" href="javascript:void(0);">添加</a>　<a class="del" href="javascript:void(0);">删除</a></p>
+                                </td>
+                             </tr>
+                        </volist>
+                        </tbody>
+
+
+                        <tbody><tr>
+                            <td>多行文字：</td>
+                            <td>
+                                <input name="default_text_remarks" type="text" disabled="disabled" class="wizard-ignore" value="备注" readonly="readonly"></td>
+                            <td>
+                                <input name="default_placeholder_remarks" type="text" disabled="disabled" value="请留言" readonly="readonly"></td>
+                       
+                             <td><input type="checkbox" name="default_show_remarks"  style="display:none" checked="checked" value="1">
+                                订单默认项</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </td> 
+      </tr> 
+      </tbody> 
+    </table> 
+  </div>
+  <div class="msgWrap" style=' text-align: center'> 
+    <button type="submit" name="button" class="btnGreen">保存</button>&nbsp; &nbsp; <a href="{lingzh::U('Car/rdrive')}" class="btnGray vm">取消</a>
+  </div>
+  </form> 
+</div> 
+ 
+  <script type="text/javascript">
+        function addHandler(className) {
+            var singlebody = $('.' + className).append(function(){
+                return $('.' + className + ' tr').first().clone(true);
+            });
+            
+            $('.' + className + ' tr:last input').val('');
+            $('.' + className + ' tr .numstrtxt').each(function(index){
+                $(this).html(index + 1);
+            });
+            
+            resetDisplay(className);
+        }
+        
+        function delHandler(className, element) {
+            if($('.' + className + ' tr').length > 1) {
+                $(element).parents('.trtxt').detach();
+                $('.' + className + ' tr .numstrtxt').each(function(index){
+                    $(this).html(index + 1);
+                });
+            }else{
+                $('.' + className + ' tr input').val('');
+            }
+            resetDisplay(className);
+        }
+        
+        function resetDisplay(className) {
+            $('.' + className + ' a.add').addClass('display_none');
+            $('.' + className + ' a.add:last').removeClass('display_none');
+        }
+      
+        $(function() {
+          $('.singlebody a.add').click(function(){addHandler('singlebody');});
+          $('.singlebody a.del').click(function(){delHandler('singlebody', this);});
+          
+          $('.fielddownloadbody a.add').click(function(){addHandler('fielddownloadbody');});
+          $('.fielddownloadbody a.del').click(function(){delHandler('fielddownloadbody', this);});
+          
+          //resetDisplay('singlebody');
+          //resetDisplay('fielddownloadbody');
+           var located = false;
+            //定位坐标
+            var lng = '{lingzh:$rdrive.longtitude}';
+            var lat = '{lingzh:$rdrive.latitude}';
+            if(lng.length <= 0 || lat.length <= 0) {
+                //lng = 113.972981;
+                //lat = 22.544814; 
+            	lng = 120.736155;
+            	lat = 31.268241;
+            }
+            var destPoint = new BMap.Point( lng, lat);
+            $(function(){
+                var map = new BMap.Map("container");
+                map.centerAndZoom(new BMap.Point(destPoint.lng, destPoint.lat), 20);//初始化地图
+                //map.enableScrollWheelZoom();
+                map.addControl(new BMap.NavigationControl());
+                var marker = new BMap.Marker(destPoint);
+                map.addOverlay(marker);//添加标注
+
+                map.addEventListener("click", function(e){
+                    if(confirm("确定红色标记为商家准确地址？")){
+                            destPoint = e.point;
+                            $('#customerLng').val(destPoint.lng);
+                            $('#customerLat').val(destPoint.lat);
+                            map.clearOverlays();
+                            var marker1 = new BMap.Marker(destPoint);  // 创建标注
+                            map.addOverlay(marker1); 
+                            located = true;
+                    }
+                });
+
+                var local;
+                function callback(posi){
+
+                        $("#locate-btn").removeAttr("disabled");
+                        for(var i=0;i<posi.length;i++){
+                                if(i==0){
+                                        destPoint = posi[0].point;
+                                         $('#customerLng').val(destPoint.lng);
+                                         $('#customerLat').val(destPoint.lat);
+                                }
+                                posi[i].marker.addEventListener("click", function(data){
+                                        destPoint = data.target.getPosition(0);
+                                        $('#customerLng').val(destPoint.lng);
+                                        $('#customerLat').val(destPoint.lat);
+                                });  
+                        }
+                }
+
+                $("#locate-btn").click(function(){
+                        if($("#address").val() == ""){
+                                alert("请输入商家详细地址！");
+                                return ;
+                        }
+                        $("#locate-btn").attr("disabled","disabled");
+                        local = new BMap.LocalSearch(map, { //智能搜索
+                                renderOptions:{map: map}
+                        });
+                        located = true;
+                        local.setMarkersSetCallback(callback);
+                        local.search($("#address").val());
+                        return false;
+                });
+            });
+            $("#uploadify").uploadify({
+              'buttonText' : '选择配图',
+              'fileTypeDesc' : 'Image Files',
+              'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+              'fileSizeLimit' : '1MB',
+              'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+               'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+               'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+               'onFallback': function() {
+                   alert('您的浏览器没有安装Flash插件');
+               },
+               //'folder': 'uploadFile', //上传文件夹名 
+               'queueID': 'fileQueue',
+               'auto': true,
+               'onUploadSuccess' :  function(file, data, response) {
+                  if (response == true) {
+                      var res_json = eval("("+data+")");
+                      if (res_json.error == 0 ) {
+                          document.getElementById('thumb_img').src=  res_json.content ;
+                          $('#img_url').val(res_json.content);
+                      } else {
+                          alert(res_json.message);
+                      }
+
+                  } else {
+                     alert("网络不给力啊！亲");
+                  }
+
+               },
+               formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+               //'uploadLimit' : 1,
+               'multi': false,
+           });
+           $("#uploadify").css('width', '100%');
+           $("#uploadify").append('<span class="img_upload_tips">建议图片尺寸720*400，大小不超过300K</span>');
+           
+           
+           $("#uploadify_1").uploadify({
+              'buttonText' : '选择图片',
+              'fileTypeDesc' : 'Image Files',
+              'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+              'fileSizeLimit' : '1MB',
+              'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+               'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+               'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+               'onFallback': function() {
+                   alert('您的浏览器没有安装Flash插件');
+               },
+               //'folder': 'uploadFile', //上传文件夹名 
+               'queueID': 'fileQueue_1',
+               'auto': true,
+               'onUploadSuccess' :  function(file, data, response) {
+                  if (response == true) {
+                      var res_json = eval("("+data+")");
+                      if (res_json.error == 0 ) {
+                          document.getElementById('thumb_img_1').src=  res_json.content ;
+                          $('#picture').val(res_json.content);
+                      } else {
+                          alert(res_json.message);
+                      }
+
+                  } else {
+                     alert("网络不给力啊！亲");
+                  }
+
+               },
+               formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+               //'uploadLimit' : 1,
+               'multi': false,
+           });
+           $("#uploadify_1").css('width', '100%');
+           $("#uploadify_1").append('<span class="img_upload_tips">建议图片尺寸720*400，大小不超过300K</span>');
+
+            $('.limit_settings [name="setting_type"]').click(function() {
+                var hlp_id = 'setting_type' + this.value;
+                $('#setting_type1,#setting_type2,#setting_type3').hide();
+                $('#' + hlp_id).show();
+
+                if(this.value == 1) {
+                    $('#settings_num').hide();
+                    $('#settings_time').show();
+                }else{
+                    $('#settings_time').hide();
+                    $('#settings_num').show();
+                }
+            });
+            
+            var settingType = '{lingzh:$rdrive.setting_type}';
+            if(settingType < 1 || settingType > 3) {
+                settingType = 1;
+            }
+            var settingTypeRadioId = '#limit_settings_' + settingType;
+            $(settingTypeRadioId).click();
+    }); // $(function(){}) => end;
+        
+    </script>
+    
+  <include file="Public:footer" />

@@ -1,0 +1,121 @@
+<include file="Public:head"/> 
+<script>
+function onboard(id) 
+{
+    $.ajax({
+	    url: "{lingzh::U('Reply/onboard')}",
+		type:"post",
+		data:{"id":id, 'rid':' {lingzh:$rid}'},
+		dataType:"JSON",
+		success: function(res){
+		    alert(res.info);
+		    if(res.status == 1){
+			    $("#status_"+id).html("已审核");
+			    location.href = res.data.url;
+			}
+		}
+	});
+}
+function delreply(id) 
+{
+    $.ajax({
+	    url: "{lingzh::U('Reply/delreply')}",
+		type:"post",
+		data:{"id":id, 'rid':' {lingzh:$rid}'},
+		dataType:"JSON",
+		success: function(res){
+		    alert(res.info);
+		    if(res.status == 1){
+			    $("#status_"+id).html("已屏蔽");
+			    location.href = res.data.url;
+			}
+		}
+	});
+}
+</script> 
+<div class="content">
+         
+          <div class="cLineB">
+              <h4 class="left">评论管理</h4>
+              <br />
+           
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+			<a href="{lingzh::U('Reply/index')}" class="right btnGrayS vm" style="margin-top:10px">返回</a>          
+			<div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post" action="index.php?g=User&m=Wall&a=dels" id="info">
+          <input name="delall" type="hidden" value="del">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+					<th style="width: 10%" align="center" valign="middle">昵称</th>
+                                        <th style="width: 30%"  align="center" valign="middle">用户Openid：独一无二的数字身份识别代码</th>
+				    <th style="width: 10%" align="center" valign="middle">状态</th>
+					<th style="width: 20%" align="center" valign="middle">消息内容</th>
+					<th style="width: 20%" align="center" valign="middle">接收时间</th>
+					<th style="width: 10%" align="center" valign="middle">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+                <volist name="list" id="vo">  
+                <tr>
+                   <td align="center" valign="middle">{lingzh:$vo.nickname}</td>
+                   <td align="center" valign="middle">{lingzh:$vo.openid}</td>
+				   <if condition="$vo['status'] eq 2">
+				   <td align="center" id="status_{lingzh:$vo.id}" valign="middle">已审核</td>
+				   <elseif condition="$vo['status'] eq 0"/>
+				   <td align="center"  id="status_{lingzh:$vo.id}" valign="middle">已屏蔽</td>
+				   <else/>
+				   <td align="center"  id="status_{lingzh:$vo.id}" valign="middle">未处理</td>
+				   </if>
+				   <td align="center" valign="middle">{lingzh:$vo.text}</td>
+				   <td align="center" valign="middle">{lingzh:$vo.createtime|date="Y-m-d H:i:s",###}</td>
+				   <td>
+				   <if condition="$vo['status'] eq 1">
+				   <a href="javascript:;" onclick="onboard({lingzh:$vo.id});">审核</a>
+				   </if>
+				   <if condition="$vo['status'] neq 0">
+				   <a href="javascript:;"  onclick="delreply({lingzh:$vo.id});">屏蔽</a>
+				   </if>
+				   </td>
+                </tr>
+				</volist>
+              </tbody>
+            </table>
+           </form> 
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages">{lingzh:$page}</div>
+             </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+<include file="Public:footer"/>
+<script>
+
+$(document).ready(function() {
+$('.ListProduct').dataTable({
+    "oLanguage": {
+        "sLengthMenu": "每页显示 _MENU_ 记录",
+        "sZeroRecords": "对不起，没有找到相关的商品",
+        "sInfo": "第 _START_ 条到 _END_ 条，总共 _TOTAL_ 条记录",
+        "sInfoEmpty": "显示 0 条记录",
+        "sInfoFiltered": "(从 总共_MAX_条记录)",
+        "sSearch": "查找",
+        "bJQueryUI": true,
+        "sPaginationType": "full_numbers",
+        "oPaginate": {
+            "sPrevious" : "前一页",
+            "sNext": "下一页"
+        },
+    },
+    "bPaginate": false,
+    "bFilter": false,
+});
+} );
+</script>

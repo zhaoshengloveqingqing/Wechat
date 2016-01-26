@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <meta name="Keywords" content="{lingzh::C('keyword')}" />
+        <meta name="Description" content="{lingzh::C('content')}" />
+        <!-- Mobile Devices Support @begin -->
+        <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+        <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta content="0" http-equiv="expires">
+        <meta content="telephone=no, address=no" name="format-detection">
+        <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <!-- Mobile Devices Support @end -->
+        <link href="/themes/w/css/car/reset.css" rel="stylesheet" type="text/css" />
+        <link href="/themes/w/css/car/common.css" rel="stylesheet" type="text/css" />
+        <link href="/themes/w/css/car/datepicker_car.css" rel="stylesheet" type="text/css" />
+        <link href="/themes/w/css/reservation.css" rel="stylesheet" type="text/css" />
+        <script src="/themes/w/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/jquery-ui.js"></script>
+        <script type="text/javascript" src="/themes/w/js/car/bootstrap_datepicker.js"></script>
+        <title>{lingzh:$rdrive.img_title}</title>
+</head>
+<body onselectstart="return true;" ondragstart="return false;">
+            <div id="bookBody" class="body">
+            <header>
+                    <ul>
+                            <li><img src="{lingzh:$rdrive.picture}" style="width:100%;" /></li>
+                    </ul>
+            </header>
+            <section>
+                    <div class="pt_5 pb_5 pl_10 pr_10">
+                            <dl class="list_book list_book_my">
+                                    <dd class="tbox">
+                                            <div><label>我的预约</label></div>
+                                            <div class="align_right"><a href="{lingzh::U('Wap/Car/rmaintain_orders', array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id'],'rdrive_id'=>$rdrive['id']))}" >{lingzh:$order_count}</a></div>
+                                    </dd>
+                            </dl>
+                    </div>
+                    <div class="pb_5 pl_10 pr_10">
+                            <dl class="list_book list_book_des">
+                                    <dd>
+                                            <div><label>预约试驾说明</label></div>
+                                            <div style="word-break:break-all;word-wrap:nowrap;white-space:normal;padding: 15px 0;">{lingzh:$rdrive.description}</div>
+                                    </dd>
+                            </dl>
+                    </div>
+                    <div class="pb_5 pl_10 pr_10">
+                            <dl class="list_book list_book_contact">
+                                <dd>
+                                    <div class="addr">
+                                        <a href="{lingzh:$navigationLink}">
+                                                <span>地址：{lingzh:$rdrive.address}</span>
+                                        </a>
+                                    </div>
+                                    <div style="padding-top: 3px;" class="tel">
+                                        <a href="tel:{lingzh:$rdrive.tel}"><span>预约电话： {lingzh:$rdrive.tel}</span></a>
+                                    </div>
+                                </dd>
+                            </dl>
+                    </div>
+                    <div class="pb_5 pl_10 pr_10">
+                        <form id="form1" >
+                            <dl class="list_book">
+                                <dt><label>请认真填写表单</label></dt>
+                                <dd class="tbox <php>if(!empty($default_col_show) && !in_array('name', $default_col_show)) {echo ' display_none';}</php>">
+                                        <div><label>联系人:</label></div>
+                                        <div><input type="text" id="name" name="name" placeholder="请输入您的真实姓名" value=""/></div>
+                                </dd>
+                                <dd class="tbox <php>if(!empty($default_col_show) && !in_array('tel', $default_col_show)) {echo ' display_none';}</php>">
+                                        <div><label>联系电话：</label></div>
+                                        <div><input type="tel" id="tel" name="tel" placeholder="请输入您的电话" value=""/></div>
+                                </dd>
+                                <dd class="tbox <php>if(!empty($default_col_show) && !in_array('number', $default_col_show)) {echo ' display_none';}</php>">
+                                        <div><label>车牌：</label></div>
+                                        <div><input type="text" id="number" name="number" placeholder="请输入您的车牌" value=""/></div>
+                                </dd>
+                                <dd class="tbox <php>if(!empty($default_col_show) && !in_array('miles', $default_col_show)) {echo ' display_none';}</php>">
+                                        <div><label>公里数：</label></div>
+                                        <div><input type="text" id="miles" name="miles" placeholder="请输入您的公里数" value=""/></div>
+                                </dd>
+                                 <dd class="tbox <php>if(!empty($default_col_show) && !in_array('reserve_date', $default_col_show)) {echo ' display_none';}</php>">
+                                        <div><label>预约日期：</label></div>
+                                        <div><input type="text" name="reserve_date" id="reserve_date" readonly="readonly" placeholder="" value="" /></div>
+                                 </dd>
+                                  <dd class="tbox <php>if(!empty($default_col_show) && !in_array('reserve_time', $default_col_show)) {echo ' display_none';}</php>">
+                                        <div><label>预约时间</label></div>
+                                        <div>
+                                            <select name="reserve_time" id="reserve_time" class="input-medium" data-rule-required="true">
+                                            </select>
+                                        </div>
+                                 </dd>
+                                 <dd class="tbox">
+                                        
+                                 </dd>
+                                 <volist name='text_cols' id='text_col'>
+                                     <dd class="tbox">
+                                        <div><label><php>echo $text_col[0];</php></label></div>
+                                        <div><input type="text" name="text_cols[]"  placeholder="<php> echo $text_col[1];</php>" value=""/></div>
+                                    </dd>
+                                 </volist>
+                                <volist name='select_cols' id='select_col'>
+                                     <dd class="tbox">
+                                            <div><label>{lingzh:$select_col[0]}</label></div>
+                                            <div>
+                                                <select name="select_cols[]" class="input-medium" data-rule-required="true">
+                                                     <php>
+                                                        foreach($select_col[1] as $selectItem) {
+                                                          echo '<option value="'.$selectItem.'" >'.$selectItem.'</option>';
+                                                        }
+                                                      </php>
+                                                </select>
+                                            </div>
+                                     </dd>
+                                </volist>
+                                 <dd class="tbox">
+                                        <div><label>备注：</label></div>
+                                        <div><textarea id="remarks" name="remarks" placeholder="请输入备注信息" style="height:80px;"></textarea></div>
+                                 </dd>
+                               </dl>
+                                <div style="margin:10px;text-align: center;">
+                                        <input id="submit" type="button" value="立即预约" class="btn_submit" style="margin:10px auto;text-align: center;">
+                                </div>
+                            </form>
+                    </div>
+                 <div class="footer">
+                    <php>
+                      echo CopyRightHelper::generateCopyRight($_GET["token"]);
+                    </php>
+                  </div>
+            </section>
+         
+    </div>
+</body>
+<script type="text/javascript">
+    
+
+    $(document).ready(function () {
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+        var ndate = $('#reserve_date').datepicker({
+                         format:"yyyy-mm-dd",
+                        onRender: function(date) {
+                           return date.valueOf() < now.valueOf() ? 'disabled' : '';
+                        }
+        }).on("changeDate", function(date){
+//					alert(date.viewMode);
+//					if('days' == date.viewMode){
+                        ndate.datepicker('hide');
+//					}
+        });
+        
+        for(var ti=0; ti<24; ti++) {
+            var toptionValue = ti + ':00' + ' - ' + (ti+1) + ':00';
+            $('#reserve_time').append('<option value="' + toptionValue  + '">' + toptionValue + '</option>');
+        }
+        
+        
+        $("#submit").click(function () {  
+ 
+            if($("#tel").val()==''){alert('电话不能为空');return;} 
+            if($("#tel").val().length < 7){alert('请输入正确的电话号码');return;} 
+            if($("#name").val()==''){alert('名字不能为空');return;} 
+            var wecha_id = '{lingzh:$Think.get.wecha_id}';
+            if(wecha_id.length <= 0) {
+                alert('非法请求');
+                return;
+            }
+            
+            var text_cols = new Array();
+            $("[name^='text_cols']").each(function(index, element) {text_cols.push($(element).val());});
+
+            var select_cols = new Array();
+            $("[name^='select_cols']").each(function(index, element) {select_cols.push($(element).val());});
+
+            var submitData = {
+                rdrive_id   : "{lingzh:$rdrive.id}",
+                name        : $("#name").val(),
+                tel         : $("#tel").val(),
+                number       : $("#number").val(),
+                miles      : $("#miles").val(), 
+                reserve_date: $('#reserve_date').val(),
+                reserve_time: $('#reserve_time').val(),
+                remarks     : $('#remarks').val(),
+                text_cols   : text_cols,
+                select_cols : select_cols
+            };
+            $.post('index.php?g=Wap&m=Car&a=reserve_maintain&token={lingzh:$_GET["token"]}&wecha_id={lingzh:$_GET["wecha_id"]}', 
+                        submitData,
+                        function(data) {
+                            if (data.success == true) {
+                                alert(data.msg);
+                                setTimeout("window.location.href='{lingzh::U('Wap/Car/rmaintain_orders', array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id'],'rdrive_id'=>$rdrive['id']))}'",1000);
+                                return
+                            } else {
+                                alert(data.msg);
+                            }
+                        },
+                        "json");
+        }); 
+});    
+
+function jumpurl(url){
+	window.location.href = url;
+}
+function shareFriend() {
+    WeixinJSBridge.invoke('sendAppMessage',{
+                            "appid":window.shareData.appid,
+                            "img_url":window.shareData.imgUrl,
+                            "img_width":"640",
+                            "img_height":"640",
+                            "link":window.shareData.sendFriendLink,
+                            "desc":window.shareData.tContent,
+                            "title":window.shareData.tTitle
+                            }, function(res) {
+                            _report('send_msg', res.err_msg);
+                            })
+}
+function shareTimeline() {
+    WeixinJSBridge.invoke('shareTimeline',{
+                            "img_url":window.shareData.imgUrl,
+                            "img_width":"640",
+                            "img_height":"640",
+                            "link":window.shareData.timeLineLink,
+                            "desc": window.shareData.tContent,
+                            "title": window.shareData.tTitle
+                            }, function(res) {
+                            _report('timeline', res.err_msg);
+                            });
+}
+function shareWeibo() {
+    WeixinJSBridge.invoke('shareWeibo',{
+                            "content":window.shareData.wContent,
+                            "url":'http://meishi.qq.com/weixin',
+                            }, function(res) {
+                            _report('weibo', res.err_msg);
+                            });
+}
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv){
+            shareFriend();
+            });
+
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function(argv){
+            shareTimeline();
+            });
+
+        // 分享到微博
+        WeixinJSBridge.on('menu:share:weibo', function(argv){
+            shareWeibo();
+            });
+        }, false)
+</script>
+</html>

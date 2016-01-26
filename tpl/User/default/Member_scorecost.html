@@ -1,0 +1,77 @@
+<include file="Public:head"/> 
+<script src="./tpl/User/default/common/js/date/WdatePicker.js"></script>
+<script type="text/javascript">
+    $(function()
+    {
+        var today=new Date();
+        $("#exchange_time").val(today.format('yyyy-MM-dd'));
+    });
+</script>
+<style type="text/css">
+            .title-con {
+                display: inline-block;
+                padding-left: 25px;
+                width: 125px;
+                font-size: 12px;
+                margin-top: 15px;
+                margin-left: 5px;
+            } 
+        </style>
+<div class="content">
+    <div class="cLineB">
+        <h4><span class="left">积分兑换管理</span></h4>
+    </div>
+    <a onclick="$('#formContainer').toggle();" title="录入积分兑换记录" class="btnGrayS vm bigbtn" style="margin-bottom:5px"><img src="./tpl/User/default/common/images/pic.png" class="vm">录入积分兑换记录</a>
+    <div id="formContainer" class="msgWrap bgfc"  style=" margin-left: auto;margin-right: auto; width: 100%; border: 1px solid #ddd; display: none; border-radius: 3px;">
+        <div class="cLineB">
+            <h4><span class="left">添加积分兑换记录</span></h4>
+        </div>
+        <form id="scoreSpendRecord" action="{lingzh::U('User/Member/addscorecost')}" method="post">
+            <div id="defaultItemContainer">
+                <span class="title-con">会员卡号:</span><input type="text" name="number" class="text textMiddle">
+                <span class="title-con">兑换积分:</span><input type="text" name="cost_score" class="text textMiddle"><br/>
+                <span class="title-con">备注:</span><input type="text" name="comment" class="text textMiddle">
+                <span class="title-con">兑换日期:</span><input id="exchange_time" type="text" name="cost_date" class="text textMiddle" onclick="WdatePicker()"><br/>
+            </div>
+            <div id="extItemContainer"></div>
+            <button type="submit" id="button" name="button" class="btnGreen" style="margin-left: 155px;margin-top: 15px">提交</button>
+        </form>
+    </div>
+    <div class="msgWrap">
+        <form action="{lingzh::U('User/Member/scorecost')}" method="post">
+            <input type="text" name="keyword" class="text textMiddle" style="width:560px" placeholder="请输入卡号查询积分兑换记录">
+            <input type="submit" class="btnGreen" style="margin-left:15px"  value="查询">
+        </form>
+        <table class="ListProduct" cellpadding="0" cellspacing="0" border="0" width="100%">
+            <thead>
+              <tr>
+                    <th align="center" valign="middle" width="20%">卡号</th>
+                    <th align="center" valign="middle" width="10%">兑换积分</th> 
+                    <th align="center" valign="middle" width="10%">兑换日期</th>
+                    <th align="center" valign="middle" width="30%">备注</th>
+                    <th align="center" valign="middle" width="10%">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+                <volist id="item" name="list">
+                    <tr>
+                        <td align="center" valign="middle">
+                            <a href="{lingzh::U('User/Member/editmemberinfo', array('wid'=>$item['wxid']))}">{lingzh:$item.cardnum}</a>
+                        </td>
+                        <td align="center" valign="middle">{lingzh:$item.expense}</td>
+                        <td align="center" valign="middle">{lingzh:$item.sign_time|date='Y-m-d',###}</td>
+                        <td align="center" valign="middle">{lingzh:$item.remark}</td>
+                        <td align="center" valign="middle">
+                            <a href="javascript:drop_confirm('删除无法撤销，您确定要删除吗?', '{lingzh::U('User/Member/delscorecost', array('id'=>$item['id']))}');">
+                                <strong>删除</strong>
+                            </a> 
+                        </td>
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<include file="Public:footer"/>

@@ -1,0 +1,588 @@
+<include file="Public:head" />
+<link rel="stylesheet" href="/js/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="/js//kindeditor/plugins/code/prettify.css" />
+<link rel="stylesheet" href="/themes/a/css/img_upload_panel.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+<script src="/js/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="/js/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="/js/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script src="/js/hashmap.js" type="text/javascript"></script>
+<script>
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#intro', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : true,
+uploadJson :'/index.php/upload/image',
+items : [
+'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut', 'image','multiimage'],
+});
+});
+</script>
+<script type="text/javascript">
+function syncPreviewText(fromId, toId) {
+document.getElementById(toId).innerHTML=document.getElementById(fromId).value;
+}
+function syncPreviewImg(fromId, toId) {
+document.getElementById(toId).src=document.getElementById(fromId).value;
+}
+</script>
+<script>
+function toDecimal(x) {
+var f = parseFloat(x);
+if (isNaN(f)) {
+return;
+}
+f = Math.round(x*10)/10;
+return f;
+}
+function calDiscount(){
+  var price=$('#price').attr('value');
+  var oprice=$('#oprice').attr('value');
+  if(oprice!=0&&oprice!=''){
+    var dis=oprice-price;
+    var discount=10-toDecimal((dis/oprice)*10);
+  }else{
+    discount=10;
+  }
+  $('#discount').attr('value',discount);
+}
+</script>
+<style type="text/css">
+.select_box{
+  width: 180px;
+}
+.attr_name_label{
+  display: block;
+}
+</style>
+<style type="text/css">
+  #size_title, #color_title{
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .size_cell{
+    width: 120px;
+    display: inline-block;
+    text-align: center;
+  }
+  .color_cell{
+    width: 120px;
+    display: inline-block;
+    text-align: center;
+
+  }
+  .amount_cell{
+    width: 120px;
+    display: inline-block;
+    text-align: center;
+
+  }
+  .checkBox_con{
+    display: inline-block;
+    width: 85px;
+    margin: 5px;
+  }
+  .set_name{
+    border: 1px solid #ccc;
+    display: inline-block;
+    width: 60px;
+    margin-left: 2px;
+    padding-left: 3px;
+  }
+  .set_name[disabled="disabled"],.set_name[disabled]{
+    border:none;
+  }
+  th{
+    width: 145px;
+  }
+  .inventory_box{
+    border: 1px solid #ccc;
+    width: 60px;
+    padding-left: 3px;
+  }
+  .size_color_pair_li{
+    margin-top: 10px;
+  }
+  .size_name,.color_name{
+    text-align: center;
+    margin-left: -5px;
+  }
+  .alias_box{
+    border: 1px solid #ccc;
+    width: 60px;
+    padding-left: 5px;
+  }
+</style>
+<div class="content">
+  <div class="cLineB">
+    <h4>商品设置</h4>
+    <a href="{lingzh::U('Fxs/shop_index')}" class="right  btnGreen" style="margin-top:-27px">返回</a>
+  </div>
+  <form class="form" method="post" action="{lingzh::U('Fxs/save_product',array('bid'=>$_GET['bid']))}" enctype="multipart/form-data">
+    <if condition="isset($product)">
+    <input type="hidden" name="gid" value="{lingzh:$product.product_id}" />
+    </if>
+    <div class="msgWrap bgfc">
+      <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+        <tbody>
+          <tr>
+            <th><span class="red">*</span>名称：</th>
+            <td><input type="text" name="name" value="<if condition='isset($product)'>{lingzh:$product.name}</if>" class="px" style="width:400px;" /></td>
+          </tr>
+          <tr>
+            <th><span class="red">*</span>分类：</th>
+            <td>
+              <select id="catid" name="cid" class="select_box">
+                <option value="-1">请选择分类...</option>
+                <volist name="categories" id="cate">
+                <option value="{lingzh:$cate['category_id']}" <if condition="(isset($product)) AND ($product['category_id'] eq $cate['category_id'])">selected="selected"</if>>{lingzh:$cate['name']}</option>
+                </volist>
+              </select>
+              <a href="{lingzh::U('Shop/catSet')}"  target="ddd" >添加分类</a>
+            </td>
+          </tr>
+          <!--规格-->
+          <tr>
+            <th valign="top"><span class="red">*</span>规格：</th>
+            <td>
+              <ul>
+                <li id="size_title">
+                  尺寸 
+                  <font style="font-size: 12px;font-weight: normal">
+                    ( 别名: <input class="alias_box" name="size_alias" value="<?php if(isset($product)){ echo $product['size_alias'] ;} else { echo '尺寸'; } ?>"> )
+                  </font>
+                </li>
+                <li id="size_con">
+                  <?php 
+                  foreach ($size_set as $k => $val) { 
+                    ?>
+                    <div class="checkBox_con" id="<?php echo "size_" . $val['id']; ?>">
+                      <input type="checkbox" name="size_set[<?php echo $k; ?>][id]" value="{lingzh:$val.id}" class="checkbox_cls" onclick="setChecked(this,0)">
+                      <input disabled="disabled" name="size_set[<?php echo $k; ?>][name]" class="set_name" value="{lingzh:$val.name}" onChange="sizeOrColorNameChange(this,0)">
+                    </div>
+                  <?php } ?>
+                </li>
+                <li id="color_title">
+                  颜色 
+                  <font style="font-size: 12px;font-weight: normal">
+                    ( 别名: <input class="alias_box" name="color_alias" value="<?php if(isset($product)){ echo $product['color_alias'] ;} else { echo '颜色'; } ?>"> )
+                  </font>
+                </li>
+                <li id="color_con">
+                  <?php foreach ($color_set as $k => $val) { ?>
+                    <div class="checkBox_con" id="<?php echo "color_" . $val['id']; ?>">
+                      <input type="checkbox" name="color_set[<?php echo $k; ?>][id]" onclick="setChecked(this,1)" value="{lingzh:$val.id}" class="checkbox_cls">
+                      <input disabled="disabled" name="color_set[<?php echo $k; ?>][name]" class="set_name" value="{lingzh:$val.name}" onChange="sizeOrColorNameChange(this,1)">
+                    </div>
+                  <?php } ?>
+                </li>
+                <li>
+                  <ul >
+                    <li id="size_title">具体信息</li>
+                    <li id="size_color_pair_con_li" style="margin-top: 15px;">
+                      <div class="size_cell">尺寸</div><div class="color_cell">颜色</div><div class="amount_cell">库存</div>
+                    </li>
+                    <li>
+                      <ul id="size_color_pair_ul">
+                        <?php foreach ($specs as $key => $val) { ?>
+                          <li id="<?php echo $val['size_id'].'_'.$val['color_id']; ?>" class="size_color_pair_li">
+                            <div class="size_cell">
+                              <input name="spec[<?php echo $key; ?>][size_id]" type="hidden" value="<?php echo $val['size_id'] ?>">
+                              <input name="spec[<?php echo $key; ?>][size_name]" type="text" value="<?php echo $val['size_name'] ?>" class="size_name" readonly="readonly">
+                            </div>
+                            <div class="color_cell">
+                              <input name="spec[<?php echo $key; ?>][color_id]" type="hidden" value="<?php echo $val['color_id'] ?>">
+                              <input name="spec[<?php echo $key; ?>][color_name]" type="text" value="<?php echo $val['color_name'] ?>" class="color_name" readonly="readonly">
+                            </div>
+                            <div class="amount_cell">
+                              <input name="spec[<?php echo $key; ?>][inventory]" type="text" value="<?php echo $val['inventory'] ?>" class="inventory_box" onChange="notifyInventory()">
+                            </div>
+                          </li>
+                        <?php } ?>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <script type="text/javascript">
+          function sizeOrColorNameChange($this,type)
+          {
+            var checkbox_node = $($this).parent().children(".checkbox_cls");
+            var name_node = $($this);
+            var id = checkbox_node.val();
+            var name = name_node.val();
+            var isCheck = checkbox_node.is(":checked");
+            if(isCheck)
+            {
+              changeSizeOrColorName(id,name,type);
+            }
+          }
+
+          function changeSizeOrColorName(id,name,type)
+          { 
+            var changeName = function(size_id,color_id,ele_cls,name)
+            {
+              $('#' + size_id + '_' + color_id).find(ele_cls).val(name);
+            }
+            if(type==0)//size
+            {
+              if(!size_map.contains(id))
+              { 
+                return; 
+              }
+              var box = size_map.get(id);
+              box.name = name;
+              if(color_map.size == 0)
+              { 
+                changeName(id,0,'.size_name',name);
+                return;
+              }
+              for (var i = color_map.size - 1; i >= 0; i--) {
+                changeName(id,color_map.getKeyByIndex(i),'.size_name',name);
+              };
+            }
+            else if (type == 1)//color
+            {
+              if(!color_map.contains(id))
+              {
+                return;
+              }
+              var box = color_map.get(id);
+              box.name = name;
+              if(size_map.size == 0)
+              {
+                changeName(0,id,'.color_name',name);
+                return;
+              }
+              for (var i = size_map.size - 1; i >= 0; i--) {
+                changeName(size_map.getKeyByIndex(i),id,'.color_name',name);
+              };
+            }
+          }
+          
+          var size_map = HashMap();
+          var color_map = HashMap();
+          var zero_id_map = HashMap();
+
+          function Box (id,name)
+          {
+            this.id = id;
+            this.name = name;
+            this.toString = function(){
+              return this.id + type;
+            };
+          }
+
+          function setChecked($this,type)
+          {
+            var checkbox_node = $($this);
+            var name_node = $($this).parent().children(".set_name");
+            var id = $($this).val();
+            var name = name_node.val();
+            var isCheck = checkbox_node.is(":checked");
+            if(isCheck)
+            {
+              name_node.removeAttr("disabled");
+              var box = new Box(id,name);
+              addNodes(id,type,box);
+            }
+            else
+            {
+              name_node.attr("disabled","disabled");
+              removeNodesByid(id,type);
+            }
+            clearZeorIdNode();
+          }
+
+          function removeNodesByid(id,type)
+          {
+            var removeNode = function(size_id,color_id){
+              $('#size_color_pair_ul').children('#' + size_id.toString() + '_' + color_id.toString()).remove();
+            }
+            if(type == 0 && size_map.contains(id))//size
+            {
+              size_map.remove(id);
+              removeNode(id,0);
+              for (var i = color_map.size - 1 ; i >= 0 ; i--) {
+                var color_id = color_map.getKeyByIndex(i);
+                removeNode(id,color_id);
+              };
+            }
+            else if(type == 1 && color_map.contains(id))//color
+            {
+              color_map.remove(id);
+              removeNode(0,id);
+              for (var i = size_map.size - 1 ; i >= 0; i--) {
+                var size_id = size_map.getKeyByIndex(i);
+                removeNode(size_id,id);
+              };
+            }
+          }
+
+          function clearZeorIdNode()
+          {
+            if(size_map.size == 0 || color_map.size == 0)
+            {
+              setForOnlyOneFieldNodes();
+              return;
+            }
+            if(zero_id_map.size > 0 )
+            {
+              for (var i = zero_id_map.size - 1; i >= 0; i--) {
+                $('#size_color_pair_ul').children(zero_id_map.indexOf(i)).remove();
+              };
+              zero_id_map = HashMap();
+            }
+          }
+
+          function setForOnlyOneFieldNodes()
+          {
+            if( (size_map.size > 0 && color_map.size > 0) || $('#size_color_pair_ul li').length > 0)
+            {
+              return;
+            }
+            if(size_map.size == 0 && color_map.size > 0)
+            {
+              for (var i = color_map.size - 1; i >= 0; i--) {
+                addNodeToUl(0,color_map.getKeyByIndex(i));
+              };
+            }
+            else if (size_map.size > 0 &&　color_map.size == 0)
+            {
+              for (var i = size_map.size - 1; i >= 0; i--) {
+                addNodeToUl(size_map.getKeyByIndex(i),0);
+              };
+            }
+          }
+
+          function addNodes(id,type,box)
+          {
+            if(type == 0)
+            {
+              size_map.put(id,box);
+              if(color_map.size == 0)
+              {
+                addNodeToUl(id,0);
+                return;
+              }
+              for (var i = color_map.size - 1 ; i >= 0; i--) {
+                var color_id = color_map.getKeyByIndex(i);
+                addNodeToUl(id,color_id);
+              };
+            }
+            else if(type == 1)
+            {
+              color_map.put(id,box);
+              if(size_map.size == 0)
+              {
+                addNodeToUl(0,id);
+                return;
+              }
+              for (var i = size_map.size - 1 ; i >= 0; i--) {
+                var size_id = size_map.getKeyByIndex(i);
+                addNodeToUl(size_id,id);
+              };
+            }
+          }
+
+          function addNodeToUl(size_id,color_id)
+          { 
+              var size_name = size_map.contains(size_id) ? size_map.get(size_id).name : '';
+              var color_name = color_map.contains(color_id) ? color_map.get(color_id).name : '';
+              var li_id = size_id + '_' + color_id;
+              if(size_id == 0 || color_id == 0)
+              {
+                zero_id_map.put(li_id,'#' + li_id);
+              }
+              var index = createUUID() ;
+              var node = '<li id="' + li_id + '" class="size_color_pair_li"> ' +
+                          '<div class="size_cell"> ' +
+                            '<input name="spec[' + index + '][size_id]" type="hidden" value="' + size_id + '"> ' +
+                            '<input name="spec[' + index + '][size_name]" type="text" value="' + size_name + '" class="size_name" readonly="readonly"> ' +
+                          '</div> ' +
+                          '<div class="color_cell"> ' +
+                            '<input name="spec[' + index + '][color_id]" type="hidden" value="' + color_id + '"> ' +
+                            '<input name="spec[' + index + '][color_name]" type="text" value="' + color_name + '" class="color_name" readonly="readonly"> ' +
+                          '</div> ' +
+                          ' <div class="amount_cell"> ' +
+                            ' <input name="spec[' + index + '][inventory]" type="text" value="20" class="inventory_box" onChange="notifyInventory()">' +
+                          '</div>' +
+                        '</li>'; 
+              $('#size_color_pair_ul').append(node);
+              notifyInventory();
+          }
+
+          function notifyInventory()
+          {
+            var total = 0; 
+            $('.inventory_box').each(function(k,node){
+              total = parseInt( node.value ) + total;
+            });
+            $('#inventory_total_box').val(total);
+          }
+
+          $(document).ready(function(){
+            var size_set = getSizeSet();
+            var color_set = getColorSet(); 
+            for (var key in size_set) {
+               if($.isFunction(size_set[key]))
+              {
+                continue;
+              }
+              var node = $('#size_' + size_set[key].id);
+              node.find(".checkbox_cls").attr('checked','checked');
+              node.find(".set_name").removeAttr('disabled');
+              node.find(".set_name").val(size_set[key].name);
+              size_map.put(size_set[key].id,new Box(size_set[key].id,size_set[key].name));
+            };
+            for (var key in color_set) {
+              if($.isFunction(color_set[key]))
+              {
+                continue;
+              }
+              var node = $('#color_' + color_set[key].id);
+              node.find(".checkbox_cls").attr('checked','checked');
+              node.find(".set_name").removeAttr('disabled');
+              node.find(".set_name").val(color_set[key].name);
+              color_map.put(color_set[key].id,new Box(color_set[key].id,color_set[key].name));
+            };
+          });
+
+          function getSizeSet()
+          {
+            <?php 
+            if($the_size_set)
+            {
+              echo 'return '.json_encode($the_size_set).';';
+            }
+            else
+            {
+              echo 'return false;';
+            }
+             ?>
+          }
+          function getColorSet()
+          {
+            <?php 
+            if($the_color_set)
+            {
+              echo 'return '.json_encode($the_color_set).';';
+            }
+            else
+            {
+              echo 'return false;';
+            }
+             ?>
+          }
+          function createUUID() {
+              // http://www.ietf.org/rfc/rfc4122.txt
+              var s = [];
+              var hexDigits = "0123456789abcdef";
+              for (var i = 0; i < 36; i++) {
+                  s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+              }
+              s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+              s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+              s[8] = s[13] = s[18] = s[23] = "-";
+
+              var uuid = s.join("");
+              return uuid;
+          }
+          </script>
+          <!--规格 end-->
+
+          <!--库存 start-->
+          <tr>
+            <th><span class="red">*</span>库存：</th>
+            <td><input type="text" id="inventory_total_box" name="inventory" value="<?php if(isset($product)){echo $product['inventory'];} else {echo 100;} ?>" class="px" style="width:100px;" /> </td>
+          </tr>
+          <tr>
+            <th><span class="red">*</span>现价：</th>
+            <td><input type="text" id="price" onchange="calDiscount();" name="shop_price" value="<if condition='isset($product)'>{lingzh:$product.shop_price}</if>" class="px" style="width:100px;" /> 元</td>
+          </tr>
+          <tr>
+            <th><span class="red">*</span>原价：</th>
+            <td><input type="text" id="oprice" onchange="calDiscount();" name="market_price" value="<if condition='isset($product)'>{lingzh:$product.market_price}</if>" class="px" style="width:100px;" /> 元</td>
+          </tr>
+          <!--tr>
+          <th>关键词：</th>
+          <td><input type="text" name="keyword" value="<if condition='isset($product)'>{lingzh:$product.keyword}</if>" class="px" style="width:400px;" /><br/> <p>通过微信发送关键词可返回该产品的图文消息，可不填写</p></td>
+        </tr-->
+        <tr>
+          <th>
+            <span class="red">*</span>商品图片：
+          </th>
+          <td>
+            <img id="shop_img" class="thumb_img" src="<if condition='isset($product)'>{lingzh:$product.logo_url}</if>" style="max-height: 100px;">
+            <br />
+            <input id='pic_url_input' type="text" name="logo_url" value="<if condition='isset($product)'>{lingzh:$product.logo_url}</if>" class="px" style="width:400px;" onblur="syncPreviewImg('pic_url_input','shop_img')"/>
+            <div class='img_upload_panel' >
+              <div name='uploadify'  id="uploadify_shop_1"  ></div>
+              <div id="fileQueue_shop_1"></div>
+              <div style="clr:both; height:0px;"></div>
+            </div>
+          </td>
+        </tr>
+        <TR>
+          <TH valign="top"><label for="info">商品详细介绍：</label></TH>
+          <TD><textarea name="intro" id="intro"  rows="5" style="width:590px;height:360px"><if condition='isset($product)'>{lingzh:$product.intro}</if></textarea></TD>
+        </TR>
+        <tr>
+          <th>&nbsp;</th>
+          <td>
+          <button type="submit" name="button" class="btnGreen">保存</button> &nbsp; <a href="{lingzh::U('Shop/index')}" class="btnGray vm">取消</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>
+</div>
+<script>
+$(function() {
+  $("#uploadify_shop_1").uploadify({
+    'buttonText': '上传图片',
+    'fileTypeDesc': 'Image Files',
+    'fileTypeExts': '*.gif; *.jpg; *.jpeg; *.png',
+    'fileSizeLimit': '1MB',
+    'swf': '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有
+    'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+    'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径
+
+    'onFallback': function() {
+      alert('您的浏览器没有安装Flash插件');
+    },
+    //'folder': 'uploadFile', //上传文件夹名
+    'queueID': 'fileQueue_shop_1',
+    'auto': true,
+    'onUploadSuccess': function(file, data, response) {
+      if (response == true) {
+        var res_json = eval("(" + data + ")");
+        if (res_json.error == 0) {
+          document.getElementById('shop_img').src = res_json.content;
+          $('#pic_url_input').val(res_json.content);
+        } else {
+          alert(res_json.message);
+        }
+      } else {
+        alert("网络不给力啊！亲");
+      }
+    },
+    formData: {
+      "<?php echo 'param1';?>": "<?php echo base64_encode(session_id());?>"
+    },
+    <?php //using session for 302 error of uploadify ?>
+    //'uploadLimit' : 1,
+    'multi': false,
+  });
+  $("#uploadify_shop_1").css('width', '100%');
+  $("#uploadify_shop_1").append('<span class="img_upload_tips">支持JPG、PNG、GIF等格式，但大小不超过1MB,<br />或者将图片上传到POCO.cn获取外链</span>');
+});
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,37 @@
+<meta http-equiv="Page-Exit" content="blendTrans(Duration=1.0)">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<link href="/themes/a/css/home.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+ 
+<style>
+.main .login-part {float: right;line-height: 30px; margin-right:20px;}
+</style>
+<div class="head">
+ <div class="main">
+  <div class="logo">
+    <p><a href="/" title="派尔网络微信营销"><img src="/images/logo.png" class="pngfix" width="235" height="44"  border="0" /></a></p>
+  </div>
+  <div class="login-part">
+    <a href="/index.php?g=User&m=Index&a=index" title="后台管理" target="_blank">后台管理</a></li>
+  </div>
+  <div class="tel">官方微信公众号:<span>Pinet_Tech</span>
+  </div>
+  <div class="navi">
+    <ul class="anv">
+      <li>
+	  <a href="/" title="首页" target="_self" <if condition="(ACTION_NAME eq 'index') and (MODULE_NAME eq 'Index')">class="selected"</if>>首页</a>
+      </li>
+      <li>
+      <a href="/index.php?m=Index&a=fc" title="平台功能" target="_self" <if condition="ACTION_NAME eq 'fc'">class="selected"</if>>平台功能</a>
+      </li>
+      <li><a href="/index.php?g=Home&m=Anli" title="成功案例" target="_self" <if condition="(ACTION_NAME eq 'index') and (MODULE_NAME eq 'Anli')">class="selected"</if>>成功案例</a>
+      </li>
+      <li><a href="/index.php?m=Index&a=about" title="技术团队" target="_self" <if condition="ACTION_NAME eq 'about'">class="selected"</if>>技术团队</a></li>
+       <li><a href="/index.php?g=Home&m=Index&a=media" title="媒体报道" target="_self" <if condition="ACTION_NAME eq 'media'">class="selected"</if>>媒体报道</a></li>
+	  <li><a href="/index.php?m=Index&a=jiameng" title="招商加盟" target="_self" <if condition="ACTION_NAME eq 'jiameng'">class="selected"</if>>招商加盟</a></li>
+     </ul>
+  </div>
+ </div>
+</div>

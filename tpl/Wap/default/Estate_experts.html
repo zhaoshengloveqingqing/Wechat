@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/wap/review.css" media="all">
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/wap/back.css" media="all">
+<script type="text/javascript" src="{lingzh::RES}/vhouse/wap/share.js"></script>
+<script type="text/javascript" src="{lingzh::RES}/vhouse/wap/common.js"></script>
+<script type="text/javascript" src="{lingzh::RES}/vhouse/wap/review.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/waphome.css" media="all">
+<link rel="stylesheet" type="text/css" href="{lingzh::RES}/vhouse/reset.css" media="all">
+<script type="text/javascript" src="{lingzh::RES}/vhouse/jQuery.js"></script>
+<script type="text/javascript" src="{lingzh::RES}/vhouse/swipe.js"></script>
+
+
+<title>专家点评</title>
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <!-- Mobile Devices Support @begin -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+
+        <!-- Mobile Devices Support @end -->
+<script src="{lingzh::RES}/vhouse/wap/sharedata.js"></script></head>
+<body onselectstart="return true;" ondragstart="return false;">
+<style type="text/css">
+    .review_man h3{font-size:18px;}
+    #impress a{
+        overflow:hidden;
+    }
+    .review_man h3{font-size:18px;}
+    .is_1 a[style*='flex:0'], .is_2 a[style*='flex:0']{
+        display:none;
+    }
+</style>
+
+<div class="wrapper">
+    <!-- start -->
+        <ul class="nav_top" id="navTop" style="display: -webkit-box;">
+            <!--li><a href="javascript:void(0);" onclick="iswitch_panel(0);return false;" class="current">房友印象</a></li-->
+            <li><a href="javascript:void(0);" onclick="iswitch_panel(1);return false;">专家点评</a></li>
+        </ul>
+    <!-- end -->
+ 
+    </div>
+    <!--专家-->
+    <div id="professional" style="display:block;">
+     <volist name="expert" id="exp">
+        <div class="review_box">
+            <div class="review_man"> <img src="{lingzh:$exp['pic_url_input']}" width="70" height="70" style="width:70px!important; height:70px!important; " alt="">     
+            <h3>{lingzh:$exp['name']}<em><br>{lingzh:$exp['position']}</em></h3>
+            <p>{lingzh:$exp['description']}</p>
+            </div>
+            <div class="review_word">
+            <h2>{lingzh:$exp['title']}</h2>
+            <p>{lingzh:$exp['comment']}</p>
+            </div>
+        </div>
+    </volist>
+ </div>
+</div>
+
+<script>
+
+$(document).ready(function() {
+
+function getId(obj,val){
+    var imp_id = val;
+    var token="{lingzh:$Think.get.token}";
+    var wecha_id="{lingzh:$Think.get.wecha_id}";
+    if (wecha_id == '') {
+        alert("请认返回上一页面，重新进入。");
+        return
+    }
+    var submitData = {
+        imp_id: imp_id,
+        token: token,
+        wecha_id:wecha_id,
+        action: "impress_add"
+    },
+    $.post("{lingzh::U('Estate/impress_add',array('token'=>$token,'wecha_id'=>$wecha_id))}", submitData,
+    function(data) {
+        var xobj=eval('('+data+')');
+        //alert(xobj.msg);
+        if (xobj.success == 1) {
+            alert(xobj.msg);
+            return
+        }else{
+            alert("Hi,您已经赞了噢。");
+        }
+    },
+    "json");
+ }
+})
+
+</script>
+<include file="Estate:menu"/>
+</body></html>

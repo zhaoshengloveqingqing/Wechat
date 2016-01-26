@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" type="text/css" href="./tpl/App/default/common/css/App/main.css"/>
+<link rel="stylesheet" type="text/css" href="./tpl/App/default/common/css/App/yuyue.css"/>
+<title>iphone6预约</title>
+</head>
+<script src="./tpl/Fxs/default/common/js/jquery-1.8.3.min.js"></script>
+<script src="./tpl/Fxs/default/common/js/mobile_tip.min.js"></script>
+<body>
+<div class="main">
+  <div class="header">
+    <div style="width:80%; margin:0 auto;"> <img src="./tpl/App/default/common/images/App/top.png" /> </div>
+  </div>
+   <form method="post"  action="{lingzh::U('App/post',array('id'=>$_GET['id']))}" onsubmit="return check_d();">
+	  <div class="content">
+		<div class="cont">
+		  <div class="iphone_logo">
+			 <img src="./tpl/App/default/common/images/App/iphone_bg.png">
+		  </div>
+		  <ul>
+			<h1>填写预约信息</h1>
+			<li>
+			  <label>客户名称：</label>
+			  <input type="text" name="customer_name" id="customer_name" class="input"/>
+			</li>
+			<li>
+			  <label>手机号码：</label>
+			<input type="text" name="mb" id ="mb" class="input" maxlength="11"/>
+			</li>
+			<li>
+			  <label>身份证：</label>
+			  <input type="text" name="idnum" id="idnum" class="input" maxlength="18"/>
+			</li>
+			 <li>
+			  <label>套餐：</label>
+			  <SELECT  name="mb_style" id="mb_style"> 
+				<option>-请选择套餐-</option>
+				<option>4G合约机</option>
+			  </SELECT>
+			</li>
+			<li>
+			  <label>机型：</label>
+			  <select  name="mb_model" id="mb_model"> 
+				<option>-请选择机型-</option>
+				<option>iphone 6</option>
+				<option>iphone 6 Plus</option>
+			  </select>
+			</li>
+			<li>
+			  <label>容量：</label>
+			  <select name="capcity" id="capcity">
+				<option>-请选择容量-</option>
+				<option>16GB</option>
+				<option>64GB</option>
+				<option>128GB</option>
+			  </select>
+			</li>
+			<li>
+			  <label>颜色： </label>
+			  <select name="mb_color" id="mb_color">
+				<option SELECTED>-请选择颜色-</option>
+				<option>灰色</option>
+				<option>银色</option>
+				<option>金色</option>
+			  </select>
+			</li>
+			<li>
+			  <input type="submit" class="submit l" value="支付"/>
+			</li>
+		  </ul>
+		</div>
+	  </div>
+  </form>
+  <div class="footer">
+    <p>Copyright(C)2006-2014 All Rights Reserved </p>
+  </div>
+</div>
+</body>
+</html>
+<script>
+$(document).ready(function() {
+	if(""!=""){
+		toAlert="";
+		addToAlert();
+	}
+});
+
+
+    /*** 数据校验 ***/
+//匹配身份证(15位或18位) 
+function NotIdcard(str) 
+{ 
+var result=str.match(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/); 
+if(result==null) return true; 
+return false; 
+} 
+function check_d(){
+
+    
+	var customer_name=$("#customer_name").val();
+	var mb=$("#mb").val();
+	var idnum=$("#idnum").val();
+	var mb_style=$("#mb_style").val();
+	var mb_model=$("#mb_model").val();
+	var capcity=$("#capcity").val();
+	var mb_color=$("#mb_color").val();
+		
+	if(customer_name =="" || customer_name==null){
+	    toAlert="请您填客户名称";
+		addToAlert();
+		return false;
+	}
+	if(mb==""||mb==null){
+    	  toAlert="请填写正确的手机号码";
+  		addToAlert();
+  		return false;
+      }
+      if((!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(mb)))){
+    	 toAlert="手机号码格式不正确";
+  		addToAlert();
+  		return false; 
+      }
+	if(idnum==""||idnum==null){
+    	  toAlert="请填写正确的身份证号码";
+    		addToAlert();
+    		return false; 
+      }
+     if(idnum.lengh==15 ||idnum.lengh==18){ 
+			if(regex.test(idnum)){
+					toAlert="身份证格式不正确";
+					addToAlert();
+					return false;
+				} 
+    }
+	if(NotIdcard(idnum)){
+			toAlert="身份证格式不正确";
+			addToAlert();
+			return false;
+	}
+	if(mb_style=="-请选择套餐-"){
+    	  toAlert="请选择套餐";
+    		addToAlert();
+    		return false; 
+    }
+	if(mb_model=="-请选择机型-"){
+    	  toAlert="请选择机型";
+    		addToAlert();
+    		return false; 
+    }
+	if(capcity=="-请选择容量-"){
+    	  toAlert="请选择容量";
+    		addToAlert();
+    		return false; 
+    }
+	if(mb_color=="-请选择颜色-"){
+    	  toAlert="请选择颜色";
+    		addToAlert();
+    		return false; 
+    }
+    
+    
+	
+	return true;
+	
+}
+
+    /*** 报名成功提示！ ***/
+    function addToCart(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert("注册成功！");
+    }
+        /*** 报名失败提示！ ***/
+    function addToAlert(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert(toAlert);
+    }
+        /*** 注册提示！ ***/
+    function SignAlert(){
+        var cookieStr = appUtil.getCookie("10100_productList",{"path":"/site"}) || "{}";
+		var productList = JSON.parse(cookieStr);
+        if(productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]){
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"]*1 + 1;
+        }else{
+        	productList["1f698e47-ca97-11e2-af2a-15e0c96b5f00"] = "1";
+        }
+        appUtil.setCookie("10100_productList",JSON.stringify(productList),{"path":"/site"});
+        appUtil.alert(toAlert);
+    }
+
+</script>

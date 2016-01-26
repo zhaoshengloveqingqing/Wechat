@@ -1,0 +1,107 @@
+<include file="Shop:header"/>
+
+<style type="text/css">
+div.copyright{font-size:14px;text-align:center;color:#272828;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#585858;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+</style>
+
+<section class="i_list" >
+  <ul class="clearfix" id="f_list">
+    <volist name="products" id="product"> 
+    <li>
+      <a href="{lingzh:$product.url}">
+      <div class="item">
+        <div>
+          <img src="{lingzh:$product.logo_url}" style="height: auto;" />
+        </div>
+        <div style="padding:0px 5px;">
+          <h3>{lingzh:$product.name}</h3>
+          <p>￥{lingzh:$product.price}</p>     
+        </div>
+      </div>
+      </a>
+    </li>
+    </volist>
+  </ul>
+</section>
+
+<div class="clr"></div>
+<notempty name="shop['name']">
+  <div class="copyright">
+    ©<php> echo date('Y').'  '.$shop['name'];</php> 
+  </div>
+</notempty>
+
+<a class="more" id="show_more" page="2" style="display: none;" href="javascript:void(0);">加载更多</a>
+<input type="hidden" value="1" id="pageid" />
+<script type="text/javascript">
+$(function() {
+  $('#search_form').submit(function() {
+    var search_name = $('#search_name').val();
+    if (search_name == '') {
+      return false;
+    }
+  });
+
+
+  /*---------------------加载更多--------------------*/
+  var b_url = '{lingzh:$get_more_url}';
+  var pages = {lingzh:$pages}, pagesize = 5;
+
+  var label_arr = ["\u8bf7\u9009\u62e9\u6807\u7b7e","\u70ed\u5356","\u7206\u6b3e"];
+  var is_getting_more = false;
+
+  if (pages > 1) {
+    var _page = $('#show_more').attr('page');
+    $(window).bind("scroll",function() {
+
+      if (is_getting_more == true) return;
+      if ($(document).scrollTop() + $(window).height() >= $(document).height()) {
+        if (_page > pages) {
+          $('#show_more').show().html('没有更多了').delay(2300).slideUp(1600);
+          return;
+        }
+        $('#show_more').show().html('加载中...');
+
+        is_getting_more = true;
+
+        $.ajax({
+          type : "GET",
+          data : {'page' : _page, 'inajax' : 1},
+          url :  b_url ,
+          dataType : "json",
+          success : function(RES) {
+            $('#show_more').hide().html('加载更多');
+            is_getting_more = false;
+            data = RES.products;
+            
+            //alert(b_url + 'order=' + order + '&method=' + method + '&pagesize='+pagesize)
+            if(data.length){
+            $('#show_more').attr('page',parseInt(_page)+1);
+            }
+            _page = $('#show_more').attr('page');
+            var _tmp_html = '';
+            $.each(data, function(x, y) {
+              _tmp_html +=    '<li>' 
+                            + '<a href="' + y.url + '">' 
+                            + '<div class="item">'
+                            + '<div><img src="' +y.logo_url + '" /></div>' 
+                            + '<div style="padding:0px 5px;"><h3>'+y.name+'</h3><p>￥' +y.price+'</p></div>'
+                            + '</div></a></li>';
+            });
+            $('#f_list').append(_tmp_html);
+            
+          }
+        });
+      }
+    });
+
+    
+  }
+});
+</script>
+
+
+</body>
+</html>

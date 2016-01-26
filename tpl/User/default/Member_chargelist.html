@@ -1,0 +1,106 @@
+<include file="Public:head"/>
+<style type="text/css"> 
+.title-con {
+    display: inline-block;
+    padding-left: 25px;
+    width: 80px;
+    font-size: 15px;
+    margin-top: 15px;
+    margin-left: 5px;
+}   
+form input,textarea{
+    width: 210px;  display: inline-block; padding: 6px;
+    border: 1px solid #ccc; border-radius: 3px; 
+    color: #606366; line-height: 17px;
+}
+form textarea{
+    height: 50px; resize: horizontal;width: 310px;
+}
+.tip{
+    color: red; width: 250px; margin-left: 15px;margin-top: 10px;padding-bottom: 5px;
+}
+input[type='text'][readonly] {
+cursor: not-allowed;
+background-color: #eee;
+}
+</style>
+<div class="content">
+    <div class="cLineB">
+        <h4><span class="left">会员充值</span></h4>
+    </div>
+  <div class="clr"></div> 
+        <a onclick="$('#rechargediv').toggle();" title="录入充值记录" class="btnGrayS vm bigbtn" style="margin-bottom:5px">
+            <img src="./tpl/User/default/common/images/pic.png" class="vm">
+            录入充值记录
+        </a>
+        <div id="rechargediv" style=" margin-left: auto;margin-right: auto; width: 100%; border: 1px solid #ddd; display: none; border-radius: 3px;">
+            <div class="cLineB" style="margin-left: 5px"><h4>添加充值记录</h4></div>
+            <form id="rechargeform" method="post" action="<?php echo U('Member/recharge') ?>">
+                <div id="defaultItemContainer">
+                    <span class="title-con">会员卡号:</span>
+                    <input id="card_num" value="<?php echo $_GET['card'] ?>" type="text" name="card_num" class="text textMiddle" placeholder="请输入要充值的会员卡号">
+                    <span class="title-con">充值金额:</span>
+                    <input id="amount" type="number" name="amount" class="text textMiddle" placeholder="请输入充值金额" ><br/>
+                    <span class="title-con">操作员:</span>
+                    <input id="oprator" type="text" name="oprator" class="text textMiddle" placeholder="请输入您的姓名">
+                    <span class="title-con">备注:</span>
+                    <input id="comment" type="text" name="comment" class="text textMiddle" placeholder="请输入备注(不得超过200个字)"><br/>
+                </div>
+                <input type="submit" class="btnGreen" style="margin-left: 110px; margin-top: 10px; width: 100px; margin-bottom: 5px;" value="提交">
+                <span class="title-con tip" id="tip"></span>
+            </form> 
+        </div> 
+    <div class="row" style="height: 40px; margin-bottom: 20px">
+        <form method="post" style="margin-top: 10px;display:inline-block;" action="<?php echo U('Member/chargelist') ?>">
+            <input size="60" style="width: 560px;" value="{lingzh:$card_num}" name="card" class="text textMiddle" placeholder="输入卡号查询充值记录">
+            <button type="submit" name="appidsubmit" value="true" class="btnGreen vm" style="margin-left: 5px;height: 38px; width: 100px">
+                <strong>查询</strong>
+            </button>
+        </form>
+    </div>
+    <div class="msgWrap">
+        <table class="ListProduct" cellpadding="0" cellspacing="0" border="0" width="100%">
+            <thead>
+              <tr>
+                    <th align="center" valign="middle" width="15%">卡号</th>
+                    <th align="center" valign="middle" width="8%">金额</th> 
+                    <th align="center" valign="middle" width="15%">备注</th>
+                    <th align="center" valign="middle" width="8%">操作员</th>
+                    <th align="center" valign="middle" width="10%">终端IP</th>
+                    <th align="center" valign="middle" width="10%">终端登录账号</th>
+                    <th align="center" valign="middle" width="10%">日期</th> 
+              </tr>
+            </thead>
+            <tbody>
+                <volist id="item" name="historys">
+                    <tr>
+                        <td align="center" valign="middle" ><a href="{lingzh::U('User/Member/editmemberinfo', array('wid'=>$item['wxid']))}">{lingzh:$item.card_num}</a></td>
+                        <td align="center" valign="middle" > <?php //echo $item['type'] ? "消费：" : "充值：" ;?> {lingzh:$item.amount}</td>
+                        <td align="center" valign="middle" >{lingzh:$item.comment}</td>
+                        <td align="center" valign="middle" >{lingzh:$item.oprator}</td>
+                        <td align="center" valign="middle" >{lingzh:$item.logon_ip}</td>
+                        <td align="center" valign="middle" >{lingzh:$item.username}</td>
+                        <td align="center" valign="middle" >{lingzh:$item['createtime']}</td> 
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
+        <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages">{lingzh:$page}</div>
+            </div>
+            <div class="clr"></div>
+        </div>
+    </div>
+</div>
+<include file="Public:footer"/>
+<script type="text/javascript">
+$().ready(function(){
+    $('#rechargeform').submit(function(){
+        $('#tip').text('');
+        if($('#card_num').val()==''){$('#tip').text("请输入要充值的会员卡号!"); return false;}
+        if( $("#amount").val()=='' || $("#amount").val() < 0){$("#tip").text('请输入正确的金额！');return false;}
+        if($("#oprator").val()==''){$("#tip").text('请输入您的姓名！');return false;} 
+    });
+});
+</script>

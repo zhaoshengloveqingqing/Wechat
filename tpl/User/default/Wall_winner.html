@@ -1,0 +1,95 @@
+<include file="Public:head"/>  
+<script>
+function onwinner(id) 
+{
+    $.ajax({
+	    url: "{lingzh::U('Wall/onwinner')}",
+		type:"post",
+		data:{"wid":{lingzh:$wid},"id":id},
+		dataType:"JSON",
+		success: function(res){
+		    if(res.status == 1){
+			    $("#status_"+id).html("已兑奖");
+			}else{
+			    alert(res.info);
+			}
+		}
+	});
+}
+</script> 
+<div class="content">
+         
+          <div class="cLineB">
+              <h4 class="left">中奖管理</h4>
+              <br />
+           
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">   
+			<a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:10px">返回</a>          
+			<div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post" action="index.php?g=User&m=Wall&a=dels" id="info">
+          <input name="delall" type="hidden" value="del">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+					<th align="center" valign="middle">微信号</th>
+				    <th align="center" valign="middle">头像</th>
+					<th align="center" valign="middle">状态</th>
+					<th align="center" valign="middle">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+                <volist name="list" id="vo">  
+                <tr>
+                   <td align="center" valign="middle">{lingzh:$vo.nickname}</td>
+                   <td align="center" valign="middle"><img src="{lingzh:$vo.headimgurl}" width="50" height="50"/></td>
+				   <if condition="$vo['status'] eq 2">
+				   <td align="center" id="status_{lingzh:$vo.id}" valign="middle">已兑奖</td>
+				   <else/>
+				   <td align="center" id="status_{lingzh:$vo.id}" valign="middle">未兑奖</td>
+				   </if>
+				   <td>
+				   <if condition="$vo['status'] eq 1">
+				   <a href="javascript:;" onclick="onwinner({lingzh:$vo.id});">兑奖</a>
+				   </if>
+				   </td>
+                </tr>
+				</volist>
+              </tbody>
+            </table>
+           </form> 
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages">{lingzh:$page}</div>
+             </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+<include file="Public:footer"/>
+<script>
+$(document).ready(function() {
+$('.ListProduct').dataTable({
+    "oLanguage": {
+        "sLengthMenu": "每页显示 _MENU_ 记录",
+        "sZeroRecords": "对不起，没有找到相关的商品",
+        "sInfo": "第 _START_ 条到 _END_ 条，总共 _TOTAL_ 条记录",
+        "sInfoEmpty": "显示 0 条记录",
+        "sInfoFiltered": "(从 总共_MAX_条记录)",
+        "sSearch": "查找",
+        "bJQueryUI": true,
+        "sPaginationType": "full_numbers",
+        "oPaginate": {
+            "sPrevious" : "前一页",
+            "sNext": "下一页"
+        },
+    },
+    "bPaginate": false,
+    "bFilter": false,
+});
+} );
+</script>

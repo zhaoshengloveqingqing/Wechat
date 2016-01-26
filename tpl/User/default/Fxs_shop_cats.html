@@ -1,0 +1,59 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />  
+        <div class="content">
+<div class="cLineB">
+<h4 class="left">分类管理 ({lingzh:$page}) </h4>
+
+<div class="clr"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul>
+<li class="tabli" id="tab0"><a href="{lingzh::U('Fxs/shop_products',array('bid'=>$_GET['bid']))}">商品管理</a></li>
+<li class="current tabli" id="tab2"><a href="{lingzh::U('Fxs/shop_cats',array('bid'=>$_GET['bid']))}">商品分类管理</a></li>
+<li class="tabli" id="tab22"><a href="{lingzh::U('Fxs/shop_payconf',array('bid'=>$_GET['bid']))}">支付方式配置</a></li>
+</ul>
+</div>
+<!--tab end-->
+<div class="cLine">
+<div class="pageNavigator left"> <a href="{lingzh::U('Fxs/shop_catAdd',array('bid'=>$_GET['bid']))}" title="新增分类" class="btnGrayS vm bigbtn"><img src="/themes/a/images/add.png" class="vm">新增分类</a></div>
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th width="160" align="center" valign="middle">分类名称</th>
+<th width="260" align="center" valign="middle">简介</th>
+<th width="130" align="center" valign="middle">创建时间</th>
+ 
+
+<th width="150" class="norightborder" align="center" valign="middle">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="hostlist"> 
+<tr>
+<td align="center" valign="middle">{lingzh:$hostlist.name}</td>
+<td align="center" valign="middle">{lingzh:$hostlist.desc}</td>
+<td align="center" valign="middle">{lingzh:$hostlist.update_time|date="Y-m-d H:i:s",###}</td> 
+
+<td class="norightborder" align="center" valign="middle">
+	<a href="{lingzh::U('Fxs/shop_catSet',array('cid'=>$hostlist['category_id'], 'bid'=>$_GET['bid']))}">修改</a> 
+	<a href="javascript:drop_confirm('您确定要删除吗?', '{lingzh::U('Wsc/shop_catDel',array('cid'=>$hostlist['category_id'], 'bid'=>$_GET['bid']))}');">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form> 
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lingzh:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

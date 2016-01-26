@@ -1,0 +1,233 @@
+<include file="lingzh:header"/>
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+
+<style type="text/css">
+
+.maincontent { width: 1000px;  margin: 10px auto; }
+
+.sideBar { border: 1px solid #D3D3D3; float: left; width: 20%; }
+.sideBar .catalogList ul {background-color: #F3F3F3;width: 100%; min-height: 770px;}
+.sideBar .catalogList ul li{display: block;text-align: center;}
+
+.sideBar .catalogList ul li.selected { background-color: #72A4C7; color: #FFF; font-size:14px; height:35px; padding-top:5px; }
+.sideBar .catalogList ul li.nav-header { background-color: #f3f3f3; line-height: 40px;  font-size: 16px; font-weight: bold;}
+
+
+.sideBar .catalogList ul li.subCatalogList {  margin-top: 2px; line-height: 30px; font-size:14px;height:35px; padding-top:5px; border-top: 1px solid #D3D3D3;}
+.sideBar .catalogList ul li.subCatalogList a {display: block;}
+.sideBar .catalogList ul li.subCatalogList:hover {  background-color: #72A4C7;}
+.sideBar .catalogList ul li:hover a, .sideBar .catalogList ul li:hover span {  color:#fff; text-decoration: none;}
+
+
+.sideBar .catalogList ul li.selected a { color: #fff; }
+
+.content { border: 1px solid #D3D3D3;border-left:none;float: left; padding: 0px 20px; background-color: #FFF; min-height: 770px; width: 75% ;}
+
+.content .star { color: red; font-weight:bold;}
+
+.content .title {font-size: 18px; padding: 20px 0; border-bottom: 1px solid #EEE; font-weight: bold; color: #424242;}
+
+.content .input-box {width: 300px; height: 14px; padding: 8px 10px; margin:10px; border: 1px solid #CCC; border-radius: 2px 2px 2px 2px;} 
+.content label{ height: 14px;color: #626262; font-size:14px;} 
+
+.content  .btnGreen {
+border: 1px solid #3D810C;
+box-shadow: 0 1px 1px #AAA;
+-moz-box-shadow: 0 1px 1px #aaa;
+-webkit-box-shadow: 0 1px 1px #AAA;
+padding: 5px 20px;
+cursor: pointer;
+display: inline-block;
+text-align: center;
+vertical-align: bottom;
+overflow: visible;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+background-color: #5BA607;
+background-image: linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -moz-linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -webkit-linear-gradient(bottom, #4D910C 3%, #69B310 97%, #FFF 100%);
+color: #FFF;
+font-size: 14px;
+line-height: 1.5;
+}
+
+.content .btnGreen:hover {
+background-color: #5BA607;
+background-image: linear-gradient(bottom, #3d810c 3%, #69b310 97%, #fff 100%);
+background-image: -moz-linear-gradient(bottom, #3d810c 3%, #69b310 97%, #fff 100%);
+background-image: -webkit-linear-gradient(bottom, #3D810C 3%, #69B310 97%, #FFF 100%);
+color: #FFF;
+}
+
+
+.content .userinfoArea { margin: 20px 0; }
+
+#preview_list{
+  float: right;
+  margin-right: 300px;
+}
+
+#preview_list img{
+  width: 60px;
+  height: 60px;
+}
+
+</style>
+
+<div class="maincontent">
+
+  <div class="sideBar">
+    <div class="catalogList">
+      <div style="float:left; position: absolute; top:115px; margin-left:45px;"> <img src="/themes/a/images/listicon2.png"/></div>
+      <ul>            
+        <li class="nav-header" >管理中心</li>
+        <li class="subCatalogList selected" > <a href="{lingzh::U('Index/index')}">我的公众号</a></li>
+        <li class="subCatalogList "> <a href="{lingzh::U('Index/useredit')}">修改密码</a> </li>
+        <li class="subCatalogList"> <a href="{lingzh::U('Index/activate')}">账户充值</a> </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="title"><span>设置微信公众号信息</span></div>
+    <form method="post" action="<if condition='isset($info)'>{lingzh::U('User/Account/upsave', array('id'=>$info['id']))} <else/> {lingzh::U('User/Account/addNewPublic')} </if>" enctype="multipart/form-data">
+      <if condition='isset($info)'><input type="hidden" name="id" value="{lingzh:$info.id}"></if>
+          <div class="msgWrap">
+            <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+                  <th><span class="star">*</span>公众号名称：</th>
+                  <td><input <if condition='isset($info)'>disabled="1"</if> type="text" required="" class="input-box" name="wxname" value="<if condition='isset($info)'>{lingzh:$info.wxname}</if>" tabindex="1" size="25">比如：{lingzh::C('company_short_name')}
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th><span class="star">*</span>公众号原始ID：</th>
+                  <td><input <if condition='isset($info)'>disabled="1"</if> type="text" required="" name="wxid" value="<if condition='isset($info)'>{lingzh:$info.wxid}</if>" onmouseup="this.value=this.value.replace('_430','')" class="input-box" tabindex="1" size="25">　比如：gh_423dwjkeww3 <a href="http://blog.sina.com.cn/s/blog_e30496380101o42t.html" target="_blank"><!-- <img src="{lingzh::RES}/images/help.png" class="vm helpimg" title="帮助"> --></a></td>
+                </tr>
+                <tr>
+                  <th><span class="star">*</span>微信号：</th>
+                  <td><input <if condition='isset($info)'>disabled="1"</if>  type="text" required="" name="weixin" value="<if condition='isset($info)'>{lingzh:$info.weixin}</if>" class="input-box" tabindex="1" size="25">　比如：Pinet_Tech </td>
+                </tr>
+
+                <tr>
+                  <th><span class="star">*</span>认证情况：</th>
+                  <td>
+                    <label for="not_authed"><input  id="not_authed" class="radio" type="radio" name="is_authed" value="0" <eq name="info.is_authed" value="0">checked</eq> />未认证</label>
+                    <label for="is_authed"><input  id="is_authed" class="radio" type="radio" name="is_authed" value="1" <eq name="info.is_authed" value="1">checked</eq> />已认证</label>
+                </tr>
+                <tr>
+                  <th><span class="star">*</span>公众号类型：</th>
+                  <td>
+                    <input  class="radio" type="radio" name="type" value="0" <eq name="info.type" value="0">checked</eq> />订阅号
+                    <input  class="radio" type="radio" name="type" value="1" <eq name="info.type" value="1">checked</eq> />服务号
+                </tr>
+				        <tr class="wx_service">
+                  <th>AppId：</th>
+                  <td><input type="text" name="appid" value="<if condition='isset($info)'>{lingzh:$info.appid}</if>" class="input-box" tabindex="1" size="25">微信开发凭据，参见微信开发公共平台</td>
+                </tr>
+				        <tr class="wx_service">
+                  <th>AppSecret：</th>
+                  <td><input type="text" name="appsecret" value="<if condition='isset($info)'>{lingzh:$info.appsecret}</if>" class="input-box" tabindex="1" size="25">同上</td>
+                </tr>
+                <if condition='isset($token)'>
+                <tr>
+                  <th>URL:</th>
+                  <td><span class="wx_token copy_text">http://{lingzh::C('wx_handler_server')}/index.php/api/<php>echo $token;</php></span></td>
+                </tr>
+                <tr>
+                  <th>Token:</th>
+                  <td><span class="wx_token copy_text"><php>echo $token;</php></span></td>
+                </tr>
+                <input type="hidden" name="token" value="{lingzh:$token}" >
+                </if>
+                <if condition='isset($info)'><input type="hidden" name="token" value="{lingzh:$info.token}" ></if>
+
+                <tr>
+                  <th>公众号二维码：</th>
+                  <td>
+                      <ul id='preview_list'>
+                        <?php if(isset($info['qrcode_pic']) && empty($info['qrcode_pic']) == false){ ?>
+                        <li>
+                          <img id="thumb_img" src="{lingzh:$info.qrcode_pic}">
+                        </li>
+                        <?php } ?>
+                      </ul>
+                    <input type="hidden" id="qrcode_pic" name='qrcode_pic' value="{lingzh:$info.qrcode_pic}">
+                    <div class='img_upload_panel' style="margin-left: 10px;" >
+                      <div name='qrcode_pic_uploadify'  id="qrcode_pic_uploadify"  ></div>                                                  
+                      <div id="qrcode_pic_queue"></div> 
+                      <div style="clr:both; height:0px;"></div>
+                    </div> 
+                  </td>
+                </tr>
+
+
+                <tr>
+                  <th></th>
+                  <td><button type="submit" class="btnGreen" id="saveSetting" style="margin-left: 180px;margin-top: 20px">保存</button></td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+          </form>
+        </div>
+        
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>	
+<script>
+$(function() {
+    $(qrcode_pic_uploadify).uploadify({
+       'buttonText' : '上传二维码图片',
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': 'qrcode_pic_queue',
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                    //$('#picUrl_fla').val(res_json.content);
+                    $('#qrcode_pic').val(res_json.content);
+                    var img = $('#thumb_img');
+                    if(img.length > 0){
+                      img[0].attr('src',res_json.content);
+                    }else{
+                      var str = '<li><img id="thumb_img" src="'+ res_json.content +'"></li>'
+                      $('#preview_list').append(str);
+                    }
+                } else {
+                    alert(res_json.message);
+                }
+
+            } else {
+               alert("网络不给力啊！亲");
+            }
+
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+      $("#qrcode_pic_uploadify").css('width', '100%');
+      $("#qrcode_pic_uploadify").append('<span class="img_upload_tips">此二维码将在用户分享出的部分消息中出现。</span>');
+});  
+</script>

@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="/themes/a/wall/core1.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/themes/a/wall/main1.css" media="all" />
+	<script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/themes/a/wall/helper_min.js"></script>
+    <script type="text/javascript" src="/themes/a/wall/main.js"></script>
+    <script type="text/javascript" src="/themes/a/wall/msgScroll.js"></script>
+	<script type="text/javascript" src="/themes/a/wall/jquery_flexslider.js"></script>
+<title>{lingzh:$set.title}</title>
+</head>
+<style>
+	.box_luck .lucky_user ol li {
+		line-height: 20px;
+	}
+	.box_luck .lucky_user ol.nth-of-type-2 li {
+		line-height: 20px;
+	}
+</style>
+<body>
+	<script type="text/javascript">
+	$(function(){
+			$.ajax({
+				url:"{lingzh::U('Wall/jsonuser')}",
+				type:"post",
+				data:{id:{lingzh:$set.id}},
+				dataType:"JSON",
+				success: function(res){
+					if(res.status==1){
+						$("#total_all").html(res.data.length);
+						window.picWaller = picWall(res.data||[]);
+						
+					}else{
+						alert(res.info);
+					}
+				}
+			});
+			
+		});
+
+
+		window.picWall=(function(){var b=function(c){return new b.fn.init(c)};b.fn=b.prototype={init:function(c){var d=this;d.playIng=false;d.timer=null;d.all=c;d.lucker=[];d.show();return d},play:function(){$("#pic_wall").removeClass("moreOne");var c=this;if(c.playIng){c.stop()}else{c.playIng=true;c.timer=setInterval(function(){c.show(true)},500)}return c}};b.fn.init.prototype=b.prototype;b.extend=function(d){for(var c in d){b.fn[c]=d[c]}};return b})();
+		function inluck(id, luckers) {
+		    for (var i = 0; i < luckers.length; i++) {
+			    if (luckers[i].openid == id) {
+				    return true;
+				}
+			}
+			return false;
+		}
+		picWall.extend({
+			show: function(lucker, res){
+				lucker = lucker||{};
+				var that = this;
+				that.lucker = [];
+				that.all = that.all.sort(function(a,b){
+					return Math.random()>0.5?1:-1;
+				});
+				
+				while(that.all.length<28){
+					that.all.push({"openid":"-1", "headimgurl":"", "nickname":"", "lottery":""});
+				}
+				//抽奖中
+				var thatAll = res?that.all:that.all.slice(0, 28);
+				var TPL = '<li><span><img src="{headimgurl}" class="{luck}" /></span></li>';
+				var html = iTemplate.makeList(TPL, thatAll, function(k,v){
+					if(true == lucker){
+						//show all
+						return {luck:"on"};
+					}else{
+						return {
+							luck: (inluck(v.openid,lucker)) && ([that.lucker.push(v), true][1])?"on":""
+						}
+					}
+				});
+				$("#pic_wall").html(html);
+			},
+			stop:function(){
+				var that = this;
+				that.playIng = false;
+				$("#pic_wall").addClass("moreOne");
+				$.ajax({
+					url:"{lingzh::U('Wall/jsonwin')}",
+					type:"post",
+					data:{id:{lingzh:$set.id}},
+					dataType:"JSON",
+					success: function(res){
+						if(res.status==1){
+							clearTimeout(that.timer);
+							that.show(res.data, true);
+							setTimeout(function(){
+								showResult(res.data);
+							}, 500);
+						}else{
+							clearTimeout(that.timer);
+							that.show();
+							alert(res.info);
+						}
+					}
+				});
+
+				function showResult(data){
+					var TPL = '<dl><li class="nth-of-li-1">{k}</li>\
+								<li class="nth-of-li-2"><span><img src="{headimgurl}" /></span></li>\
+								<li class="nth-of-li-3">{nickname}</li>\
+								<li class="nth-of-li-4">{lottery}</li>\
+							</dl>';
+
+					$("#lucky_users").html(iTemplate.makeList(TPL, data, function(k,v){
+						return {
+							k:parseInt(k)+1
+						}
+					}));
+					$("#total_lucker").html(data.length);
+				}
+				return that;
+			}
+
+		});
+
+</script>
+<body style="background-image: url({lingzh:$set.backgroud_pic_url});">
+	<div class="body">
+		<!----header---->
+		<div class="main_header">
+
+		</div>
+		<!----header end---->
+
+		<!----mainbody---->
+		<div class="main_body">
+			<div class="align_right pr_10 pt_10">
+				<img src="/themes/a/wall/logo.png" />
+			</div>
+			<div class="box_wall box_luck relative">
+				<div class="wrapper clear">
+					<table>
+						<tr>
+							<td class="nth-of-type-1">
+								<div class="wbody">
+									<header>
+										<ul class="clear">
+											<li><h5>现场抽奖</h5></li>
+											<li><a href="javascript:;" onclick="$('#prize').addClass('on');return;" class="btn_prize">奖项</a></li>
+											<li class="nth-of-type-3"><a href="javascript:;">参加抽奖人数<span id="total_all">0</span></a></li>
+										</ul>
+										<div id="prize" class="window_prize">
+											<ul class="header">
+												<li><h5>抽奖奖项</h5></li>
+												<li style="float:right;"><span class="close" onclick="$('#prize').removeClass('on');" style="padding-left:0;"></span></li>
+											</ul>
+											<div class="hbody">
+												<table>
+													<tr>
+													    <volist name="lotterys" id="lottery">
+													    <td>
+															<span><img src="<php>echo isset($lottery[3]) ? $lottery[3] : '';</php>" /></span>
+															<div><label  style="font-size:20px"><php>echo $lottery[0];</php> <php>echo $lottery[1];</php></label></div>
+														</td>
+														</volist>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</header>
+									<div class="wbody">
+										<ul id="pic_wall" class="pic_wall">
+											<!---->
+										</ul>
+										<div>
+											<a href="javascript:;" onclick="window.picWaller.play();$(this).toggleClass('on');return;" class="btn_luck">&nbsp;</a>
+										</div>
+									</div>
+								</div>
+							</td>
+							<td class="nth-of-type-2">
+								<div class="wbody">
+									<header>
+										<ul class="clear">
+											<li><h5>获奖名单</h5></li>
+											<li></li>
+											<li class="nth-of-type-3"><a href="javascript:;">获奖人数<span id="total_lucker">{lingzh:$winnernum}</span></a></li>
+										</ul>
+									</header>
+									<div class="wcontent">
+										<ul class="lucky_user">
+										   
+											<ol class="nth-of-type-1">
+												<dl>
+													<li class="nth-of-li-1">序列</li>
+													<li class="nth-of-li-2">头像</li>
+													<li class="nth-of-li-3">获奖昵称</li>
+													<li class="nth-of-li-4">奖项</li>
+												</dl>
+											</ol>
+											
+											
+											<ol id="lucky_users" class="nth-of-type-2">
+											   <volist name="winners" id="winner">
+												<dl>
+													<li class="nth-of-li-1">{lingzh:$i}</li>
+													<li class="nth-of-li-2"><span><img src="{lingzh:$winner.headimgurl}" /></span></li>
+													<li class="nth-of-li-3">{lingzh:$winner.nickname}</li>
+													<li class="nth-of-li-4">{lingzh:$winner.lottery}</li>
+												</dl>
+												</volist>
+											</ol>
+										</ul>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="box_menu">
+	<ul class="clear">
+		<ol class="fl"><label>{lingzh:$set.description}</label></ol>
+				<li>
+			<a href="javascript:;" class="yy on" onclick="playMsc(this, event);">
+				<span></span>
+				<label>微信墙</label>
+			</a>
+			<audio id="msc" loop="true" hidden="true" autoplay="true"><source src="{lingzh:$set.music_url}" ></audio>
+		</li>
+				<li>
+			<a href="javascript:;" class="qp" onclick="fullScreen(event, this);">
+				<span></span>
+				<label>全屏</label>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:;" class="ewm" onclick="$('#qrcode').addClass('on');">
+				<span></span>
+				<label>二维码</label>
+			</a>
+		</li>
+		</li>
+						<li>
+			<a href="javascript:;" class="cj on">
+				<span></span>
+				<label>抽奖</label>
+			</a>
+		</li>
+								<li>
+			<a href="{lingzh::U('Wall/wall',array('id'=>$set['id']))}" class="wxq">
+				<span></span>
+				<label>微信墙</label>
+			</a>
+		</li>
+	</ul>
+	<div id="qrcode" class="qrcode">
+		<header class="header">
+			<ul>
+				<li style="float:left;"><h5>二维码</h5></li>
+				<li style="float:right;">
+					<span class="close" onclick="$('#qrcode').removeClass('on');" style="padding-left:0;"></span>
+				</li>
+			</ul>
+			<div class="qbody">
+				<span><img src="{lingzh:$set.qrcode_url}" /></span>
+			</div>
+		</header>
+	</div>
+</div>
+<div class="align_center white"><a href="." class="white">©{lingzh::C('company_short_name')}<a></div>
+		</div>
+</body></body>
+</html>

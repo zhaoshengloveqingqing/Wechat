@@ -1,0 +1,489 @@
+<include file="Public:head"/>
+<script type="text/javascript" src="/themes/a/js/icons_sys.js"></script>
+<link href="/themes/a/css/icons_sys.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+<style type="text/css">
+    .none {display:none}
+    .mbtip {
+        display: block;
+        position: relative;
+        top: -20px;
+        left: 520px;
+        width: 250px;
+        height: 120px;
+        overflow: auto;
+        padding:5px;
+        margin-bottom: -132px;
+        border: 1px solid #EDD28B;
+        background: #FFFDEE;
+        color: #000;
+        border-radius: 7px;
+        text-align: left;
+        -moz-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15);
+        -webkit-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15);
+        z-index: 1;
+        
+    }
+</style>
+
+
+
+<div class="content">
+  <div class="cLineB"><h4>编辑栏目分类</h4></div> 
+  <div class="msgWrap">
+  <form class="form" method="post"   action="<if condition='isset($info)'>{lingzh::U('Classify/upsave')}<else/>{lingzh::U('Classify/addNewClassify')}</if>"  target="_top" enctype="multipart/form-data" >
+  <TABLE class="userinfoArea" style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+    <THEAD>
+    <TR>
+      <TH width="15%" valign="top"><label for="keyword"><span class="red">*</span>栏目名称：</label></TH>
+      <TD width="84%"><input type="input" required="" class="px" id="keyword" value="<if condition='isset($info)'>{lingzh:$info.name}</if>" name="name" style="width:500px" ><br />
+                      </TD>
+      <TD width="1%">&nbsp;</TD>
+    </TR>
+    </THEAD>
+    <TBODY>
+
+    <if condition='isset($info)'><input type="hidden" id="currentClassifyId" name="id" value="{lingzh:$info.id}"/></if>
+    <TR id='image_upload_td'>
+      <TH valign="top"><span class="red">*</span>栏目图标：</TH>
+      <TD>
+        <span class='mbtip' style='display:none'><b>您正使用网站模版：{lingzh:$homepage_template['name']}</b><br/>{lingzh:$homepage_template['tips']}</span>
+     
+              <div class='img_upload_panel'>
+                <img id="classify_img" class="thumb_img" src="<if condition='isset($info)'>{lingzh:$info.img}<else/>http://{lingzh::C('wx_handler_server')}/themes/a/images/sys_icons/1_1.png</if>" style="max-height: 100px;background-color:#666">
+                <div name='uploadify'  id="uploadify_cla" ></div>
+              <a  style="position: relative;left: 130px;bottom: 30px; text-decoration:underline;cursor:pointer;background-color: #5ba607;color:#fff" onclick="show_icons_sys()">选择系统图标</a>
+                <div id="fileQueue_cla"></div> 
+                <input type='hidden' value="<if condition='isset($info)'>{lingzh:$info.img}<else/>http://{lingzh::C('wx_handler_server')}/themes/a/images/sys_icons/1_1.png</if>" name='img' id='picUrl_cum'>
+                <div style="clr:both; height:0px;"></div>
+                </div>     
+      </TD>
+      <TD>&nbsp;</TD>
+    </TR>
+
+    <TR id='slide_upload_td'>
+      <TH valign="top">
+        <span class="red">*</span>顶部图片：
+      </TH>
+      <TD >
+        <input type="checkbox" value="1" name="use_cover_img" onclick="changeSlideStatus()" <?php if(!isset($info)){echo 'checked="checked"'; } elseif($info['use_cover_img']) echo 'checked="checked"'; ?> >
+        <span>使用封面图片</span><span style="font-size: 12px; font-weight: normal;">(显示在栏目列表顶部)</span>
+        <div id="slide_img_div" style="<?php if(!isset($info)){ echo 'display: none'; } elseif($info['use_cover_img']==1) echo 'display:none'; ?>">
+          <span class='slide_mbtip' style='display:none'><b>您正使用网站模版：{lingzh:$homepage_template['name']}</b><br/>{lingzh:$homepage_template['tips']}</span>
+          <div class='slide_upload_panel'>
+            <img id="slide_img" class="thumb_img" src="<if condition='isset($info)'>{lingzh:$info.slide_img}<else/>http://{lingzh::C('wx_handler_server')}/themes/a/images/sys_icons/1_1.png</if>" style="max-height: 100px;background-color:#666">
+            <div name='slide_uploadify'  id="slide_uploadify_cla" ></div>
+            <a style="position: relative;left: 130px;bottom: 30px; text-decoration:underline;cursor:pointer;background-color: #5ba607;color:#fff" onclick="select_slide_icon()">选择系统图标</a>
+            <div id="slide_fileQueue_cla"></div> 
+            <input type='hidden' value="<if condition='isset($info)'>{lingzh:$info.slide_img}<else/>http://{lingzh::C('wx_handler_server')}/themes/a/images/sys_icons/1_1.png</if>" name='slide_img' id='slide_url'>
+            <div style="clr:both; height:0px;"></div>
+          </div>   
+        </div>
+      </TD>
+      <TD>&nbsp;</TD>
+    </TR>
+
+    <TR>
+      <TH valign="top"><label for="keyword_1">栏目描述：</label></TH>
+      <TD>  
+        <input type="input" class="px" id="keyword_1" value="<if condition='isset($info)'>{lingzh:$info.info}</if>" name="info" style="width:500px" >
+        可不填，限4个字
+      </TD>
+      <TD>&nbsp;</TD>
+    </TR>
+
+    <TR>
+      <TH valign="top"><label for="keyword_2"><span class="red">*</span>栏目位置：</label></TH>
+      <TD>
+        <input type="input" required=""  class="px" id="keyword_2" value="<if condition='isset($info)'>{lingzh:$info.sorts}</if>" name="sorts" style="width:500px" >（序号越大越靠前）
+      </TD>
+      <TD>&nbsp;</TD>
+    </TR>
+
+    <TR>
+      <TH valign="top">上级分类：</TH>
+      <TD>  
+        <select name='parent'>
+          <option <if condition="empty($info['parent'])"> selected="1"</if>  value="0">无上级分类</option>
+          <volist name="otherCls" id="cls">
+            <option <eq name='info.parent' value='$cls["id"]'> selected="1"</eq>  value="{lingzh:$cls.id}">{lingzh:$cls.name}</option>
+          </volist>
+        </select>
+        <span>请把相应的上级分类的“链接类型”改成“次级分类列表”</span>
+      </TD>
+      <TD>&nbsp;</TD>
+    </TR>
+    
+    <TR>
+      <TH valign="top"><label for="status">是否显示：</label></TH>
+      <TD>
+        <label for="hide"><input type="radio" class="px" id="hide" value="0" name="status"  <eq name="info.status" value="0"> checked</eq> />否</label>
+        <label for="display"><input type="radio" class="px" id="keyword" value="1" name="status" <php> if(!isset($info) || $info['status']==1) echo 'checked'</php> />是</label>
+      </TD>
+      <TD>&nbsp;</TD>
+    </TR>
+
+
+<TR>
+  <TH valign="top"><label for="linktype">链接类型：</label></TH>
+  <TD>
+      <select id="linktype" name='linktype'>
+          <volist name="linktypes" id="type">
+              <option <eq name='info.linktype' value='$type["id"]'>selected="1"</eq>  value="{lingzh:$type.id}">{lingzh:$type.name}</option>
+          </volist>
+      </select>
+  </TD>
+  <TD>&nbsp;</TD>
+</TR>
+
+<TR class='none link_param_l1 subClassifies'>
+  <TH valign="top">当前子分类：</TH>
+  <TD>
+    <table class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+      <thead>
+        <tr>
+          <th>标题</th>
+        </tr>
+      </thead>
+      <tbody>
+        <if condition="count($sub_cls) eq 0">
+          <tr>
+          <td>当前没有任何次级分类</td>
+        </tr>
+        </if>
+        <volist name="sub_cls" id="classify">
+        <tr>
+          <td><a href="{lingzh::U('User/Classify/edit',array('id'=>$classify['id']))}">{lingzh:$classify.name}</a></td>
+        </tr>
+        </volist>
+      </tbody>
+    </table>
+  </TD>
+  <TD>&nbsp;</TD>
+</TR>
+
+<TR class='none link_param_l1 linkurls'>
+  <TH valign="top"><label for="linkurladdr">外链地址：</label></TH>
+  <TD><input type="input"  required="" class="px" id="linkurladdr" value="" name="link_param_l1" style="width:500px" ><br />
+                   </TD>
+  <TD>&nbsp;</TD>
+</TR>
+
+<TR class='none link_param_l1 activitys' >
+  <TH valign="top"><label for="activity">活动类型：</label></TH>
+  <TD>
+      <select name="link_param_l1">
+          <volist name="allActivities" id="activity">
+                <option value="{lingzh:$activity.id}">{lingzh:$activity.name}</option>
+          </volist>
+      </select>
+      <br />
+  </TD>
+  <TD>&nbsp;</TD>
+</TR>
+
+<TR class='none link_param_l1 car'>
+  <TH valign="top"><label for="module">汽车方案：</label></TH>
+  <TD>
+      <select name="link_param_l1">
+          <volist name="carModules" id="modules">
+              <option value="{lingzh:$modules.id}">{lingzh:$modules.name}</option>
+          </volist>
+      </select>
+      <br />
+  </TD>
+  <TD>&nbsp;</TD>
+</TR>
+
+<TR class='none link_param_l1 modules'>
+  <TH valign="top"><label for="module">业务类型：</label></TH>
+  <TD>
+      <select name="link_param_l1">
+          <volist name="allModules" id="modules">
+              <option value="{lingzh:$modules.id}">{lingzh:$modules.name}</option>
+          </volist>
+      </select>
+      <br />
+  </TD>
+  <TD>&nbsp;</TD>
+</TR>
+
+
+<TR class="none link_param_l2 dazhuanpan guaguaka youhuiquan zajindan toupiao dingdan hotel pinglun yingxiang">
+  <TH valign="top"><label for="activity">业务：</label></TH>
+  <TD>
+      <table class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+          <thead>
+              <tr>
+                <th>选择</th>
+                <th>业务标题</th>
+                <th>触发关键词</th>
+                <th>时间段</th>
+              </tr>
+          </thead>
+          <tbody id='details_l2'>
+                
+          </tbody>
+      </table>
+      <div id="isloadingdetail">正在获取详细信息。。。请稍后</div>
+      <br />
+  </TD>
+  <TD>&nbsp;</TD>
+</TR>
+
+<tr class='none link_param_l1 articles subClassifies'>
+  <TH valign="top"><label for="keyword">栏目显示模板：</label></TH>
+  <td>
+    <div>
+      <ul class="cateradio2">  
+        <volist name="classify_tmpls" id="tmpl">
+        <li class=" <php> if ($info['tmpl'] == $tmpl['file_name'] || (empty($info['tmpl']) && $tmpl['is_default'] == 1 ))  echo 'active';</php>">
+          <label>
+            <img src="{lingzh:$tmpl['preview_img']}">
+            <input class="radio2" type="radio" name="tmplId" value="{lingzh:$tmpl['id']}"  <php> if ($info['tmpl'] == $tmpl['file_name'] || (empty($info['tmpl']) && $tmpl['is_default'] == 1 ))  echo 'checked';</php> />{lingzh:$tmpl['tmpl_name']}
+          </label>
+          </li> 
+        </volist>
+      </ul>
+    </div>
+  </td>
+</tr>
+<TR>
+  <TH></TH>
+  <TD><button type="submit"  name="button"  class="btnGreen left" >保存</button> &nbsp; <a href="{lingzh::U('Classify/index')}"  class="btnGray vm">取消</a>
+  	<div class="clr"></div>
+  	</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+  </form>
+
+
+
+  </div> 
+
+        </div>
+        
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div> 
+
+<!--底部-->
+  	</div>
+<script type="text/javascript">
+function changeSlideStatus(){
+  if($('#slide_img_div').is(":hidden") == true)
+  {
+    $('#slide_img_div').show();
+  }
+  else{
+    $('#slide_img_div').hide();
+  }
+}
+</script>
+
+        <script>
+
+ $(function() {
+   
+    $("#uploadify_cla").uploadify({
+        'buttonText' : '选择封面',
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': 'fileQueue_cla',
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                    document.getElementById('classify_img').src=  res_json.content ;
+                    $('#picUrl_cum').val(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+
+            } else {
+               alert("网络不给力啊！亲");
+            }
+
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+     $("#uploadify_cla").css('width', '100%');
+     
+
+});  
+
+ $(function() {
+   
+    $("#slide_uploadify_cla").uploadify({
+        'buttonText' : '选择图片',
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': 'slide_fileQueue_cla',
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                    document.getElementById('slide_img').src=  res_json.content ;
+                    $('#slide_url').val(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+
+            } else {
+               alert("网络不给力啊！亲");
+            }
+
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+     $("#slide_uploadify_cla").css('width', '100%');
+     
+
+});  
+</script>
+
+
+<script type="text/javascript">
+function show_icons_sys(){
+  window.SysIconDialog.showDialog(function (id, url, type_id) {//id=图标id，也许需要   url=图标路径  type_id=所在分组id
+   document.getElementById('classify_img').src=url;
+        $('#picUrl_cum').val(url);
+  });
+}
+function select_slide_icon(){
+  window.SysIconDialog.showDialog(function (id, url, type_id) {//id=图标id，也许需要   url=图标路径  type_id=所在分组id
+   document.getElementById('slide_img').src=url;
+        $('#slide_url').val(url);
+  });
+}
+function resetParam() {
+            // 将所有链接参数行均隐藏
+            $('.link_param_l1,.link_param_l2').hide();
+             // 清空二级参数
+            $('#details_l2').html('');
+            // 将一级参数disable
+            $('[name="link_param_l1"]').attr('disabled', 1);
+        }
+$(function () {
+        
+        // 链接类型变化事件处理
+        $("#linktype").change( function(){
+            resetParam();
+            
+            // 获得链接类型
+            var l1Module = $(this).val();
+            
+            // 显示该链接类型对应的控件
+            $('.' + l1Module).show();
+            // 将一级参数下的form控件enable
+            $('.' + l1Module + ' [name="link_param_l1"]').removeAttr('disabled');
+            if($('#linkurladdr:enabled').length > 0 && $('#linkurladdr:enabled').val().length <= 0) {
+                $('#linkurladdr').val('http://www.lingzhtech.com');
+            }
+            
+            // 如果一级参数控件是select控件，则触发change事件，去更新二级参数
+            $enabledL1SelectObject = $("select[name='link_param_l1']:enabled");
+            if($enabledL1SelectObject) {
+                 $enabledL1SelectObject.change();
+            }
+        });
+        
+        // 一级节点事件处理
+        $("select[name='link_param_l1']").change(function(){
+            var activityId = $(this).val();
+            
+            // 隐藏二级节点
+            $('.link_param_l2').hide();
+            //清空二级节点的参数内容
+            $('#details_l2').html('');
+            
+            // 若该活动二级节点不存在，退出
+            var l2Object = $('.' + activityId);
+            if(l2Object.length == 0){
+                return;
+            }
+            
+            
+            // 获取二级节点对应的详细信息
+            $.ajax({
+                url     : "index.php?g=User&m=Classify&a=getActivityDetail",
+                dataType: "json",
+                type    : "POST",
+                data    : {
+                   activityId  : activityId,
+                   classifyId : $('#currentClassifyId').val()
+                },
+                beforeSend : function(){
+                   $('#isloadingdetail').show();
+                },
+                success    : function(res){
+                    if(res == null || res.length <= 0 || res.details == null) {
+                        $('#details_l2').html('<tr><td colspan="3">您还没有创建相应的活动。请先创建活动，再从这里进行操作。</td></tr>');
+                        return;
+                    }
+                    var tbody = '';
+                    for(var i=0; i<res.details.length; i++) {
+                        
+                        tbody = tbody + '<TR><TD><input '+ (res.details[i].id==res.selected ? 'checked="1"':'') +' type="radio" required="" name="link_param_l2" value="'+res.details[i].id + '"/></TD>' 
+                                + '<TD>'+res.details[i].title+'</TD><TD>'
+                                +res.details[i].keyword+'</TD><TD>'
+                                +res.details[i].starttime+ '<br/>' + res.details[i].endtime + '</TD></TR>';
+                       
+                    }
+                    $('#details_l2').html(tbody);
+                },
+                error      : function(){
+                    alert('获取活动详细信息失败，请刷新重试！');
+                },
+                complete   : function(XMLHttpRequest, textStatus){
+                    $('#isloadingdetail').hide();
+                },
+                timeout    : 3000       
+
+          })//ajax
+            //alert($(this).children('option:selected').attr('hasSub'));
+            // 展示二级节点
+            l2Object.show();
+        });
+        
+        // 若为更新页面，则需要设置一级参数控件的初始值
+        
+        if($('#currentClassifyId').length > 0){
+            $('.link_param_l1.{lingzh:$info.linktype} [name="link_param_l1"]').val('{lingzh:$info.link_param_l1}');
+        }
+        $('#linktype').change();
+        
+        
+        $('#image_upload_td').hover(
+            function() {$('.mbtip').fadeIn(500);},
+            function() {$('.mbtip').fadeOut(100);}
+        );
+    });
+</script>
+<include file="Public:footer"/>

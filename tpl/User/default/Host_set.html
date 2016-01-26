@@ -1,0 +1,389 @@
+ <include file="Public:head" />
+
+ <link href="/themes/w/css/reservation_setting.css" rel="stylesheet" type="text/css">
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=ZkqN4MTTGPb3lo9gvwGhiScT"></script>
+
+<div class="content"> 
+  <div class="cLineB"> 
+    <h4>商家设置 </h4> 
+    <a href="{lingzh::U('Host/index',array('token'=>$token))}" class="right btnGreen" style="margin-top:-27px">返回</a> 
+  </div> 
+
+  <form class="form" method="post" action="" enctype="multipart/form-data"> 
+  <input type="hidden" name="id" value="{lingzh:$set.id}" />    
+  <div class="msgWrap bgfc"> 
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+      <tr> 
+        <th width="120"><span class="red">*</span>关键词：</th> 
+        <td><input type="text" name="keyword" value="{lingzh:$set.keyword}" class="px" style="width:400px;" /> <span class="red">只能写一个关键词</span></td> 
+      </tr> 
+	    <tr> 
+        <th><span class="red">*</span>图文消息配图：</th> 
+        <td>
+          <input  id='pic_url_input' type="text" name="ppicurl" value="{lingzh:$set.ppicurl}" class="px" style="width:400px;" /> 
+          <span onclick="$('#upload-panel').show();" style="text-decoration:underline;cursor:pointer;"> 上传图片 </span>
+              <div id="upload-panel" style="display:none" >
+                <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+                <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                  <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+                </div>
+              </div>
+        </td> 
+      </tr> 
+      <tr> 
+        <th><span class="red">*</span>商家名称：</th> 
+        <td><input type="text" name="title" value="{lingzh:$set.title}" class="px" style="width:400px;" /></td> 
+      </tr> 
+
+      <tr> 
+        <th><span class="red">*</span>手机号：</th> 
+        <td><input type="text" name="tel2" value="{lingzh:$set.tel2}" class="px" style="width:400px;" />手机号</td> 
+      </tr> 
+      <tr> 
+        <th>商家电话：</th> 
+        <td><input type="text" name="tel" value="{lingzh:$set.tel}" class="px" style="width:400px;" />固定电话号码</td> 
+      </tr> 
+      <tr >
+        <th><span class="red">*</span>商家地址：</th>
+        <td>
+          <input  type="text" id="address" name="address" value="<php>echo empty($set['address'])?'深圳白石洲国际市长交流中心1901':$set['address']</php>" class="px" style="width:400px;" tabindex="1" >
+          <input type="button" id="locate-btn" value="定位" class="btnGreen"  style=" margin:2px; "/>
+          <font style="color: red">请在地图上定位具体位置，用于一键导航功能</font>
+          <input type="text" style="display:none" id="customerLng" name="longtitude" value="{lingzh:$set.longtitude}"/>
+          <input type="text" style="display:none" id="customerLat" name="latitude" value="{lingzh:$set.latitude}"/>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <div id="container" style="height:300px;width: 600px;"></div>
+        </td>
+      </tr>
+      <tr> 
+        <th valign="top">商家介绍图片：</th> 
+        <td valign="top">
+          <input id='pic_url_input_1' type="text" name="picurl" value="{lingzh:$set.picurl}" class="px" style="width:400px;" />
+			    <span onclick="$('#upload-panel-1').show();" style="text-decoration:underline;cursor:pointer;"> 上传图片 </span>
+          <div id="upload-panel-1" style="display:none" >
+                <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+                <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                  <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index?id=1')}"></iframe>
+                </div>
+          </div>
+	      </td>
+      </tr> 
+      <tr> 
+        <th valign="top">商家介绍：</th> 
+        <td valign="top"><textarea class="px" id="info" name="info" style="width: 410px; height: 180px;">{lingzh:$set.info}</textarea></td> 
+      </tr> 
+      <tr> 
+        <th valign="top">订单说明：</th> 
+        <td valign="top"><textarea class="px" id="info2" name="info2" style="width: 410px; height: 180px; ">{lingzh:$set.info2}</textarea></td> 
+      </tr> 
+      <tr> 
+        <th valign="top">订单类型设置：</th> 
+        <td valign="top">
+          <label><input type="radio" name="type" value="0" <if condition="isset($set) || $set['type'] == 0">checked="checked"</if>/>预约</label> 
+          <label><input type="radio" name="type" value="1" <if condition="$set['type'] == 1">checked="checked"</if>/>报名</label> 
+          <label><input type="radio" name="type" value="2" <if condition="$set['type'] == 2">checked="checked"</if>/>预定</label> 
+        </td>
+      </tr>
+      <tr> 
+        <th valign="top">订单内容设置：</th> 
+        <td valign="top">
+            <div class='ordersettings'>
+                <span class="help-inline">填写你要收集的内容！订单默认项不允许修改！</span>
+                <table id="listTable" class="table table-bordered table-hover dataTable">
+                    <thead>
+                        <tr>
+                            <th style="width:70px">字段类型</th>
+                            <th>字段名称</th>
+                            <th>初始内容</th>
+                            <th style="width:65px">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>单行文字：</td>
+                            <td>
+                                <input name="default_text_book_people" disabled="disabled"  type="text" class="wizard-ignore" value="联系人" readonly="readonly"></td>
+                            <td>
+                                <input name="default_placeholder_book_people" type="text" disabled="disabled" class="wizard-ignore" value="请输入您的名字" readonly="readonly"></td>
+                            <td><input type="checkbox" name="default_show_book_people" style="display:none" checked="checked" value="1">
+                                订单默认项</td>
+                        </tr>
+                        <tr>
+                            <td>单行文字：</td>
+                            <td>
+                                <input name="default_text_tel" disabled="disabled"  type="text" class="wizard-ignore" value="联系电话" readonly="readonly"></td>
+                            <td>
+                                <input name="default_placeholder_tel" disabled="disabled"  type="text" class="wizard-ignore" value="请输入您的电话" readonly="readonly"></td>
+
+                            <td><input type="checkbox" name="default_show_tel"  style="display:none" checked="checked" value="1">
+                                订单默认项</td>
+                        </tr>
+                      
+                        <tr>
+                            <td>日期选择：</td>
+                            <td>
+                                <input name="default_text_book_time" disabled="disabled"  type="text" class="wizard-ignore" value="预订日期"></td>
+                            <td>
+                                <input name="default_placeholder_book_time" disabled="disabled"  type="text"  class="wizard-ignore" value="请输入预订日期"></td>
+
+                            <td>
+                                 <label class="checkbox">
+                                     <input type="checkbox" name="default_show_book_time"  value="1"
+                                     <php>
+                                         if(empty($default_col_show)|| in_array( "book_time", $default_col_show)) 
+                                         {
+                                            echo 'checked="checked" ';
+                                         }
+                                     </php> >是否显示
+                                 </label>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>单行文字：</td>
+                          <td>
+                              <input type="text" class="wizard-ignore" disabled="disabled"  value="预定数量" readonly="readonly"></td>
+                          <td>
+                              <input disabled="disabled"  type="text" class="wizard-ignore" value="请输入您的预定数量" readonly="readonly">
+                          </td>
+                          <td><label class="checkbox">
+                                  <input type="checkbox"  name="default_show_book_num"  value="1"
+                                     <php>
+                                         if(empty($default_col_show) || in_array( "book_num", $default_col_show)) 
+                                         {
+                                            echo 'checked="checked"';
+                                         }
+                                     </php> >是否显示
+                               </label></td>
+                        </tr>
+                       
+                        <tr>
+                          <td>单行文字：</td>
+                          <td>
+                              <input type="text" disabled="disabled" class="wizard-ignore" value="原价" readonly="readonly"></td>
+                          <td>
+                              <input type="text" disabled="disabled" class="wizard-ignore" value="将自动显示优惠前金额" readonly="readonly">
+                          </td>
+                          <td><label class="checkbox">
+                                  <input type="checkbox" name="default_show_price"  value="1"
+                                     <php>
+                                         if(empty($default_col_show) || in_array( "price", $default_col_show) == TRUE) 
+                                         {
+                                            echo 'checked="checked"';
+                                         }
+                                     </php> >是否显示
+                               </label></td>
+                        </tr>
+                        <tr>
+                          <td>单行文字：</td>
+                          <td>
+                              <input name="keyword" type="text" disabled="disabled" class="wizard-ignore" value="现价" readonly="readonly"></td>
+                          <td>
+                              <input name="add[order][]" type="text" disabled="disabled" class="wizard-ignore" value="将自动显示优惠后金额" readonly="readonly">
+                          </td>
+                          <td><label class="checkbox">
+                                  <input type="checkbox" name="default_show_yhprice"  value="1"
+                                     <php>
+                                         if(empty($default_col_show) || in_array( "yhprice", $default_col_show) == TRUE) 
+                                         {
+                                            echo 'checked="checked"' ;
+                                         }
+                                     </php> >是否显示
+                               </label></td>
+                        </tr>
+                         <tr>
+                          <td>单行文字：</td>
+                          <td>
+                              <input type="text" disabled="disabled" class="wizard-ignore" value="已节省" readonly="readonly"></td>
+                          <td>
+                              <input  type="text" disabled="disabled" class="wizard-ignore" value="将自动显示已节省金额" readonly="readonly">
+                          </td>
+                          <td><label class="checkbox">
+                                  <input type="checkbox" name="default_show_saves" value="1"
+                                     <php>
+                                         if(empty($default_col_show) || in_array( "saves", $default_col_show) == TRUE) 
+                                         {
+                                            echo 'checked="checked" ';
+                                         }
+                                     </php> >是否显示
+                               </label></td>
+                        </tr>
+                         </tbody>
+                         <tbody class="singlebody">
+                         <volist name='text_cols' id='text_col'>
+                             <tr class="trtxt">
+                                <td>单行文字<span class="numstrtxt">{lingzh:$i}</span>：</td>
+                                <td>
+                                    <input type="text" name="text_text[]" value="<php>echo $text_col[0];</php>" class="input-medium"></td>
+                                <td>
+                                    <input name="text_placeholder[]" type="text" value="<php>echo $text_col[1];</php>" class="input-medium"></td>
+                                <td colspan="2">
+                                    <p><a class="add <php>if($i < count($text_cols)){echo 'display_none';}</php>" href="javascript:void(0);">添加</a>　<a class="del" href="javascript:void(0);">删除</a></p>
+                                </td>
+                             </tr>
+                         </volist>
+                         </tbody>
+                         
+    
+
+                        <tbody class="fielddownloadbody">
+                        <volist name='select_cols' id='select_col'>
+                             <tr class="trtxt">
+                                <td>下拉框<span class="numstrtxt">{lingzh:$i}</span>：</td>
+                                <td>
+                                    <input type="text" name="select_text[]"  value="<php>echo $select_col[0];</php>" class="input-medium"></td>
+                                <td>
+                                    <input name="select_placeholder[]" placeholder='每个选项之间以"|"分割' type="text" value="<php>echo $select_col[1];</php>" class="input-medium"></td>
+
+                                <td colspan="2">
+                                    <p><a class="add <php>if($i < count($select_cols)){echo 'display_none';}</php>" href="javascript:void(0);">添加</a>　<a class="del" href="javascript:void(0);">删除</a></p>
+                                </td>
+                             </tr>
+                        </volist>
+                        </tbody>
+
+
+                        <tbody><tr>
+                            <td>多行文字：</td>
+                            <td>
+                                <input name="default_text_remarks" type="text" disabled="disabled" class="wizard-ignore" value="备注" readonly="readonly"></td>
+                            <td>
+                                <input name="default_placeholder_remarks" type="text" disabled="disabled" value="请留言" readonly="readonly"></td>
+                       
+                             <td><input type="checkbox" name="default_show_remarks"  style="display:none" checked="checked" value="1">
+                                订单默认项</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </td> 
+      </tr> 
+      </tbody> 
+    </table> 
+  </div>
+  <div class="msgWrap" style=' text-align: center'> 
+    <button type="submit" name="button" class="btnGreen">保存</button>&nbsp; &nbsp; <a href="{lingzh::U('Host/index',array('token'=>$token))}" class="btnGray vm">取消</a>
+  </div>
+  </form> 
+</div> 
+ 
+  <script type="text/javascript">
+        function addHandler(className) {
+            var singlebody = $('.' + className).append(function(){
+                return $('.' + className + ' tr').first().clone(true);
+            });
+            
+            $('.' + className + ' tr:last input').val('');
+            $('.' + className + ' tr .numstrtxt').each(function(index){
+                $(this).html(index + 1);
+            });
+            
+            resetDisplay(className);
+        }
+        
+        function delHandler(className, element) {
+            if($('.' + className + ' tr').length > 1) {
+                $(element).parents('.trtxt').detach();
+                $('.' + className + ' tr .numstrtxt').each(function(index){
+                    $(this).html(index + 1);
+                });
+            }else{
+                $('.' + className + ' tr input').val('');
+            }
+            resetDisplay(className);
+        }
+        
+        function resetDisplay(className) {
+            $('.' + className + ' a.add').addClass('display_none');
+            $('.' + className + ' a.add:last').removeClass('display_none');
+        }
+      
+        $(function() {
+          $('.singlebody a.add').click(function(){addHandler('singlebody');});
+          $('.singlebody a.del').click(function(){delHandler('singlebody', this);});
+          
+          $('.fielddownloadbody a.add').click(function(){addHandler('fielddownloadbody');});
+          $('.fielddownloadbody a.del').click(function(){delHandler('fielddownloadbody', this);});
+          
+          //resetDisplay('singlebody');
+          //resetDisplay('fielddownloadbody');
+           var located = false;
+            //定位坐标
+            var lng = '{lingzh:$set.longtitude}';
+            var lat = '{lingzh:$set.latitude}';
+            if(lng.length <= 0 || lat.length <= 0) {
+                lng = 113.972981;
+                lat = 22.544814; 
+            }
+            var destPoint = new BMap.Point( lng, lat);
+            $(function(){
+                var map = new BMap.Map("container");
+                map.centerAndZoom(new BMap.Point(destPoint.lng, destPoint.lat), 20);//初始化地图
+                //map.enableScrollWheelZoom();
+                map.addControl(new BMap.NavigationControl());
+                var marker = new BMap.Marker(destPoint);
+                map.addOverlay(marker);//添加标注
+
+                map.addEventListener("click", function(e){
+                    if(confirm("确定红色标记为商家准确地址？")){
+                            destPoint = e.point;
+                            $('#customerLng').val(destPoint.lng);
+                            $('#customerLat').val(destPoint.lat);
+                            map.clearOverlays();
+                            var marker1 = new BMap.Marker(destPoint);  // 创建标注
+                            map.addOverlay(marker1); 
+                            located = true;
+                    }
+                });
+
+                var local;
+                function callback(posi){
+
+                        $("#locate-btn").removeAttr("disabled");
+                        for(var i=0;i<posi.length;i++){
+                                if(i==0){
+                                        destPoint = posi[0].point;
+                                         $('#customerLng').val(destPoint.lng);
+                                         $('#customerLat').val(destPoint.lat);
+                                }
+                                posi[i].marker.addEventListener("click", function(data){
+                                        destPoint = data.target.getPosition(0);
+                                        $('#customerLng').val(destPoint.lng);
+                                        $('#customerLat').val(destPoint.lat);
+                                });  
+                        }
+                }
+
+                $("#locate-btn").click(function(){
+                        if($("#address").val() == ""){
+                                alert("请输入商家详细地址！");
+                                return ;
+                        }
+                        $("#locate-btn").attr("disabled","disabled");
+                        local = new BMap.LocalSearch(map, { //智能搜索
+                                renderOptions:{map: map}
+                        });
+                        located = true;
+                        local.setMarkersSetCallback(callback);
+                        local.search($("#address").val());
+                        return false;
+                });
+            });
+
+            function ShowUploadPanel(id) {
+
+                 var url = '{lingzh::U("UploadImg/index")}' + '&id=' + id;
+
+                     $('#uploadIframe').attr('src', url);
+                     $('#upload-panel').show();
+            }
+        });
+        
+    </script>
+    
+  <include file="Public:footer" />

@@ -1,0 +1,15 @@
+<link href="/themes/a/css/page-u.css" rel="stylesheet" type="text/css" />
+<div class="content"> 
+    <div style="line-height:200%;padding:10px 20px;">
+<form class="form" method="post" target="_top" enctype="multipart/form-data" action="{lingzh::U('Manage/Shop/commission',array('oid'=>$_GET['oid']))}"> 
+         <input type="hidden" name="oid" value="{lingzh:$order.order_id}"/>
+         <input type="hidden" name="step" value="delivery"/>
+        <div>佣金：<input type="text" name="commission" value="{lingzh:$order.commission}" class="text textMiddle" style="width:200px;"/></div></br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button type="submit" name="button" class="btnGreen" style="text-align: center;">修改佣金</button>
+		
+</form>
+  </div>  
+
+</body>
+</html>

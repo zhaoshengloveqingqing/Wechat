@@ -1,0 +1,129 @@
+<include file="Public:head"/>
+<script>
+$(function(){
+        $('#ListForm').ajaxForm({
+            beforeSubmit:  checkForm,  // pre-submit callback
+            success:       complete,  // post-submit callback
+			error: showError,
+            dataType: 'json'
+        });
+        function checkForm(arr){
+        }
+        function complete(data){
+            alert(data.info);
+            window.location.reload();
+        }
+
+		function showError(data){
+            alert(data);
+        }
+    });
+</script>
+<div class="content">
+
+<div class="cLineB">
+<h4>相册管理&nbsp;&nbsp;&nbsp;<a id="preview" href="javascript:;" class="btnGrayS vm bigbtn">预览</a></h4>
+<!--h4>此相册地址：<a href="http://{lingzh::C('wx_handler_server')}/index.php?g=Wap&m=Photo&a=index&token={lingzh:$Think.session.token}" class="green">http://{lingzh::C('wx_handler_server')}/index.php?g=Wap&m=Photo&a=index&token={lingzh:$Think.session.token}</a></h4-->
+<a href="{lingzh::U('Photo/index')}" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>
+ 
+ <div class="cLineB">
+<div class="pageNavigator left"><strong>添加图片</strong></div>
+<div class="clr"></div>
+</div>
+ <div class="msgWrap form">
+           
+   <input type="hidden" name="formhash" value="7566c850">
+   <input type="hidden" name="wxid" value="gh_423dwjkewad">
+<div class="bdrcontent">
+<div id="div_ptype">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<form id="ListForm" action="" method="post">
+<thead>
+	<tr>
+		<th style=" width:120px;">名称</th>                   
+		<th style=" width:70px;">显示顺序</th>
+		<th>图片外链地址（宽720够了，高不限制）</th>
+		<th>图片简单说明（可不填）</th>
+		<th style=" width:80px;">显示</th>
+		<th style=" width:100px;" class="norightborder">操作</th>
+	</tr>
+</thead>  
+<tr>
+	<td><input type="text" name="title" value=""  class="px"/></td>
+	<td><input type="text" name="sort" value="0"  class="px" style="width:50px;" /></td>
+	<td>
+		<div class="cateimg"></div>
+		<input class="px" id="pic_url_input" style="width:250px;" type="text" name="picurl" value=""  /><span onclick="$('#upload-panel').show();" style="text-decoration:underline;cursor:pointer;"> 上传图片 </span>
+		<input type="hidden"   name="pid" value="{lingzh:$Think.get.id}"  />
+	</td>
+	<td><input class="px" type="text"  style="width:250px;"  name="info" value=""  /></td>
+	<td><input class="checkbox" type="checkbox" name="status" value="1"  checked ></td>
+	<td class="norightborder">
+		<button type="submit" id="vtype" class="btnGray vm" ><strong>添加</strong></button>　
+	</td>
+</tr> 
+</form>
+
+
+ <tr>
+	<td colspan="6"><div class="cLineB">
+  <h4>图片列表</h4>  
+ </div></td>
+ </tr>
+ <thead>
+ 
+<tr>
+<th style=" width:120px;">名称</th>
+                   
+<th style=" width:70px;">显示顺序</th>
+<th>图片外链地址</th>
+                        <th>图片简单说明（可不填）</th>
+<th style=" width:80px;">显示</th>
+                        <th style=" width:100px;" class="norightborder">操作</th>
+</tr>
+</thead> 
+<volist name="photo" id="photo">
+ <form method="post" action="{lingzh::U('Photo/list_edit',array('token'=>session('token')))}">              
+<tr>
+	<td><input type="text" name="title" value="{lingzh:$photo.title}"  class="px"    /></td>
+	<td><input type="text" name="sort" value="{lingzh:$photo.sort}"  class="px" style="width:50px;" /></td>
+	<td><div class="cateimg"></div><input class="px"  style="width:250px;"   type="text"   name="picurl" value="{lingzh:$photo.picurl}"  /></td>
+	<td><input class="px" type="text"  style="width:250px;"  name="info" value="{lingzh:$photo.info}"  /></td>
+	<td>
+		<input class="checkbox" type="checkbox" name="status" value="1"  <if condition="$photo['status'] eq 1">checked</if> >
+		<input type="hidden"   name="id" value="{lingzh:$photo.id}"  /></td>
+	<td class="norightborder">
+		<button type="submit" name="edit" value="true" class="btnGreen vm" style="height:20px;font-size:12px;line-height:10px;">
+			<strong>修改</strong>
+		</button>
+	<a href="{lingzh::U('Photo/list_del',array('id'=>$photo['id'],'token'=>session('token')))}">删除</a>
+	</td>
+</tr>
+</form>
+</volist>
+  </table>
+</div>
+</div>
+<div class="footactions" style="padding-left:10px">
+  <div class="pages">{lingzh:$page}</div>
+</div>
+
+
+ </div>
+  
+        </div>
+              <div id="upload-panel" style="display:none" >
+                <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+                <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+                  <iframe style=" width:500px;height:500px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+                </div>
+              </div>
+<script>
+$("#preview").click(function(){
+    var left = ($(window.parent.parent).width() - 450)/2;
+    window.open("/index.php?g=User&m=Preview&a=index&model=photo_list&id={lingzh:$Think.get.id}","我的微相册",
+	    "height=650,width=450,top=0,left="+left+",toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no");
+});
+</script>
+<include file="Public:footer"/>  
+ 

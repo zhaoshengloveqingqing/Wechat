@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>权限管理</title>
+<include file="common:public" />
+ <script src="/themes/a/js/jquery.dataTables.min.js" type="text/javascript"></script>
+     <!--link href="/themes/a/css/jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css"-->
+     <link href="/themes/a/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+     <style type='text/css'>
+         .btnGreen {
+border: 1px solid #3D810C;
+box-shadow: 0 1px 1px #AAA;
+-moz-box-shadow: 0 1px 1px #aaa;
+-webkit-box-shadow: 0 1px 1px #AAA;
+padding: 5px 20px;
+cursor: pointer;
+display: inline-block;
+text-align: center;
+vertical-align: bottom;
+overflow: visible;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+background-color: #5BA607;
+background-image: linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -moz-linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -webkit-linear-gradient(bottom, #4D910C 3%, #69B310 97%, #FFF 100%);
+color: #FFF;
+font-size: 14px;
+line-height: 1.5;
+}
+     </style>
+</head>
+<body>
+<div class="cr"></div>
+<div id="artlist">
+
+	 <div class="ksearch">
+            <div class="fl">
+                <form action="{lingzh::U('Admin/Users/search')}" method="post">
+                    <a href="{lingzh::U('Users/add/')}"><font class='btnGreen'>添加商户</font></a>
+               
+                    <span>
+                       按：
+                        <select id='searchtype' name='searchtype'>
+                            <option value="name">名字</option>
+                            <option value="username">登录名</option>
+                            <eq name="isAdmin" value="1"><option value="administrator">代理商</option></eq>
+                            
+                        </select>
+                        <input type='text' id='searchparam' name='searchparam' value='' placeholder='支持包含查询' />
+                        <select style='display:none' id='beuserselect' name='searchparam'>
+                            <volist name='backendUsers' id='beuser'>
+                                <option value='{lingzh:$beuser.id}'>{lingzh:$beuser.username}</option>
+                            </volist>
+                        </select>
+                        <input type='submit' value='全局查找' style="padding:5px 10px;"/>
+                    </span>
+                </form>
+            </div>  
+</div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="myUserTable">
+	  <thead>
+              <tr>
+		<th width="80">登录名</th>
+		<th width="60">名字</th>
+		<th width="50">电话</th>
+		<th width="80">公司名称</th>
+		<th width="60">城市</th>
+		<th width="80">注册时间</th>
+		<th width="80">上次登录</th>
+                <th width="80">管理者</th>
+                <th width="80">分配时间</th>
+		<th width="25">状态</th>
+		<th width="100">管理操作</th>
+              </tr>
+	  </thead>
+    <tbody>
+	    <volist name="info" id="vo">
+			<tr>
+				<td ><a href="{lingzh::U('Users/edit/',array('id'=>$vo['id']))}">{lingzh:$vo.username}</a></td>
+				<td >{lingzh:$vo.name}</td>
+				<td >{lingzh:$vo.tel}</td>
+				<td >{lingzh:$vo.company}</td>
+				<td >{lingzh:$vo.city}</td>
+                                <td align='center'><php>echo date('Y-m-d H:i:s', $vo['createtime'])</php></td>
+				<td align='center'><php>echo date('Y-m-d H:i:s', $vo['lasttime'])</php></td>
+                                <td align='center'>
+                                    <php>
+                                        if(empty($vo['administrator']))
+                                        {
+                                            echo 'admin';
+                                        }else{
+                                            foreach($adminList as $adminUser) {
+                                                  if($adminUser['id'] == $vo['administrator']) {
+                                                    echo $adminUser['username'];
+                                                    break;
+                                                  }
+                                            }
+                                        }
+                                    </php>
+                                </td>
+                                <td align='center'><php>echo date('Y-m-d H:i:s', $vo['assign_time'])</php></td>
+				<td align='center'><eq name="vo.status" value="1"><font color="red">√</font><else/><font color="blue">×</font></eq> 
+				</td>
+                               
+				<td align='center'>
+                                        <a href="{lingzh::U('Users/activate/',array('id'=>$vo['id']))}">充值</a>
+					<a href="{lingzh::U('Users/edit/',array('id'=>$vo['id']))}">修改</a>
+					<eq name="isAdmin" value="1"><a href="javascript:void(0)" onclick="return confirmurl('{lingzh::U('Users/del/',array('id'=>$vo['id']))}','确定删除该用户吗?')">删除</a></eq>
+				</td>
+			</tr>
+	    </volist>
+        </tbody>
+   
+    
+</table>
+<div class="listpage">{lingzh:$page}</div>
+
+    <script>
+    $(document).ready(function() {
+            $('#myUserTable').dataTable({
+                 "bPaginate": false,
+                 "bAutoWidth": true,
+                 "sSearch": "查找",
+                 "aaSorting": [],
+                  "oLanguage": {
+                    "sLengthMenu": "每页显示 _MENU_ 记录",
+                            "sZeroRecords": "对不起，您还没添加图文消息",
+                            "sInfo": "第 _START_ 条到 _END_ 条，总共 _TOTAL_ 条记录",
+                            "sInfoEmpty": "显示 0 条记录",
+                            "sInfoFiltered": "(从 总共_MAX_条记录)",
+                            "sSearch": "在当前页查找"
+
+                    }
+            });
+            
+            
+            var searchtype = '{lingzh:$searchtype}';
+            var searchparam = '{lingzh:$searchparam}';
+            if(searchtype != null && searchtype.length > 0) {
+                $('#searchtype').val(searchtype);
+            }
+            $('#searchtype').change(function()
+            {
+                if($('#searchtype').val() == 'administrator') {
+                    $('#searchparam').hide();
+                    $('#searchparam').attr('disabled', '1');
+                    
+                    $('#beuserselect').removeAttr('disabled');
+                    $('#beuserselect').show();
+                }else {
+                    $('#beuserselect').hide();
+                    $('#beuserselect').attr('disabled', '1');
+                    
+                    $('#searchparam').removeAttr('disabled');
+                    $('#searchparam').val('');
+                    $('#searchparam').show();
+                }
+            });
+            $('#searchtype').change();
+            
+            if(searchparam != null && searchparam.length > 0) {
+                if(searchtype == 'administrator') {
+                    $('#beuserselect').val(searchparam);
+                }else {
+                    $('#searchparam').val(searchparam);
+                }
+            }
+
+            
+
+    } );
+    </script>
+</body>
+</html>

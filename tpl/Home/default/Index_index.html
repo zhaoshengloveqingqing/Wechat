@@ -1,0 +1,223 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>派尔网络  - 全国最领先的微信营销平台</title>
+<meta name="Keywords" content="{lingzh:$Think.config.keyword}" />
+<meta name="Description" content="{lingzh:$Think.config.content}"/>
+<a name="toptop"></a><include file="lingzh:header"/>
+<style type="text/css">
+    .dynamic_item {
+        font-size:16px; 
+        margin-top:27px;
+    }
+    .display_none {
+        display: none;
+    }
+	.hints .new.latest_dynamics a{ color:#FFF; text-decoration:none;}
+	.hints .new.latest_dynamics a hover{ color:#FFF; text-decoration:none;}
+	
+	
+</style>
+<div id="maincontent" class="flash">
+<div class="element pict main" >
+	  <a href="/index.php?m=Index&a=fc" target="_blank" title="派尔网络营销平台">
+      <img src="/themes/a/images/banner/banner9.jpg" alt="派尔网络APP后台管理"></a>
+    </div>
+<div class="element pict" >
+	  <a href="/index.php?m=Dynamics&a=details&cid=1&item=33" target="_blank" title="派尔网络营销平台">
+      <img src="/themes/a/images/banner/banner8.jpg" alt="派尔网络多客服系统"></a>
+    </div>
+ <div class="element pict " >
+	  <a href="/index.php?m=Index&a=fc" target="_blank" title="派尔网络营销平台">
+      <img src="/themes/a/images/banner/banner7.jpg" alt="派尔网络微商城"></a>
+    </div>
+    <div class="element pict " >
+	  <a href="/index.php?m=Index&a=fc" target="_blank" title="派尔网络营销平台">
+      <img src="/themes/a/images/banner/banner1.jpg" alt="派尔网络营销平台"></a>
+    </div>
+       <div class="element pict" >
+	  <a href="/index.php?m=Index&a=fc" target="_blank" title="微网站">
+      <img src="/themes/a/images/banner/banner2.jpg" alt="微网站"></a>
+    </div>
+    <div class="element pict">
+	  <a href="/index.php?m=Index&a=fc" target="_blank" title="微信会员卡">
+	  <img src="themes/a/images/banner/banner3.jpg" alt="微信会员卡"></a>
+	</div>
+     <div class="element pict">
+	  <a href="/index.php?m=Index&a=fc" target="_blank" title="微订单">
+	  <img src="themes/a/images/banner/banner4.jpg" alt="微订单"></a>
+	</div>
+     <div class="element pict">
+	  <a href="/index.php?m=Index&a=about" target="_blank" title="派尔网络 - 技术团队">
+	  <img src="themes/a/images/banner/banner5.jpg" alt="派尔网络 - 核心团队"></a>
+	</div>
+	<div class="element pict">
+	  <a href="/index.php?m=Index&a=jiameng" target="_blank" title="派尔网络 - 招商加盟">
+	  <img src="themes/a/images/banner/banner6.jpg" alt="派尔网络 - 招商加盟"></a>
+	</div>
+    <div class="element navi left" style=" padding-left:160px;"><img src="/themes/a/images/arrow-left.png" alt="left"></div>
+    <div class="element navi right" style=" padding-right:180px;"><img src="/themes/a/images/arrow-right.png" alt="right"></div>
+    
+    
+</div>
+<div class="hints"><div class="news-icon" style="margin-left:30px; padding-top:32px"> </div>
+    <p class="new latest_dynamics" style="margin-left:-10px; font-weight:bolder;"><a href="/index.php?m=Dynamics&a=index" target="_blank">行业新闻</a></p>
+    <p class="new industry_dynamics" style="margin-left:-10px; display:none;font-weight:bolder;">最新动态</p>
+    
+    <?php
+        $dymaic_index = 0;
+        foreach($DYNAMICS_LIST as $k => $dynamic_item) {
+            if($dynamic_item['has_link'] == 0) {
+                $link = 'javascript:void(0)';
+            }else{
+              $link = U('Home/Dynamics/details', array('cid'=>$dynamic_item['category_id'], 'item'=>$dynamic_item['id']));
+            }
+            $display_none = $dymaic_index < 2 ? "" : "display:none";
+            echo '<p class="dynamic_item" style="'.$display_none.'">●&nbsp;&nbsp;<a href="'.$link.'" style="color:#FFF; ">'.$dynamic_item["title"].'</a></p>';
+            $dymaic_index ++;
+            if($dymaic_index >= 2) {
+                break;
+            }
+        }
+        $dymaic_index = 4;
+        echo '<script>var total_dynamic_count = '.$dymaic_index.';</script>';
+     ?>
+    <?php 
+        $totalidx = 0;
+        foreach($INDUSTRY_DYNAMICS as $idx) {
+            if($idx['slide_show'] == 1) {
+                echo '<p class="dynamic_item" style="display:none">●&nbsp;&nbsp;<a href="javascript:void(0)" style="color:#FFF; ">'.$idx["title"].'</a></p>';
+                $totalidx ++;
+                
+                if($totalidx >= 2) {
+                    break;
+                }
+            }
+        }
+     ?>
+    <p class="latest_dynamics" style="float:right;"><a style="color:#b2dded;" href='/index.php?m=Dynamics&a=index'>更多>></a></p>
+</div>
+<div class="fuwu">
+  <span class="title-cn">平台功能</span><span class="title-en">Platform Feature</span>
+   <div class="more" style="margin-left:20px;"><a href="/index.php?m=Index&a=fc" title="更多功能" target="_blank">更多功能</a></div>
+ <ul class="contatc">
+
+    <li class="fw01">
+    <a href="/index.php?m=Index&a=fc" target="_blank" title="微网站智能建站">
+	<h2>微网站建设</h2>
+	<p>智能化和可视化，操作简单</p>
+    <p>丰富的行业模板供选择</p>
+	</a>
+  </li>
+  <li class="fw02">
+    <a href="/index.php?m=Index&a=fc" target="_blank" title="微信客服">
+	<h2>微信客服</h2>
+	<p>自动回复、沟通快捷</p>
+    <p>节约人工成本</p></a>
+  </li>
+   <li class="fw03">
+    <a href="/index.php?m=Index&a=fc" target="_blank" title="微信会员卡">
+    <h2>微信会员卡</h2>
+    <p>签到、积分、兑换、特权</p>
+	<p>全面替代传统实体会员卡</p></a>
+  </li> 
+  <li class="fw04">
+    <a href="/index.php?m=Index&a=fc" target="_blank" title="微信商城">
+    <h2>微信商城</h2>
+    <p>独立商城，快捷支付</p>
+    <p>摆脱淘宝/天猫大平台的剥削</p></a>
+	</a>
+  </li>
+ </ul>
+  <ul class="contatc">
+  <br />
+  <li class="fw05">
+    <a href="/index.php?m=Index&a=fc" target="_blank" title="预约/报名/订单">
+    <h2>预约/报名/订单</h2>
+    <p>预约驾驶、报名预订</p>
+    <p>酒店KTV订房、餐馆订餐</p>
+    </a>
+  </li>
+  <li class="fw06">
+    <a href="/index.php?m=Index&a=fc" target="_blank" title="微信相册">
+    <h2>微信相册</h2>
+	<p>提供极致流畅的图片浏览体验</p>
+    <p>适用于婚纱/摄影/房产等高端形象行业</p>
+    </a>
+  </li>
+    <li class="fw07">
+    <a href="/index.php?m=Index&a=fc" target="_blank" title="互动营销">
+      <h2>互动营销</h2>
+      <p>幸运转盘、刮刮卡、优惠券</p>
+      <p>增强用户互动，培养品牌沉淀</p>
+    </a>
+  </li>
+  <li class="fw08">
+    <a href="/index.php?m=Index&a=fc" target="_blank" title="微信定制开发">
+    <h2>微信定制开发</h2>
+	<p>针对不同行业的特殊需求</p>
+    <p>制定一对一的解决方案</p></a>
+  </li>
+
+  
+ </ul>
+</div>
+<div class="main">
+ <div class="line"></div>
+ <div class="caer">
+  <span class="title-cn">成功案例</span><span class="title-en">Successful Case</span>
+  <div class="more" style="margin-left:20px;"><a href="/index.php/Anli" title="微信营销案例" target="_blank">更多案例</a></div>
+  	<ul class="list">
+    <li><div style="background: url(themes/a/images/case-qr-code.png) 0 0 no-repeat;  width:147px; height:147px; padding-bottom:10px;" ></div>
+    <a href="/index.php/Anli" title="思瑞整形" target="_blank"><font style="font-size:14px">思瑞整形</font></a>
+    </li>
+    <li><div style="background: url(themes/a/images/case-qr-code.png) 0px -163px no-repeat;  width:147px;  height:147px;padding-bottom:10px;"></div>
+    <a href="/index.php/Anli" title="M2MUSE酒吧" target="_blank"><font style="font-size:14px">M2MUSE酒吧</font></a>
+    </li>
+    <li><div style="background: url(themes/a/images/case-qr-code.png) 0px -326px no-repeat;  width:147px;  height:147px;padding-bottom:10px;"></div>
+    <a href="/index.php/Anli" title="麦兜点点" target="_blank"><font style="font-size:14px">麦兜点点</font></a>
+    </li>
+    <li><div style="background: url(themes/a/images/case-qr-code.png) 0px -489px no-repeat;  width:147px;  height:147px;padding-bottom:10px;"></div>
+    <a href="/index.php/Anli" title="韩国艺匠" target="_blank"><font style="font-size:14px">韩国艺匠</font></a>
+    </li>
+    <li><div style="background: url(themes/a/images/case-qr-code.png) 0px -652px no-repeat;  width:147px;  height:147px;padding-bottom:10px;"></div>
+    <a href="/index.php/Anli" title="红星美凯龙" target="_blank"><font style="font-size:14px">红星美凯龙</font></a>
+    </li>
+	</ul>
+ </div>
+</div>
+
+<div style="clear:both"></div>
+<div style=" width:1000px; height:25px; margin:0px auto; display:block;text-align:right"><a href="#toptop"><img src="/themes/a/images/back.jpg" alt="派尔网络"></a></div>
+<script type="text/javascript" src="/themes/a/js/slide.js"></script>
+<script language="javascript"> 
+setInterval('$("#maincontent .right").click();',4000);
+
+var curr_dynamic_index = 0;
+var mod_value = 0;
+function scroll_dynamics() {
+    
+    // hide
+    $('p.dynamic_item:eq('+ curr_dynamic_index + ')').hide();
+    $('p.dynamic_item:eq('+ (curr_dynamic_index + 1)%total_dynamic_count + ')').hide();
+    if(mod_value == 0) {
+        $('.latest_dynamics').hide();
+        $('.industry_dynamics').slideDown('slow',function(){});
+        mod_value = 1;
+    }else{
+        $('.industry_dynamics').hide();
+        $('.latest_dynamics').slideDown('slow',function(){});
+        mod_value = 0;
+    }
+    
+    // show
+    curr_dynamic_index = (curr_dynamic_index + 2)%total_dynamic_count;
+    $('p.dynamic_item:eq('+ curr_dynamic_index + ')').slideDown('slow',function(){});
+    $('p.dynamic_item:eq('+ (curr_dynamic_index + 1)%total_dynamic_count + ')').slideDown('slow',function(){})
+    
+}
+setInterval('scroll_dynamics()', 4000);
+
+</script>
+<include file="lingzh:footer"/>

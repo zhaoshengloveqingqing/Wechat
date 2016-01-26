@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+<title>领众科技 - 系统更新/优化</title>
+<meta name="Keywords" content="领众科技,领众微信,微信营销,深圳微信营销案例,微信营销案例,微信成功案例,微信营销技巧,微信公众平台成功案例" >
+<meta name="Description" content="领众微信营销平台，是领众科技公司投入巨资研发的一款营销类产品，是目前全国最领先的微信营销平台。平台提供了微信客服、微网站、会员卡系统、微商城、预约/报名/订单系统、微信相册、中英翻译、快递查询等50多个功能模块，有效地帮助客户提升品牌形象，增强营销效果，提升经营价值。咨询热线:0755-36989386" >
+<include file="lingzh:header"/>
+
+
+<style>
+
+.page-main {margin:0 auto; width:1000px;}
+
+.page-title {margin:20px 0px;}
+.page-title h1{font-size:24px;}
+.page-title p{color:#353535; font-size:13px; line-height:24px;}
+
+.case-navi {float:left; background-color:#d6dcdf; color:#2e2e2e; width:202px; }
+.case-navi .title{border:1px #d6dcdf solid; background-color:#014c6e; color:#fff; height:34px;line-height:34px; padding:0px 5px 0px 35px; font-size:16px;}
+.case-navi .name{border-bottom:1px #555555 solid; height:34px;line-height:34px; padding:0px 5px 0px 35px; color:black;}
+.case-navi .name .arrow{float:right; font-family:宋体; font-size:12px; color:#252525; padding-right:15px;}
+.case-navi .name:hover{cursor:pointer;background-color:#93aab5;color: #FFF;}
+.case-navi div.selected{background-color:#93aab5; color:black;}
+
+
+.cases-show {float:left; width:753px;margin-left:45px;}
+.cases-show .case-digest { text-align: center; float:left; background-color:#E3E8EA; margin-bottom:0px;width:100%; padding-right:15px;}
+.cases-show .case-digest .name { font-size:23px; font-weight:bold;  color:#0A5F99; text-align:center;}
+.cases-show .case-digest .wx-id { font-size:13px; text-align:center;color:#93ACBC;}
+
+.cases-show .case-details {
+  float:left; background-color:#E3E8EA; margin-bottom:0px;width:100%; padding-right:15px;
+	
+}
+.cases-show .case-details .case-item {
+    margin-left:25px;
+}
+.cases-show .case-details p{font-size:14px; line-height:24px; color:#6c6c6c; margin:5px 10px 5px; text-indent:2em;}
+
+.none {display:none;}
+
+.dynamic_nav_header {
+    float: left;
+    background-color: #D6E2E8;
+    margin-bottom: 0px;
+    width: 100%;
+    font-size:14px;
+    padding: 15px 0px 15px 15px;
+	font-family:微软雅黑;
+}
+.dynamic_nav_header .dynamic_nav_title{
+    color: #085a92;
+}
+
+.dynamic_nav_footer {
+    background-color:#e3e8ea;
+    padding-top:15px;
+    margin-bottom:50px;
+    padding-left:15px;
+    width: 100%;
+    float: left;
+	font-weight:400;
+	font-size:13px;
+	
+	line-height:30px;
+	padding-bottom:15px;
+}
+.dynamic_nav_footer a {
+   color:#06426c;
+	font-weight:400;
+	font-family:微软雅黑
+}
+.dynamic_nav_footer {
+    background-color:#e3e8ea;
+    padding-top:15px;
+    margin-bottom:50px;
+    padding-left:15px;
+    width: 100%;
+    float: left;
+	font-weight:400;
+	font-size:13px;
+	
+	line-height:30px;
+	padding-bottom:15px;
+}
+.dynamic_nav_footer a {
+   color:#06426c;
+	font-weight:400;
+	font-family:微软雅黑
+}
+a{ text-decoration:none; }
+a:hover{ text-decoration: none; color:#06426c; }
+
+</style>
+
+<div class="page-main">
+  <div class="page-title">
+    <h1>更多资讯 敬请期待</h1>
+  </div>
+  <div class="case-navi">
+  	<div class="title">最新动态</div>
+        <a href='{lingzh::U("Dynamics/index", array("section"=>"company"))}'><div class="name"><span>企业动态</span><span class="arrow">></span></div></a>
+        <a href='{lingzh::U("Dynamics/index", array("section"=>"industry"))}'><div class="name "><span>行业动态</span><span class="arrow">></span></div></a>
+	<a href='{lingzh::U("Dynamics/index", array("section"=>"update"))}'><div class="name selected"><span>系统更新/优化</span><span class="arrow">></span></div></a>
+    
+  </div>
+  <div class="cases-show">
+        <div class='dynamic_nav_header'> 
+            <a  class='dynamic_nav_node'  href='{lingzh::U("Index/index")}'>首页</a> >
+            <a class='dynamic_nav_node'  href='{lingzh::U("Dynamics/index")}'>最新动态</a> >
+            <a class='dynamic_nav_node' href='{lingzh::U("Dynamics/index", array("section"=>"update"))}'>系统更新/优化</a> >
+            <a class='dynamic_nav_title' href='javascript:void(0)'><php>echo $curr_item['title'];</php></a>
+        </div>
+      
+        <div class="case-digest">
+          <p class="name"><php>echo $curr_item['title'];</php></p>
+          <p class="wx-id" style="line-height:5px">时间：<php>echo $curr_item['timestamp'];</php> | 来源：<php>echo $curr_item['source'];</php></p>
+        </div>
+        <div class='case-details'>
+            <div id='dynamic_5'  class='case-item none'>
+                <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture4.png"></div>
+                <p style="font-size:16px; font-weight:bolder; color:#414141; ">
+                      领众新功能华丽上线，开通会员卡积分兑换功能；
+                </p>
+                <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture5.png"></div>
+                <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture6.jpg"></div>
+                <p style="font-size:16px; font-weight:bolder; color:#414141; ">
+                  微喜帖，婚庆墙功能；
+                </p>
+                 <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture7.png"></div>
+                 <p style="font-size:16px; font-weight:bolder; color:#414141; ">
+                    小票打印功能；
+                </p>
+                 <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture8.jpg"></div>
+                <p style="font-size:16px; font-weight:bolder; color:#414141; ">微统计功能；
+                <p style="font-size:16px; font-weight:bolder; color:#414141; ">
+                <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture9.png"></div>
+                <p style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0em; line-height:32px; ">
+                     后台优化功能：<br>
+1、图片上传优化<br>
+2、wifi支持文本消息"一键登录"<br>
+3、微商城前台可查看物流信息
+                </p>
+                <br>
+                <p style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0em; line-height:32px; color:#dd6a04; ">下期系统优化更新提示：<br>
+新留言板上线、微网站更新、图文回复设置、公众号平台改版，敬请期待吧。
+                </p>
+                 
+            </div>
+            <div id='dynamic_4'  class='case-item none'>
+           
+                <p style="font-size:16px; font-weight:bolder; color:#414141; ">
+                     会员卡新增充值功能：
+                </p>
+                <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture11.jpg"></div>
+                <p style="font-size:16px; font-weight:bolder; color:#414141; ">
+                    会员卡绑定商家可自定义信息：
+                </p>
+                <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture12.jpg"></div>
+                <p style="font-size:16px; font-weight:bolder; color:#414141; ">
+                   商城支持微信、财付通多种方式支付功能：
+                </p>
+                 <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture13.jpg"></div>
+                <p style="font-size:16px; font-weight:bolder; color:#414141; ">
+                   自定义菜单可选择系统业务：
+                </p>
+                <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picuter14.jpg"></div>
+                <p style="font-size:16px; font-weight:bolder; color:#414141; ">
+                   微评论之"微印象"全新上线：
+                </p>
+                 <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picuter15.jpg"></div>
+                <p  style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0em; line-height:32px; color:#dd6a04; ">
+                   下期系统优化更新内容大家敬请期待。
+                </p>
+            </div>
+            
+            
+             <div id='dynamic_3'  class='case-item none'>
+                
+                <p style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0">
+                     1. 会员卡全力升级进行时：
+                </p>
+                 <p style="font-size:16px; font-weight:bolder; color:#414141;text-indent:0 ">
+                    1.1 自定义会员资料模版：
+                </p>
+                <p style="text-indent:0;">您设置的模版将会体现在会员领卡注册页和会员资料修改页。您可以通过勾选来开启或隐藏标准字段，也可以添加单行文本字段，下拉框字段。<br><br>如：您在商家后台设置会员资料模版如下<br><img src="/images/news/picture17.jpg"></p><br>
+                <p style="text-indent:0;">在手机端查看会员资料时，将如下图展示：<br><div style="text-align:center;"><img src="/images/news/picture18.jpg"></div></p><br>
+                 <p style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0">
+                     1.2 实体会员导入与绑定
+                </p>
+                 <p style="text-indent:0;">实体会员导入如下图：<br><div style="text-align:center;"><img src="/images/news/picture19.jpg" ></div></p><br>
+                 <p style="text-indent:0;">实体会员可以在微信端进行绑定：<br><div style="text-align:center;"><img src="/images/news/picture20.jpg"> <Br><Br></div><div style="text-align:center;"><img src="/images/news/picture21.jpg" ></div></p><br>
+                <p style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0">
+                    1.3 会员管理
+                </p>
+                 <p style="text-indent:0;">商家可以暂停或重新启动接收会员，可以很方便的查找会员并进行操作。<br><div style="text-align:center;"><img src="/images/news/picture22.jpg"></div></p><br>
+                 
+                <p style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0">
+                    1.4 积分和余额信息展示
+                </p>
+                 <p style="text-indent:0;">商家可自行控制是否在手机端会员卡页面显示积分和余额信息<br><div style="text-align:center;"><img src="/images/news/picture23.jpg" ><br><br></div><div style="text-align:center;"><img src="/images/news/picture24.jpg" ></div></p><br>
+                  <p style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0">
+                   1.5 将特权、优惠券、充值、消费、积分兑换等常用功能均暴露一级菜单，方便商家操作。
+                </p>
+                 <p style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0">
+                   2.后台优化：
+                </p>
+                 <p style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0">
+                  2.1餐饮行业添加订单短信提醒
+                </p>
+                 <p style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0">
+                 2.2微商城支持批量图片上传
+                </p>
+                 <p style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0">
+                 2.3 代理商可自行购买短信包套餐
+                </p><br>
+                 
+                <p  style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0em; line-height:32px; color:#dd6a04; ">
+                   下期系统升级预告:<br>1.多场景360度全景图<br>
+2.餐饮行业添加门店管理，以适应连锁餐饮店需求<br>
+3.会员卡升级进行时：已领卡微信会员绑定、自定义会员卡等级、抽奖活动与会员卡等级关联。<br>
+4.多图文编辑优化
+                </p>
+            </div>
+            
+            <div id='dynamic_2'  class='case-item none'>
+                
+                <p >
+                     此次系统升级亮点，提升客户体验度，多场景360度全景观赏上线了，具体咋用，听我细细说来。
+                </p>
+                 <p style="font-size:16px; font-weight:bolder; color:#414141;text-indent:0 ">
+                    一．新增：多场景360度全景图火爆上线！ 
+                </p>
+                <p style="text-indent:0;">为了创造一个多场景全景图，您需要在后台3D相册中，选择某个全景图，点击"添加导航"。</p>
+                <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture31.jpg"></div>
+                <p style="font-size:16px; font-weight:bolder; color:#414141;text-indent:0 ">
+                   如何添加导航？
+                </p>
+                <p>您只需用鼠标拖拽3D图片，将您要设置的导航点挪到红色靶心内，点击添加导航按钮，在导航列表中第一行我们会使用当前的靶心坐标自动创建一个导航，您只需要设置导航名称，并选择目标相册和全景图即可。记得点击保存哦，保存后即可预览。</p>
+                 <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture32.jpg"></div>
+                 <p>（点击公众号菜单"3D全景图"进行真人体验吧）</p>
+                 <p>先上手机端的多场景图，让您先过把瘾，点击箭头空间会瞬间迁移！</p>
+                  <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture30.jpg"></div>
+                   <p style="font-size:16px; font-weight:bolder; color:#414141;text-indent:0 ">
+                   二. 新增：餐饮行业添加连锁店支持 
+                </p>
+                <p style="text-indent:0;">您可以在餐饮后台配置您的分店，通过操作栏中"导入菜单"功能，您可以简便的在从其他分店复制菜品信息，减少编辑成本；您可以点击分店名称或"进入分店"进入分店菜品设置页面。</p>
+                
+                <p style="font-size:16px; font-weight:bolder; color:#414141;text-indent:0 ">
+                  设置路径：后台-第三方接入-餐饮服务行业-分店管理-导入菜单
+                </p>
+                <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture33.jpg"></div>
+                <p>在手机端，用户首先会看到连锁店列表，然后选择自己所在的分店进行点餐。</p>
+                 <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture34.jpg"></div>
+                 <p style="font-size:16px; font-weight:bolder; color:#414141;text-indent:0 ">
+                   三．功能改进： 
+                </p>
+                <p style="text-indent:0;">微网站主页添加一键拨号一键导航。</p>
+                <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picture35.jpg"></div>
+                 <div style="margin:auto; text-align:center; margin:10px 0px 10px 0px;"><img src="/images/news/picuter15.jpg"></div>
+                <p  style="font-size:16px; font-weight:bolder; color:#414141; text-indent:0em; line-height:32px; color:#dd6a04; ">
+                   下周后台优化预告：<br>一. 多图文编辑优化<br>
+二. 短信身份验证： 微订单、餐饮房产行业预约<br>
+三. 会员卡升级进行时
+                </p>
+                
+                 
+            </div>
+           
+           
+           
+           
+              <div class='dynamic_nav_footer'> 
+            <a href="{lingzh::U('Home/Dynamics/details', array('section'=>'update', 'item'=>$prev_item['id']))}">上一篇：{lingzh:$prev_item['title']}</a>
+            <br/>
+            <a href="{lingzh::U('Home/Dynamics/details', array('section'=>'update', 'item'=>$next_item['id']))}">下一篇：{lingzh:$next_item['title']}</a>
+        </div>
+  
+        </div>
+      
+      
+    </div>
+    <script type='text/javascript'>
+        $(function() {
+            var item_id = "#dynamic_{lingzh:$curr_item.id}";
+            $(item_id).removeClass("none");
+        });
+    </script>
+</div>
+<include file="lingzh:footer"/>

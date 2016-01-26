@@ -1,0 +1,141 @@
+<include file="Public:head"/>
+<div class="content">
+  <div class="cLineB">
+    <h4 class="left">操作员管理</h4> 
+  </div>
+
+<style>
+.manager-portal-title{font-size: 18px; font-weight: bold;margin: 40px 10px 20px;}
+.manager-portal{width: 30%;float: left;}
+
+.download-btn img{padding:10px; float: left;border-radius: 5px 0px 0px 5px; padding-left:15px; padding-right:15px;}
+
+.android-btn img{ background-color:#55a631;}
+.android-btn div{color:#fff;background-color:#67c03e;padding: 0px 0px;float: left;line-height: 53px;border-radius: 0px 5px 5px 0px;width:180px;font-size: 18px;text-align: center;font-weight: bold;}
+
+.iphone-btn img{background-color:#ececec; border: 1px solid #E0DDDE;border-right: 0px;}
+.iphone-btn div{border: 1px solid #E0DDDE;border-left: 0px;background-color:#ffffff;padding: 0px 0px;float: left;line-height: 53px;border-radius: 0px 5px 5px 0px; color:#000;width:180px;font-size: 18px;text-align: center;font-weight: bold;color: #605F5F;}
+
+.web-btn img{background-color:#017cb8;}
+.web-btn div{color:#fff;background-color:#039ae3;padding: 0px 0px;float: left;line-height: 53px;border-radius: 0px 5px 5px 0px; width:180px;font-size: 18px;text-align: center;font-weight: bold;}
+
+.download-desc {float: left;margin: 10px 0px;color: #9f9f9f; font-size: 15px;}
+
+.qr-downloand-area div#qr-area { padding:10px; border:1px solid #e0ddde; position:relative; margin:10px 10px 10px 0px; float:left; width:80%; height:140px;}
+.top-arrow, .top-arrow-inline { position:absolute; display:block; height:0px; width: 0px;}
+
+
+#qr-area {
+}
+
+#qr-area img {  float: left;margin: 10px 0px;border:1px solid #e0ddde;width:45%;}
+#qr-area .qr-desc { float: left;margin: 50px 10px; width:80px;width:45%; font-size: 14px;}
+#qr-area .qr-desc span{color: red;}
+#qr-area .top-arrow {  left:100px;  top:-9px;  border-width: 9px;  border-style: solid;  border-color: rgba(0, 0, 0, 0);  border-top-width: 0;  border-bottom: 9px solid #e0ddde;}
+#qr-area .top-arrow-inline {  left:-9px;  top:1px;  border-width: 9px;  border-style: solid;  border-color: rgba(0, 0, 0, 0);  border-top-width: 0;  border-bottom: 9px solid #FFF;}
+
+}
+</style>
+
+  <div class="cLine">
+    <div class="pageNavigator left"> 
+      <a href="{lingzh::U('Admin/admin')}" title="新增操作员" class="btnGrayS vm bigbtn">
+        <img src="/themes/a/images/add.png" class="vm">新增操作员
+      </a>
+    </div>  
+    <div class="clr"></div>
+  </div>
+  <div class="msgWrap">
+  <form method="post" action="" id="info">
+  <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+    <thead>
+    <tr>
+      <th width="160">名称@商家ID</th>
+      <th width="130">修改时间</th>
+      <th width="150" class="norightborder">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+      <volist name="adminstrators" id="admin"> 
+      <tr>
+        <td>{lingzh:$admin.user_name}@{lingzh:$code}</td>
+        <td>{lingzh:$admin.update_time|date="Y-m-d H:i:s",###}</td> 
+        <td class="norightborder">
+          <a href="{lingzh::U('Admin/admin',array('aid'=>$admin['user_id']))}">修改</a> 
+          <a href="javascript:drop_confirm('您确定要删除吗?', '{lingzh::U('Admin/deleteAdmin',array('aid'=>$admin['user_id']))}');">删除</a>
+        </td>
+      </tr>
+      </volist>
+    </tbody>
+  </table>
+  </form>
+
+  <div class="manager-portal-title">商户管理平台</div>
+    <div class="manager-portal" style="display:none;">
+      <div class="click-downloand-area" >
+        <div class="download-btn android-btn">
+          <a href="http://lingzhtech.com/app/release/app.apk">
+            <img src="/themes/a/images/admin/android_icon.png">
+            <div>Android版下载</div>
+          </a>
+        </div>
+        <div class="download-desc">
+          系统要求：Android 4.0或更高版本
+        </div>
+      </div>
+      <div class="qr-downloand-area" style="display:none;">
+        <div id="qr-area">
+          <img src="/images/android_ewm.png">
+          <div class="qr-desc">扫描<span>二维码</span>，下载应用到手机</div>
+          <div class="top-arrow"><div class="top-arrow-inline"></div></div> 
+        </div>
+      </div>
+    </div>
+
+    <div class="manager-portal" style="display:none;">
+      <div class="click-downloand-area">
+        <div class="download-btn iphone-btn">
+          <a href="https://itunes.apple.com/cn/app/ling-zhong-shang-hu-ping-tai/id888955011?mt=8">
+            <img src="/themes/a/images/admin/iphone_icon.png">
+            <div>iPhone版下载</div>
+          </a>
+        </div>
+        <div class="download-desc">
+          系统要求：IOS 6.0或更高版本
+        </div>
+      </div>
+      <div class="qr-downloand-area" style="display:none;">
+        <div id="qr-area">
+          <img src="/images/lingzhmpios.png">
+          <div class="qr-desc">扫描<span>二维码</span>，下载应用到手机</div>
+          <div class="top-arrow"><div class="top-arrow-inline"></div></div> 
+        </div>
+      </div>
+     </div>
+
+     <div class="manager-portal">
+
+      <div class="click-downloand-area">
+        <div class="download-btn web-btn">
+          <a target="_blank" href='<if condition="isset($ori_manage_entry)">{lingzh:$ori_manage_entry}<else/>{lingzh:$well_manage_entry}</if>'>
+            <img src="/themes/a/images/admin/web_icon.png">
+            <div>商户管理入口</div>
+          </a>
+        </div>
+        <div class="download-desc">
+          直接点击网页管理
+          <if condition="isset($well_manage_entry)">，或输入网址 <a href='<if condition="isset($ori_manage_entry)">{lingzh:$ori_manage_entry}<else/>{lingzh:$well_manage_entry}</if>' target="_blank">{lingzh:$well_manage_entry}</if>
+        </div>
+      </div>
+     </div>
+
+  </div>
+  <div class="cLine">
+    <div class="pageNavigator right">
+      <div class="pages">{lingzh:$page}</div>
+    </div>
+    <div class="clr"></div>
+  </div>
+</div>
+
+<include file="Public:footer"/>

@@ -1,0 +1,48 @@
+#alert {
+	margin-top: 30px;
+}
+
+.am-icon-chevron-left{
+	color: #fff;
+	height: 100%;
+
+}
+.am-topbar-brand {
+	line-height: 80px;
+}
+
+.pi-topbar-title {
+	display: block;
+	height: 100%;
+	margin: 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	background: #23c1fb;
+}
+.am-form {
+	margin-top: 50px;
+}
+
+.pi-topbar-title a {
+	margin-left: -10%;
+	color: #fff;
+}
+.pi-btn-submit {
+	margin-top: 90px;
+}
+.am-input-group-btn .am-btn{
+		border:1px solid #23c1fb;	
+}
+.pi-btn-send {
+	background: #23c1fb;
+	padding: 11px 20px;
+	color: #fff;
+	border:1px solid #23c1fb;	
+}
+.pi-btn-blue {
+	background: #23c1fb;
+	padding: 4% 0;
+	color: #fff;	
+	border:1px solid #23c1fb;
+}

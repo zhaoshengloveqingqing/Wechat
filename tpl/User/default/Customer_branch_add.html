@@ -1,0 +1,167 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="/themes/a/css/branch.css" />  
+      
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=ZkqN4MTTGPb3lo9gvwGhiScT"></script>
+  <div class="content">
+      <div class="cLineB">
+          <h4><empty name='branch'>新增分店<else/>修改分店信息</empty></h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+      </div>
+      <div class="tab">
+            <ul>
+            <li class="tabli " id="tab0"><a href="{lingzh::U('Customer/index')}">公司详细信息</a></li>
+            <li class="tabli current" id="tab2"><a href="{lingzh::U('Customer/branchstore')}">分店/分公司</a></li>
+            </ul>
+    </div>
+    <form method="post" action="<empty name='branch'>{lingzh::U('Customer/branch_add')}<else/>{lingzh::U('Customer/branch_edit')}</empty>" enctype="multipart/form-data">
+          <div class="msgWrap bgfc">
+              <input style='display:none' value="<notempty name='branch'>{lingzh:$branch.id}</notempty>" name="id">
+            <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                 <tr>
+                  <th>分店名称：</th>
+                  <td><input type="text" name="cname" value="<notempty name='branch'>{lingzh:$branch.cname}</notempty>" class="input-box" tabindex="1" size="25" ></td>
+                </tr>
+                
+                <tr>
+                  <th>联系电话：</th>
+                   <td><input type="text" name="tel" value="<notempty name='branch'>{lingzh:$branch.tel}</notempty>" class="input-box" tabindex="1" size="25" ></td>
+                </tr>
+             
+                <tr >
+                  <th>分店地址：</th>
+                  <td >
+                       <input  type="text" id="address" name="info" value="<notempty name='branch'>{lingzh:$branch.info}</notempty>" class="input-box" tabindex="1" size="25" >
+                       <input type="button" id="locate-btn" value="定位" class="btnGreen"  style=" margin:2px; "/>
+                       <font style="color: red">请在地图上定位具体位置，用于附近门店功能</font>
+                       <input type="text" style="display:none" id="customerLng" name="longtitude" value="<notempty name='branch'>{lingzh:$branch.longtitude}</notempty>"/>
+                       <input type="text" style="display:none" id="customerLat" name="latitude" value="<notempty name='branch'>{lingzh:$branch.latitude}</notempty>"/>
+                   </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="container" style="height:300px;width: 700px; margin-left: 70px;">
+                        </div>
+                       
+                    </td>
+                </tr>
+                <tr>
+                    <th>分店展示图片：</th>
+                    <td>
+                        <input disabled="1" class="px" id="pic_url_name_input_1" style="width:300px;" type="text" value="<notempty name='branch'>{lingzh:$branch.raw_name}</notempty>">&nbsp;
+                        <span onclick="ShowUploadPanel(1)" class="uploadPictureBtn" style="text-decoration:underline;cursor:pointer;"> 上传图片 </span>
+                        <input id="pic_url_id_input_1" style="display:none" type="text" name="picture" value="<notempty name='branch'>{lingzh:$branch.picture}</notempty>">
+                        
+                        <span >&nbsp;（建议尺寸：700像素 * 380像素）</span>
+                    </td>
+                </tr>
+                 <tr>
+                    <th>分店简介：</th>
+                    <td>
+                        <textarea id="description" wrap="virtual" name="description" class="detailTextArea" value=""><notempty name='branch'>{lingzh:$branch.description}</notempty></textarea>
+                        <span>最多为1000个字符。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>显示顺序：</th>
+                    <td>
+              <input type='text' value="<notempty name='branch'>{lingzh:$branch.sort}<else/>0</notempty>" name="sort" class="input-box" tabindex="1" size="25"/>数值小者优先显示
+                    </td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td><button type="submit" class="btnGreen" id="saveSetting">保存</button></td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+          </form>
+        </div>
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+  <div id="upload-panel" style="display:none" >
+    <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+    <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+      <iframe id="uploadIframe" style=" width:500px;height:500px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+    </div>
+  </div>
+<script type="text/javascript">
+
+               var located = false;
+               //定位坐标
+               var lng = '{lingzh:$branch.longtitude}';
+               var lat = '{lingzh:$branch.latitude}';
+               if(lng.length <= 0 || lat.length <= 0) {
+                   lng = 113.972981;
+                   lat = 22.544814; 
+               }
+               var destPoint = new BMap.Point( lng, lat);
+               $(function(){
+                   var map = new BMap.Map("container");
+                   map.centerAndZoom(new BMap.Point(destPoint.lng, destPoint.lat), 20);//初始化地图
+                   //map.enableScrollWheelZoom();
+                   map.addControl(new BMap.NavigationControl());
+                   var marker = new BMap.Marker(destPoint);
+                   map.addOverlay(marker);//添加标注
+
+                   map.addEventListener("click", function(e){
+                       if(confirm("确定红色标记为公司准确地址？")){
+                               destPoint = e.point;
+                               $('#customerLng').val(destPoint.lng);
+                               $('#customerLat').val(destPoint.lat);
+                               map.clearOverlays();
+                               var marker1 = new BMap.Marker(destPoint);  // 创建标注
+                               map.addOverlay(marker1); 
+                               located = true;
+                       }
+                   });
+
+                   var local;
+                   function callback(posi){
+
+                           $("#locate-btn").removeAttr("disabled");
+                           for(var i=0;i<posi.length;i++){
+                                   if(i==0){
+                                           destPoint = posi[0].point;
+                                            $('#customerLng').val(destPoint.lng);
+                                            $('#customerLat').val(destPoint.lat);
+                                   }
+                                   posi[i].marker.addEventListener("click", function(data){
+                                           destPoint = data.target.getPosition(0);
+                                           $('#customerLng').val(destPoint.lng);
+                                           $('#customerLat').val(destPoint.lat);
+                                   });  
+                           }
+                   }
+
+                   $("#locate-btn").click(function(){
+                           if($("#address").val() == ""){
+                                   alert("请输入公司详细地址！");
+                                   return ;
+                           }
+                           $("#locate-btn").attr("disabled","disabled");
+                           local = new BMap.LocalSearch(map, { //智能搜索
+                                   renderOptions:{map: map}
+                           });
+                           located = true;
+                           local.setMarkersSetCallback(callback);
+                           local.search($("#address").val());
+                           return false;
+                   });
+
+                   $( "#tabs" ).tabs();
+               });
+               
+               function ShowUploadPanel(id) {
+       
+                    var url = '{lingzh::U("UploadImg/index")}' + '&id=' + id;
+
+                        $('#uploadIframe').attr('src', url);
+                        $('#upload-panel').show();
+               }
+               </script>
+<include file="Public:footer"/> 

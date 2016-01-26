@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<head>
+<meta charset="utf-8" />
+<title></title>
+</head>
+<body>
+  <ul>
+    <li>
+      <h2>您好，您所访问的信息</h2>
+      <br>
+      <h2>需要关注</h2>
+      【<h2>{lingzh:$pub_account.wxname}</h2>】
+      <h2>方可查看！</h2>
+    </li>
+    <?php if(isset($pub_account['qrcode_pic']) && empty($pub_account['qrcode_pic']) == false) { ?>
+     <li class="img_con">
+      <img class="qr_code" src="{lingzh:$pub_account.qrcode_pic}">
+    </li>
+    <?php } ?>
+    <li style="text-align: center">
+      <h2 style="display: inline">请扫描二维码关注公众号 </h2>【<h1 style="display: inline">{lingzh:$pub_account.wxname}</h1>】<br> <br>
+      请关注后，从公众号内通过关键词，或微网站访问此页面！
+    </li>
+  </ul>
+  <script type="text/javascript">
+
+  </script>
+</body>
+<style type="text/css">
+h2{
+  display: inline;
+  line-height: 35px;
+}
+ ul{
+    list-style-type: none;
+    margin: 0 auto 0 auto;
+ }
+ ul li{
+    padding: 15px;
+ }
+ .img_con{
+    text-align: center;
+ }
+ .qr_code{
+    margin-top: 40px;
+    width: 400px;
+    height: 400px;
+ }
+ body{background:#D2D460;text-align:center;vertical-align: center;}
+</style>
+</html>

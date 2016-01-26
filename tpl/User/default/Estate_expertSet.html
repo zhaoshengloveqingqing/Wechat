@@ -1,0 +1,149 @@
+<include file="Public:head" /> 
+<link rel="stylesheet" href="/js/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="/js//kindeditor/plugins/code/prettify.css" />
+<link rel="stylesheet" href="/themes/a/css/img_upload_panel.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+<script src="/js/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="/js/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="/js/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#comment', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : true,
+uploadJson :'/index.php/upload/image',
+items : [
+'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut', 'image'],
+
+});
+
+});
+</script>
+
+
+<div class="content"> 
+  <div class="cLineB"> 
+    <h4>点评设置</h4> 
+    <a href="{lingzh::U('Estate/experts')}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+  </div> 
+
+  <div class="msgWrap bgfc">
+	  <form class="form" method="post" action="" target="_top" >	 
+		<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tbody>
+				<tr>
+				  <th valign="top"><span class="red">*</span>标题:</th>
+				  <td>
+					 <input type="text" id="title" name="title" value="{lingzh:$expert['title']}" class="input-large px" data-rule-required="true" data-rule-maxlength="20">
+                                        <span class="maroon">*</span>
+                                        <span class="help-inline">尽量简单，不要超过20字</span></td>
+				</tr>
+				<tr>
+					<th width="120">显示顺序:</th>
+					<td> <input type="text" id="orderNum" name="orderNum" value="{lingzh:$expert['orderNum']|default=1}" class="input-mini px" data-rule-required="true" data-rule-number="true">
+                                        <span class="maroon">*</span>
+                                        <span class="help-inline">数值越大越靠前</span></td>
+				</tr>
+				<tr>
+					<th width="120">专家姓名：</th>
+					<td> <input type="text" id="name" name="name" value="{lingzh:$expert['name']}" class="input-large px" data-rule-required="true">
+                                        <span class="maroon">*</span></td>
+				</tr>
+				<tr>
+					<th width="120">专家职位：</th>
+					<td>  <input type="text" id="position" name="position" value="{lingzh:$expert['position']}" class="input-large px" data-rule-required="true" data-rule-maxlength="20">
+                                        <span class="maroon">*</span></td>
+				</tr>
+				<tr>
+					<th width="120">专家照片：</th>
+					<td>
+					<img id="thumb_img_1" class="thumb_img" src="<if condition="isset($expert['pic_url_input'])">{lingzh:$expert.pic_url_input}</if>" style="max-height: 100px;<if condition="!isset($expert['pic_url_input']) OR (isset($expert['pic_url_input']) AND empty($expert['pic_url_input']))">visibility: hidden;</if>"><br/>
+                                        <input type='hidden' value="<if condition="isset($expert['pic_url_input'])">{lingzh:$expert.pic_url_input}</if>" name='pic_url_input' id='pic_url_input'>
+                    <!--<input  id='pic_url_input' onblur="syncPreviewImg('pic_url_input','thumb_img_1')" type="text" name="pic_url_input" value="<if condition="isset($expert['pic_url_input'])">{lingzh:$expert.pic_url_input}</if>" class="px" style="width:400px;" /> -->
+                     <div class='img_upload_panel' >
+                       <div name='uploadify'  id="uploadify_expertSet"  ></div>                                                  
+                       <div id="fileQueue_expertSet"></div> 
+                       <div style="clr:both; height:0px;"></div>
+                         </div> 
+					</td>
+				</tr>
+				<tr>
+					<th width="120">专家介绍：</th>
+					<td>  
+					<textarea id="description" name="description" placeholder='专家描述' style="width:560px;height:75px" >{lingzh:$expert['description']}</textarea>
+                                        <span class="maroon">*</span>
+                                        <span class="help-block">最多可150字</span></td>
+				</tr>
+				<tr>
+					<th>点评内容：</th>
+					<td>
+	                    <textarea id="comment" name="comment" placeholder='点评内容' style="width:560px;height:75px" >{lingzh:$expert['comment']}</textarea>
+                                        <span class="maroon">*</span>
+                                        <span class="help-block">最多可5k字</span>
+					</td>
+				</tr>
+				<th>&nbsp;</th>
+				  <if condition="$expert['id'] neq ''">
+                                    <input type="hidden" name="id" value="{lingzh:$expert['id']}" />
+                                </if>
+                                    <input type="hidden" name="pid" value="{lingzh:$pid}">
+					<td>
+						<button type="submit" name="button" class="btnGreen">保存</button>
+						<a href="javascript:history.go(-1);" class="btnGray vm">取消</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+  </div> 
+</div> 
+<script>
+ function syncPreviewImg(fromId, toId) {    
+        document.getElementById(toId).src=document.getElementById(fromId).value;
+    }
+</script>
+<script>
+$(function () {   
+    $("#uploadify_expertSet").uploadify({
+        'buttonText' : '选择封面',
+        'fileTypeDesc' : 'Image Files',
+        'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+        'fileSizeLimit' : '1MB',
+        'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有 
+         'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+         'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径 
+         'onFallback': function() {
+             alert('您的浏览器没有安装Flash插件');
+         },
+         //'folder': 'uploadFile', //上传文件夹名 
+         'queueID': 'fileQueue_expertSet',
+         'auto': true,
+         'onUploadSuccess' :  function(file, data, response) {
+            if (response == true) {
+                var res_json = eval("("+data+")");
+                if (res_json.error == 0 ) {
+                	$("#thumb_img_1").css("visibility", "visible");
+                    document.getElementById('thumb_img_1').src=  res_json.content ;
+                    $('#pic_url_input').val(res_json.content);
+                } else {
+                    alert(res_json.message);
+                }
+            } else {
+               alert("网络不给力啊！亲");
+            }
+         },
+         formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+         //'uploadLimit' : 1,
+         'multi': false,
+     });
+     $("#uploadify_shop_cat").css('width', '100%');
+     $("#uploadify_shop_cat").append('<span class="img_upload_tips">支持JPG、PNG、GIF等格式，但大小不超过1MB,<br />或者将图片上传到POCO.cn获取外链</span>');
+});
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,219 @@
+.x-dlg-proxy {
+	OVERFLOW: hidden; BORDER-TOP: #6593cf 1px solid; BORDER-RIGHT: #6593cf 1px solid; BACKGROUND-IMAGE: url(images/basic-dialog/gradient-bg.gif); BORDER-BOTTOM: #6593cf 1px solid; POSITION: absolute; LEFT: 0px; BORDER-LEFT: #6593cf 1px solid; Z-INDEX: 10001; TOP: 0px; BACKGROUND-COLOR: #c3daf9
+}
+.x-dlg-shadow {
+	BACKGROUND: #aaaaaa; POSITION: absolute; LEFT: 0px; TOP: 0px
+}
+.x-dlg-focus {
+	OVERFLOW: hidden; HEIGHT: 0px; WIDTH: 0px; POSITION: absolute; OUTLINE-WIDTH: 0px; OUTLINE-STYLE: none; LEFT: 0px; TOP: 0px; -moz-outline: 0 none
+}
+.x-dlg-mask {
+	POSITION: absolute; LEFT: 0px; FILTER: alpha(opacity=20); Z-INDEX: 10000; DISPLAY: none; TOP: 0px; BACKGROUND-COLOR: #ccc; -moz-opacity: 0; opacity: .50
+}
+BODY.x-body-masked SELECT {
+	VISIBILITY: hidden
+}
+BODY.x-body-masked .x-dlg SELECT {
+	VISIBILITY: visible
+}
+.x-dlg {
+	OVERFLOW: hidden; HEIGHT: 125px; POSITION: absolute; Z-INDEX: 10001; TOP: 0px
+}
+.x-dlg .x-dlg-hd {
+	OVERFLOW: hidden; HEIGHT: 23px; BACKGROUND: url(images/basic-dialog/hd-sprite.gif) #f7fcff repeat-x 0px -82px; WHITE-SPACE: nowrap; COLOR: #2c71af; FONT: bold 12px "sans serif" , tahoma, verdana, helvetica
+}
+.x-dlg .x-dlg-hd .info {
+	HEIGHT: 16px; WIDTH: 16px; BACKGROUND: url(images/basic-dialog/info.gif) no-repeat 0px 0px; FLOAT: left; MARGIN-LEFT: 5px; MARGIN-TOP: 5px
+}
+.x-dlg .x-dlg-hd .title {
+	FLOAT: left; MARGIN-LEFT: 4px; MARGIN-TOP: 8px
+}
+.x-dlg .x-dlg-hd-left {
+	HEIGHT: 23px; BACKGROUND: url(images/basic-dialog/hd-sprite.gif) no-repeat 0px -41px; PADDING-LEFT: 3px; MARGIN: 0px
+}
+.x-dlg .x-dlg-hd-right {
+	HEIGHT: 23px; BACKGROUND: url(images/basic-dialog/hd-sprite.gif) no-repeat right 0px; PADDING-RIGHT: 3px
+}
+.x-dlg .x-dlg-dlg-body {
+	OVERFLOW: hidden; BORDER-TOP: #8b9faf 0px; HEIGHT: 105px; BORDER-RIGHT: #8b9faf 1px solid; BACKGROUND: url(images/basic-dialog/gradient-bg.gif); BORDER-BOTTOM: #8b9faf 1px solid; POSITION: absolute; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; LEFT: 0px; BORDER-LEFT: #8b9faf 1px solid; Z-INDEX: 1; TOP: 24px; PADDING-RIGHT: 0px
+}
+.x-dlg-collapsed .x-resizable-handle {
+	DISPLAY: none
+}
+.x-dlg .x-dlg-bd {
+	OVERFLOW: hidden
+}
+.x-dlg .x-dlg-ft {
+	OVERFLOW: hidden; WIDTH: 372px; FLOAT: left; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: #eef2f6
+}
+.x-dlg .x-tabs-body {
+	OVERFLOW: auto; BACKGROUND: white
+}
+.x-dlg .x-tabs-top .x-tabs-body {
+	BORDER-TOP: #6593cf 0px; BORDER-RIGHT: #6593cf 1px solid; BORDER-BOTTOM: #6593cf 1px solid; BORDER-LEFT: #6593cf 1px solid
+}
+.x-dlg .x-tabs-bottom .x-tabs-body {
+	BORDER-TOP: #6593cf 1px solid; BORDER-RIGHT: #6593cf 1px solid; BORDER-BOTTOM: #6593cf 0px; BORDER-LEFT: #6593cf 1px solid
+}
+.x-dlg .x-layout-container .x-tabs-body {
+	BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px
+}
+.x-dlg .inner-tab {
+	MARGIN: 5px
+}
+.x-dlg .x-dlg-ft .x-btn {
+	FLOAT: right; CLEAR: none; MARGIN-RIGHT: 5px
+}
+.x-dlg .x-dlg-ft .x-dlg-btns TD {
+	BORDER-LEFT-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP-WIDTH: 0px
+}
+.x-dlg .x-dlg-ft .x-dlg-btns-right TABLE {
+	FLOAT: right; CLEAR: none
+}
+.x-dlg .x-dlg-ft .x-dlg-btns-left TABLE {
+	FLOAT: left; CLEAR: none
+}
+.x-dlg .x-dlg-ft .x-dlg-btns-center {
+	TEXT-ALIGN: right
+}
+.x-dlg .x-dlg-ft .x-dlg-btns-center TABLE {
+	FLOAT: right; TEXT-ALIGN: right; MARGIN: 0px auto
+}
+.x-dlg .x-dlg-ft .x-dlg-btns .x-btn-focus .x-btn-left {
+	BACKGROUND-POSITION: 0px -147px
+}
+.x-dlg .x-dlg-ft .x-dlg-btns .x-btn-focus .x-btn-right {
+	BACKGROUND-POSITION: 0px -168px
+}
+.x-dlg .x-dlg-ft .x-dlg-btns .x-btn-focus .x-btn-center {
+	BACKGROUND-POSITION: 0px -189px
+}
+.x-dlg .x-dlg-ft .x-dlg-btns .x-btn-click .x-btn-center {
+	BACKGROUND-POSITION: 0px -126px
+}
+.x-dlg .x-dlg-ft .x-dlg-btns .x-btn-click .x-btn-right {
+	BACKGROUND-POSITION: 0px -84px
+}
+.x-dlg .x-dlg-ft .x-dlg-btns .x-btn-click .x-btn-left {
+	BACKGROUND-POSITION: 0px -63px
+}
+.x-dlg-draggable .x-dlg-hd {
+	CURSOR: move
+}
+.x-dlg-closable .x-dlg-hd {
+	TEXT-ALIGN: left; PADDING-RIGHT: 22px
+}
+.x-dlg-toolbox {
+	CURSOR: default; HEIGHT: 15px; WIDTH: 40px; BACKGROUND: none transparent scroll repeat 0% 0%; RIGHT: 4px; POSITION: absolute; Z-INDEX: 6; TOP: 4px
+}
+.x-dlg .x-dlg .x-dlg-collapse {
+	CURSOR: pointer; FONT-SIZE: 1px; HEIGHT: 15px; WIDTH: 15px; BACKGROUND-REPEAT: no-repeat; FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 0px 2px; LINE-HEIGHT: 1px; PADDING-RIGHT: 0px; VISIBILITY: inherit
+}
+.x-dlg .x-dlg-close {
+	OVERFLOW: hidden; CURSOR: hand; HEIGHT: 16px; WIDTH: 28px; BACKGROUND-IMAGE: url(images/basic-dialog/close.gif); RIGHT: -10px; BACKGROUND-REPEAT: no-repeat; POSITION: absolute; BACKGROUND-POSITION: 0px -1px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; TOP: 0px; PADDING-RIGHT: 0px
+}
+.x-dlg .x-dlg-collapse {
+	BACKGROUND-IMAGE: url(images/basic-dialog/collapse.gif)
+}
+.x-dlg-collapsed .x-dlg-collapse {
+	BACKGROUND-IMAGE: url(images/basic-dialog/expand.gif)
+}
+.x-dlg .x-dlg-close-over {
+	
+}
+.x-dlg .x-dlg-collapse-over {
+	
+}
+.x-dlg DIV.x-resizable-handle-east {
+	BORDER-LEFT-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px; BACKGROUND-IMAGE: url(images/basic-dialog/e-handle.gif); BORDER-BOTTOM-WIDTH: 0px; BACKGROUND-POSITION: right 50%; BORDER-TOP-WIDTH: 0px; MARGIN-RIGHT: 0px
+}
+.x-dlg DIV.x-resizable-handle-south {
+	BORDER-LEFT-WIDTH: 0px; HEIGHT: 6px; BORDER-RIGHT-WIDTH: 0px; BACKGROUND-IMAGE: url(images/sizer/s-handle-dark.gif); BORDER-BOTTOM-WIDTH: 0px; BORDER-TOP-WIDTH: 0px
+}
+.x-dlg DIV.x-resizable-handle-west {
+	BORDER-LEFT-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px; BACKGROUND-IMAGE: url(images/basic-dialog/e-handle.gif); BORDER-BOTTOM-WIDTH: 0px; BACKGROUND-POSITION: 1px 50%; BORDER-TOP-WIDTH: 0px
+}
+.x-dlg DIV.x-resizable-handle-north {
+	BORDER-LEFT-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px; BACKGROUND-IMAGE: url(images/s.gif); BORDER-BOTTOM-WIDTH: 0px; BORDER-TOP-WIDTH: 0px
+}
+.x-dlg DIV.x-resizable-handle-northeast {
+	BORDER-LEFT-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px; BACKGROUND-IMAGE: url(images/s.gif); BORDER-BOTTOM-WIDTH: 0px; BORDER-TOP-WIDTH: 0px
+}
+.xtheme-gray .x-dlg DIV.x-resizable-handle-northeast {
+	BORDER-LEFT-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px; BACKGROUND-IMAGE: url(images/s.gif); BORDER-BOTTOM-WIDTH: 0px; BORDER-TOP-WIDTH: 0px
+}
+.x-dlg DIV.x-resizable-handle-northwest {
+	BORDER-LEFT-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px; BACKGROUND-IMAGE: url(images/s.gif); BORDER-BOTTOM-WIDTH: 0px; BORDER-TOP-WIDTH: 0px
+}
+.xtheme-gray .x-dlg DIV.x-resizable-handle-northwest {
+	BORDER-LEFT-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px; BACKGROUND-IMAGE: url(images/s.gif); BORDER-BOTTOM-WIDTH: 0px; BORDER-TOP-WIDTH: 0px
+}
+.x-dlg DIV.x-resizable-handle-southeast {
+	BORDER-LEFT-WIDTH: 0px; HEIGHT: 8px; BORDER-RIGHT-WIDTH: 0px; WIDTH: 8px; BACKGROUND-IMAGE: url(images/basic-dialog/se-handle.gif); BORDER-BOTTOM-WIDTH: 0px; BACKGROUND-POSITION: right bottom; BORDER-TOP-WIDTH: 0px
+}
+.x-dlg DIV.x-resizable-handle-southwest {
+	BORDER-LEFT-WIDTH: 0px; MARGIN-BOTTOM: 1px; BORDER-RIGHT-WIDTH: 0px; BACKGROUND-IMAGE: url(images/sizer/sw-handle-dark.gif); BORDER-BOTTOM-WIDTH: 0px; BACKGROUND-POSITION: right top; MARGIN-LEFT: 1px; BORDER-TOP-WIDTH: 0px
+}
+#x-msg-box .x-dlg-ft .x-btn {
+	FLOAT: none; CLEAR: none; MARGIN: 0px 3px
+}
+#x-msg-box .x-dlg-bd {
+	OVERFLOW: hidden !important; BORDER-TOP: #cbd8e1 1px solid; BORDER-RIGHT: #cbd8e1 1px solid; BACKGROUND: url(images/basic-dialog/messageInfo.gif) white no-repeat 20px center; BORDER-BOTTOM: #cbd8e1 1px solid; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; FONT: 13px verdana,tahoma,sans-serif; PADDING-LEFT: 5px; MIN-HEIGHT: 60px !important; BORDER-LEFT: #cbd8e1 1px solid; PADDING-RIGHT: 5px
+}
+#x-msg-box .ext-mb-input {
+	WIDTH: 95%; MARGIN-TOP: 4px
+}
+#x-msg-box .ext-mb-textarea {
+	FONT: 13px verdana,tahoma,sans-serif; MARGIN-TOP: 4px
+}
+#x-msg-box .ext-mb-progress-wrap {
+	BORDER-TOP: #6593cf 1px solid; BORDER-RIGHT: #6593cf 1px solid; BORDER-BOTTOM: #6593cf 1px solid; BORDER-LEFT: #6593cf 1px solid; MARGIN-TOP: 4px
+}
+#x-msg-box .ext-mb-progress {
+	HEIGHT: 18px; BACKGROUND: url(images/qtip/bg.gif) #e0e8f3 repeat-x
+}
+#x-msg-box .ext-mb-progress-bar {
+	OVERFLOW: hidden; BORDER-TOP: #b2d0f7 1px solid; HEIGHT: 18px; BORDER-RIGHT: #65a1ef 1px solid; WIDTH: 0px; BACKGROUND: #8bb8f3; BORDER-BOTTOM: #65a1ef 1px solid
+}
+#x-msg-box .x-msg-box-wait {
+	WIDTH: 300px; BACKGROUND: url(images/grid/loading.gif) no-repeat left 50%; PADDING-LEFT: 18px; DISPLAY: block; LINE-HEIGHT: 18px
+}
+.x-btn-text {
+	BORDER-TOP: red 0px solid; HEIGHT: 22px !important; BORDER-RIGHT: red 0px solid; WIDTH: 68px !important; BACKGROUND: url(images/basic-dialog/btn_blank.gif) no-repeat left 50%; BORDER-BOTTOM: red 0px solid; COLOR: #06559b; PADDING-TOP: 5px !important; FONT: 11px/12px ????; BORDER-LEFT: red 0px solid; LETTER-SPACING: 12px
+}
+.ext-mb-text {
+	WORD-WRAP: break-word; FONT-SIZE: 13px; TEXT-OVERFLOW: ellipsis; WORD-BREAK: break-all; FLOAT: left; COLOR: #06559b; MARGIN-LEFT: 60px
+}
+.ext-mb-text UL {
+	MARGIN-BOTTOM: 10px; FLOAT: left; TEXT-ALIGN: left; MARGIN-LEFT: 50px; MARGIN-TOP: 20px
+}
+.ext-mb-text UL LI {
+	WORD-WRAP: break-word; WIDTH: 250px; TEXT-OVERFLOW: ellipsis; WORD-BREAK: break-all; FLOAT: left; CLEAR: both; PADDING-RIGHT: 60px
+}
+#x-msg-box #ext-gen65 {
+	WIDTH: 400px; FLOAT: left; MIN-HEIGHT: 60px
+}
+.x-tabs-wrap {
+	HEIGHT: 0px; DISPLAY: none
+}
+.modalBackground {
+	FILTER: alpha(opacity=20); Z-INDEX: 998 !important; BACKGROUND-COLOR: gray; opacity: 0.7
+}
+.modalPopup {
+	BORDER-TOP: white 3px solid; BORDER-RIGHT: white 3px solid; BORDER-BOTTOM: white 3px solid; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; PADDING-LEFT: 3px; BORDER-LEFT: white 3px solid; Z-INDEX: 999 !important; PADDING-RIGHT: 3px; BACKGROUND-COLOR: white
+}
+.hidden {
+	DISPLAY: none
+}
+.visible {
+	POSITION: absolute; DISPLAY: block !important
+}
+.x-dlg-modal {
+	POSITION: absolute; LEFT: 0px; TOP: 0px
+}
+.ext-shim {
+	OVERFLOW: hidden; POSITION: absolute; LEFT: 0px; TOP: 0px; VISIBILITY: hidden
+}
+.x-clear {
+	OVERFLOW: hidden; FONT-SIZE: 0px; HEIGHT: 0px; CLEAR: both; LINE-HEIGHT: 0
+}

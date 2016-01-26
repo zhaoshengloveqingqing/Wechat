@@ -1,0 +1,192 @@
+<include file="Public:head"/>
+
+<div class="content">
+
+  <div class="cLineB">
+    <h4>投票结果查看 （状态：{lingzh:$vote.statustext}）</h4><a href="{lingzh::U('Vote/index',array('type'=>'text'))}" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+    <h6 class="red">(已停止或者已结束的投票不可修改)</h6>
+  </div>
+         
+  <div class="msgWrap bgfc">
+  <form id="voteForm" class="form" method="post" action="" target="_top" enctype="multipart/form-data">   
+    <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+      <tr>
+        <th width="120">关键词：</th>
+        <td>
+          <input disabled="disabled" type="text" id="keyword" name="keyword" value="{lingzh:$vote.keyword}" class="px" style="width:550px;"><br><span class="red">关键词不可修改</span>
+        </td>
+      </tr>
+      <tr>
+        <th width="120">投票标题：</th>
+        <td><input type="text" id="title" name="title" value="{lingzh:$vote.title}" class="px" style="width:550px;"></td>
+      </tr>
+      <tr>
+        <th>投票图片：</th>
+        <td><input type="text" name="imgurl" value="{lingzh:$vote.imgurl}" id="pic_url_input" class="px" style="width:550px;"> 
+        <span onclick="$('#upload-panel').show();" style="text-decoration:underline;cursor:pointer;"> 上传图片 </span>
+        <br>图片地址，大小为720x400</td>
+      </tr>
+<!--tr>
+<th>图片显示：</th>
+<td><label>
+<input type="radio" name="showpic" value="1" checked="checked" id="showpic2">
+显示在投票页面</label>
+    
+    <label>
+<input name="showpic" type="radio" id="showpic1" value="0">
+不显示在投票页面</label>
+                                    
+                                    
+</td>
+</tr-->
+      <tr>
+        <th valign="top">投票说明：</th>
+        <td valign="top"><textarea class="px" id="info" name="content" style="width: 550px;">{lingzh:$vote.content}</textarea></td>
+      </tr>
+      <tr>
+        <th>单选/多选：</th>
+        <td>
+          <p style="width: 120px; float: left; display: block; line-height: 32px; height: 32px;">
+            <label><input name="type" type="radio" onclick="document.getElementById('cknums').style.display='none';" id="RadioGroup1_0" value="0" checked="checked">单选</label>
+        　  <label><input type="radio" name="type" onclick="document.getElementById('cknums').style.display='block';" value="1" id="RadioGroup1_1">多选</label>
+          </p>
+        <!--p id="cknums" style="display:none;width:200px; float: left">
+                                            <input name="cknums" class="px" size="4" type="text" value="2">多项最多选多少项
+        </p-->
+        </td>
+      </tr>
+      <tr>
+        <th>起止时间：</th>
+        <td>
+          <input disabled="disabled" type="input" class="px" id="starttime" value="{lingzh:$vote.starttime}" onClick="WdatePicker()" name="starttime">
+          到
+          <input type="input" class="px" id="endtime" value="{lingzh:$vote.endtime}" name="endtime" onClick="WdatePicker()"><span class="red">开始时间不可修改</span>
+        </td>
+      </tr>
+      <tr>
+        <th valign="top">投票选项：</th>
+        <td valign="top">
+          <div class="bdrcontent">
+            <div id="div_ptype">
+              <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="70%">
+              <tbody>
+              <tr>
+                <if condition="$is_text_vote eq 0"><td width="350">图标</td></if>
+                <td width="350">选项</td>
+                <td width="50">结果</td>                  
+              </tr>
+              <volist name="vote.options" id="option">
+              <tr valign="middle">
+                <if condition="$is_text_vote eq 0">
+                <td width="350">
+                  <img src="{lingzh:$option.icon}" width="50" height="50" style="float:left">
+                  <input type="text" id="option{lingzh:$i}" name="option{lingzh:$i}" value="{lingzh:$option.icon}" class="px" style="width:200px;float:left;margin-left:10px;">
+                </td>
+                </if>
+                <td width="350">
+                  <input type="text" id="option{lingzh:$i}" name="option{lingzh:$i}" value="{lingzh:$option.option}" class="px" style="width:200px;">
+                </td>
+                <td><label style="width:35px;">{lingzh:$option.num}</label></td>        
+              </tr>
+              </volist>
+              </tbody>
+              </table>
+  
+            </div>
+          </div>
+        </td>
+      </tr>
+      <if condition="($vote.statustext eq '未开始') OR ($vote.statustext eq '已开始')">
+      <tr>
+        <th>&nbsp;</th>
+        <td>
+          <button type="submit" name="button" class="btnGreen">保存</button>
+          <a href="{lingzh::U('Vote/index')}" class="btnGray vm">取消</a></td>
+      </tr>
+      </if>
+
+                          
+
+<!--tr>
+<th>投票结果：</th>
+<td><label>
+<input type="radio" name="display" value="1" id="RadioGroup2_1">
+投票前可见</label>
+    
+    <label>
+<input name="display" type="radio" id="RadioGroup2_0" value="0">
+投票后可见</label>
+                                    
+                                      <label>
+<input name="display" type="radio" id="RadioGroup2_2" value="2">
+投票结束可见</label></td>
+</tr-->
+
+    </table>
+  </form>
+  </div> 
+</div>
+<div id="upload-panel" style="display:none" >
+    <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+    <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+        <iframe style=" width:500px;height:500px;" src="/index.php?g=User&m=UploadImg&a=index"></iframe>
+    </div>
+</div>
+<include file="Public:footer"/>
+
+
+<script src="/js/date/WdatePicker.js"></script>
+<script>
+
+$(function(){
+        $('#voteForm').ajaxForm({
+            beforeSubmit:  checkForm,  // pre-submit callback
+            success:       complete,  // post-submit callback
+            error: showError,
+            dataType: 'json'
+        });
+        function checkForm(arr){
+            if( '' == $.trim($('#title').val())){
+                alert("投票关键词不能为空");
+                return false;
+            }
+            if( '' == $.trim($('#keyword').val())){
+                alert("关键词不能为空");
+                return false;
+            }
+            if( '' == $.trim($('#info').val())){
+                alert("投票说明不能为空");
+                return false;
+            }
+            var optionNum = $("#div_ptype input.opt").length;
+            var options = "";
+            var num = 0;
+            for (var i = 1; i <= optionNum; i++) {
+                var option = $("#option"+i).val();
+                if ($.trim(option) != '') {
+                    options += option + "^";
+                    num++;
+                }
+            }
+            if (options.length > 1) {
+                options = options.substring(0, options.length - 1);
+            }
+            if( '' == options){
+                alert("投票选项不能为空");
+                return false;
+            }
+            if(num < 2){
+                alert("投票选项至少有两个");
+                return false;
+            }
+            arr.push({name:'optionAry', value:options});
+        }
+        function complete(data){
+            alert(data.info);
+        }
+
+        function showError(data){
+            alert(data);
+        }
+    });
+</script>

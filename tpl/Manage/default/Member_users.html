@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{lingzh:$page_title}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/themes/m/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  <style type="text/css">
+    body {
+       padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+  </style>
+
+</head>
+<body>
+<include file="Index:header"/>
+
+  <div class="container">
+    <div class="row">
+      <include file="Index:sidebar"/>
+      <div class="col-lg-10">
+
+        <div class="page-header">
+          <h3>用户信息</h3>
+        </div>
+        <div class="content"> 
+          <div class="row">
+          <div class="col-lg-5">
+            <form method="post" action="">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="支持手机号、微信号查询，留空则列出所有会员信息" name="searchkey">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">查询!</button>
+              </span>
+            </div>
+            </form>
+          </div> <!-- /col -->
+        </div>
+
+        <div class="row">
+          <TABLE class="table">
+          <THEAD>
+            <TR>
+              <TH>卡号</TH>
+              <TH>微信名</TH>
+              <TH>真实姓名</TH>
+              <TH>联系电话</TH>
+              <TH>性别</TH>
+              <TH>生日</TH>
+              <TH>签到积分</TH>
+              <TH>消费积分</TH>
+              <TH>已兑换积分</TH>
+              <TH>剩余积分</TH>
+            </TR>
+          </THEAD>
+          <TBODY>
+            <volist name="members" id="vo">
+            <TR>
+              <TD>{lingzh:$vo.number}</TD>
+              <TD>{lingzh:$vo.nickname} </TD>
+              <TD>{lingzh:$vo.truename} </TD>
+              <TD>{lingzh:$vo.tel} </TD>
+              <TD><if condition="$vo['sex'] eq 1">男<else/>女</if></TD>                 
+              <TD>{lingzh:$vo.birthday} </TD>
+              <TD>{lingzh:$vo.sign_score} </TD>
+              <TD>{lingzh:$vo.expend_score} </TD>
+              <TD>{lingzh:$vo.spend_score} </TD>
+              <TD>{lingzh:$vo.total_score} </TD>
+            </TR>
+            </volist>
+          </TBODY>
+        </TABLE>
+        </div>
+
+
+          
+        </div> 
+      </div> <!-- /col -->
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</body>
+</html>

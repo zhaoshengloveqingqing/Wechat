@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="viewport"
+	    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>账户管理</title>
+	<!-- Set render engine for 360 browser -->
+	<meta name="renderer" content="webkit">
+
+	<!-- No Baidu Siteapp-->
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+	<link rel="stylesheet" type="text/css" href="/tpl/Wap/default/common/income/assets/css/amazeui.css">
+	<link rel="stylesheet" type="text/css" href="/tpl/Wap/default/common/income/assets/css/info.css">
+</head>
+<body>
+<header data-am-widget="header" class="am-header am-header-default">
+  <div class="am-header-left am-header-nav">
+    <a href="{lingzh::U('Income/index', array('token'=>$token))}" class="" style="padding:20px; padding-bottom:10px;">
+      <i class="am-header-icon am-icon-chevron-left"></i>
+    </a>
+  </div>
+  <h1 class="am-header-title">
+    <a href="#title-link">账户信息</a>
+  </h1>
+</header>
+<section id="user-header" style="height:275px;">
+	<div class="am-g">
+		<div class="col-sm-12">
+			<figure id="user-info" data-am-widget="figure" class="am am-figure am-figure-default">
+			  <img class="am-img-circle" src="{lingzh:$photo}" alt="用户头像" />
+			  <figcaption class="am-figure-capition-btm" style="display:none;">编号：{lingzh:$user.id}</figcaption>
+			</figure>
+		</div>
+	</div>
+</section>
+<section>
+	<div class="am-g">
+		<div class="col-sm-12">
+			<div class="share">
+				<h3 class="am-text-primary">
+					推广链接
+					<div class="am-btn am-btn-default pi-copy">点击推广</div>
+				</h3>
+				<p class="am-form">
+					<div id="url" class="pi-url">
+						{lingzh:$product_url}
+					</div>
+				</p>
+				<figure data-am-widget="figure" class="am am-figure am-figure-default pi-erweima" style="display: block; position: absolute; width: 105px; height: 105px;
+					top: -105px; right: 10px; margin: 0">
+				  <img style="height:100%; border: none; padding: 0;" src="{lingzh:$qrcode_url}" alt="二维码" />
+                    <figcaption class="am-figure-capition-btm" style="font-size: 12px; margin-bottom: 0;color: red;">(推广二维码，长按可保存)</figcaption>
+				</figure>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="am-list-news am-list-news-default pi-list-news">
+			  	<div class="am-list-news-bd">
+				  	<div class="am-list-news-bd">
+					    <ul class="am-list">
+					      	<li class="am-g am-list-item-desced">
+						      	<div class="col-sm-9 pi-list-news-title"><a href="http://www.douban.com/online/11614662/" class="am-list-item-hd">手机号码</a></div>
+						      	<div class="col-sm-12 pi-list-news-content">
+						      		<div class="am-list-item-text">{lingzh:$user.mb}</div>
+						      	</div>
+					      	</li>
+					      	<li class="am-g am-list-item-desced">
+						      	<div class="col-sm-9 pi-list-news-title"><a href="http://www.douban.com/online/11614662/" class="am-list-item-hd">支付方式</a></div>
+						      	<div class="col-sm-3 pi-list-news-btn"><i id="accout-edit" class="am-icon-edit" style="padding-left: 10px; padding-right: 10px;"></i></div>
+						      	<div class="col-sm-12 pi-list-news-content">
+						      		<div class="am-list-item-text">{lingzh:$payinfo}</div>
+						      	</div>
+					      	</li>
+					      	<li class="am-g am-list-item-desced pi-edit-form">
+						      	<div class="col-sm-12 pi-list-news-title" style="padding: 0;">
+							      	<div class="am-form">
+										<div class="reminder" class="am-g reminder">
+											<div class="col-sm-12" style="padding:0; padding-bottom: 10px;">
+												<p>温馨提示：</p>
+												<p>1.为保证正常结算，以上信息均需填写，并确保内容
+填写正确，否则无法进行结算。</p>
+											</div>
+										</div>
+							      		<div class="am-form-group">
+							      			<label for="">选择支付方式</label>
+								      		<select name="payment">
+								      			<option value="alipay" <if condition="$payment.pay_code eq 'alipay'">selected</if> >支付宝</option>
+								      			<option value="cftpay" <if condition="$payment.pay_code eq 'cftpay'">selected</if> >财付通</option>
+								      		</select>
+							      		</div>
+							      		<div class="am-form-group">
+							      			<label for="">账户号码</label>
+							      			<input type="text" value="{lingzh:$payment.pay_account}" name="account">
+							      		</div>
+							      		<div class="am-form-group" style="text-align: center;">
+							      			<div id="update-account" class="am-btn am-btn-secondary" style="width:75%;">
+							      				保存
+							      			</div>
+							      		</div>
+							      	</div>
+						      	</div>
+					      	</li>
+					    </ul>
+			  	  	</div>
+			    </div>
+			</div>
+		</div>
+
+	</div>
+</section>
+<footer>
+</footer>
+</body>
+<script type="text/javascript" src="/tpl/Wap/default/common/income/assets/js/zepto.min.js"></script>
+<script type="text/javascript" src="/tpl/Wap/default/common/income/assets/js/amazeui.js"></script>
+<script type="text/javascript" src="/tpl/Wap/default/common/income/assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+	jQuery(function($){
+		function selectText(element) {
+			  var doc = document,
+			      text = doc.getElementById(element),
+			      range,
+			      selection;
+
+			  if (doc.body.createTextRange) {
+			      range = document.body.createTextRange();
+			      range.moveToElementText(text);
+			      range.select();
+			      document.execCommand("Copy");
+			  } else if (window.getSelection) {
+			      selection = window.getSelection();
+			      range = document.createRange();
+			      range.selectNodeContents(text);
+			      selection.removeAllRanges();
+			      selection.addRange(range);
+			      document.execCommand("Copy");
+			      /*if(selection.setBaseAndExtent){
+			          selection.setBaseAndExtent(text, 0, text, 1);
+			      }*/
+			  }else{
+			      alert("none");
+			  }
+			}
+
+			function unSelectText(element) {
+			  var doc = document,
+			      text = doc.getElementById(element),
+			      range,
+			      selection;
+			  if (doc.body.createTextRange) {
+			  	  document.selection.empty()
+			  } else if (window.getSelection) {
+			      selection = window.getSelection();
+			      selection.removeAllRanges();
+			  }else{
+			      alert("none");
+			  }
+			}
+
+			$(".pi-copy").data("copy", false);
+
+			function copyText() {
+				selectText("url");
+				$(".pi-copy").text("已复制");
+				var alert_map = $('<p class="am-text-success pi-alert">推广链接已复制</p>');
+				$(".pi-copy").parent().after(alert_map);
+				$(".pi-copy").data("copy", true);
+				setTimeout(function(){
+					$(".pi-copy").data("copy", false);
+					alert_map.fadeOut(function(){
+						$(this).remove();
+					});
+					$(".pi-copy").text("点击复制");
+					unSelectText("url");
+				}, 6000);
+			}
+
+			$(".pi-copy").on('click', function(){
+                window.location="{lingzh::U('Agents/QR_code', array('token'=>$token))}";
+			});
+		$(".pi-edit-form").hide();
+		$("#accout-edit").on('click', function(){
+			$(".pi-edit-form").slideDown(function(){
+				var height = $(this).height();
+				$(document).scrollTop($(document).scrollTop() + height);
+			});
+		});
+		$("#update-account").on('click', function(){
+			var pay_code = $("select[name='payment']").val(),
+				account = $("input[name='account']").val();
+			if (!pay_code) {
+				alert("请选择支付方式");
+				return;
+			}
+			if (!account) {
+				alert("请输入账号");
+				return;
+			}
+			$.ajax({
+			  type: "POST",
+			  url: "{lingzh::U('Agents/pay_conf', array('token'=>$token))}",
+			  data: { pay_code: pay_code, account: account, user_id : '{lingzh:$user.id}', token :'{lingzh:$token}' }
+			}).done(function( res ) {
+			    $(".pi-edit-form").hide();
+				if(res) {
+					res = JSON.parse(res);
+					if (res.status == '1') {
+						alert('保存成功');
+						window.location.href = res.data;
+					}
+				}
+			});
+		});
+	});
+</script>
+</html>

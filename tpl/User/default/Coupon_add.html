@@ -1,0 +1,362 @@
+<include file="Public:head"/>
+<script src="{lingzh::RES}/js/date/WdatePicker.js"></script>
+<style>
+.form-wizard .wizard-steps {
+list-style-type: none;
+margin: 0 0 30px 0;
+padding: 0;
+background: #eee;
+}
+.form-wizard .wizard-steps.steps-3 li {
+width: 33.333%;
+}
+.form-wizard .wizard-steps li.active {
+background: #fff;
+position: relative;
+}
+.form-wizard .wizard-steps li {
+float: left;
+text-align: center;
+}
+.form-wizard .wizard-steps li .single-step {
+padding: 15px 0;
+}
+.form-wizard .wizard-steps li.active .single-step .title {
+background: #368ee0;
+color: #fff;
+}
+.form-wizard .wizard-steps li .single-step .title {
+text-align: center;
+font-size: 16px;
+background: #ddd;
+padding: 4px 10px;
+color: #888;
+}
+.form-wizard .wizard-steps li.active .single-step .description {
+color: #333;
+}
+.form-wizard .wizard-steps li .single-step .description {
+margin-left: 5px;
+color: #aaa;
+}
+</style>
+<div class="content">
+<form id="Form" class="form form-wizard" method="post" action=""  target="_top" enctype="multipart/form-data" >
+
+<!--活动开始-->
+<div class="cLineB">
+  <h4>编辑优惠券活动内容</h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>  
+<div class="msgWrap bgfc step" id="step1">
+ <ul class="wizard-steps steps-3">
+        <li class='active'>
+            <div class="single-step">
+                <span class="title">1</span>
+                    <span class="circle">
+                    <span class="active"></span>
+                </span>
+                <span class="description">活动开始内容</span>
+            </div>
+        </li>
+        <li>
+            <div class="single-step">
+                <span class="title">2</span>
+                <span class="circle"></span>
+                <span class="description">活动结束内容</span>
+            </div>
+        </li>                                
+        <li>
+            <div class="single-step">
+                <span class="title">3</span>
+                <span class="circle"></span>
+                <span class="description">优惠券设置</span>
+            </div>
+        </li>                                
+     </ul>
+
+<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+<tr>
+  <th width="16%" valign="top"><span class="red">*</span>关键词：</th>
+  <td width="34%"><input type="input" class="px" id="keyword" data-rule-required="true"  value="{lingzh:$vo.keyword}" name="keyword" style="width:400px"><br>
+  	<span class="red">只能写一个关键词</span>，用户输入此关键词将会触发此活动。</td>
+  <td width="50%" rowspan="7" valign="top"><div style="margin-left:20px"><img id="pic" src="<if condition="$vo['starpicurl'] eq ''">{lingzh::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-start.jpg<else/>{lingzh:$vo.starpicurl}</if>" width="373px">
+<br>
+<input class="px" name="starpicurl" id="pic_url_input" value="<if condition="$vo['starpicurl'] eq ''">{lingzh::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-start.jpg<else/>{lingzh:$vo.starpicurl}</if>" onblur="document.getElementById('pic').src=this.value;" style="width:363px;">
+<br><br>
+  	<span onclick="$('#upload-panel').show();" class="btnGreens"> 上传活动开始图片 </span>
+  </div><br><br><div style="margin-left:20px"><img id="zjpic" src="<if condition="$vo['zjpic'] eq ''">{lingzh::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-winning.jpg<else/>{lingzh:$vo.zjpic}</if>" width="373px">
+<br>
+<input class="px" name="zjpic" id="pic_url_input_1" value="<if condition="$vo['zjpic'] eq ''">{lingzh::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-winning.jpg<else/>{lingzh:$vo.zjpic}</if>" onblur="document.getElementById('zjpic').src=this.value;" style="width:363px;">
+<br><br>
+  	<span onclick="$('#upload-panel-1').show();" class="btnGreens"> 上传中奖后显示的头部图片 </span>
+     <br>
+
+  </div></td>
+</tr>
+<tr>
+  <th valign="top"><span class="red">*</span>活动名称：</th>
+  <td><input type="input" class="px" id="title" data-rule-required="true" data-rule-maxlength="50" value="{lingzh:$vo.title}" name="title" style="width:400px">
+  	<br>
+  	请不要多于50字!
+  	</td>
+  </tr>
+
+<tr>
+  	<th valign="top"><span class="red">*</span>优惠券介绍：</th>
+  	<td><textarea class="px" id="sttxt" data-rule-required="true"  name="sttxt" style="width:400px; height: 125px;">{lingzh:$vo.sttxt}</textarea>
+  		 </td>
+</tr>
+</TR>
+<tr>
+	<th><span class="red">*</span>活动时间：</th>
+	<td><input type="input" class="px" id="statdate" data-rule-required="true" value="<if condition="$vo['statdate'] neq ''">{lingzh:$vo.statdate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker()" name="statdate" />                
+		到
+		<input type="input" class="px" id="enddate" data-rule-required="true" value="<if condition="$vo['enddate'] neq ''">{lingzh:$vo.enddate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));?></if>" name="enddate" onClick="WdatePicker()"  /> 
+	</td>
+</tr>
+<tr>
+<th valign="top"><span class="red">*</span>优惠券活动<br />说明：</th>
+<td><textarea class="px" id="info" data-rule-required="true" name="info" style="width: 400px; height: 125px;">{lingzh:$vo.info}</textarea>
+活动说明. </td>
+</tr>
+<tr>
+<th><span class="red">*</span>兑换券使用<br />说明：</th>
+<td><textarea id="aginfo" class="px" data-rule-required="true" name="aginfo" style="width: 400px; height: 125px;">{lingzh:$vo.aginfo}</textarea><br>用户获取优惠券后显示的提示信息
+</td>
+</tr>
+</tbody>
+</table>
+ </div> 
+  
+<!--活动结束-->
+<div class="msgWrap bgfc step" id="step2">
+ <ul class="wizard-steps steps-3">
+        <li>
+            <div class="single-step">
+                <span class="title">1</span>
+                <span class="circle"></span>
+                <span class="description">活动开始内容</span>
+            </div>
+        </li>
+        <li class='active'>
+            <div class="single-step">
+                <span class="title">2</span>
+                <span class="circle">
+				    <span class="active"></span>
+				</span>
+                <span class="description">活动结束内容</span>
+            </div>
+        </li>                                
+        <li>
+            <div class="single-step">
+                <span class="title">3</span>
+                <span class="circle"></span>
+                <span class="description">优惠劵设置</span>
+            </div>
+        </li>                                
+     </ul>
+  	<table class="userinfoArea" style=" margin: 0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+  		<tbody>
+  			<tr>
+  				<th valign="top"><span class="red">*</span>活动结束主题：</th>
+  				<td><input type="input" class="px" id="endtite" data-rule-required="true" data-rule-maxlength="50" value="{lingzh:$vo.endtite}" name="endtite" style="width:400px">
+  					<br>
+  					请不要多于50字! </td>
+  				<td rowspan="4" valign="top"><div style="margin-left:20px"><img id="end" src="<if condition="$vo['endpicurl'] eq ''">{lingzh::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-end.jpg<else/>{lingzh:$vo.endpicurl}</if>" width="373px"> <br>
+  					<input id="pic_url_input_2" class="px" name="endpicurl" onblur="document.getElementById('end').src=this.value;" value="<if condition="$vo['endpicurl'] eq ''">{lingzh::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-end.jpg<else/>{lingzh:$vo.endpicurl}</if>" style="width:363px;">
+  					<br><br>
+  					<span onclick="$('#upload-panel-2').show();" class="btnGreens"> 上传图片 </span>  </td>
+  				</tr>
+  			<tr>
+  				<th valign="top">活动结束说明：</th>
+			  <td valign="top"><p>
+  				    <textarea class="px" id="endinfo" name="endinfo" style="width: 400px; height: 125px;">{lingzh:$vo.endinfo}</textarea>
+			    </p>
+			    <p>活动结束显示
+			    </p></td>
+  				</tr>
+  			</tbody>
+  		</table>
+  </div> 
+  
+  
+<!--奖项设置-->
+
+<div class="msgWrap bgfc step" id="step3">
+<ul class="wizard-steps steps-3">
+        <li>
+            <div class="single-step">
+                <span class="title">1</span>
+                <span class="circle"></span>
+                <span class="description">活动开始内容</span>
+            </div>
+        </li>
+        <li>
+            <div class="single-step">
+                <span class="title">2</span>
+                <span class="circle"></span>
+                <span class="description">活动结束内容</span>
+            </div>
+        </li>                                
+        <li class='active'>
+            <div class="single-step">
+                <span class="title">3</span>
+                <span class="circle">
+				    <span class="active"></span>
+				</span>
+                <span class="description">优惠劵设置</span>
+            </div>
+        </li>                                
+     </ul>
+<table class="userinfoArea" style=" margin: 0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+<tr>
+<th width="12%" valign="top"><span class="red">*</span>优惠券名称1：</th>
+<td width="87%"><input type="input" class="px" id="fist" name="fist" data-rule-required="true" data-rule-maxlength="50" value="{lingzh:$vo.fist}" style="width:250px">
+请不要多于50字! </td>
+  <td width="1%" rowspan="9" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<th valign="top"><span class="red">*</span>优惠券数量：</th>
+<td><input type="input" class="px" id="fistnums" name="fistnums" data-rule-required="true" data-rule-number="true" value="{lingzh:$vo.fistnums}" style="width:60px">
+</td>
+                                    </tr>
+<tr>
+<th valign="top">优惠券名称2：</th>
+<td><input type="input" class="px" id="second" name="second" data-rule-maxlength="50" value="{lingzh:$vo.second}" style="width:250px">
+请不要多于50字! </td>
+                                        </tr>
+<tr>
+<th valign="top">优惠券数量：</th>
+<td><input type="input" class="px" id="secondnums" name="secondnums" data-rule-number="true" value="{lingzh:$vo.secondnums}" style="width:60px">
+</td>
+                                        </tr>
+<tr>
+<th valign="top">优惠券名称3：</th>
+<td><input type="input" class="px" id="third" name="third" data-rule-maxlength="50" value="{lingzh:$vo.third}" style="width:250px">
+请不要多于50字! </td>
+                                        </tr>
+<tr>
+<th valign="top">优惠券数量：</th>
+<td><input type="input" class="px" id="thirdnums" name="thirdnums" data-rule-number="true" value="{lingzh:$vo.thirdnums}" style="width:60px">
+ </td>
+
+  </tbody>
+
+<tbody>
+<tr>
+<th valign="top"><span class="red">*</span>预计活动人数：</th>
+<td><input type="input" class="px" id="allpeople" name="allpeople"  data-rule-required="true" data-rule-number="true" value="{lingzh:$vo.allpeople}" style="width:150px"/>  预估活动人数直接影响获取优惠券概率：获取优惠券概率 = 优惠券总数/(预估活动人数*每人获取次数) 如果要确保任何时候都100%获取建议设置为1人参加!<span class='red'>如果要确保任何时候都100%获取建议设置为1人参加!并且优惠券奖项只设置一等奖.</span></td>
+</tr>
+                                        
+<tr>
+<th valign="top">SN码生成设置：</th>
+<td>
+    <input class="radio" type="radio" checked name="snimport" value="0">自动生成  
+</td> 
+</tr>
+
+</tbody>
+</table>
+</div> 
+<div class="msgWrap" style=" text-align: center"> 
+<input type="reset" id="back" class="btnGray"></input>
+<input type="submit" id="next" class="btnGreen"></input>
+</div>
+</form>
+</div>
+<div id="upload-panel" style="display:none" >
+    <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+    <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+        <iframe style=" width:500px;height:500px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+    </div>
+</div>
+<div id="upload-panel-1" style="display:none" >
+    <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+    <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+        <iframe style=" width:500px;height:500px;" src="/index.php?g=User&m=UploadImg&a=index&id=1"></iframe>
+    </div>
+</div>
+<div id="upload-panel-2" style="display:none" >
+    <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+    <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+        <iframe style=" width:500px;height:500px;" src="/index.php?g=User&m=UploadImg&a=index&id=2"></iframe>
+    </div>
+</div>
+<link rel="stylesheet" href="/js/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="/js//kindeditor/plugins/code/prettify.css" />
+<script src="/js/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="/js/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$("#Form").formwizard({ 
+		 	formPluginEnabled: true,
+		 	validationEnabled: true,
+		 	focusFirstInput : true,
+			formOptions: {
+                success: function (data) { 
+				    var json = JSON.parse(data);
+				    alert(json.info);
+				},
+                resetForm: true
+            }
+		 }
+		);
+	});
+	KindEditor.ready(function(K) {
+		editor1 = K.create('#sttxt', {
+			minWidth : '400px',
+			resizeType : 1,
+			allowPreviewEmoticons : false,
+			allowImageUpload : true,
+			uploadJson :'/index.php/upload/image',
+			items : [
+				'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut', 'image','multiimage'
+			],
+			afterBlur:function(){ this.sync(); }
+		});
+		editor2 = K.create('#info', {
+			minWidth : '400px',
+			resizeType : 1,
+			allowPreviewEmoticons : false,
+			allowImageUpload : true,
+			uploadJson :'/index.php/upload/image',
+			items : [
+				'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut', 'image','multiimage'
+			],
+			afterBlur:function(){ this.sync(); }
+		});
+		editor3 = K.create('#aginfo', {
+			minWidth : '400px',
+			resizeType : 1,
+			allowPreviewEmoticons : false,
+			allowImageUpload : true,
+			uploadJson :'/index.php/upload/image',
+			items : [
+				'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut', 'image','multiimage'
+			],
+			afterBlur:function(){ this.sync(); }
+		});
+		editor4 = K.create('#endinfo', {
+			minWidth : '400px',
+			resizeType : 1,
+			allowPreviewEmoticons : false,
+			allowImageUpload : true,
+			uploadJson :'/index.php/upload/image',
+			items : [
+				'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut', 'image','multiimage'
+			],
+			afterBlur:function(){ this.sync(); }
+		});
+	});
+</script>
+<include file="Public:footer"/> 

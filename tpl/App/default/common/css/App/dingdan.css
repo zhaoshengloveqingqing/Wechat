@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* CSS Document */
+
+.content{width:80%; background-color: #ffffff; border-radius: 4px; margin: 0 auto; height: 600px; margin-top:-300px; }
+.content .cont{margin:0 auto; padding:20px 40px; overflow: scroll;}
+ul{width: 30%; float: right; margin-top:10px;}
+ul li{ float: left; margin-top:5px; line-height:30px;}
+.toolbar {
+	width: 100%;
+	display: inline-block;
+	margin-bottom: 10px;
+}
+.content .cont caption{ color:#0489f7; font-size:20px; padding-top:20px;padding-bottom:20px; overflow: scroll;}
+.content .cont .scrollcontent {
+	height: 450px;
+	overflow: scroll;
+}
+
+.input{ border:0px; width:170px; height:60px;margin-top:0px; line-height:30px; border:1px solid #CCC; padding-left:10px}
+.code { height: 30px;}
+SELECT{ border:0px; width:290px; height:30px;margin-top:0px; line-height:30px; border:1px solid #CCC; padding-left:10px}
+.submit{ border-radius:5px; width:170px; height:40px;font-size:20px;text-align:center; line-height:35px;  color:#fff; cursor:pointer;  background:#0489f7; border:0px; display:block;}
+tr th{ text-align:center;}
+tbody tr th{ text-align:center;}
+
+.phone_ul .input .code_ul .input {
+	float: left;
+}
+
+.phone_ul .submit, .code_ul .submit {
+	width: 60px;
+	margin-left: 10px;
+}
+
+@media screen and (max-width: 1280px) { 
+	.content .cont {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}

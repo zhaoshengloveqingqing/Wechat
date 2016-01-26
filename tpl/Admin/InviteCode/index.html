@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>邀请码管理</title>
+    <include file="common:public" />
+    <include file="Public:head"/>
+    <script src="/themes/a/js/jquery.dataTables.min.js" type="text/javascript"></script>
+     <!--link href="/themes/a/css/jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css"-->
+     <link href="/themes/a/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+     <style type='text/css'>
+         .btnGreen {
+border: 1px solid #3D810C;
+box-shadow: 0 1px 1px #AAA;
+-moz-box-shadow: 0 1px 1px #aaa;
+-webkit-box-shadow: 0 1px 1px #AAA;
+padding: 5px 20px;
+cursor: pointer;
+display: inline-block;
+text-align: center;
+vertical-align: bottom;
+overflow: visible;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+background-color: #5BA607;
+background-image: linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -moz-linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -webkit-linear-gradient(bottom, #4D910C 3%, #69B310 97%, #FFF 100%);
+color: #FFF;
+font-size: 14px;
+line-height: 1.5;
+}
+
+.filtersection {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    height:30px;
+    font-size: 14px;
+    font-family: arial,"宋体";
+}
+.fl {
+      font-size: 14px;
+    font-family: arial,"宋体";
+}
+.normal_select {
+    margin-top: 5px;
+    height: 30px;
+    overflow: hidden;
+    border: 1px solid #cccccc;
+    font-size: 14px;
+    font-family: arial,"宋体";
+    color: #99;
+    padding: 6px 0;
+}
+.normal_btn {
+    padding: 5px 8px;
+font-size: 16px;
+font-family: Microsoft YaHei,Tahoma, arial;
+}
+
+.topbar .balance {
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right:10px;
+	color:#cc0707;
+	margin-top:5px;
+}
+
+
+     </style>
+</head>
+<body>
+   
+    
+  <div id="artlist" >
+    <div class="topbar" style="margin-left:35px; margin-top:30px; ">
+          <div class="balance">
+                  账户余额：{lingzh:$agentInfo.balance}元
+          </div>
+         <a href="{lingzh::U('InviteCode/generate_package')}"><font class="btnGreen" >购买套餐</font></a><a <neq name="isAdmin" value="1">style="display: none"</neq> href="{lingzh::U('InviteCode/generate/')}">
+                <font class='btnGreen'>生成充值码</font></a>
+          <div style="clear: both;"></div>
+    </div>
+      
+      <form action="{lingzh::U('InviteCode/index')}" method="post">
+          <div class="filtersection" style="margin-left:40px;">
+                 <span>
+                     按：
+                        <select class="searchstyle normal_select" id='searchtype' name='searchtype'>
+                            <option value="status">充值码状态</option>
+                            <eq name="isAdmin" value="1"><option value="manager">代理商</option></eq>
+                            
+                        </select>
+                       <select class="searchstyle normal_select" id="statusselect" name="searchparam">
+                           <neq name="isAdmin" value="1">
+                               <option value="0">未激活</option>
+                               <else/>
+                               <option value="0">未分配</option>
+                               <option value="100">已分配</option>
+                           </neq>
+                           <option value="1">已激活</option>
+                       </select>
+                        <select class="searchstyle normal_select" id='managerselect' name='searchparam' >
+                            <volist name='backendUsers' id='beuser'>
+                                <option value='{lingzh:$beuser.id}'>{lingzh:$beuser.username}</option>
+                            </volist>
+                        </select>
+                        <input class="searchstyle normal_btn" type='submit'  value='全局查找' style="margin-left:10px;"/>
+                        
+                    </span>
+            </div>
+          
+              <div style="clear:both"></div>
+      </form>
+    <form action="{lingzh::U('InviteCode/assign_manager')}" method="post" name="codeIndexForm" id="codeIndexForm">
+        <div <neq name="isAdmin" value="1" >style="display: none"</neq>>
+            <div style="margin-top:12px; margin-left:35px;"><div class="fl" >
+            <label>价格：</label><input name="price" style=" width: 50px" type="text" value="0"/>元
+             <select name="assign_to_manager" class='normal_select'>
+                    <option value="">请选择代理商</option>
+                    <volist name="backendUsers" id="backendUser">
+                        <option value="{lingzh:$backendUser.id}">{lingzh:$backendUser.username}</option>
+                    </volist>
+                </select>
+                <input type="submit" class='normal_btn' name='doSubmit' value="分配充值码" />
+               
+                
+                <label>注释：</label><input name="remarks" style=" width: 300px" type="text" value=""/>
+           </div>
+            &nbsp;&nbsp;
+            </div>
+            
+            
+        </div>
+
+        <table  width="100%" border="0" cellspacing="0" cellpadding="0" class="ListProduct"  id="inviteCodeTable">
+             <THEAD>
+                <TR>
+                    <TH width="10"<neq name="isAdmin" value="1">style="display: none"</neq>>选择</TH>
+                    <TH width="100">充值码</TH>
+                    
+                    <TH width="60">状态</TH>
+                    <TH width="100">受邀商户</TH>
+                    <TH width="50">套餐</TH>
+                    <TH width="300">方案</TH>
+                    
+                    <TH width='50'>充值者</TH>
+                    <TH width="60">充值时间</TH>
+                    
+                    <TH width="60" <neq name="isAdmin" value="1">style="display: none"</neq>>创建于</TH>
+
+                    <TH width="60" <neq name="isAdmin" value="1">style="display: none"</neq>>管理者</TH>
+                    <TH width="50" <neq name="isAdmin" value="1">style="display: none"</neq>>角色</TH>
+                   
+                    
+                    <TH width="50" <neq name="isAdmin" value="1">style="display: none"</neq>>操作</TH>
+                    <TH width="50" <neq name="isAdmin" value="1">style="display: none"</neq>>注释</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+              <volist name="invitecodes" id="codeRow">
+                    <tr>
+                        <td <neq name="isAdmin" value="1">style="display: none"</neq>>
+                            <input type="checkbox" name="assign_code_list[]" class="ipt" value="{lingzh:$codeRow.id}" <notempty name="codeRow.manager">disabled="true"<else/><neq name='codeRow.status' value='0'>disabled="true"</neq></notempty> />
+                        </td>
+                        <td >{lingzh:$codeRow.code}</td>
+                        
+                        <td align='center'>
+                            <switch name="codeRow.status">
+                                <case value="-1">已删除</case>
+                                <case value="1">已激活</case>
+                                <case value="0"><neq name="isAdmin" value="1">未激活<else/><notempty name="codeRow.manager">已分配<else/>未分配</notempty></neq></case>
+                                <default/>
+                            </switch></eq> 
+                        </td>
+                        <td>
+                            <php>
+                                foreach($feUsers as $feUser){
+                                    if($feUser['id'] == $codeRow['final_user']) {
+                                        echo $feUser['username'];
+                                        break;
+                                    }
+                                }
+                            </php>
+                        </td>
+                       
+                        
+                        <td >{lingzh:$codeRow.duration}<eq name='codeRow.type' value='1'>天<else/>条</eq></td>
+                        <td>
+                            <eq name='codeRow.type' value='1'>
+                                <php>
+                                    if(empty($codeRow['package'])) {
+                                        $funcGroupIdArray = explode(",", trim($codeRow['function_group_list']));
+                                        $funcGroupNameArray = array();
+                                        foreach($funcGroupIdArray as $funcGroupId) {
+                                            $funcGroupNameArray[$funcGroupId] = $funcGroups[$funcGroupId];
+                                        }
+                                        echo join(",", $funcGroupNameArray);
+                                    }else {
+                                        echo $agentPackages[$codeRow['package']]['name'];
+                                    }
+                                </php>
+                             <else/>短信</eq>
+                        </td>
+                        <td>{lingzh:$codeRow.activator}</td>
+                        <td ><notempty name='codeRow.activate_time'><php>echo date('Y-m-d H:i:s', $codeRow['activate_time']);</php></notempty></td>
+                        
+                        <td <neq name="isAdmin" value="1">style="display: none"</neq>><php>echo date('Y-m-d H:i:s', $codeRow['create_time'])</php></td>
+                        <td <neq name="isAdmin" value="1">style="display: none"</neq>><php>echo $userId2NameMap[$codeRow['manager']]</php></td>
+                        <td <neq name="isAdmin" value="1">style="display: none"</neq>><php>echo $roleId2NameMap[$codeRow['manager_role']]</php></td>
+                        
+                        
+                        <td align='center' <neq name="isAdmin" value="1">style="display: none"</neq>>
+                            <!--<a <eq name="codeRow.status" value="0">href="{lingzh::U('InviteCode/activate/',array('codeId'=>$codeRow['id']))}"</eq> >充值</a>
+                            <eq name="isAdmin" value="1">| </eq>-->
+                            <a <neq name="isAdmin" value="1">style="display: none"</neq> href="javascript:void(0)" onclick="return confirmurl('{lingzh::U('InviteCode/del/',array('codeId'=>$codeRow['id']))}','确定删除该邀请码?')">删除</a>
+			</td>
+                        <td <neq name="isAdmin" value="1">style="display: none"</neq>>{lingzh:$codeRow.remarks}</td>
+                    </tr>
+                </volist>
+             
+              </tbody>
+        </table>
+        <br>
+            
+            <div class="listpage">
+
+                {lingzh:$page}
+            </div>
+        </br>
+    </form>
+        
+    </div>
+    <script type="text/javascript">
+        
+        function globalsearch() {
+            var searchtype = $('#searchtype').val();
+            var searchparam = $('#' + searchtype + 'select').val();
+            var url = document.location + '&searchtype=' + searchtype + '&searchparam=' + searchparam;
+            $.get(url, function(data, status){
+                $('#main',  window.parent.document).html(data);
+            });
+        }
+        
+        
+        $(document).ready(function() {
+                $('#inviteCodeTable').dataTable({
+                     "bPaginate": false,
+                     "bAutoWidth": true,
+                     "sSearch": "查找",
+                     "aaSorting": [],
+
+                      "oLanguage": {
+                        "sLengthMenu": "每页显示 _MENU_ 记录",
+                                "sZeroRecords": "对不起，您还没添加图文消息",
+                                "sInfo": "第 _START_ 条到 _END_ 条，总共 _TOTAL_ 条记录",
+                                "sInfoEmpty": "显示 0 条记录",
+                                "sInfoFiltered": "(从 总共_MAX_条记录)",
+                                "sSearch": "在当前页查找"
+
+                        }
+                });
+                
+            var searchtype = '{lingzh:$searchtype}';
+            var searchparam = '{lingzh:$searchparam}';
+            if(searchtype != null && searchtype.length > 0) {
+                $('#searchtype').val(searchtype);
+            }
+            $('#searchtype').change(function()
+            {
+                $('[name=searchparam]').attr('disabled', 1);
+                $('[name=searchparam]').hide();
+                var searchtypeId = '#' + $('#searchtype').val() + 'select';
+                
+                
+                $(searchtypeId).removeAttr('disabled');
+                $(searchtypeId).val('');
+                $(searchtypeId).show();
+            });
+            
+            $('#searchtype').change();
+            
+            if(searchparam != null && searchparam.length > 0) {
+                var searchtypeId = '#' + $('#searchtype').val() + 'select';
+                $(searchtypeId).val(searchparam);
+            }
+            if(searchtype != null && searchtype.length > 0 && searchparam != null && searchparam.length > 0) {
+                   
+                $('.listpage > a').each(function(index){
+                    var href = $(this).attr('href');
+                    if(href.indexOf('searchtype') < 0 && href.indexOf('searchparam') < 0) {
+                        href = href + '&searchtype=' + searchtype + '&searchparam=' + searchparam;
+                        $(this).attr('href', href);
+                    }
+                });
+            }
+} );
+    </script>
+</body>
+</html>

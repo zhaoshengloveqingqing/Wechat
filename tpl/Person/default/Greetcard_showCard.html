@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>{lingzh:$card.title}</title>
+<link rel="stylesheet" type="text/css" href="/themes/p/css/person.css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/js/weixin.js"></script>
+</head>
+<body> 
+<style>
+body{margin:0;min-width:320px;background-color:#b20001;}
+#card_body{display:block;}
+#card_center{margin-top:60px;text-align:center;}
+#card_center img{width:310px;height:266px;}
+#card_head{margin-top:0px;text-align:center;}
+#card_head img{width:100%;}
+#card_main{margin:15px 20px 0  20px;}
+#card_title,#card_content,#card_author,#card_date{text-align:center;color:#e1ce6c;}
+#card_title{font-size:30px;}
+#card_content{margin-top:18px;font-size:20px;line-height:30px;}
+#card_author,#card_date{font-size:18px;}
+#card_author{margin-top:18px;}
+#card_date{margin-top:5px;}
+#card_postmark{position:absolute;left:10px;top:30px;z-index:100;}
+#card_postmark img{width:100px;height:100px;}
+#card_button{margin:15px;}
+#mess_save{margin:15px;}
+#card_duty{margin-bottom:15px;font-size:11px;text-align:center;}
+copyright a, a:link, a:hover, a:active, a:visited{ color:#FFF}
+</style>
+<script>
+var dataForWeixin={
+   appId:"",
+   Img:"http://" + window.location.host + "/themes/p/images/card_msg.png",
+   path:"http://" + window.location.host + "/index.php?g=Person&m=Greetcard&a=showCard&id={lingzh:$card.id}",
+   title:"收到一张来自{lingzh:$card.author}的贺卡",
+   desc:"{lingzh:$card.content}",
+   fakeid:"",
+   callback:function(){}
+};
+</script>
+<div id="card_body">
+<if condition="$card.himgurl neq false"><div id="card_head"><img src="{lingzh:$card.himgurl}"></div></if>
+<if condition="$card.bimgurl neq false"><div id="card_center"><img src="{lingzh:$card.bimgurl}"></div></if>
+<div id="card_main">
+       <div id="card_title">{lingzh:$card.recver}</div>
+	   <div id="card_content">{lingzh:$card.content}</div>
+	   <div id="card_author">{lingzh:$card.author}</div>
+	   <div id="card_date">{lingzh:$card.date}</div>
+</div>
+<div id="card_postmark"><img src="/themes/p/images/postmark.png"></div>
+<div id="card_button"><button class="button2" onclick="location.href='/index.php?g=Person&m=Greetcard&a=index'">我也要发送贺卡</button></div>
+<div id="mess_save"><button class="button2">收藏贺卡工具</button></div>
+<div class="copyright" style=" color:#6b0d0e; text-align:center; padding-bottom:3px;"><a href="/index.php?g=Person&m=Index&a=index">返回首页</a></div>
+<div id="cover"></div>
+<div id="guide2"><div><img src="/themes/p/images/guide3.png"></div>
+<div id="guide_button2">
+<button class="button2" id="guideCacel">取消</button>
+</div>
+</div>
+</div>
+<!--div id="copyright">©2013 {lingzh::C('company_short_name')}</div-->
+</body>
+<script>
+$(function() {
+	$("#guideCacel").click(function() {
+	     cover(false);
+             $("#guide2").hide();
+	});
+    $("#mess_save button").click(function() {
+		location.href="http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5OTA1MTU5MA==&appmsgid=10012010&itemidx=1&sign=cbfd5b6d9d94a311dd28efbd974a54fa&uin=MjUyMTM2OTc1";
+	    /* cover(true);
+	     $("#guide2").show();*/
+	});
+});
+</script>
+</html>

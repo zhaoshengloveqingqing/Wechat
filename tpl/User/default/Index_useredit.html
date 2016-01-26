@@ -1,0 +1,117 @@
+<include file="lingzh:header"/>
+
+
+<style type="text/css">
+
+.maincontent { width: 1000px;  margin: 10px auto; }
+
+.sideBar { border: 1px solid #D3D3D3; float: left; width: 20%; }
+.sideBar .catalogList ul {background-color: #F3F3F3;width: 100%; min-height: 770px;}
+.sideBar .catalogList ul li{display: block;text-align: center;}
+
+.sideBar .catalogList ul li.selected { background-color: #72A4C7; color: #FFF; font-size:14px; height:35px; padding-top:5px; }
+.sideBar .catalogList ul li.nav-header { background-color: #f3f3f3; line-height: 40px;  font-size: 16px; font-weight: bold;}
+
+
+.sideBar .catalogList ul li.subCatalogList {  margin-top: 2px; line-height: 30px; font-size:14px;height:35px; padding-top:5px; border-top: 1px solid #D3D3D3;}
+.sideBar .catalogList ul li.subCatalogList a {display: block;}
+.sideBar .catalogList ul li.subCatalogList:hover {  background-color: #72A4C7;}
+.sideBar .catalogList ul li:hover a, .sideBar .catalogList ul li:hover span {  color:#fff; text-decoration: none;}
+
+
+.sideBar .catalogList ul li.selected a { color: #fff; }
+
+.content { border: 1px solid #D3D3D3;border-left:none;float: left; padding: 0px 20px; background-color: #FFF; min-height: 770px; width: 75% ;}
+
+.content .star { color: red; font-weight:bold;}
+
+.content .title {font-size: 18px; padding: 20px 0; border-bottom: 1px solid #EEE; font-weight: bold; color: #424242;}
+
+.content .input-box {width: 300px; height: 14px; padding: 8px 10px; margin:10px; border: 1px solid #CCC; border-radius: 2px 2px 2px 2px;} 
+.content label{ height: 14px;color: #626262; font-size:14px;} 
+
+.content  .btnGreen {
+border: 1px solid #3D810C;
+box-shadow: 0 1px 1px #AAA;
+-moz-box-shadow: 0 1px 1px #aaa;
+-webkit-box-shadow: 0 1px 1px #AAA;
+padding: 5px 20px;
+cursor: pointer;
+display: inline-block;
+text-align: center;
+vertical-align: bottom;
+overflow: visible;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+background-color: #5BA607;
+background-image: linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -moz-linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -webkit-linear-gradient(bottom, #4D910C 3%, #69B310 97%, #FFF 100%);
+color: #FFF;
+font-size: 14px;
+line-height: 1.5;
+}
+
+.content .btnGreen:hover {
+background-color: #5BA607;
+background-image: linear-gradient(bottom, #3d810c 3%, #69b310 97%, #fff 100%);
+background-image: -moz-linear-gradient(bottom, #3d810c 3%, #69b310 97%, #fff 100%);
+background-image: -webkit-linear-gradient(bottom, #3D810C 3%, #69B310 97%, #FFF 100%);
+color: #FFF;
+}
+
+
+.content .userinfoArea { margin: 20px 0; }
+</style>
+
+<div class="maincontent">
+
+  <div class="sideBar">
+    <div class="catalogList">
+      <div style="float:left; position: absolute; top:115px; margin-left:45px;"> <img src="/themes/a/images/listicon2.png"/></div>
+      <ul>            
+        <li class="nav-header" >管理中心</li>
+        <li class="subCatalogList" > <a href="{lingzh::U('Index/index')}">我的公众号</a></li>
+        <li class="subCatalogList  selected"> <a>修改密码</a> </li>
+        <li class="subCatalogList"> <a href="{lingzh::U('Index/activate')}">账户充值</a> </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="title"><span>修改密码</span></div>
+    <form method="post" action="{lingzh::U('Index/resetpwd')}" enctype="multipart/form-data">
+    <div class="msgWrap">
+      <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+        <tbody>
+				<tr>
+         	<th width="11%"><span class="star">*</span>
+         	<label> 修改密码</label></th>
+         	<td colspan="2"><input type="password" class="input-box"  value="" name="password"></td>
+        </tr>
+        <tr>
+          <th><span class="star">* </span>
+            <label>再次输入</label></th>
+          <td colspan="2"><input type="password" class="input-box"  value="" name="repassword"> 忘记密码后,请联系管理员重设密码</td>
+        </tr>
+        <tr>
+          <th rowspan="2"></th>
+          <td width="15%" align="center">
+            <p><button type="submit" name="button" class="btnGreen">提交</button> </p></td>
+          <td width="74%" height="50%"></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+            
+    </div>
+    </form>
+          
+  </div>
+  <div class="clr"></div>
+</div>
+
+<include file="Public:footer"/>

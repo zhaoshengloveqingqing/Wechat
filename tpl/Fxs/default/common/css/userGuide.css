@@ -1,0 +1,523 @@
+HTML {
+	
+}
+BODY {
+	FONT-SIZE: 14px; FONT-FAMILY: "Microsoft YaHei","Î¢ÈíÑÅºÚ",Helvetica,"ºÚÌå",Arial,Tahoma; COLOR: rgb(34,34,34); LINE-HEIGHT: 1.6
+}
+INPUT {
+	OUTLINE-WIDTH: 0px; OUTLINE-STYLE: none
+}
+TEXTAREA {
+	OUTLINE-WIDTH: 0px; OUTLINE-STYLE: none
+}
+BUTTON {
+	OUTLINE-WIDTH: 0px; OUTLINE-STYLE: none
+}
+A {
+	OUTLINE-WIDTH: 0px; OUTLINE-STYLE: none
+}
+BODY {
+	MARGIN: 0px
+}
+H1 {
+	MARGIN: 0px
+}
+H2 {
+	MARGIN: 0px
+}
+H3 {
+	MARGIN: 0px
+}
+H4 {
+	MARGIN: 0px
+}
+H5 {
+	MARGIN: 0px
+}
+H6 {
+	MARGIN: 0px
+}
+P {
+	MARGIN: 0px
+}
+UL {
+	MARGIN: 0px
+}
+OL {
+	MARGIN: 0px
+}
+DL {
+	MARGIN: 0px
+}
+DD {
+	MARGIN: 0px
+}
+FIELDSET {
+	MARGIN: 0px
+}
+TEXTAREA {
+	MARGIN: 0px
+}
+TEXTAREA:unknown {
+	COLOR: rgb(163,163,163)
+}
+INPUT:unknown {
+	COLOR: rgb(163,163,163)
+}
+UL {
+	LIST-STYLE-TYPE: none; PADDING-LEFT: 0px
+}
+OL {
+	LIST-STYLE-TYPE: none; PADDING-LEFT: 0px
+}
+A IMG {
+	BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px
+}
+FIELDSET {
+	BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px
+}
+A {
+	TEXT-DECORATION: none; COLOR: rgb(46,125,198)
+}
+A:hover {
+	TEXT-DECORATION: underline
+}
+UNKNOWN {
+	HEIGHT: 0px; DISPLAY: none
+}
+UNKNOWN {
+	OVERFLOW: hidden
+}
+BUTTON:unknown {
+	BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: 0px; PADDING-RIGHT: 0px
+}
+INPUT:unknown {
+	BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.body {
+	WIDTH: 100%; MARGIN-LEFT: auto; MARGIN-RIGHT: auto
+}
+.col_main {
+	
+}
+.body {
+	PADDING-BOTTOM: 3.5em; PADDING-TOP: 2.5em; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.foot {
+	COLOR: rgb(218,218,218); PADDING-BOTTOM: 24px; TEXT-ALIGN: center; PADDING-TOP: 24px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(114,113,113)
+}
+.head .inner {
+	HEIGHT: 60px
+}
+.head .inner:after {
+	HEIGHT: 0px; CONTENT: "?"; CLEAR: both; DISPLAY: block
+}
+.head .wrp.inner {
+	WIDTH: 100%; MARGIN-LEFT: auto; MARGIN-RIGHT: auto
+}
+.head_box {
+	BORDER-TOP: rgb(103,173,3) 4px solid; BORDER-BOTTOM: rgb(195,195,195) 1px solid; POSITION: relative; BACKGROUND-COLOR: rgb(243,243,243); box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15), 0px -1px 0px 0px rgb(252, 252, 252) inset
+}
+.container_box {
+	BORDER-TOP: rgb(211,211,211) 1px solid; BORDER-RIGHT: rgb(211,211,211) 1px solid; BORDER-BOTTOM: rgb(211,211,211) 1px solid; MIN-HEIGHT: 650px; BORDER-LEFT: rgb(211,211,211) 1px solid; BACKGROUND-COLOR: rgb(255,255,255); box-shadow: 0px 2px 2px 0px rgb(227, 227, 227); border-radius: 3px
+}
+.container_hd {
+	FONT-SIZE: 14px; HEIGHT: 36px; BORDER-BOTTOM: rgb(211,211,211) 1px solid; COLOR: rgb(84,84,84); LINE-HEIGHT: 36px; BACKGROUND-COLOR: rgb(233,233,233); box-shadow: 0px 1px 0px 0px rgb(252, 252, 252) inset
+}
+.main_hd {
+	FONT-SIZE: 14px; HEIGHT: 36px; BORDER-BOTTOM: rgb(211,211,211) 1px solid; COLOR: rgb(84,84,84); LINE-HEIGHT: 36px; BACKGROUND-COLOR: rgb(233,233,233); box-shadow: 0px 1px 0px 0px rgb(252, 252, 252) inset
+}
+.container_hd H2 {
+	FONT-SIZE: 14px; FONT-WEIGHT: 400; FONT-STYLE: normal; PADDING-LEFT: 20px; PADDING-RIGHT: 20px
+}
+.main_hd H2 {
+	FONT-SIZE: 14px; FONT-WEIGHT: 400; FONT-STYLE: normal; PADDING-LEFT: 20px; PADDING-RIGHT: 20px
+}
+.col_main {
+	HEIGHT: 650px; VERTICAL-ALIGN: top; DISPLAY: table-cell
+}
+.col_side {
+	HEIGHT: 650px; VERTICAL-ALIGN: top; DISPLAY: table-cell
+}
+.col_main {
+	WIDTH: 2000px
+}
+.col_side {
+	WIDTH: 19%; BACKGROUND-COLOR: rgb(243,243,243)
+}
+.col_side {
+	MIN-HEIGHT: 1px
+}
+.inner_side {
+	MIN-HEIGHT: 1px
+}
+.side_l .col_side {
+	BORDER-RIGHT: rgb(211,211,211) 1px solid
+}
+.logo {
+	FONT-SIZE: 24px; FLOAT: left; PADDING-TOP: 8px
+}
+.logo A {
+	OVERFLOW: hidden; TEXT-DECORATION: none; HEIGHT: 40px; WIDTH: 248px; DISPLAY: block
+}
+.logo A:before {
+	CONTENT: url('bg_logo.png'); DISPLAY: inline-block
+}
+.account {
+	FONT-SIZE: 0px; FLOAT: right; PADDING-TOP: 10px
+}
+.account A {
+	COLOR: rgb(34,34,34)
+}
+.account A:hover {
+	COLOR: rgb(46,125,198)
+}
+.account_meta {
+	FONT-SIZE: 14px; VERTICAL-ALIGN: top; DISPLAY: inline-block
+}
+.account_info {
+	POSITION: relative; MARGIN-RIGHT: 5px
+}
+.account_info .avatar {
+	HEIGHT: 38px; WIDTH: 38px; POSITION: absolute; LEFT: -50px; TOP: 0px; BACKGROUND-COLOR: rgb(240,240,240); border-radius: 2px
+}
+.account_info .type {
+	POSITION: absolute; LEFT: 0px; TOP: 2px
+}
+.account_info .nickname {
+	FONT-WEIGHT: 400; FONT-STYLE: normal; MARGIN-TOP: 18px; DISPLAY: inline-block
+}
+.account_inbox {
+	FONT-SIZE: 11px; POSITION: relative; Z-INDEX: 1; MARGIN-TOP: 1px
+}
+.account_inbox_switch {
+	BORDER-TOP: transparent 1px solid; HEIGHT: 49px; BORDER-RIGHT: transparent 1px solid; WIDTH: 45px; BORDER-BOTTOM: transparent 0px solid; TEXT-ALIGN: center; BORDER-LEFT: transparent 1px solid; DISPLAY: block; LINE-HEIGHT: 49px; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none
+}
+.account_inbox_switch:hover {
+	TEXT-DECORATION: none
+}
+.account_inbox_switch I.icon_common {
+	CURSOR: pointer; VERTICAL-ALIGN: top; MARGIN-TOP: 16px
+}
+.account_inbox_switch I.inbox {
+	
+}
+.account_logout A {
+	PADDING-LEFT: 14px; MARGIN-LEFT: -1px; BORDER-LEFT: rgb(173,173,173) 1px solid; MARGIN-TOP: 18px; DISPLAY: inline-block; box-shadow: 1px 0px 0px 0px rgb(255, 255, 255) inset
+}
+.icon_menu {
+	HEIGHT: 23px; WIDTH: 23px; VERTICAL-ALIGN: middle; MARGIN-TOP: -0.2em; DISPLAY: inline-block
+}
+.manage.icon_menu {
+	BACKGROUND: url(base_z.png) no-repeat 0px 0px
+}
+.function.icon_menu {
+	BACKGROUND: url(base_z.png) no-repeat 0px -33px
+}
+.statistics.icon_menu {
+	BACKGROUND: url(base_z.png) no-repeat 0px -66px
+}
+.service.icon_menu {
+	BACKGROUND: url(base_z.png) no-repeat 0px -99px
+}
+.setting.icon_menu {
+	BACKGROUND: url(base_z.png) no-repeat 0px -132px
+}
+.icon_menu_switch {
+	HEIGHT: 16px; WIDTH: 16px; VERTICAL-ALIGN: middle; BACKGROUND: url(base_z.png) no-repeat 0px -330px; DISPLAY: inline-block
+}
+.closed .icon_menu_switch {
+	BACKGROUND: url(base_z.png) no-repeat 0px -356px
+}
+.menu_box {
+	MARGIN-BOTTOM: 150px
+}
+.closed.menu .menu_item {
+	DISPLAY: none
+}
+.menu_title {
+	OVERFLOW: hidden; CURSOR: pointer; WIDTH: auto; WHITE-SPACE: nowrap; TEXT-OVERFLOW: ellipsis; POSITION: relative; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 16px; LINE-HEIGHT: 40px; PADDING-RIGHT: 16px; BACKGROUND-COLOR: rgb(243,243,243)
+}
+.menu_title .new {
+	MARGIN-LEFT: 3px; MARGIN-TOP: 3px
+}
+.menu_item {
+	LINE-HEIGHT: 31px; BACKGROUND-COLOR: rgb(243,243,243)
+}
+.menu_item A {
+	OVERFLOW: hidden; WIDTH: auto; WHITE-SPACE: nowrap; TEXT-OVERFLOW: ellipsis; COLOR: rgb(34,34,34); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 50px; DISPLAY: block; PADDING-RIGHT: 36px
+}
+.menu_item A:hover {
+	TEXT-DECORATION: none
+}
+.icon_menu {
+	MARGIN-RIGHT: 10px
+}
+.icon_menu_switch {
+	RIGHT: 16px; POSITION: absolute; MARGIN-TOP: -9px; TOP: 50%
+}
+.menu {
+	BORDER-TOP: rgb(209,209,209) 1px solid; PADDING-BOTTOM: 8px
+}
+.no_extra.menu {
+	BORDER-TOP-WIDTH: 0px
+}
+.extra.menu {
+	BORDER-BOTTOM: rgb(209,209,209) 1px solid; box-shadow: 0px 1px 0px 0px rgb(253, 253, 253)
+}
+.menu_title {
+	MARGIN-BOTTOM: 6px; BORDER-BOTTOM: rgb(209,209,209) 1px solid; box-shadow: 0px 1px 0px 0px rgb(253, 253, 253) inset
+}
+.closed.menu {
+	PADDING-BOTTOM: 0px
+}
+.closed.menu .menu_title {
+	MARGIN-BOTTOM: 0px; BORDER-BOTTOM-WIDTH: 0px
+}
+.menu_item:hover {
+	BACKGROUND-COLOR: rgb(181,218,175)
+}
+.selected.menu_item {
+	BORDER-BOTTOM: rgb(84,146,73) 1px solid; COLOR: rgb(255,255,255); BACKGROUND-COLOR: rgb(107,176,95)
+}
+.selected.menu_item A {
+	COLOR: rgb(255,255,255)
+}
+.links_item {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 1em; BORDER-LEFT: rgb(121,121,121) 1px solid; DISPLAY: inline-block; LINE-HEIGHT: 1em; PADDING-RIGHT: 1em
+}
+.no_extra.links_item {
+	BORDER-LEFT-WIDTH: 0px
+}
+.links_item A {
+	COLOR: rgb(121,121,121); DISPLAY: block
+}
+.copyright {
+	DISPLAY: inline-block
+}
+.links.ft {
+	DISPLAY: inline-block
+}
+.ft .links_item {
+	BORDER-LEFT-COLOR: rgb(218,218,218)
+}
+.ft .links_item A {
+	COLOR: rgb(218,218,218)
+}
+.faq {
+	FONT-SIZE: 0px; WIDTH: 190px; TEXT-ALIGN: center; MARGIN-TOP: -50px
+}
+.faq .links_item {
+	FONT-SIZE: 12px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0.5em; PADDING-RIGHT: 0.5em
+}
+.faq .links_item A:hover {
+	COLOR: rgb(46,125,198)
+}
+.faq .tail {
+	FONT-SIZE: 12px; COLOR: rgb(121,121,121); TEXT-ALIGN: center; LINE-HEIGHT: 30px
+}
+.inbox.icon_common {
+	OVERFLOW: hidden; HEIGHT: 23px; WIDTH: 23px; VERTICAL-ALIGN: middle; BACKGROUND: url(base_z.png) no-repeat 0px -496px; DISPLAY: inline-block; LINE-HEIGHT: 100px
+}
+.new.icon_common {
+	OVERFLOW: hidden; HEIGHT: 18px; WIDTH: 18px; VERTICAL-ALIGN: middle; BACKGROUND: url(base_z.png) no-repeat 0px -529px; MARGIN-LEFT: 3px; MARGIN-TOP: 3px; DISPLAY: inline-block; LINE-HEIGHT: 100px
+}
+.icon_service_label {
+	OVERFLOW: hidden; HEIGHT: 16px; WIDTH: 38px; VERTICAL-ALIGN: middle; BACKGROUND: url(base_z.png) no-repeat 0px -1231px; DISPLAY: inline-block; LINE-HEIGHT: 100px
+}
+.btn {
+	OVERFLOW: visible; CURSOR: pointer; FONT-SIZE: 14px; TEXT-DECORATION: none; BORDER-TOP: 1px solid; HEIGHT: 30px; BORDER-RIGHT: 1px solid; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 1px solid; PADDING-BOTTOM: 0px; TEXT-ALIGN: center; PADDING-TOP: 0px; PADDING-LEFT: 36px; BORDER-LEFT: 1px solid; DISPLAY: inline-block; LINE-HEIGHT: 30px; PADDING-RIGHT: 36px; border-radius: 3px
+}
+.btn:hover {
+	TEXT-DECORATION: none
+}
+.btn_primary {
+	BORDER-TOP-COLOR: rgb(61,129,12); BORDER-LEFT-COLOR: rgb(61,129,12); COLOR: rgb(255,255,255); BORDER-BOTTOM-COLOR: rgb(61,129,12); BORDER-RIGHT-COLOR: rgb(61,129,12); BACKGROUND-COLOR: rgb(86,164,71)
+}
+.btn_primary:hover {
+	COLOR: rgb(255,255,255); BACKGROUND-COLOR: rgb(83,160,70); box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3)
+}
+.btn_disabled {
+	CURSOR: default; BORDER-TOP-COLOR: rgb(204,204,204); BORDER-LEFT-COLOR: rgb(204,204,204); COLOR: rgb(174,174,174); BORDER-BOTTOM-COLOR: rgb(204,204,204); BORDER-RIGHT-COLOR: rgb(204,204,204); BACKGROUND-COLOR: rgb(225,225,225)
+}
+.btn_disabled:hover {
+	COLOR: rgb(174,174,174); BACKGROUND-COLOR: rgb(225,225,225); box-shadow: none
+}
+BODY {
+	BACKGROUND-IMAGE: url(bg_body.jpg); MIN-WIDTH: 100%
+}
+.l {
+	FLOAT: left
+}
+.group {
+	
+}
+.group:after {
+	HEIGHT: 0px; CONTENT: "?"; CLEAR: both; DISPLAY: block
+}
+.icon16_page_msg {
+	HEIGHT: 16px; WIDTH: 16px; VERTICAL-ALIGN: middle; BACKGROUND: url(icon16_page_msg.png) no-repeat 0px 0px; DISPLAY: inline-block
+}
+.pay-bd {
+	PADDING-BOTTOM: 40px; PADDING-TOP: 20px; PADDING-LEFT: 20px; PADDING-RIGHT: 20px
+}
+.arrow {
+	FONT-SIZE: 0px; BORDER-TOP: transparent 6px dashed; HEIGHT: 0px; BORDER-RIGHT: transparent 6px dashed; WIDTH: 0px; BORDER-BOTTOM: transparent 6px dashed; POSITION: absolute; BORDER-LEFT: transparent 6px dashed
+}
+.arrow_l.arrow {
+	BORDER-RIGHT-STYLE: solid
+}
+.tip_box {
+	BORDER-TOP: rgb(170,170,170) 1px solid; BORDER-RIGHT: rgb(170,170,170) 1px solid; BORDER-BOTTOM: rgb(170,170,170) 1px solid; PADDING-BOTTOM: 6px; TEXT-ALIGN: center; PADDING-TOP: 6px; PADDING-LEFT: 15px; MARGIN: 0px auto; BORDER-LEFT: rgb(170,170,170) 1px solid; PADDING-RIGHT: 15px; BACKGROUND-COLOR: rgb(219,233,251); box-shadow: 0px 1px 1px rgb(192, 192, 192) inset, 0px 1px 0px rgb(255, 255, 255); border-radius: 3px
+}
+.icon16_page_msg {
+	HEIGHT: 16px; WIDTH: 16px; VERTICAL-ALIGN: middle; BACKGROUND: url(../images/icon16_page_msg.png) no-repeat 0px 0px; DISPLAY: inline-block
+}
+.icon_step_list {
+	HEIGHT: 39px; WIDTH: 39px; VERTICAL-ALIGN: middle; DISPLAY: inline-block
+}
+.step.icon_step_list {
+	BACKGROUND: url(../images/business_index_z.png) no-repeat 0px 0px; LINE-HEIGHT: 36px
+}
+.step_list {
+	PADDING-LEFT: 60px
+}
+.step_item H4 {
+	FONT-SIZE: 17px; FONT-WEIGHT: 400; FONT-STYLE: normal
+}
+
+.step_content {
+	OVERFLOW: hidden
+}
+.step_desc {
+	FONT-SIZE: 1em; PADDING-TOP: 5px
+}
+.step_list_opr {
+	MARGIN-TOP: 0.5em
+}
+.step_list_opr .btn {
+	MIN-WIDTH: 8em; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.step_list_opr .btn_disabled {
+	BORDER-TOP: transparent 0px; BORDER-RIGHT: transparent 0px; BACKGROUND: rgb(212,212,212) 0px center; BORDER-BOTTOM: transparent 0px; BORDER-LEFT: transparent 0px
+}
+.step_box {
+	MARGIN-BOTTOM: 15px; BORDER-TOP: rgb(204,204,204) 1px solid; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; POSITION: relative; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 20px; MIN-HEIGHT: 56px; BORDER-LEFT: rgb(204,204,204) 1px solid; MARGIN-TOP: 15px; PADDING-RIGHT: 20px; BACKGROUND-COLOR: rgb(240,240,240); box-shadow: 0px 1px 2px rgb(227, 227, 227); border-radius: 5px
+}
+.step_box .arrow_wrapper {
+	POSITION: absolute; LEFT: -7px; TOP: 20px
+}
+.step_box .arrow_out {
+	BORDER-TOP: transparent 7px dashed; HEIGHT: 0px; BORDER-RIGHT: rgb(204,204,204) 7px solid; WIDTH: 0px; BORDER-BOTTOM: transparent 7px dashed; POSITION: absolute; LEFT: -1px; BORDER-LEFT: transparent 0px dashed; DISPLAY: inline-block
+}
+.step_box .arrow_in {
+	BORDER-TOP: transparent 7px dashed; HEIGHT: 0px; BORDER-RIGHT: rgb(240,240,240) 7px solid; WIDTH: 0px; BORDER-BOTTOM: transparent 7px dashed; POSITION: absolute; BORDER-LEFT: transparent 0px dashed; DISPLAY: inline-block
+}
+.icon_step_wrapper {
+	POSITION: absolute; LEFT: -69px; TOP: 10px
+}
+.icon_step_list {
+	FONT-SIZE: 18px; FONT-WEIGHT: 400; COLOR: rgb(255,255,255); FONT-STYLE: normal; TEXT-ALIGN: center
+}
+.icon_step_line {
+	WIDTH: 5px; POSITION: absolute; LEFT: -52px; DISPLAY: inline-block; BACKGROUND-COLOR: rgb(206,206,206)
+}
+.icon_step_line_up {
+	HEIGHT: 35px; TOP: -30px
+}
+.no_extra_up .icon_step_line_up {
+	DISPLAY: none
+}
+.icon_step_line_down {
+	HEIGHT: 100%; TOP: 35px
+}
+.no_extra_down .icon_step_line_down {
+	DISPLAY: none
+}
+.intro {
+	BORDER-TOP: rgb(230,230,230) 1px solid
+}
+:first-child.intro {
+	BORDER-TOP-WIDTH: 0px
+}
+.intro {
+	PADDING-BOTTOM: 25px; PADDING-TOP: 15px
+}
+.intro .intro_title_ico {
+	HEIGHT: 100px; WIDTH: 100px; DISPLAY: block; MARGIN-RIGHT: 5px
+}
+.intro .business_ico {
+	BACKGROUND: url(../images/business_index_z.png) no-repeat 0px -697px
+}
+.intro .help_ico {
+	BACKGROUND: url(business_index_z02.png) no-repeat 0px -697px
+}
+.intro DT .ico {
+	HEIGHT: 26px; WIDTH: 26px; MARGIN: 1px 8px 0px 0px; DISPLAY: inline-block
+}
+.intro DT .ico_intro {
+	BACKGROUND: url(../images/business_index_z.png) no-repeat 0px -917px
+}
+.intro DT .intro_title {
+	FONT-SIZE: 22px; HEIGHT: 100px; LINE-HEIGHT: 100px
+}
+.intro DT .ico_approve {
+	BACKGROUND: url(../images/business_index_z.png) no-repeat 0px -1061px
+}
+.intro DT H3 {
+	FONT-SIZE: 16px; HEIGHT: 26px; VERTICAL-ALIGN: top; FONT-WEIGHT: normal; DISPLAY: inline-block; LINE-HEIGHT: 26px
+}
+.intro DD {
+	FONT-SIZE: 14px; COLOR: rgb(123,123,123); PADDING-LEFT: 35px; MARGIN: 0px; LINE-HEIGHT: 1.8em
+}
+.intro DD UL {
+	LIST-STYLE-TYPE: disc
+}
+.intro DD UL {
+	LIST-STYLE-TYPE: none
+}
+.pay-index {
+	PADDING-BOTTOM: 4px; PADDING-TOP: 4px; PADDING-LEFT: 30px; PADDING-RIGHT: 30px
+}
+.pay-index .pay-bd {
+	POSITION: relative; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.pay-index .pay-bd DD {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.pay-index .step_list_wrp {
+	MARGIN-TOP: 20px; PADDING-RIGHT: 10px
+}
+.pay-index .step_desc {
+	COLOR: rgb(96,96,96)
+}
+.pay-index .tip_box {
+	WIDTH: 320px
+}
+BODY {
+	WIDTH: 100%; MIN-WIDTH: 0px
+}
+.all_main {
+	WIDTH: 100%; MARGIN: auto
+}
+.header .logo_area {
+	POSITION: relative; Z-INDEX: 1; BACKGROUND-COLOR: rgb(243,243,243); box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3)
+}
+.header .logo_area .wrapper {
+	WIDTH: 90%; POSITION: relative; MARGIN: 0px auto; LINE-HEIGHT: 60px
+}
+.header .logo_area .wrapper IMG {
+	CURSOR: pointer; VERTICAL-ALIGN: middle
+}
+.header .logo_area .hd_login_info {
+	FONT-SIZE: 14px; RIGHT: 0px; POSITION: absolute; TOP: 10px
+}
+.header .logo_area .hd_login_info A {
+	COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px
+}
+.header .logo_area .hd_login_info A:hover {
+	TEXT-DECORATION: none; COLOR: rgb(46,125,198)
+}
+.sign_img IMG {
+	WIDTH: 100%
+}

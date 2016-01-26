@@ -1,0 +1,82 @@
+<link href="/themes/a/css/page-u.css" rel="stylesheet" type="text/css" />
+<div class="content"> 
+
+    <div style="line-height:200%;padding:10px 20px;">
+   <if condition="$token eq '54447845z7b'">
+   		 经销商：{lingzh:$order.pname|default="Hi电"}<br>
+   </if>
+    订购人：{lingzh:$order.truename}<br>
+    电话：{lingzh:$order.tel}<br>
+    地址：{lingzh:$order.cmbProvince}{lingzh:$order.cmbCity}{lingzh:$order.cmbArea}{lingzh:$order.address}<br>
+    总数：{lingzh:$order.total}<br>
+
+    总价：<span style="color:#f30;font-size:16px;font-weight:bold">{lingzh:$order.price}</span>元
+    </div>
+
+    <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+    <thead>
+    <tr>
+      <th width="120" align="center" style="text-align:center">名称</th>
+      <th class="60" align="center" style="text-align:center">尺寸</th>
+      <th class="60" align="center" style="text-align:center">颜色</th>
+      <th class="60" align="center" style="text-align:center">数量</th>
+      <th width="160" align="center" style="text-align:center">单价（元）</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr></tr>
+    <volist name="products" id="o"> 
+    <tr>
+    <td align="center">
+        <img src="{lingzh:$o.logo_url}"  width="100"/><br>
+        {lingzh:$o.name}
+    </td>
+    <td align="center"><?php if($o['size_name']){echo $o['size_name'] ;} else { echo "无" ;} ?></td>
+    <td align="center"><?php if($o['color_name']){echo $o['color_name'] ;} else { echo "无" ;} ?></td>
+    <td align="center">{lingzh:$o.count}</td>
+    <td align="center">{lingzh:$o.price}</td>
+    </tr>
+    </volist>
+    </tbody>
+    </table>
+    <div style="line-height:200%;padding:10px 20px;">
+        支付方式：
+        <switch name="order.payment">
+			<case value="unionpay">银联支付</case>
+            <case value="cod">货到付款</case>
+            <case value="alipay">支付宝支付</case>
+            <case value="wxpay">微信支付<br/>流水号：{lingzh:$wxtrade.n_transaction_id}</case>
+            <case value="cftpay">财付通</case>
+            <case value="wingpay">翼支付</case>
+            <default />
+        </switch>
+    </div>
+    <div style="line-height:200%;padding:10px 20px;">
+套餐信息：</br>
+<if condition="!empty($order['note'])">
+{lingzh:$order.note}<br>
+</if>
+        配送信息：</br>
+        <if condition="isset($logistics)">
+        	配送公司：{lingzh:$logistics.name}<br/>快递单号：{lingzh:$logistics.logistics_no}
+        <else/>
+        	配送公司：<br/>快递单号：
+        <!--  <form class="form" method="post" action="" target="_top" enctype="multipart/form-data" action="{lingzh:U('User/Shop/orderFlow')}">     
+            <input type="hidden" name="oid" value="{lingzh:$order.order_id}"/>
+             <input type="hidden" name="step" value="delivery"/>
+        <div>配送公司：<input type="text" name="logistics_name" value="" class="text textMiddle" style="width:400px;"/> </div>
+        <div>快递单号：<input type="text" name="logistics_no" value="" class="text textMiddle" style="width:400px;"/></div>
+        <button type="submit" name="button" class="btnGreen">发货</button>
+        
+        </form> -->
+        </if>
+    </div>
+	<if condition="$order.status eq 5" >
+	<div style="line-height:50%;padding:10px 20px;">
+		订单取消原因<span style="color:red">(商户取消)</span>：{lingzh:$order.merchant_cancel}<br>
+    </div>
+	</if>
+  </div>  
+
+</body>
+</html>

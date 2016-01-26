@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lingzh:$tpl['wxname']}</title>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="/themes/w/css/reset.css" rel="stylesheet" type="text/css" />
+<script src="/themes/w/js/swipe.js"></script>
+<style>
+body {background-color: #eee;margin: 0 auto;max-width: 640px;min-width: 320px;overflow-x: hidden; background-color:#ebebeb; }
+
+.banner {background:url(/themes/w/images/lz/top-bg.jpg) 0 0 repeat-x; margin:10px 0px 10px 20px;}
+.banner a{width:40%;}
+
+
+
+.swipe {  overflow: hidden;    visibility: hidden;	  position: relative;	  }
+.swipe-wrap { overflow: hidden;		  position: relative;  }
+.swipe-wrap > div {	float:left;width:100%;  position: relative;}
+.swipe-wrap > div img{width:100%;	height: 200px;}
+
+ul#indicator{text-align: center;list-style: none;margin: -24px 0px 0px 0px;padding: 0; background-color:#000;}
+ul#indicator li {display: inline-block;width: 10px;height: 10px;border-radius: 10px;background: #7d8083; margin: 0 2px;cursor: pointer;}
+ul#indicator li.on {display: inline-block;width: 10px;height: 10px;border-radius: 10px;background: #fff; margin: 0 2px;cursor: pointer;}
+.navi {opacity:0.5;}
+
+.mainmenu { display: block; margin:5px auto; width: 100%; color: #fff}
+.mainmenu li {
+	width: 100%;
+	display: block;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	height:117px;
+	margin-bottom:10px;
+	/* [disabled]border: 5px solid #030303; */
+}
+.mainmenu li div img { border: 0; width: 106px; height:106px; padding-top:5px; padding-left:6px; }
+.mainmenu li .menubtn .menumesg{ width:37%; float:left; background-color:{lingzh:$web_setting['classify_bg_color']}; height:117px;  margin-right:5px;}
+.mainmenu li .menubtn .menumesgtwo{ width:60%; float:left;  background-color:#f52e74; height:117px; margin-left:10px;}
+.mainmenu li .menubtn .menumesgright{ width:60%; float:left;height:117px; background-color:{lingzh:$web_setting['classify_bg_color']}}
+.mainmenu li .menubtn .menumesgright .menuimg{ border: 0; width: 100%; height:100%;}
+.mainmenu li .menubtn .menuimg {
+position: relative;
+margin: auto;
+width: 100%;
+height: 180px;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+background-image: url(/themes/w/default-cls-icon.png);
+overflow: hidden;
+}
+.mainmenu li .menubtn .menumesgright p  { color:#202020; font-size:20px; font-weight:bold; font-family:微软雅黑; padding-top:10px; padding-left:10px;}
+.mainmenu li .menubtn a .menumesgright .mainmenuspan{ color:#6b6b6b; font-size:14px; line-height:16px; font-weight:bolder; font-family:微软雅黑; padding-top:5px; padding-left:10px; padding-right:10px;}
+
+.mainmenu li .menubtn .menumesg .one{
+padding-left:5px; margin-top:-15px; font-size:14px; font-weight:normal; line-height:22px;
+}
+
+div.copyright{font-size:14px;text-align:center;color:#ffffff;margin:8px 0px;}
+a.copyright{font-size:14px;text-align:center;color:#ffffff;margin:8px 0px;text-decoration:underline;}
+div.tech-support{font-size:12px;text-align:center;color:#ffffff;margin:8px 0px;}
+div.tech-support a{text-decoration: underline;}
+.clr {clear: both;}
+.tech-support{ color:#454545;}
+.tech-support a{ color:#454545;}
+
+</style>
+</head>
+
+<body>
+
+<div id='slider' class='swipe'>
+  <div class='swipe-wrap'>
+    <volist name="flash" id="so">
+      <div><a href="{lingzh:$so.hyperlink}"><img src="{lingzh:$so.img}" /></a></div>
+	</volist>
+  </div>
+</div>
+
+<div class="navi">
+	<ul id="indicator">
+		<volist name="flash" id="so">
+		<li   <if condition="$i eq 1">class="on"</if>  ></li>
+		</volist>
+	</ul>
+</div>
+
+    
+<ul class="mainmenu">
+    <volist name="info" id="vo">   
+    <li>
+	<div class="menubtn">
+            <a href='{lingzh:$vo.hyperlink}'>
+                <div class="menumesg">
+                 <img src="{lingzh:$vo.img}">
+                </div>
+                <div class="menumesgright"><p>{lingzh:$vo.name}<br></p><div class="mainmenuspan">{lingzh:$vo.info}</div>
+                </div>
+            </a>
+	</div>
+    </li>
+    </volist>
+</ul>
+
+<div class="clr"></div>
+<include file="Index:navi"/> 
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+
+<script type="text/javascript">
+var slider = Swipe(document.getElementById('slider'), {
+      auto: 3000,
+      continuous: true,
+      callback: function(pos) {
+          var i = bullets.length;
+	      while (i--) {
+	          bullets[i].className = ' ';
+	       }
+	      bullets[pos].className = 'on';
+      }
+  });
+
+  var bullets = document.getElementById('indicator').getElementsByTagName('li');
+
+
+</script>
+
+</body>
+</html>

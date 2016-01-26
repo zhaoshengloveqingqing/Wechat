@@ -1,0 +1,100 @@
+<include file="Shop:header"/>
+
+<script type="text/javascript" src="../tpl/Wap/default/common/js/city/jquery.cityselect.js"></script>
+<script type="text/javascript" src="../tpl/Wap/default/common/js/city/jsAddress.js"></script>
+<form method="post" action="" onsubmit="return tgSubmit()">
+
+        
+<div class="main" id="wrap">
+    
+    	<div class="p_mod o_address">
+    		<h2 class="p_mod_title">请填写个人信息</h2>
+            <div id="city">
+    		<ul>
+    			<li><strong>姓名：</strong><input type="text" placeholder="请输入姓名" id="truename" name="truename" value="{lingzh:$customer.truename}" /></li>
+    			<li><strong>手机：</strong><input type="text" placeholder="请输入联系人手机号" id="tel" name="tel" value="{lingzh:$customer.tel}" /></li>
+				<li><strong>地区：</strong><select class="cmbProvince" style="width:70px;" name="cmbProvince" id="cmbProvince" value="{pigcms:$vo['cmbProvince']}"></select> 
+									<select  class="city" style="width:70px;" name="cmbCity" id="cmbCity" "></select>
+									<select  class="dist" style="width:70px;" name="cmbArea"  id="cmbArea"></select></li>								
+    			<li><strong>地址：</strong><input type="text" placeholder="请输入详细地址" id="address" name="address" value="{lingzh:$customer.address}" /></li>
+                <?php if($_GET['token'] != '53cb3b7ez79'){ ?>
+    			<li>邮编：<input type="text" placeholder="请输入邮政编码,可选" id="zipcode" name="zipcode" value="{lingzh:$customer.zipcode}" /></li>
+                <?php } ?>
+    		</ul>
+            </div>
+    	</div>
+		
+      <div class="p_mod o_address">
+          <h2 class="p_mod_title">请选择支付方式</h2>
+            <div id="city">
+                <select name="payment" style="width:100%">
+                    <volist name="payments" id="pay">
+                        <option value="{lingzh:$pay.pay_code}">{lingzh:$pay.pay_name}</option>
+                    </volist>
+                </select>
+            </div>
+      </div>
+    	<div class="o_btn clearfix">
+    		<input type="button" class="o_btn_back ts1" onclick="history.go(-1);" value="取消" />
+    		<input type="submit" class="o_btn_submit ts1" value="确认订单" />
+    	</div>
+    
+</div>
+</form>
+<script>
+function showTip(tipTxt) {
+        var div = document.createElement('div');
+        div.innerHTML = '<div class="deploy_ctype_tip"><p>' + tipTxt + '</p></div>';
+        var tipNode = div.firstChild;
+        $("#wrap").after(tipNode);
+        setTimeout(function () {
+            $(tipNode).remove();
+        }, 1500);
+		}
+	function tgSubmit(){
+		if($('#hour')&&$('#desks').css.display=='block'){
+			if($('#hour').val()==""){
+				showTip('请选择时间')
+				return false;
+			}
+		}
+		//
+		var userName=$('#truename').val();
+		if($.trim(userName) == ""){
+			showTip('请填写姓名')
+			return false;
+		}
+		//
+		//var zipcode=$('#zipcode').val();
+		//if($.trim(zipcode) == ""){
+		//	showTip('请填写邮政编码')
+		//	return false;
+		//}
+		//
+		var userPhone = $("#tel").val()
+		if ($.trim(userPhone) == "") {
+			showTip('请填写您的手机号码')
+			
+			return false;
+		}
+
+		var patrn = /^(1(([35][0-9])|(47)|[8][01256789]))\d{8}$/;
+		if (!patrn.exec($.trim(userPhone))) {
+			showTip('手机号格式错误')
+			return false;
+		}
+		return true;
+	}
+
+	</script>
+	<script type="text/javascript">
+	var province = '<?php echo $customer['province']; ?>'; 
+			city = '<?php echo $customer['city']; ?>' ;
+			area = '<?php echo $customer['area']; ?>';
+	province = province ? province : '安徽';
+	city = city ? city : '合肥市';
+	area = area ? area : '市辖区';
+	addressInit('cmbProvince', 'cmbCity', 'cmbArea', province, city, area);
+</script>
+</body>
+</html>

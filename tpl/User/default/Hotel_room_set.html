@@ -1,0 +1,213 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="/themes/a/css/img_upload_panel.css" />
+<link rel="stylesheet" type="text/css" href="/js/uploadify/uploadify.css">
+<script src="/js/uploadify/jquery.uploadify.min.js?v=<?php echo rand(0,99999);?>" type="text/javascript"></script>
+<script src="/themes/a/js/bootstrapSwitch.js"></script>
+<link rel="stylesheet" href="/themes/a/css/bootstrapSwitch.css">
+<style>
+	th span:not(#inventory_title){
+		color : red;
+	} 
+	label.error {
+		color : red;
+	} 
+</style>
+<div class="content">
+    <div class="cLineB">
+        <h4>客房设置 [ 都是必填项 ]</h4>
+    <a href="{lingzh::U('Hotel/rooms',array('id'=>(int)$_GET['hid']))}" class="right btnGreen" style="margin-top:-27px">返回</a> </div>
+    <div class="msgWrap bgfc">
+        <form class="form" method="post" action="" target="_top" id="hotel_room" enctype="multipart/form-data">
+            <input type="hidden" name="hid" value="{lingzh:$list['hid']}">
+            <table class="userinfoArea" style="margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+                <tbody>
+                    <tr>
+                        <th><span>*</span>客房类型：</th>
+                        <td width="220">
+                            <input type="text" name="type" value="{lingzh:$list['type']}" class="px required" style="width:200px;" placeholder="如:标准房/商务套房">
+                        </td>
+                        <th><span>*</span>简要说明：</th>
+                        <td colspan="3">
+                            <input type="text" name="typeinfo" value="{lingzh:$list['typeinfo']}" class="px required" style="width:200px;" placeholder="字尽量少，如:大床，双床，适合2人">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>*</span>原价：</th>
+                        <td><input type="number" name="price" value="{lingzh:$list['price']}" class="px required" style="width:200px;" ></td>
+                        <th><span>*</span>优惠价：</th>
+                        <td colspan="3"><input type="number" name="yhprice" value="{lingzh:$list['yhprice']}" class="px required" style="width:200px;" onchange="notifyPrice()" onblur="notifyPrice()"></td>
+                    </tr>
+                    <!-- tr>
+                        <th><span>*</span>预付款：</th>
+                        <td><input type="number"  value="{lingzh:$list['sale_price']}" name="sale_price" class="px required" style="width:200px;"></td>
+                    </tr-->
+                    <tr>
+                        <th>开启库存：</th>
+                        <td>
+                            <div class="switch switch_anchor" data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+                                <input type="checkbox" onChange="inventory_change(this)" id="open_inventory" name="open_inventory" <?php echo $list['open_inventory'] == 1 ? "checked" : "" ; ?> value="1"/>
+                            </div>
+                        </td>
+                        <th>
+                            <span id = "inventory_title">库存：</span>
+                        </th>
+                        <td colspan="3">
+                            <input id="inventory_value" type="text" name="inventory" value="{lingzh:$list['inventory']}" class="px required digits" style="width:200px;">
+                        </td>
+                    </tr>
+                    <script type="text/javascript">
+                        function inventory_change($this)
+                        {
+                            var a = $($this).is(':checked');
+                            hide_inventory(a)
+                            
+                        }
+                        function hide_inventory(isHide)
+                        {
+                            if(isHide)
+                            {
+                                $('#inventory_title').show();
+                                $('#inventory_value').show();
+                            }
+                            else
+                            {
+                                $('#inventory_title').hide();
+                                $('#inventory_value').hide();
+                            }
+                        }
+                        $().ready(function(){
+                            <?php 
+                            if($list['open_inventory'] == 1) 
+                            {
+                                echo 'hide_inventory(true);';
+                            }
+                            else
+                            {
+                                echo 'hide_inventory(false);';
+                            }
+                            ?>
+                        });
+                        
+                     function notifyPrice() {
+                    	 	var price = $('input[name="yhprice"]').val();
+            	            $("input[name='sale_price']").val(price ? price : 0);
+            	     }
+                        
+                    </script>
+                    <tr>
+                        <th valign="top"><span>*</span>客房图片：</th>
+                        <td colspan="5">
+                            <img  id="room_img" class="thumb_img" src="<if condition="isset($list['picurl'])">{lingzh:$list.picurl}</if>" style="max-height: 100px;display:block;margin:5px;">
+                            <input type="text" id="pic_url_input" name="picurl" onblur="syncPreviewImg('pic_url_input','room_img')" value="{lingzh:$list['picurl']}" class="px  required" style="width:400px;">
+                            <div class='img_upload_panel' >
+                                <div name='uploadify'  id="uploadify_room"  ></div>
+                                <div id="fileQueue_room"></div>
+                                <div style="clr:both; height:0px;"></div>
+                            </div>
+                            <!--<input type="text" id="pic_url_input" name="picurl" value="{lingzh:$list['picurl']}" class="px" style="width:400px;"><span onclick="$('#upload-panel').show();" style="text-decoration:underline;cursor:pointer;"> 点击上传图片 </span>
+                            div class="bdrcontent">
+                            <div id="div_ptype">
+                                <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th width="160">文字描述</th>
+                                            
+                                            <th width="160">图片地址</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody id="div_add_del" name="div_add_del">
+                                        <tr>
+                                            <td width="160"><input type="text" name="name" value="{lingzh:$list['name']}" class="px" style="width:160px;"></td>
+                                            <td width="200"><input type="text" id="pic_url_input" name="picurl" value="{lingzh:$list['picurl']}" class="px" style="width:260px;"><span onclick="$('#upload-panel').show();" style="text-decoration:underline;cursor:pointer;"> 点击上传图片 </span></td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                    </tbody></table>
+                                </div-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <th valign="top">详细说明：</th>
+                            <td valign="top" colspan="5"><textarea class="px" id="info" name="info" style="width: 600px; height: 180px; ">{lingzh:$list['info']}</textarea></td>
+                        </tr>
+                        <tr><th width="100">&nbsp;</th>
+                        <td><button type="submit" name="button" class="btnGreen">保存</button>
+                        <a href="{lingzh::U('Hotel/rooms',array('id'=>$_GET['hid']))}" class="btnGray vm">取消</a></td>
+                    </tr>
+                </tbody></table>
+            </form>
+        </div>
+    </div>
+    <div id="upload-panel" style="display:none" >
+        <div style="position:fixed; width:100%;height:100%;opacity:0.25;z-index:50;top:0;left:0;background-color:#000;"></div>
+        <div style="position:fixed; width:500px;height:500px;opacity:1; left:30%; top:30%;z-index:100;background-color:#fff;">
+            <iframe style=" width:500px;height:450px;" src="{lingzh::U('UploadImg/index')}"></iframe>
+        </div>
+    </div>
+    <script src="/js/kindeditor/kindeditor.js" type="text/javascript"></script>
+	<script src="/js/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+	<script src="/js/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+    <script>
+    function syncPreviewImg(fromId, toId) {
+    	document.getElementById(toId).src=document.getElementById(fromId).value;
+    }
+    $(function () {
+    	$("#uploadify_room").uploadify({
+		    'buttonText' : '上传图片',
+		    'fileTypeDesc' : 'Image Files',
+		    'fileTypeExts' : '*.gif; *.jpg; *.jpeg; *.png',
+		    'fileSizeLimit' : '1MB',
+		    'swf'      : '/js/uploadify/uploadify.swf', //进度条，Uploadify里面含有
+		    'uploader': '/index.php/upload/image', //如果没有相册/3d的概念可以把这两个参数忽略
+		    'cancelImg': '/js/uploadify/uploadify-cancel.png', //取消图片路径
+		    'onFallback': function() {
+		    	alert('您的浏览器没有安装Flash插件');
+		    },
+		    //'folder': 'uploadFile', //上传文件夹名
+		    'queueID': 'fileQueue_room',
+		    'auto': true,
+		    'onUploadSuccess' :  function(file, data, response) {
+			    if (response == true) {
+				    var res_json = eval("("+data+")");
+				    if (res_json.error == 0 ) {
+					    document.getElementById('room_img').src=  res_json.content ;
+					    $('#pic_url_input').val(res_json.content);
+				    } else {
+				    	alert(res_json.message);
+				    }
+			    } else {
+			    	alert("网络不给力啊！亲");
+			    }
+		    },
+		    formData : { '<?php echo 'param1';?>' : '<?php echo base64_encode(session_id());?>' }, <?php  //using session for 302 error of uploadify ?>
+		    //'uploadLimit' : 1,
+		    'multi': false,
+	    });
+	    $("#uploadify_room").css('width', '100%');
+	    $("#uploadify_room").css('margin-bottom', '0px');
+	    $("#uploadify_room").append('<span class="img_upload_tips">支持JPG、PNG、GIF等格式，但大小不超过1MB,<br />或者将图片上传到POCO.cn获取外链</span>');
+    });
+    
+    var editor;
+    KindEditor.ready(function(K) {
+    	editor = K.create('#info', {
+    		resizeType : 1,
+    		allowPreviewEmoticons : false,
+    		allowImageUpload : true,
+    		uploadJson :'/index.php/upload/image',
+    		items : [
+    			'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+    			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+    			'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut', 'image', 'multiimage'
+    		]
+    	});
+    });
+    </script>
+<script type="text/javascript">
+$().ready(function() {
+ $("#hotel_room").validate();
+});
+</script>
+    <include file="Public:footer"/>

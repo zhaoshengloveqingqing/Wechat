@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<title>{lingzh:$tpl['wxname']}</title>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="/themes/w/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="/themes/w/css/page.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+
+ body {
+color: #222;
+font-family: "Microsoft YaHei", Helvitica, Verdana, Tohoma, Arial, san-serif;
+background-color: #EEE;
+margin: 0 auto;
+padding: 0;
+text-decoration: none;
+width: 320px;
+}
+
+.radius {border-radius: 6px;}
+
+.margin10 {
+margin: 10px;
+}
+.mainmenu2 {
+margin: 0 auto;
+display: block;
+border: 1px solid #DDD;
+}
+
+.radius_top {
+border-top-left-radius: 0.6em;
+border-top-right-radius: 0.6em;
+border-bottom-left-radius: 0.6em;
+}
+
+li.border-top-none {border-top: 0px solid #DDD;}
+.mainmenu2 .menubtn {
+display: block;
+min-height: 60px;
+position: relative;
+overflow: hidden;
+}
+
+.mainmenu2 li {
+display: block;
+position: relative;
+z-index: 1;
+color: #222;
+border-top: 1px solid #FFF;
+border-left: 1px solid #FFF;
+border-right: 1px solid #FFF;
+border-bottom: 1px solid #DDD;
+font-weight: bold;
+text-shadow: 0 1px 0 #FFF;
+text-decoration: none;
+background: #FFF;
+-moz-user-select: none;
+-webkit-user-select: none;
+-ms-user-select: none;
+}
+
+.mainmenu2 li {
+color: #222;
+font-weight: bold;
+text-shadow: 0 1px 0 #FFF;
+}
+
+.mainmenu2 li a {
+display: block;
+padding: 0.7em 15px;
+font-size: 14px;
+color: #000;
+text-decoration: none;
+padding-right: 40px;
+}
+
+.mainmenu2 .icon {
+margin-top: -9px;
+position: absolute;
+top: 50%;
+right: 10px;
+height: 18px;
+width: 18px;
+background: url(/themes/w/images/jiantou.png) no-repeat 0 0;
+background-size: 18px 18px;
+}
+
+
+div.copyright{font-size:14px;text-align:center;color:#000;margin:8px;}
+a.copyright{font-size:14px;text-align:center;color:#000;margin:8px 0px;text-decoration:underline;}
+div.tech-support{font-size:12px;text-align:center;color:#000;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+.clr {clear: both;}
+
+.page-prev, .page-cur, .page-next, .page-next a{
+	float : left;	
+}
+
+</style>
+</head>
+
+<body>
+<div>
+  <ul class="mainmenu2 radius margin10">
+    
+    <volist name="res" id="vo">
+    <li class="radius_top border-top-none">
+      <div class="menubtn">
+        <if condition="$vo['url']">
+        <a href="{lingzh:$vo.url}">
+        <else />
+        <a href="{lingzh:$vo.hyperlink}">
+        </if>
+          <h2 class="menutitle">{lingzh:$vo.title}</h2>
+          <p class="menudesc"><php> echo my_cus_substr($vo['content'], 20);</php></p>
+        </a> 
+        <span class="icon">&nbsp;</span> 
+      </div>
+    </li>
+    </volist>
+  </ul>
+  
+</div>
+
+
+<div id="page-navi">
+  <div class="page-navi-block">
+    <div class="page-navi-inline">
+      
+        <div class='page-prev <eq name="p" value="1"> page-grey </eq> '><span class="page-arrow-area"><em></em></span><a <gt name="p" value="1">href="/index.php?g=Wap&m=Index&a=lists&classid=<php>echo $_GET['classid'];</php>&token={lingzh:$tpl.token}&wecha_id={lingzh:$wecha_id}&wxref=mp.weixin.qq.com&p=<php>echo $p-1;</php>"</gt>  >上一页</a>
+      </div>
+    
+      <div class="page-cur">
+        <div class="page-cur-bg page-arrow-down"><span>{lingzh:$p}/{lingzh:$page}</span><span></span></div>
+       
+        <select class="page-drop-down" onchange="dourl('/index.php?g=Wap&m=Index&a=lists&classid=<php>echo $_GET['classid'];</php>&token={lingzh:$tpl.token}&p='+this.value + '&wecha_id={lingzh:$wecha_id}&wxref=mp.weixin.qq.com')">
+          <?php
+            for($i=1;$i<=$page;$i++){
+              if($i==$p){
+                echo '<option value="'.$i.'" selected>第'.$i.'页</option>';
+              }else{
+                echo '<option value="'.$i.'">第'.$i.'页</option>';
+              }
+            }
+          ?>
+        </select>
+      </div>
+
+      <div class='page-next <eq name="p" value="$page"> page-grey </eq>'  >
+        <?php
+          if($p < $page){
+            echo '<a href="/index.php?g=Wap&m=Index&a=lists&classid='.(int)$_GET['classid'].'&token='.$tpl['token'].'&p='.($p+1).'&wecha_id='.$wecha_id.'&wxref=mp.weixin.qq.com'.'">';
+          }else{
+            echo '<a>';
+          }
+        ?>
+        下一页</a>
+        <span class="page-arrow-area"><em></em></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="clr"></div>
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+
+<script>
+function dourl(url){
+location.href= url;
+}
+</script>
+
+</body>
+</html>

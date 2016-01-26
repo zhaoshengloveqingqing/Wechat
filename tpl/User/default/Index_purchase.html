@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<include file="lingzh:header"/>
+<style type="text/css">
+
+.maincontent { width: 1000px;  margin: 10px auto; }
+
+.sideBar { border: 1px solid #D3D3D3; float: left; width: 20%; }
+.sideBar .catalogList ul {background-color: #F3F3F3;width: 100%; min-height: 770px;}
+.sideBar .catalogList ul li{display: block;text-align: center;}
+
+.sideBar .catalogList ul li.selected { background-color: #72A4C7; color: #FFF; font-size:14px; height:35px; padding-top:5px; }
+.sideBar .catalogList ul li.nav-header { background-color: #f3f3f3; line-height: 40px;  font-size: 16px; font-weight: bold;}
+
+
+.sideBar .catalogList ul li.subCatalogList {  margin-top: 2px; line-height: 30px; font-size:14px;height:35px; padding-top:5px; border-top: 1px solid #D3D3D3;}
+.sideBar .catalogList ul li.subCatalogList a {display: block;}
+.sideBar .catalogList ul li.subCatalogList:hover {  background-color: #72A4C7;}
+.sideBar .catalogList ul li:hover a, .sideBar .catalogList ul li:hover span {  color:#fff; text-decoration: none;}
+
+
+.sideBar .catalogList ul li.selected a { color: #fff; }
+
+.content { border: 1px solid #D3D3D3;border-left:none;float: left; padding: 0px 20px; background-color: #FFF; min-height: 770px; width: 75% ;}
+
+.content .star { color: red; font-weight:bold;}
+
+.content .title {font-size: 18px; padding: 20px 0; border-bottom: 1px solid #EEE; font-weight: bold; color: #424242;}
+
+.content .input-box {width: 300px; height: 14px; padding: 8px 10px; margin:10px; border: 1px solid #CCC; border-radius: 2px 2px 2px 2px;} 
+.content label{ height: 14px;color: #626262; font-size:14px;} 
+
+.content  .btnGreen {
+border: 1px solid #3D810C;
+box-shadow: 0 1px 1px #AAA;
+-moz-box-shadow: 0 1px 1px #aaa;
+-webkit-box-shadow: 0 1px 1px #AAA;
+padding: 5px 20px;
+cursor: pointer;
+display: inline-block;
+text-align: center;
+vertical-align: bottom;
+overflow: visible;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+background-color: #5BA607;
+background-image: linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -moz-linear-gradient(bottom, #4d910c 3%, #69b310 97%, #fff 100%);
+background-image: -webkit-linear-gradient(bottom, #4D910C 3%, #69B310 97%, #FFF 100%);
+color: #FFF;
+font-size: 14px;
+line-height: 1.5;
+}
+
+.content .btnGreen:hover {
+background-color: #5BA607;
+background-image: linear-gradient(bottom, #3d810c 3%, #69b310 97%, #fff 100%);
+background-image: -moz-linear-gradient(bottom, #3d810c 3%, #69b310 97%, #fff 100%);
+background-image: -webkit-linear-gradient(bottom, #3D810C 3%, #69B310 97%, #FFF 100%);
+color: #FFF;
+}
+
+
+.content .userinfoArea { margin: 20px 0; }
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="/themes/a/css/branch.css" />  
+<link rel="stylesheet" type="text/css" href="/themes/a/css/inside.css" /> 
+<link rel="stylesheet" type="text/css" href="/themes/a/css/purchase.css" /> 
+
+<div class="maincontent">
+ 
+
+  <div class="sideBar">
+    <div class="catalogList">
+      <div style="float:left; position: absolute; top:115px; margin-left:45px;"> <img src="/themes/a/images/listicon2.png"/></div>
+      <ul>            
+        <li class="nav-header" >管理中心</li>
+        <li class="subCatalogList " > <a href="{lingzh::U('Index/index')}">我的公众号</a></li>
+        <li class="subCatalogList "> <a href="{lingzh::U('Index/useredit')}">修改密码</a> </li>
+        <li class="subCatalogList selected"> <a >账户充值</a> </li>
+      </ul>
+    </div>
+  </div>
+<div class="content2">
+     <div class="tab">
+            <ul>
+            <li class="tabli " id="tab0"><a href="{lingzh::U('Index/activate')}">我已有充值码</a></li>
+            <li class="tabli current" id="tab2"><a href="{lingzh::U('Index/purchase')}">我要购买套餐</a></li>
+            </ul>
+    </div>
+    <br/>
+    <div class="purchase_preview">
+        <empty name='last_purchase'>
+            <else />
+                <label class="plain_desc">最近订单编号：</label>
+                <label class="content_desc">{lingzh:$last_purchase.trade_no}</label>
+               
+                <label class="content_desc">
+                    <php>echo $merchantPackages[$last_purchase['package_id']]['name'];
+                        $package_type = $merchantPackages[$last_purchase['package_id']]['type'];
+                        if($package_type == 1) {
+                            echo '('. $last_purchase['package_duration'].'月)';
+                        }
+                        else {
+                            echo '('.$last_purchase['package_duration'].'条)';
+                        }
+                    </php></label>
+                <label class="content_desc">
+                    <b>
+                        <php>
+                            switch($last_purchase['status']) {
+                            case 1:
+                                echo '等待付款';
+                                break;
+                            case 6:
+                                echo '交易成功';
+                                break;
+                            default:
+                                echo '交易失败';
+                                break;
+                            }
+                        </php>
+                    </b>
+                </label>
+                 <label class="plain_desc">提交日期：</label>
+                <label class="content_desc">{lingzh:$last_purchase.submit_time|date="y-m-d H:i:s",###}</label>
+                <div style="clear:both;padding-top:10px;"></div>
+                <a id="more_orderlist" href="javascript:void(0)">查看更多购买记录 >></a>
+              
+        </empty>
+    </div>
+    <div class="package_orderlist display_none">
+        <table style="margin-bottom:10px;">
+            <thead>
+                <th>套餐项目</th>
+                <th>套餐周期</th>
+                <th>总价</th>
+                <th>状态</th>
+                <th>提交日期</th>
+                <th>订单号</th>
+            </thead>
+            <tbody>
+            <volist name="orders" id="order">
+                <tr>
+                    <td><php>echo $merchantPackages[$order['package_id']]['name'];</php></td>
+            <td><php>
+                $package_type = $merchantPackages[$order['package_id']]['type'];
+                if($package_type == 1) {
+                    echo $order['package_duration'].'月';
+                }
+                else {
+                    echo $order['package_duration'].'条';
+                }
+               </php></td>
+                    <td>{lingzh:$order.total_fee}元</td>
+                    <td>
+                          <php>
+                            switch($order['status']) {
+                            case 1:
+                                echo '等待付款';
+                                break;
+                            case 6:
+                                echo '交易成功';
+                                break;
+                            default:
+                                echo '交易失败';
+                                break;
+                            }
+                        </php>
+                    </td>
+                    <td>{lingzh:$order.submit_time|date="y-m-d H:i:s",###}</td>
+                    <td>{lingzh:$order.trade_no}</td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+       <div class="packages">
+           <form action="{lingzh::U('MerchantPay/start_m_alipay')}" method="post">
+            <label class='package_guide'>套餐项目：</label>
+            <select id="packageId" name="package_id" class='normal_select'>
+                <volist name='merchantPackages' id='package'>
+                    <option package-type="{lingzh:$package.type}" value="{lingzh:$package.id}">{lingzh:$package.name}
+                    </option>
+                </volist>
+            </select>
+            <div class='display_none'>
+                <volist name='merchantPackages' id='package'>
+                    <input type='hidden' id='price_{lingzh:$package.id}' value='{lingzh:$package.price_month}' />
+                </volist>
+            </div>
+
+            <label class='package_guide'>套餐量：</label>
+            <select  id="packageDuration" name="package_duration" class='normal_select'>
+                
+            </select>
+            <label class="package_guide">应付总价：</label>
+            <label id='currcharge' class="package_price">0</label>
+            <span class="package_guide">元</span>
+            <div class='invoice'>
+                <input type="checkbox" id="select_invoice" name='need_invoice'>
+                <span class='package_guide'>开具发票(500元以上)</span>
+                 
+                <div style='clear:both'></div>
+            </div>
+            <div class="invoice-field display_none" >
+                    <div style="margin-top: 15px; font-size: 13px; margin-bottom:10px;">
+                            发票类型：<b id="invoice_type" style="color: #f63">普票</b>
+                    </div>
+                    <div id="normal_invoice_area">
+                            <div class="input-prepend">
+                              <span class="add-on">公司名称：</span>
+                              <input name='invoice_crp' class="span2" style="width: 623px" id="invoice_crp" type="text" placeholder="请填写公司名称">
+                            </div>
+
+                            <div class="input-prepend invoice_float">
+                              <span class="add-on">收件人：</span>
+                              <input name="invoice_name" class="span2" style="width: 423px" id="invoice_name" type="text" placeholder="请填写收件人姓名">
+                            </div>
+
+                            <div class="input-prepend">
+                              <span class="add-on">联系电话：</span>
+                              <input name="invoice_phone" class="span2" style="width: 110px" id="invoice_phone" type="text">
+                            </div>
+
+                            <div class="input-prepend invoice_float">
+                              <span class="add-on">邮寄地址：</span>
+                              <input name="invoice_address" class="span2" style="width: 410px" id="invoice_address" type="text" placeholder="请填写邮寄地址">
+                            </div>
+
+                            <div class="input-prepend">
+                              <span class="add-on">邮政编码：</span>
+                              <input name="invoice_zipcode" class="span2" style="width: 110px" id="invoice_zipcode" type="text">
+                            </div>
+                    </div>
+            </div>
+            <div class='payment'>
+                    <input type="checkbox" id="select_license"> 我已阅读并同意
+                    <a target="_blank" style="color: #36c;" href="/merchant_license.html">{lingzh::C('company_short_name')}用户服务协议</a>
+                    <img id="pay_btn" class="cursor_p" src="/themes/a/images/btn-payment.jpg" style="max-height: 35px;margin-top:8px;margin-left:15px;">
+                   
+                </div>
+            </form>
+    </div>
+    
+    <div id="fallr-overlay"></div>
+    <div id="fallr-wrapper" style=" display:none;width: 360px; height: auto; position: fixed; top: 227px; left: 400px; z-index: 999999;"><div id="fallr-icon" class="icon-msg-window"></div><div id="fallr" style="height: auto; width: 266px;"><p>请您在新打开的页面完成支付</p></div><div id="fallr-buttons"><a href="#" class="fallr-button fallr-button-danger" id="fallr-button-button1">支付成功</a><a href="#" class="fallr-button " id="fallr-button-button2">重新下单</a></div></div>
+    <div class="package_details" style="margin-top:25px;">
+        <div><label class="package_guidetitle">方案详细说明如下图：<br /></label></div>
+        <volist name='merchantPackages' id='package'>
+            <img id='detail_img_{lingzh:$package.id}' class='detail_img display_none' src="{lingzh:$package.detail_img}"  style="margin-top:10px;"/>
+        </volist>
+    </div>
+    <script type='text/javascript'>
+        function package_volume_change() {
+            var packageDuration = $("#packageDuration").val();
+            var packageId = $("#packageId").val();
+            var price_unit = $("#price_" + packageId).val();
+            var totalCharge = price_unit * packageDuration;
+            //alert(packageId + ' ' + packageDuration + ' ' + price_unit + ' ' + totalCharge);
+            $('#currcharge').text(totalCharge);
+            $('.detail_img:visible').addClass('display_none');
+            $('#detail_img_'+packageId).removeClass('display_none');
+        }
+        
+        function package_change() {
+            var package_type = $("#packageId option:selected").attr('package-type');
+            switch(package_type) {
+                case '2':
+                    // 短信包
+                    $("#packageDuration").html("<option value='500'>500条</option><option value='1000'>1000条</option>");
+                    break;
+                case '1':
+                    // 功能套餐
+                    $("#packageDuration").html("<option value='12'>一年</option>");
+                    break;
+                default:
+                    break;
+            }
+            package_volume_change();
+        }
+        
+        function invoice_change() {
+           $('.invoice-field').toggle();
+        }
+        
+        function OpenWindowWithPost(url, name, params) {
+            
+             var form = document.createElement("form");
+             form.setAttribute("method", "post");
+             form.setAttribute("action", url);
+             form.setAttribute("target", name); 
+             for (var i in params) { 
+                 var input = document.createElement('input');
+                 input.type = 'hidden';
+                 input.name = params[i].name;
+                 input.value = params[i].value;
+                 form.appendChild(input);
+             }
+             document.body.appendChild(form); 
+             form.submit();
+             document.body.removeChild(form);
+         }
+        function pay_btnclick() {
+            if(!$('#select_license').is(':checked')) {
+                alert('请阅读并同意 {lingzh::C('company_short_name')}用户服务协议');
+                return;
+            }
+            
+            var form1 = $("form"), action = form1.attr("action"); 
+             OpenWindowWithPost(action, "buy", form1.serializeArray());
+             $('#fallr-overlay').addClass('fallr-overlay-background');
+             $('#fallr-overlay').show();
+             $('#fallr-wrapper').show();
+             
+             $('#fallr-button-button1').click(function () 
+             {
+                 window.top.location.reload();
+             });
+              $('#fallr-button-button2').click(function () 
+             {
+                 window.top.location.reload();
+             });
+             
+        }
+        
+
+        $(function(){
+            $("#packageId").change(package_change);
+            $("#packageDuration").change(package_volume_change);
+            $("#packageId").change();
+            
+            $('#select_invoice').change(invoice_change);
+            
+            $('#pay_btn').click(pay_btnclick);
+            
+             $('#more_orderlist').click(function() {
+                    $('.package_orderlist').toggle();
+                });
+        });
+    </script>
+    <div class="clr"></div>
+  </div>
+  <!--底部-->
+</div>
+<include file="Public:footer"/>	

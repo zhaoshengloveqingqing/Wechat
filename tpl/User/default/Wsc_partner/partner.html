@@ -1,0 +1,96 @@
+<include file="Public:head"/>
+<div class="content">
+
+<div class="cLineB">
+  <h4 class="left">发展部门管理</h4>
+  <div class="searchbar right">
+		<form method="post" action="">
+			<input type="text" class="txt left" placeholder="输入关键词搜索"	name="search" value="{lingzh:$search}"> 
+			<input type="submit" value="搜索" href="" class="btnGrayS" title="搜索">
+		</form>
+	</div>
+</div>
+<div class="cLine" style="line-height: 32px;">
+ 	<div class="pageNavigator left">
+		<a href="{lingzh::U('Wsc/add_partner')}" title="新增发展部门" 	class="btnGrayS vm bigbtn">
+		<img src="/themes/a/images/add.png"	class="vm">新增发展部门</a>
+		<a onclick="$('#import_partnerinfo').toggle();" title='导入合作伙伴' class='btnGrayS vm bigbtn'><img src="./tpl/User/default/common/images/pic.png" class="vm" />发展部门伙伴</a>
+	</div>
+</div>
+
+<div id="import_partnerinfo" style="display:none;margin-top:5px;">
+    <div class="cLineD" style=" margin: 0px 10px 10px 0px; border: 1px #E0E0E0  solid; padding: 10px; border-radius: 5px;">
+	    <form method="post" action="{lingzh::U('Wsc/import_partner')}" enctype="multipart/form-data">
+	        <div class="cLineB"><h4>导入发展部门信息</h4></div>
+          <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+	          <tbody>
+  	          <tr>
+  	            <td>
+                  <a href="/tpl/User/default/partner-entity-tpl.xls" target="_blank" class="green">下载模板文件partner-entity-tpl.xls（支持excel 2003,2007格式）</a>
+                </td>
+  	          </tr>
+  	          <tr>
+  	            <td>
+                  <input  type="file" class="text textMiddle" name="partner" />&nbsp;&nbsp;
+                  <button type="submit" name="button" class="btnGreen">提交</button> 
+                  <strong> <font color="red"> 若有重复项，会覆盖原有的记录。</font></strong>
+                </td>
+  	          </tr>
+	          </tbody>
+          </table>
+      </form>
+    </div>
+    <div class="clr"></div>
+</div>
+ 
+ <div class="msgWrap form">
+
+<div class="bdrcontent">
+<div id="div_ptype">
+<table class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+	<thead>
+		<tr>
+			<th>名称</th>
+			<th>编号</th>
+			<th>所在部门</th>
+			<th>手机</th>
+			<th>银行账号</th>
+			<th>详细地址</th>
+			<th class="norightborder" align="center">操作</th>
+		</tr>
+	</thead>
+	<volist name="partner" id="vo">
+		<tr>
+			<td>{lingzh:$vo.part_name}</td>
+			<td>{lingzh:$vo.part_num}</td>
+			<td>{lingzh:$vo.dept_name}</td>
+			<td>{lingzh:$vo.mobile}</td>
+			<td>{lingzh:$vo.bank_account}</td>
+			<td>{lingzh:$vo.address}</td>
+			<td class="norightborder" align="center">
+			  <a href="{lingzh::U('Wsc/qr',array('partner_id'=>$vo['part_id']))}"  target="_blank">二维码</a> 
+			  <a href="{lingzh::U('Wsc/shop_orders',array('partner_id'=>$vo['part_id']))}">管理</a> 
+			  <a href="{lingzh::U('Wsc/edit_partner',array('partner_id'=>$vo['part_id'],'pids'=>$vo['dept_pid']))}"  target="_blank">修改</a> 
+			  <a href="{lingzh::U('Wsc/del_partner',array('partner_id'=>$vo['part_id']))}"  target="_self">删除</a> 
+			  <!-- <a href="{lingzh::U('Wsc/shop_index',array('partner_id'=>$vo['part_id']))}"  target="_blank">分店</a>  -->
+			</td>
+		</tr>
+	</volist>
+  </table>
+</div>
+</div>
+<div class="footactions" style="padding-left:10px">
+  <div class="pages">{lingzh:$page}</div>
+</div>
+          </div>
+  
+        </div>
+   
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div> 
+  <!--底部-->
+  	</div>
+
+<include file="Public:footer"/>

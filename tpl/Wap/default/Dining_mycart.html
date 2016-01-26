@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/dining.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/dining-dialog.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/themes/w/css/datepicker_canyin.css" media="all" />
+    <script type="text/javascript" src="/themes/w/js/jQuery.js"></script>
+    <script type="text/javascript" src="/themes/w/js/wei_webapp_v2_common.js"></script>
+    <script type="text/javascript" src="/themes/w/js/bootstrap-datepicker_canyin.js"></script>
+<title>我的菜单</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+</head>
+<body id="page_intelOrder" class="myOrderCon">
+    <style>
+    .btn_common{
+        font-size:12px;
+        padding: 5px 8px;
+        border: 0;
+        border-radius: 2px;
+        cursor: pointer;
+        background-color: #2ec366;
+        color: #fff;
+    }
+    .dish_item textarea{
+        padding: 8px;
+        background: #eaeaea;
+        border-radius: 12px;
+        border: 1px solid #dedede;
+        outline: none;
+        resize: none;
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        box-shadow: none;
+        display:none;
+    }
+    .dish_item{
+        height:45px!important;
+    }
+    .dish_item.on{
+        height:97px!important;
+    } .dish_item.on textarea{
+        margin-top:3px;
+        display:block;
+    }
+    
+    .vcbutton {
+display: block;
+height: 38px;
+line-height: 38px;
+padding: 0 5px;
+background: #40bb6e;
+color: #ffffff;
+text-align: center;
+border-radius: 1px;
+font-size: 16px;
+width:70%
+}
+</style>
+
+
+
+<header  style="padding-top:20px;">
+    <span class="pCount" style="">已点<l style="color:red" id="countnums" nums="{lingzh:$num}">{lingzh:$num}</l>个菜</span>
+    <label><i>共计：</i><b class="duiqi" id="total">{lingzh:$price}元</b></label>
+</header>
+
+<section style="margin-bottom:10px;">
+    <article>
+        <h2>我的菜单
+            <button class="btn_add emptyIt" id="clearBtn" onclick="clearAll();">清空</button>
+            <button class="btn_add" onClick="location.href = './index.php?g=Wap&m=Dining&token={lingzh:$token}&a=index&rest_id={lingzh:$order.rest_id}'">+加菜</button>
+        </h2>
+        <ul id="myorder" class="myorder">
+        <volist name="menus" id="menu">
+            <li class="dish_item" did="{lingzh:$menu.dishes_id}" dname="{lingzh:$menu.name}" dprice="{lingzh:$menu.price}" ddescribe="{lingzh:$menu.describe}">
+                <span class="dishName">{lingzh:$menu.name}</span>
+                <i>{lingzh:$menu.price}元/份</i>
+                <section class="bbox" dishname="{lingzh:$menu.name}" onclick="changeCount(this, event, {lingzh:$menu.dishes_id});">
+                    <input class="btn-reduce" type="button" value="-">
+                    <input class="numBox" name="numBox" type="text" value="1" price="{lingzh:$menu.price}" readonly="readonly">
+                    <input type="button" class="btn-plus" value="+">
+                </section>
+            </li>
+        </volist>
+        </ul>
+    </article>
+</section>
+<section style="margin-bottom:40px;">
+    <article>
+        <div id="form_dish">
+            <input type="hidden" name="id" value="" />
+            <table class="table_book">
+                <tr>
+                    <td width="80px" style="width:80px;">手机号码：</td>
+                    <td colspan="2"><input type="tel" id="tel" name="tel" value="<if condition="isset($user['tel'])">{lingzh:$user.tel}</if>" maxlength="11" placeholder="(必填*)请输入您的手机号码" style="width:200px;"/></td>
+                </tr>
+                <eq name="enable_vcode" value="1">
+                    <tr>
+                        <td  style="width:100px;"><input name="smsvcode"  type="text"  class="px" id='smsvcode' value="" placeholder="短信验证码"></td>
+                        <td colspan="2"><a id='vcodelink'  href="javascript:void(0);" class="vcbutton">获取验证码</a></td>
+                   
+                    </tr>
+                    
+                </eq>
+                <tr>
+                    <td style="width:80px;">用户姓名：</td>
+                    <td colspan="2">
+                        <input type="text" name="username" id="username" value="<if condition="isset($user['username'])">
+                        {lingzh:$user.username}</if>" placeholder="(必填*)请输入您的真实姓名" maxlength="10" style="width:200px;"/>
+                    </td>
+                    <!--td>
+                        <div class="group_checkbox" style="width:70px;display:inline;">
+                            <input type="checkbox" value="1" name="sex" checked="checked" />
+                        </div>
+                    </td-->
+                </tr>
+                <tr>
+                    <td style="width:80px;">就餐时间：</td>
+                    <td colspan="2">
+                        <input id="dpd1" type="text" name="time_day" readonly="readonly" style="width:80px;"/>
+                        <select name="time_hour">
+                                                            <option value="01">01时</option>
+                                                            <option value="02">02时</option>
+                                                            <option value="03">03时</option>
+                                                            <option value="04">04时</option>
+                                                            <option value="05">05时</option>
+                                                            <option value="06">06时</option>
+                                                            <option value="07">07时</option>
+                                                            <option value="08">08时</option>
+                                                            <option value="09">09时</option>
+                                                            <option value="10">10时</option>
+                                                            <option value="11">11时</option>
+                                                            <option value="12">12时</option>
+                                                            <option value="13">13时</option>
+                                                            <option value="14">14时</option>
+                                                            <option value="15">15时</option>
+                                                            <option value="16">16时</option>
+                                                            <option value="17">17时</option>
+                                                            <option value="18">18时</option>
+                                                            <option value="19">19时</option>
+                                                            <option value="20">20时</option>
+                                                            <option value="21">21时</option>
+                                                            <option value="22">22时</option>
+                                                            <option value="23">23时</option>
+                                                            <option value="24">24时</option>
+                                                    </select>
+                        <select name="time_second">
+                                                            <option value="00">00分</option>
+                                                            <option value="10">10分</option>
+                                                            <option value="20">20分</option>
+                                                            <option value="30">30分</option>
+                                                            <option value="40">40分</option>
+                                                            <option value="50">50分</option>
+                                                            <option value="60">60分</option>
+                                                    </select>
+                    </td>
+                    <!--
+                    <td colspan="2">
+                        <input type="text" name="start_time" value="" style="width:200px;" />
+                        就餐时长：
+                        <select name="time_length">
+                                                            <option value="1" >1小时</option>
+                                                            <option value="2" >2小时</option>
+                                                            <option value="3" >3小时</option>
+                                                            <option value="4" >4小时</option>
+                                                            <option value="5" >5小时</option>
+                        </select>
+                    </td>
+                    -->
+                </tr>
+                </tr>
+
+                <tr>
+                    <td style="width:80px;">就餐人数：</td>
+                    <td colspan="2">
+                        <input type="number" name="nums" id="nums" value="1" min="1" maxlength="3" style="width:100px;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:80px;">桌号：</td>
+                    <td colspan="2">
+                        <input type="text" name="table" id="table" value="" style="width:100px;" placeholder="预约无须填写"/>
+                    </td>
+                </tr>
+                <!--tr>
+                    <td style="width:80px;">就餐形式：</td>
+                    <td colspan="2">
+                        <div class="group_radio">
+                            <span >
+                                <input type="radio" name="seat_type" value="2" checked="checked" />
+                                <label>包间</label>
+                            </span>
+                            <span>
+                                <input type="radio" name="seat_type" value="1" />
+                                <label>大厅</label>
+                            </span>
+                        </div>
+                    </td>
+                </tr-->
+                <tr>
+                    <td style="width:80px;vertical-align:top;line-height:25px;">备注说明：</td>
+                    <td colspan="2">
+                        <textarea id="note" name="note" style="height:60px;" maxlength="100"></textarea>
+                    </td>
+                </tr>
+            </table>
+            <footer>
+                <input type="button" value="立即预定" class="btn_2" id="submit_form" />
+            </footer>
+            
+        </div>
+        
+    </article>
+    
+</section>
+
+</div>
+<div id="footer_menu" class="footer footer_menu" >
+            <ul class="clear" style="position: inherit;">
+                <li><a href="./index.php?g=Wap&m=Dining&a=index&token={lingzh:$token}&rest_id={lingzh:$order.rest_id}" ><span class="icons icons_2"></span><label>点菜</label></a></li>
+                <li><a href="./index.php?g=Wap&m=Dining&a=order&token={lingzh:$token}&rest_id={lingzh:$order.rest_id}" ><span class="icons icons_3"></span><label>我的订单</label></a></li>
+                <li><a href="javascript:void(0);" id="my_menu"><span class="icons icons_5"></a></li>
+            </ul>
+        </div>
+        <script>
+            var footer = document.getElementById("footer_menu");
+            var evtObj = {
+                handleEvent: function(evt){
+                    if("A" == evt.target.tagName){
+                        evt.target.classList.toggle("on");
+                    }
+                }
+            }
+            footer.addEventListener("touchstart", evtObj, false);
+            footer.addEventListener("touchend", evtObj, false);
+        </script>
+<script>var pageName = 'menuFilled';</script>
+<script>
+    $(document).ready(function(){
+        
+        var now = new Date();
+        var nowArr = [now.getFullYear(), now.getMonth() + 1, now.getDate()];
+        $("#dpd1").each(function(k, v) {
+            var ndate = $(v).datepicker({
+                format: "yyyy/mm/dd",
+                onRender: function(date) {
+                    var t1 = new Date(date.valueOf());
+                    var t2 = new Date(now.valueOf());
+                    t1 = t1.getFullYear() + "/" + (t1.getMonth() + 1) + "/" + t1.getDate();
+                    t2 = t2.getFullYear() + "/" + (t2.getMonth() + 1) + "/" + t2.getDate();
+                    return (t1 != t2 && (date.valueOf() < now.valueOf())) ? 'disabled' : '';
+                }
+            }).on("changeDate", function(date) {
+                if ('days' == date.viewMode) {
+                    ndate.datepicker('hide');
+                }
+            });
+            v.value = nowArr.join("/");
+        });
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            WeixinJSBridge.call('hideToolbar');
+        });
+    });
+    //
+    
+    function changeCount(thi, evt, dishes_id) {
+        if ("button" == evt.target.type) {
+            var counter = thi.querySelectorAll("input[name='numBox']")[0];
+            
+            var val = parseInt(counter.value);
+            
+            var countnums = parseInt($("#countnums").attr("nums"));
+            if ("btn-reduce" == evt.target.className) {
+                val--;
+            } else {
+                val++;
+            }
+			if (val == 0) {
+			    var id = parseInt(thi.parentElement.attributes.getNamedItem("did").value);
+			    $("[did='" + id +"']").remove();
+			}
+            counter.value = Math.max(0, val);
+            if(val >= 0){
+                if ("btn-reduce" == evt.target.className) {
+                    var num = countnums - 1;
+                } else {
+                    var num = countnums + 1;
+                }
+                $("#countnums").html(num);
+                $("#countnums").attr("nums",num);
+            }
+            var totalPrice = 0;
+            $("#myorder li").each(function (ele) {
+                totalPrice += parseFloat($(this).attr("dprice")) * parseInt($(this).children("section").children(".numBox").val());
+            });
+            $("#total").html((totalPrice).toFixed(2) + "元");
+        }
+    }
+
+    //
+    function clearAll() {
+        MDialog.confirm(
+                '', '是否清空菜单？', null,
+                '确定', function() {
+                    $.ajax({
+                        'url': './index.php?g=Wap&m=Dining&a=clear&token={lingzh:$token}&cart_id={lingzh:$order.id}',
+                        'success': function(db) {
+                            $('#myorder').empty();
+                            $('#total').text('0');
+                        }
+                    });
+
+                }, null,
+                '取消', null, null,
+                null, true, true
+                );
+    }
+    //
+
+    function slideOn(thi, evt) {
+        var li = $(thi).closest("li");
+        li["toggleClass"]("on");
+    }
+
+</script>
+
+<script type="text/javascript">
+        
+function validateTel(telno){
+    if(telno.length != 11) {
+        return false;
+    }
+    var reg = new RegExp('^[0-9]+$');
+    return reg.test(telno);
+}
+
+function getVCode(){
+    var telno = $('#tel').val();
+    if(!validateTel(telno)){
+        alert('请输入合法的手机号！');
+        return;
+    }
+    
+    var postdata = {
+        "telno": telno,
+        "wecha_id": '{lingzh:$wecha_id}',
+        "token": '{lingzh:$token}',
+        "func": "vccanyin",
+    };
+    
+    var prev_text = $(this).text();
+    $(this).unbind('click', getVCode);
+    $(this).text("正在获取...");
+    var vcodelink = this;
+    $.ajax({
+            url: "{lingzh::U('Smsvcode/getVCode')}",
+            type:"post",
+            data:postdata,
+            dataType:"JSON",
+            success: function(res){
+                switch(res.errcode)
+                {
+                   case 0: //success
+                        alert('验证码已发送至您手机，请查收！');
+                        var seconds = 60;//seconds
+                        var ticker = function(){
+                            setTimeout(function(){
+                                    seconds --;
+                                    if(seconds>0){
+                                            $(vcodelink).text( seconds+"秒后可重获");
+                                            ticker();
+                                    }else{
+                                            $(vcodelink).bind('click', getVCode);
+                                            $(vcodelink).text(prev_text);
+                                    }
+                                },
+                                1000);
+                        }
+                        ticker();
+                        break;
+                    case 2: // exceed max limit
+                        $(vcodelink).bind('click', getVCode);
+                        $(vcodelink).text(prev_text);
+                        break;
+                    default:
+                        alert("获取验证码失败！");
+                        $(vcodelink).bind('click', getVCode);
+                         $(vcodelink).text(prev_text);
+                        break;
+                }
+            }
+	});
+}
+
+function submit_handler() {
+
+            if (null == $('#tel').val().match(/^1\d{10,13}$/g)) {
+                alert("请输入正确的手机号");return false;
+                MDialog.alert(null, "请输入正确的手机号", null, "确定");
+                return false;
+            }
+            
+            if($("#username").val() == ''){
+                alert("请输入用户姓名");return false;
+//                MDialog.alert(null, "请输入用户姓名", null, "确定");
+//                return false;
+            }
+           
+            if (null == $('#nums').val().match(/^[0-9]*[1-9][0-9]*$/)) {
+                alert("请输入正确的预定人数");return false;
+                MDialog.alert(null, "请输入正确的预定人数", null, "确定");
+                return false;
+            }
+            
+            var params = '[';
+            var price = 0;
+            $("#myorder li").each(function (ele) {
+                params += '{"dishes_id":' + $(this).attr("did") + ','
+                params += '"price":' + $(this).attr("dprice") + ','
+                params += '"name":"' + $(this).attr("dname") + '",'
+                params += '"describe":"' + $(this).attr("ddescribe") + '",'
+                params += '"nums":' + $(this).children("section").children(".numBox").val() + '},'
+                price += parseFloat($(this).attr("dprice"));
+            });
+            
+            if(price < 0){
+                alert("订单价格有误，请重新下单");return false;
+            }
+            
+            params = params.replace(/,$/, "");
+            params += ']';
+            
+            var smsvcode = $('#smsvcode').val();
+            if($('#smsvcode').length > 0 && smsvcode.length != 6) {alert('请输入6位短信验证码');return;}
+
+            var dinetime = $("input[name='time_day']").val() + " " 
+                 + $("select[name='time_hour']").val() + ":" 
+                 + $("select[name='time_second']").val();
+         
+            $('#submit_form').unbind('click', submit_handler);
+            $.ajax({
+               'url': './index.php?g=Wap&m=Dining&a=book&token={lingzh:$token}',
+               'data': {'menus': params,
+                        'cart_id':{lingzh:$order.id},
+                        'tel':$('#tel').val(), 
+                        'smsvcode' : smsvcode,
+                        'username':$('#username').val(),
+                        'dinetime':dinetime,
+                        'guestnum':$('#nums').val(),
+                        'note':$('#note').val(),
+                        'table':$('#table').val()
+                        },
+               'type': 'POST',
+               'dataType':'json',
+               'async': false,
+               'success': function(re) {
+                   if(re.status){                    
+                       location.href='./index.php?g=Wap&m=Dining&a=order&token={lingzh:$token}&rest_id={lingzh:$order.rest_id}';
+                   }
+                   else{
+                        alert(re.data);
+                        $('#submit_form').bind('click', submit_handler);
+                   }
+               }
+            });
+        }
+    $(function() {
+        $('#vcodelink').bind('click', getVCode);
+        $('#submit_form').bind('click', submit_handler);
+    });
+    
+    
+
+
+</script>
+<iframe name="hide" style="display:none;"></iframe>
+</body>
+</html>

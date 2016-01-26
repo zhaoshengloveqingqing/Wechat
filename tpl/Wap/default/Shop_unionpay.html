@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <meta name="Keywords" content="苏州派尔网络科技、微汽车、微信营销、微网站、微商城、微营销" />
+        <meta name="Description" content="苏州派尔网络科技，国内最大的微信公众智能服务平台。" />
+        <!-- Mobile Devices Support @begin -->
+        <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+        <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta content="0" http-equiv="expires">
+        <meta content="telephone=no, address=no" name="format-detection">
+        <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <title>银联支付</title>
+        <script type="text/javascript" src="/themes/w/js/jQuery.js"></script>
+        <style type="text/css">
+	        *{ margin:0px; padding:0px;-webkit-box-sizing:border-box;}
+	        .body { text-align:center; width:100%; padding:60px 20px; }
+	        .body .ordernum{ font-size:14px; line-height:30px;}
+	        .body .money{ font-size:20px; font-weight:bold; line-height:60px;}
+	        .body .time{font-size:16px; font-weight:bold; line-height:30px;}
+	        .body .paybtn{ display:block;background:#25a52e; text-decoration:none; border-radius:2px; color:#fff; height:44px; line-height:44px; font-size:18px; margin-top:20px;}
+        </style>
+	</head>
+	<!-- script language="javascript">
+		document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+			WeixinJSBridge.call('showOptionMenu');
+		});
+	</script -->
+	<body>
+	    <section class="body">
+	        <div class="ordernum">订单号：{lingzh:$order['orderId']}</div>
+	        <div class="ordernum">交易流水号：{lingzh:$order['tradeId']}</div>
+	        <div class="money">共计金额￥<php>echo sprintf('%.2f', $order['total_fee'] * 0.01);</php></div>
+	        <div class="time">下单时间：{lingzh:$order['order_time']|date="Y-m-d H:i:s",###}</div>
+	        <a href="{lingzh:$order['unionpay_url']}" class="paybtn" id='paybtn'>确认支付</a>
+	    </section>
+	</body>
+</html>

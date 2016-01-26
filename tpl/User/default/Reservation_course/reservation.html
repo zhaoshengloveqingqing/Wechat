@@ -1,0 +1,130 @@
+<include file="Public:head"/> 
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+<script src="/themes/a/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<link href="/themes/a/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+<div class="content">
+	  <div class="cLineB">
+	    <h4 class="left">课程预约管理</h4>
+	    <div class="clr"></div>
+	  </div>
+	  <!--tab start-->
+	  <div class="tab">
+		  <ul>
+			  <li class="current tabli" id="tab0"><a href="#">预约管理</a></li>
+			  <li class="tabli" id="tab2"><a href="{lingzh::U('Reservation/course')}">课程管理</a></li>
+		  </ul>
+	  </div>
+	  <!--tab end-->
+	<div class="cLineB">
+	<h4 class="left"></h4>
+	<div class="searchbar right">
+	<form method="post" action="">
+		<input type="text" id="msgSearchInput" class="txt left" placeholder="输入姓名搜索" name="searchkey" value="{lingzh:$search}">
+		<input type="submit" value="搜索" id="msgSearchBtn" class="btnGrayS" title="搜索">
+	</form>
+	</div>
+	<div class="clr"></div>
+	</div>
+	<div class="cLine">
+		<!-- <div class="pageNavigator left"> 
+		    <a href="{lingzh::U('Reservation/add')}" title="新增预约" class="btnGrayS vm bigbtn"><img src="/themes/a/images/add.png" class="vm">新增预约</a>
+		</div>
+		<div class="clr"></div> -->
+	</div>
+	
+	<div class="msgWrap">
+		<form method="post" action="" id="info">
+		<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%" style="float:left;">
+		<thead>
+		<tr>
+			<th align="center" valign="middle">姓名</th>
+			<th align="center" valign="middle">联系方式</th>
+			<th align="center" valign="middle">企业名称</th>
+			<th width="170" align="center" valign="middle">职务</th>
+			<!-- <th align="center" valign="middle">企业总资产</th> -->
+			<!-- <th align="center" valign="middle">邮箱</th> -->
+			<!-- <th width="170" align="center" valign="middle">QQ</th> -->
+			<th align="center" valign="middle">了解渠道</th>
+			<th align="center" valign="middle">所选课程</th>
+			<th class="norightborder" align="center" valign="middle">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<volist name="info" id="vo"> 
+			<tr>
+				<td align="center" valign="middle">{lingzh:$vo.username}</td>
+				<td align="center" valign="middle">{lingzh:$vo.phone}</td>
+				<td align="center" valign="middle">{lingzh:$vo.company}</td>
+				<td align="center" valign="middle">{lingzh:$vo.position}</td>
+				<!-- <td align="center" valign="middle">{lingzh:$vo.total_assets}</td> -->
+				<!-- <td align="center" valign="middle">{lingzh:$vo.email}</td> -->
+				<!-- <td align="center" valign="middle">{lingzh:$vo.qq}</td> -->
+				<td align="center" valign="middle">
+					<switch name="vo.access_from" >
+						<case value="1">网络媒体</case>
+						<case value="2">朋友推荐</case>
+						<case value="3">省经信委</case>
+						<case value="4">省农委</case>
+						<case value="5">省商务厅</case>
+						<case value="6">商会</case>
+						<default />
+					</switch>
+				</td>
+				<td align="left">
+					<php>
+						$enroll_course = explode(',', $vo['enroll_course']);
+						$length = count($enroll_course);
+						if($length){
+							$str = '';
+							foreach($enroll_course as $key=>$id){
+								if( $key == $length - 1 ){
+									$str .= ($res_course[$id] ? $res_course[$id] : '');
+								}else{
+									$str .= ($res_course[$id] ? $res_course[$id].'<br/>' : '');
+								}
+							}
+							echo $str;
+						}
+					</php>
+				</td>
+				<td class="norightborder" align="center" valign="middle">
+					<a href="{lingzh::U('Reservation/edit', array('id'=>$vo['id']))}">编辑</a> 
+					<a href="javascript:drop_confirm('您确定要删除吗?', '{lingzh::U('Reservation/del', array('id'=>$vo['id']))}')">删除</a>
+				</td>
+			</tr>
+		</volist>
+		</tbody>
+		</table>
+		</form>
+		<script>
+			$(document).ready(function() {
+				$('.ListProduct').dataTable({
+				    "aaSorting": [],
+				    "oLanguage": {
+				        "sLengthMenu": "每页显示 _MENU_ 记录",
+				        "sZeroRecords": "对不起，没有找到相关的订单",
+				        "sInfo": "第 _START_ 条到 _END_ 条，总共 _TOTAL_ 条记录",
+				        "sInfoEmpty": "显示 0 条记录",
+				        "sInfoFiltered": "(从 总共_MAX_条记录)",
+				        "sSearch": "查找",
+				        "bJQueryUI": true,
+				        "sPaginationType": "full_numbers",
+				        "oPaginate": {
+				            "sPrevious" : "前一页",
+				            "sNext": "下一页"
+				        },
+				    },
+				    "bPaginate": false,
+				    "bFilter": false,
+				});
+			});
+		</script>
+	</div>
+	<div class="">
+		<div class="pageNavigator right">
+			<div class="pages">{lingzh:$page}</div>
+		</div>
+		<div class="clr"></div>
+	</div>
+</div>
+<include file="Public:footer"/>

@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+.content{ background: #fff;
+	border-radius: 5px;
+	height:1399px; 
+	width:100%;
+	margin:-300px auto 0px;
+}
+.content .cont{width:980px; margin:0 auto; padding:20px 40px;  color:#000;}
+ul{ padding:20px 40px; width:980px; }
+ul li{ float:left;
+	width:220px;
+	margin-top:5px; 
+    border: 1px solid #eee;
+	box-shadow:2px 2px 5px #eee;  
+	margin-right: 10px;
+	margin-bottom: 12px}
+ul li .center{width:220px;text-align: center;}
+ul li span{width:220px;text-align: center;display: block; padding: 5px 0;}
+
+.content .cont caption{ color:#0489f7; font-size:20px; padding-top:20px;padding-bottom:20px;}
+

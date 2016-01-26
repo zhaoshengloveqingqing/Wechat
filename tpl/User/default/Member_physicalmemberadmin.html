@@ -1,0 +1,67 @@
+<include file="Public:head"/>  
+<div class="content">
+  <div class="cLineB">
+    <h4 class="left">用户信息</h4>
+    <div class="clr"></div>
+  </div>
+  <div class="clr"></div>
+    <a onclick="$('#import_userinfo').toggle();" title='导入线下会员' class='btnGrayS vm bigbtn'><img src="./tpl/User/default/common/images/pic.png" class="vm" />导入线下会员</a>
+         
+    <div id="import_userinfo" style="display:none;margin-top:5px;">
+      <div class="cLineD" style=" margin: 0px 10px 10px 0px; border: 1px #E0E0E0  solid; padding: 10px; border-radius: 5px;">
+  	    <form method="post" action="{lingzh::U('Member/physicalmemberimport')}" enctype="multipart/form-data">
+  	        <div class="cLineB"><h4>导入线下会员</h4></div>
+            <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+  	          <tbody>
+    	          <tr>
+    	            <td>
+                    <a href="/tpl/User/default/member-entity-tpl.xls" target="_blank" class="green">下载模板文件member-entity-tpl.xls（支持excel 2003,2007格式）</a>
+                  </td>
+    	          </tr>
+    	          <tr>
+    	            <td>
+                    <input  type="file" class="text textMiddle" name="file_stu" />&nbsp;&nbsp;
+                    <button type="submit" id="button" name="button" class="btnGreen">提交</button> 
+                    <strong> <font color="red"> 若有重复项，会覆盖原有的记录。</font></strong>
+                  </td>
+    	          </tr>
+  	          </tbody>
+            </table>
+        </form>
+      </div>
+      <div class="clr"></div>
+  </div>
+  <div class="msgWrap">
+    <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+      <THEAD>
+      <TR>
+        <TH align="center" valign="middle">实体卡号</TH>
+        <TH align="center" valign="middle">真实姓名</TH>
+        <TH align="center" valign="middle">联系电话</TH>
+        <TH align="center" valign="middle">性别</TH>
+        <TH align="center" valign="middle">生日</TH>
+        <TH align="center" valign="middle">地址</TH>
+      </TR>
+      </THEAD>
+      <TBODY>
+        <?php foreach ($table as $item) {?>
+        <TR>
+          <TD align="center" valign="middle">{lingzh:$item['cardnum']}</TD>
+          <TD align="center" valign="middle">{lingzh:$item['name']}</TD>
+          <TD align="center" valign="middle">{lingzh:$item['tel']}</TD>
+          <TD align="center" valign="middle"> <?php if ($item['sex']==1) { echo "男";} elseif ($item['sex']==2) { echo '女';} else{echo "未知";}?> </TD>
+          <TD align="center" valign="middle">{lingzh:$item['birthday']}</TD>
+          <TD align="center" valign="middle">{lingzh:$item['address']}</TD>
+        </TR>
+        <?php } ?>
+      </TBODY>
+    </TABLE>
+    <div class="cLine">
+      <div class="pageNavigator right">
+           <div class="pages">{lingzh:$page}</div>
+       </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+</div>
+<include file="Public:footer"/> 

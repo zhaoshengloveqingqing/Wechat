@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="description" content="{lingzh::C('content')}" />
+
+<title>{lingzh::C('company_short_name')}微汽车</title>
+<style>
+body {
+	-webkit-text-size-adjust: none;
+	-webkit-user-select: none;
+	margin: 0;
+	background: url(/themes/w/images/car_preview_bg.jpg);
+	background-size: cover;
+}
+#mainmenu{
+	background: none;
+	border: none;
+	margin: 10px 0px 0px 5px;
+	box-shadow: none;
+	border-radius: 0;
+}
+</style>
+</head>
+<body>
+	<div id="page">
+ 		
+<style>
+#mainmenu{
+	background: none;
+	border: none;
+	margin: 70px 0px 0px 15px;
+}
+#mainmenu li{
+	padding: 0;
+	list-style: none;
+	margin-bottom: 8px;
+	position: relative;
+}
+#mainmenu li a{
+	height: 100%;
+	color: #FFF;
+	background-color: #af5e02;
+	padding: 8px 10px 8px 5px;
+	text-decoration: none;
+	position: relative;
+}
+#mainmenu li:nth-child(6n) a{
+	background-color: #6c0a33;
+	padding-right: 32px;
+}
+#mainmenu li:nth-child(6n-1) a{
+	background-color: #5d0a66;
+	padding-right: 25px;
+}
+#mainmenu li:nth-child(6n-2) a{
+	background-color: #0077c3;
+	padding-right: 55px;
+}
+#mainmenu li:nth-child(6n-3) a{
+	background-color: #4b7c11;
+	padding-right: 43px;
+}
+#mainmenu li:nth-child(6n-4) a{
+	background-color: #677c05;
+	padding-right: 25px;
+}
+#mainmenu li:nth-child(6n-5) a{
+	background-color: #b16004;
+	padding-right: 35px;
+}
+#mainmenu li .title{
+	line-height: 35px;
+	text-align: left;
+	width: 100%;
+	font-size: 1em;
+}
+#mainmenu li .rightarrow{
+	position: absolute;
+	width: 8px;
+	right: 5px;
+	top: 12px;
+}
+</style>
+<div id="mainmenu" class="fn-clear">
+	<ul>
+	
+		<li>
+			<a href="{lingzh::C('site_url')}/index.php?g=Wap&m=Car&a=index&token={lingzh:$_GET['token']}&wecha_id={lingzh:$_GET['wecha_id']}">
+				<span class="title">在售车型</span>
+			</a>
+		</li>
+	
+		<li>
+			<a href="{lingzh::C('site_url')}/index.php?g=Wap&m=Car&a=sales&token={lingzh:$_GET['token']}&wecha_id={lingzh:$_GET['wecha_id']}">
+				<span class="title">销售服务</span>
+			</a>
+		</li>
+                
+		<li>
+			<a href="{lingzh::C('site_url')}/index.php?g=Wap&m=Car&a=rmaintain&token={lingzh:$_GET['token']}&wecha_id={lingzh:$_GET['wecha_id']}">
+				<span class="title">预约保养</span>
+			</a>
+		</li>
+                
+		<li>
+			<a href="{lingzh::C('site_url')}/index.php?g=Wap&m=Car&a=rdrive&token={lingzh:$_GET['token']}&wecha_id={lingzh:$_GET['wecha_id']}">
+				<span class="title">预约试驾</span>
+			</a>
+		</li>
+		<li>
+			<a href="{lingzh::C('site_url')}/index.php?g=Wap&m=Car&a=tools&token={lingzh:$_GET['token']}&wecha_id={lingzh:$_GET['wecha_id']}">
+				<span class="title">实用工具</span>
+			</a>
+		</li>
+                <li>
+			<a href="{lingzh::C('site_url')}/index.php?g=Wap&m=Car&a=care&token={lingzh:$_GET['token']}&wecha_id={lingzh:$_GET['wecha_id']}">
+				<span class="title">车主关怀</span>
+			</a>
+		</li>
+	</ul>
+</div>
+        </div>
+</body>
+</html>

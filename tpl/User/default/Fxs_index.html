@@ -1,0 +1,70 @@
+<include file="Public:head"/>
+<div class="content">
+
+<div class="cLineB">
+  <h4 class="left">分销商管理</h4>
+  <div class="searchbar right">
+		<form method="post" action="">
+			<input type="text" class="txt left" placeholder="输入关键词搜索"	name="searchkey" value="{lingzh:$search}"> 
+			<input type="submit" value="搜索" href="" class="btnGrayS" title="搜索">
+		</form>
+	</div>
+</div>
+<div class="msgWrap form">
+  <div class="bdrcontent">
+	<div id="div_ptype">
+		  <table class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+			<thead>
+				<tr>
+					<th>姓名</th>
+					<th>手机</th>
+					<th>支付方式</th>
+					<if condition="$type eq 0"><th>状态</th></if>
+					<th>编码</th>
+					<th>所属部门</th>
+					<th class="norightborder" align="center">操作</th>
+				</tr>
+			</thead>
+			<volist name="info" id="vo">
+				<tr>
+					<td>{lingzh:$vo.truename}</td>
+					<td>{lingzh:$vo.mb}</td>
+					<td><if condition="!empty($vo['pay_name'])">{lingzh:$vo.pay_name}  ({lingzh:$vo.pay_account})</if></td>
+					<if condition="$type eq 0">
+						<td>
+							<if condition="$vo['status'] eq 1">已激活<else/><font color=red>未激活</font></if>
+						</td>
+					</if>
+					<td>{lingzh:$vo.code}</td>
+					<td>{lingzh:$vo.pname}</td>	
+					<if condition="$type eq 1">
+						<td class="norightborder" align="center">
+						  <a href="{lingzh::U('Fxs/qr',array('fxs_id'=>$vo['id']))}"  target="_blank">二维码</a> 
+						  <a href="{lingzh::U('Fxs/shop_orders',array('fxs_id'=>$vo['id']))}">订单</a> 
+						  <a href="{lingzh::U('Fxs/add',array('fxs_id'=>$vo['id']))}"  target="_blank">修改</a> 
+						  <a href="javascript:drop_confirm('您确定要删除吗?', '{lingzh::U('Fxs/delfxs',array('fxs_id'=>$vo['id']))}');">删除</a>
+						</td>
+					<else/>
+						<td class="norightborder" align="center">
+							<if condition="$vo['status'] eq 0">
+						 		<a href="{lingzh::U('Fxs/fxs_check',array('fxs_id'=>$vo['id']))}">审核</a>
+						 	<else/>
+						 		<a href="{lingzh::U('Fxs/fxs_check',array('fxs_id'=>$vo['id']))}">修改</a>
+						 	</if>
+						 </td>
+					</if>
+						
+				</tr>
+			</volist>
+		  </table>
+		</div>
+	</div>
+	<div class="">
+		<div class="pageNavigator right">
+			<div class="pages">{lingzh:$page}</div>
+		</div>
+		<div class="clr"></div>
+	</div>
+</div>
+</div>
+<include file="Public:footer"/>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>微助手-贺卡</title>
+<link rel="stylesheet" type="text/css" href="/themes/p/css/person.css" />
+
+</head>
+<body>
+<div id="tip1">选择贺卡模板</div>
+<volist name="cardtps" id="card">
+<div class="area3" onclick="location.href='/index.php?g=Person&m=Greetcard&a=tp&id={lingzh:$card.id}'">
+   <div class="card_icon"><img src="{lingzh:$card.imgurl}"></div>
+   <div class="card_title">{lingzh:$card.title}</div>
+   <div class="card_button"><button class="button2">发送</button></div>
+   <div class="clear"></div>
+</div>
+</volist>
+<div class="copyright" style="margin-left:-12px; margin-right:-12px;  margin-bottom:-20px;background-color:#FFF;padding:15px;font-size:14px;color:#333;text-align:center;"><a href="/index.php?g=Person&m=Index&a=index">返回首页</a></div>
+</body>
+</html>
+ 

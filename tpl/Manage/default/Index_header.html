@@ -1,0 +1,28 @@
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">{lingzh:$Think.session.manage_merchant}</a>
+    </div>
+
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        
+        <if condition="!isset($_SESSION['manage_user_name'])">
+         <li>
+          <a href="{lingzh::U('Index/signin')}" class="login">登录</a>
+        </li>
+        <else/>
+          <p class="navbar-text navbar-right">您好,{lingzh:$Think.session.manage_user_name}@{lingzh:$Think.session.manage_company_code}!<a href="{lingzh::U('Index/logout')}" class="navbar-link" >[退出]</a></p>
+        </if> 
+        
+      </ul>
+    </nav>
+
+  </div><!-- /.container -->
+</div>

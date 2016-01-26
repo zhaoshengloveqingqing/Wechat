@@ -1,0 +1,144 @@
+
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+
+
+<!DOCTYPE html>
+<link href="/themes/a/css/page-u.css" rel="stylesheet" type="text/css" />
+<html>
+  <head>
+    <title>{lingzh:$page_title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="/themes/m/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="js/artDialog/jquery.artDialog.js?skin=default"></script>
+	<script src="js/artDialog/plugins/iframeTools.js"></script>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+
+  </head>
+  <body>
+    <include file="Index:header"/>
+    <div class="container">
+      <div class="row">
+        <include file="Index:sidebar"/>
+        <div class="col-lg-10">
+
+          <div class="page-header">
+            <h4>激活分销商</h4>
+          </div>
+				
+				
+				<div class="bdrcontent">
+				<div id="div_ptype">
+				<form class="form" method="post" action="{lingzh::U('Fxs/fxs_check',array('fxs_id'=>$_GET['fxs_id']))}" target="_top" enctype="multipart/form-data">
+					<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+					  <tbody>
+					  <volist name="info" id="info">
+						<tr>
+						  <th width="186"><span class="red">*</span>姓名：</th>
+						  <td>
+							<input style="width:400px;" name="truename" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.truename}</if>"></input>
+						  </td>
+						</tr>
+						<tr>
+						  <th width="186"><span class="red">*</span>手机号码：</th>
+						  <td>
+							<input style="width:400px;" name="mb" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.mb}</if>"></input>
+						  </td>
+						</tr>
+						<if condition="$info['company'] != null">
+						<tr>
+						  <th valign="top"><label for="keyword">营业执照：</label></th>
+						  <td><input type="input" class="px" id="img" value="{lingzh:$info.license_logo}" name="license_logo"style="width:400px" >  <script src="js/upyun.js?2013"></script><a href="###" onclick="chooseFile('img','icon')" class="a_upload"></a> <a href="###" onclick="upyunPicUpload('img',700,420,'{lingzh:$token}')" class="a_upload"></a> <a href="###" onclick="viewImg('img')">预览</a></td>
+						  <TD>&nbsp;</TD>
+						</tr>
+						</if>
+						<!--<tr>
+						  <th width="186"><span class="red">*</span></th>
+						  <td>
+						   <div id="preview">
+								<img id="imghead" width=100 height=100 border=0 src='<%=request.getContextPath()%>/images/defaul.jpg'>
+						  </div>
+						  <input type="file" name="license_logo" value="{lingzh:$info.license_logo}" onchange="previewImage(this)" />    
+						  </td>
+						</tr>-->
+						<tr>
+						  <th width="186">编号：</th>
+						  <td>
+							<input style="width:400px;" readonly="readonly" name="num" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.num}</if>"></input>
+						  </td>
+						</tr>
+						<tr>
+						  <th width="186">身份证：</th>
+						  <td>
+							<input style="width:400px;" name="idnum" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.idnum}</if>"></input>
+						  </td>
+						</tr>
+						<tr>
+						  <th width="186">邮件：</th>
+						  <td>
+							<input style="width:400px;" name="email" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.email}</if>"></input>
+						  </td>
+						</tr>
+						
+						<if condition="$info['alipay'] != null">
+						<tr>
+						  <th width="186">支付宝账号：</th>
+						  <td>
+							<input style="width:400px;" name="alipay" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.alipay}</if>"></input>
+						  </td>
+						</tr>	
+						</if>		
+						
+						<if condition="$info['tenpay']!=null">
+						<tr>
+						  <th width="186">财付通账号：</th>
+						  <td>
+							<input style="width:400px;" name="tenpay" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.tenpay}</if>"></input>
+						  </td>
+						</tr>
+						</if>
+						<tr>
+						  <th width="186"><span class="red">*</span>地址：</th>
+						  <td>
+							<input style="width:400px;" name="address" class="text textMiddle" value="<if condition='isset($info)'>{lingzh:$info.address}</if>"></input>
+						  </td>
+						<tr>
+						  <th>&nbsp;</th>
+						  <td>
+							<if condition="$info['status']==0"> <button type="submit" name="button" class="btnGreen">确认激活</button></if>
+							<if condition="$info['status']==1"> <button type="submit" disabled="true" name="button" class="btnGreen">已激活</button></if>
+						  </td>
+						</tr>
+						</volist>
+					  </tbody>
+					</table>
+					</form>
+				</div>
+				</div>
+            </div>
+         </div> <!-- /col -->
+    </div> <!-- /row -->
+ </div> <!-- /container -->
+
+  </body>
+</html>
+
+
+

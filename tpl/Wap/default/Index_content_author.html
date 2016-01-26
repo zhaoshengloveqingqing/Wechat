@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>{lingzh:$res.title}-{lingzh:$wx_user.wxname}</title> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<link href="/themes/w/css/reset.css" rel="stylesheet" type="text/css" />
+</head> 
+
+<style>
+
+body {background-color: #F0EFEF;margin: 0 auto;max-width: 640px;min-width: 320px;overflow-x: hidden;}
+div.page {padding: 15px 9px 0 10px;}
+.page .title h1{font-size: 20px;color: #000;word-break: normal;word-wrap: break-word;}
+
+.page .author {margin:10px 0px;}
+.page .author span.time{font-size: 11px;color: #8C8C8C;margin: 0;}
+.page .author span.name{font-size: 11px;color: #004F9C;margin-left: 10px;}
+.page .showpic img{    width: 100%;margin-top: 5px;	}
+.footer {
+box-shadow: 0 3px 6px #E2E2E2;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+cursor: pointer;
+background: none repeat scroll 0 0 #FFF;
+border: 1px solid #DDD;
+box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+-moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+margin: 10px;
+padding: 15px;
+text-align: center;
+display: block;
+}
+
+div.copyright{font-size:14px;text-align:center;color:#000;margin:8px;}
+div.tech-support{font-size:12px;text-align:center;color:#000;margin:8px;}
+div.tech-support a{text-decoration: underline;}
+.clr {clear: both;}
+</style>
+
+<body>
+
+<div class="page">
+  <a name="top"></a>
+<?php if(!isset($res) || $res['display_title_time']){ ?>
+  <div class="title">
+    <h1>{lingzh:$res.title}</h1>
+  </div>
+  <?php } ?>
+  <div class="author">
+<?php if(!isset($res) || $res['display_title_time']){ ?>
+    <span class="time">{lingzh:$res.createtime|date="Y-m-d",###}</span> 
+<?php } ?>
+    <a target="_blank" href='weixin://contacts/profile/{lingzh:$tpl.weixin}'>
+      <span class="name">{lingzh:$tpl.wxname}</span>
+    </a>
+  </div>
+  <if condition="isset($res['pic']) and !empty($res['pic']) and $res['display_pic'] eq 1">
+    <div class="showpic"><img src="{lingzh:$res.pic}" /></div> 
+  </if>
+  <div class="text" id="content">
+    {lingzh:$res.content|htmlspecialchars_decode}
+  </div>
+</div>
+
+<a class="footer" href="#top"><span class="top">返回顶部</span></a>
+
+<div class="clr"></div>
+<php>
+    echo CopyRightHelper::generateCopyRight($_GET["token"]);
+</php>
+<!--div class="tech-support"  >
+  <php>echo htmlspecialchars_decode(C('tech_support'))</php>
+</div-->
+<script src="/tpl/Wap/default/common/js/wxshare.js"></script>
+<script>
+	var imgUrl = '{lingzh:$res.pic}';
+	var lineLink = "{lingzh:$url}";
+	var descContent = '{lingzh:$res.strcontent}';
+	var shareTitle = '{lingzh:$res.title}';
+	var appid = '';
+	wxshare(imgUrl, lineLink, descContent, shareTitle, appid);
+</script>
+</body>
+</html>

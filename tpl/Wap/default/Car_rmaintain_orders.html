@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <meta name="Keywords" content="{lingzh::C('keyword')}" />
+        <meta name="Description" content="{lingzh::C('content')}" />
+        <!-- Mobile Devices Support @begin -->
+        <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+        <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta content="0" http-equiv="expires">
+        <meta content="telephone=no, address=no" name="format-detection">
+        <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <!-- Mobile Devices Support @end -->
+        <link href="/themes/w/css/car/reset.css" rel="stylesheet" type="text/css" />
+        <link href="/themes/w/css/car/common.css" rel="stylesheet" type="text/css" />
+        <link href="/themes/w/css/reservation.css" rel="stylesheet" type="text/css" />
+        <script src="/themes/w/js/jquery.min.js"></script>
+        <title>我的预约保养</title>
+</head>
+    <body onselectstart="return true;" ondragstart="return false;">
+        <div id="bookBody" class="body">
+            <header>
+                <ul>
+                    <li><img src="{lingzh:$rdrive.picture}" style="width:100%;" /></li>
+                </ul>
+            </header>
+            <section>
+                <volist name='orders' id='order'>
+                <div class="p_10">
+                    <form  action="" method="post" >
+                        <dl class="list_book">
+                            <dt class="ofh">
+                                    <label style="width:150px;">{lingzh:$order.reserve_date|date="Y年m月d日订单详情",###}</label>
+                                    <a href="javascript:;" style="background-color:#ccc;float:right;margin-right:10px;color:#000;line-height:20px;border-radius:8px;margin-top:3px;padding:0 5px;">
+                                        <if condition="$order.status eq 2"> 已确认 
+                                        <elseif condition="$order.status eq 3"/> 已取消 
+                                        <elseif condition="$order.status eq 4"/> 未通过 
+                                        <else />未确认
+                                        </if>  
+                                    </a>
+                            </dt>
+                            <dd class="tbox">
+                                    <div><label>联系人:</label></div>
+                                    <div><label>{lingzh:$order.name}</label></div>
+                            </dd>
+                            <dd class="tbox">
+                                    <div><label>联系电话：</label></div>
+                                    <div><a href="tel:{lingzh:$order.tel}" style="color:#000;">{lingzh:$order.tel}</a></div>
+                            </dd>
+                             <dd class="tbox">
+                                    <div><label>车牌：</label></div>
+                                    <div><label>{lingzh:$order.number}</label></div>
+                            </dd>
+                            <dd class="tbox">
+                                    <div><label>公里数：</label></div>
+                                    <div><label>{lingzh:$order.miles}</label></div>
+                            </dd>
+                            <dd class="tbox">
+                                    <div><label>预约日期：</label></div>
+                                    <div><label>{lingzh:$order.reserve_date|date="Y-m-d",###}</label></div>
+                            </dd>
+                            <dd class="tbox">
+                                    <div><label>提交时间：</label></div>
+                                    <div><label>{lingzh:$order.submit_time|date="Y-m-d H:i",###}</label></div>
+                            </dd>
+                            <dd class="tbox">
+                                    <div><label>备注：</label></div>
+                                    <div><label>{lingzh:$order.remarks}</label></div>
+                            </dd>
+                             <php>
+                                $textColVals = unserialize( $order['text_cols']);
+                                if(count($textColVals) !== count($text_cols)) {
+                                    for($ij=0; $ij<count($text_cols); $ij++) {
+                                        echo "";
+                                    }
+                                }else {
+                                    for($textColIndex=0; $textColIndex<count($text_cols); $textColIndex ++) {
+                                        echo    '<dd class="tbox"> '.
+                                                '<div><label>'.$text_cols[$textColIndex].'：</label></div> '.
+                                                '<div><label>'.$textColVals[$textColIndex].'</label></div> '.
+                                                '</dd> ';
+                                    }
+                                }
+                            </php>
+                            <php>
+                                $selectColVals = unserialize($order['select_cols']);
+                                if(count($selectColVals) !== count($select_cols)) {
+                                    for($ik=0; $ik<count($select_cols); $ik++) {
+                                        echo "";
+                                    }
+                                }else{
+                                    for($selColIndex=0; $selColIndex<count($select_cols); $selColIndex ++) {
+                                        echo    '<dd class="tbox"> '.
+                                           '<div><label>'.$select_cols[$selColIndex].'：</label></div> '.
+                                           '<div><label>'.$selectColVals[$selColIndex].'</label></div> '.
+                                           '</dd> ';
+                                    }
+                                }    
+                            </php>
+                            <if condition="$order.status eq 1">
+                                <div>
+                                    <li class="box group_btn">
+                                            <div><a href="javascript:cancelOrder('{lingzh:$order.token}', '{lingzh:$Think.get.wecha_id}','{lingzh:$order['id']}', '{lingzh:$order['rdrive_id']}');"  class="gray">删除订单</a></div>
+                                    </li>
+                                </div>
+                            </if>
+
+                        </dl>
+                    </form>
+                   </div>
+                </volist>
+            </section>
+        </div>
+        <div class="footer">
+            <php>
+              echo CopyRightHelper::generateCopyRight($_GET["token"]);
+            </php>
+        </div>
+        
+<script type="text/javascript">
+    function cancelOrder(token, wecha_id, orderId, hid) {
+        var url = "index.php?g=Wap&m=Car&a=rmaintain_order_cancel&token=" + token + "&wecha_id=" + wecha_id + "&wxref=mp.weixin.qq.com&id=" + orderId + '&rdrive_id=' + hid ;
+        $.get(
+                url,
+                function (data) {
+                    if(data == '0') {
+                        alert("取消成功！");
+                        location.href = "index.php?g=Wap&m=Car&a=rmaintain_orders&token=" + token + "&wecha_id=" + wecha_id + "&wxref=mp.weixin.qq.com&rdrive_id=" + hid ;
+                    }
+                    else{
+                        alert("取消失败！请刷新重试！");
+                    }
+                },
+                "json"
+                );
+    }
+</script>
+    </body>        
+</html>

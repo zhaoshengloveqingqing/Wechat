@@ -1,0 +1,278 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/themes/a/css/shop.css" />
+<link rel="stylesheet" href="/themes/a/css/bootstrapSwitch.css">
+<script src="/themes/a/js/bootstrapSwitch.js"></script>
+<style type="text/css">
+    a {
+	text-decoration: none;
+	color: #006ebc;
+	}
+    .payconf_section {
+        width: 90%;
+        padding: 10px 10px;
+        margin-left: 60px;
+    }
+    .payconf_section .payconf_section_item {
+        margin: 3px 3px 5px 3px;
+    }
+    .payconf_section .payconf_section_item label {
+        width: 250px;
+        display: inline-block;
+        
+    }
+    .payconf_section .payconf_section_item input {
+        font-size: 14px;
+        padding: 3px 3px;
+        border: 1px solid #CCCCCC;
+        border-radius: 2px 2px 2px 2px;
+        width: 350px;
+    }
+    
+    .display_none {
+        display: none;
+    }
+</style>
+<div class="content">
+
+<div class="cLineB">
+  <h4 class="left">支付方式配置</h4>
+  <div class="searchbar right" >  
+	  <a href="{lingzh::U('Hotel/index')}" class="right btnGreen vm">返回</a>
+   </div>
+ </div>
+ <!--tab start-->
+<div class="tab">
+	<ul>
+		  <li class="tabli" id="tab0"><a href="{lingzh::U('Hotel/rooms',array('id'=>$hid))}">客房管理</a></li>
+		  <li class="tabli" id="tab1"><a href="{lingzh::U('Hotel/admin',array('id'=>$hid))}">订单管理</a></li>
+		  <li class="current tabli" id="tab2"><a href="{lingzh::U('Hotel/payconf',array('id'=>$hid))}">支付方式配置</a></li>
+	</ul>
+</div>
+<!--tab end-->  
+<form method="post" action="" target="_top" enctype="multipart/form-data">
+<div id="main">
+	<div class="container-fluid">
+
+		<div class="row-fluid">
+			<div class="span12">
+
+				<div class="box">
+					<div class="box-content">
+						<div class="row-fluid">
+                <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <td><img src="/themes/a/images/pay/offline_icon.gif"  />
+                            </td>
+                            <td>货到付款</td>
+                            <td>由快递公司送货上门，您签收后直接将货款交付给快递员</td> 
+                            <td>
+                             <div class="switch switch_anchor"  data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+                                    <input type="checkbox" <if condition="$cod.enabled eq 1" >checked</if>  value="cod"/>
+                              </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td><img src="/themes/a/images/pay/weixin.png"  />
+                            </td>
+                            <td>微信支付</td>
+                            <td>微支付，支付就这么简单。
+                                    <span class="red">微支付申请请进入您的微信公众平台，点击服务→服务中心→商户功能申请栏目</span>
+                            </td> 
+                            <td>
+                             <div class="switch switch_anchor"  data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+                                    <input type="checkbox" <if condition="$wxpay.enabled eq 1" >checked</if>  value="wxpay"/>
+                              </div>
+                            </td>
+                        </tr>
+                        <tr class="payconf_wxpay <if condition='$wxpay.enabled eq 0' >display_none</if>">
+                            <td colspan="4">
+                                <div class="payconf_section">
+                                    <div class="payconf_section_item">
+                                        <label>收款方名称：</label>
+                                        <input name="wxpay_name"  value="<if condition='isset($wxpay)'>{lingzh:$wxpay.wxpay_name}</if>" />
+                                    </div>
+                                    <div class="payconf_section_item">
+                                        <label>公众号身份标识[AppID]：</label>
+                                        <input name="wxpay_appId"  value="<if condition='isset($wxpay)'>{lingzh:$wxpay.wxpay_appId}</if>" />
+                                    </div>
+                                    <div class="payconf_section_item">
+                                        <label>公众平台API密钥 Key[AppSecret]：</label>
+                                        <input name="wxpay_appSecret" value="<if condition='isset($wxpay)'>{lingzh:$wxpay.wxpay_appSecret}</if>"/>
+                                    </div>
+                                    <div class="payconf_section_item">
+                                        <label>加密的密钥 Key[PaySignKey]：</label>
+                                        <input name="wxpay_paySignKey" value="<if condition='isset($wxpay)'>{lingzh:$wxpay.wxpay_paySignKey}</if>"/>
+                                    </div>
+                                    <div class="payconf_section_item">
+                                        <label>财付通商户身份标识[PartnerId]：</label>
+                                        <input  name="wxpay_partnerId" value="<if condition='isset($wxpay)'>{lingzh:$wxpay.wxpay_partnerId}</if>"/>
+                                    </div>
+                                    <div class="payconf_section_item">
+                                        <label>财付通商户权限密钥 Key[PartnerKey]：</label>
+                                        <input type="text" name="wxpay_partnerKey" value="<if condition='isset($wxpay)'>{lingzh:$wxpay.wxpay_partnerKey}</if>"/>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="/themes/a/images/pay/tenpay_direct_icon.gif" /></td>
+                            <td>财付通即时到账交易（手机网站支付）</td>
+                            <td>财付通倾力打造的创新性电子商务平台——与传统以购物为主的电子商务平台不同，财付通开放平台聚焦于本地化生活服务。
+                                                                    <!--
+                            <a href="javascript:void(0)" class="red" target="_blank">
+                                                                    -->
+                            <span class="red"> 财付通申请请与对应的业务人员/客服进行联系</span>
+                                                                    <!--
+                            </a>
+                                                                    -->
+                            </td>
+                            
+                            <td>
+                             <div class="switch switch_anchor"  data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+                                    <input type="checkbox" <if condition="$cftpay.enabled eq 1" >checked</if>  value="cftpay"/>
+                              </div>
+                            </td>
+                        </tr>
+                         <tr class="payconf_cftpay <if condition='$cftpay.enabled eq 0' >display_none</if>">
+                            <td colspan="4">
+                                <div class="payconf_section">
+                                    <div class="payconf_section_item">
+                                        <label>收款方名称：</label>
+                                        <input name="cftpay_name"  value="<if condition='isset($cftpay)'>{lingzh:$cftpay.cftpay_name}</if>" />
+                                    </div>
+                                    <div class="payconf_section_item">
+                                        <label>财付通收款账户：</label>
+                                        <input name="cftpay_partnerId" value="<if condition='isset($cftpay)'>{lingzh:$cftpay.cftpay_partnerId}</if>"/>
+                                    </div>
+                                    <div class="payconf_section_item">
+                                        <label>交易安全校验码：</label>
+                                        <input name="cftpay_partnerKey" value="<if condition='isset($cftpay)'>{lingzh:$cftpay.cftpay_partnerKey}</if>"/>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="/themes/a/images/pay/alipay_direct_icon.gif" /></td>
+                            <td>支付宝即时到账交易（手机网站支付）</td>
+                            <td>中国领先的在线支付平台，致力于为互联网用户和企业提供安全、便捷、专业的在线支付服务。
+                                    <a href="https://b.alipay.com/order/productDetail.htm?productId=2013080604609688" class="red" target="_blank">
+                                            <span class="red">立即申请</span>
+                                    </a>
+                                    <a href="/themes/a/images/pay/alipay.doc" class="red" target="_blank">
+                                            <span class="red">申请步骤</span>
+                                    </a>
+                            </td>
+                            <td>
+                             <div class="switch switch_anchor"  data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+                                    <input type="checkbox" <if condition="$alipay.enabled eq 1" >checked</if>  value="alipay"/>
+                              </div>
+                            </td>
+                        </tr>
+                         <tr class="payconf_alipay <if condition='$alipay.enabled eq 0' >display_none</if>">
+                            <td colspan="4">
+                                <div class="payconf_section">
+                                    <div class="payconf_section_item">
+                                        <label>支付宝商户注册账户：</label>
+                                        <input  name="pay_account"  value="<if condition='isset($alipay)'>{lingzh:$alipay.pay_account}</if>" />
+                                    </div>
+                                    <div class="payconf_section_item">
+                                        <label>支付宝PID(合作者身份)：</label>
+                                        <input name="alipay_pid" value="<if condition='isset($alipay)'>{lingzh:$alipay.alipay_pid}</if>"/>
+                                    </div>
+                                    <div class="payconf_section_item">
+                                        <label>支付宝交易安全校验码：</label>
+                                        <input name="alipay_key" value="<if condition='isset($alipay)'>{lingzh:$alipay.alipay_key}</if>"/>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="/themes/a/images/pay/yinlian.png"  />
+                            </td>
+                            <td>银联支付</td>
+                            <td>银联支付</td> 
+                            <td>
+                             <div class="switch switch_anchor"  data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+                                    <input type="checkbox" <if condition="$unionpay.enabled eq 1" >checked</if>  value="unionpay"/>
+                              </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="/themes/a/images/pay/wingpay.jpg" /></td>
+                            <td>翼支付</td>
+                            <td>翼支付是中国电信旗下电子商务公司推出的一项产品。</td>
+                            <td>
+                             <div class="switch switch_anchor"  data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+                                    <input type="checkbox" <if condition="$wingpay.enabled eq 1" >checked</if>  value="wingpay"/>
+                              </div>
+                            </td>
+                        </tr>
+                         <tr class="payconf_wingpay <if condition='$wingpay.enabled eq 0' >display_none</if>">
+                            <td colspan="4">
+                                <div class="payconf_section">
+                                    <div class="payconf_section_item">
+                                        <label>商户号[MerchantId]：</label>
+                                        <input  name="wingpay_mchid"  value="<if condition='isset($wingpay)'>{lingzh:$wingpay.wingpay_mchid}</if>" />
+                                    </div>
+                                    <div class="payconf_section_item">
+                                        <label>商户Key[Key]：</label>
+                                        <input name="wingpay_key" value="<if condition='isset($wingpay)'>{lingzh:$wingpay.wingpay_key}</if>"/>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align:center">
+                                 <button type="submit" name="button" class="btnGreen">保存</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<input type="hidden" id="enable_unionpay" name="enable_unionpay" value="<php>echo (isset($unionpay) && $unionpay['enabled'] == 1) ? '1' : '0';</php>"/>
+<input type="hidden" id="enable_cod" name="enable_cod" value="<php>echo (isset($cod) && $cod['enabled'] == 1) ? '1' : '0';</php>"/>
+<input type="hidden" id="enable_wxpay" name="enable_wxpay" value="<php>echo (isset($wxpay) && $wxpay['enabled'] == 1) ? '1' : '0';</php>"/>
+<input type="hidden" id="enable_alipay" name="enable_alipay" value="<php>echo (isset($alipay) && $alipay['enabled'] == 1) ? '1' : '0';</php>"/>
+<input type="hidden" id="enable_cftpay" name="enable_cftpay" value="<php>echo (isset($cftpay) && $cftpay['enabled'] == 1) ? '1' : '0';</php>"/>
+<input type="hidden" id="enable_wingpay" name="enable_wingpay" value="<php>echo (isset($wingpay) && $wingpay['enabled'] == 1) ? '1' : '0';</php>"/>
+<style>
+.table tr td{
+	border:none;
+	padding:10px;
+}
+td img {
+	width: 60px;
+	height: 22px;
+	padding: 2px;
+	border: 1px solid #e8e8e8;
+}
+</style>
+</form>
+</div>
+<script>
+$(function(){
+    $('.switch_anchor').on('switch-change', function (e, data) {
+        var $el = $(data.el) , status = data.value;
+        var payment = $el.attr('value');
+        var payconf_section = '.payconf_' + payment;
+        $(payconf_section).toggle();
+        if(status == true ){
+            $('#enable_' + payment).val('1');
+        }else {
+            $('#enable_' + payment).val('0'); 
+        }
+    });
+});    
+
+</script>
+<include file="Public:footer"/>

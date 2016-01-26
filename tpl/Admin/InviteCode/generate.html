@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{lingzh::RES}/images/main.css" type="text/css" rel="stylesheet">
+<script src="{lingzh::STATICS}/jquery-1.4.2.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/themes/a/css/branch.css" />  
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+</head>
+<body class="warp">
+    <div class="tab">
+        <ul>
+             <li class="tabli current" id="tab0"><a href="{lingzh::U('InviteCode/generate')}">功能码</a></li>
+             <li class="tabli" id="tab2"><a href="{lingzh::U('InviteCode/generate_sms')}">短信码</a></li>
+        </ul>
+   </div>
+<div id="artlist" class="addn">
+    <script src="./tpl/User/default/common/js/date/WdatePicker.js"></script>
+    <form action="{lingzh::U('InviteCode/generate')}" method="post" name="form" id="myform">
+        邀请码总数<input  required='' type='text' name='codeCount'/>
+        有效期(天)<input  required='' type='text' name="codeDuration" />
+        <br/><br/>
+        <p style="font-size:15px; line-height:12px;"><strong>开通功能组：</strong><p>
+        <br/>
+        <volist name='funcGroups' id='group'>
+            <input type="checkbox" name="func_group[]" class="ipt" value="{lingzh:$group.id}" />
+            <label>{lingzh:$group.name}</label>
+            <br />  
+        </volist>
+        <input type="submit" name="dosubmit" value="生成邀请码" style="padding:5px 10px;"/>
+    </form>
+    <br />
+    <br />
+    <br />
+</div>
+    
+    <script type="text/javascript">
+    </script>
+</body>
+</html>
